@@ -670,7 +670,232 @@ button {
     line-height: 1.25;
 }
 
+/* =========================================================
+   HINDU
+   ========================================================= */
 
+.hindu-section {
+    background: var(--white);
+}
+
+.hindu-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(300px, .8fr);
+
+    gap: clamp(30px, 5vw, 70px);
+
+    align-items: start;
+}
+
+
+/* CERITA UTAMA */
+
+.hindu-feature-image {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    background: var(--navy);
+}
+
+.hindu-feature-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .6s ease;
+}
+
+.hindu-feature:hover img {
+    transform: scale(1.04);
+}
+
+.hindu-feature-content {
+    padding-top: 22px;
+}
+
+.hindu-feature-title {
+    max-width: 800px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(26px, 2.8vw, 40px);
+
+    font-weight: 400;
+
+    line-height: 1.1;
+}
+
+.hindu-feature-description {
+    max-width: 650px;
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* CERITA PENDUKUNG */
+
+.hindu-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.hindu-item {
+    padding-bottom: 20px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.hindu-item:last-child {
+    margin-bottom: 0;
+}
+
+.hindu-item > a {
+    display: grid;
+
+    grid-template-columns:
+        115px
+        minmax(0, 1fr);
+
+    gap: 18px;
+}
+
+.hindu-item-image {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    background: var(--navy);
+}
+
+.hindu-item-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .5s ease;
+}
+
+.hindu-item:hover img {
+    transform: scale(1.05);
+}
+
+.hindu-item-title {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(15px, 1.2vw, 20px);
+
+    font-weight: 400;
+
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   HINDU — TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .hindu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hindu-list {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 20px;
+    }
+
+    .hindu-item {
+        margin: 0;
+
+        padding: 0;
+
+        border-bottom: none;
+    }
+
+    .hindu-item > a {
+        display: block;
+    }
+
+    .hindu-item-image {
+        aspect-ratio: 16 / 10;
+
+        margin-bottom: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   HINDU — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .hindu-list {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 0;
+    }
+
+    .hindu-item {
+        padding-bottom: 18px;
+
+        margin-bottom: 18px;
+
+        border-bottom: 1px solid var(--line);
+    }
+
+    .hindu-item > a {
+        display: grid;
+
+        grid-template-columns:
+            90px
+            minmax(0, 1fr);
+
+        gap: 15px;
+    }
+
+    .hindu-item-image {
+        aspect-ratio: 1 / 1;
+
+        margin-bottom: 0;
+    }
+
+}
 /* =========================================================
    PROGRAM
    ========================================================= */
