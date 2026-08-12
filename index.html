@@ -1,931 +1,129 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
 
-    <!-- Responsive untuk HP, tablet, dan desktop -->
+    <!-- WAJIB untuk tampilan HP -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Media Mandala — Media budaya, sejarah, tradisi, dan kehidupan masyarakat Nusantara."
+    >
 
     <title>Media Mandala — Merawat Warisan, Menceritakan Peradaban</title>
 
-    <meta name="description"
-        content="Media Mandala adalah media digital yang mendokumentasikan, melestarikan, dan menceritakan budaya, tradisi, sejarah, dan kehidupan masyarakat Nusantara.">
-
-    <style>
-        /* =====================================================
-           DASAR
-        ===================================================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #071f46;
-            line-height: 1.6;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button {
-            font-family: inherit;
-        }
-
-        .container {
-            width: min(1200px, 90%);
-            margin: auto;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        header {
-            height: 76px;
-            background: #062653;
-            color: white;
-            display: flex;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-inner {
-            width: min(1400px, 92%);
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .logo-box {
-            width: 42px;
-            height: 42px;
-            background: #e83434;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: Georgia, serif;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .logo-text {
-            font-size: 15px;
-        }
-
-        .logo-tagline {
-            display: block;
-            font-size: 7px;
-            letter-spacing: .5px;
-            opacity: .75;
-            margin-top: 2px;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-
-        nav a {
-            font-size: 13px;
-            font-weight: 600;
-            position: relative;
-            padding: 28px 0;
-        }
-
-        nav a.active::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 17px;
-            width: 100%;
-            height: 3px;
-            background: #ffd21c;
-        }
-
-        .menu-button {
-            display: none;
-            font-size: 26px;
-            cursor: pointer;
-        }
-
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .hero {
-            min-height: 600px;
-            background:
-                linear-gradient(
-                    90deg,
-                    #0b75ed 0%,
-                    #0879f2 45%,
-                    #2b8ff5 100%
-                );
-            color: white;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            right: -180px;
-            top: -150px;
-            width: 600px;
-            height: 700px;
-            background: rgba(255,255,255,.08);
-            transform: rotate(30deg);
-        }
-
-        .hero-content {
-            width: min(1200px, 90%);
-            margin: auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .eyebrow {
-            color: #ffd21c;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            max-width: 760px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(52px, 6vw, 88px);
-            line-height: .98;
-            font-weight: 400;
-            margin-bottom: 25px;
-        }
-
-        .hero h1 span {
-            color: #ffd21c;
-        }
-
-        .hero-description {
-            max-width: 580px;
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 32px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 25px;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: .5px;
-            border: 1px solid transparent;
-        }
-
-        .button-yellow {
-            background: #ffd21c;
-            color: #071f46;
-        }
-
-        .button-outline {
-            border-color: white;
-            color: white;
-        }
-
-        .hero-indicator {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .hero-indicator span {
-            color: white;
-            font-size: 13px;
-            opacity: .6;
-        }
-
-        .hero-indicator .active {
-            color: #ffd21c;
-            opacity: 1;
-        }
-
-
-        /* =====================================================
-           GARIS WARNA
-        ===================================================== */
-
-        .color-line {
-            height: 5px;
-            display: flex;
-        }
-
-        .color-line span:nth-child(1) {
-            flex: 1;
-            background: #ffd21c;
-        }
-
-        .color-line span:nth-child(2) {
-            flex: 1;
-            background: #ed3838;
-        }
-
-        .color-line span:nth-child(3) {
-            flex: 2;
-            background: #1684f5;
-        }
-
-
-        /* =====================================================
-           SECTION UMUM
-        ===================================================== */
-
-        section {
-            padding: 85px 0;
-        }
-
-        .section-label {
-            color: #0879f2;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .section-title {
-            font-family: Georgia, "Times New Roman", serif;
-            font-weight: 400;
-            font-size: clamp(34px, 4vw, 48px);
-            line-height: 1.1;
-            color: #071f46;
-        }
-
-        .section-heading {
-            display: flex;
-            align-items: end;
-            justify-content: space-between;
-            gap: 30px;
-            margin-bottom: 42px;
-        }
-
-        .see-more {
-            color: #071f46;
-            font-size: 11px;
-            font-weight: 700;
-            white-space: nowrap;
-            border-bottom: 2px solid #ffd21c;
-            padding-bottom: 5px;
-        }
-
-
-        /* =====================================================
-           BERITA
-        ===================================================== */
-
-        .news {
-            background: white;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            gap: 45px;
-        }
-
-        .featured-news {
-            min-height: 390px;
-            background: #0c438b;
-            color: white;
-            padding: 42px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .featured-news .category {
-            color: #ffd21c;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .featured-news h3 {
-            font-family: Georgia, serif;
-            font-size: 34px;
-            font-weight: 400;
-            line-height: 1.15;
-            margin-bottom: 12px;
-        }
-
-        .featured-news p {
-            font-size: 13px;
-            max-width: 550px;
-            margin-bottom: 20px;
-        }
-
-        .news-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-item {
-            display: grid;
-            grid-template-columns: 110px 1fr;
-            gap: 18px;
-            padding: 0 0 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #d7dce3;
-        }
-
-        .news-thumb {
-            height: 75px;
-            background: #0b4b9b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 9px;
-            letter-spacing: 2px;
-        }
-
-        .news-category {
-            color: #0879f2;
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
-
-        .news-item h4 {
-            font-family: Georgia, serif;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 1.2;
-            margin: 5px 0;
-        }
-
-        .date {
-            font-size: 9px;
-            color: #777;
-        }
-
-
-        /* =====================================================
-           PROGRAM
-        ===================================================== */
-
-        .program {
-            background: #0878ef;
-            color: white;
-        }
-
-        .program .section-title {
-            color: white;
-        }
-
-        .program .section-label {
-            color: #ffd21c;
-        }
-
-        .program-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border: 1px solid rgba(255,255,255,.35);
-        }
-
-        .program-card {
-            padding: 42px 30px;
-            min-height: 230px;
-            border-right: 1px solid rgba(255,255,255,.35);
-        }
-
-        .program-card:last-child {
-            border-right: none;
-        }
-
-        .program-number {
-            color: #ffd21c;
-            font-size: 11px;
-            font-weight: 800;
-            margin-bottom: 42px;
-        }
-
-        .program-card h3 {
-            font-family: Georgia, serif;
-            font-size: 25px;
-            font-weight: 400;
-            margin-bottom: 12px;
-        }
-
-        .program-card p {
-            font-size: 12px;
-            opacity: .85;
-        }
-
-
-        /* =====================================================
-           MEDIA
-        ===================================================== */
-
-        .media {
-            background: #f5f7fa;
-        }
-
-        .media-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr;
-            gap: 35px;
-        }
-
-        .media-column {
-            min-width: 0;
-        }
-
-        .media-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .media-heading h3 {
-            font-family: Georgia, serif;
-            font-size: 25px;
-            font-weight: 400;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .video-card {
-            min-height: 180px;
-            background: #0b4b9b;
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .play {
-            width: 40px;
-            height: 40px;
-            background: #ffd21c;
-            color: #071f46;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        .video-info {
-            margin-top: 12px;
-        }
-
-        .video-info small {
-            color: #0879f2;
-            font-weight: 800;
-            font-size: 9px;
-            letter-spacing: 1px;
-        }
-
-        .video-info h4 {
-            font-family: Georgia, serif;
-            font-weight: 400;
-            font-size: 15px;
-            margin-top: 4px;
-        }
-
-        .podcast-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .podcast-item {
-            display: grid;
-            grid-template-columns: 60px 1fr;
-            gap: 15px;
-            padding: 12px 0;
-            border-bottom: 1px solid #d5dbe2;
-        }
-
-        .podcast-thumb {
-            width: 60px;
-            height: 60px;
-            background: #0b4b9b;
-            color: #ffd21c;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .podcast-item h4 {
-            font-family: Georgia, serif;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.25;
-        }
-
-        .podcast-item small {
-            color: #777;
-            font-size: 9px;
-        }
-
-
-        /* =====================================================
-           AGENDA
-        ===================================================== */
-
-        .agenda {
-            background: #ffd21c;
-            padding: 28px;
-        }
-
-        .agenda h3 {
-            font-family: Georgia, serif;
-            font-size: 25px;
-            font-weight: 400;
-            margin-bottom: 20px;
-        }
-
-        .agenda-item {
-            display: grid;
-            grid-template-columns: 55px 1fr;
-            gap: 15px;
-            padding: 17px 0;
-            border-bottom: 1px solid rgba(7,31,70,.2);
-        }
-
-        .agenda-date {
-            font-size: 20px;
-            font-weight: 800;
-        }
-
-        .agenda-date small {
-            display: block;
-            font-size: 8px;
-        }
-
-        .agenda-item h4 {
-            font-size: 12px;
-        }
-
-        .agenda-item p {
-            font-size: 9px;
-        }
-
-        .agenda-button {
-            margin-top: 20px;
-            display: block;
-            background: #071f46;
-            color: white;
-            padding: 12px;
-            text-align: center;
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-            background: #061f45;
-            color: white;
-            padding: 70px 0 25px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
-            gap: 45px;
-        }
-
-        .footer-title {
-            font-weight: 800;
-            letter-spacing: 3px;
-            font-size: 17px;
-            margin-bottom: 15px;
-        }
-
-        .footer-column h4 {
-            color: #ffd21c;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-bottom: 18px;
-        }
-
-        .footer-column p,
-        .footer-column a {
-            display: block;
-            font-size: 11px;
-            color: rgba(255,255,255,.75);
-            margin-bottom: 8px;
-        }
-
-        .newsletter {
-            display: flex;
-            margin-top: 15px;
-        }
-
-        .newsletter input {
-            min-width: 0;
-            flex: 1;
-            padding: 12px;
-            border: none;
-            outline: none;
-        }
-
-        .newsletter button {
-            border: none;
-            background: #ffd21c;
-            color: #071f46;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 0 15px;
-        }
-
-        .footer-bottom {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,.2);
-            display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            color: rgba(255,255,255,.6);
-        }
-
-
-        /* =====================================================
-           RESPONSIVE — TABLET
-        ===================================================== */
-
-        @media (max-width: 900px) {
-
-            nav {
-                display: none;
-            }
-
-            .menu-button {
-                display: block;
-            }
-
-            .hero {
-                min-height: 560px;
-            }
-
-            .hero-indicator {
-                display: none;
-            }
-
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .program-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .program-card {
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,.35);
-            }
-
-            .program-card:last-child {
-                border-bottom: none;
-            }
-
-            .media-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-
-        /* =====================================================
-           RESPONSIVE — HP
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .container {
-                width: 88%;
-            }
-
-            header {
-                height: 65px;
-            }
-
-            .header-inner {
-                width: 88%;
-            }
-
-            .logo-box {
-                width: 34px;
-                height: 34px;
-                font-size: 19px;
-            }
-
-            .logo-text {
-                font-size: 12px;
-            }
-
-            .logo-tagline {
-                font-size: 5px;
-            }
-
-            .hero {
-                min-height: 620px;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .hero-description {
-                font-size: 13px;
-            }
-
-            section {
-                padding: 60px 0;
-            }
-
-            .section-heading {
-                align-items: flex-start;
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .featured-news {
-                min-height: 360px;
-                padding: 28px;
-            }
-
-            .featured-news h3 {
-                font-size: 27px;
-            }
-
-            .news-item {
-                grid-template-columns: 90px 1fr;
-            }
-
-            .news-thumb {
-                height: 65px;
-            }
-
-            .program-card {
-                min-height: 200px;
-                padding: 30px 24px;
-            }
-
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .video-card {
-                min-height: 220px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .newsletter {
-                width: 100%;
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
     <!-- =====================================================
          HEADER
-    ====================================================== -->
+         ===================================================== -->
 
-    <header>
+    <header class="site-header">
 
         <div class="header-inner">
 
             <a href="#" class="logo">
 
-                <div class="logo-box">
+                <div class="logo-mark">
                     M
                 </div>
 
                 <div class="logo-text">
-                    MEDIA MANDALA
-                    <span class="logo-tagline">
-                        Merawat Warisan, Menceritakan Peradaban
+
+                    <span class="logo-name">
+                        MEDIA MANDALA
                     </span>
+
+                    <span class="logo-tagline">
+                        Budaya • Tradisi • Sejarah • Masyarakat
+                    </span>
+
                 </div>
 
             </a>
 
 
-            <nav>
+            <button
+                class="menu-toggle"
+                aria-label="Buka menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
 
-                <a href="#" class="active">Beranda</a>
-                <a href="#">Berita</a>
-                <a href="#">Hindu</a>
-                <a href="#">Budaya</a>
-                <a href="#">Sejarah</a>
-                <a href="#">Candi</a>
-                <a href="#">Podcast</a>
-                <a href="#">Video</a>
-                <a href="#">Tentang Kami</a>
+
+            <nav class="main-nav">
+
+                <a href="#" class="active">
+                    Beranda
+                </a>
+
+                <a href="#berita">
+                    Berita
+                </a>
+
+                <a href="#hindu">
+                    Hindu
+                </a>
+
+                <a href="#budaya">
+                    Budaya
+                </a>
+
+                <a href="#sejarah">
+                    Sejarah
+                </a>
+
+                <a href="#candi">
+                    Candi
+                </a>
+
+                <a href="#podcast">
+                    Podcast
+                </a>
+
+                <a href="#video">
+                    Video
+                </a>
+
+                <a href="#tentang">
+                    Tentang Kami
+                </a>
 
             </nav>
-
-
-            <div class="menu-button">
-                ☰
-            </div>
 
         </div>
 
     </header>
 
 
-
     <!-- =====================================================
          HERO
-    ====================================================== -->
+         ===================================================== -->
 
     <main>
 
         <section class="hero">
 
+            <!-- FOTO HERO -->
+            <img
+                class="hero-image"
+                src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=85"
+                alt="Warisan budaya dan arsitektur Nusantara"
+            >
+
             <div class="hero-content">
 
-                <div class="eyebrow">
-                    Media • Budaya • Sejarah
+                <div class="hero-label">
+                    MEDIA • BUDAYA • SEJARAH
                 </div>
 
-                <h1>
+                <h1 class="hero-title">
                     Merawat Warisan,<br>
                     Menceritakan<br>
                     <span>Peradaban.</span>
@@ -938,22 +136,13 @@
 
                 <div class="hero-buttons">
 
-                    <a href="#" class="button button-yellow">
+                    <a href="#berita" class="btn btn-primary">
                         JELAJAHI CERITA →
                     </a>
 
-                    <a href="#" class="button button-outline">
+                    <a href="#video" class="btn btn-outline">
                         TONTON DOKUMENTER ▶
                     </a>
-
-                </div>
-
-
-                <div class="hero-indicator">
-
-                    <span class="active">01 ━</span>
-                    <span>02 ━</span>
-                    <span>03 ━</span>
 
                 </div>
 
@@ -962,35 +151,32 @@
         </section>
 
 
-        <div class="color-line">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <!-- =================================================
+             BERITA TERBARU
+             ================================================= -->
 
-
-
-        <!-- =====================================================
-             BERITA
-        ====================================================== -->
-
-        <section class="news">
+        <section
+            class="section news-section"
+            id="berita"
+        >
 
             <div class="container">
 
                 <div class="section-heading">
 
                     <div>
-                        <div class="section-label">
-                            Terkini
-                        </div>
+
+                        <span class="section-label">
+                            TERKINI
+                        </span>
 
                         <h2 class="section-title">
                             Berita & Cerita Terbaru
                         </h2>
+
                     </div>
 
-                    <a href="#" class="see-more">
+                    <a href="#" class="view-all">
                         Lihat semua berita →
                     </a>
 
@@ -1000,48 +186,74 @@
                 <div class="news-grid">
 
 
-                    <article class="featured-news">
+                    <!-- BERITA UTAMA -->
 
-                        <div class="category">
-                            BUDAYA
-                        </div>
+                    <article class="featured-story">
 
-                        <h3>
-                            Menelusuri Warisan Budaya Nusantara
-                        </h3>
+                        <a href="#">
 
-                        <p>
-                            Kisah, tradisi, dan pengetahuan yang diwariskan
-                            dari generasi ke generasi.
-                        </p>
+                            <div class="featured-image">
 
-                        <div class="date">
-                            12 Agustus 2026
-                        </div>
+                                <img
+                                    src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1400&q=85"
+                                    alt="Warisan budaya Nusantara"
+                                >
+
+                                <div class="featured-overlay">
+
+                                    <div class="story-category">
+                                        BUDAYA
+                                    </div>
+
+                                    <h3 class="featured-title">
+                                        Menelusuri Warisan Budaya Nusantara
+                                    </h3>
+
+                                    <p class="story-excerpt">
+                                        Kisah, tradisi, dan pengetahuan yang
+                                        diwariskan dari generasi ke generasi.
+                                    </p>
+
+                                    <div class="story-date">
+                                        12 Agustus 2026
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </a>
 
                     </article>
 
 
-                    <div class="news-list">
+                    <!-- DAFTAR BERITA -->
+
+                    <div class="story-list">
 
 
-                        <article class="news-item">
+                        <article class="story-item">
 
-                            <div class="news-thumb">
-                                FOTO
-                            </div>
+                            <a href="#" class="story-thumb">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1604840171987-6f9f8c5f5c16?auto=format&fit=crop&w=500&q=80"
+                                    alt="Upacara Hindu Nusantara"
+                                >
+
+                            </a>
 
                             <div>
 
-                                <div class="news-category">
+                                <div class="story-category">
                                     HINDU
                                 </div>
 
-                                <h4>
+                                <h3 class="story-item-title">
                                     Tradisi dan Makna Upacara Hindu Nusantara
-                                </h4>
+                                </h3>
 
-                                <div class="date">
+                                <div class="story-date">
                                     12 Agustus 2026
                                 </div>
 
@@ -1050,23 +262,28 @@
                         </article>
 
 
-                        <article class="news-item">
+                        <article class="story-item">
 
-                            <div class="news-thumb">
-                                FOTO
-                            </div>
+                            <a href="#" class="story-thumb">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1605537964076-3cb0ea9b8aeb?auto=format&fit=crop&w=500&q=80"
+                                    alt="Peninggalan sejarah Nusantara"
+                                >
+
+                            </a>
 
                             <div>
 
-                                <div class="news-category">
+                                <div class="story-category">
                                     SEJARAH
                                 </div>
 
-                                <h4>
+                                <h3 class="story-item-title">
                                     Membaca Jejak Peradaban dari Peninggalan Candi
-                                </h4>
+                                </h3>
 
-                                <div class="date">
+                                <div class="story-date">
                                     11 Agustus 2026
                                 </div>
 
@@ -1075,23 +292,28 @@
                         </article>
 
 
-                        <article class="news-item">
+                        <article class="story-item">
 
-                            <div class="news-thumb">
-                                FOTO
-                            </div>
+                            <a href="#" class="story-thumb">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80"
+                                    alt="Kebudayaan masyarakat Nusantara"
+                                >
+
+                            </a>
 
                             <div>
 
-                                <div class="news-category">
+                                <div class="story-category">
                                     TRADISI
                                 </div>
 
-                                <h4>
+                                <h3 class="story-item-title">
                                     Mengenal Adat Istiadat yang Masih Bertahan
-                                </h4>
+                                </h3>
 
-                                <div class="date">
+                                <div class="story-date">
                                     10 Agustus 2026
                                 </div>
 
@@ -1099,7 +321,6 @@
 
                         </article>
 
-
                     </div>
 
                 </div>
@@ -1109,12 +330,107 @@
         </section>
 
 
-
-        <!-- =====================================================
+        <!-- =================================================
              PROGRAM MANDALA
-        ====================================================== -->
+             ================================================= -->
 
-        <section class="program">
+        <section
+            class="section program-section"
+            id="budaya"
+        >
+
+            <div class="container">
+
+                <span class="section-label">
+                    PROGRAM MANDALA
+                </span>
+
+                <h2 class="section-title">
+                    Menjelajah Warisan Nusantara
+                </h2>
+
+
+                <div class="program-grid">
+
+
+                    <article
+                        class="program-card"
+                        id="candi"
+                    >
+
+                        <span class="program-number">
+                            01
+                        </span>
+
+                        <h3 class="program-title">
+                            Jelajah Candi
+                        </h3>
+
+                        <p class="program-description">
+                            Mengenal sejarah dan kisah di balik peninggalan
+                            peradaban Nusantara.
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="program-card"
+                        id="budaya"
+                    >
+
+                        <span class="program-number">
+                            02
+                        </span>
+
+                        <h3 class="program-title">
+                            Tradisi Nusantara
+                        </h3>
+
+                        <p class="program-description">
+                            Dokumentasi adat, ritual, dan tradisi masyarakat
+                            dari berbagai daerah.
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="program-card"
+                        id="hindu"
+                    >
+
+                        <span class="program-number">
+                            03
+                        </span>
+
+                        <h3 class="program-title">
+                            Suara Mandala
+                        </h3>
+
+                        <p class="program-description">
+                            Percakapan bersama tokoh, budayawan, dan mereka
+                            yang menjaga warisan Nusantara.
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             VIDEO + PODCAST + AGENDA
+             ================================================= -->
+
+        <section
+            class="section video-section"
+            id="video"
+        >
 
             <div class="container">
 
@@ -1122,72 +438,124 @@
 
                     <div>
 
-                        <div class="section-label">
-                            Program Mandala
-                        </div>
+                        <span class="section-label">
+                            VIDEO DOKUMENTER
+                        </span>
 
                         <h2 class="section-title">
-                            Menjelajah Warisan Nusantara
+                            Cerita dalam Gambar
                         </h2>
 
                     </div>
 
+                    <a href="#" class="view-all">
+                        Lihat semua →
+                    </a>
+
                 </div>
 
 
-                <div class="program-grid">
+                <div class="video-grid">
 
 
-                    <article class="program-card">
+                    <article class="video-card">
 
-                        <div class="program-number">
-                            01
-                        </div>
+                        <a href="#">
 
-                        <h3>
-                            Jelajah Candi
-                        </h3>
+                            <div class="video-image">
 
-                        <p>
-                            Mengenal sejarah dan kisah di balik
-                            peninggalan peradaban Nusantara.
-                        </p>
+                                <img
+                                    src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=900&q=85"
+                                    alt="Dokumenter perjalanan budaya"
+                                >
 
-                    </article>
+                                <span class="play-button">
+                                    ▶
+                                </span>
 
+                            </div>
 
-                    <article class="program-card">
+                            <div class="video-info">
 
-                        <div class="program-number">
-                            02
-                        </div>
+                                <div class="story-category">
+                                    DOKUMENTER
+                                </div>
 
-                        <h3>
-                            Tradisi Nusantara
-                        </h3>
+                                <h3 class="video-title">
+                                    Menyusuri Jejak Peradaban Nusantara
+                                </h3>
 
-                        <p>
-                            Dokumentasi adat, ritual, dan tradisi
-                            masyarakat dari berbagai daerah.
-                        </p>
+                            </div>
+
+                        </a>
 
                     </article>
 
 
-                    <article class="program-card">
+                    <article class="video-card">
 
-                        <div class="program-number">
-                            03
-                        </div>
+                        <a href="#">
 
-                        <h3>
-                            Suara Mandala
-                        </h3>
+                            <div class="video-image">
 
-                        <p>
-                            Percakapan bersama tokoh, budayawan,
-                            dan mereka yang menjaga warisan Nusantara.
-                        </p>
+                                <img
+                                    src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85"
+                                    alt="Kehidupan masyarakat dan budaya"
+                                >
+
+                                <span class="play-button">
+                                    ▶
+                                </span>
+
+                            </div>
+
+                            <div class="video-info">
+
+                                <div class="story-category">
+                                    BUDAYA
+                                </div>
+
+                                <h3 class="video-title">
+                                    Mengenal Tradisi dan Kehidupan Masyarakat
+                                </h3>
+
+                            </div>
+
+                        </a>
+
+                    </article>
+
+
+                    <article class="video-card">
+
+                        <a href="#">
+
+                            <div class="video-image">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=85"
+                                    alt="Tradisi dan upacara Nusantara"
+                                >
+
+                                <span class="play-button">
+                                    ▶
+                                </span>
+
+                            </div>
+
+                            <div class="video-info">
+
+                                <div class="story-category">
+                                    HINDU
+                                </div>
+
+                                <h3 class="video-title">
+                                    Makna di Balik Tradisi dan Upacara
+                                </h3>
+
+                            </div>
+
+                        </a>
 
                     </article>
 
@@ -1199,382 +567,287 @@
         </section>
 
 
+        <!-- =================================================
+             PODCAST
+             ================================================= -->
 
-        <!-- =====================================================
-             VIDEO / PODCAST / AGENDA
-        ====================================================== -->
-
-        <section class="media">
+        <section
+            class="section event-section"
+            id="podcast"
+        >
 
             <div class="container">
 
-                <div class="media-grid">
+                <div class="event-grid">
 
 
-                    <!-- VIDEO -->
+                    <div>
 
-                    <div class="media-column">
+                        <span class="section-label">
+                            PODCAST MANDALA
+                        </span>
 
-                        <div class="media-heading">
-
-                            <h3>
-                                Video Dokumenter
-                            </h3>
-
-                            <a href="#" class="see-more">
-                                Lihat semua →
-                            </a>
-
-                        </div>
+                        <h2 class="section-title">
+                            Suara & Cerita
+                        </h2>
 
 
-                        <div class="video-grid">
+                        <article class="event-card">
 
+                            <div class="event-date">
+                                EP 12
+                            </div>
 
-                            <article>
+                            <div>
 
-                                <div class="video-card">
-                                    <div class="play">▶</div>
+                                <h3 class="event-title">
+                                    Peran Hindu dalam Membentuk
+                                    Peradaban Nusantara
+                                </h3>
+
+                                <div class="event-location">
+                                    Suara Mandala
                                 </div>
 
-                                <div class="video-info">
+                            </div>
 
-                                    <small>
-                                        DOKUMENTER
-                                    </small>
+                        </article>
 
-                                    <h4>
-                                        Menyusuri Jejak Peradaban Nusantara
-                                    </h4>
 
+                        <article class="event-card">
+
+                            <div class="event-date">
+                                EP 11
+                            </div>
+
+                            <div>
+
+                                <h3 class="event-title">
+                                    Melestarikan Tradisi di Tengah Perubahan Zaman
+                                </h3>
+
+                                <div class="event-location">
+                                    Suara Mandala
                                 </div>
 
-                            </article>
+                            </div>
+
+                        </article>
 
 
-                            <article>
+                        <article class="event-card">
 
-                                <div class="video-card">
-                                    <div class="play">▶</div>
+                            <div class="event-date">
+                                EP 10
+                            </div>
+
+                            <div>
+
+                                <h3 class="event-title">
+                                    Candi sebagai Pusat Pendidikan dan Kebudayaan
+                                </h3>
+
+                                <div class="event-location">
+                                    Suara Mandala
                                 </div>
 
-                                <div class="video-info">
+                            </div>
 
-                                    <small>
-                                        BUDAYA
-                                    </small>
-
-                                    <h4>
-                                        Mengenal Tradisi dan Kehidupan Masyarakat
-                                    </h4>
-
-                                </div>
-
-                            </article>
-
-
-                            <article>
-
-                                <div class="video-card">
-                                    <div class="play">▶</div>
-                                </div>
-
-                                <div class="video-info">
-
-                                    <small>
-                                        HINDU
-                                    </small>
-
-                                    <h4>
-                                        Makna di Balik Tradisi dan Upacara
-                                    </h4>
-
-                                </div>
-
-                            </article>
-
-
-                        </div>
+                        </article>
 
                     </div>
-
-
-
-                    <!-- PODCAST -->
-
-                    <div class="media-column">
-
-                        <div class="media-heading">
-
-                            <h3>
-                                Podcast Mandala
-                            </h3>
-
-                            <a href="#" class="see-more">
-                                Lihat semua →
-                            </a>
-
-                        </div>
-
-
-                        <div class="podcast-list">
-
-
-                            <article class="podcast-item">
-
-                                <div class="podcast-thumb">
-                                    ▶
-                                </div>
-
-                                <div>
-
-                                    <small>
-                                        EP. 12
-                                    </small>
-
-                                    <h4>
-                                        Peran Hindu dalam Membentuk
-                                        Peradaban Nusantara
-                                    </h4>
-
-                                </div>
-
-                            </article>
-
-
-                            <article class="podcast-item">
-
-                                <div class="podcast-thumb">
-                                    ▶
-                                </div>
-
-                                <div>
-
-                                    <small>
-                                        EP. 11
-                                    </small>
-
-                                    <h4>
-                                        Melestarikan Tradisi di Tengah
-                                        Perubahan Zaman
-                                    </h4>
-
-                                </div>
-
-                            </article>
-
-
-                            <article class="podcast-item">
-
-                                <div class="podcast-thumb">
-                                    ▶
-                                </div>
-
-                                <div>
-
-                                    <small>
-                                        EP. 10
-                                    </small>
-
-                                    <h4>
-                                        Candi sebagai Pusat Pendidikan
-                                        dan Kebudayaan
-                                    </h4>
-
-                                </div>
-
-                            </article>
-
-
-                        </div>
-
-                    </div>
-
 
 
                     <!-- AGENDA -->
 
-                    <div class="agenda">
+                    <div>
 
-                        <h3>
-                            Agenda Budaya
-                        </h3>
+                        <span class="section-label">
+                            AGENDA BUDAYA
+                        </span>
+
+                        <h2 class="section-title">
+                            Jangan Lewatkan
+                        </h2>
 
 
-                        <article class="agenda-item">
+                        <article class="event-card">
 
-                            <div class="agenda-date">
-                                15
-                                <small>AUG</small>
+                            <div class="event-date">
+                                15<br>AUG
                             </div>
 
                             <div>
-                                <h4>
+
+                                <h3 class="event-title">
                                     Piodalan Pura Agung Besakih
-                                </h4>
+                                </h3>
 
-                                <p>
+                                <div class="event-location">
                                     Bali
-                                </p>
+                                </div>
+
                             </div>
 
                         </article>
 
 
-                        <article class="agenda-item">
+                        <article class="event-card">
 
-                            <div class="agenda-date">
-                                20
-                                <small>AUG</small>
+                            <div class="event-date">
+                                20<br>AUG
                             </div>
 
                             <div>
-                                <h4>
+
+                                <h3 class="event-title">
                                     Festival Budaya Nusantara
-                                </h4>
+                                </h3>
 
-                                <p>
+                                <div class="event-location">
                                     Yogyakarta
-                                </p>
+                                </div>
+
                             </div>
 
                         </article>
 
 
-                        <article class="agenda-item">
+                        <article class="event-card">
 
-                            <div class="agenda-date">
-                                28
-                                <small>AUG</small>
+                            <div class="event-date">
+                                28<br>AUG
                             </div>
 
                             <div>
-                                <h4>
-                                    Pawiwahan Massal
-                                </h4>
 
-                                <p>
+                                <h3 class="event-title">
+                                    Pawiwahan Massal
+                                </h3>
+
+                                <div class="event-location">
                                     Denpasar, Bali
-                                </p>
+                                </div>
+
                             </div>
 
                         </article>
-
-
-                        <a href="#" class="agenda-button">
-                            LIHAT SEMUA AGENDA
-                        </a>
 
                     </div>
-
 
                 </div>
 
             </div>
 
         </section>
-
 
 
     </main>
 
 
-
     <!-- =====================================================
          FOOTER
-    ====================================================== -->
+         ===================================================== -->
 
-    <footer>
+    <footer
+        class="site-footer"
+        id="tentang"
+    >
 
         <div class="container">
 
             <div class="footer-grid">
 
 
-                <div class="footer-column">
+                <div>
 
-                    <div class="footer-title">
+                    <div class="footer-logo">
                         MEDIA<br>
                         MANDALA
                     </div>
 
-                    <p>
-                        Media digital yang berdedikasi untuk
-                        mendokumentasikan, melestarikan, dan
-                        menceritakan warisan serta kehidupan
+                    <p class="footer-description">
+                        Media digital yang berdedikasi untuk mendokumentasikan,
+                        melestarikan, dan menceritakan warisan serta kehidupan
                         masyarakat Nusantara.
                     </p>
 
                 </div>
 
 
-                <div class="footer-column">
+                <div>
 
-                    <h4>
+                    <div class="footer-title">
                         MENU
-                    </h4>
+                    </div>
 
-                    <a href="#">Berita</a>
-                    <a href="#">Hindu</a>
-                    <a href="#">Budaya</a>
-                    <a href="#">Sejarah</a>
-                    <a href="#">Candi</a>
-                    <a href="#">Podcast</a>
-                    <a href="#">Video</a>
+                    <div class="footer-links">
+
+                        <a href="#berita">Berita</a>
+                        <a href="#hindu">Hindu</a>
+                        <a href="#budaya">Budaya</a>
+                        <a href="#sejarah">Sejarah</a>
+                        <a href="#candi">Candi</a>
+                        <a href="#podcast">Podcast</a>
+                        <a href="#video">Video</a>
+
+                    </div>
 
                 </div>
 
 
-                <div class="footer-column">
+                <div>
 
-                    <h4>
+                    <div class="footer-title">
                         TENTANG
-                    </h4>
+                    </div>
 
-                    <a href="#">Tentang Kami</a>
-                    <a href="#">Visi & Misi</a>
-                    <a href="#">Redaksi</a>
-                    <a href="#">Karir</a>
-                    <a href="#">Kontak Kami</a>
+                    <div class="footer-links">
+
+                        <a href="#tentang">
+                            Tentang Kami
+                        </a>
+
+                        <a href="#">
+                            Visi & Misi
+                        </a>
+
+                        <a href="#">
+                            Redaksi
+                        </a>
+
+                        <a href="#">
+                            Kontak Kami
+                        </a>
+
+                    </div>
 
                 </div>
 
 
-                <div class="footer-column">
+                <div>
 
-                    <h4>
+                    <div class="footer-title">
                         INFORMASI
-                    </h4>
+                    </div>
 
-                    <a href="#">Kebijakan Privasi</a>
-                    <a href="#">Syarat & Ketentuan</a>
-                    <a href="#">Pedoman Media Siber</a>
-                    <a href="#">FAQ</a>
+                    <div class="footer-links">
 
-                </div>
+                        <a href="#">
+                            Kebijakan Privasi
+                        </a>
 
+                        <a href="#">
+                            Syarat & Ketentuan
+                        </a>
 
-                <div class="footer-column">
+                        <a href="#">
+                            Pedoman Media Siber
+                        </a>
 
-                    <h4>
-                        LANGGANAN NEWSLETTER
-                    </h4>
-
-                    <p>
-                        Dapatkan update terbaru seputar
-                        budaya dan sejarah Nusantara.
-                    </p>
-
-                    <div class="newsletter">
-
-                        <input
-                            type="email"
-                            placeholder="Email Anda"
-                        >
-
-                        <button>
-                            BERLANGGANAN
-                        </button>
+                        <a href="#">
+                            FAQ
+                        </a>
 
                     </div>
 
@@ -1586,13 +859,13 @@
 
             <div class="footer-bottom">
 
-                <div>
+                <span>
                     © 2026 Media Mandala. Semua hak dilindungi.
-                </div>
+                </span>
 
-                <div>
-                    Merawat Warisan, Menceritakan Peradaban.
-                </div>
+                <span>
+                    Merawat Warisan • Menceritakan Peradaban
+                </span>
 
             </div>
 
@@ -1601,5 +874,49 @@
     </footer>
 
 
+    <!-- =====================================================
+         MOBILE MENU
+         ===================================================== -->
+
+    <script>
+
+        const menuToggle = document.querySelector(".menu-toggle");
+        const mainNav = document.querySelector(".main-nav");
+
+        menuToggle.addEventListener("click", function () {
+
+            mainNav.classList.toggle("active");
+
+            const isOpen =
+                mainNav.classList.contains("active");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+
+        });
+
+
+        document
+            .querySelectorAll(".main-nav a")
+            .forEach(function (link) {
+
+                link.addEventListener("click", function () {
+
+                    mainNav.classList.remove("active");
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                });
+
+            });
+
+    </script>
+
 </body>
+
 </html>
