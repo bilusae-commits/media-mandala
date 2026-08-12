@@ -1383,3 +1383,130 @@ button {
     object-fit: contain !important;
     display: block !important;
 }
+/* =========================================================
+   SCROLL REVEAL ANIMATION
+   ========================================================= */
+
+.program-card,
+.video-card,
+.event-card,
+.story-item,
+.featured-story {
+    opacity: 0;
+
+    transform: translateY(24px);
+
+    transition:
+        opacity .6s ease,
+        transform .6s ease;
+}
+
+
+/* Saat elemen sudah masuk viewport */
+
+.program-card.is-visible,
+.video-card.is-visible,
+.event-card.is-visible,
+.story-item.is-visible,
+.featured-story.is-visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   ANIMATION DELAY
+   ========================================================= */
+
+/* Berita */
+
+.story-list .story-item:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.story-list .story-item:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.story-list .story-item:nth-child(3) {
+    transition-delay: .19s;
+}
+
+
+/* Program */
+
+.program-card:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.program-card:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.program-card:nth-child(3) {
+    transition-delay: .19s;
+}
+
+
+/* Video */
+
+.video-card:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.video-card:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.video-card:nth-child(3) {
+    transition-delay: .19s;
+}
+
+
+/* Podcast & Agenda */
+
+.event-grid > div:nth-child(1) .event-card:nth-child(2) {
+    transition-delay: .05s;
+}
+
+.event-grid > div:nth-child(1) .event-card:nth-child(3) {
+    transition-delay: .12s;
+}
+
+.event-grid > div:nth-child(1) .event-card:nth-child(4) {
+    transition-delay: .19s;
+}
+
+.event-grid > div:nth-child(2) .event-card:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.event-grid > div:nth-child(2) .event-card:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.event-grid > div:nth-child(2) .event-card:nth-child(3) {
+    transition-delay: .19s;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .program-card,
+    .video-card,
+    .event-card,
+    .story-item,
+    .featured-story {
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+}
