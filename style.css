@@ -1348,3 +1348,23 @@ button {
     }
 
 }
+/* =========================================================
+   FIX LOGO HEADER
+   ========================================================= */
+
+.site-header .logo {
+    width: 120px !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+}
+
+.site-header .logo img {
+    width: 120px !important;
+    height: 50px !important;
+    max-width: 120px !important;
+    max-height: 50px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
