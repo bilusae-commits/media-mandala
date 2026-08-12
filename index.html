@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- WAJIB untuk tampilan HP -->
+    <!-- Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
@@ -26,21 +26,22 @@
     <header class="site-header">
 
         <div class="header-inner">
- <a href="#" class="logo">
-    <img
-        src="images/logo.png"
-        alt="Media Mandala"
-    >
-</a>
+
+            <a href="#" class="logo">
+                <img
+                    src="images/logo.png"
+                    alt="Media Mandala"
+                >
+            </a>
 
             <button
                 class="menu-toggle"
                 aria-label="Buka menu"
                 aria-expanded="false"
+                type="button"
             >
                 ☰
             </button>
-
 
             <nav class="main-nav">
 
@@ -88,14 +89,18 @@
 
 
     <!-- =====================================================
-         HERO
+         MAIN CONTENT
          ===================================================== -->
 
     <main>
 
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
         <section class="hero">
 
-            <!-- FOTO HERO -->
             <img
                 class="hero-image"
                 src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=85"
@@ -121,11 +126,17 @@
 
                 <div class="hero-buttons">
 
-                    <a href="#berita" class="btn btn-primary">
+                    <a
+                        href="#berita"
+                        class="btn btn-primary"
+                    >
                         JELAJAHI CERITA →
                     </a>
 
-                    <a href="#video" class="btn btn-outline">
+                    <a
+                        href="#video"
+                        class="btn btn-outline"
+                    >
                         TONTON DOKUMENTER ▶
                     </a>
 
@@ -161,7 +172,10 @@
 
                     </div>
 
-                    <a href="#" class="view-all">
+                    <a
+                        href="#"
+                        class="view-all"
+                    >
                         Lihat semua berita →
                     </a>
 
@@ -171,7 +185,9 @@
                 <div class="news-grid">
 
 
-                    <!-- BERITA UTAMA -->
+                    <!-- =====================================
+                         BERITA UTAMA
+                         ===================================== -->
 
                     <article class="featured-story">
 
@@ -212,14 +228,21 @@
                     </article>
 
 
-                    <!-- DAFTAR BERITA -->
+                    <!-- =====================================
+                         DAFTAR BERITA
+                         ===================================== -->
 
                     <div class="story-list">
 
 
+                        <!-- BERITA 1 -->
+
                         <article class="story-item">
 
-                            <a href="#" class="story-thumb">
+                            <a
+                                href="#"
+                                class="story-thumb"
+                            >
 
                                 <img
                                     src="https://images.unsplash.com/photo-1604840171987-6f9f8c5f5c16?auto=format&fit=crop&w=500&q=80"
@@ -247,9 +270,14 @@
                         </article>
 
 
+                        <!-- BERITA 2 -->
+
                         <article class="story-item">
 
-                            <a href="#" class="story-thumb">
+                            <a
+                                href="#"
+                                class="story-thumb"
+                            >
 
                                 <img
                                     src="https://images.unsplash.com/photo-1605537964076-3cb0ea9b8aeb?auto=format&fit=crop&w=500&q=80"
@@ -277,9 +305,14 @@
                         </article>
 
 
+                        <!-- BERITA 3 -->
+
                         <article class="story-item">
 
-                            <a href="#" class="story-thumb">
+                            <a
+                                href="#"
+                                class="story-thumb"
+                            >
 
                                 <img
                                     src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80"
@@ -338,6 +371,8 @@
                 <div class="program-grid">
 
 
+                    <!-- PROGRAM 01 -->
+
                     <article
                         class="program-card"
                         id="candi"
@@ -359,10 +394,9 @@
                     </article>
 
 
-                    <article
-                        class="program-card"
-                        id="budaya"
-                    >
+                    <!-- PROGRAM 02 -->
+
+                    <article class="program-card">
 
                         <span class="program-number">
                             02
@@ -379,6 +413,8 @@
 
                     </article>
 
+
+                    <!-- PROGRAM 03 -->
 
                     <article
                         class="program-card"
@@ -409,7 +445,7 @@
 
 
         <!-- =================================================
-             VIDEO + PODCAST + AGENDA
+             VIDEO DOKUMENTER
              ================================================= -->
 
         <section
@@ -433,7 +469,10 @@
 
                     </div>
 
-                    <a href="#" class="view-all">
+                    <a
+                        href="#"
+                        class="view-all"
+                    >
                         Lihat semua →
                     </a>
 
@@ -443,7 +482,14 @@
                 <div class="video-grid">
 
 
-                    <article class="video-card">
+                    <!-- =====================================
+                         VIDEO 1
+                         ===================================== -->
+
+                    <article
+                        class="video-card"
+                        data-youtube-id=""
+                    >
 
                         <a href="#">
 
@@ -477,7 +523,14 @@
                     </article>
 
 
-                    <article class="video-card">
+                    <!-- =====================================
+                         VIDEO 2
+                         ===================================== -->
+
+                    <article
+                        class="video-card"
+                        data-youtube-id=""
+                    >
 
                         <a href="#">
 
@@ -511,7 +564,14 @@
                     </article>
 
 
-                    <article class="video-card">
+                    <!-- =====================================
+                         VIDEO 3
+                         ===================================== -->
+
+                    <article
+                        class="video-card"
+                        data-youtube-id=""
+                    >
 
                         <a href="#">
 
@@ -553,7 +613,7 @@
 
 
         <!-- =================================================
-             PODCAST
+             PODCAST + AGENDA
              ================================================= -->
 
         <section
@@ -566,6 +626,10 @@
                 <div class="event-grid">
 
 
+                    <!-- =====================================
+                         PODCAST
+                         ===================================== -->
+
                     <div>
 
                         <span class="section-label">
@@ -576,6 +640,8 @@
                             Suara & Cerita
                         </h2>
 
+
+                        <!-- PODCAST 12 -->
 
                         <article class="event-card">
 
@@ -599,6 +665,8 @@
                         </article>
 
 
+                        <!-- PODCAST 11 -->
+
                         <article class="event-card">
 
                             <div class="event-date">
@@ -608,7 +676,8 @@
                             <div>
 
                                 <h3 class="event-title">
-                                    Melestarikan Tradisi di Tengah Perubahan Zaman
+                                    Melestarikan Tradisi di Tengah
+                                    Perubahan Zaman
                                 </h3>
 
                                 <div class="event-location">
@@ -620,6 +689,8 @@
                         </article>
 
 
+                        <!-- PODCAST 10 -->
+
                         <article class="event-card">
 
                             <div class="event-date">
@@ -629,7 +700,8 @@
                             <div>
 
                                 <h3 class="event-title">
-                                    Candi sebagai Pusat Pendidikan dan Kebudayaan
+                                    Candi sebagai Pusat Pendidikan
+                                    dan Kebudayaan
                                 </h3>
 
                                 <div class="event-location">
@@ -643,7 +715,9 @@
                     </div>
 
 
-                    <!-- AGENDA -->
+                    <!-- =====================================
+                         AGENDA BUDAYA
+                         ===================================== -->
 
                     <div>
 
@@ -656,10 +730,13 @@
                         </h2>
 
 
+                        <!-- AGENDA 1 -->
+
                         <article class="event-card">
 
                             <div class="event-date">
-                                15<br>AUG
+                                15<br>
+                                AUG
                             </div>
 
                             <div>
@@ -677,10 +754,13 @@
                         </article>
 
 
+                        <!-- AGENDA 2 -->
+
                         <article class="event-card">
 
                             <div class="event-date">
-                                20<br>AUG
+                                20<br>
+                                AUG
                             </div>
 
                             <div>
@@ -698,10 +778,13 @@
                         </article>
 
 
+                        <!-- AGENDA 3 -->
+
                         <article class="event-card">
 
                             <div class="event-date">
-                                28<br>AUG
+                                28<br>
+                                AUG
                             </div>
 
                             <div>
@@ -719,6 +802,7 @@
                         </article>
 
                     </div>
+
 
                 </div>
 
@@ -744,6 +828,8 @@
             <div class="footer-grid">
 
 
+                <!-- FOOTER BRAND -->
+
                 <div>
 
                     <div class="footer-logo">
@@ -760,6 +846,8 @@
                 </div>
 
 
+                <!-- MENU -->
+
                 <div>
 
                     <div class="footer-title">
@@ -768,18 +856,40 @@
 
                     <div class="footer-links">
 
-                        <a href="#berita">Berita</a>
-                        <a href="#hindu">Hindu</a>
-                        <a href="#budaya">Budaya</a>
-                        <a href="#sejarah">Sejarah</a>
-                        <a href="#candi">Candi</a>
-                        <a href="#podcast">Podcast</a>
-                        <a href="#video">Video</a>
+                        <a href="#berita">
+                            Berita
+                        </a>
+
+                        <a href="#hindu">
+                            Hindu
+                        </a>
+
+                        <a href="#budaya">
+                            Budaya
+                        </a>
+
+                        <a href="#sejarah">
+                            Sejarah
+                        </a>
+
+                        <a href="#candi">
+                            Candi
+                        </a>
+
+                        <a href="#podcast">
+                            Podcast
+                        </a>
+
+                        <a href="#video">
+                            Video
+                        </a>
 
                     </div>
 
                 </div>
 
+
+                <!-- TENTANG -->
 
                 <div>
 
@@ -809,6 +919,8 @@
 
                 </div>
 
+
+                <!-- INFORMASI -->
 
                 <div>
 
@@ -842,6 +954,8 @@
             </div>
 
 
+            <!-- FOOTER BOTTOM -->
+
             <div class="footer-bottom">
 
                 <span>
@@ -860,13 +974,21 @@
 
 
     <!-- =====================================================
-         MOBILE MENU
+         JAVASCRIPT
          ===================================================== -->
 
     <script>
 
-        const menuToggle = document.querySelector(".menu-toggle");
-        const mainNav = document.querySelector(".main-nav");
+        /* ================================================
+           MOBILE MENU
+           ================================================ */
+
+        const menuToggle =
+            document.querySelector(".menu-toggle");
+
+        const mainNav =
+            document.querySelector(".main-nav");
+
 
         menuToggle.addEventListener("click", function () {
 
@@ -882,6 +1004,10 @@
 
         });
 
+
+        /* ================================================
+           TUTUP MENU SETELAH LINK DIKLIK
+           ================================================ */
 
         document
             .querySelectorAll(".main-nav a")
@@ -899,6 +1025,7 @@
                 });
 
             });
+
 
     </script>
 
