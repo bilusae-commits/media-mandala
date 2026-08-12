@@ -56,7 +56,6 @@ body {
 
 img {
     display: block;
-
     max-width: 100%;
 }
 
@@ -73,18 +72,6 @@ button {
 /* =========================================================
    FLUID CONTAINER
    ========================================================= */
-
-/*
-   PENTING:
-   Kita sengaja TIDAK menggunakan max-width kecil.
-
-   Dengan width 92vw:
-   - desktop besar → ikut melebar
-   - laptop → ikut mengecil
-   - tablet → ikut mengecil
-   - HP → ikut mengecil
-   - zoom browser → tetap mengikuti viewport
-*/
 
 .container {
     width: 92vw;
@@ -173,7 +160,7 @@ button {
 
     color: white;
 
-    border-bottom: 1px solid rgba(255,255,255,.15);
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
 }
 
 .header-inner {
@@ -192,62 +179,41 @@ button {
 }
 
 
-/* LOGO */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo {
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
-
     flex-shrink: 0;
+
+    /*
+    Ukuran logo dikontrol dari sini.
+    Tidak akan mengikuti ukuran asli file logo.png.
+    */
+    width: 120px;
+
+    overflow: hidden;
 }
 
-.logo-mark {
-    width: 34px;
-    height: 34px;
+.logo img {
+    display: block;
 
-    display: grid;
-    place-items: center;
+    width: 120px;
+    height: auto;
 
-    background: var(--red);
+    max-width: 120px;
 
-    color: white;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.logo-name {
-    font-size: 12px;
-
-    font-weight: 900;
-
-    letter-spacing: 1.5px;
-}
-
-.logo-tagline {
-    margin-top: 1px;
-
-    font-size: 7px;
-
-    color: rgba(255,255,255,.7);
-
-    letter-spacing: .4px;
+    object-fit: contain;
 }
 
 
-/* NAV */
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 .main-nav {
     display: flex;
@@ -260,7 +226,7 @@ button {
 .main-nav a {
     position: relative;
 
-    color: rgba(255,255,255,.9);
+    color: rgba(255, 255, 255, .9);
 
     font-size: clamp(10px, .75vw, 12px);
 
@@ -296,7 +262,9 @@ button {
 }
 
 
-/* MOBILE MENU */
+/* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
 
 .menu-toggle {
     display: none;
@@ -304,7 +272,7 @@ button {
     width: 42px;
     height: 42px;
 
-    border: 1px solid rgba(255,255,255,.3);
+    border: 1px solid rgba(255, 255, 255, .3);
 
     background: transparent;
 
@@ -342,7 +310,7 @@ button {
 }
 
 
-/* FOTO HERO */
+/* HERO IMAGE */
 
 .hero-image {
     position: absolute;
@@ -360,10 +328,7 @@ button {
 }
 
 
-/*
-   Overlay membuat teks tetap terbaca
-   sekaligus membuat foto tetap terlihat.
-*/
+/* HERO OVERLAY */
 
 .hero::after {
     content: "";
@@ -377,10 +342,10 @@ button {
     background:
         linear-gradient(
             90deg,
-            rgba(4,27,58,.92) 0%,
-            rgba(4,27,58,.72) 35%,
-            rgba(4,27,58,.30) 70%,
-            rgba(4,27,58,.10) 100%
+            rgba(4, 27, 58, .92) 0%,
+            rgba(4, 27, 58, .72) 35%,
+            rgba(4, 27, 58, .30) 70%,
+            rgba(4, 27, 58, .10) 100%
         );
 }
 
@@ -438,7 +403,7 @@ button {
 
     margin-top: 28px;
 
-    color: rgba(255,255,255,.9);
+    color: rgba(255, 255, 255, .9);
 
     font-size: clamp(12px, 1vw, 15px);
 
@@ -454,6 +419,11 @@ button {
 
     margin-top: 35px;
 }
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
 
 .btn {
     min-height: 48px;
@@ -491,7 +461,7 @@ button {
 }
 
 .btn-outline {
-    border: 1px solid rgba(255,255,255,.8);
+    border: 1px solid rgba(255, 255, 255, .8);
 
     color: white;
 }
@@ -572,7 +542,7 @@ button {
     background:
         linear-gradient(
             transparent,
-            rgba(3,20,45,.95)
+            rgba(3, 20, 45, .95)
         );
 }
 
@@ -612,7 +582,7 @@ button {
 }
 
 .featured-overlay .story-excerpt {
-    color: rgba(255,255,255,.85);
+    color: rgba(255, 255, 255, .85);
 }
 
 .story-date {
@@ -715,7 +685,7 @@ button {
     right: 4%;
     bottom: -120px;
 
-    color: rgba(255,255,255,.05);
+    color: rgba(255, 255, 255, .05);
 
     font-size: clamp(180px, 22vw, 350px);
 
@@ -742,7 +712,7 @@ button {
 
     margin-top: clamp(30px, 4vw, 55px);
 
-    border: 1px solid rgba(255,255,255,.3);
+    border: 1px solid rgba(255, 255, 255, .3);
 }
 
 .program-card {
@@ -750,7 +720,7 @@ button {
 
     padding: clamp(25px, 3vw, 40px);
 
-    border-right: 1px solid rgba(255,255,255,.3);
+    border-right: 1px solid rgba(255, 255, 255, .3);
 
     transition:
         background .3s ease;
@@ -761,7 +731,7 @@ button {
 }
 
 .program-card:hover {
-    background: rgba(255,255,255,.08);
+    background: rgba(255, 255, 255, .08);
 }
 
 .program-number {
@@ -792,7 +762,7 @@ button {
 .program-description {
     max-width: 420px;
 
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, .8);
 
     font-size: 11px;
 }
@@ -859,6 +829,7 @@ button {
     height: clamp(48px, 4vw, 64px);
 
     display: grid;
+
     place-items: center;
 
     border-radius: 50%;
@@ -908,7 +879,9 @@ button {
 .event-card {
     display: grid;
 
-    grid-template-columns: 75px minmax(0, 1fr);
+    grid-template-columns:
+        75px
+        minmax(0, 1fr);
 
     padding: 20px 0;
 
@@ -985,7 +958,7 @@ button {
 .footer-description {
     max-width: 360px;
 
-    color: rgba(255,255,255,.65);
+    color: rgba(255, 255, 255, .65);
 
     font-size: 11px;
 
@@ -1013,7 +986,7 @@ button {
 }
 
 .footer-links a {
-    color: rgba(255,255,255,.72);
+    color: rgba(255, 255, 255, .72);
 
     font-size: 11px;
 
@@ -1036,9 +1009,9 @@ button {
 
     padding-top: 20px;
 
-    border-top: 1px solid rgba(255,255,255,.15);
+    border-top: 1px solid rgba(255, 255, 255, .15);
 
-    color: rgba(255,255,255,.45);
+    color: rgba(255, 255, 255, .45);
 
     font-size: 9px;
 }
@@ -1059,6 +1032,7 @@ button {
     .hero-title {
         max-width: 1050px;
     }
+
 }
 
 
@@ -1108,7 +1082,7 @@ button {
     .program-card {
         border-right: none;
 
-        border-bottom: 1px solid rgba(255,255,255,.3);
+        border-bottom: 1px solid rgba(255, 255, 255, .3);
     }
 
     .program-card:last-child {
@@ -1124,6 +1098,7 @@ button {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
     }
+
 }
 
 
@@ -1146,6 +1121,15 @@ button {
 
     /* HEADER */
 
+    .logo {
+        width: 100px;
+    }
+
+    .logo img {
+        width: 100px;
+        max-width: 100px;
+    }
+
     .main-nav {
         position: absolute;
 
@@ -1166,7 +1150,7 @@ button {
 
         background: var(--navy-dark);
 
-        border-top: 1px solid rgba(255,255,255,.1);
+        border-top: 1px solid rgba(255, 255, 255, .1);
     }
 
     .main-nav.active {
@@ -1200,8 +1184,8 @@ button {
         background:
             linear-gradient(
                 90deg,
-                rgba(4,27,58,.9),
-                rgba(4,27,58,.45)
+                rgba(4, 27, 58, .9),
+                rgba(4, 27, 58, .45)
             );
     }
 
@@ -1239,7 +1223,9 @@ button {
     .story-item {
         display: grid;
 
-        grid-template-columns: 90px minmax(0, 1fr);
+        grid-template-columns:
+            90px
+            minmax(0, 1fr);
 
         gap: 15px;
 
@@ -1272,7 +1258,8 @@ button {
     /* FOOTER */
 
     .footer-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+            1fr 1fr;
     }
 
     .footer-bottom {
@@ -1280,6 +1267,7 @@ button {
 
         gap: 8px;
     }
+
 }
 
 
@@ -1295,12 +1283,18 @@ button {
         width: 88vw;
     }
 
-    .logo-tagline {
-        display: none;
+    /*
+    Logo sedikit diperkecil lagi
+    untuk HP kecil.
+    */
+
+    .logo {
+        width: 92px;
     }
 
-    .logo-name {
-        font-size: 11px;
+    .logo img {
+        width: 92px;
+        max-width: 92px;
     }
 
     .hero {
@@ -1322,6 +1316,7 @@ button {
     .footer-grid {
         grid-template-columns: 1fr;
     }
+
 }
 
 
@@ -1351,4 +1346,5 @@ button {
     *::after {
         transition: none !important;
     }
+
 }
