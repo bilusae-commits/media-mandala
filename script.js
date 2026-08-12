@@ -3,12 +3,11 @@
    MAIN JAVASCRIPT
    ========================================================= */
 
-
-/* =========================================================
-   1. MOBILE MENU
-   ========================================================= */
-
 document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       MOBILE MENU
+       ===================================================== */
 
     const menuToggle = document.querySelector(".menu-toggle");
     const mainNav = document.querySelector(".main-nav");
@@ -27,11 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        /* Tutup menu setelah memilih menu */
+        /* Tutup menu ketika link diklik */
 
-        const navLinks = mainNav.querySelectorAll("a");
-
-        navLinks.forEach(function (link) {
+        mainNav.querySelectorAll("a").forEach(function (link) {
 
             link.addEventListener("click", function () {
 
@@ -46,208 +43,122 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
+    }
 
-        /* Tutup menu jika klik di luar */
 
-        document.addEventListener("click", function (event) {
+    /* =====================================================
+       HEADER SCROLL EFFECT
+       ===================================================== */
 
-            const clickedInsideMenu =
-                mainNav.contains(event.target);
+    const header = document.querySelector(".site-header");
 
-            const clickedToggle =
-                menuToggle.contains(event.target);
+    if (header) {
 
-            if (
-                !clickedInsideMenu &&
-                !clickedToggle &&
-                mainNav.classList.contains("active")
-            ) {
+        function updateHeader() {
 
-                mainNav.classList.remove("active");
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
+            if (window.scrollY > 20) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
             }
 
-        });
+        }
+
+        window.addEventListener("scroll", updateHeader);
+
+        updateHeader();
 
     }
 
 
     /* =====================================================
-       2. ACTIVE MENU SAAT SCROLL
+       ACTIVE NAVIGATION
        ===================================================== */
 
-    const sections = document.querySelectorAll(
-        "main section[id], footer[id]"
-    );
-
     const navLinks = document.querySelectorAll(
-        ".main-nav a"
+        ".main-nav a[href^='#']"
     );
 
+    const sections = document.querySelectorAll(
+        "main section[id]"
+    );
 
-    function updateActiveMenu() {
+    if (navLinks.length && sections.length) {
 
-        const scrollPosition =
-            window.scrollY + 150;
+        const observer = new IntersectionObserver(
+            function (entries) {
 
-        let currentSection = "";
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        const currentId =
+                            entry.target.getAttribute("id");
+
+                        navLinks.forEach(function (link) {
+
+                            link.classList.remove("active");
+
+                            if (
+                                link.getAttribute("href") ===
+                                "#" + currentId
+                            ) {
+                                link.classList.add("active");
+                            }
+
+                        });
+
+                    }
+
+                });
+
+            },
+            {
+                rootMargin: "-35% 0px -55% 0px",
+                threshold: 0
+            }
+        );
 
         sections.forEach(function (section) {
 
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-
-            if (
-                scrollPosition >= sectionTop &&
-                scrollPosition < sectionTop + sectionHeight
-            ) {
-
-                currentSection = section.getAttribute("id");
-
-            }
+            observer.observe(section);
 
         });
-
-
-        navLinks.forEach(function (link) {
-
-            link.classList.remove("active");
-
-            const href =
-                link.getAttribute("href");
-
-            if (
-                href &&
-                href === "#" + currentSection
-            ) {
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-
-        /* Jika berada paling atas */
-
-        if (window.scrollY < 100) {
-
-            navLinks.forEach(function (link) {
-
-                link.classList.remove("active");
-
-            });
-
-            const homeLink =
-                document.querySelector(
-                    '.main-nav a[href="#"]'
-                );
-
-            if (homeLink) {
-                homeLink.classList.add("active");
-            }
-
-        }
 
     }
 
 
-    window.addEventListener(
-        "scroll",
-        updateActiveMenu,
-        { passive: true }
-    );
-
-
-    updateActiveMenu();
-
-
     /* =====================================================
-       3. SMOOTH SCROLL
-       ===================================================== */
-
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach(function (link) {
-
-            link.addEventListener("click", function (event) {
-
-                const targetId =
-                    this.getAttribute("href");
-
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
-                }
-
-                const target =
-                    document.querySelector(targetId);
-
-                if (!target) {
-                    return;
-                }
-
-                event.preventDefault();
-
-                const header =
-                    document.querySelector(".site-header");
-
-                const headerHeight =
-                    header
-                        ? header.offsetHeight
-                        : 0;
-
-                const targetPosition =
-                    target.getBoundingClientRect().top +
-                    window.scrollY -
-                    headerHeight;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: "smooth"
-                });
-
-            });
-
-        });
-
-
-    /* =====================================================
-       4. VIDEO YOUTUBE
+       VIDEO CARD
        ===================================================== */
 
     const videoCards =
-        document.querySelectorAll(
-            ".video-card[data-youtube-id]"
-        );
-
+        document.querySelectorAll(".video-card");
 
     videoCards.forEach(function (card) {
 
-        const youtubeId =
-            card.getAttribute("data-youtube-id");
-
-        if (!youtubeId) {
-            return;
-        }
-
         card.addEventListener("click", function (event) {
+
+            const youtubeId =
+                card.getAttribute("data-youtube-id");
+
+            /*
+             Jika ID YouTube belum diisi,
+             jangan lakukan apa-apa.
+            */
+
+            if (!youtubeId) {
+                return;
+            }
 
             event.preventDefault();
 
-            const youtubeUrl =
+            const youtubeURL =
                 "https://www.youtube.com/watch?v=" +
                 youtubeId;
 
             window.open(
-                youtubeUrl,
+                youtubeURL,
                 "_blank",
                 "noopener,noreferrer"
             );
@@ -258,63 +169,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       5. HEADER SCROLL EFFECT
+       CLOSE MOBILE MENU KETIKA KLIK DI LUAR MENU
        ===================================================== */
 
-    const header =
-        document.querySelector(".site-header");
+    document.addEventListener("click", function (event) {
 
-
-    function updateHeader() {
-
-        if (!header) {
+        if (!menuToggle || !mainNav) {
             return;
         }
 
-        if (window.scrollY > 20) {
+        const clickedInsideMenu =
+            mainNav.contains(event.target);
 
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
-        }
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        updateHeader,
-        { passive: true }
-    );
-
-
-    updateHeader();
-
-
-    /* =====================================================
-       6. CLOSE MOBILE MENU SAAT RESIZE
-       ===================================================== */
-
-    window.addEventListener("resize", function () {
+        const clickedToggle =
+            menuToggle.contains(event.target);
 
         if (
-            window.innerWidth > 700 &&
-            mainNav
+            !clickedInsideMenu &&
+            !clickedToggle &&
+            mainNav.classList.contains("active")
         ) {
 
             mainNav.classList.remove("active");
 
-            if (menuToggle) {
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            }
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
 
         }
 
@@ -322,27 +203,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       7. IMAGE ERROR HANDLING
+       ESC UNTUK MENUTUP MENU
        ===================================================== */
 
-    const images =
-        document.querySelectorAll("img");
+    document.addEventListener("keydown", function (event) {
 
+        if (event.key !== "Escape") {
+            return;
+        }
 
-    images.forEach(function (image) {
+        if (!mainNav || !menuToggle) {
+            return;
+        }
 
-        image.addEventListener(
-            "error",
-            function () {
+        mainNav.classList.remove("active");
 
-                this.classList.add(
-                    "image-error"
-                );
-
-            }
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
         );
 
     });
-
 
 });
