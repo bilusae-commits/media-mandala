@@ -1,24 +1,27 @@
 /* =========================================================
    MEDIA MANDALA
-   GLOBAL JAVASCRIPT
-   ========================================================= */
+   MAIN JAVASCRIPT
+   Responsive + Navigation + Animation
+========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
+document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
-       MOBILE MENU
-       ===================================================== */
+       ELEMENT
+    ===================================================== */
 
     const menuToggle = document.querySelector(".menu-toggle");
     const mainNav = document.querySelector(".main-nav");
 
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
     if (menuToggle && mainNav) {
 
-        menuToggle.addEventListener("click", function () {
+        menuToggle.addEventListener("click", () => {
 
-            const isOpen =
-                mainNav.classList.toggle("active");
+            const isOpen = mainNav.classList.toggle("active");
 
             menuToggle.setAttribute(
                 "aria-expanded",
@@ -28,16 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        /* ================================================
-           TUTUP MENU SAAT LINK DIKLIK
-           ================================================ */
+        /* Tutup menu ketika link diklik */
 
-        const navLinks =
-            document.querySelectorAll(".main-nav a");
+        mainNav.querySelectorAll("a").forEach(link => {
 
-        navLinks.forEach(function (link) {
-
-            link.addEventListener("click", function () {
+            link.addEventListener("click", () => {
 
                 mainNav.classList.remove("active");
 
@@ -50,100 +48,109 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-
-        /* ================================================
-           TUTUP MENU SAAT KLIK DI LUAR MENU
-           ================================================ */
-
-        document.addEventListener("click", function (event) {
-
-            const clickedInsideMenu =
-                mainNav.contains(event.target);
-
-            const clickedToggle =
-                menuToggle.contains(event.target);
-
-            if (
-                !clickedInsideMenu &&
-                !clickedToggle
-            ) {
-
-                mainNav.classList.remove("active");
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            }
-
-        });
+    }
 
 
-        /* ================================================
-           TUTUP MENU SAAT ESC
-           ================================================ */
+    /* =====================================================
+       HEADER SCROLL EFFECT
+    ===================================================== */
 
-        document.addEventListener(
-            "keydown",
-            function (event) {
+    const header = document.querySelector(".site-header");
 
-                if (event.key === "Escape") {
+    if (header) {
 
-                    mainNav.classList.remove("active");
+        let lastScroll = 0;
 
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+        window.addEventListener(
+            "scroll",
+            () => {
 
+                const currentScroll = window.scrollY;
+
+                if (currentScroll > 40) {
+                    header.classList.add("scrolled");
+                } else {
+                    header.classList.remove("scrolled");
                 }
 
-            }
+                lastScroll = currentScroll;
+
+            },
+            { passive: true }
         );
 
     }
 
 
     /* =====================================================
-       HEADER ACTIVE MENU
-       ===================================================== */
+       ACTIVE NAVIGATION
+    ===================================================== */
 
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop() || "index.html";
-
-    const allNavLinks =
+    const navLinks =
         document.querySelectorAll(".main-nav a");
 
-    allNavLinks.forEach(function (link) {
+    const sections =
+        document.querySelectorAll("main section[id]");
 
-        const linkPage =
-            link.getAttribute("href");
+    if (navLinks.length && sections.length) {
 
-        if (
-            linkPage &&
-            !linkPage.startsWith("#") &&
-            linkPage === currentPage
-        ) {
+        const updateActiveNav = () => {
 
-            allNavLinks.forEach(function (item) {
-                item.classList.remove("active");
+            let currentSection = "";
+
+            sections.forEach(section => {
+
+                const sectionTop =
+                    section.offsetTop - 150;
+
+                const sectionHeight =
+                    section.offsetHeight;
+
+                if (
+                    window.scrollY >= sectionTop &&
+                    window.scrollY < sectionTop + sectionHeight
+                ) {
+                    currentSection = section.id;
+                }
+
             });
 
-            link.classList.add("active");
 
-        }
+            navLinks.forEach(link => {
 
-    });
+                link.classList.remove("active");
+
+                const target =
+                    link.getAttribute("href");
+
+                if (
+                    target &&
+                    target === `#${currentSection}`
+                ) {
+                    link.classList.add("active");
+                }
+
+            });
+
+        };
+
+
+        window.addEventListener(
+            "scroll",
+            updateActiveNav,
+            { passive: true }
+        );
+
+        updateActiveNav();
+
+    }
 
 
     /* =====================================================
-       ANIMASI SAAT ELEMEN MASUK LAYAR
-       ===================================================== */
+       REVEAL ANIMATION
+    ===================================================== */
 
-    const animatedElements =
+    const revealElements =
         document.querySelectorAll(
             ".section-label, " +
             ".section-title, " +
@@ -155,42 +162,25 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    /* =====================================================
-       REDUCED MOTION
-       ===================================================== */
+    if ("IntersectionObserver" in window) {
 
-    const prefersReducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-
-    if (!prefersReducedMotion) {
-
-        animatedElements.forEach(function (element) {
-
-            element.classList.add("scroll-hidden");
-
-        });
-
-
-        const observer =
+        const revealObserver =
             new IntersectionObserver(
-                function (entries, observer) {
+                (entries, observer) => {
 
-                    entries.forEach(function (entry) {
+                    entries.forEach(entry => {
 
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add(
-                                "scroll-show"
-                            );
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
+                        if (!entry.isIntersecting) {
+                            return;
                         }
+
+                        entry.target.classList.add(
+                            "is-visible"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
 
                     });
 
@@ -202,33 +192,76 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        animatedElements.forEach(function (element) {
+        revealElements.forEach(element => {
 
-            observer.observe(element);
+            element.classList.add(
+                "reveal"
+            );
 
+            revealObserver.observe(
+                element
+            );
+
+        });
+
+    } else {
+
+        revealElements.forEach(element => {
+            element.classList.add("is-visible");
         });
 
     }
 
 
     /* =====================================================
-       SMOOTH SCROLL UNTUK LINK ANCHOR
-       ===================================================== */
+       STAGGER ANIMATION
+    ===================================================== */
 
-    const anchorLinks =
-        document.querySelectorAll(
-            'a[href^="#"]'
+    const staggerGroups = [
+        ".story-list",
+        ".program-grid",
+        ".video-grid"
+    ];
+
+
+    staggerGroups.forEach(selector => {
+
+        const group =
+            document.querySelector(selector);
+
+        if (!group) return;
+
+        const children =
+            group.children;
+
+        Array.from(children).forEach(
+            (child, index) => {
+
+                child.style.setProperty(
+                    "--delay",
+                    `${index * 90}ms`
+                );
+
+            }
         );
 
+    });
 
-    anchorLinks.forEach(function (link) {
+
+    /* =====================================================
+       SMOOTH ANCHOR SCROLL
+    ===================================================== */
+
+    document.querySelectorAll(
+        'a[href^="#"]'
+    ).forEach(link => {
 
         link.addEventListener(
             "click",
-            function (event) {
+            event => {
 
                 const targetId =
-                    this.getAttribute("href");
+                    link.getAttribute("href");
 
                 if (
                     !targetId ||
@@ -237,24 +270,32 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-
                 const target =
                     document.querySelector(
                         targetId
                     );
 
-
                 if (!target) {
                     return;
                 }
 
-
                 event.preventDefault();
 
+                const headerHeight =
+                    header
+                        ? header.offsetHeight
+                        : 0;
 
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
+                const targetPosition =
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    headerHeight -
+                    20;
+
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
                 });
 
             }
@@ -264,44 +305,69 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       VIDEO CARD
-       ===================================================== */
+       IMAGE LOAD EFFECT
+    ===================================================== */
 
-    const videoCards =
+    const images =
         document.querySelectorAll(
-            ".video-card[data-youtube-id]"
+            "img"
         );
 
 
-    videoCards.forEach(function (card) {
+    images.forEach(img => {
 
-        const youtubeId =
-            card.getAttribute(
-                "data-youtube-id"
+        if (img.complete) {
+
+            img.classList.add(
+                "image-loaded"
             );
 
+        } else {
+
+            img.addEventListener(
+                "load",
+                () => {
+
+                    img.classList.add(
+                        "image-loaded"
+                    );
+
+                },
+                { once: true }
+            );
+
+        }
+
+    });
+
+
+    /* =====================================================
+       YOUTUBE VIDEO CARD
+       Jika data-youtube-id diisi,
+       klik akan membuka YouTube.
+    ===================================================== */
+
+    document.querySelectorAll(
+        ".video-card[data-youtube-id]"
+    ).forEach(card => {
+
+        const youtubeId =
+            card.dataset.youtubeId;
 
         if (!youtubeId) {
             return;
         }
 
+        card.style.cursor = "pointer";
 
         card.addEventListener(
             "click",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const youtubeUrl =
-                    "https://www.youtube.com/watch?v=" +
-                    youtubeId;
-
+            () => {
 
                 window.open(
-                    youtubeUrl,
+                    `https://www.youtube.com/watch?v=${youtubeId}`,
                     "_blank",
-                    "noopener"
+                    "noopener,noreferrer"
                 );
 
             }
@@ -311,115 +377,124 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       KLIK GAMBAR VIDEO
-       ===================================================== */
+       BUTTON HOVER MAGNETIC EFFECT
+       Hanya desktop
+    ===================================================== */
 
-    const playButtons =
+    const buttons =
         document.querySelectorAll(
-            ".play-button"
+            ".btn"
         );
 
 
-    playButtons.forEach(function (button) {
+    if (window.matchMedia(
+        "(pointer: fine)"
+    ).matches) {
 
-        button.addEventListener(
-            "click",
-            function (event) {
+        buttons.forEach(button => {
 
-                const card =
-                    this.closest(
-                        ".video-card"
-                    );
+            button.addEventListener(
+                "mousemove",
+                event => {
 
+                    const rect =
+                        button.getBoundingClientRect();
 
-                if (!card) {
-                    return;
-                }
+                    const x =
+                        event.clientX -
+                        rect.left -
+                        rect.width / 2;
 
+                    const y =
+                        event.clientY -
+                        rect.top -
+                        rect.height / 2;
 
-                const youtubeId =
-                    card.getAttribute(
-                        "data-youtube-id"
-                    );
-
-
-                if (!youtubeId) {
-
-                    event.preventDefault();
-
-                    return;
+                    button.style.transform =
+                        `translate(${x * 0.08}px, ${y * 0.08}px)`;
 
                 }
+            );
 
 
-                event.preventDefault();
-                event.stopPropagation();
+            button.addEventListener(
+                "mouseleave",
+                () => {
 
+                    button.style.transform =
+                        "";
 
-                window.open(
-                    "https://www.youtube.com/watch?v=" +
-                    youtubeId,
-                    "_blank",
-                    "noopener"
-                );
+                }
+            );
 
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       HEADER SHADOW SAAT SCROLL
-       ===================================================== */
-
-    const header =
-        document.querySelector(
-            ".site-header"
-        );
-
-
-    if (header) {
-
-        function updateHeader() {
-
-            if (window.scrollY > 20) {
-
-                header.classList.add(
-                    "header-scrolled"
-                );
-
-            } else {
-
-                header.classList.remove(
-                    "header-scrolled"
-                );
-
-            }
-
-        }
-
-
-        window.addEventListener(
-            "scroll",
-            updateHeader,
-            {
-                passive: true
-            }
-        );
-
-
-        updateHeader();
+        });
 
     }
 
 
     /* =====================================================
-       LOG
-       ===================================================== */
+       PREVENT EMPTY LINKS FROM JUMPING
+    ===================================================== */
 
-    console.log(
-        "Media Mandala — JavaScript aktif."
+    document.querySelectorAll(
+        'a[href="#"]'
+    ).forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       CURRENT YEAR
+    ===================================================== */
+
+    const yearElements =
+        document.querySelectorAll(
+            "[data-current-year]"
+        );
+
+
+    yearElements.forEach(element => {
+
+        element.textContent =
+            new Date().getFullYear();
+
+    });
+
+
+    /* =====================================================
+       REDUCED MOTION
+    ===================================================== */
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    if (prefersReducedMotion) {
+
+        document.documentElement.classList.add(
+            "reduce-motion"
+        );
+
+    }
+
+
+    /* =====================================================
+       PAGE READY
+    ===================================================== */
+
+    document.body.classList.add(
+        "page-ready"
     );
 
 });
