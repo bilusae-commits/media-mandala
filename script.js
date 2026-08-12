@@ -10,231 +10,64 @@ document.addEventListener("DOMContentLoaded", function () {
        MOBILE MENU
        ===================================================== */
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const mainNav = document.querySelector(".main-nav");
+    const menuToggle =
+        document.querySelector(".menu-toggle");
+
+    const mainNav =
+        document.querySelector(".main-nav");
+
 
     if (menuToggle && mainNav) {
 
         menuToggle.addEventListener("click", function () {
 
-            mainNav.classList.toggle("active");
-
-            const isOpen = mainNav.classList.contains("active");
+            const isOpen =
+                mainNav.classList.toggle("active");
 
             menuToggle.setAttribute(
                 "aria-expanded",
-                isOpen
+                isOpen ? "true" : "false"
             );
 
         });
 
 
-        /* ================================================
-           TUTUP MENU SETELAH LINK DIKLIK
-           ================================================ */
+        /* Tutup menu setelah memilih menu */
 
-        const navLinks = mainNav.querySelectorAll("a");
+        mainNav
+            .querySelectorAll("a")
+            .forEach(function (link) {
 
-        navLinks.forEach(function (link) {
+                link.addEventListener("click", function () {
 
-            link.addEventListener("click", function () {
+                    mainNav.classList.remove("active");
 
-                mainNav.classList.remove("active");
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
+                });
 
             });
 
-        });
-
     }
 
 
     /* =====================================================
-       HEADER SAAT SCROLL
+       SCROLL REVEAL
+       
+       Semua elemen yang memiliki class .reveal
+       akan menggunakan sistem animasi yang sama.
        ===================================================== */
 
-    const header = document.querySelector(".site-header");
-
-    if (header) {
-
-        window.addEventListener("scroll", function () {
-
-            if (window.scrollY > 20) {
-
-                header.classList.add("scrolled");
-
-            } else {
-
-                header.classList.remove("scrolled");
-
-            }
-
-        });
-
-    }
+    const revealElements =
+        document.querySelectorAll(".reveal");
 
 
-    /* =====================================================
-       SMOOTH SCROLL
-       ===================================================== */
+    if (revealElements.length > 0) {
 
-    const anchorLinks = document.querySelectorAll(
-        'a[href^="#"]'
-    );
-
-    anchorLinks.forEach(function (link) {
-
-        link.addEventListener("click", function (event) {
-
-            const targetId =
-                this.getAttribute("href");
-
-            if (
-                !targetId ||
-                targetId === "#"
-            ) {
-                return;
-            }
-
-            const target =
-                document.querySelector(targetId);
-
-            if (!target) {
-                return;
-            }
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        });
-
-    });
-
-
-    /* =====================================================
-       ACTIVE MENU SAAT SCROLL
-       ===================================================== */
-
-    const sections = document.querySelectorAll(
-        "main section[id]"
-    );
-
-    const sectionLinks =
-        document.querySelectorAll(".main-nav a");
-
-    if (sections.length > 0 && sectionLinks.length > 0) {
-
-        const sectionObserver =
-            new IntersectionObserver(
-                function (entries) {
-
-                    entries.forEach(function (entry) {
-
-                        if (entry.isIntersecting) {
-
-                            const sectionId =
-                                entry.target.getAttribute("id");
-
-                            sectionLinks.forEach(function (link) {
-
-                                link.classList.remove("active");
-
-                                const linkTarget =
-                                    link.getAttribute("href");
-
-                                if (
-                                    linkTarget ===
-                                    "#" + sectionId
-                                ) {
-
-                                    link.classList.add("active");
-
-                                }
-
-                            });
-
-                        }
-
-                    });
-
-                },
-                {
-                    rootMargin: "-30% 0px -60% 0px",
-                    threshold: 0
-                }
-            );
-
-        sections.forEach(function (section) {
-
-            sectionObserver.observe(section);
-
-        });
-
-    }
-
-
-    /* =====================================================
-       VIDEO YOUTUBE
-       ===================================================== */
-
-    const videoCards =
-        document.querySelectorAll(
-            ".video-card[data-youtube-id]"
-        );
-
-    videoCards.forEach(function (card) {
-
-        const youtubeId =
-            card.getAttribute("data-youtube-id");
-
-        if (!youtubeId) {
-            return;
-        }
-
-        const link = card.querySelector("a");
-
-        if (!link) {
-            return;
-        }
-
-        link.addEventListener("click", function (event) {
-
-            event.preventDefault();
-
-            window.open(
-                "https://www.youtube.com/watch?v=" +
-                youtubeId,
-                "_blank"
-            );
-
-        });
-
-    });
-
-
-    /* =====================================================
-       ANIMASI SAAT ELEMEN MASUK LAYAR
-       ===================================================== */
-
-    const animatedElements =
-        document.querySelectorAll(
-            ".program-card, .video-card, .event-card, .story-item, .featured-story"
-        );
-
-    if (
-        animatedElements.length > 0 &&
-        "IntersectionObserver" in window
-    ) {
-
-        const animationObserver =
+        const revealObserver =
             new IntersectionObserver(
                 function (entries, observer) {
 
@@ -256,13 +89,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 },
                 {
-                    threshold: 0.12
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -40px 0px"
                 }
             );
 
-        animatedElements.forEach(function (element) {
 
-            animationObserver.observe(element);
+        revealElements.forEach(function (element) {
+
+            revealObserver.observe(element);
 
         });
 
@@ -270,30 +105,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       ESCAPE KEY
+       SMOOTH SCROLL
+       
+       Menu anchor akan berhenti sedikit di bawah header.
        ===================================================== */
 
-    document.addEventListener(
-        "keydown",
-        function (event) {
+    const anchorLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
 
-            if (event.key !== "Escape") {
+
+    anchorLinks.forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            const targetId =
+                this.getAttribute("href");
+
+
+            if (
+                !targetId ||
+                targetId === "#"
+            ) {
                 return;
             }
 
-            if (mainNav && menuToggle) {
 
-                mainNav.classList.remove("active");
+            const target =
+                document.querySelector(targetId);
 
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
 
+            if (!target) {
+                return;
             }
 
-        }
-    );
+
+            event.preventDefault();
+
+
+            const header =
+                document.querySelector(".site-header");
+
+
+            const headerHeight =
+                header
+                    ? header.offsetHeight
+                    : 0;
+
+
+            const targetPosition =
+                target.getBoundingClientRect().top +
+                window.scrollY -
+                headerHeight -
+                20;
+
+
+            window.scrollTo({
+
+                top: targetPosition,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+    });
 
 
 });
