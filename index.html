@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Media Mandala — Merawat Warisan, Menceritakan Peradaban</title>
 
-    <meta
-        name="description"
-        content="Media Mandala — media yang mendokumentasikan Hindu, sejarah, budaya, tradisi dan kehidupan masyarakat Nusantara."
-    >
+    <meta name="description"
+        content="Media Mandala — media yang mendokumentasikan Hindu, sejarah, budaya, tradisi dan kehidupan masyarakat Nusantara.">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -61,11 +60,11 @@
 
         <div class="header-actions">
 
-            <button class="search-button">
+            <button class="search-button" aria-label="Cari">
                 ⌕
             </button>
 
-            <button class="menu-button">
+            <button class="menu-button" aria-label="Menu">
                 ☰
             </button>
 
@@ -83,14 +82,7 @@
 
 <section class="hero">
 
-    <div class="hero-background">
-
-        <div class="hero-image-placeholder">
-            FOTO HERO
-        </div>
-
-    </div>
-
+    <div class="hero-background"></div>
 
     <div class="container hero-inner">
 
@@ -100,20 +92,17 @@
                 MEDIA • BUDAYA • SEJARAH
             </div>
 
-
             <h1>
                 Merawat Warisan,<br>
                 Menceritakan<br>
                 <span>Peradaban.</span>
             </h1>
 
-
             <p class="hero-description">
                 Menjelajahi budaya, tradisi, sejarah, dan kehidupan
                 masyarakat Nusantara untuk generasi hari ini
                 dan mendatang.
             </p>
-
 
             <div class="hero-buttons">
 
@@ -124,7 +113,7 @@
 
                 <a href="#video" class="button button-outline">
                     TONTON DOKUMENTER
-                    <span>▷</span>
+                    <span>▶</span>
                 </a>
 
             </div>
@@ -134,28 +123,22 @@
 
         <div class="hero-slider">
 
-            <span class="slider-number active">
-                01
-            </span>
+            <div class="slider-number active">
+                <strong>01</strong>
+                <span></span>
+            </div>
 
-            <span class="slider-number">
-                02
-            </span>
+            <div class="slider-number">
+                <strong>02</strong>
+                <span></span>
+            </div>
 
-            <span class="slider-number">
-                03
-            </span>
+            <div class="slider-number">
+                <strong>03</strong>
+                <span></span>
+            </div>
 
         </div>
-
-    </div>
-
-
-    <div class="brand-line">
-
-        <span class="yellow"></span>
-        <span class="red"></span>
-        <span class="blue"></span>
 
     </div>
 
@@ -164,7 +147,7 @@
 
 
 <!-- =====================================================
-     BERITA TERBARU
+     BERITA
 ===================================================== -->
 
 <section class="section news-section" id="berita">
@@ -174,6 +157,7 @@
         <div class="section-heading">
 
             <div>
+
                 <div class="section-label">
                     TERKINI
                 </div>
@@ -181,6 +165,7 @@
                 <h2>
                     Berita & Cerita Terbaru
                 </h2>
+
             </div>
 
             <a href="#" class="view-all">
@@ -199,11 +184,7 @@
 
                 <div class="featured-image">
 
-                    <div class="image-placeholder">
-                        FOTO UTAMA
-                    </div>
-
-                    <div class="featured-overlay">
+                    <div class="image-overlay">
 
                         <div class="category">
                             BUDAYA
@@ -220,7 +201,7 @@
                             ke generasi.
                         </p>
 
-                        <div class="news-meta">
+                        <div class="news-date">
                             12 Agustus 2026
                         </div>
 
@@ -237,8 +218,7 @@
 
             <!-- BERITA SAMPING -->
 
-            <div class="news-list">
-
+            <div class="side-news">
 
                 <article class="news-item">
 
@@ -246,7 +226,7 @@
                         FOTO
                     </div>
 
-                    <div class="news-info">
+                    <div>
 
                         <div class="category">
                             HINDU
@@ -257,9 +237,9 @@
                             Upacara Hindu Nusantara
                         </h3>
 
-                        <div class="date">
+                        <span>
                             12 Agustus 2026
-                        </div>
+                        </span>
 
                     </div>
 
@@ -272,7 +252,7 @@
                         FOTO
                     </div>
 
-                    <div class="news-info">
+                    <div>
 
                         <div class="category">
                             SEJARAH
@@ -283,9 +263,9 @@
                             dari Peninggalan Candi
                         </h3>
 
-                        <div class="date">
+                        <span>
                             11 Agustus 2026
-                        </div>
+                        </span>
 
                     </div>
 
@@ -298,7 +278,7 @@
                         FOTO
                     </div>
 
-                    <div class="news-info">
+                    <div>
 
                         <div class="category">
                             TRADISI
@@ -309,9 +289,9 @@
                             yang Masih Bertahan
                         </h3>
 
-                        <div class="date">
+                        <span>
                             10 Agustus 2026
-                        </div>
+                        </span>
 
                     </div>
 
@@ -345,7 +325,7 @@
                 Menjelajah Warisan Nusantara
             </h2>
 
-            <a href="#" class="view-all light">
+            <a href="#">
                 Lihat semua program →
             </a>
 
@@ -358,7 +338,7 @@
             <article class="program-card">
 
                 <div class="program-icon">
-                    ✦
+                    🛕
                 </div>
 
                 <div class="program-number">
@@ -370,8 +350,9 @@
                 </h3>
 
                 <p>
-                    Mengenal sejarah dan kisah di balik
-                    peninggalan peradaban Nusantara.
+                    Mengenal sejarah dan kisah
+                    di balik peninggalan peradaban
+                    Nusantara.
                 </p>
 
             </article>
@@ -380,7 +361,7 @@
             <article class="program-card">
 
                 <div class="program-icon">
-                    ✧
+                    🪷
                 </div>
 
                 <div class="program-number">
@@ -392,8 +373,9 @@
                 </h3>
 
                 <p>
-                    Dokumentasi adat, ritual, dan tradisi
-                    masyarakat dari berbagai daerah.
+                    Dokumentasi adat, ritual,
+                    dan tradisi masyarakat
+                    dari berbagai daerah.
                 </p>
 
             </article>
@@ -402,7 +384,7 @@
             <article class="program-card">
 
                 <div class="program-icon">
-                    ◉
+                    🎙
                 </div>
 
                 <div class="program-number">
@@ -414,8 +396,9 @@
                 </h3>
 
                 <p>
-                    Percakapan bersama tokoh, budayawan,
-                    dan mereka yang menjaga warisan Nusantara.
+                    Percakapan bersama tokoh,
+                    budayawan, dan mereka yang
+                    menjaga warisan Nusantara.
                 </p>
 
             </article>
@@ -429,122 +412,117 @@
 
 
 <!-- =====================================================
-     VIDEO
+     VIDEO + PODCAST + AGENDA
 ===================================================== -->
 
-<section class="section video-section" id="video">
+<section class="media-section" id="video">
 
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div>
-                <div class="section-label">
-                    VIDEO DOKUMENTER
-                </div>
-
-                <h2>
-                    Cerita dalam Gambar
-                </h2>
-            </div>
-
-            <a href="#" class="view-all">
-                Lihat semua →
-            </a>
-
-        </div>
+    <div class="container media-layout">
 
 
-        <div class="video-grid">
+        <!-- VIDEO -->
 
+        <div class="media-column">
 
-            <article class="video-card">
-
-                <div class="video-image">
-                    <div class="play-button">▶</div>
-                </div>
-
-                <div class="category">
-                    DOKUMENTER
-                </div>
-
-                <h3>
-                    Menyusuri Jejak
-                    Peradaban Nusantara
-                </h3>
-
-            </article>
-
-
-            <article class="video-card">
-
-                <div class="video-image">
-                    <div class="play-button">▶</div>
-                </div>
-
-                <div class="category">
-                    BUDAYA
-                </div>
-
-                <h3>
-                    Mengenal Tradisi dan
-                    Kehidupan Masyarakat
-                </h3>
-
-            </article>
-
-
-            <article class="video-card">
-
-                <div class="video-image">
-                    <div class="play-button">▶</div>
-                </div>
-
-                <div class="category">
-                    HINDU
-                </div>
-
-                <h3>
-                    Makna di Balik Tradisi
-                    dan Upacara
-                </h3>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PODCAST + AGENDA
-===================================================== -->
-
-<section class="media-section" id="podcast">
-
-    <div class="container media-grid">
-
-
-        <div class="podcast-area">
-
-            <div class="media-heading">
+            <div class="media-title">
 
                 <div>
+
+                    <div class="section-label">
+                        VIDEO DOKUMENTER
+                    </div>
+
+                    <h2>
+                        Cerita dalam Gambar
+                    </h2>
+
+                </div>
+
+                <a href="#">
+                    Lihat semua →
+                </a>
+
+            </div>
+
+
+            <div class="video-grid">
+
+                <article class="video-card">
+
+                    <div class="video-image">
+                        <span>▶</span>
+                    </div>
+
+                    <div class="category">
+                        DOKUMENTER
+                    </div>
+
+                    <h3>
+                        Menyusuri Jejak
+                        Peradaban Nusantara
+                    </h3>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <div class="video-image">
+                        <span>▶</span>
+                    </div>
+
+                    <div class="category">
+                        BUDAYA
+                    </div>
+
+                    <h3>
+                        Mengenal Tradisi dan
+                        Kehidupan Masyarakat
+                    </h3>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <div class="video-image">
+                        <span>▶</span>
+                    </div>
+
+                    <div class="category">
+                        HINDU
+                    </div>
+
+                    <h3>
+                        Makna di Balik Tradisi
+                        dan Upacara
+                    </h3>
+
+                </article>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PODCAST -->
+
+        <div class="podcast-column" id="podcast">
+
+            <div class="media-title">
+
+                <div>
+
                     <div class="section-label">
                         PODCAST MANDALA
                     </div>
 
                     <h2>
-                        Suara dari Nusantara
+                        Suara & Cerita
                     </h2>
-                </div>
 
-                <a href="#" class="view-all">
-                    Lihat semua →
-                </a>
+                </div>
 
             </div>
 
@@ -557,13 +535,13 @@
 
                 <div>
 
-                    <div class="episode">
+                    <small>
                         EP. 12
-                    </div>
+                    </small>
 
                     <h3>
-                        Peran Hindu dalam Membentuk
-                        Peradaban Nusantara
+                        Peran Hindu dalam
+                        Membentuk Peradaban Nusantara
                     </h3>
 
                     <span>
@@ -583,13 +561,13 @@
 
                 <div>
 
-                    <div class="episode">
+                    <small>
                         EP. 11
-                    </div>
+                    </small>
 
                     <h3>
-                        Melestarikan Tradisi di
-                        Tengah Perubahan Zaman
+                        Melestarikan Tradisi
+                        di Tengah Perubahan Zaman
                     </h3>
 
                     <span>
@@ -609,9 +587,9 @@
 
                 <div>
 
-                    <div class="episode">
+                    <small>
                         EP. 10
-                    </div>
+                    </small>
 
                     <h3>
                         Candi sebagai Pusat
@@ -630,33 +608,35 @@
 
 
 
+        <!-- AGENDA -->
+
         <aside class="agenda">
 
-            <div class="agenda-top">
-
-                <div class="section-label">
-                    AGENDA BUDAYA
-                </div>
-
-                <a href="#">
-                    Lihat semua →
-                </a>
-
+            <div class="section-label">
+                AGENDA BUDAYA
             </div>
+
+            <h2>
+                Jangan Lewatkan
+            </h2>
 
 
             <div class="agenda-item">
 
                 <strong>
                     15
+                    <small>AUG</small>
                 </strong>
 
                 <div>
-                    <b>AGO</b>
+                    <h3>
+                        Piodalan Pura
+                        Agung Besakih
+                    </h3>
+
                     <span>
-                        Piodalan Pura Agung Besakih
+                        Bali
                     </span>
-                    <small>Bali</small>
                 </div>
 
             </div>
@@ -666,14 +646,18 @@
 
                 <strong>
                     20
+                    <small>AUG</small>
                 </strong>
 
                 <div>
-                    <b>AGO</b>
+                    <h3>
+                        Festival Budaya
+                        Nusantara
+                    </h3>
+
                     <span>
-                        Festival Budaya Nusantara
+                        Yogyakarta
                     </span>
-                    <small>Yogyakarta</small>
                 </div>
 
             </div>
@@ -683,14 +667,17 @@
 
                 <strong>
                     28
+                    <small>AUG</small>
                 </strong>
 
                 <div>
-                    <b>AGO</b>
+                    <h3>
+                        Pawiwaahan Massal
+                    </h3>
+
                     <span>
-                        Pawiwahan Massal
+                        Denpasar, Bali
                     </span>
-                    <small>Denpasar, Bali</small>
                 </div>
 
             </div>
@@ -717,7 +704,7 @@
     <div class="container footer-grid">
 
 
-        <div class="footer-brand">
+        <div class="footer-about">
 
             <div class="footer-logo">
                 MEDIA<br>
@@ -731,7 +718,7 @@
                 masyarakat Nusantara.
             </p>
 
-            <div class="social-links">
+            <div class="socials">
                 <a href="#">f</a>
                 <a href="#">◎</a>
                 <a href="#">▶</a>
@@ -767,7 +754,7 @@
             <a href="#">Tentang Kami</a>
             <a href="#">Visi & Misi</a>
             <a href="#">Redaksi</a>
-            <a href="#">Karier</a>
+            <a href="#">Karir</a>
             <a href="#">Kontak Kami</a>
 
         </div>
@@ -798,7 +785,7 @@
                 budaya dan sejarah Nusantara.
             </p>
 
-            <div class="newsletter-form">
+            <form>
 
                 <input
                     type="email"
@@ -809,7 +796,7 @@
                     BERLANGGANAN
                 </button>
 
-            </div>
+            </form>
 
         </div>
 
@@ -820,13 +807,8 @@
 
         <div class="container">
 
-            <span>
-                © 2026 Media Mandala. Semua hak dilindungi.
-            </span>
-
-            <span>
-                Dibuat dengan <b>♥</b> untuk Nusantara
-            </span>
+            © 2026 Media Mandala.
+            Semua hak dilindungi.
 
         </div>
 
