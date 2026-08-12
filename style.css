@@ -1670,3 +1670,236 @@ button {
     }
 
 }
+/* =========================================================
+   JAVASCRIPT ANIMATION SYSTEM
+========================================================= */
+
+/* ---------------------------------------------------------
+   SCROLL REVEAL
+--------------------------------------------------------- */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s cubic-bezier(.2, .7, .2, 1);
+
+    transition-delay: var(--delay, 0ms);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE LOAD
+--------------------------------------------------------- */
+
+img {
+    opacity: 1;
+    transition:
+        opacity .45s ease,
+        transform .6s ease;
+}
+
+img:not(.image-loaded) {
+    opacity: .01;
+}
+
+img.image-loaded {
+    opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   HEADER WHEN SCROLLING
+--------------------------------------------------------- */
+
+.site-header {
+    transition:
+        background .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+}
+
+.site-header.scrolled {
+    background: rgba(6, 29, 61, .96);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .16);
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* ---------------------------------------------------------
+   NAVIGATION ANIMATION
+--------------------------------------------------------- */
+
+.main-nav a {
+    transition:
+        color .25s ease,
+        transform .25s ease;
+}
+
+.main-nav a:hover {
+    transform: translateY(-1px);
+}
+
+
+/* ---------------------------------------------------------
+   STORY IMAGE
+--------------------------------------------------------- */
+
+.featured-image img,
+.story-thumb img,
+.video-image img {
+    transition:
+        transform .7s cubic-bezier(.2, .7, .2, 1),
+        filter .5s ease;
+}
+
+.featured-story:hover .featured-image img,
+.story-item:hover .story-thumb img,
+.video-card:hover .video-image img {
+    transform: scale(1.035);
+}
+
+
+/* ---------------------------------------------------------
+   VIDEO PLAY BUTTON
+--------------------------------------------------------- */
+
+.play-button {
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.video-card:hover .play-button {
+    transform:
+        translate(-50%, -50%)
+        scale(1.08);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .2);
+}
+
+
+/* ---------------------------------------------------------
+   PROGRAM CARD
+--------------------------------------------------------- */
+
+.program-card {
+    transition:
+        background .35s ease,
+        transform .35s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-3px);
+}
+
+
+/* ---------------------------------------------------------
+   EVENT CARD
+--------------------------------------------------------- */
+
+.event-card {
+    transition:
+        transform .3s ease,
+        padding-left .3s ease;
+}
+
+.event-card:hover {
+    transform: translateX(5px);
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON
+--------------------------------------------------------- */
+
+.btn {
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+}
+
+.btn-primary:hover {
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, .15);
+}
+
+
+/* ---------------------------------------------------------
+   PAGE READY
+--------------------------------------------------------- */
+
+body:not(.page-ready) {
+    opacity: 0;
+}
+
+body.page-ready {
+    opacity: 1;
+
+    transition:
+        opacity .35s ease;
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+--------------------------------------------------------- */
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+
+
+/* =========================================================
+   MOBILE ADJUSTMENT
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .reveal {
+        transform: translateY(20px);
+
+        transition-duration: .55s;
+    }
+
+    .program-card:hover,
+    .event-card:hover {
+        transform: none;
+    }
+
+    .main-nav a:hover {
+        transform: none;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .reveal {
+        transform: translateY(15px);
+    }
+
+}
