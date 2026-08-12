@@ -1,9 +1,10 @@
 /* =========================================================
    MEDIA MANDALA
-   MAIN JAVASCRIPT
+   GLOBAL JAVASCRIPT
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
+
 
     /* =====================================================
        MOBILE MENU
@@ -16,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         menuToggle.addEventListener("click", function () {
 
-            const isOpen = mainNav.classList.toggle("active");
+            const isOpen =
+                mainNav.classList.toggle("active");
 
             menuToggle.setAttribute(
                 "aria-expanded",
@@ -26,9 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        /* Tutup menu ketika link diklik */
+        /* ================================================
+           TUTUP MENU SAAT LINK DIKLIK
+           ================================================ */
 
-        mainNav.querySelectorAll("a").forEach(function (link) {
+        const navLinks =
+            document.querySelectorAll(".main-nav a");
+
+        navLinks.forEach(function (link) {
 
             link.addEventListener("click", function () {
 
@@ -43,89 +50,217 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-    }
 
+        /* ================================================
+           TUTUP MENU SAAT KLIK DI LUAR MENU
+           ================================================ */
 
-    /* =====================================================
-       HEADER SCROLL EFFECT
-       ===================================================== */
+        document.addEventListener("click", function (event) {
 
-    const header = document.querySelector(".site-header");
+            const clickedInsideMenu =
+                mainNav.contains(event.target);
 
-    if (header) {
+            const clickedToggle =
+                menuToggle.contains(event.target);
 
-        function updateHeader() {
+            if (
+                !clickedInsideMenu &&
+                !clickedToggle
+            ) {
 
-            if (window.scrollY > 20) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
+                mainNav.classList.remove("active");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
             }
 
-        }
-
-        window.addEventListener("scroll", updateHeader);
-
-        updateHeader();
-
-    }
+        });
 
 
-    /* =====================================================
-       ACTIVE NAVIGATION
-       ===================================================== */
+        /* ================================================
+           TUTUP MENU SAAT ESC
+           ================================================ */
 
-    const navLinks = document.querySelectorAll(
-        ".main-nav a[href^='#']"
-    );
+        document.addEventListener(
+            "keydown",
+            function (event) {
 
-    const sections = document.querySelectorAll(
-        "main section[id]"
-    );
+                if (event.key === "Escape") {
 
-    if (navLinks.length && sections.length) {
+                    mainNav.classList.remove("active");
 
-        const observer = new IntersectionObserver(
-            function (entries) {
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
-                entries.forEach(function (entry) {
+                }
 
-                    if (entry.isIntersecting) {
-
-                        const currentId =
-                            entry.target.getAttribute("id");
-
-                        navLinks.forEach(function (link) {
-
-                            link.classList.remove("active");
-
-                            if (
-                                link.getAttribute("href") ===
-                                "#" + currentId
-                            ) {
-                                link.classList.add("active");
-                            }
-
-                        });
-
-                    }
-
-                });
-
-            },
-            {
-                rootMargin: "-35% 0px -55% 0px",
-                threshold: 0
             }
         );
 
-        sections.forEach(function (section) {
+    }
 
-            observer.observe(section);
+
+    /* =====================================================
+       HEADER ACTIVE MENU
+       ===================================================== */
+
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop() || "index.html";
+
+    const allNavLinks =
+        document.querySelectorAll(".main-nav a");
+
+    allNavLinks.forEach(function (link) {
+
+        const linkPage =
+            link.getAttribute("href");
+
+        if (
+            linkPage &&
+            !linkPage.startsWith("#") &&
+            linkPage === currentPage
+        ) {
+
+            allNavLinks.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+
+    /* =====================================================
+       ANIMASI SAAT ELEMEN MASUK LAYAR
+       ===================================================== */
+
+    const animatedElements =
+        document.querySelectorAll(
+            ".section-label, " +
+            ".section-title, " +
+            ".featured-story, " +
+            ".story-item, " +
+            ".program-card, " +
+            ".video-card, " +
+            ".event-card"
+        );
+
+
+    /* =====================================================
+       REDUCED MOTION
+       ===================================================== */
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    if (!prefersReducedMotion) {
+
+        animatedElements.forEach(function (element) {
+
+            element.classList.add("scroll-hidden");
+
+        });
+
+
+        const observer =
+            new IntersectionObserver(
+                function (entries, observer) {
+
+                    entries.forEach(function (entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "scroll-show"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -40px 0px"
+                }
+            );
+
+
+        animatedElements.forEach(function (element) {
+
+            observer.observe(element);
 
         });
 
     }
+
+
+    /* =====================================================
+       SMOOTH SCROLL UNTUK LINK ANCHOR
+       ===================================================== */
+
+    const anchorLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    anchorLinks.forEach(function (link) {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                const targetId =
+                    this.getAttribute("href");
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (!target) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+        );
+
+    });
 
 
     /* =====================================================
@@ -133,96 +268,158 @@ document.addEventListener("DOMContentLoaded", function () {
        ===================================================== */
 
     const videoCards =
-        document.querySelectorAll(".video-card");
+        document.querySelectorAll(
+            ".video-card[data-youtube-id]"
+        );
+
 
     videoCards.forEach(function (card) {
 
-        card.addEventListener("click", function (event) {
+        const youtubeId =
+            card.getAttribute(
+                "data-youtube-id"
+            );
 
-            const youtubeId =
-                card.getAttribute("data-youtube-id");
 
-            /*
-             Jika ID YouTube belum diisi,
-             jangan lakukan apa-apa.
-            */
+        if (!youtubeId) {
+            return;
+        }
 
-            if (!youtubeId) {
-                return;
+
+        card.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const youtubeUrl =
+                    "https://www.youtube.com/watch?v=" +
+                    youtubeId;
+
+
+                window.open(
+                    youtubeUrl,
+                    "_blank",
+                    "noopener"
+                );
+
             }
-
-            event.preventDefault();
-
-            const youtubeURL =
-                "https://www.youtube.com/watch?v=" +
-                youtubeId;
-
-            window.open(
-                youtubeURL,
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-        });
-
-    });
-
-
-    /* =====================================================
-       CLOSE MOBILE MENU KETIKA KLIK DI LUAR MENU
-       ===================================================== */
-
-    document.addEventListener("click", function (event) {
-
-        if (!menuToggle || !mainNav) {
-            return;
-        }
-
-        const clickedInsideMenu =
-            mainNav.contains(event.target);
-
-        const clickedToggle =
-            menuToggle.contains(event.target);
-
-        if (
-            !clickedInsideMenu &&
-            !clickedToggle &&
-            mainNav.classList.contains("active")
-        ) {
-
-            mainNav.classList.remove("active");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-        }
-
-    });
-
-
-    /* =====================================================
-       ESC UNTUK MENUTUP MENU
-       ===================================================== */
-
-    document.addEventListener("keydown", function (event) {
-
-        if (event.key !== "Escape") {
-            return;
-        }
-
-        if (!mainNav || !menuToggle) {
-            return;
-        }
-
-        mainNav.classList.remove("active");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "false"
         );
 
     });
+
+
+    /* =====================================================
+       KLIK GAMBAR VIDEO
+       ===================================================== */
+
+    const playButtons =
+        document.querySelectorAll(
+            ".play-button"
+        );
+
+
+    playButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function (event) {
+
+                const card =
+                    this.closest(
+                        ".video-card"
+                    );
+
+
+                if (!card) {
+                    return;
+                }
+
+
+                const youtubeId =
+                    card.getAttribute(
+                        "data-youtube-id"
+                    );
+
+
+                if (!youtubeId) {
+
+                    event.preventDefault();
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+                event.stopPropagation();
+
+
+                window.open(
+                    "https://www.youtube.com/watch?v=" +
+                    youtubeId,
+                    "_blank",
+                    "noopener"
+                );
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       HEADER SHADOW SAAT SCROLL
+       ===================================================== */
+
+    const header =
+        document.querySelector(
+            ".site-header"
+        );
+
+
+    if (header) {
+
+        function updateHeader() {
+
+            if (window.scrollY > 20) {
+
+                header.classList.add(
+                    "header-scrolled"
+                );
+
+            } else {
+
+                header.classList.remove(
+                    "header-scrolled"
+                );
+
+            }
+
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            updateHeader,
+            {
+                passive: true
+            }
+        );
+
+
+        updateHeader();
+
+    }
+
+
+    /* =====================================================
+       LOG
+       ===================================================== */
+
+    console.log(
+        "Media Mandala — JavaScript aktif."
+    );
 
 });
