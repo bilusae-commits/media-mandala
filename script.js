@@ -3,26 +3,21 @@
    MAIN JAVASCRIPT
    ========================================================= */
 
+
+/* =========================================================
+   1. MOBILE MENU
+   ========================================================= */
+
 document.addEventListener("DOMContentLoaded", function () {
 
-
-    /* =====================================================
-       MOBILE MENU
-       ===================================================== */
-
-    const menuToggle =
-        document.querySelector(".menu-toggle");
-
-    const mainNav =
-        document.querySelector(".main-nav");
-
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector(".main-nav");
 
     if (menuToggle && mainNav) {
 
         menuToggle.addEventListener("click", function () {
 
-            const isOpen =
-                mainNav.classList.toggle("active");
+            const isOpen = mainNav.classList.toggle("active");
 
             menuToggle.setAttribute(
                 "aria-expanded",
@@ -34,142 +29,318 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Tutup menu setelah memilih menu */
 
-        mainNav
-            .querySelectorAll("a")
-            .forEach(function (link) {
+        const navLinks = mainNav.querySelectorAll("a");
 
-                link.addEventListener("click", function () {
+        navLinks.forEach(function (link) {
 
-                    mainNav.classList.remove("active");
+            link.addEventListener("click", function () {
 
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+                mainNav.classList.remove("active");
 
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            });
+
+        });
+
+
+        /* Tutup menu jika klik di luar */
+
+        document.addEventListener("click", function (event) {
+
+            const clickedInsideMenu =
+                mainNav.contains(event.target);
+
+            const clickedToggle =
+                menuToggle.contains(event.target);
+
+            if (
+                !clickedInsideMenu &&
+                !clickedToggle &&
+                mainNav.classList.contains("active")
+            ) {
+
+                mainNav.classList.remove("active");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================================
+       2. ACTIVE MENU SAAT SCROLL
+       ===================================================== */
+
+    const sections = document.querySelectorAll(
+        "main section[id], footer[id]"
+    );
+
+    const navLinks = document.querySelectorAll(
+        ".main-nav a"
+    );
+
+
+    function updateActiveMenu() {
+
+        const scrollPosition =
+            window.scrollY + 150;
+
+        let currentSection = "";
+
+        sections.forEach(function (section) {
+
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionTop + sectionHeight
+            ) {
+
+                currentSection = section.getAttribute("id");
+
+            }
+
+        });
+
+
+        navLinks.forEach(function (link) {
+
+            link.classList.remove("active");
+
+            const href =
+                link.getAttribute("href");
+
+            if (
+                href &&
+                href === "#" + currentSection
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+
+        /* Jika berada paling atas */
+
+        if (window.scrollY < 100) {
+
+            navLinks.forEach(function (link) {
+
+                link.classList.remove("active");
+
+            });
+
+            const homeLink =
+                document.querySelector(
+                    '.main-nav a[href="#"]'
+                );
+
+            if (homeLink) {
+                homeLink.classList.add("active");
+            }
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateActiveMenu,
+        { passive: true }
+    );
+
+
+    updateActiveMenu();
+
+
+    /* =====================================================
+       3. SMOOTH SCROLL
+       ===================================================== */
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(function (link) {
+
+            link.addEventListener("click", function (event) {
+
+                const targetId =
+                    this.getAttribute("href");
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
+
+                const target =
+                    document.querySelector(targetId);
+
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const header =
+                    document.querySelector(".site-header");
+
+                const headerHeight =
+                    header
+                        ? header.offsetHeight
+                        : 0;
+
+                const targetPosition =
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
                 });
 
             });
 
-    }
-
-
-    /* =====================================================
-       SCROLL REVEAL
-       
-       Semua elemen yang memiliki class .reveal
-       akan menggunakan sistem animasi yang sama.
-       ===================================================== */
-
-    const revealElements =
-        document.querySelectorAll(".reveal");
-
-
-    if (revealElements.length > 0) {
-
-        const revealObserver =
-            new IntersectionObserver(
-                function (entries, observer) {
-
-                    entries.forEach(function (entry) {
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add(
-                                "is-visible"
-                            );
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.12,
-                    rootMargin: "0px 0px -40px 0px"
-                }
-            );
-
-
-        revealElements.forEach(function (element) {
-
-            revealObserver.observe(element);
-
         });
 
-    }
-
 
     /* =====================================================
-       SMOOTH SCROLL
-       
-       Menu anchor akan berhenti sedikit di bawah header.
+       4. VIDEO YOUTUBE
        ===================================================== */
 
-    const anchorLinks =
+    const videoCards =
         document.querySelectorAll(
-            'a[href^="#"]'
+            ".video-card[data-youtube-id]"
         );
 
 
-    anchorLinks.forEach(function (link) {
+    videoCards.forEach(function (card) {
 
-        link.addEventListener("click", function (event) {
+        const youtubeId =
+            card.getAttribute("data-youtube-id");
 
-            const targetId =
-                this.getAttribute("href");
+        if (!youtubeId) {
+            return;
+        }
 
-
-            if (
-                !targetId ||
-                targetId === "#"
-            ) {
-                return;
-            }
-
-
-            const target =
-                document.querySelector(targetId);
-
-
-            if (!target) {
-                return;
-            }
-
+        card.addEventListener("click", function (event) {
 
             event.preventDefault();
 
+            const youtubeUrl =
+                "https://www.youtube.com/watch?v=" +
+                youtubeId;
 
-            const header =
-                document.querySelector(".site-header");
-
-
-            const headerHeight =
-                header
-                    ? header.offsetHeight
-                    : 0;
-
-
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                headerHeight -
-                20;
-
-
-            window.scrollTo({
-
-                top: targetPosition,
-
-                behavior: "smooth"
-
-            });
+            window.open(
+                youtubeUrl,
+                "_blank",
+                "noopener,noreferrer"
+            );
 
         });
+
+    });
+
+
+    /* =====================================================
+       5. HEADER SCROLL EFFECT
+       ===================================================== */
+
+    const header =
+        document.querySelector(".site-header");
+
+
+    function updateHeader() {
+
+        if (!header) {
+            return;
+        }
+
+        if (window.scrollY > 20) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        { passive: true }
+    );
+
+
+    updateHeader();
+
+
+    /* =====================================================
+       6. CLOSE MOBILE MENU SAAT RESIZE
+       ===================================================== */
+
+    window.addEventListener("resize", function () {
+
+        if (
+            window.innerWidth > 700 &&
+            mainNav
+        ) {
+
+            mainNav.classList.remove("active");
+
+            if (menuToggle) {
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+
+    });
+
+
+    /* =====================================================
+       7. IMAGE ERROR HANDLING
+       ===================================================== */
+
+    const images =
+        document.querySelectorAll("img");
+
+
+    images.forEach(function (image) {
+
+        image.addEventListener(
+            "error",
+            function () {
+
+                this.classList.add(
+                    "image-error"
+                );
+
+            }
+        );
 
     });
 
