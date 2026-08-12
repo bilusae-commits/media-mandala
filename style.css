@@ -1384,7 +1384,7 @@ button {
     display: block !important;
 }
 /* =========================================================
-   SCROLL REVEAL ANIMATION
+   SCROLL REVEAL
    ========================================================= */
 
 .program-card,
@@ -1393,16 +1393,14 @@ button {
 .story-item,
 .featured-story {
     opacity: 0;
-
-    transform: translateY(24px);
-
+    transform: translateY(45px);
     transition:
-        opacity .6s ease,
-        transform .6s ease;
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
 
-/* Saat elemen sudah masuk viewport */
+/* ELEMENT SUDAH TERLIHAT */
 
 .program-card.is-visible,
 .video-card.is-visible,
@@ -1410,84 +1408,30 @@ button {
 .story-item.is-visible,
 .featured-story.is-visible {
     opacity: 1;
-
     transform: translateY(0);
 }
 
 
 /* =========================================================
-   ANIMATION DELAY
+   DELAY ANTAR KARTU
    ========================================================= */
 
-/* Berita */
-
-.story-list .story-item:nth-child(1) {
-    transition-delay: .05s;
+.program-card:nth-child(1),
+.video-card:nth-child(1),
+.story-item:nth-child(1) {
+    transition-delay: 0.05s;
 }
 
-.story-list .story-item:nth-child(2) {
-    transition-delay: .12s;
+.program-card:nth-child(2),
+.video-card:nth-child(2),
+.story-item:nth-child(2) {
+    transition-delay: 0.20s;
 }
 
-.story-list .story-item:nth-child(3) {
-    transition-delay: .19s;
-}
-
-
-/* Program */
-
-.program-card:nth-child(1) {
-    transition-delay: .05s;
-}
-
-.program-card:nth-child(2) {
-    transition-delay: .12s;
-}
-
-.program-card:nth-child(3) {
-    transition-delay: .19s;
-}
-
-
-/* Video */
-
-.video-card:nth-child(1) {
-    transition-delay: .05s;
-}
-
-.video-card:nth-child(2) {
-    transition-delay: .12s;
-}
-
-.video-card:nth-child(3) {
-    transition-delay: .19s;
-}
-
-
-/* Podcast & Agenda */
-
-.event-grid > div:nth-child(1) .event-card:nth-child(2) {
-    transition-delay: .05s;
-}
-
-.event-grid > div:nth-child(1) .event-card:nth-child(3) {
-    transition-delay: .12s;
-}
-
-.event-grid > div:nth-child(1) .event-card:nth-child(4) {
-    transition-delay: .19s;
-}
-
-.event-grid > div:nth-child(2) .event-card:nth-child(1) {
-    transition-delay: .05s;
-}
-
-.event-grid > div:nth-child(2) .event-card:nth-child(2) {
-    transition-delay: .12s;
-}
-
-.event-grid > div:nth-child(2) .event-card:nth-child(3) {
-    transition-delay: .19s;
+.program-card:nth-child(3),
+.video-card:nth-child(3),
+.story-item:nth-child(3) {
+    transition-delay: 0.35s;
 }
 
 
@@ -1503,9 +1447,7 @@ button {
     .story-item,
     .featured-story {
         opacity: 1;
-
         transform: none;
-
         transition: none;
     }
 
