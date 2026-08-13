@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — Mandala CMS</title><link rel="stylesheet" href="css/admin.css">
+<script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script>
+</head><body>
+<div class="login"><div class="loginBox">
+<div class="brand"><div class="mark">✺</div><h1>MANDALA</h1><p>CHANNEL CMS</p></div>
+<div id="error" class="error"></div>
+<form id="loginForm"><div class="field"><label>EMAIL</label><input id="email" type="email" required></div>
+<div class="field"><label>PASSWORD</label><input id="password" type="password" required></div>
+<button class="btn primary" style="width:100%">MASUK KE CMS</button></form>
+<p class="hint" style="margin-top:18px">Akun karyawan dibuat dari Authentication Supabase. Tidak ada password karyawan yang disimpan di HTML.</p>
+</div></div>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async e=>{
+ e.preventDefault();
+ const db=await MandalaCMS.ready();
+ const {error}=await db.auth.signInWithPassword({email:email.value,password:password.value});
+ if(error){const x=document.getElementById("error");x.textContent="Email atau password salah atau akun belum aktif.";x.style.display="block";return;}
+ location.href="dashboard.html";
+});
+</script>
+</body></html>
