@@ -1,506 +1,486 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mandala Channel — Media Informasi, Edukasi dan Pelestarian Hindu Nusantara</title>
-  <link rel="stylesheet" href="css/main.css">
-  <style>
-    /* =========================================================
-       MANDALA CHANNEL — HOMEPAGE V2
-       Fluid layout + responsive playlist carousel
-       ========================================================= */
-    :root{
-      --navy:#081d35;
-      --navy-2:#102a48;
-      --gold:#c79735;
-      --gold-light:#e0b65a;
-      --ink:#162333;
-      --muted:#6c7480;
-      --paper:#fff;
-      --soft:#f5f3ee;
-      --line:rgba(18,35,54,.13);
-      --max:1500px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mandala Channel</title>
+<link rel="stylesheet" href="css/main.css">
+<style>
+/* =========================================================
+   MANDALA CHANNEL — HOMEPAGE V3
+   Fluid layout • sticky navigation • scroll reveal • draggable playlist
+   Semua ukuran utama mengikuti viewport, bukan max-width tetap.
+========================================================= */
+:root{
+  --navy:#082d56;
+  --navy-deep:#061f3c;
+  --navy-soft:#123b64;
+  --ink:#172536;
+  --muted:#6d7b88;
+  --line:#e5e8eb;
+  --paper:#f7f6f2;
+  --paper-2:#f1f0eb;
+  --accent:#9b7d4d;
+  --white:#fff;
+  --content:92vw;
+  --top-h:28px;
+  --nav-h:74px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;overflow-x:hidden;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-    img{display:block;max-width:100%}
-    a{color:inherit}
-    button,input{font:inherit}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;overflow-x:hidden;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+body.modal-lock{overflow:hidden}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+img{display:block;max-width:100%}
 
-    .w{width:min(var(--max),calc(100% - clamp(28px,6vw,112px)));margin-inline:auto}
+/* FLUID CONTAINER — sengaja tanpa max-width */
+.w{width:var(--content);margin-inline:auto}
 
-    /* ---------- TOP BAR ---------- */
-    .top{background:#07192d;color:#dfe6ee;font-size:clamp(9px,.62vw,12px);letter-spacing:.03em}
-    .top .w{min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+/* ---------- TOP BAR + STICKY NAV ---------- */
+.top{
+  height:var(--top-h);
+  background:var(--navy-deep);
+  color:#bdc8d2;
+  font-size:clamp(7px,.52vw,10px);
+  position:relative;
+  z-index:60;
+}
+.top .w{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
 
-    /* ---------- HEADER ---------- */
-    header{position:relative;background:#fff;border-bottom:1px solid var(--line);z-index:20}
-    .nav{min-height:78px;display:flex;align-items:center;gap:clamp(20px,3vw,58px)}
-    .logo{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:max-content}
-    .logo .mark{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:22px}
-    .logo b{display:block;font:600 clamp(17px,1.35vw,25px)/1 Georgia,serif;letter-spacing:.03em;color:#a67824}
-    .logo small{display:block;margin-top:4px;font-size:clamp(8px,.55vw,11px);letter-spacing:.23em;color:#8c6b36}
-    .links{display:flex;align-items:center;gap:clamp(15px,2vw,34px);flex:1;justify-content:center}
-    .links a{font-size:clamp(10px,.7vw,13px);font-weight:700;text-transform:uppercase;text-decoration:none;white-space:nowrap;color:#253142;position:relative;padding:30px 0}
-    .links a:first-child{color:var(--gold)}
-    .links a:first-child::after{content:"";position:absolute;left:0;right:0;bottom:20px;height:2px;background:var(--gold)}
-    .yt{background:var(--navy);color:#fff;text-decoration:none;font-size:clamp(9px,.62vw,12px);font-weight:700;letter-spacing:.08em;padding:12px 16px;white-space:nowrap}
+header{
+  height:var(--nav-h);
+  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.96);
+  position:sticky;
+  top:0;
+  z-index:55;
+  transition:height .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease),backdrop-filter .35s var(--ease);
+}
+body.scrolled header{
+  height:58px;
+  background:rgba(255,255,255,.91);
+  box-shadow:0 8px 30px rgba(6,31,60,.10);
+  backdrop-filter:blur(12px);
+}
+.nav{height:100%;display:flex;align-items:center;gap:clamp(14px,2vw,34px)}
+.logo{display:flex;align-items:center;gap:clamp(7px,.7vw,12px);flex:0 0 auto}
+.mark{width:clamp(30px,2.5vw,42px);height:clamp(30px,2.5vw,42px);border:1px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:clamp(13px,1vw,18px);transition:.35s var(--ease)}
+body.scrolled .mark{width:31px;height:31px}
+.logo b{font:500 clamp(14px,1.05vw,19px) Georgia,serif;letter-spacing:.13em;color:var(--navy)}
+.logo small{display:block;font-size:clamp(6px,.48vw,8px);letter-spacing:.27em;color:#8794a0}
+.links{display:flex;align-items:stretch;justify-content:center;gap:clamp(12px,1.8vw,30px);margin-left:auto}
+.links a{position:relative;padding:0;display:flex;align-items:center;height:100%;font-size:clamp(8px,.62vw,11px);text-transform:uppercase;color:#596978;white-space:nowrap;transition:color .25s}
+.links a:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--navy);transform:scaleX(0);transform-origin:center;transition:transform .25s var(--ease)}
+.links a:hover,.links a.active{color:var(--navy)}
+.links a:hover:after,.links a.active:after{transform:scaleX(1)}
+.yt{background:var(--navy);color:#fff;padding:clamp(8px,.7vw,11px) clamp(10px,1vw,15px);border-radius:4px;font-size:clamp(7px,.55vw,10px);font-weight:bold;white-space:nowrap;transition:transform .25s,background .25s}
+.yt:hover{background:var(--navy-soft);transform:translateY(-1px)}
 
-    /* ---------- HERO ---------- */
-    .hero{position:relative;isolation:isolate;background:#0a1d32;color:#fff;min-height:clamp(520px,42vw,720px);display:flex;align-items:center;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,18,33,.96) 0%,rgba(4,18,33,.76) 42%,rgba(4,18,33,.24) 100%),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=90') center/cover no-repeat;z-index:-2}
-    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 40%,transparent 0 20%,rgba(3,14,26,.3) 55%,rgba(3,14,26,.62) 100%);z-index:-1}
-    .heroGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.92fr);align-items:center;gap:clamp(30px,5vw,100px);padding-block:clamp(60px,7vw,105px)}
-    .heroCopy{max-width:760px}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold-light);font-size:clamp(10px,.72vw,13px);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:18px}
-    .eyebrow::before{content:"";width:30px;height:1px;background:var(--gold-light)}
-    .hero h1{margin:0;max-width:760px;font:500 clamp(42px,4.8vw,82px)/.98 Georgia,serif;letter-spacing:-.035em}
-    .hero p{max-width:650px;margin:25px 0 30px;color:#d9e0e8;font-size:clamp(14px,1.05vw,18px);line-height:1.75}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;margin:0 10px 10px 0;border:1px solid rgba(255,255,255,.45);color:#fff;text-decoration:none;font-size:clamp(10px,.65vw,12px);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-    .btn.primary{border-color:var(--gold);background:var(--gold);color:#fff}
+/* ---------- GENERAL ---------- */
+section{padding:clamp(58px,6vw,100px) 0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;margin-bottom:clamp(22px,2.2vw,34px)}
+.k{font-size:clamp(7px,.55vw,10px);letter-spacing:.19em;text-transform:uppercase;color:var(--accent);font-weight:800}
+.title{font:500 clamp(30px,3.15vw,56px)/1.05 Georgia,serif;color:var(--navy);margin:7px 0 0}
+.view{font-size:clamp(8px,.58vw,10px);font-weight:bold;color:var(--navy);white-space:nowrap}
 
-    .heroVisual{position:relative;min-height:clamp(310px,30vw,520px)}
-    .heroVisual .frame{position:absolute;overflow:hidden;box-shadow:0 24px 55px rgba(0,0,0,.38)}
-    .heroVisual .frame img{width:100%;height:100%;object-fit:cover}
-    .heroVisual .main{width:68%;height:80%;right:3%;top:10%;z-index:3}
-    .heroVisual .left{width:42%;height:56%;left:0;top:23%;z-index:2;opacity:.88}
-    .heroVisual .right{width:40%;height:52%;right:0;bottom:5%;z-index:1;opacity:.68}
-    .heroVisual .main::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55))}
-    .heroCaption{position:absolute;z-index:4;right:7%;bottom:15%;font:500 clamp(18px,2vw,34px)/1 Georgia,serif;max-width:310px;text-align:right}
+/* ---------- HERO ---------- */
+.hero{
+  min-height:min(720px,72vh);
+  padding:clamp(70px,8vw,130px) 0 clamp(60px,7vw,105px);
+  color:#fff;
+  background:
+    linear-gradient(90deg,rgba(3,18,35,.96) 0%,rgba(3,18,35,.78) 35%,rgba(3,18,35,.30) 72%,rgba(3,18,35,.52) 100%),
+    url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2400&q=92') center/cover no-repeat;
+  position:relative;
+  isolation:isolate;
+}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,18,35,.55),transparent 45%);z-index:-1}
+.heroGrid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);gap:clamp(25px,5vw,100px);align-items:center}
+.hero .k{color:#d5c29c}
+.hero h1{font:500 clamp(48px,6.2vw,104px)/.94 Georgia,serif;color:#fff;margin:12px 0 24px;max-width:11ch;text-shadow:0 4px 25px rgba(0,0,0,.3)}
+.hero p{font-size:clamp(10px,.75vw,13px);line-height:1.85;color:#dce4ea;max-width:690px;margin:0}
+.btn{display:inline-block;padding:clamp(10px,.8vw,14px) clamp(13px,1.1vw,19px);border:1px solid rgba(255,255,255,.65);border-radius:3px;font-size:clamp(7px,.55vw,10px);font-weight:bold;margin:24px 7px 0 0;transition:.25s var(--ease)}
+.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.10)}
+.primary{background:#fff;color:var(--navy);border-color:#fff}
+.primary:hover{background:#edf1f4;color:var(--navy)}
+.visual{height:clamp(300px,32vw,520px);position:relative;min-width:0}
+.visual div{position:absolute;overflow:hidden;border-radius:8px;box-shadow:0 22px 65px rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.16)}
+.visual img{width:100%;height:100%;object-fit:cover}
+.v1{width:68%;height:88%;right:3%;top:2%}
+.v2{width:43%;height:55%;left:1%;bottom:0}
+.v3{width:31%;height:43%;right:0;bottom:-4%;}
 
-    /* ---------- SECTION ---------- */
-    section{padding-block:clamp(55px,6vw,100px)}
-    section.dark{background:var(--navy);color:#fff}
-    section.playlistSection{background:#f5f2eb;overflow:hidden}
-    .head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:clamp(24px,3vw,42px)}
-    .k{color:var(--gold);font-size:clamp(9px,.66vw,12px);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
-    .title{margin:0;font:500 clamp(28px,3vw,50px)/1.08 Georgia,serif;letter-spacing:-.02em}
-    .view{font-size:clamp(10px,.68vw,13px);font-weight:700;text-decoration:none;color:var(--gold);white-space:nowrap}
+/* ---------- FEATURED ---------- */
+.featureGrid{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(300px,.58fr);gap:clamp(14px,1.3vw,24px)}
+.feature{min-height:clamp(360px,42vw,650px);position:relative;border-radius:8px;overflow:hidden;color:#fff}
+.feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.feature:hover img{transform:scale(1.025)}
+.feature:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#04172bef 0%,rgba(4,23,43,.35) 52%,transparent 78%)}
+.feature .copy{position:absolute;z-index:2;bottom:clamp(22px,2.3vw,40px);left:clamp(22px,2.4vw,42px);right:clamp(22px,2.4vw,42px)}
+.feature .k{color:#d8c8a7}
+.feature h2{font:500 clamp(27px,3vw,51px)/1.05 Georgia,serif;margin:8px 0}
+.feature small{font-size:clamp(8px,.6vw,10px);color:#dce3e8}
+.stories{display:grid;gap:clamp(12px,1.3vw,22px)}
+.story{display:grid;grid-template-columns:42% 1fr;border:1px solid var(--line);border-radius:7px;overflow:hidden;min-height:0;transition:transform .3s var(--ease),box-shadow .3s}
+.story:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(6,31,60,.10)}
+.story img{width:100%;height:100%;min-height:clamp(150px,14vw,230px);object-fit:cover}
+.story .copy{padding:clamp(14px,1.3vw,22px)}
+.story h3{font:500 clamp(16px,1.3vw,22px)/1.18 Georgia,serif;color:var(--navy);margin:7px 0}
+.story p,.card p{font-size:clamp(8px,.58vw,10px);line-height:1.6;color:var(--muted)}
 
-    /* ---------- FEATURE ---------- */
-    .featureGrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.7fr);gap:clamp(18px,2vw,32px)}
-    .feature,.story{position:relative;overflow:hidden;background:#eee;text-decoration:none}
-    .feature{min-height:clamp(420px,39vw,640px)}
-    .feature>img,.story>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-    .feature::after,.story::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(4,13,23,.9) 100%)}
-    .feature .copy,.story .copy{position:absolute;left:clamp(18px,2vw,32px);right:clamp(18px,2vw,32px);bottom:clamp(18px,2vw,32px);z-index:2;color:#fff}
-    .feature h2{font:500 clamp(26px,2.6vw,46px)/1.05 Georgia,serif;margin:7px 0 12px;max-width:850px}
-    .feature small{font-size:12px;color:#d9dfe7}
-    .stories{display:grid;grid-template-rows:1fr 1fr;gap:clamp(18px,2vw,32px)}
-    .story{min-height:clamp(190px,18vw,304px)}
-    .story h3{font:500 clamp(19px,1.5vw,27px)/1.08 Georgia,serif;margin:5px 0 7px}
-    .story p{margin:0;color:#dbe1e7;font-size:clamp(11px,.78vw,14px);line-height:1.5}
+/* ---------- CARDS ---------- */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,1.7vw,32px) clamp(12px,1.4vw,25px)}
+.thumb{aspect-ratio:16/10;border-radius:7px;overflow:hidden;position:relative;background:#e7ebef}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.card:hover .thumb img{transform:scale(1.045)}
+.badge{position:absolute;left:8px;top:8px;background:rgba(255,255,255,.93);color:var(--navy);padding:5px 7px;border-radius:3px;font-size:clamp(7px,.48vw,9px);font-weight:bold}
+.meta{font-size:clamp(7px,.52vw,9px);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:bold;margin-top:10px}
+.card h3{font:500 clamp(14px,1vw,18px)/1.28 Georgia,serif;color:inherit;margin:6px 0}
+.video .thumb:after{content:"▶";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(34px,3vw,48px);height:clamp(34px,3vw,48px);border-radius:50%;background:rgba(255,255,255,.94);color:var(--navy);display:grid;place-items:center;font-size:clamp(11px,1vw,15px)}
 
-    /* ---------- CARDS ---------- */
-    .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.5vw,24px)}
-    .card{min-width:0}
-    .card a{text-decoration:none;color:inherit}
-    .thumb{position:relative;aspect-ratio:16/10;overflow:hidden;background:#ddd}
-    .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
-    .card:hover .thumb img{transform:scale(1.045)}
-    .badge{position:absolute;left:10px;bottom:10px;background:var(--gold);color:#fff;padding:5px 8px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-    .meta{margin-top:12px;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-    .card h3{margin:7px 0;font:500 clamp(17px,1.25vw,23px)/1.15 Georgia,serif}
-    .card p{margin:0;color:#78818d;font-size:12px;line-height:1.5}
-    .dark .card p,.dark .card h3{color:#fff}.dark .card p{color:#c2cbd5}
+.dark{background:var(--navy);color:#fff}
+.dark .title,.dark .card h3,.dark .view{color:#fff}
+.dark .k{color:#d5c29c}
+.dark .meta{color:#d5c29c}
 
-    /* ---------- PLAYLIST CAROUSEL ---------- */
-    .playlistViewport{position:relative;width:100%;padding:clamp(12px,2vw,26px) 0 clamp(48px,5vw,76px);overflow:hidden}
-    .playlistTrack{position:relative;height:clamp(360px,38vw,600px);display:flex;align-items:center;justify-content:center;perspective:1400px;transform-style:preserve-3d}
-    .playlistItem{position:absolute;left:50%;top:50%;width:clamp(180px,24vw,390px);aspect-ratio:3/4;transform:translate(-50%,-50%);transition:transform .65s cubic-bezier(.22,.8,.25,1),opacity .45s ease,filter .45s ease,z-index .45s;cursor:pointer;will-change:transform}
-    .playlistItem a{display:block;width:100%;height:100%;text-decoration:none;color:#fff}
-    .playlistCard{position:relative;width:100%;height:100%;overflow:hidden;background:#17283c;box-shadow:0 22px 48px rgba(25,27,29,.23)}
-    .playlistCard img{width:100%;height:100%;object-fit:cover}
-    .playlistCard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 35%,rgba(0,0,0,.84) 100%)}
-    .playlistInfo{position:absolute;z-index:2;left:clamp(15px,1.5vw,25px);right:clamp(15px,1.5vw,25px);bottom:clamp(16px,1.8vw,28px)}
-    .playlistInfo .category{font-size:clamp(8px,.6vw,11px);font-weight:700;letter-spacing:.13em;color:#e0b65a;text-transform:uppercase}
-    .playlistInfo h3{margin:7px 0 5px;font:500 clamp(18px,1.8vw,30px)/1.03 Georgia,serif;text-transform:uppercase}
-    .playlistInfo p{margin:0;font-size:clamp(9px,.7vw,12px);color:#d9dfe5}
+/* ---------- PLAYLIST 3D CAROUSEL ---------- */
+.playlist{background:var(--paper)}
+.playlist-stage{
+  position:relative;
+  width:100%;
+  height:clamp(520px,46vw,760px);
+  overflow:hidden;
+  user-select:none;
+  touch-action:pan-y;
+}
+.playlist-stage:before{content:"";position:absolute;left:50%;bottom:5%;width:clamp(300px,45vw,800px);height:80px;transform:translateX(-50%);background:rgba(6,31,60,.12);filter:blur(30px);border-radius:50%}
+.playlists{
+  position:absolute!important;
+  inset:0;
+  display:block!important;
+  overflow:visible!important;
+  padding:0!important;
+}
+.pcard{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:clamp(190px,18vw,310px);
+  aspect-ratio:3/4;
+  margin:0;
+  flex:none!important;
+  transform-origin:center center;
+  transition:transform .62s var(--ease),opacity .48s var(--ease),filter .48s var(--ease),z-index 0s;
+  cursor:pointer;
+  will-change:transform,opacity;
+}
+.pcard a{display:block;width:100%;height:100%;position:relative}
+.pcard .pthumb{width:100%;height:100%;aspect-ratio:auto;border-radius:4px;overflow:hidden;background:#222;box-shadow:0 18px 50px rgba(6,31,60,.22)}
+.pcard .pthumb:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72),transparent 45%,rgba(0,0,0,.05))}
+.pcard .pthumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.pcard.active .pthumb img{transform:scale(1.025)}
+.pcard .count{right:10px;bottom:10px;background:rgba(6,31,60,.82);font-size:clamp(7px,.5vw,9px)}
+.pcard h3,.pcard p{position:absolute;z-index:3;left:7%;right:7%;color:#fff;text-align:left}
+.pcard h3{bottom:12%;font:500 clamp(17px,1.55vw,26px)/1.08 Georgia,serif;margin:0;text-transform:none}
+.pcard p{bottom:6%;font-size:clamp(7px,.52vw,9px);color:#d8e0e6;margin:0;text-transform:uppercase;letter-spacing:.1em}
+.playlist-arrow{
+  position:absolute;z-index:20;top:50%;transform:translateY(-50%);
+  width:clamp(38px,3vw,52px);height:clamp(38px,3vw,52px);
+  border:1px solid #cbd1d6;background:rgba(255,255,255,.94);color:var(--navy);border-radius:50%;display:grid;place-items:center;font-size:clamp(20px,1.7vw,30px);line-height:1;cursor:pointer;box-shadow:0 8px 25px rgba(6,31,60,.12);transition:.25s var(--ease)
+}
+.playlist-arrow:hover{background:var(--navy);color:#fff;transform:translateY(-50%) scale(1.05)}
+.playlist-arrow.prev{left:1%}.playlist-arrow.next{right:1%}
+.playlist-dots{position:absolute;z-index:20;left:50%;bottom:2.5%;transform:translateX(-50%);display:flex;gap:8px;align-items:center}
+.playlist-dots button{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#c4c9cd;cursor:pointer;transition:.3s var(--ease)}
+.playlist-dots button.active{width:22px;border-radius:5px;background:var(--navy)}
 
-    .playlistItem[data-pos="0"]{transform:translate(calc(-50% - clamp(270px,29vw,460px)),-50%) rotateY(28deg) scale(.67);opacity:.65;filter:saturate(.75);z-index:1}
-    .playlistItem[data-pos="1"]{transform:translate(calc(-50% - clamp(150px,16vw,255px)),-50%) rotateY(17deg) scale(.83);opacity:.84;z-index:2}
-    .playlistItem[data-pos="2"]{transform:translate(-50%,-50%) rotateY(0deg) scale(1);opacity:1;z-index:5}
-    .playlistItem[data-pos="3"]{transform:translate(calc(-50% + clamp(150px,16vw,255px)),-50%) rotateY(-17deg) scale(.83);opacity:.84;z-index:2}
-    .playlistItem[data-pos="4"]{transform:translate(calc(-50% + clamp(270px,29vw,460px)),-50%) rotateY(-28deg) scale(.67);opacity:.65;filter:saturate(.75);z-index:1}
-    .playlistItem.is-hidden{opacity:0;pointer-events:none;z-index:0}
-    .playlistNav{position:absolute;inset:0;pointer-events:none}
-    .playlistArrow{position:absolute;top:50%;transform:translateY(-50%);width:clamp(38px,4vw,58px);height:clamp(38px,4vw,58px);border:1px solid rgba(8,29,53,.25);border-radius:50%;background:rgba(255,255,255,.86);color:var(--navy);font-size:clamp(22px,2vw,34px);display:grid;place-items:center;cursor:pointer;pointer-events:auto;box-shadow:0 8px 24px rgba(0,0,0,.1);z-index:8}
-    .playlistArrow:hover{background:#fff}
-    .playlistArrow.prev{left:clamp(4px,1vw,18px)}
-    .playlistArrow.next{right:clamp(4px,1vw,18px)}
-    .playlistDots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
-    .playlistDots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#b9b5ad;cursor:pointer;transition:all .25s}
-    .playlistDots button.active{width:10px;height:10px;background:var(--gold);transform:translateY(-1px)}
-    .playlistEmpty{text-align:center;color:#777;padding:80px 0}
+/* ---------- TOPICS / PODCAST / NEWS / FOOTER ---------- */
+.topicGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.topic{background:#fff;padding:clamp(20px,2.1vw,34px);min-height:clamp(130px,11vw,190px);transition:.3s var(--ease)}
+.topic:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+.topic:hover h3,.topic:hover p{color:#fff}.topic .num{font:24px Georgia,serif;color:var(--accent)}
+.topic h3{font:600 clamp(14px,1vw,18px) Arial,sans-serif;color:var(--navy);margin:10px 0 7px}.topic p{font-size:clamp(8px,.56vw,10px);line-height:1.6;color:var(--muted)}
+.podcasts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.5vw,25px)}
+.podcast{display:grid;grid-template-columns:clamp(130px,13vw,210px) 1fr;background:var(--navy-soft);border-radius:7px;overflow:hidden;min-width:0}
+.podcast img{width:100%;height:100%;object-fit:cover}.podcast .copy{padding:clamp(18px,1.7vw,28px);color:#fff}.podcast h3{font:500 clamp(18px,1.55vw,28px) Georgia,serif;margin:8px 0}.podcast p{font-size:clamp(8px,.6vw,10px);line-height:1.6;color:#b9c7d4}.play{background:transparent;border:1px solid #ffffff55;color:#fff;padding:9px 12px;border-radius:3px;font-size:9px;cursor:pointer}
+.news{border:1px solid var(--line);padding:clamp(25px,3vw,50px);display:flex;align-items:center;justify-content:space-between;gap:30px}.news h2{font:500 clamp(26px,2.2vw,38px) Georgia,serif;color:var(--navy);margin:6px 0}.news p{font-size:clamp(8px,.6vw,10px);color:var(--muted)}.email{display:flex;min-width:min(390px,35vw)}.email input{flex:1;min-width:0;padding:12px;border:1px solid var(--line);font-size:10px}.email button{border:0;background:var(--navy);color:#fff;padding:0 16px;font-size:9px;font-weight:bold;cursor:pointer}
+footer{background:var(--navy-deep);color:#9fb0bf;padding:clamp(38px,4vw,65px) 0 16px}.foot{display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,55px)}.foot h3{font-size:clamp(8px,.55vw,10px);color:#fff}.foot p,.foot a{font-size:clamp(8px,.56vw,10px);line-height:1.8;color:#9fb0bf}.copy{border-top:1px solid #ffffff18;margin-top:30px;padding-top:13px;text-align:center;font-size:8px}
 
-    /* ---------- TOPICS ---------- */
-    .topicGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1vw,16px)}
-    .topic{min-height:150px;border:1px solid var(--line);padding:20px;text-decoration:none;background:#fff;transition:.25s}
-    .topic:hover{transform:translateY(-3px);border-color:rgba(199,151,53,.6);box-shadow:0 12px 28px rgba(12,28,45,.08)}
-    .topic .num{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.1em}
-    .topic h3{font:500 clamp(17px,1.25vw,23px)/1.05 Georgia,serif;margin:14px 0 8px}
-    .topic p{margin:0;color:#747d87;font-size:11px;line-height:1.5}
+/* ---------- REVEAL ANIMATION ---------- */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.reveal.revealed{opacity:1;transform:none}
+.reveal.delay-1{transition-delay:.08s}.reveal.delay-2{transition-delay:.16s}.reveal.delay-3{transition-delay:.24s}
 
-    /* ---------- PODCAST ---------- */
-    .podcasts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2vw,30px)}
-    .podcast{display:grid;grid-template-columns:minmax(160px,.85fr) minmax(0,1fr);background:#102a48;min-width:0}
-    .podcast>img{width:100%;height:100%;min-height:250px;object-fit:cover}
-    .podcast .copy{padding:clamp(20px,2.2vw,34px);display:flex;flex-direction:column;justify-content:center}
-    .podcast h3{font:500 clamp(22px,1.8vw,32px)/1.08 Georgia,serif;margin:8px 0 10px}
-    .podcast p{color:#c8d1dc;line-height:1.6;font-size:clamp(12px,.8vw,14px)}
-    .play{align-self:flex-start;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:.08em;cursor:pointer;margin-top:8px}
+/* ---------- VIDEO MODAL ---------- */
+.modal{position:fixed;inset:0;background:rgba(3,20,38,.90);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalBox{width:min(1000px,96vw);background:#061a31;border-radius:8px;overflow:hidden}.modalBar{height:46px;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:10px}.close{background:#ffffff16;border:0;color:#fff;width:30px;height:30px;cursor:pointer}.frame{aspect-ratio:16/9;background:#000}.frame iframe{width:100%;height:100%;border:0}
 
-    /* ---------- NEWSLETTER ---------- */
-    .news{display:grid;grid-template-columns:1fr minmax(320px,.85fr);gap:30px;align-items:center;padding:clamp(30px,4vw,60px);background:#f5f2eb;border:1px solid var(--line)}
-    .news h2{margin:0;font:500 clamp(28px,2.5vw,42px)/1.1 Georgia,serif}
-    .news p{margin:10px 0 0;color:#69727d;font-size:13px}
-    .email{display:flex;border:1px solid #d0cbc1;background:#fff}
-    .email input{width:100%;border:0;outline:0;padding:15px;font-size:13px;min-width:0}
-    .email button{border:0;background:var(--gold);color:#fff;padding:0 20px;font-size:10px;font-weight:700;letter-spacing:.1em;cursor:pointer}
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1050px){
+  :root{--content:94vw}
+  .links{gap:12px}.yt{display:none}
+  .heroGrid{grid-template-columns:1fr}.visual{max-width:850px;width:100%;margin:10px auto 0}
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot{grid-template-columns:2fr 1fr 1fr}
+}
+@media(max-width:760px){
+  :root{--content:92vw}
+  .top{display:none}
+  header{height:66px}.nav{height:100%}.links{display:none}
+  .hero{min-height:auto;padding:65px 0 55px}.heroGrid{gap:25px}.hero h1{font-size:clamp(44px,13vw,72px)}.visual{height:320px}
+  .featureGrid{grid-template-columns:1fr}.feature{min-height:460px}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .playlist-stage{height:560px}.pcard{width:clamp(170px,36vw,230px)}
+  .pcard h3{font-size:clamp(15px,3.6vw,21px)}
+  .playlist-arrow.prev{left:0}.playlist-arrow.next{right:0}
+  .topicGrid{grid-template-columns:1fr 1fr}.podcasts{grid-template-columns:1fr}.news{display:block}.email{min-width:0;width:100%;margin-top:20px}.foot{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .cards{grid-template-columns:1fr}.topicGrid{grid-template-columns:1fr}.story{grid-template-columns:1fr}.story img{height:190px}.podcast{grid-template-columns:115px 1fr}.playlist-stage{height:500px}.pcard{width:190px}.pcard h3{font-size:16px}
+}
 
-    /* ---------- FOOTER ---------- */
-    footer{background:#07192d;color:#d8e0e8;padding-top:clamp(45px,5vw,75px)}
-    .foot{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:clamp(25px,4vw,70px);padding-bottom:40px}
-    .foot p{max-width:420px;color:#aeb9c5;font-size:12px;line-height:1.7}
-    .foot h3{margin:0 0 15px;color:#fff;font-size:10px;letter-spacing:.15em}
-    .foot a{font-size:12px;color:#b8c2ce;text-decoration:none;line-height:2}
-    .foot a:hover{color:#fff}
-    .copy{border-top:1px solid rgba(255,255,255,.12);padding:18px 0;color:#8794a2;font-size:10px}
-
-    /* ---------- MODAL ---------- */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
-    .modal.open{display:flex}
-    .modalBox{width:min(1000px,100%);background:#07192d}
-    .modalBar{display:flex;align-items:center;justify-content:space-between;color:#fff;padding:12px 16px}
-    .close{border:0;background:transparent;color:#fff;font-size:26px;cursor:pointer}
-    .frame{aspect-ratio:16/9;background:#000}
-    .frame iframe{width:100%;height:100%;border:0}
-
-    /* ---------- FLUID BREAKPOINTS ---------- */
-    @media (max-width:1150px){
-      .links{gap:14px}
-      .links a{font-size:10px}
-      .heroGrid{grid-template-columns:1fr .8fr}
-      .topicGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
-    }
-    @media (max-width:900px){
-      .nav{min-height:68px;flex-wrap:wrap;padding-block:10px}
-      .links{order:3;flex-basis:100%;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}
-      .links::-webkit-scrollbar{display:none}
-      .links a{padding:8px 0}
-      .links a:first-child::after{bottom:0}
-      .heroGrid{grid-template-columns:1fr}
-      .heroVisual{min-height:420px;max-width:760px;width:100%;margin-inline:auto}
-      .featureGrid{grid-template-columns:1fr}
-      .stories{grid-template-columns:1fr 1fr;grid-template-rows:none}
-      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .podcasts{grid-template-columns:1fr}
-      .news{grid-template-columns:1fr}
-      .foot{grid-template-columns:1.5fr 1fr 1fr}
-      .foot>div:last-child{grid-column:auto}
-    }
-    @media (max-width:650px){
-      .top .w{min-height:30px}
-      .top .w span:last-child{display:none}
-      .nav{gap:12px}
-      .logo .mark{width:32px;height:32px;font-size:18px}
-      .yt{padding:9px 11px}
-      .hero{min-height:700px}
-      .hero h1{font-size:clamp(38px,12vw,58px)}
-      .heroVisual{min-height:330px}
-      .heroVisual .main{width:72%;height:75%;right:2%;top:12%}
-      .heroVisual .left{width:47%;height:52%;left:0;top:26%}
-      .heroVisual .right{width:44%;height:48%;right:0;bottom:3%}
-      .heroCaption{font-size:20px;bottom:14%;right:7%;max-width:190px}
-      section{padding-block:50px}
-      .head{align-items:flex-start;flex-direction:column;gap:12px}
-      .feature{min-height:390px}
-      .stories{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
-      .cards{grid-template-columns:1fr}
-      .topicGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .playlistTrack{height:clamp(320px,105vw,470px)}
-      .playlistItem{width:clamp(180px,53vw,280px)}
-      .playlistItem[data-pos="0"]{transform:translate(calc(-50% - 155px),-50%) rotateY(24deg) scale(.62)}
-      .playlistItem[data-pos="1"]{transform:translate(calc(-50% - 92px),-50%) rotateY(16deg) scale(.78)}
-      .playlistItem[data-pos="3"]{transform:translate(calc(-50% + 92px),-50%) rotateY(-16deg) scale(.78)}
-      .playlistItem[data-pos="4"]{transform:translate(calc(-50% + 155px),-50%) rotateY(-24deg) scale(.62)}
-      .playlistArrow.prev{left:0}.playlistArrow.next{right:0}
-      .podcast{grid-template-columns:1fr}
-      .podcast>img{min-height:210px;aspect-ratio:16/9}
-      .foot{grid-template-columns:1fr 1fr}
-      .foot>div:first-child{grid-column:1/-1}
-      .news{padding:25px}
-      .email{flex-direction:column}
-      .email button{min-height:44px}
-    }
-    @media (max-width:430px){
-      .w{width:min(var(--max),calc(100% - 28px))}
-      .topicGrid{grid-template-columns:1fr}
-      .playlistItem[data-pos="0"],.playlistItem[data-pos="4"]{opacity:0}
-      .playlistItem[data-pos="1"]{transform:translate(calc(-50% - 72px),-50%) rotateY(13deg) scale(.72)}
-      .playlistItem[data-pos="3"]{transform:translate(calc(-50% + 72px),-50%) rotateY(-13deg) scale(.72)}
-    }
-  </style>
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition-duration:.01ms!important}
+}
+</style>
 </head>
 <body data-base="./">
 
-  <div class="top">
-    <div class="w">
-      <span>MANDALA CHANNEL · MEDIA INFORMASI, EDUKASI & PELESTARIAN HINDU NUSANTARA</span>
-      <span>Instagram · YouTube · Kontak</span>
+<div class="top">
+  <div class="w"><span>MANDALA CHANNEL · MEDIA DHARMA & NUSANTARA</span><span>Instagram · YouTube · Kontak</span></div>
+</div>
+
+<header>
+  <div class="w nav">
+    <a class="logo" href="index.html"><div class="mark">✺</div><div><b>MANDALA</b><small>CHANNEL</small></div></a>
+    <nav class="links" aria-label="Navigasi utama">
+      <a class="active" href="index.html">Beranda</a>
+      <a href="pages/artikel.html">Artikel</a>
+      <a href="pages/video.html">Video</a>
+      <a href="pages/playlist.html">Playlist</a>
+      <a href="pages/podcast.html">Podcast</a>
+      <a href="pages/tentang-kami.html">Tentang</a>
+      <a href="pages/kontak.html">Kontak</a>
+    </nav>
+    <a class="yt" href="https://www.youtube.com/" target="_blank" rel="noopener">YOUTUBE ↗</a>
+  </div>
+</header>
+
+<section class="hero reveal">
+  <div class="w heroGrid">
+    <div>
+      <div class="k">Mandala Channel · Media Nusantara</div>
+      <h1>Merawat Dharma, Melestarikan Peradaban Hindu Nusantara.</h1>
+      <p>Ruang editorial untuk mengenal tokoh, membaca gagasan, menjelajah tempat suci, merawat tradisi dan mengikuti kabar umat Hindu dari berbagai penjuru Nusantara.</p>
+      <a class="btn primary" href="pages/artikel.html">JELAJAHI CERITA</a>
+      <a class="btn" href="pages/playlist.html">LIHAT PLAYLIST</a>
+    </div>
+    <div class="visual" aria-hidden="true">
+      <div class="v1"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=90" alt=""></div>
+      <div class="v2"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=900&q=90" alt=""></div>
+      <div class="v3"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=90" alt=""></div>
     </div>
   </div>
+</section>
 
-  <header>
-    <div class="w nav">
-      <a class="logo" href="index.html" aria-label="Mandala Channel">
-        <div class="mark">✺</div>
-        <div><b>MANDALA</b><small>CHANNEL</small></div>
-      </a>
-      <nav class="links" aria-label="Navigasi utama">
-        <a href="index.html">Beranda</a>
-        <a href="pages/artikel.html">Artikel</a>
-        <a href="pages/video.html">Video</a>
-        <a href="pages/playlist.html">Playlist</a>
-        <a href="pages/podcast.html">Podcast</a>
-        <a href="pages/tentang-kami.html">Tentang</a>
-        <a href="pages/kontak.html">Kontak</a>
-      </nav>
-      <a class="yt" href="https://www.youtube.com/" target="_blank" rel="noopener">YOUTUBE ↗</a>
-    </div>
-  </header>
-
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="w heroGrid">
-        <div class="heroCopy">
-          <div class="eyebrow">Mandala Channel · Media Nusantara</div>
-          <h1>Merawat Dharma,<br>Melestarikan Peradaban<br>Hindu Nusantara.</h1>
-          <p>Informasi · Edukasi · Inspirasi. Ruang editorial untuk mengenal tokoh, membaca gagasan, menjelajah tempat suci, merawat tradisi dan mengikuti kabar umat Hindu dari berbagai penjuru Nusantara.</p>
-          <a class="btn primary" href="pages/artikel.html">JELAJAHI MANDALA</a>
-          <a class="btn" href="pages/playlist.html">LIHAT PLAYLIST</a>
-        </div>
-        <div class="heroVisual" aria-hidden="true">
-          <div class="frame left"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=900&q=85" alt=""></div>
-          <div class="frame right"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=85" alt=""></div>
-          <div class="frame main"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1300&q=90" alt=""></div>
-          <div class="heroCaption">Dharma, Budaya & Cerita Nusantara</div>
-        </div>
+<section class="reveal">
+  <div class="w">
+    <div class="head"><div><div class="k">Pilihan Redaksi</div><h2 class="title">Cerita yang sedang dibaca</h2></div><a class="view" href="pages/artikel.html">Semua artikel →</a></div>
+    <div class="featureGrid">
+      <article class="feature reveal delay-1"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=90" alt="Menjaga Jejak Dharma"><div class="copy"><div class="k">Dharma & Ajaran</div><h2>Menjaga Jejak Dharma di Tengah Perubahan Zaman</h2><small>13 Agustus 2026 · 6 menit</small></div></article>
+      <div class="stories">
+        <a class="story reveal delay-2" href="pages/artikel-detail.html"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=90" alt="Jejak Hindu Jawa"><div class="copy"><div class="k">Tradisi</div><h3>Mengenal Kembali Jejak Hindu Jawa di Nusantara</h3><p>Warisan yang tetap hidup di tengah perubahan.</p></div></a>
+        <a class="story reveal delay-3" href="topics/jelajah-nusantara.html"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=90" alt="Lanskap tempat suci"><div class="copy"><div class="k">Jelajah</div><h3>Membaca Lanskap Tempat Suci</h3><p>Perjalanan, manusia dan cerita di balik tempat.</p></div></a>
       </div>
-    </section>
-
-    <!-- FEATURE -->
-    <section>
-      <div class="w">
-        <div class="head">
-          <div><div class="k">Pilihan Redaksi</div><h2 class="title">Cerita yang sedang dibaca</h2></div>
-          <a class="view" href="pages/artikel.html">Semua artikel →</a>
-        </div>
-        <div class="featureGrid">
-          <article class="feature">
-            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1400&q=90" alt="Perjalanan spiritual">
-            <div class="copy">
-              <div class="k">Dharma & Ajaran</div>
-              <h2>Menjaga Jejak Dharma di Tengah Perubahan Zaman</h2>
-              <small>13 Agustus 2026 · 6 menit</small>
-            </div>
-          </article>
-          <div class="stories">
-            <a class="story" href="pages/artikel-detail.html">
-              <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85" alt="Tradisi Hindu Jawa">
-              <div class="copy"><div class="k">Tradisi</div><h3>Mengenal Kembali Jejak Hindu Jawa</h3><p>Warisan yang tetap hidup di tengah perubahan.</p></div>
-            </a>
-            <a class="story" href="topics/jelajah-nusantara.html">
-              <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=900&q=85" alt="Jelajah Nusantara">
-              <div class="copy"><div class="k">Jelajah</div><h3>Membaca Lanskap Tempat Suci</h3><p>Perjalanan, manusia dan cerita di balik tempat.</p></div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARTIKEL -->
-    <section>
-      <div class="w">
-        <div class="head"><div><div class="k">Artikel Terbaru</div><h2 class="title">Dari ruang redaksi</h2></div><a class="view" href="pages/artikel.html">Semua artikel →</a></div>
-        <div class="cards" data-render="articles"></div>
-      </div>
-    </section>
-
-    <!-- VIDEO -->
-    <section class="dark">
-      <div class="w">
-        <div class="head"><div><div class="k">Mandala Video</div><h2 class="title">Tonton tanpa meninggalkan Mandala</h2></div><a class="view" href="pages/video.html">Semua video →</a></div>
-        <div class="cards">
-          <article class="card video"><a href="#" onclick="openVideo('','Bersama Sang Tokoh');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85" alt="Bersama Sang Tokoh"><span class="badge">TOKOH</span></div><div class="meta">Mandala Video</div><h3>Bersama Sang Tokoh</h3><p>Putar langsung di dalam website →</p></a></article>
-          <article class="card video"><a href="#" onclick="openVideo('','Jelajah Nusantara');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85" alt="Jelajah Nusantara"><span class="badge">JELAJAH</span></div><div class="meta">Mandala Video</div><h3>Jelajah Nusantara</h3><p>Putar langsung di dalam website →</p></a></article>
-          <article class="card video"><a href="#" onclick="openVideo('','Tradisi dan Budaya');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85" alt="Tradisi dan Budaya"><span class="badge">TRADISI</span></div><div class="meta">Mandala Video</div><h3>Tradisi dan Budaya Hindu Jawa</h3><p>Putar langsung di dalam website →</p></a></article>
-          <article class="card video"><a href="#" onclick="openVideo('','Kabar Umat');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85" alt="Kabar Umat"><span class="badge">KABAR</span></div><div class="meta">Mandala Video</div><h3>Kabar Umat Hindu Nusantara</h3><p>Putar langsung di dalam website →</p></a></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PLAYLIST -->
-    <section class="playlistSection">
-      <div class="w">
-        <div class="head">
-          <div><div class="k">Serial Mandala</div><h2 class="title">Playlist pilihan</h2></div>
-          <a class="view" href="pages/playlist.html">Lihat semua →</a>
-        </div>
-
-        <div class="playlistViewport" id="playlistViewport">
-          <div class="playlistTrack" id="playlistTrack" data-render="playlists"></div>
-          <div class="playlistNav" aria-hidden="false">
-            <button class="playlistArrow prev" id="playlistPrev" type="button" aria-label="Playlist sebelumnya">‹</button>
-            <button class="playlistArrow next" id="playlistNext" type="button" aria-label="Playlist berikutnya">›</button>
-          </div>
-          <div class="playlistDots" id="playlistDots" aria-label="Posisi playlist"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TOPIK -->
-    <section>
-      <div class="w">
-        <div class="head"><div><div class="k">Eksplorasi</div><h2 class="title">Topik Mandala</h2></div></div>
-        <div class="topicGrid" data-render="topics"></div>
-      </div>
-    </section>
-
-    <!-- PODCAST -->
-    <section class="dark">
-      <div class="w">
-        <div class="head"><div><div class="k">Podcast Terbaru</div><h2 class="title">Percakapan yang lebih panjang</h2></div><a class="view" href="pages/podcast.html">Semua podcast →</a></div>
-        <div class="podcasts">
-          <article class="podcast"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=900&q=85" alt="Podcast tradisi dan budaya"><div class="copy"><div class="k">Mandala Podcast</div><h3>Tradisi dan Budaya Jawa</h3><p>Ruang percakapan untuk membedah tradisi, sejarah dan makna.</p><button class="play" onclick="openVideo('','Podcast')">▶ PUTAR</button></div></article>
-          <article class="podcast"><img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&w=900&q=85" alt="Podcast dharma"><div class="copy"><div class="k">Mandala Podcast</div><h3>Dharma dalam Kehidupan</h3><p>Percakapan dan refleksi yang dekat dengan keseharian.</p><button class="play" onclick="openVideo('','Podcast')">▶ PUTAR</button></div></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEWSLETTER -->
-    <section>
-      <div class="w">
-        <div class="news">
-          <div><div class="k">Mandala Letter</div><h2>Ikuti cerita terbaru.</h2><p>Berita, artikel dan pilihan video langsung ke email.</p></div>
-          <form class="email" onsubmit="event.preventDefault();alert('Form siap dihubungkan ke layanan email.');"><input type="email" required placeholder="Email Anda" aria-label="Email Anda"><button>DAFTAR</button></form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modalBox">
-      <div class="modalBar"><span id="modalTitle">Mandala Channel</span><button class="close" onclick="closeVideo()" aria-label="Tutup">×</button></div>
-      <div class="frame"><iframe id="videoFrame" title="Mandala Video" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
     </div>
   </div>
+</section>
 
-  <footer>
-    <div class="w">
-      <div class="foot">
-        <div><b style="color:#fff;font:500 22px Georgia,serif">MANDALA CHANNEL</b><p>Media digital tentang Hindu, dharma, tokoh, budaya dan kearifan Nusantara.</p></div>
-        <div><h3>JELAJAH</h3><a href="pages/artikel.html">Artikel</a><br><a href="pages/video.html">Video</a><br><a href="pages/playlist.html">Playlist</a><br><a href="pages/podcast.html">Podcast</a></div>
-        <div><h3>TOPIK</h3><a href="topics/jelajah-nusantara.html">Jelajah</a><br><a href="topics/tokoh-hindu.html">Tokoh</a><br><a href="topics/tradisi-budaya.html">Tradisi</a><br><a href="topics/spiritual.html">Spiritual</a></div>
-        <div><h3>MANDALA</h3><a href="pages/tentang-kami.html">Tentang Kami</a><br><a href="pages/kontak.html">Kontak</a></div>
-      </div>
-      <div class="copy">© 2026 Mandala Channel · All Rights Reserved.</div>
+<section class="reveal">
+  <div class="w"><div class="head"><div><div class="k">Artikel</div><h2 class="title">Dari ruang redaksi</h2></div><a class="view" href="pages/artikel.html">Semua artikel →</a></div><div class="cards" data-render="articles"></div></div>
+</section>
+
+<section class="dark reveal">
+  <div class="w"><div class="head"><div><div class="k">Mandala Video</div><h2 class="title">Tonton tanpa meninggalkan Mandala</h2></div><a class="view" href="pages/video.html">Semua video →</a></div>
+    <div class="cards">
+      <article class="card video reveal delay-1"><a href="#" onclick="openVideo('','Bersama Sang Tokoh');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85" alt=""><span class="badge">TOKOH</span></div><div class="meta">Mandala Video</div><h3>Bersama Sang Tokoh</h3><p>Putar langsung di dalam website →</p></a></article>
+      <article class="card video reveal delay-2"><a href="#" onclick="openVideo('','Jelajah Nusantara');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85" alt=""><span class="badge">JELAJAH</span></div><div class="meta">Mandala Video</div><h3>Jelajah Nusantara</h3><p>Putar langsung di dalam website →</p></a></article>
+      <article class="card video reveal delay-3"><a href="#" onclick="openVideo('','Tradisi dan Budaya');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85" alt=""><span class="badge">TRADISI</span></div><div class="meta">Mandala Video</div><h3>Tradisi dan Budaya Hindu Jawa</h3><p>Putar langsung di dalam website →</p></a></article>
+      <article class="card video reveal"><a href="#" onclick="openVideo('','Kabar Umat');return false"><div class="thumb"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85" alt=""><span class="badge">KABAR</span></div><div class="meta">Mandala Video</div><h3>Kabar Umat Hindu Nusantara</h3><p>Putar langsung di dalam website →</p></a></article>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="js/main.js"></script>
-  <script>
-    /* Playlist 3D carousel. Data tetap berasal dari data/playlists.json melalui main.js. */
-    (function(){
-      const track=document.getElementById('playlistTrack');
-      const dots=document.getElementById('playlistDots');
-      const prev=document.getElementById('playlistPrev');
-      const next=document.getElementById('playlistNext');
-      if(!track||!dots)return;
+<section class="playlist reveal">
+  <div class="w">
+    <div class="head"><div><div class="k">Serial Mandala</div><h2 class="title">Playlist pilihan</h2></div><a class="view" href="pages/playlist.html">Lihat semua →</a></div>
+    <div class="playlist-stage" id="playlistStage">
+      <div class="playlists" data-render="playlists"></div>
+      <button class="playlist-arrow prev" id="playlistPrev" aria-label="Playlist sebelumnya">‹</button>
+      <button class="playlist-arrow next" id="playlistNext" aria-label="Playlist berikutnya">›</button>
+      <div class="playlist-dots" id="playlistDots" aria-label="Posisi playlist"></div>
+    </div>
+  </div>
+</section>
 
-      let items=[];
-      let current=0;
-      let timer=null;
-      let initialized=false;
+<section class="reveal">
+  <div class="w"><div class="head"><div><div class="k">Eksplorasi</div><h2 class="title">Topik Mandala</h2></div></div><div class="topicGrid" data-render="topics"></div></div>
+</section>
 
-      function waitForPlaylist(){
-        items=[...track.querySelectorAll('.pcard')];
-        if(!items.length){
-          if(!initialized)setTimeout(waitForPlaylist,80);
-          return;
+<section class="dark reveal">
+  <div class="w"><div class="head"><div><div class="k">Podcast</div><h2 class="title">Percakapan yang lebih panjang</h2></div><a class="view" href="pages/podcast.html">Semua podcast →</a></div>
+    <div class="podcasts">
+      <article class="podcast reveal delay-1"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=900&q=85" alt=""><div class="copy"><div class="k">Mandala Podcast</div><h3>Tradisi dan Budaya Jawa</h3><p>Ruang percakapan untuk membedah tradisi, sejarah dan makna.</p><button class="play" onclick="openVideo('','Podcast')">▶ PUTAR</button></div></article>
+      <article class="podcast reveal delay-2"><img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&w=900&q=85" alt=""><div class="copy"><div class="k">Mandala Podcast</div><h3>Dharma dalam Kehidupan</h3><p>Percakapan dan refleksi yang dekat dengan keseharian.</p><button class="play" onclick="openVideo('','Podcast')">▶ PUTAR</button></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="w"><div class="news"><div><div class="k">Mandala Letter</div><h2>Ikuti cerita terbaru.</h2><p>Berita, artikel dan pilihan video langsung ke email.</p></div><form class="email" onsubmit="event.preventDefault();alert('Form siap dihubungkan ke layanan email.');"><input type="email" required placeholder="Email Anda"><button>DAFTAR</button></form></div></div>
+</section>
+
+<div class="modal" id="modal"><div class="modalBox"><div class="modalBar"><span id="modalTitle">Mandala Channel</span><button class="close" onclick="closeVideo()">×</button></div><div class="frame"><iframe id="videoFrame" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div></div>
+
+<footer>
+  <div class="w"><div class="foot"><div><b style="color:#fff;font:500 18px Georgia,serif">MANDALA</b><p>Media digital tentang Hindu, dharma, tokoh, budaya dan kearifan Nusantara.</p></div><div><h3>JELAJAH</h3><a href="pages/artikel.html">Artikel</a><br><a href="pages/video.html">Video</a><br><a href="pages/playlist.html">Playlist</a></div><div><h3>TOPIK</h3><a href="topics/jelajah-nusantara.html">Jelajah</a><br><a href="topics/tokoh-hindu.html">Tokoh</a><br><a href="topics/tradisi-budaya.html">Tradisi</a></div><div><h3>MANDALA</h3><a href="pages/tentang-kami.html">Tentang</a><br><a href="pages/kontak.html">Kontak</a></div></div><div class="copy">© 2026 Mandala Channel</div></div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+/* =========================================================
+   HOMEPAGE INTERACTION LAYER
+========================================================= */
+(function(){
+  'use strict';
+
+  /* Sticky nav berubah halus saat scroll */
+  const syncHeader=()=>document.body.classList.toggle('scrolled',window.scrollY>24);
+  syncHeader();
+  window.addEventListener('scroll',syncHeader,{passive:true});
+
+  /* Active navigation */
+  document.querySelectorAll('.links a').forEach(a=>{
+    if(a.pathname===location.pathname) a.classList.add('active');
+  });
+
+  /* Reveal saat konten masuk viewport */
+  const revealEls=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
         }
-        initialized=true;
-        setup();
-      }
+      });
+    },{threshold:.10,rootMargin:'0px 0px -8% 0px'});
+    revealEls.forEach(el=>observer.observe(el));
+  }else revealEls.forEach(el=>el.classList.add('revealed'));
 
-      function setup(){
-        const cards=items.map((card,index)=>{
-          const link=card.querySelector('a');
-          const img=card.querySelector('img');
-          const title=card.querySelector('h3');
-          const category=card.querySelector('p');
-          const count=card.querySelector('.count');
-          const item=document.createElement('div');
-          item.className='playlistItem';
-          item.dataset.index=index;
-          item.innerHTML=`<a href="${link?link.getAttribute('href'):'#'}"><div class="playlistCard"><img src="${img?img.getAttribute('src'):''}" alt="${title?title.textContent:''}"><div class="playlistInfo"><div class="category">${category?category.textContent:''}</div><h3>${title?title.textContent:''}</h3><p>${count?count.textContent:''}</p></div></div></a>`;
-          return item;
-        });
+  /* Playlist 3D carousel — menunggu main.js selesai mengambil JSON */
+  function setupPlaylist(){
+    const stage=document.getElementById('playlistStage');
+    const track=stage && stage.querySelector('[data-render="playlists"]');
+    if(!stage || !track) return false;
+    const cards=[...track.querySelectorAll('.pcard')];
+    if(!cards.length) return false;
 
-        track.innerHTML='';
-        cards.forEach((item,index)=>{
-          item.addEventListener('click',function(e){
-            if(index!==current){e.preventDefault();current=index;render();}
-          });
-          track.appendChild(item);
-        });
+    let index=0;
+    let timer=null;
+    let dragging=false;
+    let startX=0;
+    let moved=0;
 
-        dots.innerHTML=cards.map((_,i)=>`<button type="button" aria-label="Playlist ${i+1}" data-index="${i}"></button>`).join('');
-        [...dots.children].forEach(btn=>btn.addEventListener('click',()=>{current=Number(btn.dataset.index);render();restart();}));
+    const dots=document.getElementById('playlistDots');
+    dots.innerHTML=cards.map((_,i)=>`<button type="button" aria-label="Playlist ${i+1}"></button>`).join('');
+    const dotEls=[...dots.children];
 
-        prev.onclick=()=>{current=(current-1+cards.length)%cards.length;render();restart()};
-        next.onclick=()=>{current=(current+1)%cards.length;render();restart()};
+    const update=()=>{
+      const width=stage.clientWidth;
+      const mobile=width<760;
+      const gap=Math.max(100,width*.14);
+      const sideGap=Math.max(150,width*.20);
+      cards.forEach((card,i)=>{
+        let d=i-index;
+        const n=cards.length;
+        if(d>n/2)d-=n;
+        if(d<-n/2)d+=n;
 
-        track.addEventListener('mouseenter',()=>stop());
-        track.addEventListener('mouseleave',()=>start());
-        document.getElementById('playlistViewport').addEventListener('touchstart',stop,{passive:true});
-        document.getElementById('playlistViewport').addEventListener('touchend',start,{passive:true});
+        let x=0,scale=1,rotate=0,opacity=1,z=10,blur=0;
+        if(d===0){x=0;scale=1;rotate=0;z=30;opacity=1}
+        else if(d===-1){x=-sideGap;scale=.78;rotate=-8;z=20;opacity=.92}
+        else if(d===1){x=sideGap;scale=.78;rotate=8;z=20;opacity=.92}
+        else if(d===-2){x=-sideGap*1.65;scale=.58;rotate=-14;z=10;opacity=.48;blur=1}
+        else if(d===2){x=sideGap*1.65;scale=.58;rotate=14;z=10;opacity=.48;blur=1}
+        else {x=d<0?-width*.62:width*.62;scale=.45;rotate=d<0?-18:18;z=0;opacity=0;blur=2}
 
-        window.addEventListener('resize',render,{passive:true});
-        render();
-        start();
-      }
+        if(mobile){
+          if(d===-1)x=-gap;
+          if(d===1)x=gap;
+          if(Math.abs(d)>1){x=d<0?-width*.7:width*.7;opacity=0}
+        }
 
-      function render(){
-        const all=[...track.querySelectorAll('.playlistItem')];
-        const n=all.length;
-        if(!n)return;
-        all.forEach((item,i)=>{
-          let diff=(i-current+n)%n;
-          if(diff>n/2)diff-=n;
-          let pos=diff+2;
-          item.dataset.pos=pos>=0&&pos<=4?pos:'hidden';
-          item.classList.toggle('is-hidden',Math.abs(diff)>2);
-          item.setAttribute('aria-hidden',Math.abs(diff)>2?'true':'false');
-        });
-        [...dots.children].forEach((dot,i)=>dot.classList.toggle('active',i===current));
-      }
+        card.style.transform=`translate3d(calc(-50% + ${x}px), -50%, 0) scale(${scale}) rotate(${rotate}deg)`;
+        card.style.opacity=opacity;
+        card.style.zIndex=z;
+        card.style.filter=blur?`blur(${blur}px)`:'';
+        card.classList.toggle('active',d===0);
+        card.setAttribute('aria-hidden',d===0?'false':'true');
+        card.style.pointerEvents=Math.abs(d)<=1?'auto':'none';
+      });
+      dotEls.forEach((dot,i)=>dot.classList.toggle('active',i===index));
+    };
 
-      function start(){
-        stop();
-        timer=setInterval(()=>{current=(current+1)%items.length;render()},5000);
-      }
-      function stop(){if(timer){clearInterval(timer);timer=null}}
-      function restart(){start()}
+    const go=(next,reset=true)=>{
+      index=(next+cards.length)%cards.length;
+      update();
+      if(reset)restart();
+    };
+    const next=()=>go(index+1);
+    const prev=()=>go(index-1);
 
-      const observer=new MutationObserver(waitForPlaylist);
-      observer.observe(track,{childList:true});
-      waitForPlaylist();
-    })();
-  </script>
+    document.getElementById('playlistNext').addEventListener('click',e=>{e.stopPropagation();next()});
+    document.getElementById('playlistPrev').addEventListener('click',e=>{e.stopPropagation();prev()});
+    dotEls.forEach((dot,i)=>dot.addEventListener('click',()=>go(i)));
+    cards.forEach((card,i)=>card.addEventListener('click',e=>{
+      if(moved>8){e.preventDefault();return}
+      if(i!==index){e.preventDefault();go(i)}
+    }));
+
+    const pointerDown=e=>{dragging=true;startX=e.clientX;moved=0;stage.setPointerCapture?.(e.pointerId);stop()};
+    const pointerMove=e=>{if(!dragging)return;moved=e.clientX-startX};
+    const pointerUp=e=>{if(!dragging)return;dragging=false;if(Math.abs(moved)>45){moved<0?next():prev()}restart()};
+    stage.addEventListener('pointerdown',pointerDown);
+    stage.addEventListener('pointermove',pointerMove);
+    stage.addEventListener('pointerup',pointerUp);
+    stage.addEventListener('pointercancel',pointerUp);
+    stage.addEventListener('pointerleave',()=>{if(dragging){dragging=false;restart()}});
+
+    const stop=()=>{if(timer)clearInterval(timer);timer=null};
+    const restart=()=>{stop();timer=setInterval(next,6000)};
+    stage.addEventListener('mouseenter',stop);
+    stage.addEventListener('mouseleave',restart);
+    window.addEventListener('resize',update,{passive:true});
+    update();
+    restart();
+    return true;
+  }
+
+  /* main.js memuat data secara async. Poll ringan hanya sampai cards tersedia. */
+  let tries=0;
+  const wait=()=>{
+    if(setupPlaylist())return;
+    if(++tries<80)setTimeout(wait,100);
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wait,{once:true});
+  else wait();
+
+  /* Modal video tetap kompatibel dengan main.js */
+  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&typeof closeVideo==='function')closeVideo()});
+})();
+</script>
 </body>
 </html>
