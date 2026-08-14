@@ -3,41 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Menjaga Jejak Dharma di Tengah Perubahan Zaman | Mandala Channel</title>
-<meta name="description" content="Artikel Mandala Channel tentang dharma, budaya dan warisan Hindu Nusantara.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='white' stroke='%23b78a35' stroke-width='3'/%3E%3Cpath d='M32 12v40M12 32h40M18 18l28 28M46 18L18 46' stroke='%23b78a35' stroke-width='2'/%3E%3C/svg%3E">
+
+<meta
+  name="description"
+  content="Artikel Mandala Channel tentang dharma, budaya dan warisan Hindu Nusantara."
+>
+
+<!--
+  ============================================================
+  MANDALA CHANNEL — ARTIKEL DETAIL
+  ============================================================
+
+  PRINSIP:
+  - Tidak memakai Google Fonts
+  - Tidak memakai CDN
+  - Tidak memakai library eksternal
+  - Tidak memakai iframe
+  - Tidak memakai gambar dari internet
+  - Semua asset diarahkan ke folder lokal
+  - Layout FLUID seperti index.html
+  - Nyaman pada browser zoom 80% - 200%
+  - Gambar pendukung dibuat lebih kecil dan minimalis
+  ============================================================
+-->
+
+<link
+  rel="icon"
+  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='white' stroke='%23b78a35' stroke-width='3'/%3E%3Cpath d='M32 12v40M12 32h40M18 18l28 28M46 18L18 46' stroke='%23b78a35' stroke-width='2'/%3E%3C/svg%3E"
+>
 
 <style>
-:root{
-  --navy:#082f5f;
-  --navy-deep:#062447;
-  --gold:#b78a35;
-  --ink:#243e5d;
-  --muted:#718094;
-  --line:#e4e8ed;
-  --soft:#f5f7f9;
-  --cream:#f5f2eb;
 
-  --page-max:1180px;
-  --hero-max:920px;
-  --article-max:680px;
-  --media-max:880px;
-  --header-h:76px;
+/* ============================================================
+   01. VARIABLES
+============================================================ */
+
+:root{
+  --navy:#082d56;
+  --navy-deep:#061f3c;
+
+  --ink:#172536;
+  --text:#304052;
+  --muted:#718091;
+  --soft:#8b96a1;
+
+  --paper:#f7f6f1;
+  --white:#fff;
+
+  --line:#e4e8ec;
+
+  --bronze:#a9823f;
+  --bronze-soft:#c2a66e;
+
+  /*
+    Fluid width.
+
+    Berbeda dengan fixed width seperti 900px,
+    ukuran akan mengikuti viewport.
+  */
+  --page-width:94vw;
+
+  /*
+    Lebar bacaan.
+    Sengaja tidak terlalu lebar supaya nyaman dibaca.
+  */
+  --reading-width:min(64vw,760px);
+
+  /*
+    Lebar media utama.
+  */
+  --main-media-width:min(78vw,980px);
+
+  /*
+    Lebar gambar pendukung.
+    Sengaja lebih kecil.
+  */
+  --support-media-width:min(48vw,540px);
 }
 
-*{box-sizing:border-box}
+
+/* ============================================================
+   02. RESET
+============================================================ */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
 
 html{
   scroll-behavior:smooth;
+  scroll-padding-top:80px;
   overflow-x:hidden;
 }
 
 body{
   margin:0;
-  color:var(--ink);
+  padding:0;
+
   background:#fff;
-  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   overflow-x:hidden;
+
+  /*
+    Sangat penting untuk fleksibilitas zoom.
+  */
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
 }
 
 img{
@@ -52,520 +133,801 @@ a{
 
 button{
   font:inherit;
+  touch-action:manipulation;
 }
 
-/* =========================
-   HEADER
-========================= */
+
+/* ============================================================
+   03. GLOBAL CONTAINER
+============================================================ */
+
+.container{
+  width:var(--page-width);
+  max-width:none;
+  margin-inline:auto;
+}
+
+
+/* ============================================================
+   04. HEADER
+============================================================ */
+
 .site-header{
   position:sticky;
   top:0;
   z-index:1000;
-  min-height:var(--header-h);
+
+  height:clamp(62px,5.1vw,74px);
+
   background:rgba(255,255,255,.97);
-  border-bottom:1px solid var(--line);
+
+  border-bottom:1px solid rgba(8,45,86,.08);
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  transition:
+    height .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.site-header.scrolled{
+  box-shadow:
+    0 8px 28px rgba(8,45,86,.09);
+
+  background:rgba(255,255,255,.94);
 }
 
 .header-inner{
-  width:min(calc(100% - 48px),var(--page-max));
-  min-height:var(--header-h);
-  margin:auto;
+  width:var(--page-width);
+  height:100%;
+  margin-inline:auto;
+
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:32px;
+
+  gap:clamp(14px,2vw,36px);
 }
 
+
+/* ---------- BRAND ---------- */
+
 .brand{
+  flex:0 0 auto;
+
   display:flex;
   align-items:center;
-  gap:12px;
-  flex-shrink:0;
+
+  gap:clamp(7px,.8vw,12px);
 }
 
 .brand-mark{
-  width:42px;
-  height:42px;
-  border:1px solid var(--gold);
+  width:clamp(34px,2.8vw,42px);
+  aspect-ratio:1;
+
+  border:1px solid var(--bronze);
   border-radius:50%;
+
   display:grid;
   place-items:center;
-  color:var(--gold);
-  font-size:17px;
+
+  color:var(--bronze);
+
+  font-size:clamp(14px,1.1vw,18px);
+}
+
+.brand-text{
+  display:block;
 }
 
 .brand-name{
   display:block;
-  font-family:Georgia,"Times New Roman",serif;
-  letter-spacing:4px;
-  font-size:21px;
-  line-height:1;
+
   color:var(--navy);
+
+  font:
+    500 clamp(15px,1.1vw,21px)/1
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing:.15em;
 }
 
 .brand-sub{
   display:block;
+
   margin-top:3px;
-  font-size:7px;
-  letter-spacing:3px;
-  color:#8a96a4;
+
+  color:#8794a0;
+
+  font-size:clamp(6px,.45vw,8px);
+
+  letter-spacing:.28em;
 }
 
+
+/* ---------- NAVIGATION ---------- */
+
 .nav{
+  margin-left:auto;
+
   display:flex;
   align-items:center;
-  gap:28px;
+
+  gap:clamp(12px,1.6vw,29px);
+
+  overflow-x:auto;
+
+  scrollbar-width:none;
+}
+
+.nav::-webkit-scrollbar{
+  display:none;
 }
 
 .nav a{
-  padding:27px 0 23px;
-  border-bottom:2px solid transparent;
-  color:#59697b;
-  font-size:12px;
+  position:relative;
+
+  padding:
+    clamp(20px,2vw,27px)
+    0;
+
+  color:#526170;
+
+  font-size:clamp(8px,.58vw,11px);
+
   white-space:nowrap;
+}
+
+.nav a::after{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+
+  bottom:clamp(10px,1vw,15px);
+
+  height:2px;
+
+  background:var(--bronze);
+
+  transform:scaleX(0);
+  transform-origin:center;
+
+  transition:transform .2s ease;
 }
 
 .nav a:hover,
 .nav a.active{
   color:var(--navy);
-  border-color:var(--gold);
 }
 
-.nav .youtube{
-  padding:11px 16px;
-  border:0;
+.nav a:hover::after,
+.nav a.active::after{
+  transform:scaleX(1);
+}
+
+.nav-youtube{
+  padding:
+    clamp(8px,.7vw,10px)
+    clamp(10px,1vw,14px) !important;
+
   border-radius:4px;
+
   background:var(--navy);
-  color:#fff;
-  font-size:11px;
+
+  color:#fff !important;
+
+  font-size:clamp(8px,.5vw,10px) !important;
+
   font-weight:700;
 }
 
-/* =========================
-   ARTICLE HEADER
-========================= */
+
+/* ============================================================
+   05. ARTICLE HERO
+============================================================ */
+
 .article-hero{
-  background:linear-gradient(180deg,#f3f6f8 0%,#f8fafb 72%,#fff 100%);
-  padding:clamp(48px,5vw,72px) 24px clamp(42px,5vw,58px);
+  padding:
+    clamp(48px,6vw,88px)
+    0
+    clamp(42px,5vw,66px);
+
+  background:
+    linear-gradient(
+      110deg,
+      #f7f9fb 0%,
+      #fff 60%,
+      #f1f4f7 100%
+    );
+
+  border-bottom:1px solid var(--line);
 }
 
-.hero-inner{
-  width:min(100%,var(--hero-max));
-  margin:auto;
-}
-
-.eyebrow,
-.section-label{
-  color:var(--gold);
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:3px;
-  line-height:1.3;
-  text-transform:uppercase;
+.hero-content{
+  width:min(88vw,1180px);
+  max-width:100%;
+  margin-inline:auto;
 }
 
 .eyebrow{
-  margin-bottom:18px;
+  margin-bottom:clamp(12px,1.3vw,19px);
+
+  color:var(--bronze);
+
+  font-size:clamp(8px,.55vw,10px);
+
+  font-weight:800;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
 }
 
-.article-hero h1{
-  max-width:1000px;
-  margin:0 0 24px;
+.article-title{
+  max-width:1050px;
+
+  margin:0;
+
   color:var(--navy);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(40px,4.4vw,66px);
-  font-weight:400;
-  line-height:1.02;
-  letter-spacing:-1.8px;
+
+  font:
+    500 clamp(38px,5vw,70px)/.98
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing:-.035em;
 }
 
-.dek{
-  max-width:850px;
-  margin:0 0 24px;
-  color:#607087;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(17px,1.6vw,22px);
-  line-height:1.55;
+.article-dek{
+  max-width:820px;
+
+  margin:
+    clamp(17px,1.8vw,25px)
+    0
+    clamp(17px,2vw,25px);
+
+  color:#657487;
+
+  font:
+    400 clamp(14px,1.15vw,19px)/1.7
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
-.meta{
+.article-meta{
   display:flex;
   align-items:center;
   flex-wrap:wrap;
-  gap:10px;
+
+  gap:clamp(6px,.7vw,10px);
+
   color:#7a8795;
-  font-size:12px;
+
+  font-size:clamp(9px,.56vw,11px);
 }
 
-.meta .dot{
-  color:#b8bec6;
+.article-meta .dot{
+  color:#bdc3ca;
 }
 
-.actions{
+
+/* ============================================================
+   06. ACTION BUTTON
+============================================================ */
+
+.article-actions{
   display:flex;
   flex-wrap:wrap;
+
   gap:8px;
-  margin-top:20px;
+
+  margin-top:clamp(15px,1.7vw,22px);
 }
 
-.action{
+.action-button{
+  appearance:none;
+
   border:1px solid #d8dee5;
+
   border-radius:4px;
-  padding:9px 13px;
+
+  padding:
+    clamp(7px,.65vw,9px)
+    clamp(10px,.95vw,13px);
+
   background:#fff;
+
   color:var(--navy);
-  font-size:11px;
+
+  font-size:clamp(9px,.55vw,11px);
+
   cursor:pointer;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
 }
 
-.action:hover{
+.action-button:hover{
   border-color:var(--navy);
+  transform:translateY(-1px);
 }
 
-/* =========================
-   ARTICLE CONTENT
-========================= */
-.content-wrap{
-  width:min(calc(100% - 48px),var(--media-max));
-  margin:auto;
-  padding:clamp(34px,5vw,58px) 0 90px;
+
+/* ============================================================
+   07. ARTICLE CONTENT WRAPPER
+============================================================ */
+
+.article-content{
+  width:100%;
+
+  padding:
+    clamp(34px,4.5vw,64px)
+    clamp(14px,4vw,72px)
+    clamp(70px,7vw,105px);
 }
 
-.media{
-  width:min(100%,var(--media-max));
-  margin:0 auto clamp(34px,5vw,52px);
+
+/* ============================================================
+   08. MAIN IMAGE
+============================================================ */
+
+.main-media{
+  width:var(--main-media-width);
+  max-width:100%;
+
+  margin:
+    0
+    auto
+    clamp(34px,4vw,52px);
 }
 
-.media.main-media{
-  width:min(100%,880px);
-}
-
-.media.medium{
-  width:min(100%,600px);
-}
-
-.media.small{
-  width:min(100%,560px);
-}
-
-.media img{
+.main-media img{
   width:100%;
   height:auto;
-  max-height:560px;
+
+  aspect-ratio:16 / 8.7;
+
   object-fit:cover;
-  border-radius:6px;
+
+  border-radius:clamp(2px,.3vw,5px);
+
   background:#eef1f4;
-  box-shadow:0 16px 38px rgba(0,0,0,.08);
+
+  box-shadow:
+    0 clamp(8px,1vw,15px)
+    clamp(22px,2.8vw,38px)
+    rgba(0,0,0,.07);
 }
 
-.media.main-media img{
-  aspect-ratio:16/8.2;
-  max-height:520px;
-}
 
-.media.medium img{
-  aspect-ratio:16/10;
-}
-
-.media.small img{
-  aspect-ratio:16/10;
-}
+/* ============================================================
+   09. CAPTION
+============================================================ */
 
 .caption{
-  margin:9px 2px 0;
+  margin:
+    clamp(7px,.65vw,10px)
+    2px
+    0;
+
   color:#8a95a1;
-  font-size:11px;
+
+  font-size:clamp(8px,.5vw,10px);
+
   line-height:1.5;
 }
 
-/* local-only fallback; no external image request */
-.image-missing img{
-  min-height:220px;
-  object-fit:cover;
-  background:
-    linear-gradient(135deg,#eef1f4,#f8f9fa);
-}
+
+/* ============================================================
+   10. ARTICLE TEXT
+============================================================ */
 
 .article-body{
-  width:min(100%,var(--article-max));
-  margin:clamp(38px,5vw,56px) auto 0;
+  width:var(--reading-width);
+  max-width:100%;
+
+  margin-inline:auto;
 }
 
 .article-body p{
-  margin:0 0 24px;
+  margin:
+    0
+    0
+    clamp(20px,2vw,28px);
+
   color:#263f5c;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(17px,1.1vw,19px);
-  line-height:1.85;
+
+  font:
+    400 clamp(15px,1.02vw,18px)/1.88
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
 .article-body h2{
-  margin:54px 0 20px;
+  margin:
+    clamp(44px,4.5vw,60px)
+    0
+    clamp(15px,1.4vw,21px);
+
   color:var(--navy);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(30px,3vw,42px);
-  font-weight:400;
-  line-height:1.15;
+
+  font:
+    400 clamp(27px,2.65vw,40px)/1.12
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing:-.02em;
 }
 
 .article-body h3{
-  margin:42px 0 16px;
+  margin:
+    clamp(32px,3.3vw,45px)
+    0
+    clamp(12px,1.1vw,17px);
+
   color:var(--navy);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(25px,2.5vw,32px);
-  font-weight:400;
+
+  font:
+    400 clamp(22px,2vw,31px)/1.15
+    Georgia,
+    "Times New Roman",
+    serif;
 }
+
+
+/* ============================================================
+   11. SUPPORTING IMAGE
+   LEBIH KECIL + MINIMALIS
+============================================================ */
+
+.support-media{
+  width:var(--support-media-width);
+  max-width:100%;
+
+  margin:
+    clamp(30px,3.5vw,48px)
+    auto;
+}
+
+.support-media img{
+  width:100%;
+  height:auto;
+
+  aspect-ratio:16 / 10;
+
+  object-fit:cover;
+
+  border-radius:3px;
+
+  background:#eef1f4;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.055);
+}
+
+
+/*
+  Alternatif untuk gambar yang benar-benar kecil.
+*/
+.support-media.small{
+  width:min(40vw,430px);
+}
+
+
+/* ============================================================
+   12. QUOTE
+============================================================ */
 
 blockquote{
-  margin:42px 0;
-  padding:24px 28px;
-  border-left:4px solid var(--gold);
-  background:var(--cream);
+  margin:
+    clamp(32px,3.5vw,46px)
+    0;
+
+  padding:
+    clamp(17px,1.8vw,24px)
+    clamp(18px,2.2vw,29px);
+
+  border-left:3px solid var(--bronze);
+
+  background:#f6f3ec;
+
   color:var(--navy);
-  font:italic clamp(20px,2vw,25px)/1.55 Georgia,"Times New Roman",serif;
+
+  font:
+    italic clamp(17px,1.5vw,24px)/1.55
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
-/* =========================
-   SUPPORTING GALLERY
-========================= */
-.gallery{
-  width:min(100%,680px);
-  margin:44px auto;
+
+/* ============================================================
+   13. SMALL SUPPORTING GALLERY
+============================================================ */
+
+.support-gallery{
+  width:min(50vw,560px);
+  max-width:100%;
+
+  margin:
+    clamp(35px,4vw,52px)
+    auto;
+
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:clamp(9px,1vw,13px);
 }
 
-.gallery figure{
+.support-gallery figure{
   margin:0;
 }
 
-.gallery img{
+.support-gallery img{
   width:100%;
-  aspect-ratio:16/10;
+
+  aspect-ratio:16 / 10;
+
   object-fit:cover;
-  border-radius:5px;
+
+  border-radius:3px;
+
   background:#eef1f4;
 }
 
-.gallery figcaption{
-  margin-top:8px;
+.support-gallery figcaption{
+  margin-top:6px;
+
   color:#8a95a1;
-  font-size:11px;
-  line-height:1.5;
+
+  font-size:clamp(8px,.48vw,10px);
+
+  line-height:1.45;
 }
 
+
+/* ============================================================
+   14. DIVIDER
+============================================================ */
+
 .article-divider{
-  width:min(100%,var(--article-max));
+  width:100%;
+
   height:1px;
-  margin:64px auto 0;
+
+  margin:
+    clamp(48px,5vw,68px)
+    auto
+    0;
+
   background:var(--line);
 }
 
-/* =========================
-   RELATED
-========================= */
+
+/* ============================================================
+   15. RELATED ARTICLES
+============================================================ */
+
 .related{
-  padding:68px 24px 82px;
-  background:var(--soft);
+  padding:
+    clamp(52px,6vw,80px)
+    var(--page-width)
+    clamp(62px,7vw,90px);
+
+  background:var(--paper);
 }
 
 .related-inner{
-  width:min(100%,var(--page-max));
-  margin:auto;
+  width:100%;
+  max-width:1180px;
+
+  margin-inline:auto;
 }
 
-.section-label{
-  margin-bottom:11px;
+.related-label{
+  margin-bottom:9px;
+
+  color:var(--bronze);
+
+  font-size:clamp(8px,.54vw,10px);
+
+  font-weight:800;
+
+  letter-spacing:.17em;
+
+  text-transform:uppercase;
 }
 
-.section-title{
-  margin:0 0 32px;
+.related-title{
+  margin:
+    0
+    0
+    clamp(22px,2.2vw,31px);
+
   color:var(--navy);
-  font:400 clamp(32px,3.2vw,46px)/1.1 Georgia,"Times New Roman",serif;
+
+  font:
+    400 clamp(28px,2.6vw,40px)/1.05
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
 .related-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:clamp(12px,1.5vw,22px);
 }
 
 .related-card{
   overflow:hidden;
+
   border:1px solid var(--line);
-  border-radius:6px;
+
+  border-radius:4px;
+
   background:#fff;
-  transition:transform .2s ease,box-shadow .2s ease;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
 }
 
 .related-card:hover{
   transform:translateY(-3px);
-  box-shadow:0 12px 28px rgba(8,47,95,.08);
+
+  box-shadow:
+    0 12px 28px
+    rgba(8,47,95,.08);
 }
 
 .related-card img{
   width:100%;
-  aspect-ratio:16/10;
+
+  aspect-ratio:16 / 9;
+
   object-fit:cover;
+
   background:#eef1f4;
 }
 
 .related-copy{
-  padding:18px 19px 21px;
+  padding:
+    clamp(13px,1.2vw,18px)
+    clamp(14px,1.35vw,20px)
+    clamp(16px,1.5vw,21px);
 }
 
-.related-copy small{
-  color:var(--gold);
-  font-size:10px;
+.related-category{
+  color:var(--bronze);
+
+  font-size:clamp(8px,.48vw,10px);
+
   font-weight:700;
-  letter-spacing:1.5px;
+
+  letter-spacing:.14em;
 }
 
-.related-copy h3{
-  margin:8px 0 0;
+.related-card h3{
+  margin:7px 0 0;
+
   color:var(--navy);
-  font:400 21px/1.28 Georgia,"Times New Roman",serif;
+
+  font:
+    400 clamp(16px,1vw,20px)/1.28
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
-/* =========================
-   FOOTER
-========================= */
+
+/* ============================================================
+   16. FOOTER
+============================================================ */
+
 .footer{
-  padding:34px 24px;
+  padding:
+    clamp(27px,3vw,38px)
+    var(--page-width);
+
   background:var(--navy-deep);
+
   color:#c5d0dc;
+
   text-align:center;
-  font-size:11px;
+
+  font-size:clamp(8px,.52vw,10px);
 }
 
-/* =========================
-   LOWER-PAGE MOTION ONLY
-   No animation on first paint.
-========================= */
-.reveal{
-  opacity:1;
-  transform:none;
+
+/* ============================================================
+   17. IMAGE ERROR
+   Tidak menampilkan broken image besar.
+============================================================ */
+
+.image-missing{
+  display:none !important;
 }
 
-.reveal.observe{
-  opacity:0;
-  transform:translateY(18px);
-  transition:opacity .55s ease,transform .55s ease;
-}
 
-.reveal.observe.visible{
-  opacity:1;
-  transform:none;
-}
+/* ============================================================
+   18. RESPONSIVE
+============================================================ */
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media(max-width:1050px){
-  .header-inner{
-    width:min(calc(100% - 32px),var(--page-max));
-  }
+@media(max-width:1000px){
 
-  .nav{
-    gap:18px;
-  }
-
-  .nav a{
-    font-size:11px;
-  }
-
-  .content-wrap{
-    width:min(calc(100% - 40px),var(--media-max));
-  }
-}
-
-@media(max-width:820px){
   :root{
-    --header-h:68px;
-  }
+    --page-width:92vw;
 
-  .header-inner{
-    min-height:68px;
-    width:calc(100% - 28px);
-    gap:18px;
-  }
+    --reading-width:min(76vw,700px);
 
-  .brand-mark{
-    width:38px;
-    height:38px;
-  }
+    --main-media-width:min(84vw,820px);
 
-  .brand-name{
-    font-size:18px;
-    letter-spacing:3px;
+    --support-media-width:min(58vw,560px);
   }
 
   .nav{
-    gap:13px;
-    overflow-x:auto;
-    scrollbar-width:none;
+    gap:clamp(10px,1.3vw,18px);
   }
 
-  .nav::-webkit-scrollbar{
+  .nav-youtube{
     display:none;
-  }
-
-  .nav a{
-    padding:24px 0 20px;
-    font-size:9px;
-  }
-
-  .nav .youtube{
-    display:none;
-  }
-
-  .article-hero{
-    padding-left:20px;
-    padding-right:20px;
-  }
-
-  .content-wrap{
-    width:calc(100% - 32px);
-  }
-
-  .related{
-    padding-left:20px;
-    padding-right:20px;
   }
 
   .related-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
   }
 }
 
-@media(max-width:620px){
+
+@media(max-width:700px){
+
+  :root{
+    --page-width:calc(100% - 30px);
+
+    --reading-width:100%;
+
+    --main-media-width:100%;
+
+    --support-media-width:min(82vw,520px);
+  }
+
+  .site-header{
+    height:64px;
+  }
+
   .header-inner{
-    width:calc(100% - 20px);
-  }
-
-  .brand{
-    gap:8px;
-  }
-
-  .brand-mark{
-    width:34px;
-    height:34px;
-    font-size:14px;
+    gap:10px;
   }
 
   .brand-name{
-    font-size:16px;
-    letter-spacing:2.5px;
+    font-size:15px;
   }
 
   .brand-sub{
-    font-size:6px;
-    letter-spacing:2.5px;
+    font-size:5px;
   }
 
   .nav{
-    gap:10px;
+    gap:11px;
   }
 
   .nav a{
@@ -573,149 +935,280 @@ blockquote{
   }
 
   .article-hero{
-    padding:44px 16px 42px;
+    padding-top:48px;
   }
 
-  .article-hero h1{
-    font-size:clamp(36px,10vw,54px);
-    letter-spacing:-1.4px;
+  .hero-content{
+    width:100%;
   }
 
-  .dek{
-    font-size:17px;
+  .article-title{
+    font-size:
+      clamp(35px,9vw,52px);
   }
 
-  .meta{
-    font-size:11px;
+  .article-dek{
+    font-size:15px;
+    line-height:1.65;
   }
 
-  .content-wrap{
-    width:calc(100% - 24px);
-    padding-top:28px;
-    padding-bottom:64px;
+  .article-content{
+    padding:
+      30px
+      15px
+      70px;
   }
 
-  .media.main-media img{
-    aspect-ratio:16/10;
+  .support-gallery{
+    width:min(82vw,500px);
+  }
+}
+
+
+@media(max-width:520px){
+
+  :root{
+    --page-width:calc(100% - 24px);
+
+    --support-media-width:100%;
   }
 
-  .article-body{
-    margin-top:34px;
+  .nav{
+    max-width:48vw;
+  }
+
+  .nav a:nth-child(n+3){
+    display:none;
+  }
+
+  .brand-mark{
+    width:34px;
+  }
+
+  .article-title{
+    font-size:
+      clamp(34px,10vw,46px);
   }
 
   .article-body p{
-    font-size:17px;
+    font-size:16px;
     line-height:1.82;
   }
 
   .article-body h2{
-    margin-top:44px;
+    font-size:29px;
   }
 
-  blockquote{
-    padding:20px 20px;
-    margin:36px 0;
-  }
+  /*
+    Pada layar kecil gallery berubah menjadi satu kolom.
+    Tetap kecil dan tidak memenuhi layar secara berlebihan.
+  */
+  .support-gallery{
+    width:min(88vw,430px);
 
-  .gallery{
     grid-template-columns:1fr;
-    gap:18px;
-    margin:38px auto;
-  }
 
-  .gallery img{
-    aspect-ratio:16/10;
+    gap:15px;
   }
 
   .related{
-    padding:54px 12px 62px;
+    padding-left:12px;
+    padding-right:12px;
   }
 
   .related-grid{
     grid-template-columns:1fr;
-    gap:16px;
-  }
-
-  .related-copy h3{
-    font-size:20px;
   }
 }
+
+
+/* ============================================================
+   19. REDUCE MOTION
+============================================================ */
 
 @media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{
-    animation:none!important;
-    transition:none!important;
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+
+    transition-duration:.01ms !important;
+
+    animation-duration:.01ms !important;
   }
 }
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
 <header class="site-header" id="siteHeader">
+
   <div class="header-inner">
 
-    <a class="brand" href="../index.html" aria-label="Mandala Channel">
+    <a
+      href="../index.html"
+      class="brand"
+      aria-label="Mandala Channel"
+    >
+
       <span class="brand-mark">✺</span>
-      <span>
+
+      <span class="brand-text">
         <span class="brand-name">MANDALA</span>
         <span class="brand-sub">CHANNEL</span>
       </span>
+
     </a>
 
-    <nav class="nav" aria-label="Navigasi utama">
-      <a href="../index.html">BERANDA</a>
-      <a href="artikel.html" class="active">ARTIKEL</a>
-      <a href="video.html">VIDEO</a>
-      <a href="playlist.html">PLAYLIST</a>
-      <a href="podcast.html">PODCAST</a>
-      <a href="tentang.html">TENTANG</a>
-      <a href="#" class="youtube">YOUTUBE ↗</a>
+
+    <nav
+      class="nav"
+      aria-label="Navigasi utama"
+    >
+
+      <a href="../index.html">
+        BERANDA
+      </a>
+
+      <a
+        href="artikel.html"
+        class="active"
+      >
+        ARTIKEL
+      </a>
+
+      <a href="video.html">
+        VIDEO
+      </a>
+
+      <a href="playlist.html">
+        PLAYLIST
+      </a>
+
+      <a href="podcast.html">
+        PODCAST
+      </a>
+
+      <a href="tentang-kami.html">
+        TENTANG
+      </a>
+
+      <a
+        href="#"
+        class="nav-youtube"
+        id="youtubeLink"
+      >
+        YOUTUBE ↗
+      </a>
+
     </nav>
 
   </div>
+
 </header>
+
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
 
 <main>
 
-  <!--
-    ============================================
-    AREA ARTIKEL
-    NANTI DATA INI BISA DIPINDAHKAN KE ADMIN/CMS
-    ============================================
-  -->
+
+  <!-- ==========================================================
+       ARTICLE HERO
+  =========================================================== -->
+
   <section class="article-hero">
-    <div class="hero-inner">
 
-      <div class="eyebrow">Dharma &amp; Ajaran</div>
+    <div class="hero-content">
 
-      <h1>Menjaga Jejak Dharma di Tengah Perubahan Zaman</h1>
-
-      <p class="dek">
-        Menelusuri cerita, wawasan dan perjalanan Nusantara melalui perspektif Mandala Channel.
-      </p>
-
-      <div class="meta">
-        <span>13 Agustus 2026</span>
-        <span class="dot">•</span>
-        <span>Redaksi Mandala</span>
-        <span class="dot">•</span>
-        <span>Mandala Channel</span>
+      <div class="eyebrow">
+        Dharma &amp; Ajaran
       </div>
 
-      <div class="actions">
-        <button class="action" id="copyLink">Salin tautan</button>
-        <button class="action" id="shareBtn">Bagikan</button>
+
+      <h1 class="article-title">
+        Menjaga Jejak Dharma di Tengah Perubahan Zaman
+      </h1>
+
+
+      <p class="article-dek">
+        Menelusuri cerita, wawasan dan perjalanan Nusantara
+        melalui perspektif Mandala Channel.
+      </p>
+
+
+      <div class="article-meta">
+
+        <span>
+          13 Agustus 2026
+        </span>
+
+        <span class="dot">•</span>
+
+        <span>
+          Redaksi Mandala
+        </span>
+
+        <span class="dot">•</span>
+
+        <span>
+          Mandala Channel
+        </span>
+
+      </div>
+
+
+      <div class="article-actions">
+
+        <button
+          type="button"
+          class="action-button"
+          id="copyLink"
+        >
+          Salin tautan
+        </button>
+
+        <button
+          type="button"
+          class="action-button"
+          id="shareBtn"
+        >
+          Bagikan
+        </button>
+
       </div>
 
     </div>
+
   </section>
 
-  <section class="content-wrap">
 
-    <!-- FOTO UTAMA -->
-    <figure class="media main-media">
+
+  <!-- ==========================================================
+       ARTICLE CONTENT
+  =========================================================== -->
+
+  <section class="article-content">
+
+
+    <!-- ========================================================
+         FOTO UTAMA
+    ========================================================= -->
+
+    <figure class="main-media">
+
       <img
         src="../assets/images/article-1.jpg"
         alt="Foto utama artikel"
@@ -723,28 +1216,50 @@ blockquote{
         height="860"
         fetchpriority="high"
         decoding="async"
-        onerror="this.closest('figure').classList.add('image-missing')">
+        onerror="this.closest('figure').classList.add('image-missing')"
+      >
+
       <figcaption class="caption">
-        Foto utama artikel — keterangan foto nantinya dapat dikelola dari admin.
+        Foto utama artikel — keterangan foto nantinya
+        dapat dikelola dari admin.
       </figcaption>
+
     </figure>
+
+
+
+    <!-- ========================================================
+         ISI ARTIKEL
+    ========================================================= -->
 
     <article class="article-body">
 
-      <p>
-        Perubahan zaman membawa banyak hal baru dalam kehidupan masyarakat. Namun,
-        di tengah perkembangan tersebut, nilai, pengetahuan dan warisan yang telah
-        membentuk perjalanan budaya tetap memiliki tempat penting untuk dirawat.
-      </p>
 
       <p>
-        Dharma tidak hanya hadir sebagai sebuah gagasan, tetapi juga dapat ditemukan
-        dalam cara manusia menjaga hubungan dengan sesama, alam, leluhur, tempat suci
-        dan tradisi yang diwariskan dari generasi ke generasi.
+        Perubahan zaman membawa banyak hal baru dalam kehidupan
+        masyarakat. Namun, di tengah perkembangan tersebut,
+        nilai, pengetahuan dan warisan yang telah membentuk
+        perjalanan budaya tetap memiliki tempat penting untuk
+        dirawat.
       </p>
 
-      <!-- FOTO PENDUKUNG 1: sengaja lebih kecil dari foto utama -->
-      <figure class="media medium">
+
+      <p>
+        Dharma tidak hanya hadir sebagai sebuah gagasan, tetapi
+        juga dapat ditemukan dalam cara manusia menjaga hubungan
+        dengan sesama, alam, leluhur, tempat suci dan tradisi
+        yang diwariskan dari generasi ke generasi.
+      </p>
+
+
+
+      <!-- ======================================================
+           FOTO PENDUKUNG 1
+           Dibuat lebih kecil dari foto utama.
+      ======================================================= -->
+
+      <figure class="support-media">
+
         <img
           src="../assets/images/article-1-support-1.jpg"
           alt="Foto pendukung artikel pertama"
@@ -752,29 +1267,48 @@ blockquote{
           height="875"
           loading="lazy"
           decoding="async"
-          onerror="this.closest('figure').classList.add('image-missing')">
+          onerror="this.closest('figure').classList.add('image-missing')"
+        >
+
         <figcaption class="caption">
-          Dokumentasi pendukung yang memperkuat cerita dalam artikel.
+          Dokumentasi pendukung yang memperkuat
+          cerita dalam artikel.
         </figcaption>
+
       </figure>
 
-      <p>
-        Karena itu, merawat jejak masa lalu bukan berarti menolak perubahan.
-        Justru dengan memahami akar kebudayaan, masyarakat dapat melihat perubahan
-        secara lebih jernih dan menentukan nilai apa yang layak untuk terus dibawa
-        ke masa depan.
-      </p>
 
-      <h2>Merawat warisan, memahami perubahan</h2>
 
       <p>
-        Setiap tempat menyimpan cerita. Sebuah bangunan, upacara, perjalanan seorang
-        tokoh, hingga kebiasaan sederhana masyarakat dapat menjadi bagian dari
-        perjalanan panjang sebuah peradaban.
+        Karena itu, merawat jejak masa lalu bukan berarti
+        menolak perubahan. Justru dengan memahami akar
+        kebudayaan, masyarakat dapat melihat perubahan secara
+        lebih jernih dan menentukan nilai apa yang layak untuk
+        terus dibawa ke masa depan.
       </p>
 
-      <!-- FOTO PENDUKUNG 2: lebih kecil -->
-      <figure class="media small">
+
+
+      <h2>
+        Merawat warisan, memahami perubahan
+      </h2>
+
+
+      <p>
+        Setiap tempat menyimpan cerita. Sebuah bangunan, upacara,
+        perjalanan seorang tokoh, hingga kebiasaan sederhana
+        masyarakat dapat menjadi bagian dari perjalanan panjang
+        sebuah peradaban.
+      </p>
+
+
+
+      <!-- ======================================================
+           FOTO PENDUKUNG 2
+      ======================================================= -->
+
+      <figure class="support-media small">
+
         <img
           src="../assets/images/article-1-support-2.jpg"
           alt="Foto pendukung artikel kedua"
@@ -782,40 +1316,59 @@ blockquote{
           height="750"
           loading="lazy"
           decoding="async"
-          onerror="this.closest('figure').classList.add('image-missing')">
+          onerror="this.closest('figure').classList.add('image-missing')"
+        >
+
         <figcaption class="caption">
-          Foto pendukung kedua — ukuran dibatasi agar halaman tetap ringan dan nyaman dibaca.
+          Dokumentasi visual yang mendukung pembahasan.
         </figcaption>
+
       </figure>
 
+
+
       <blockquote>
-        “Warisan tidak hanya tentang apa yang kita terima dari masa lalu,
-        tetapi juga tentang apa yang kita pilih untuk diteruskan.”
+        “Warisan tidak hanya tentang apa yang kita terima
+        dari masa lalu, tetapi juga tentang apa yang kita
+        pilih untuk diteruskan.”
       </blockquote>
 
-      <p>
-        Dari sinilah ruang editorial Mandala Channel dibangun: menjadi tempat untuk
-        membaca kembali cerita, melihat kebudayaan dengan perspektif yang lebih luas,
-        serta menghadirkan percakapan tentang kehidupan Hindu Nusantara secara
-        kontekstual dan relevan.
-      </p>
 
-      <h2>Cerita yang terus berjalan</h2>
 
       <p>
-        Perjalanan tersebut tidak berhenti pada satu generasi. Setiap orang memiliki
-        kesempatan untuk mengenal kembali cerita di sekitarnya, mendokumentasikan,
-        mempelajari dan membagikannya kepada generasi berikutnya.
+        Dari sinilah ruang editorial Mandala Channel dibangun:
+        menjadi tempat untuk membaca kembali cerita, melihat
+        kebudayaan dengan perspektif yang lebih luas, serta
+        menghadirkan percakapan tentang kehidupan Hindu
+        Nusantara secara kontekstual dan relevan.
       </p>
 
-      <!--
-        GALERI FOTO
-        Admin nantinya dapat menambah/mengurangi jumlah foto.
-        Layout otomatis menyesuaikan layar.
-      -->
-      <div class="gallery">
+
+
+      <h2>
+        Cerita yang terus berjalan
+      </h2>
+
+
+      <p>
+        Perjalanan tersebut tidak berhenti pada satu generasi.
+        Setiap orang memiliki kesempatan untuk mengenal kembali
+        cerita di sekitarnya, mendokumentasikan, mempelajari
+        dan membagikannya kepada generasi berikutnya.
+      </p>
+
+
+
+      <!-- ======================================================
+           GALERI PENDUKUNG
+           Sengaja compact.
+      ======================================================= -->
+
+      <div class="support-gallery">
+
 
         <figure>
+
           <img
             src="../assets/images/article-1-gallery-1.jpg"
             alt="Galeri artikel pertama"
@@ -823,13 +1376,18 @@ blockquote{
             height="750"
             loading="lazy"
             decoding="async"
-            onerror="this.closest('figure').classList.add('image-missing')">
+            onerror="this.closest('figure').classList.add('image-missing')"
+          >
+
           <figcaption>
             Dokumentasi perjalanan dan kebudayaan Nusantara.
           </figcaption>
+
         </figure>
 
+
         <figure>
+
           <img
             src="../assets/images/article-1-gallery-2.jpg"
             alt="Galeri artikel kedua"
@@ -837,36 +1395,62 @@ blockquote{
             height="750"
             loading="lazy"
             decoding="async"
-            onerror="this.closest('figure').classList.add('image-missing')">
+            onerror="this.closest('figure').classList.add('image-missing')"
+          >
+
           <figcaption>
             Ruang, tempat dan cerita yang terus hidup.
           </figcaption>
+
         </figure>
+
 
       </div>
 
+
+
       <p>
-        Dengan dokumentasi yang baik, cerita-cerita tersebut tidak hanya menjadi
-        catatan masa lalu. Ia dapat menjadi jembatan untuk memahami identitas,
-        kebudayaan dan perjalanan masyarakat pada masa kini.
+        Dengan dokumentasi yang baik, cerita-cerita tersebut
+        tidak hanya menjadi catatan masa lalu. Ia dapat menjadi
+        jembatan untuk memahami identitas, kebudayaan dan
+        perjalanan masyarakat pada masa kini.
       </p>
 
+
       <div class="article-divider"></div>
+
 
     </article>
 
   </section>
 
-  <!-- ARTIKEL TERKAIT -->
+
+
+  <!-- ==========================================================
+       ARTIKEL TERKAIT
+  =========================================================== -->
+
   <section class="related">
+
     <div class="related-inner">
 
-      <div class="section-label">Bacaan berikutnya</div>
-      <h2 class="section-title">Artikel terkait</h2>
+      <div class="related-label">
+        Bacaan berikutnya
+      </div>
+
+      <h2 class="related-title">
+        Artikel terkait
+      </h2>
+
 
       <div class="related-grid">
 
-        <a href="artikel-detail.html?slug=jejak-hindu-jawa" class="related-card">
+
+        <a
+          href="artikel-detail.html?slug=jejak-hindu-jawa"
+          class="related-card"
+        >
+
           <img
             src="../assets/images/article-2.jpg"
             alt="Mengenal Kembali Jejak Hindu Jawa"
@@ -874,14 +1458,31 @@ blockquote{
             height="625"
             loading="lazy"
             decoding="async"
-            onerror="this.closest('.related-card').classList.add('image-missing')">
+            onerror="this.closest('.related-card').classList.add('image-missing')"
+          >
+
           <div class="related-copy">
-            <small>TRADISI &amp; BUDAYA</small>
-            <h3>Mengenal Kembali Jejak Hindu Jawa di Nusantara</h3>
+
+            <div class="related-category">
+              TRADISI &amp; BUDAYA
+            </div>
+
+            <h3>
+              Mengenal Kembali Jejak Hindu Jawa
+              di Nusantara
+            </h3>
+
           </div>
+
         </a>
 
-        <a href="artikel-detail.html?slug=tokoh-hindu" class="related-card">
+
+
+        <a
+          href="artikel-detail.html?slug=tokoh-hindu"
+          class="related-card"
+        >
+
           <img
             src="../assets/images/article-3.jpg"
             alt="Ketika Tokoh Menjadi Jembatan Pengetahuan"
@@ -889,14 +1490,30 @@ blockquote{
             height="625"
             loading="lazy"
             decoding="async"
-            onerror="this.closest('.related-card').classList.add('image-missing')">
+            onerror="this.closest('.related-card').classList.add('image-missing')"
+          >
+
           <div class="related-copy">
-            <small>TOKOH HINDU</small>
-            <h3>Ketika Tokoh Menjadi Jembatan Pengetahuan</h3>
+
+            <div class="related-category">
+              TOKOH HINDU
+            </div>
+
+            <h3>
+              Ketika Tokoh Menjadi Jembatan Pengetahuan
+            </h3>
+
           </div>
+
         </a>
 
-        <a href="artikel-detail.html?slug=tradisi-masa-lalu" class="related-card">
+
+
+        <a
+          href="artikel-detail.html?slug=tradisi-masa-lalu"
+          class="related-card"
+        >
+
           <img
             src="../assets/images/article-4.jpg"
             alt="Merawat Tradisi"
@@ -904,80 +1521,300 @@ blockquote{
             height="625"
             loading="lazy"
             decoding="async"
-            onerror="this.closest('.related-card').classList.add('image-missing')">
+            onerror="this.closest('.related-card').classList.add('image-missing')"
+          >
+
           <div class="related-copy">
-            <small>TRADISI &amp; BUDAYA</small>
-            <h3>Merawat Tradisi Bukan Sekadar Mengulang Masa Lalu</h3>
+
+            <div class="related-category">
+              TRADISI &amp; BUDAYA
+            </div>
+
+            <h3>
+              Merawat Tradisi Bukan Sekadar
+              Mengulang Masa Lalu
+            </h3>
+
           </div>
+
         </a>
 
+
       </div>
+
     </div>
+
   </section>
 
 </main>
+
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
 
 <footer class="footer">
   © 2026 Mandala Channel
 </footer>
 
+
+
 <script>
-/* ==========================================
-   HEADER
-========================================== */
-const header = document.getElementById('siteHeader');
 
-function updateHeader(){
+/* ============================================================
+   HEADER SCROLL
+============================================================ */
+
+(function(){
+
+  const header =
+    document.getElementById('siteHeader');
+
   if(!header) return;
-  header.style.boxShadow = window.scrollY > 12
-    ? '0 5px 24px rgba(8,47,95,.08)'
-    : 'none';
-}
 
-window.addEventListener('scroll', updateHeader, {passive:true});
-updateHeader();
+  function updateHeader(){
 
-/* ==========================================
-   SHARE / COPY
-========================================== */
-document.getElementById('copyLink')?.addEventListener('click', async ()=>{
-  const btn = document.getElementById('copyLink');
+    if(window.scrollY > 12){
 
-  try{
-    await navigator.clipboard.writeText(window.location.href);
-    const old = btn.textContent;
-    btn.textContent = 'Tautan tersalin ✓';
-    setTimeout(()=>btn.textContent = old, 1600);
-  }catch(e){
-    alert('Tautan: ' + window.location.href);
-  }
-});
+      header.classList.add('scrolled');
 
-document.getElementById('shareBtn')?.addEventListener('click', async ()=>{
-  if(navigator.share){
-    try{
-      await navigator.share({
-        title:document.title,
-        url:window.location.href
-      });
-    }catch(e){}
-  }else{
-    try{
-      await navigator.clipboard.writeText(window.location.href);
-      alert('Tautan artikel berhasil disalin.');
-    }catch(e){
-      alert(window.location.href);
+    }else{
+
+      header.classList.remove('scrolled');
+
     }
-  }
-});
 
-/*
-  CATATAN:
-  Tidak ada lagi fallback ke Unsplash/external image.
-  Ini sengaja supaya halaman tidak terus menunggu koneksi
-  eksternal ketika gambar lokal belum tersedia.
-*/
+  }
+
+  window.addEventListener(
+    'scroll',
+    updateHeader,
+    {passive:true}
+  );
+
+  updateHeader();
+
+})();
+
+
+
+/* ============================================================
+   COPY LINK
+============================================================ */
+
+(function(){
+
+  const button =
+    document.getElementById('copyLink');
+
+  if(!button) return;
+
+  button.addEventListener(
+    'click',
+    async function(){
+
+      const original =
+        button.textContent;
+
+      /*
+        Clipboard API.
+        Tidak membuat request internet.
+      */
+
+      try{
+
+        await navigator.clipboard.writeText(
+          window.location.href
+        );
+
+        button.textContent =
+          'Tautan tersalin ✓';
+
+      }catch(error){
+
+        /*
+          Fallback tanpa internet.
+        */
+
+        const textarea =
+          document.createElement('textarea');
+
+        textarea.value =
+          window.location.href;
+
+        textarea.style.position =
+          'fixed';
+
+        textarea.style.opacity =
+          '0';
+
+        document.body.appendChild(
+          textarea
+        );
+
+        textarea.select();
+
+        try{
+          document.execCommand('copy');
+
+          button.textContent =
+            'Tautan tersalin ✓';
+
+        }catch(copyError){
+
+          button.textContent =
+            'Salin gagal';
+
+        }
+
+        document.body.removeChild(
+          textarea
+        );
+      }
+
+      setTimeout(
+        function(){
+          button.textContent =
+            original;
+        },
+        1600
+      );
+
+    }
+  );
+
+})();
+
+
+
+/* ============================================================
+   SHARE
+============================================================ */
+
+(function(){
+
+  const button =
+    document.getElementById('shareBtn');
+
+  if(!button) return;
+
+  button.addEventListener(
+    'click',
+    async function(){
+
+      /*
+        Web Share API bersifat lokal/browser.
+        Tidak memuat resource eksternal.
+      */
+
+      if(
+        typeof navigator.share === 'function'
+      ){
+
+        try{
+
+          await navigator.share({
+
+            title:
+              document.title,
+
+            text:
+              'Baca artikel Mandala Channel',
+
+            url:
+              window.location.href
+
+          });
+
+        }catch(error){
+
+          /*
+            User membatalkan share.
+            Tidak perlu melakukan apa-apa.
+          */
+
+        }
+
+        return;
+      }
+
+
+      /*
+        Jika browser tidak mendukung share,
+        gunakan copy link.
+      */
+
+      try{
+
+        await navigator.clipboard.writeText(
+          window.location.href
+        );
+
+        const old =
+          button.textContent;
+
+        button.textContent =
+          'Tautan tersalin ✓';
+
+        setTimeout(
+          function(){
+            button.textContent =
+              old;
+          },
+          1600
+        );
+
+      }catch(error){
+
+        /*
+          Tidak ada alert atau popup internet.
+        */
+
+      }
+
+    }
+  );
+
+})();
+
+
+
+/* ============================================================
+   YOUTUBE
+   ============================================================
+
+   Sengaja tidak diarahkan ke URL eksternal di sini.
+
+   Nanti ketika CMS sudah siap, link YouTube bisa dimasukkan
+   dari database/settings.
+============================================================ */
+
+(function(){
+
+  const youtube =
+    document.getElementById('youtubeLink');
+
+  if(!youtube) return;
+
+  youtube.addEventListener(
+    'click',
+    function(event){
+
+      /*
+        Untuk sekarang tombol tidak membuka internet.
+        Supaya preview lokal tidak meminta akses jaringan.
+      */
+
+      event.preventDefault();
+
+    }
+  );
+
+})();
+
 </script>
+
 
 </body>
 </html>
