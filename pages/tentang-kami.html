@@ -1,1 +1,2330 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tentang Mandala</title><link rel="stylesheet" href="../css/main.css"></head><body><header><div class="w nav"><a class="logo" href="../index.html"><div class="mark">✺</div><div><b>MANDALA</b><small>CHANNEL</small></div></a></div></header><section class="page"><div class="w"><div class="k">Tentang Mandala</div><h1>Media yang tumbuh dari cerita.</h1><p>Mandala Channel menghadirkan ruang untuk cerita Hindu, tokoh, dharma, budaya dan jejak Nusantara dengan pendekatan editorial modern.</p></div></section><main class="article"><div class="prose"><p>Video tetap penting, tetapi cerita tidak berhenti pada video. Website menghubungkan artikel, foto, video, playlist dan podcast dalam satu pengalaman.</p><h2>Nusantara sebagai ruang cerita</h2><p>Dari tradisi hingga perjalanan, dari tokoh hingga kabar umat, Mandala ingin mendokumentasikan cerita yang layak diingat.</p></div></main><footer><div class="w"><div class="copy">© 2026 Mandala Channel</div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Tentang Mandala Channel"
+  >
+
+  <title>Tentang Kami — Mandala</title>
+
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #ffffff;
+      color: #172536;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
+
+    :root {
+      --navy: #082d56;
+      --navy-deep: #061f3c;
+      --ink: #172536;
+      --muted: #718091;
+      --paper: #f7f6f1;
+      --white: #ffffff;
+      --line: #e3e7eb;
+      --bronze: #9b7837;
+
+      --page-width: 94vw;
+      --content-width: 1180px;
+    }
+
+
+    /* =========================================================
+       GLOBAL WIDTH
+    ========================================================= */
+
+    .page-width {
+      width: var(--page-width);
+      margin-inline: auto;
+    }
+
+    .content-width {
+      width: min(var(--page-width), var(--content-width));
+      margin-inline: auto;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+    ========================================================= */
+
+    .topbar {
+      height: 34px;
+      background: var(--navy-deep);
+      color: #dbe4ed;
+      font-size: clamp(10px, 0.7vw, 13px);
+    }
+
+    .topbar-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-inline: clamp(2px, 1vw, 18px);
+    }
+
+    .topbar-left,
+    .topbar-right {
+      white-space: nowrap;
+    }
+
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      height: 78px;
+
+      background: rgba(255, 255, 255, 0.97);
+      border-bottom: 1px solid rgba(8, 45, 86, 0.08);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      transition:
+        height 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .site-header.scrolled {
+      height: 62px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 7px 24px rgba(6, 31, 60, 0.10);
+    }
+
+    .nav {
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: clamp(15px, 2vw, 35px);
+    }
+
+
+    /* =========================================================
+       LOGO
+    ========================================================= */
+
+    .brand {
+      flex: 0 0 auto;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      color: var(--navy);
+    }
+
+    .brand-mark {
+      width: clamp(34px, 2.8vw, 43px);
+      height: clamp(34px, 2.8vw, 43px);
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--bronze);
+      border-radius: 50%;
+
+      color: var(--bronze);
+      font-size: clamp(15px, 1.1vw, 19px);
+    }
+
+    .brand-name {
+      display: block;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(16px, 1.2vw, 22px);
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      line-height: 1;
+    }
+
+    .brand-subtitle {
+      display: block;
+      margin-top: 4px;
+
+      color: #8794a0;
+
+      font-size: clamp(7px, 0.5vw, 9px);
+      letter-spacing: 0.28em;
+    }
+
+
+    /* =========================================================
+       DESKTOP NAV
+    ========================================================= */
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+
+      gap: clamp(16px, 1.9vw, 32px);
+
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+
+      padding: 29px 0;
+
+      color: #526170;
+
+      font-size: clamp(10px, 0.76vw, 14px);
+      white-space: nowrap;
+
+      transition: color 0.2s ease;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 15px;
+
+      height: 2px;
+
+      background: var(--bronze);
+
+      transform: scaleX(0);
+      transform-origin: center;
+
+      transition: transform 0.2s ease;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active {
+      color: var(--navy);
+    }
+
+    .desktop-nav a:hover::after,
+    .desktop-nav a.active::after {
+      transform: scaleX(1);
+    }
+
+    .site-header.scrolled .desktop-nav a {
+      padding: 22px 0;
+    }
+
+    .site-header.scrolled .desktop-nav a::after {
+      bottom: 11px;
+    }
+
+
+    /* =========================================================
+       YOUTUBE BUTTON
+    ========================================================= */
+
+    .youtube-button {
+      flex: 0 0 auto;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 38px;
+      padding: 0 16px;
+
+      border-radius: 3px;
+
+      background: var(--navy);
+      color: #ffffff;
+
+      font-size: clamp(10px, 0.67vw, 12px);
+
+      white-space: nowrap;
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .youtube-button:hover {
+      background: var(--navy-deep);
+      transform: translateY(-1px);
+    }
+
+
+    /* =========================================================
+       MOBILE MENU BUTTON
+    ========================================================= */
+
+    .menu-button {
+      display: none;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid var(--line);
+      background: #ffffff;
+
+      cursor: pointer;
+    }
+
+    .menu-lines {
+      width: 18px;
+      margin: auto;
+    }
+
+    .menu-lines span {
+      display: block;
+
+      height: 1px;
+
+      margin: 4px 0;
+
+      background: var(--navy);
+    }
+
+
+    /* =========================================================
+       MOBILE NAV
+    ========================================================= */
+
+    .mobile-menu {
+      display: none;
+
+      position: fixed;
+      z-index: 999;
+
+      top: 100px;
+      left: 14px;
+      right: 14px;
+
+      padding: 8px;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+
+      box-shadow: 0 15px 40px rgba(6, 31, 60, 0.12);
+    }
+
+    .site-header.scrolled + .mobile-menu {
+      top: 72px;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+
+      padding: 14px;
+
+      color: var(--navy);
+
+      font-size: 12px;
+
+      border-bottom: 1px solid #eef0f2;
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: 0;
+    }
+
+
+    /* =========================================================
+       LOADING
+    ========================================================= */
+
+    .page-loading {
+      min-height: 70vh;
+
+      display: grid;
+      place-items: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .page-loading-inner {
+      text-align: center;
+    }
+
+    .loading-symbol {
+      width: 38px;
+      height: 38px;
+
+      margin: 0 auto 18px;
+
+      border: 1px solid var(--line);
+      border-top-color: var(--bronze);
+
+      border-radius: 50%;
+
+      animation: loadingSpin 0.9s linear infinite;
+    }
+
+    @keyframes loadingSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+    /* =========================================================
+       ERROR
+    ========================================================= */
+
+    .page-error {
+      min-height: 60vh;
+
+      display: none;
+      place-items: center;
+
+      padding: 40px 20px;
+
+      text-align: center;
+    }
+
+    .page-error.show {
+      display: grid;
+    }
+
+    .error-inner {
+      max-width: 520px;
+    }
+
+    .error-inner h2 {
+      margin-bottom: 12px;
+
+      color: var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    .error-inner p {
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    /* =========================================================
+       MAIN CONTENT
+    ========================================================= */
+
+    #pageContent {
+      display: none;
+    }
+
+    #pageContent.ready {
+      display: block;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      position: relative;
+
+      min-height: clamp(470px, 58vh, 680px);
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          115deg,
+          #f7f8f9 0%,
+          #ffffff 54%,
+          #f0f3f5 100%
+        );
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: clamp(280px, 34vw, 540px);
+      height: clamp(280px, 34vw, 540px);
+
+      right: clamp(-170px, -9vw, -70px);
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: 1px solid rgba(155, 120, 55, 0.20);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: "";
+
+      position: absolute;
+
+      width: clamp(180px, 22vw, 340px);
+      height: clamp(180px, 22vw, 340px);
+
+      right: clamp(-70px, -3vw, -20px);
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: 1px solid rgba(155, 120, 55, 0.13);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+
+      width: min(var(--page-width), var(--content-width));
+
+      padding: clamp(70px, 8vw, 110px) 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 16px;
+
+      color: var(--bronze);
+
+      font-size: clamp(10px, 0.7vw, 13px);
+      font-weight: 600;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      max-width: 900px;
+
+      margin-bottom: 25px;
+
+      color: var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(46px, 6.2vw, 88px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-title .accent {
+      color: var(--bronze);
+    }
+
+    .hero-description {
+      max-width: 720px;
+
+      color: #687888;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(16px, 1.12vw, 20px);
+      line-height: 1.8;
+    }
+
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
+
+    .intro {
+      padding: clamp(70px, 8vw, 115px) 0;
+      background: #ffffff;
+    }
+
+    .intro-grid {
+      width: min(var(--page-width), var(--content-width));
+
+      margin-inline: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 0.8fr)
+        minmax(0, 1.2fr);
+
+      gap: clamp(40px, 8vw, 120px);
+
+      align-items: start;
+    }
+
+    .section-label {
+      color: var(--bronze);
+
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .intro-title {
+      margin-top: 9px;
+
+      color: var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(32px, 3.3vw, 52px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+    }
+
+    .intro-content {
+      color: #657484;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(15px, 1vw, 18px);
+      line-height: 1.9;
+    }
+
+    .intro-content p {
+      margin-bottom: 20px;
+    }
+
+    .intro-content p:last-child {
+      margin-bottom: 0;
+    }
+
+
+    /* =========================================================
+       MANIFESTO
+    ========================================================= */
+
+    .manifesto {
+      padding: clamp(65px, 8vw, 110px) 0;
+      background: var(--paper);
+    }
+
+    .manifesto-inner {
+      width: min(var(--page-width), 980px);
+
+      margin-inline: auto;
+
+      text-align: center;
+    }
+
+    .manifesto-mark {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      margin: 0 auto 24px;
+
+      border: 1px solid var(--bronze);
+      border-radius: 50%;
+
+      color: var(--bronze);
+
+      font-size: 18px;
+    }
+
+    .manifesto-text {
+      color: var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(25px, 3vw, 44px);
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .manifesto-credit {
+      display: block;
+
+      margin-top: 25px;
+
+      color: #7d8994;
+
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       VALUES
+    ========================================================= */
+
+    .values {
+      padding: clamp(70px, 8vw, 110px) 0;
+      background: #ffffff;
+    }
+
+    .values-head {
+      width: min(var(--page-width), var(--content-width));
+
+      margin: 0 auto 42px;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 30px;
+    }
+
+    .values-title {
+      margin-top: 8px;
+
+      color: var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(31px, 3vw, 47px);
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .values-description {
+      max-width: 390px;
+
+      color: #788592;
+
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .values-grid {
+      width: min(var(--page-width), var(--content-width));
+
+      margin-inline: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .value-card {
+      min-height: 260px;
+
+      padding: 30px 30px 35px;
+
+      border-right: 1px solid var(--line);
+    }
+
+    .value-card:last-child {
+      border-right: 0;
+    }
+
+    .value-number {
+      margin-bottom: 42px;
+
+      color: #bdc4ca;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 24px;
+    }
+
+    .value-title {
+      margin-bottom: 12px;
+
+      color: var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(21px, 1.7vw, 28px);
+      font-weight: 400;
+    }
+
+    .value-description {
+      max-width: 310px;
+
+      color: #71808d;
+
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+
+    /* =========================================================
+       EDITORIAL
+    ========================================================= */
+
+    .editorial {
+      padding: clamp(70px, 8vw, 110px) 0;
+
+      background: var(--navy);
+      color: #ffffff;
+    }
+
+    .editorial-grid {
+      width: min(var(--page-width), var(--content-width));
+
+      margin-inline: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+      gap: clamp(45px, 8vw, 120px);
+
+      align-items: center;
+    }
+
+    .editorial .section-label {
+      color: #c5a35f;
+    }
+
+    .editorial-title {
+      margin: 10px 0 22px;
+
+      color: #ffffff;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(34px, 3.7vw, 57px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+
+    .editorial-description {
+      max-width: 550px;
+
+      color: #c4cfda;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(15px, 1vw, 18px);
+      line-height: 1.85;
+    }
+
+    .editorial-list {
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .editorial-item {
+      display: grid;
+
+      grid-template-columns: 45px 1fr;
+
+      gap: 18px;
+
+      padding: 20px 0;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .editorial-number {
+      color: #c5a35f;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 18px;
+    }
+
+    .editorial-item-title {
+      margin-bottom: 5px;
+
+      color: #ffffff;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 19px;
+      font-weight: 400;
+    }
+
+    .editorial-item-description {
+      color: #aebdca;
+
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+
+    /* =========================================================
+       CLOSING
+    ========================================================= */
+
+    .closing {
+      padding: clamp(75px, 9vw, 120px) 0;
+
+      text-align: center;
+
+      background: #ffffff;
+    }
+
+    .closing-inner {
+      width: min(var(--page-width), 800px);
+
+      margin-inline: auto;
+    }
+
+    .closing-title {
+      margin: 8px 0 18px;
+
+      color: var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(34px, 4vw, 57px);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+    }
+
+    .closing-description {
+      max-width: 610px;
+
+      margin: 0 auto 30px;
+
+      color: #74828f;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(15px, 1vw, 18px);
+      line-height: 1.8;
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 45px;
+
+      padding: 0 23px;
+
+      border-radius: 3px;
+
+      background: var(--navy);
+      color: #ffffff;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .contact-button:hover {
+      background: var(--navy-deep);
+      transform: translateY(-1px);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .footer {
+      padding: 30px 20px;
+
+      background: var(--navy-deep);
+      color: #c5d0dc;
+
+      text-align: center;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1050px) {
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .youtube-button {
+        margin-left: auto;
+      }
+
+    }
+
+
+    @media (max-width: 850px) {
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .values-head {
+        display: block;
+      }
+
+      .values-description {
+        margin-top: 15px;
+      }
+
+      .editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        min-height: auto;
+
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .value-card:last-child {
+        border-bottom: 0;
+      }
+
+      .value-number {
+        margin-bottom: 25px;
+      }
+
+    }
+
+
+    @media (max-width: 560px) {
+
+      :root {
+        --page-width: calc(100% - 28px);
+      }
+
+      .topbar {
+        font-size: 10px;
+      }
+
+      .topbar-right {
+        display: none;
+      }
+
+      .site-header {
+        height: 66px;
+      }
+
+      .site-header.scrolled {
+        height: 58px;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .brand-name {
+        font-size: 15px;
+      }
+
+      .brand-subtitle {
+        font-size: 6px;
+      }
+
+      .youtube-button {
+        min-height: 34px;
+        padding-inline: 11px;
+        font-size: 9px;
+      }
+
+      .hero {
+        min-height: 470px;
+      }
+
+      .hero-inner {
+        width: calc(100% - 20px);
+      }
+
+      .hero-title {
+        font-size: clamp(45px, 13vw, 65px);
+      }
+
+      .hero-description {
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      .intro,
+      .values,
+      .editorial,
+      .closing {
+        padding-top: 60px;
+        padding-bottom: 70px;
+      }
+
+      .intro-grid,
+      .values-grid,
+      .editorial-grid {
+        width: calc(100% - 20px);
+      }
+
+      .intro-content {
+        font-size: 15px;
+      }
+
+      .manifesto {
+        padding: 60px 0;
+      }
+
+      .manifesto-text {
+        font-size: 25px;
+      }
+
+      .value-card {
+        padding: 25px 20px 30px;
+      }
+
+      .editorial {
+        padding-top: 60px;
+        padding-bottom: 70px;
+      }
+
+      .closing {
+        padding-top: 65px;
+        padding-bottom: 75px;
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       TOP BAR
+  ======================================================== -->
+
+  <div class="topbar">
+
+    <div class="page-width topbar-inner">
+
+      <span class="topbar-left">
+        MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA
+      </span>
+
+      <span class="topbar-right">
+        Instagram · YouTube · Kontak
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+
+  <header
+    class="site-header"
+    id="siteHeader"
+  >
+
+    <div class="page-width nav">
+
+
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="Mandala Beranda"
+      >
+
+        <span class="brand-mark">
+          ✺
+        </span>
+
+        <span>
+
+          <span class="brand-name">
+            MANDALA
+          </span>
+
+          <span class="brand-subtitle">
+            CHANNEL
+          </span>
+
+        </span>
+
+      </a>
+
+
+      <nav
+        class="desktop-nav"
+        aria-label="Navigasi utama"
+      >
+
+        <a href="index.html">
+          BERANDA
+        </a>
+
+        <a href="artikel.html">
+          ARTIKEL
+        </a>
+
+        <a href="video.html">
+          VIDEO
+        </a>
+
+        <a href="playlist.html">
+          PLAYLIST
+        </a>
+
+        <a href="podcast.html">
+          PODCAST
+        </a>
+
+        <a
+          href="tentang-kami.html"
+          class="active"
+        >
+          TENTANG
+        </a>
+
+      </nav>
+
+
+      <a
+        href="#"
+        class="youtube-button"
+        id="youtubeButton"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        YOUTUBE ↗
+      </a>
+
+
+      <button
+        type="button"
+        class="menu-button"
+        id="menuButton"
+        aria-label="Buka menu"
+        aria-expanded="false"
+      >
+
+        <span class="menu-lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+
+      </button>
+
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       MOBILE MENU
+  ======================================================== -->
+
+  <div
+    class="mobile-menu"
+    id="mobileMenu"
+  >
+
+    <a href="index.html">
+      BERANDA
+    </a>
+
+    <a href="artikel.html">
+      ARTIKEL
+    </a>
+
+    <a href="video.html">
+      VIDEO
+    </a>
+
+    <a href="playlist.html">
+      PLAYLIST
+    </a>
+
+    <a href="podcast.html">
+      PODCAST
+    </a>
+
+    <a href="tentang-kami.html">
+      TENTANG
+    </a>
+
+    <a href="kontak.html">
+      KONTAK
+    </a>
+
+  </div>
+
+
+  <!-- =======================================================
+       LOADING
+  ======================================================== -->
+
+  <div
+    class="page-loading"
+    id="pageLoading"
+  >
+
+    <div class="page-loading-inner">
+
+      <div class="loading-symbol"></div>
+
+      <div>
+        MEMUAT HALAMAN
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       ERROR
+  ======================================================== -->
+
+  <section
+    class="page-error"
+    id="pageError"
+  >
+
+    <div class="error-inner">
+
+      <h2>
+        Halaman belum dapat dimuat.
+      </h2>
+
+      <p>
+        Konten Tentang Kami tidak berhasil
+        diambil dari server. Silakan periksa
+        koneksi atau konfigurasi Supabase.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       MAIN CONTENT
+  ======================================================== -->
+
+  <main id="pageContent">
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+      <div class="hero-inner">
+
+        <div
+          class="eyebrow"
+          id="heroLabel"
+        ></div>
+
+        <h1
+          class="hero-title"
+          id="heroTitle"
+        ></h1>
+
+        <p
+          class="hero-description"
+          id="heroDescription"
+        ></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <section class="intro">
+
+      <div class="intro-grid">
+
+        <div>
+
+          <div
+            class="section-label"
+            id="introLabel"
+          ></div>
+
+          <h2
+            class="intro-title"
+            id="introTitle"
+          ></h2>
+
+        </div>
+
+
+        <div
+          class="intro-content"
+          id="introContent"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MANIFESTO
+    ====================================================== -->
+
+    <section class="manifesto">
+
+      <div class="manifesto-inner">
+
+        <div class="manifesto-mark">
+          ✺
+        </div>
+
+        <blockquote
+          class="manifesto-text"
+          id="manifestoText"
+        ></blockquote>
+
+        <cite class="manifesto-credit">
+          Mandala Channel
+        </cite>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VALUES
+    ====================================================== -->
+
+    <section class="values">
+
+      <div class="values-head">
+
+        <div>
+
+          <div
+            class="section-label"
+            id="valuesLabel"
+          ></div>
+
+          <h2
+            class="values-title"
+            id="valuesTitle"
+          ></h2>
+
+        </div>
+
+        <p
+          class="values-description"
+          id="valuesDescription"
+        ></p>
+
+      </div>
+
+
+      <div class="values-grid">
+
+
+        <article class="value-card">
+
+          <div class="value-number">
+            I
+          </div>
+
+          <h3
+            class="value-title"
+            id="value1Title"
+          ></h3>
+
+          <p
+            class="value-description"
+            id="value1Description"
+          ></p>
+
+        </article>
+
+
+        <article class="value-card">
+
+          <div class="value-number">
+            II
+          </div>
+
+          <h3
+            class="value-title"
+            id="value2Title"
+          ></h3>
+
+          <p
+            class="value-description"
+            id="value2Description"
+          ></p>
+
+        </article>
+
+
+        <article class="value-card">
+
+          <div class="value-number">
+            III
+          </div>
+
+          <h3
+            class="value-title"
+            id="value3Title"
+          ></h3>
+
+          <p
+            class="value-description"
+            id="value3Description"
+          ></p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         EDITORIAL
+    ====================================================== -->
+
+    <section class="editorial">
+
+      <div class="editorial-grid">
+
+
+        <div>
+
+          <div
+            class="section-label"
+            id="editorialLabel"
+          ></div>
+
+          <h2
+            class="editorial-title"
+            id="editorialTitle"
+          ></h2>
+
+          <p
+            class="editorial-description"
+            id="editorialDescription"
+          ></p>
+
+        </div>
+
+
+        <div class="editorial-list">
+
+
+          <article class="editorial-item">
+
+            <div class="editorial-number">
+              01
+            </div>
+
+            <div>
+
+              <h3
+                class="editorial-item-title"
+                id="editorial1Title"
+              ></h3>
+
+              <p
+                class="editorial-item-description"
+                id="editorial1Description"
+              ></p>
+
+            </div>
+
+          </article>
+
+
+          <article class="editorial-item">
+
+            <div class="editorial-number">
+              02
+            </div>
+
+            <div>
+
+              <h3
+                class="editorial-item-title"
+                id="editorial2Title"
+              ></h3>
+
+              <p
+                class="editorial-item-description"
+                id="editorial2Description"
+              ></p>
+
+            </div>
+
+          </article>
+
+
+          <article class="editorial-item">
+
+            <div class="editorial-number">
+              03
+            </div>
+
+            <div>
+
+              <h3
+                class="editorial-item-title"
+                id="editorial3Title"
+              ></h3>
+
+              <p
+                class="editorial-item-description"
+                id="editorial3Description"
+              ></p>
+
+            </div>
+
+          </article>
+
+
+          <article class="editorial-item">
+
+            <div class="editorial-number">
+              04
+            </div>
+
+            <div>
+
+              <h3
+                class="editorial-item-title"
+                id="editorial4Title"
+              ></h3>
+
+              <p
+                class="editorial-item-description"
+                id="editorial4Description"
+              ></p>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CLOSING
+    ====================================================== -->
+
+    <section class="closing">
+
+      <div class="closing-inner">
+
+        <div
+          class="section-label"
+          id="closingLabel"
+        ></div>
+
+        <h2
+          class="closing-title"
+          id="closingTitle"
+        ></h2>
+
+        <p
+          class="closing-description"
+          id="closingDescription"
+        ></p>
+
+        <a
+          href="kontak.html"
+          class="contact-button"
+        >
+          HUBUNGI MANDALA →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+      © 2026 Mandala Channel
+    </footer>
+
+
+  </main>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    /* =======================================================
+       SUPABASE
+    ======================================================== */
+
+    const SUPABASE_URL =
+      "https://roeckoabffhyctfkvbhw.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr";
+
+
+    /* =======================================================
+       CONFIG
+    ======================================================== */
+
+    const ABOUT_ENDPOINT =
+      SUPABASE_URL +
+      "/rest/v1/about_page?select=*";
+
+
+    /* =======================================================
+       ELEMENTS
+    ======================================================== */
+
+    const siteHeader =
+      document.getElementById("siteHeader");
+
+    const pageLoading =
+      document.getElementById("pageLoading");
+
+    const pageError =
+      document.getElementById("pageError");
+
+    const pageContent =
+      document.getElementById("pageContent");
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+    const youtubeButton =
+      document.getElementById("youtubeButton");
+
+
+    /* =======================================================
+       HEADER SCROLL
+    ======================================================== */
+
+    function updateHeader() {
+
+      if (window.scrollY > 20) {
+
+        siteHeader.classList.add("scrolled");
+
+      } else {
+
+        siteHeader.classList.remove("scrolled");
+
+      }
+
+    }
+
+    updateHeader();
+
+    window.addEventListener(
+      "scroll",
+      updateHeader,
+      {
+        passive: true
+      }
+    );
+
+
+    /* =======================================================
+       MOBILE MENU
+    ======================================================== */
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        const isOpen =
+          mobileMenu.classList.toggle("open");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          String(isOpen)
+        );
+
+      }
+    );
+
+
+    mobileMenu
+      .querySelectorAll("a")
+      .forEach(function (link) {
+
+        link.addEventListener(
+          "click",
+          function () {
+
+            mobileMenu.classList.remove("open");
+
+            menuButton.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =======================================================
+       YOUTUBE
+
+       Ganti URL ini nanti dengan channel Mandala.
+    ======================================================== */
+
+    const YOUTUBE_URL =
+      "https://youtube.com/";
+
+    youtubeButton.href =
+      YOUTUBE_URL;
+
+
+    /* =======================================================
+       TEXT ESCAPE
+    ======================================================== */
+
+    function escapeHTML(value) {
+
+      if (value === null || value === undefined) {
+        return "";
+      }
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =======================================================
+       SET TEXT
+    ======================================================== */
+
+    function setText(id, value) {
+
+      const element =
+        document.getElementById(id);
+
+      if (!element) {
+        return;
+      }
+
+      element.textContent =
+        value ?? "";
+
+    }
+
+
+    /* =======================================================
+       INTRO CONTENT
+
+       Supabase menyimpan intro_content
+       sebagai satu text panjang.
+
+       Setiap paragraf dipisahkan dengan
+       baris kosong.
+    ======================================================== */
+
+    function renderIntroContent(content) {
+
+      const element =
+        document.getElementById(
+          "introContent"
+        );
+
+      if (!element) {
+        return;
+      }
+
+      const text =
+        String(content || "")
+          .trim();
+
+      if (!text) {
+        element.innerHTML = "";
+        return;
+      }
+
+      const paragraphs =
+        text
+          .split(/\n\s*\n/)
+          .map(function (paragraph) {
+
+            return paragraph.trim();
+
+          })
+          .filter(Boolean);
+
+      element.innerHTML =
+        paragraphs
+          .map(function (paragraph) {
+
+            return (
+              "<p>" +
+              escapeHTML(paragraph)
+                .replace(/\n/g, "<br>") +
+              "</p>"
+            );
+
+          })
+          .join("");
+
+    }
+
+
+    /* =======================================================
+       RENDER DATA
+    ======================================================== */
+
+    function renderAboutPage(data) {
+
+      setText(
+        "heroLabel",
+        data.hero_label
+      );
+
+      setText(
+        "heroTitle",
+        data.hero_title
+      );
+
+      setText(
+        "heroDescription",
+        data.hero_description
+      );
+
+
+      setText(
+        "introLabel",
+        data.intro_label
+      );
+
+      setText(
+        "introTitle",
+        data.intro_title
+      );
+
+      renderIntroContent(
+        data.intro_content
+      );
+
+
+      setText(
+        "manifestoText",
+        data.manifesto
+      );
+
+
+      setText(
+        "valuesLabel",
+        data.values_label
+      );
+
+      setText(
+        "valuesTitle",
+        data.values_title
+      );
+
+      setText(
+        "valuesDescription",
+        data.values_description
+      );
+
+
+      setText(
+        "value1Title",
+        data.value_1_title
+      );
+
+      setText(
+        "value1Description",
+        data.value_1_description
+      );
+
+
+      setText(
+        "value2Title",
+        data.value_2_title
+      );
+
+      setText(
+        "value2Description",
+        data.value_2_description
+      );
+
+
+      setText(
+        "value3Title",
+        data.value_3_title
+      );
+
+      setText(
+        "value3Description",
+        data.value_3_description
+      );
+
+
+      setText(
+        "editorialLabel",
+        data.editorial_label
+      );
+
+      setText(
+        "editorialTitle",
+        data.editorial_title
+      );
+
+      setText(
+        "editorialDescription",
+        data.editorial_description
+      );
+
+
+      setText(
+        "editorial1Title",
+        data.editorial_1_title
+      );
+
+      setText(
+        "editorial1Description",
+        data.editorial_1_description
+      );
+
+
+      setText(
+        "editorial2Title",
+        data.editorial_2_title
+      );
+
+      setText(
+        "editorial2Description",
+        data.editorial_2_description
+      );
+
+
+      setText(
+        "editorial3Title",
+        data.editorial_3_title
+      );
+
+      setText(
+        "editorial3Description",
+        data.editorial_3_description
+      );
+
+
+      setText(
+        "editorial4Title",
+        data.editorial_4_title
+      );
+
+      setText(
+        "editorial4Description",
+        data.editorial_4_description
+      );
+
+
+      setText(
+        "closingLabel",
+        data.closing_label
+      );
+
+      setText(
+        "closingTitle",
+        data.closing_title
+      );
+
+      setText(
+        "closingDescription",
+        data.closing_description
+      );
+
+    }
+
+
+    /* =======================================================
+       LOAD FROM SUPABASE
+    ======================================================== */
+
+    async function loadAboutPage() {
+
+      try {
+
+        const response =
+          await fetch(
+            ABOUT_ENDPOINT,
+            {
+              method: "GET",
+
+              headers: {
+                "apikey": SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY,
+
+                "Content-Type":
+                  "application/json"
+              }
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Supabase HTTP " +
+            response.status
+          );
+
+        }
+
+
+        const rows =
+          await response.json();
+
+
+        if (
+          !Array.isArray(rows) ||
+          rows.length === 0
+        ) {
+
+          throw new Error(
+            "Data about_page kosong."
+          );
+
+        }
+
+
+        /*
+          Kita mengambil row pertama.
+
+          Saat Editor nanti dibuat,
+          sistem akan mempertahankan
+          satu row utama untuk halaman
+          Tentang Kami.
+        */
+
+        renderAboutPage(
+          rows[0]
+        );
+
+
+        pageLoading.style.display =
+          "none";
+
+        pageError.classList.remove(
+          "show"
+        );
+
+        pageContent.classList.add(
+          "ready"
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Gagal memuat about_page:",
+          error
+        );
+
+
+        pageLoading.style.display =
+          "none";
+
+        pageContent.classList.remove(
+          "ready"
+        );
+
+        pageError.classList.add(
+          "show"
+        );
+
+      }
+
+    }
+
+
+    /* =======================================================
+       START
+    ======================================================== */
+
+    loadAboutPage();
+
+  </script>
+
+</body>
+</html>
