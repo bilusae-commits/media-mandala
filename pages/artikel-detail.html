@@ -14,257 +14,159 @@
   --ink:#173b65;
   --muted:#6d7c8d;
   --line:#e4e8ed;
-  --paper:#fff;
   --soft:#f5f7f9;
   --cream:#f5f2eb;
-  --max:1180px;
-  --article:820px;
-  --header-h:76px;
+  --page:92vw;
+  --max-page:1440px;
+  --article:760px;
+  --hero-copy:980px;
+  --header-h:78px;
 }
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;
-  color:var(--ink);
-  background:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+  margin:0;color:var(--ink);background:#fff;
+  font-family:Arial,Helvetica,sans-serif;overflow-x:hidden;
 }
-img{display:block;max-width:100%}
+img{display:block;max-width:100%;height:auto}
 a{text-decoration:none;color:inherit}
 button{font:inherit}
 
+/* HEADER — tetap stabil saat zoom dan scroll */
 .site-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  height:var(--header-h);
-  background:rgba(255,255,255,.96);
+  position:sticky;top:0;z-index:1000;height:var(--header-h);
+  background:rgba(255,255,255,.97);
   border-bottom:1px solid var(--line);
   backdrop-filter:blur(12px);
   transition:box-shadow .25s ease,background .25s ease;
 }
-.site-header.scrolled{
-  box-shadow:0 5px 24px rgba(8,47,95,.08);
-  background:rgba(255,255,255,.98);
-}
+.site-header.scrolled{box-shadow:0 5px 24px rgba(8,47,95,.09)}
 .header-inner{
-  width:min(calc(100% - 48px),1450px);
-  height:100%;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:30px;
+  width:min(var(--page),var(--max-page));height:100%;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:28px;
 }
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-shrink:0;
-}
+.brand{display:flex;align-items:center;gap:12px;flex:0 0 auto}
 .brand-mark{
-  width:42px;height:42px;border:1px solid var(--gold);
-  border-radius:50%;display:grid;place-items:center;
-  color:var(--gold);font-size:17px;
+  width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-size:17px;
 }
-.brand-name{
-  font-family:Georgia,"Times New Roman",serif;
-  letter-spacing:4px;font-size:21px;color:var(--ink);
-}
-.brand-sub{
-  display:block;font-size:7px;letter-spacing:3px;color:#8a96a4;margin-top:-2px;
-}
-.nav{display:flex;align-items:center;gap:30px}
-.nav a{
-  font-size:12px;color:#59697b;padding:28px 0 24px;
-  border-bottom:2px solid transparent;
-}
+.brand-name{font-family:Georgia,"Times New Roman",serif;letter-spacing:4px;font-size:21px;color:var(--ink)}
+.brand-sub{display:block;font-size:7px;letter-spacing:3px;color:#8a96a4;margin-top:-2px}
+.nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,1.8vw,30px);min-width:0}
+.nav a{font-size:clamp(10px,.78vw,13px);color:#59697b;padding:28px 0 24px;border-bottom:2px solid transparent;white-space:nowrap}
 .nav a:hover,.nav a.active{color:var(--navy);border-color:var(--gold)}
-.youtube{
-  background:var(--navy);color:white!important;
-  padding:11px 16px!important;border-radius:4px;border:0!important;
-  font-weight:bold;font-size:11px!important;
-}
+.youtube{background:var(--navy);color:#fff!important;padding:11px 16px!important;border-radius:4px;border:0!important;font-weight:bold;font-size:11px!important}
 
+/* JUDUL ARTIKEL */
 .article-hero{
   background:linear-gradient(180deg,#f3f6f8 0%,#f8fafb 72%,#fff 100%);
-  padding:76px 24px 62px;
+  padding:clamp(58px,6vw,96px) 0 clamp(52px,5vw,72px);
 }
-.hero-inner{
-  width:min(100%,var(--article));
-  margin:auto;
-}
-.eyebrow{
-  color:var(--gold);font-size:12px;letter-spacing:3px;
-  font-weight:bold;text-transform:uppercase;margin-bottom:20px;
-}
+.hero-inner{width:min(var(--hero-copy),88vw);margin:auto}
+.eyebrow{color:var(--gold);font-size:clamp(10px,.8vw,13px);letter-spacing:3px;font-weight:bold;text-transform:uppercase;margin-bottom:18px}
 h1{
-  font-family:Georgia,"Times New Roman",serif;
-  font-weight:400;font-size:clamp(42px,5.2vw,78px);
-  line-height:.98;letter-spacing:-2.2px;
-  margin:0 0 24px;color:var(--navy);
+  font-family:Georgia,"Times New Roman",serif;font-weight:400;
+  font-size:clamp(42px,5.4vw,78px);line-height:1.02;letter-spacing:-2.4px;
+  margin:0 0 22px;color:var(--navy);max-width:1050px;
 }
-.dek{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(18px,1.8vw,24px);
-  line-height:1.55;color:#607087;margin:0 0 25px;
-}
-.meta{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  color:#7a8795;font-size:12px;
-}
+.dek{font-family:Georgia,"Times New Roman",serif;font-size:clamp(17px,1.55vw,23px);line-height:1.55;color:#607087;margin:0 0 24px;max-width:900px}
+.meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#7a8795;font-size:clamp(10px,.72vw,12px)}
 .meta .dot{color:#b8bec6}
-.actions{display:flex;gap:8px;margin-top:22px}
-.action{
-  border:1px solid #d8dee5;background:white;color:var(--navy);
-  border-radius:3px;padding:10px 14px;font-size:11px;cursor:pointer;
-}
+.actions{display:flex;gap:8px;margin-top:20px}
+.action{border:1px solid #d8dee5;background:#fff;color:var(--navy);border-radius:4px;padding:10px 14px;font-size:11px;cursor:pointer}
 .action:hover{border-color:var(--navy)}
 
-.content-wrap{
-  width:min(calc(100% - 48px),1100px);
-  margin:auto;
-  padding:48px 0 100px;
-}
-.hero-image{
-  width:100%;
-  max-height:660px;
-  object-fit:cover;
-  border-radius:5px;
-  box-shadow:0 18px 45px rgba(0,0,0,.09);
-}
-.caption{
-  font-size:11px;color:#8994a0;line-height:1.5;
-  margin-top:10px;
-}
+/* ISI — lebar sengaja terkontrol agar terasa seperti majalah */
+.content-wrap{width:min(92vw,1180px);margin:auto;padding:clamp(34px,4vw,56px) 0 90px}
+.media{margin:42px auto}
+.media img{width:100%;border-radius:6px;object-fit:cover;box-shadow:0 14px 36px rgba(0,0,0,.07)}
+.media.full{width:min(100%,1100px)}
+.media.medium{width:min(100%,700px)}
+.media.small{width:min(100%,560px)}
+.hero-image{width:100%;max-height:650px;object-fit:cover;border-radius:6px}
+.caption{font-size:11px;color:#8994a0;line-height:1.5;margin-top:9px}
 
-.article-body{
-  width:min(100%,var(--article));
-  margin:52px auto 0;
-}
-.article-body p{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(17px,1.35vw,20px);
-  line-height:1.9;color:#263f5c;margin:0 0 30px;
-}
-.article-body h2{
-  font-family:Georgia,"Times New Roman",serif;
-  font-weight:400;font-size:clamp(30px,3vw,44px);
-  line-height:1.15;color:var(--navy);margin:60px 0 22px;
-}
-.article-body h3{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:28px;font-weight:400;margin:48px 0 18px;
-}
-.article-body blockquote{
-  margin:48px 0;padding:28px 30px;
-  border-left:4px solid var(--gold);
-  background:var(--cream);
-  font:italic 25px/1.55 Georgia,"Times New Roman",serif;
-  color:var(--navy);
-}
+.article-body{width:min(92vw,var(--article));margin:54px auto 0}
+.article-body p{font-family:Georgia,"Times New Roman",serif;font-size:clamp(17px,1.25vw,20px);line-height:1.88;color:#263f5c;margin:0 0 28px}
+.article-body h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(30px,3vw,44px);line-height:1.15;color:var(--navy);margin:58px 0 20px}
+.article-body h3{font-family:Georgia,"Times New Roman",serif;font-size:28px;font-weight:400;margin:46px 0 18px}
+.article-body blockquote{margin:46px 0;padding:24px 26px;border-left:4px solid var(--gold);background:var(--cream);font:italic clamp(20px,2vw,25px)/1.55 Georgia,"Times New Roman",serif;color:var(--navy)}
 
-.media{
-  margin:48px auto;
-}
-.media img{
-  width:100%;border-radius:5px;
-  max-height:700px;object-fit:cover;
-}
-.media.small{width:min(100%,680px)}
-.media.medium{width:min(100%,900px)}
-.media.full{width:100%}
-
+/* GALERI: kecil, rapi, dan tidak memenuhi halaman */
 .gallery{
-  margin:52px 0;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  width:min(100%,820px);margin:48px auto;display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;
 }
-.gallery figure{margin:0}
-.gallery img{
-  width:100%;height:360px;object-fit:cover;border-radius:4px;
-}
+.gallery figure{margin:0;min-width:0}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:5px;box-shadow:0 10px 25px rgba(0,0,0,.06)}
 .gallery figcaption{font-size:11px;color:#8994a0;margin-top:8px;line-height:1.5}
+.article-divider{width:min(100%,760px);height:1px;background:var(--line);margin:62px auto 36px}
 
-.article-divider{
-  width:min(100%,var(--article));height:1px;background:var(--line);
-  margin:65px auto 40px;
-}
-
-.related{
-  background:var(--soft);
-  padding:70px 24px 85px;
-}
-.related-inner{width:min(100%,1180px);margin:auto}
-.section-label{
-  color:var(--gold);font-size:11px;font-weight:bold;
-  letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;
-}
-.section-title{
-  font:400 clamp(32px,3.4vw,48px)/1.1 Georgia,"Times New Roman",serif;
-  margin:0 0 34px;color:var(--navy);
-}
-.related-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
-}
-.related-card{
-  background:white;border:1px solid var(--line);
-  border-radius:5px;overflow:hidden;
-  transition:transform .25s ease,box-shadow .25s ease;
-}
+/* ARTIKEL TERKAIT */
+.related{background:var(--soft);padding:64px 0 78px}
+.related-inner{width:min(var(--page),var(--max-page));margin:auto}
+.section-label{color:var(--gold);font-size:clamp(10px,.75vw,12px);font-weight:bold;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.section-title{font:400 clamp(32px,3.3vw,48px)/1.1 Georgia,"Times New Roman",serif;margin:0 0 30px;color:var(--navy)}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
+.related-card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
 .related-card:hover{transform:translateY(-4px);box-shadow:0 14px 35px rgba(8,47,95,.08)}
 .related-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
-.related-copy{padding:20px}
-.related-copy small{
-  color:var(--gold);font-size:10px;font-weight:bold;letter-spacing:1.5px;
-}
-.related-copy h3{
-  font:400 22px/1.25 Georgia,"Times New Roman",serif;
-  color:var(--navy);margin:9px 0 0;
-}
+.related-copy{padding:18px}
+.related-copy small{color:var(--gold);font-size:10px;font-weight:bold;letter-spacing:1.5px}
+.related-copy h3{font:400 clamp(19px,1.6vw,23px)/1.25 Georgia,"Times New Roman",serif;color:var(--navy);margin:8px 0 0}
+.footer{background:var(--navy-deep);color:#c5d0dc;padding:34px 20px;text-align:center;font-size:11px}
 
-.footer{
-  background:var(--navy-deep);color:#c5d0dc;
-  padding:35px 24px;text-align:center;font-size:11px;
-}
+/* Reveal tidak mengubah layout saat halaman pertama kali dimuat */
+.reveal{opacity:1;transform:none}
+.reveal.animate-ready{opacity:0;transform:translateY(18px)}
+.reveal.visible{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
 
-.reveal{
-  opacity:0;transform:translateY(24px);
-  transition:opacity .7s ease,transform .7s ease;
-}
-.reveal.visible{opacity:1;transform:none}
-
-@media(max-width:900px){
-  :root{--header-h:68px}
-  .header-inner{width:min(calc(100% - 30px),1450px)}
-  .nav{gap:16px}
+@media(max-width:1050px){
+  :root{--header-h:70px}
+  .header-inner{width:94vw;gap:16px}
+  .nav{gap:14px}
   .nav a{font-size:10px}
   .youtube{display:none}
-  .content-wrap{width:min(calc(100% - 30px),1100px)}
-  .article-hero{padding:58px 15px 48px}
-  .related-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-inner{width:90vw}
+  h1{font-size:clamp(40px,6.5vw,68px)}
+  .content-wrap{width:92vw}
+  .related-inner{width:92vw}
 }
-
-@media(max-width:650px){
-  .brand-name{font-size:17px;letter-spacing:3px}
-  .brand-mark{width:36px;height:36px}
-  .nav{gap:12px}
+@media(max-width:760px){
+  :root{--header-h:66px}
+  .header-inner{width:calc(100% - 28px)}
+  .brand-mark{width:38px;height:38px}
+  .brand-name{font-size:18px;letter-spacing:3px}
+  .nav{gap:10px}
+  .nav a{font-size:9px;padding:23px 0 21px}
   .nav a:nth-child(4),.nav a:nth-child(5){display:none}
-  .nav a{font-size:9px}
-  h1{letter-spacing:-1.2px}
-  .content-wrap{width:calc(100% - 24px);padding-top:30px}
-  .hero-image{max-height:460px}
-  .article-body{margin-top:36px}
+  .article-hero{padding:48px 0 44px}
+  .hero-inner{width:calc(100% - 28px)}
+  h1{font-size:clamp(38px,10vw,56px);letter-spacing:-1.5px}
+  .dek{font-size:17px}
+  .content-wrap{width:calc(100% - 28px);padding-top:30px}
+  .article-body{width:min(100%,680px);margin-top:40px}
+  .media.full{width:100%}
+  .media.medium{width:min(100%,640px)}
+  .media.small{width:min(100%,520px)}
+  .gallery{width:100%;gap:12px}
+  .related{padding:52px 0 62px}
+  .related-inner{width:calc(100% - 28px)}
+  .related-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:540px){
+  .nav a:nth-child(3){display:none}
+  .nav a{font-size:8px}
+  .brand-sub{font-size:6px}
+  .article-hero{padding:42px 0 38px}
+  h1{font-size:clamp(35px,11vw,48px)}
   .article-body p{font-size:17px;line-height:1.8}
-  .media,.gallery{margin:36px 0}
+  .article-body h2{margin-top:48px}
+  .media{margin:34px auto}
   .gallery{grid-template-columns:1fr}
-  .gallery img{height:auto;aspect-ratio:16/10}
+  .gallery img{aspect-ratio:16/10}
   .related-grid{grid-template-columns:1fr}
 }
-
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -299,9 +201,9 @@ h1{
 <main>
   <section class="article-hero reveal">
     <div class="hero-inner">
-      <div class="eyebrow">Dharma &amp; Ajaran</div>
-      <h1>Menjaga Jejak Dharma di Tengah Perubahan Zaman</h1>
-      <p class="dek">Menelusuri cerita, wawasan dan perjalanan Nusantara melalui perspektif Mandala Channel.</p>
+      <div class="eyebrow" data-cms-field="category">Dharma &amp; Ajaran</div>
+      <h1 data-cms-field="title">Menjaga Jejak Dharma di Tengah Perubahan Zaman</h1>
+      <p class="dek" data-cms-field="excerpt">Menelusuri cerita, wawasan dan perjalanan Nusantara melalui perspektif Mandala Channel.</p>
 
       <div class="meta">
         <span>13 Agustus 2026</span>
@@ -342,7 +244,7 @@ h1{
         dan tradisi yang diwariskan dari generasi ke generasi.
       </p>
 
-      <!-- FOTO PENDUKUNG 1 -->
+      <!-- FOTO PENDUKUNG 1 — ukuran sedang agar tidak mendominasi artikel -->
       <figure class="media medium reveal">
         <img src="../assets/images/article-1-support-1.jpg"
              alt="Foto pendukung artikel"
@@ -365,7 +267,7 @@ h1{
         perjalanan panjang sebuah peradaban.
       </p>
 
-      <!-- FOTO PENDUKUNG 2 -->
+      <!-- FOTO PENDUKUNG 2 — lebih kecil untuk memberi ritme visual -->
       <figure class="media small reveal">
         <img src="../assets/images/article-1-support-2.jpg"
              alt="Foto pendukung kedua"
@@ -393,7 +295,7 @@ h1{
         mempelajari dan membagikannya kepada generasi berikutnya.
       </p>
 
-      <!-- GALERI FOTO: ADMIN BISA MENAMBAH/MENGURANGI FOTO -->
+      <!-- GALERI FOTO: ADMIN BISA MENAMBAH/MENGURANGI FOTO. Jumlah foto fleksibel. -->
       <div class="gallery reveal">
         <figure>
           <img src="../assets/images/article-1-gallery-1.jpg"
@@ -474,16 +376,21 @@ function updateHeader(){
 window.addEventListener('scroll', updateHeader, {passive:true});
 updateHeader();
 
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+const revealItems = [...document.querySelectorAll('.reveal')];
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  requestAnimationFrame(()=>{
+    revealItems.forEach(el=>el.classList.add('animate-ready'));
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:.06,rootMargin:'0px 0px -24px 0px'});
+    revealItems.forEach(el=>observer.observe(el));
   });
-},{threshold:.08, rootMargin:'0px 0px -30px 0px'});
-
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+}
 
 document.getElementById('copyLink')?.addEventListener('click', async ()=>{
   try{
