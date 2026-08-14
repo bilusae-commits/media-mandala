@@ -868,11 +868,11 @@ section{
 }
 
 /* =========================================================
-   FINAL PATCH — STABLE HERO + BLUE GRADIENT
+   FINAL PATCH — STABLE FIRST PAINT + LIGHT BLUE HERO
    ========================================================= */
 
-/* Prevent the hero from participating in any initial-load
-   reveal/transform. It must be stable from the first paint. */
+/* The hero is intentionally static on first paint.
+   No reveal, transform or animation is allowed here. */
 .hero,
 .hero.reveal,
 .hero.is-visible{
@@ -883,74 +883,61 @@ section{
   will-change:auto !important;
 }
 
-/* Blue editorial overlay: image remains clearly visible. */
+/* Soft blue gradient: the photo remains clearly visible. */
 .hero{
   background-color:#082d56 !important;
   background-image:
     linear-gradient(
       90deg,
-      rgba(4,31,61,.88) 0%,
-      rgba(5,39,76,.72) 34%,
-      rgba(8,45,86,.48) 60%,
-      rgba(8,45,86,.24) 82%,
-      rgba(8,45,86,.34) 100%
+      rgba(4,31,61,.58) 0%,
+      rgba(5,39,76,.46) 34%,
+      rgba(8,45,86,.30) 60%,
+      rgba(8,45,86,.16) 82%,
+      rgba(8,45,86,.22) 100%
     ),
     var(--hero-bg) !important;
   background-size:cover !important;
   background-position:center !important;
 }
 
-/* A second overlay is unnecessary and made the photo too dark. */
 .hero:after{
   display:none !important;
 }
 
-/* Main hero typography: white and clearly separated from photo. */
 .hero .k{
-  color:rgba(255,255,255,.82) !important;
+  color:rgba(255,255,255,.90) !important;
 }
 
 .hero h1{
   color:#fff !important;
-  text-shadow:0 3px 24px rgba(0,0,0,.30) !important;
+  text-shadow:0 3px 24px rgba(0,0,0,.28) !important;
 }
 
 .hero p{
-  color:rgba(255,255,255,.88) !important;
+  color:rgba(255,255,255,.92) !important;
 }
 
-/* Keep the three-image composition visible without making it
-   compete too strongly with the main title. */
 .hero .visual{
   opacity:.96;
 }
 
-/* No movement on first paint. Scroll-reveal remains active only
-   for sections below the hero. */
-body:not(.page-ready) .hero{
-  opacity:1 !important;
+/* Keep all hero children physically fixed. */
+.heroGrid,
+.heroCopy,
+.hero .visual{
   transform:none !important;
 }
 
-/* Prevent the header's height transition from animating during
-   the first browser paint. It is re-enabled after initialization. */
-body:not(.page-ready) #siteHeader{
-  transition:none !important;
-}
-
-/* The normal sticky-header transition is restored after boot. */
+/* IMPORTANT: do not switch header styles after a delayed
+   page-ready class. That delayed switch was able to create
+   the first-load up/down flicker. The sticky header transition
+   is now active continuously instead. */
+body:not(.page-ready) #siteHeader,
 body.page-ready #siteHeader{
   transition:
     height .28s ease,
     box-shadow .28s ease,
     background .28s ease;
-}
-
-/* Keep the top of the page visually stable while images/data load. */
-.heroGrid,
-.heroCopy,
-.hero .visual{
-  transform:none !important;
 }
 
 </style>
@@ -1286,26 +1273,6 @@ body.page-ready #siteHeader{
 </footer>
 
 <script>
-
-/* =========================================================
-   FIRST-PAINT STABILITY
-   ========================================================= */
-(function(){
-  const markReady=()=>{
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        document.body.classList.add('page-ready');
-      });
-    });
-  };
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded',markReady,{once:true});
-  }else{
-    markReady();
-  }
-})();
-
 
 /* =========================================================
    STICKY HEADER
