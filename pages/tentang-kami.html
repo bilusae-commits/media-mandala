@@ -6,43 +6,43 @@
 <meta charset="utf-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
->
-
-<meta
-    name="description"
-    content="Tentang Mandala Channel — Media Dharma, budaya dan Nusantara."
+  name="viewport"
+  content="width=device-width,initial-scale=1"
 >
 
 <title>Tentang Kami — Mandala Channel</title>
 
+<meta
+  name="description"
+  content="Tentang Mandala Channel, media dharma dan Nusantara."
+>
 
 <style>
 
 /* =========================================================
-   MANDALA CHANNEL
-   TENTANG KAMI
-   SISTEM FLUID — MENGIKUTI INDEX.HTML
+   MANDALA CHANNEL — TENTANG KAMI
+   FLUID SYSTEM — MENGIKUTI INDEX.HTML
    ========================================================= */
 
 :root{
+  --navy:#082d56;
+  --navy-deep:#061f3c;
+  --ink:#172536;
+  --muted:#718091;
 
-    --navy:#082c55;
-    --navy-2:#0d3d72;
+  --paper:#f7f6f1;
+  --white:#fff;
 
-    --gold:#c79a35;
+  --line:#e4e8ec;
 
-    --ink:#132033;
-    --muted:#6d7785;
+  --bronze:#a9823f;
+  --bronze-soft:#c2a66e;
 
-    --line:#e8edf2;
-
-    --paper:#fff;
-    --soft:#f6f8fa;
-
-    --max:1280px;
-
+  /*
+    SAMA DENGAN INDEX
+    Tidak menggunakan max-width tetap.
+  */
+  --max-fluid:94vw;
 }
 
 
@@ -51,110 +51,59 @@
    ========================================================= */
 
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
-    overflow-x:hidden;
+  scroll-behavior:smooth;
+
+  scroll-padding-top:78px;
+
+  overflow-x:hidden;
 }
 
 body{
-    margin:0;
+  margin:0;
 
-    background:var(--paper);
-    color:var(--ink);
+  overflow-x:hidden;
 
-    font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+  background:#fff;
 
-    line-height:1.55;
+  color:var(--ink);
 
-    overflow-x:hidden;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
 img{
-    display:block;
-    width:100%;
-    max-width:100%;
-    object-fit:cover;
+  display:block;
+  max-width:100%;
 }
 
 a{
-    text-decoration:none;
-    color:inherit;
+  color:inherit;
+  text-decoration:none;
 }
 
 button{
-    font:inherit;
+  font:inherit;
+  touch-action:manipulation;
 }
 
 
 /* =========================================================
-   GLOBAL CONTAINER
-   SAMA DENGAN INDEX
+   FLUID WIDTH
+   PERSIS SISTEM INDEX
    ========================================================= */
 
-.container{
+.w{
+  width:var(--max-fluid);
 
-    width:
-        min(
-            var(--max),
-            calc(100% - 48px)
-        );
+  max-width:none;
 
-    margin-inline:auto;
-
-}
-
-
-/* =========================================================
-   SERIF
-   ========================================================= */
-
-.serif{
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-}
-
-
-/* =========================================================
-   EYEBROW
-   ========================================================= */
-
-.eyebrow{
-
-    color:var(--gold);
-
-    font-size:clamp(
-        9px,
-        .72vw,
-        12px
-    );
-
-    font-weight:800;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-
-    margin-bottom:
-        clamp(
-            9px,
-            1vw,
-            14px
-        );
-
+  margin-inline:auto;
 }
 
 
@@ -164,282 +113,273 @@ button{
 
 .top{
 
-    height:34px;
+  height:28px;
 
-    background:var(--navy);
+  background:var(--navy-deep);
 
-    color:#dbe5ef;
+  color:#dbe5ef;
 
-    font-size:
-        clamp(
-            9px,
-            .72vw,
-            13px
-        );
-
+  font-size:clamp(
+    8px,
+    .52vw,
+    10px
+  );
 }
 
-.top .container{
+.top .w{
 
-    height:100%;
+  height:100%;
 
-    display:flex;
+  display:flex;
 
-    align-items:center;
+  align-items:center;
 
-    justify-content:space-between;
-
-}
-
-.top-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-}
-
-.top-right a{
-
-    transition:opacity .2s ease;
-
-}
-
-.top-right a:hover{
-
-    opacity:.7;
-
+  justify-content:space-between;
 }
 
 
 /* =========================================================
-   HEADER
-   SAMA SISTEM DENGAN INDEX
+   STICKY HEADER
+   PERSIS SISTEM INDEX
    ========================================================= */
 
-.site-header{
+header#siteHeader{
 
-    position:sticky;
+  position:sticky !important;
 
-    top:0;
+  top:0 !important;
 
-    z-index:1000;
+  z-index:1000 !important;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            .94
-        );
+  height:74px;
 
-    backdrop-filter:blur(18px);
+  background:
+    rgba(255,255,255,.97);
 
-    -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(14px);
 
-    border-bottom:
-        1px solid
-        rgba(
-            232,
-            237,
-            242,
-            .9
-        );
+  -webkit-backdrop-filter:blur(14px);
 
+  border-bottom:
+    1px solid rgba(8,45,86,.08);
+
+  transition:
+    height .28s ease,
+    box-shadow .28s ease,
+    background .28s ease;
+}
+
+
+/*
+  SAAT SCROLL
+  74px → 60px
+*/
+
+header#siteHeader.scrolled{
+
+  height:60px;
+
+  background:
+    rgba(255,255,255,.94);
+
+  box-shadow:
+    0 7px 24px
+    rgba(6,31,60,.10);
 }
 
 
 /* =========================================================
-   NAV
+   HEADER NAV
    ========================================================= */
 
 .nav{
 
-    min-height:76px;
+  height:100%;
 
-    display:flex;
+  display:flex;
 
-    align-items:center;
+  align-items:center;
 
-    gap:
-        clamp(
-            16px,
-            2vw,
-            28px
-        );
+  justify-content:space-between;
 
+  gap:
+    clamp(
+      16px,
+      2vw,
+      36px
+    );
 }
 
 
 /* =========================================================
-   BRAND
+   LOGO
    ========================================================= */
 
-.brand{
+.logo{
 
-    display:flex;
+  display:flex;
 
-    align-items:center;
+  align-items:center;
 
-    gap:10px;
+  gap:12px;
 
-    margin-right:auto;
-
-    flex:0 0 auto;
-
+  flex:0 0 auto;
 }
 
-.brand-mark{
+.mark{
 
-    width:
-        clamp(
-            34px,
-            2.8vw,
-            40px
-        );
+  width:42px;
 
-    height:
-        clamp(
-            34px,
-            2.8vw,
-            40px
-        );
+  height:42px;
 
-    border:
-        1px solid
-        var(--gold);
+  border:
+    1px solid
+    var(--bronze);
 
-    border-radius:50%;
+  border-radius:50%;
 
-    display:grid;
+  display:grid;
 
-    place-items:center;
+  place-items:center;
 
-    color:var(--gold);
+  color:var(--bronze);
 
-    font-size:
-        clamp(
-            15px,
-            1.2vw,
-            19px
-        );
+  font-size:18px;
 
+  line-height:1;
 }
 
-.brand strong{
+.logo b{
 
-    display:block;
+  display:block;
 
-    color:var(--navy);
+  color:var(--navy);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  font:
+    500
+    clamp(
+      16px,
+      1.15vw,
+      22px
+    )/1
+    Georgia,
+    "Times New Roman",
+    serif;
 
-    font-size:
-        clamp(
-            16px,
-            1.05vw,
-            22px
-        );
-
-    font-weight:500;
-
-    letter-spacing:.12em;
-
+  letter-spacing:.15em;
 }
 
-.brand span{
+.logo small{
 
-    display:block;
+  display:block;
 
-    color:#8793a0;
+  margin-top:3px;
 
-    font-size:
-        clamp(
-            6px,
-            .5vw,
-            9px
-        );
+  color:#8794a0;
 
-    letter-spacing:.18em;
+  font-size:
+    clamp(
+      7px,
+      .5vw,
+      9px
+    );
 
+  letter-spacing:.28em;
 }
 
 
 /* =========================================================
-   NAV LINKS
+   MENU
    ========================================================= */
 
-.nav-links{
+.links{
 
-    display:flex;
+  display:flex;
 
-    align-items:center;
+  align-items:center;
 
-    gap:
-        clamp(
-            14px,
-            1.8vw,
-            28px
-        );
+  gap:
+    clamp(
+      16px,
+      1.9vw,
+      32px
+    );
 
-    font-size:
-        clamp(
-            9px,
-            .78vw,
-            14px
-        );
-
+  margin-left:auto;
 }
 
-.nav-links a{
+.links a{
 
-    position:relative;
+  position:relative;
 
-    padding:
-        clamp(
-            24px,
-            2vw,
-            28px
-        ) 0;
+  padding:
+    28px 0;
 
-    color:#526170;
+  font-size:
+    clamp(
+      9px,
+      .62vw,
+      12px
+    );
 
-    white-space:nowrap;
+  white-space:nowrap;
 
+  color:#526170;
+
+  transition:
+    color .2s ease;
 }
 
-.nav-links a:hover,
-.nav-links a.active{
+.links a:after{
 
-    color:var(--navy);
+  content:"";
 
+  position:absolute;
+
+  left:0;
+
+  right:0;
+
+  bottom:16px;
+
+  height:2px;
+
+  background:var(--bronze);
+
+  transform:
+    scaleX(0);
+
+  transition:
+    transform .22s ease;
 }
 
-.nav-links a.active::after{
+.links a:hover,
+.links a[aria-current="page"]{
 
-    content:"";
+  color:var(--navy);
+}
 
-    position:absolute;
+.links a:hover:after,
+.links a[aria-current="page"]:after{
 
-    left:0;
-    right:0;
+  transform:
+    scaleX(1);
+}
 
-    bottom:
-        clamp(
-            12px,
-            1.1vw,
-            17px
-        );
 
-    height:2px;
+/*
+  MENU SAAT HEADER MENGECIL
+*/
 
-    background:var(--gold);
+header.scrolled .links a{
 
+  padding:
+    21px 0;
+}
+
+header.scrolled .links a:after{
+
+  bottom:12px;
 }
 
 
@@ -447,39 +387,42 @@ button{
    YOUTUBE
    ========================================================= */
 
-.youtube-btn{
+.yt{
 
-    flex:0 0 auto;
+  flex:0 0 auto;
 
-    background:var(--navy);
+  color:#fff;
 
-    color:#fff !important;
+  background:var(--navy);
 
-    border-radius:4px;
+  font-size:
+    clamp(
+      8px,
+      .55vw,
+      10px
+    );
 
-    padding:
-        clamp(
-            9px,
-            .8vw,
-            12px
-        )
-        clamp(
-            12px,
-            1.1vw,
-            17px
-        );
+  padding:
+    9px 13px;
 
-    font-size:
-        clamp(
-            8px,
-            .68vw,
-            12px
-        );
+  border-radius:3px;
 
-    font-weight:700;
+  white-space:nowrap;
+}
 
-    white-space:nowrap;
 
+/* =========================================================
+   GENERAL SECTION
+   ========================================================= */
+
+section{
+
+  padding:
+    clamp(
+      48px,
+      5vw,
+      76px
+    ) 0;
 }
 
 
@@ -487,126 +430,122 @@ button{
    HERO
    ========================================================= */
 
-.about-hero{
+.hero{
 
-    position:relative;
+  min-height:
+    clamp(
+      470px,
+      58vh,
+      590px
+    );
 
-    overflow:hidden;
+  padding:
+    clamp(
+      42px,
+      5vw,
+      68px
+    ) 0;
 
-    background:
+  display:flex;
 
-        radial-gradient(
-            circle at 88% 50%,
-            rgba(8,44,85,.035),
-            transparent 28%
-        ),
+  align-items:center;
 
-        linear-gradient(
-            180deg,
-            #f7f9fb 0%,
-            #ffffff 100%
-        );
+  position:relative;
 
-    padding:
-        clamp(
-            70px,
-            7vw,
-            110px
-        )
-        0
-        clamp(
-            70px,
-            7vw,
-            110px
-        );
+  overflow:hidden;
 
+  background:
+    linear-gradient(
+      110deg,
+      #f8fafc 0%,
+      #fff 55%,
+      #f1f4f7 100%
+    );
 }
 
 
-/* lingkaran dekorasi */
+/*
+  Lingkaran dekorasi
+*/
 
-.about-hero::before{
+.hero:before{
 
-    content:"";
+  content:"";
 
-    position:absolute;
+  position:absolute;
 
-    width:
-        clamp(
-            280px,
-            30vw,
-            500px
-        );
+  width:
+    clamp(
+      330px,
+      28vw,
+      520px
+    );
 
-    aspect-ratio:1;
+  height:
+    clamp(
+      330px,
+      28vw,
+      520px
+    );
 
-    right:
-        clamp(
-            -230px,
-            -10vw,
-            -80px
-        );
+  right:
+    clamp(
+      -180px,
+      -7vw,
+      -80px
+    );
 
-    top:
-        clamp(
-            50px,
-            6vw,
-            100px
-        );
+  top:
+    50%;
 
-    border:
-        1px solid
-        rgba(
-            199,
-            154,
-            53,
-            .16
-        );
+  transform:
+    translateY(-50%);
 
-    border-radius:50%;
+  border:
+    1px solid
+    rgba(169,130,63,.16);
 
+  border-radius:50%;
 }
 
-.about-hero::after{
+.hero:after{
 
-    content:"";
+  content:"";
 
-    position:absolute;
+  position:absolute;
 
-    width:
-        clamp(
-            180px,
-            19vw,
-            320px
-        );
+  width:
+    clamp(
+      220px,
+      18vw,
+      340px
+    );
 
-    aspect-ratio:1;
+  height:
+    clamp(
+      220px,
+      18vw,
+      340px
+    );
 
-    right:
-        clamp(
-            -140px,
-            -6vw,
-            -40px
-        );
+  right:
+    clamp(
+      -100px,
+      -3vw,
+      -40px
+    );
 
-    top:
-        clamp(
-            110px,
-            12vw,
-            180px
-        );
+  top:
+    50%;
 
-    border:
-        1px solid
-        rgba(
-            199,
-            154,
-            53,
-            .13
-        );
+  transform:
+    translateY(-50%);
 
-    border-radius:50%;
+  border:
+    1px solid
+    rgba(169,130,63,.13);
 
+  border-radius:50%;
 }
 
 
@@ -614,194 +553,184 @@ button{
    HERO CONTENT
    ========================================================= */
 
-.hero-content{
+.heroGrid{
 
-    position:relative;
+  width:var(--max-fluid);
 
-    z-index:2;
+  display:grid;
 
-    width:
-        min(
-            86vw,
-            1080px
-        );
+  grid-template-columns:
+    minmax(0,1.15fr)
+    minmax(260px,.65fr);
 
-    max-width:100%;
+  align-items:center;
 
+  gap:
+    clamp(
+      30px,
+      6vw,
+      100px
+    );
+
+  position:relative;
+
+  z-index:2;
 }
 
-.hero-title{
+.heroCopy{
 
-    margin:0;
-
-    max-width:
-        min(
-            900px,
-            78vw
-        );
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            42px,
-            5vw,
-            70px
-        );
-
-    line-height:.98;
-
-    font-weight:500;
-
-    letter-spacing:-.035em;
-
+  max-width:850px;
 }
 
-.hero-description{
+.hero .k{
 
-    margin:
-        clamp(
-            20px,
-            2vw,
-            28px
-        )
-        0
-        0;
+  color:var(--bronze);
 
-    max-width:
-        min(
-            650px,
-            70vw
-        );
+  letter-spacing:.18em;
 
-    color:#627386;
+  font-size:
+    clamp(
+      8px,
+      .56vw,
+      10px
+    );
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  text-transform:uppercase;
+}
 
-    font-size:
-        clamp(
-            15px,
-            1.15vw,
-            18px
-        );
+.hero h1{
 
-    line-height:1.75;
+  margin:
+    10px 0 20px;
 
+  max-width:780px;
+
+  color:var(--navy);
+
+  font:
+    400
+    clamp(
+      38px,
+      4.05vw,
+      68px
+    )/.98
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing:
+    -.035em;
+}
+
+.hero p{
+
+  max-width:700px;
+
+  margin:
+    0 0 24px;
+
+  color:#617082;
+
+  font:
+    400
+    clamp(
+      12px,
+      .76vw,
+      15px
+    )/1.75
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
 
 /* =========================================================
-   INTRO
+   WHO WE ARE
    ========================================================= */
 
 .intro{
 
-    padding:
-        clamp(
-            65px,
-            7vw,
-            105px
-        )
-        0;
-
+  background:#fff;
 }
 
-.intro-grid{
+.introGrid{
 
-    display:grid;
+  width:var(--max-fluid);
 
-    grid-template-columns:
-        minmax(
-            0,
-            42%
-        )
-        minmax(
-            0,
-            58%
-        );
+  display:grid;
 
-    gap:
-        clamp(
-            35px,
-            7vw,
-            100px
-        );
+  grid-template-columns:
+    minmax(260px,.8fr)
+    minmax(320px,1.2fr);
 
-    align-items:start;
+  gap:
+    clamp(
+      50px,
+      9vw,
+      150px
+    );
 
+  align-items:start;
 }
 
-.intro-title{
+.k{
 
-    margin:0;
+  color:var(--bronze);
 
-    color:var(--navy);
+  font-size:
+    clamp(
+      8px,
+      .56vw,
+      10px
+    );
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  letter-spacing:.17em;
 
-    font-size:
-        clamp(
-            34px,
-            3.6vw,
-            52px
-        );
-
-    line-height:1.05;
-
-    font-weight:400;
-
-    letter-spacing:-.02em;
-
+  text-transform:uppercase;
 }
 
-.intro-copy{
+.intro h2{
 
-    max-width:
-        min(
-            650px,
-            48vw
-        );
+  margin:
+    8px 0 0;
 
+  max-width:550px;
+
+  color:var(--navy);
+
+  font:
+    400
+    clamp(
+      30px,
+      3vw,
+      46px
+    )/1.05
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
-.intro-copy p{
+.introText{
 
-    margin:
-        0
-        0
-        clamp(
-            15px,
-            1.5vw,
-            23px
-        );
+  max-width:700px;
 
-    color:#68798b;
+  color:#667789;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  font:
+    400
+    clamp(
+      13px,
+      .86vw,
+      17px
+    )/1.85
+    Georgia,
+    "Times New Roman",
+    serif;
+}
 
-    font-size:
-        clamp(
-            15px,
-            1.05vw,
-            18px
-        );
+.introText:first-child{
 
-    line-height:1.8;
-
+  margin-top:4px;
 }
 
 
@@ -811,93 +740,84 @@ button{
 
 .principles{
 
-    padding:
-        0
-        0
-        clamp(
-            70px,
-            7vw,
-            110px
-        );
-
+  background:#fff;
 }
 
-.principles-head{
+.principlesHead{
 
-    display:grid;
+  width:var(--max-fluid);
 
-    grid-template-columns:
-        minmax(0,1.4fr)
-        minmax(0,.6fr);
+  display:grid;
 
-    gap:
-        clamp(
-            30px,
-            6vw,
-            80px
-        );
+  grid-template-columns:
+    minmax(300px,1.35fr)
+    minmax(260px,.65fr);
 
-    align-items:end;
+  gap:
+    clamp(
+      30px,
+      6vw,
+      100px
+    );
 
-    padding-bottom:
-        clamp(
-            20px,
-            2vw,
-            30px
-        );
+  align-items:end;
 
-    border-bottom:
-        1px solid
-        var(--line);
+  margin-bottom:
+    clamp(
+      20px,
+      2vw,
+      30px
+    );
 
+  padding-bottom:
+    clamp(
+      18px,
+      2vw,
+      28px
+    );
+
+  border-bottom:
+    1px solid
+    var(--line);
 }
 
-.principles-title{
+.principlesHead h2{
 
-    margin:0;
+  margin:
+    5px 0 0;
 
-    color:var(--navy);
+  color:var(--navy);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            36px,
-            3.8vw,
-            56px
-        );
-
-    line-height:1.05;
-
-    font-weight:400;
-
-    letter-spacing:-.025em;
-
+  font:
+    400
+    clamp(
+      30px,
+      3vw,
+      46px
+    )/1.05
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
-.principles-description{
+.principlesHead p{
 
-    margin:0;
+  margin:0;
 
-    color:#718091;
+  max-width:480px;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  color:#718091;
 
-    font-size:
-        clamp(
-            12px,
-            .8vw,
-            14px
-        );
-
-    line-height:1.7;
-
+  font:
+    400
+    clamp(
+      11px,
+      .68vw,
+      13px
+    )/1.7
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
 
@@ -906,109 +826,99 @@ button{
    TANPA ANGKA
    ========================================================= */
 
-.principle-grid{
+.principlesGrid{
 
-    display:grid;
+  width:var(--max-fluid);
 
-    grid-template-columns:
-        repeat(
-            3,
-            minmax(0,1fr)
-        );
+  display:grid;
 
-    border-bottom:
-        1px solid
-        var(--line);
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
 
+  border-bottom:
+    1px solid
+    var(--line);
 }
 
 .principle{
 
-    min-width:0;
+  min-height:
+    clamp(
+      210px,
+      18vw,
+      270px
+    );
 
-    padding:
-        clamp(
-            28px,
-            3vw,
-            42px
-        )
-        clamp(
-            18px,
-            2vw,
-            30px
-        );
+  padding:
+    clamp(
+      28px,
+      3vw,
+      44px
+    )
+    clamp(
+      18px,
+      2vw,
+      32px
+    );
 
-    border-right:
-        1px solid
-        var(--line);
-
+  border-right:
+    1px solid
+    var(--line);
 }
 
 .principle:first-child{
 
-    padding-left:
-        clamp(
-            0px,
-            1.5vw,
-            20px
-        );
-
+  padding-left:
+    clamp(
+      2px,
+      1.5vw,
+      24px
+    );
 }
 
 .principle:last-child{
 
-    border-right:0;
-
+  border-right:none;
 }
 
 .principle h3{
 
-    margin:
-        0
-        0
-        clamp(
-            9px,
-            1vw,
-            14px
-        );
+  margin:
+    0 0 12px;
 
-    color:var(--navy);
+  color:var(--navy);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            20px,
-            1.6vw,
-            26px
-        );
-
-    line-height:1.2;
-
-    font-weight:400;
-
+  font:
+    400
+    clamp(
+      19px,
+      1.45vw,
+      26px
+    )/1.2
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
 .principle p{
 
-    margin:0;
+  max-width:330px;
 
-    max-width:340px;
+  margin:0;
 
-    color:#758496;
+  color:#778696;
 
-    font-size:
-        clamp(
-            11px,
-            .7vw,
-            13px
-        );
+  font-size:
+    clamp(
+      10px,
+      .68vw,
+      13px
+    );
 
-    line-height:1.7;
-
+  line-height:1.7;
 }
 
 
@@ -1018,182 +928,161 @@ button{
 
 .story{
 
-    background:var(--navy);
+  background:var(--navy);
 
-    color:#fff;
+  color:#fff;
 
-    padding:
-        clamp(
-            70px,
-            7vw,
-            110px
-        )
-        0;
-
+  padding:
+    clamp(
+      65px,
+      7vw,
+      105px
+    ) 0;
 }
 
-.story-grid{
+.storyGrid{
 
-    display:grid;
+  width:var(--max-fluid);
 
-    grid-template-columns:
-        minmax(0,42%)
-        minmax(0,58%);
+  display:grid;
 
-    gap:
-        clamp(
-            35px,
-            7vw,
-            100px
-        );
+  grid-template-columns:
+    minmax(280px,.85fr)
+    minmax(360px,1.15fr);
 
+  gap:
+    clamp(
+      50px,
+      9vw,
+      150px
+    );
+
+  align-items:start;
 }
 
-.story-title{
+.story .k{
 
-    margin:0;
-
-    color:#fff;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            38px,
-            4.3vw,
-            62px
-        );
-
-    line-height:1.02;
-
-    font-weight:400;
-
-    letter-spacing:-.025em;
-
+  color:
+    var(--bronze-soft);
 }
 
-.story-description{
+.story h2{
 
-    margin:
-        clamp(
-            18px,
-            2vw,
-            27px
-        )
-        0
-        0;
+  max-width:650px;
 
-    color:#c8d4e0;
+  margin:
+    8px 0 0;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  color:#fff;
 
-    font-size:
-        clamp(
-            15px,
-            1.05vw,
-            18px
-        );
+  font:
+    400
+    clamp(
+      34px,
+      4vw,
+      58px
+    )/1.02
+    Georgia,
+    "Times New Roman",
+    serif;
 
-    line-height:1.75;
-
+  letter-spacing:
+    -.025em;
 }
 
-.story-list{
+.storyLead{
 
-    border-top:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .13
-        );
+  max-width:520px;
 
+  margin:
+    25px 0 0;
+
+  color:#c6d2df;
+
+  font:
+    400
+    clamp(
+      13px,
+      .82vw,
+      16px
+    )/1.75
+    Georgia,
+    "Times New Roman",
+    serif;
 }
 
-.story-item{
 
-    display:grid;
+/* =========================================================
+   STORY LIST
+   TANPA ANGKA
+   ========================================================= */
 
-    grid-template-columns:
-        minmax(
-            140px,
-            .42fr
-        )
-        minmax(
-            0,
-            1fr
-        );
+.storyList{
 
-    gap:
-        clamp(
-            20px,
-            3vw,
-            50px
-        );
-
-    padding:
-        clamp(
-            17px,
-            1.7vw,
-            24px
-        )
-        0;
-
-    border-bottom:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .13
-        );
-
+  border-top:
+    1px solid
+    rgba(255,255,255,.14);
 }
 
-.story-item h3{
+.storyItem{
 
-    margin:0;
+  display:grid;
 
-    color:#fff;
+  grid-template-columns:
+    minmax(130px,.35fr)
+    minmax(220px,1fr);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+  gap:
+    clamp(
+      20px,
+      3vw,
+      50px
+    );
 
-    font-size:
-        clamp(
-            17px,
-            1.3vw,
-            20px
-        );
+  padding:
+    clamp(
+      18px,
+      1.7vw,
+      25px
+    ) 0;
 
-    font-weight:400;
-
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.14);
 }
 
-.story-item p{
+.storyItem h3{
 
-    margin:0;
+  margin:0;
 
-    color:#afc0d1;
+  color:#fff;
 
-    font-size:
-        clamp(
-            10px,
-            .68vw,
-            13px
-        );
+  font:
+    400
+    clamp(
+      17px,
+      1.15vw,
+      21px
+    )/1.2
+    Georgia,
+    "Times New Roman",
+    serif;
+}
 
-    line-height:1.7;
+.storyItem p{
 
+  margin:2px 0 0;
+
+  color:#aebed0;
+
+  font-size:
+    clamp(
+      9px,
+      .58vw,
+      11px
+    );
+
+  line-height:1.7;
 }
 
 
@@ -1201,351 +1090,410 @@ button{
    FOOTER
    ========================================================= */
 
-footer{
+.footer{
 
-    background:var(--navy);
+  padding:
+    clamp(
+      27px,
+      3vw,
+      38px
+    )
+    0;
 
-    color:#dbe5ef;
+  background:var(--navy-deep);
 
-    padding:
-        clamp(
-            25px,
-            3vw,
-            42px
-        )
-        0
-        20px;
+  color:#c5d0dc;
 
+  text-align:center;
+
+  font-size:
+    clamp(
+      8px,
+      .55vw,
+      11px
+    );
 }
 
-.copyright{
 
-    border-top:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .12
-        );
+/* =========================================================
+   TABLET
+   ========================================================= */
 
-    padding-top:18px;
+@media(max-width:900px){
 
-    text-align:center;
+  :root{
 
-    color:#91a5b9;
+    --max-fluid:
+      calc(100% - 40px);
+  }
 
-    font-size:
-        clamp(
-            9px,
-            .65vw,
-            12px
-        );
+  .links{
+
+    gap:
+      clamp(
+        10px,
+        1.4vw,
+        17px
+      );
+  }
+
+  .heroGrid{
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .heroCopy{
+
+    max-width:850px;
+  }
+
+  .hero:before{
+
+    right:-220px;
+  }
+
+  .hero:after{
+
+    right:-120px;
+  }
+
+  .introGrid{
+
+    gap:50px;
+  }
+
+  .principlesHead{
+
+    gap:40px;
+  }
+
+  .storyGrid{
+
+    gap:60px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE / SMALL TABLET
+   ========================================================= */
+
+@media(max-width:820px){
+
+  .top{
+
+    height:32px;
+  }
+
+  .hero{
+
+    min-height:0;
+  }
+
+  .heroGrid{
+
+    padding:
+      10px 0 30px;
+  }
+
+  .introGrid{
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .principlesHead{
+
+    grid-template-columns:
+      1fr;
+
+    align-items:start;
+  }
+
+  .principlesGrid{
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .principle{
+
+    min-height:auto;
+
+    padding:
+      32px 0;
+
+    border-right:none;
+
+    border-bottom:
+      1px solid
+      var(--line);
+  }
+
+  .principle:first-child{
+
+    padding-left:0;
+  }
+
+  .principle:last-child{
+
+    border-bottom:none;
+  }
+
+  .storyGrid{
+
+    grid-template-columns:
+      1fr;
+  }
 
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   SMALL MOBILE
    ========================================================= */
-
-@media(max-width:1100px){
-
-    .nav-links{
-
-        gap:
-            clamp(
-                11px,
-                1.4vw,
-                20px
-            );
-
-    }
-
-    .intro-grid,
-    .story-grid{
-
-        gap:
-            clamp(
-                28px,
-                5vw,
-                60px
-            );
-
-    }
-
-}
-
-
-@media(max-width:820px){
-
-    .container{
-
-        width:
-            min(
-                var(--max),
-                calc(100% - 28px)
-            );
-
-    }
-
-    .nav{
-
-        min-height:68px;
-
-    }
-
-    .nav-links{
-
-        display:none;
-
-    }
-
-    .youtube-btn{
-
-        display:none;
-
-    }
-
-    .intro-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .intro-copy{
-
-        max-width:100%;
-
-    }
-
-    .principles-head{
-
-        grid-template-columns:1fr;
-
-        gap:20px;
-
-    }
-
-    .principle-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .principle,
-    .principle:first-child{
-
-        padding:
-            clamp(
-                25px,
-                4vw,
-                35px
-            )
-            0;
-
-        border-right:0;
-
-        border-bottom:
-            1px solid
-            var(--line);
-
-    }
-
-    .principle:last-child{
-
-        border-bottom:0;
-
-    }
-
-    .story-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
 
 @media(max-width:560px){
 
-    .container{
+  :root{
 
-        width:
-            calc(
-                100% - 28px
-            );
+    --max-fluid:
+      calc(100% - 28px);
+  }
 
-    }
+  .top{
 
-    .top{
+    font-size:10px;
+  }
 
-        height:32px;
+  .top .w span:last-child{
 
-        font-size:10px;
+    display:none;
+  }
 
-    }
 
-    .top-right{
+  /*
+    HEADER INDEX:
+    66px normal
+    58px ketika scroll
+  */
 
-        display:none;
+  header#siteHeader{
 
-    }
+    height:66px;
+  }
 
-    .nav{
+  header#siteHeader.scrolled{
 
-        min-height:64px;
+    height:58px;
+  }
 
-    }
 
-    .brand-mark{
+  .nav{
 
-        width:34px;
-        height:34px;
+    gap:10px;
+  }
 
-    }
+  .logo{
 
-    .brand strong{
+    gap:7px;
+  }
 
-        font-size:15px;
+  .mark{
 
-    }
+    width:36px;
 
-    .brand span{
+    height:36px;
 
-        font-size:6px;
+    font-size:15px;
+  }
 
-    }
+  .logo b{
 
-    .about-hero{
+    font-size:15px;
+  }
 
-        padding:
-            60px
-            0
-            65px;
+  .logo small{
 
-    }
+    font-size:5px;
+  }
 
-    .hero-content{
 
-        width:100%;
+  /*
+    Pada layar kecil menu yang tidak muat
+    disembunyikan seperti sistem index.
+  */
 
-    }
+  .links{
 
-    .hero-title{
+    gap:10px;
+  }
 
-        max-width:100%;
+  .links a{
 
-        font-size:
-            clamp(
-                38px,
-                11vw,
-                54px
-            );
+    font-size:8px;
 
-    }
+    padding:
+      20px 0;
+  }
 
-    .hero-description{
+  .links a:after{
 
-        max-width:100%;
+    bottom:10px;
+  }
 
-        font-size:15px;
+  .links a:nth-child(5){
 
-    }
+    display:none;
+  }
 
-    .intro{
+  .links a:nth-child(6){
 
-        padding:
-            65px
-            0
-            70px;
+    display:none;
+  }
 
-    }
+  .yt{
 
-    .intro-title{
+    font-size:8px;
 
-        font-size:38px;
+    padding:
+      8px 10px;
+  }
 
-    }
 
-    .intro-copy p{
+  /*
+    HERO
+  */
 
-        font-size:15px;
+  .hero{
 
-    }
+    padding:
+      52px 0 58px;
+  }
 
-    .principles{
+  .hero h1{
 
-        padding-bottom:70px;
+    font-size:
+      clamp(
+        37px,
+        11vw,
+        54px
+      );
+  }
 
-    }
+  .hero p{
 
-    .principles-title{
+    font-size:13px;
+  }
 
-        font-size:39px;
 
-    }
+  /*
+    SECTION
+  */
 
-    .story{
+  section{
 
-        padding:
-            65px
-            0
-            70px;
+    padding:
+      55px 0;
+  }
 
-    }
 
-    .story-title{
+  /*
+    INTRO
+  */
 
-        font-size:42px;
+  .intro h2{
 
-    }
+    font-size:
+      clamp(
+        30px,
+        9vw,
+        42px
+      );
+  }
 
-    .story-item{
+  .introText{
 
-        grid-template-columns:1fr;
+    font-size:15px;
 
-        gap:7px;
+    line-height:1.8;
+  }
 
-    }
+
+  /*
+    PRINCIPLES
+  */
+
+  .principlesHead h2{
+
+    font-size:
+      clamp(
+        30px,
+        9vw,
+        42px
+      );
+  }
+
+
+  /*
+    STORY
+  */
+
+  .story{
+
+    padding:
+      65px 0;
+  }
+
+  .story h2{
+
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        50px
+      );
+  }
+
+  .storyLead{
+
+    font-size:15px;
+  }
+
+  .storyItem{
+
+    grid-template-columns:
+      1fr;
+
+    gap:7px;
+  }
 
 }
 
 
+/* =========================================================
+   VERY SMALL
+   ========================================================= */
+
 @media(max-width:400px){
 
-    .container{
+  .logo b{
 
-        width:
-            calc(
-                100% - 24px
-            );
+    font-size:14px;
 
-    }
+    letter-spacing:.12em;
+  }
 
-    .hero-title{
+  .links{
 
-        font-size:39px;
+    gap:8px;
+  }
 
-    }
+  .links a{
 
-    .intro-title{
-
-        font-size:36px;
-
-    }
-
-    .principles-title{
-
-        font-size:36px;
-
-    }
-
-    .story-title{
-
-        font-size:39px;
-
-    }
+    font-size:7px;
+  }
 
 }
 
@@ -1556,20 +1504,19 @@ footer{
 
 @media(prefers-reduced-motion:reduce){
 
-    html{
+  html{
 
-        scroll-behavior:auto;
+    scroll-behavior:auto;
+  }
 
-    }
+  *,
+  *::before,
+  *::after{
 
-    *{
+    animation:none !important;
 
-        animation:none !important;
-
-        transition:none !important;
-
-    }
-
+    transition:none !important;
+  }
 }
 
 </style>
@@ -1580,421 +1527,406 @@ footer{
 <body>
 
 
-<!-- =====================================================
+<!-- =========================================================
      TOP BAR
-     ===================================================== -->
+     ========================================================= -->
 
 <div class="top">
 
-    <div class="container">
+  <div class="w">
 
-        <span>
-            MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA
-        </span>
+    <span>
+      MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA
+    </span>
 
-        <div class="top-right">
+    <span>
+      Instagram · YouTube · Kontak
+    </span>
 
-            <a href="#">
-                Instagram
-            </a>
-
-            <span>·</span>
-
-            <a href="#">
-                YouTube
-            </a>
-
-            <span>·</span>
-
-            <a href="kontak.html">
-                Kontak
-            </a>
-
-        </div>
-
-    </div>
+  </div>
 
 </div>
 
 
-<!-- =====================================================
-     HEADER
-     ===================================================== -->
+<!-- =========================================================
+     STICKY HEADER
+     ========================================================= -->
 
-<header class="site-header">
+<header id="siteHeader">
 
-    <div class="container nav">
-
-        <a
-            class="brand"
-            href="../index.html"
-        >
-
-            <div class="brand-mark">
-                ✺
-            </div>
-
-            <div>
-
-                <strong>
-                    MANDALA
-                </strong>
-
-                <span>
-                    CHANNEL
-                </span>
-
-            </div>
-
-        </a>
+  <div class="w nav">
 
 
-        <nav
-            class="nav-links"
-            aria-label="Navigasi utama"
-        >
+    <!-- LOGO -->
 
-            <a href="../index.html">
-                Beranda
-            </a>
+    <a
+      class="logo"
+      href="../index.html"
+      aria-label="Mandala Channel"
+    >
 
-            <a href="artikel.html">
-                Artikel
-            </a>
+      <div class="mark">
+        ✺
+      </div>
 
-            <a href="video.html">
-                Video
-            </a>
+      <div>
 
-            <a href="playlist.html">
-                Playlist
-            </a>
+        <b>
+          MANDALA
+        </b>
 
-            <a href="podcast.html">
-                Podcast
-            </a>
+        <small>
+          CHANNEL
+        </small>
 
-            <a
-                href="tentang-kami.html"
-                class="active"
-            >
-                Tentang
-            </a>
+      </div>
 
-        </nav>
+    </a>
 
 
-        <a
-            class="youtube-btn"
-            href="#"
-        >
-            YOUTUBE ↗
-        </a>
+    <!-- MENU -->
 
-    </div>
+    <nav
+      class="links"
+      aria-label="Navigasi utama"
+    >
+
+      <a href="../index.html">
+        Beranda
+      </a>
+
+      <a href="artikel.html">
+        Artikel
+      </a>
+
+      <a href="video.html">
+        Video
+      </a>
+
+      <a href="playlist.html">
+        Playlist
+      </a>
+
+      <a href="podcast.html">
+        Podcast
+      </a>
+
+      <a
+        href="tentang-kami.html"
+        aria-current="page"
+      >
+        Tentang
+      </a>
+
+    </nav>
+
+
+    <!-- YOUTUBE -->
+
+    <a
+      class="yt"
+      href="#"
+      id="youtubeButton"
+    >
+      YOUTUBE ↗
+    </a>
+
+  </div>
 
 </header>
 
 
-<!-- =====================================================
-     MAIN
-     ===================================================== -->
+<!-- =========================================================
+     HERO
+     ========================================================= -->
 
 <main>
 
 
-<!-- =====================================================
-     HERO
-     ===================================================== -->
+<section
+  class="hero"
+  id="heroSection"
+>
 
-<section class="about-hero">
+  <div class="heroGrid">
 
-    <div class="container">
+    <div class="heroCopy">
 
-        <div class="hero-content">
 
-            <div class="eyebrow">
-                Tentang Mandala
-            </div>
+      <div class="k">
+        Tentang Mandala
+      </div>
 
-            <h1 class="hero-title">
-                Melihat Nusantara lebih dekat.
-            </h1>
 
-            <p class="hero-description">
-                Mandala Channel adalah ruang media yang menghadirkan
-                cerita, gagasan, budaya, dan kehidupan masyarakat
-                Nusantara melalui sudut pandang yang dekat dan berimbang.
-            </p>
+      <h1>
+        Melihat Nusantara lebih dekat.
+      </h1>
 
-        </div>
+
+      <p>
+        Mandala Channel adalah ruang media yang menghadirkan
+        cerita, gagasan, budaya, dan kehidupan masyarakat
+        Nusantara melalui sudut pandang yang dekat dan berimbang.
+      </p>
+
 
     </div>
+
+  </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      SIAPA KAMI
-     ===================================================== -->
+     ========================================================= -->
 
 <section class="intro">
 
-    <div class="container">
-
-        <div class="intro-grid">
-
-            <div>
-
-                <div class="eyebrow">
-                    Siapa Kami
-                </div>
-
-                <h2 class="intro-title serif">
-                    Media yang memilih untuk mendengar.
-                </h2>
-
-            </div>
+  <div class="introGrid">
 
 
-            <div class="intro-copy">
+    <div>
 
-                <p>
-                    Mandala Channel hadir sebagai ruang untuk menemukan
-                    kembali cerita-cerita yang tumbuh di sekitar kita.
-                </p>
+      <div class="k">
+        Siapa Kami
+      </div>
 
-                <p>
-                    Kami percaya bahwa sebuah cerita tidak hanya tentang
-                    apa yang terjadi, tetapi juga tentang manusia, konteks,
-                    dan suara yang ada di dalamnya.
-                </p>
-
-                <p>
-                    Melalui artikel, video, podcast, dan berbagai bentuk
-                    cerita lainnya, Mandala berusaha menghadirkan informasi
-                    yang dekat dengan kehidupan masyarakat Nusantara.
-                </p>
-
-            </div>
-
-        </div>
+      <h2>
+        Media yang memilih untuk mendengar.
+      </h2>
 
     </div>
+
+
+    <div>
+
+      <p class="introText">
+        Mandala Channel hadir sebagai ruang untuk menemukan
+        kembali cerita-cerita yang tumbuh di sekitar kita.
+        Kami percaya bahwa sebuah cerita tidak hanya tentang
+        apa yang terjadi, tetapi juga tentang manusia,
+        konteks, dan suara yang ada di dalamnya.
+      </p>
+
+
+      <p class="introText">
+        Melalui artikel, video, podcast, dan berbagai bentuk
+        cerita lainnya, Mandala berusaha menghadirkan informasi
+        yang dekat dengan kehidupan masyarakat Nusantara.
+      </p>
+
+    </div>
+
+
+  </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      PRINSIP KAMI
-     TANPA ANGKA
-     ===================================================== -->
+     ========================================================= -->
 
 <section class="principles">
 
-    <div class="container">
-
-        <div class="principles-head">
-
-            <div>
-
-                <div class="eyebrow">
-                    Prinsip Kami
-                </div>
-
-                <h2 class="principles-title serif">
-                    Tiga hal yang kami jaga.
-                </h2>
-
-            </div>
-
-            <p class="principles-description">
-                Dalam setiap cerita, kami berusaha menjaga kedekatan
-                dengan fakta, manusia, dan konteks yang menyertainya.
-            </p>
-
-        </div>
+  <div class="principlesHead">
 
 
-        <div class="principle-grid">
+    <div>
 
+      <div class="k">
+        Prinsip Kami
+      </div>
 
-            <article class="principle">
-
-                <h3>
-                    Kedekatan
-                </h3>
-
-                <p>
-                    Mendekat kepada sumber cerita dan masyarakat agar
-                    sebuah peristiwa tidak hanya hadir dalam permukaannya.
-                </p>
-
-            </article>
-
-
-            <article class="principle">
-
-                <h3>
-                    Konteks
-                </h3>
-
-                <p>
-                    Sebuah cerita selalu memiliki latar. Kami berusaha
-                    menghadirkan konteks agar informasi dapat dipahami
-                    secara utuh.
-                </p>
-
-            </article>
-
-
-            <article class="principle">
-
-                <h3>
-                    Perspektif
-                </h3>
-
-                <p>
-                    Nusantara memiliki banyak suara dan sudut pandang.
-                    Kami membuka ruang untuk melihat cerita dari lebih
-                    banyak sisi.
-                </p>
-
-            </article>
-
-
-        </div>
+      <h2>
+        Tiga hal yang kami jaga.
+      </h2>
 
     </div>
+
+
+    <p>
+      Dalam setiap cerita, kami berusaha menjaga kedekatan
+      dengan fakta, manusia, dan konteks yang menyertainya.
+    </p>
+
+
+  </div>
+
+
+  <div class="principlesGrid">
+
+
+    <article class="principle">
+
+      <h3>
+        Kedekatan
+      </h3>
+
+      <p>
+        Mendekat kepada sumber cerita dan masyarakat agar
+        sebuah peristiwa tidak hanya hadir dalam permukaannya.
+      </p>
+
+    </article>
+
+
+    <article class="principle">
+
+      <h3>
+        Konteks
+      </h3>
+
+      <p>
+        Sebuah cerita selalu memiliki latar. Kami berusaha
+        menghadirkan konteks agar informasi dapat dipahami
+        secara utuh.
+      </p>
+
+    </article>
+
+
+    <article class="principle">
+
+      <h3>
+        Perspektif
+      </h3>
+
+      <p>
+        Nusantara memiliki banyak suara dan sudut pandang.
+        Kami membuka ruang untuk melihat cerita dari lebih
+        banyak sisi.
+      </p>
+
+    </article>
+
+
+  </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================================
      CARA KAMI BERCERITA
-     TANPA ANGKA
-     ===================================================== -->
+     ========================================================= -->
 
 <section class="story">
 
-    <div class="container">
-
-        <div class="story-grid">
+  <div class="storyGrid">
 
 
-            <div>
+    <div>
 
-                <div class="eyebrow">
-                    Cara Kami Bercerita
-                </div>
+      <div class="k">
+        Cara Kami Bercerita
+      </div>
 
-                <h2 class="story-title serif">
-                    Tidak sekadar memberitakan.
-                </h2>
+      <h2>
+        Tidak sekadar memberitakan.
+      </h2>
 
-                <p class="story-description">
-                    Kami ingin setiap konten memiliki alasan untuk hadir.
-                </p>
+      <p class="storyLead">
+        Kami ingin setiap konten memiliki alasan untuk hadir.
+      </p>
 
-            </div>
-
-
-            <div class="story-list">
+    </div>
 
 
-                <article class="story-item">
-
-                    <div>
-
-                        <h3>
-                            Riset
-                        </h3>
-
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Memahami informasi dan latar cerita sebelum
-                            menyampaikannya kepada publik.
-                        </p>
-
-                    </div>
-
-                </article>
+    <div class="storyList">
 
 
-                <article class="story-item">
+      <article class="storyItem">
 
-                    <div>
+        <div>
 
-                        <h3>
-                            Mendengar
-                        </h3>
-
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Memberikan ruang kepada orang-orang yang
-                            berada di dalam cerita.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-                <article class="story-item">
-
-                    <div>
-
-                        <h3>
-                            Menyajikan
-                        </h3>
-
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Mengemas informasi dengan bahasa yang jelas,
-                            visual yang sederhana, dan konteks yang cukup.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-                <article class="story-item">
-
-                    <div>
-
-                        <h3>
-                            Mengajak berpikir
-                        </h3>
-
-                    </div>
-
-                    <div>
-
-                        <p>
-                            Membuka percakapan, bukan sekadar memberikan
-                            kesimpulan.
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-            </div>
+          <h3>
+            Riset
+          </h3>
 
         </div>
 
+        <div>
+
+          <p>
+            Memahami informasi dan latar cerita sebelum
+            menyampaikannya kepada publik.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="storyItem">
+
+        <div>
+
+          <h3>
+            Mendengar
+          </h3>
+
+        </div>
+
+        <div>
+
+          <p>
+            Memberikan ruang kepada orang-orang yang
+            berada di dalam cerita.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="storyItem">
+
+        <div>
+
+          <h3>
+            Menyajikan
+          </h3>
+
+        </div>
+
+        <div>
+
+          <p>
+            Mengemas informasi dengan bahasa yang jelas,
+            visual yang sederhana, dan konteks yang cukup.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="storyItem">
+
+        <div>
+
+          <h3>
+            Mengajak berpikir
+          </h3>
+
+        </div>
+
+        <div>
+
+          <p>
+            Membuka percakapan, bukan sekadar memberikan
+            kesimpulan.
+          </p>
+
+        </div>
+
+      </article>
+
+
     </div>
+
+  </div>
 
 </section>
 
@@ -2002,21 +1934,83 @@ footer{
 </main>
 
 
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-     ===================================================== -->
+     ========================================================= -->
 
-<footer>
+<footer class="footer">
 
-    <div class="container">
-
-        <div class="copyright">
-            © 2026 Mandala Channel
-        </div>
-
-    </div>
+  © 2026 Mandala Channel
 
 </footer>
+
+
+<!-- =========================================================
+     STICKY HEADER ENGINE
+     SAMA DENGAN INDEX
+     ========================================================= -->
+
+<script>
+
+(function(){
+
+  const header =
+    document.getElementById(
+      'siteHeader'
+    );
+
+
+  const update = () => {
+
+    header.classList.toggle(
+      'scrolled',
+      window.scrollY > 20
+    );
+
+  };
+
+
+  update();
+
+
+  window.addEventListener(
+    'scroll',
+    update,
+    {
+      passive:true
+    }
+  );
+
+})();
+
+
+/*
+  Tombol YouTube sementara tidak membuka
+  internet ketika preview.
+
+  Nanti URL bisa diganti Admin.
+*/
+
+const youtubeButton =
+  document.getElementById(
+    'youtubeButton'
+  );
+
+
+if(youtubeButton){
+
+  youtubeButton.addEventListener(
+    'click',
+    function(event){
+
+      event.preventDefault();
+
+    }
+  );
+
+}
+
+</script>
 
 
 </body>
