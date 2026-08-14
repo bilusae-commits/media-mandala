@@ -20,12 +20,11 @@
 <meta
   name="theme-color"
   content="#082d56"
-/>
+>
 
 
 <!-- =========================================================
-     CONFIG SUPABASE
-     File ini sudah ada di project kamu.
+     SUPABASE CONFIG
 ========================================================= -->
 
 <script src="../js/config.js"></script>
@@ -35,74 +34,44 @@
 
 /* =========================================================
    MANDALA CHANNEL
-   ARTIKEL DETAIL — CMS DYNAMIC VERSION
-
-   Data artikel:
-   Supabase → articles
-
-   Yang diambil:
-   - title
-   - slug
-   - excerpt
-   - content
-   - cover_image_url
-   - category
-   - published_at
-   - status
-
-   Tidak menggunakan:
-   - Google Fonts
-   - CDN
-   - Supabase JS CDN
-   - iframe
-   - library eksternal
-========================================================= */
-
-
-/* =========================================================
-   VARIABLES
+   ARTIKEL DETAIL
+   FINAL VERSION
 ========================================================= */
 
 :root{
 
   --navy:#082d56;
-
   --navy-deep:#061f3c;
 
   --ink:#172536;
-
   --body:#263f5c;
 
   --muted:#718091;
-
   --soft:#8793a0;
 
   --line:#e4e8ec;
 
   --paper:#f7f6f1;
-
   --white:#fff;
 
   --bronze:#a9823f;
-
   --bronze-soft:#c2a66e;
 
 
   /*
     FLUID WIDTH
 
-    Tidak menggunakan fixed width.
+    Semua ukuran menggunakan vw / clamp /
+    max-width sehingga zoom browser tetap nyaman.
   */
 
   --page-width:94vw;
 
   --hero-width:min(88vw,1180px);
 
+  --main-width:min(82vw,980px);
+
   --reading-width:min(64vw,720px);
-
-  --main-media-width:min(82vw,980px);
-
-  --support-media-width:min(48vw,530px);
 
 }
 
@@ -182,6 +151,7 @@ button{
 
 /* =========================================================
    TOP BAR
+   SAMA KONSEPNYA DENGAN INDEX
 ========================================================= */
 
 .top{
@@ -219,7 +189,7 @@ button{
    HEADER
 ========================================================= */
 
-.site-header{
+#siteHeader{
 
   position:sticky;
 
@@ -227,8 +197,7 @@ button{
 
   z-index:1000;
 
-  height:
-    clamp(64px,5vw,74px);
+  height:74px;
 
   background:
     rgba(255,255,255,.97);
@@ -243,20 +212,23 @@ button{
     blur(14px);
 
   transition:
-    height .25s ease,
-    box-shadow .25s ease;
+    height .28s ease,
+    box-shadow .28s ease,
+    background .28s ease;
 
 }
 
 
-.site-header.scrolled{
+#siteHeader.scrolled{
 
-  height:
-    clamp(58px,4.4vw,63px);
+  height:60px;
+
+  background:
+    rgba(255,255,255,.94);
 
   box-shadow:
-    0 7px 25px
-    rgba(6,31,60,.09);
+    0 7px 24px
+    rgba(6,31,60,.10);
 
 }
 
@@ -273,8 +245,10 @@ button{
 
   align-items:center;
 
+  justify-content:space-between;
+
   gap:
-    clamp(14px,2vw,36px);
+    clamp(16px,2vw,36px);
 
 }
 
@@ -366,14 +340,14 @@ button{
 
 .nav{
 
-  margin-left:auto;
-
   display:flex;
 
   align-items:center;
 
   gap:
     clamp(13px,1.6vw,30px);
+
+  margin-left:auto;
 
   overflow-x:auto;
 
@@ -394,15 +368,18 @@ button{
   position:relative;
 
   padding:
-    clamp(21px,2vw,28px)
+    28px
     0;
 
   color:#526170;
 
   font-size:
-    clamp(8px,.62vw,12px);
+    clamp(9px,.62vw,12px);
 
   white-space:nowrap;
+
+  transition:
+    color .2s ease;
 
 }
 
@@ -417,8 +394,7 @@ button{
 
   right:0;
 
-  bottom:
-    clamp(10px,1vw,16px);
+  bottom:16px;
 
   height:2px;
 
@@ -428,7 +404,7 @@ button{
     scaleX(0);
 
   transition:
-    transform .2s ease;
+    transform .22s ease;
 
 }
 
@@ -450,18 +426,52 @@ button{
 }
 
 
+/*
+  Saat scroll header mengecil.
+*/
+
+#siteHeader.scrolled .nav a{
+
+  padding:
+    21px
+    0;
+
+}
+
+
+#siteHeader.scrolled .nav a::after{
+
+  bottom:12px;
+
+}
+
+
+/* =========================================================
+   YOUTUBE BUTTON
+========================================================= */
+
 .nav-youtube{
 
   padding:
     9px 13px !important;
 
-  border-radius:4px;
-
   background:var(--navy);
+
+  border-radius:3px;
 
   color:#fff !important;
 
-  font-weight:700;
+  font-size:
+    clamp(8px,.55vw,10px) !important;
+
+  font-weight:600;
+
+}
+
+
+.nav-youtube::after{
+
+  display:none !important;
 
 }
 
@@ -586,15 +596,8 @@ button{
 }
 
 
-.article-meta .dot{
-
-  color:#b8bec6;
-
-}
-
-
 /* =========================================================
-   ACTIONS
+   ACTION BUTTON
 ========================================================= */
 
 .actions{
@@ -631,12 +634,18 @@ button{
 
   cursor:pointer;
 
+  transition:
+    border-color .2s ease,
+    background .2s ease;
+
 }
 
 
 .action:hover{
 
   border-color:var(--navy);
+
+  background:#f7f9fb;
 
 }
 
@@ -714,7 +723,68 @@ button{
 
 
 /* =========================================================
-   ARTICLE CONTENT
+   ERROR
+========================================================= */
+
+#errorState{
+
+  display:none;
+
+  width:min(700px,calc(100% - 30px));
+
+  margin:
+    80px
+    auto
+    120px;
+
+  padding:
+    35px;
+
+  border:
+    1px solid var(--line);
+
+  background:#fafbfc;
+
+  text-align:center;
+
+}
+
+
+#errorState strong{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  color:var(--navy);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:25px;
+
+  font-weight:400;
+
+}
+
+
+#errorState p{
+
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  line-height:1.7;
+
+}
+
+
+/* =========================================================
+   ARTICLE PAGE
 ========================================================= */
 
 .article-page{
@@ -726,7 +796,7 @@ button{
 
 .content-wrap{
 
-  width:var(--main-media-width);
+  width:var(--main-width);
 
   margin:auto;
 
@@ -739,7 +809,7 @@ button{
 
 
 /* =========================================================
-   MAIN COVER
+   COVER IMAGE
 ========================================================= */
 
 .main-media{
@@ -763,8 +833,7 @@ button{
 
   object-fit:cover;
 
-  border-radius:
-    clamp(2px,.35vw,5px);
+  border-radius:4px;
 
   background:#eef1f4;
 
@@ -926,17 +995,8 @@ button{
 
 
 /* =========================================================
-   IMAGES INSIDE ARTICLE CONTENT
-
-   Ini penting.
-
-   Admin dapat memasukkan gambar ke dalam field content.
-   Kalau content berisi:
-
-   <img src="...">
-
-   maka otomatis mengikuti ukuran minimalis ini.
-
+   SUPPORTING IMAGES
+   MINIMAL & RESPONSIVE
 ========================================================= */
 
 .article-body img{
@@ -949,7 +1009,7 @@ button{
 
   height:auto;
 
-  max-height:520px;
+  max-height:500px;
 
   margin:
     clamp(28px,3.5vw,45px)
@@ -966,7 +1026,51 @@ button{
 }
 
 
+/*
+  Default image:
+
+  Tidak akan memenuhi lebar artikel.
+*/
+
+.article-body img.article-image{
+
+  width:min(100%,530px);
+
+}
+
+
+/*
+  Image kecil.
+*/
+
+.article-body img.article-image-small{
+
+  width:min(100%,430px);
+
+}
+
+
+/*
+  Image lebar.
+
+  Hanya jika admin memang memberikan class
+  article-image-wide.
+*/
+
+.article-body img.article-image-wide{
+
+  width:min(100%,680px);
+
+}
+
+
+/* =========================================================
+   FIGURE
+========================================================= */
+
 .article-body figure{
+
+  width:100%;
 
   margin:
     clamp(30px,3.5vw,45px)
@@ -986,7 +1090,7 @@ button{
 
 .article-body figcaption{
 
-  margin-top:7px;
+  margin-top:8px;
 
   color:#8994a0;
 
@@ -999,6 +1103,8 @@ button{
     clamp(8px,.5vw,10px);
 
   line-height:1.5;
+
+  text-align:center;
 
 }
 
@@ -1035,71 +1141,6 @@ button{
   font-style:italic;
 
   line-height:1.55;
-
-}
-
-
-/* =========================================================
-   CMS CONTENT IMAGE SIZE HELPERS
-
-   Admin bisa menggunakan class:
-
-   class="article-image"
-   class="article-image-small"
-
-========================================================= */
-
-.article-body img.article-image{
-
-  width:min(100%,530px);
-
-}
-
-
-.article-body img.article-image-small{
-
-  width:min(100%,430px);
-
-}
-
-
-/* =========================================================
-   GALLERY
-========================================================= */
-
-.article-gallery{
-
-  width:min(50vw,560px);
-
-  max-width:100%;
-
-  margin:
-    clamp(34px,4vw,52px)
-    auto;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap:
-    clamp(9px,1vw,13px);
-
-}
-
-
-.article-gallery img{
-
-  width:100%;
-
-  aspect-ratio:
-    16 / 10;
-
-  object-fit:cover;
-
-  border-radius:3px;
-
-  margin:0;
 
 }
 
@@ -1297,67 +1338,6 @@ button{
 
 
 /* =========================================================
-   ERROR
-========================================================= */
-
-#errorState{
-
-  display:none;
-
-  width:min(700px,calc(100% - 30px));
-
-  margin:
-    80px
-    auto
-    120px;
-
-  padding:
-    35px;
-
-  border:
-    1px solid var(--line);
-
-  background:#fafbfc;
-
-  text-align:center;
-
-}
-
-
-#errorState strong{
-
-  display:block;
-
-  margin-bottom:8px;
-
-  color:var(--navy);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:25px;
-
-  font-weight:400;
-
-}
-
-
-#errorState p{
-
-  margin:0;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.7;
-
-}
-
-
-/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -1391,11 +1371,9 @@ button{
 
     --hero-width:92vw;
 
+    --main-width:88vw;
+
     --reading-width:min(72vw,700px);
-
-    --main-media-width:88vw;
-
-    --support-media-width:min(58vw,540px);
 
   }
 
@@ -1404,13 +1382,6 @@ button{
 
     gap:
       clamp(10px,1.3vw,18px);
-
-  }
-
-
-  .nav-youtube{
-
-    display:none;
 
   }
 
@@ -1433,11 +1404,9 @@ button{
 
     --hero-width:calc(100% - 30px);
 
+    --main-width:calc(100% - 30px);
+
     --reading-width:100%;
-
-    --main-media-width:calc(100% - 30px);
-
-    --support-media-width:min(72vw,500px);
 
   }
 
@@ -1449,7 +1418,17 @@ button{
   }
 
 
+  #siteHeader.scrolled{
+
+    height:60px;
+
+  }
+
+
   .header-inner{
+
+    width:
+      calc(100% - 24px);
 
     gap:12px;
 
@@ -1458,28 +1437,57 @@ button{
 
   .brand-mark{
 
-    width:35px;
+    width:34px;
 
   }
 
 
   .brand-name{
 
-    font-size:16px;
+    font-size:15px;
+
+  }
+
+
+  .brand-sub{
+
+    font-size:5px;
 
   }
 
 
   .nav{
 
-    gap:10px;
+    gap:12px;
+
+    max-width:62vw;
 
   }
 
 
   .nav a{
 
+    padding:
+      26px
+      0;
+
     font-size:8px;
+
+  }
+
+
+  #siteHeader.scrolled .nav a{
+
+    padding:
+      21px
+      0;
+
+  }
+
+
+  .nav-youtube{
+
+    display:none;
 
   }
 
@@ -1524,9 +1532,7 @@ button{
 
     --hero-width:calc(100% - 24px);
 
-    --main-media-width:calc(100% - 24px);
-
-    --support-media-width:88vw;
+    --main-width:calc(100% - 24px);
 
   }
 
@@ -1540,21 +1546,22 @@ button{
 
   .header-inner{
 
-    width:calc(100% - 20px);
+    width:
+      calc(100% - 20px);
 
   }
 
 
   .brand-mark{
 
-    width:33px;
+    width:32px;
 
   }
 
 
   .brand-name{
 
-    font-size:15px;
+    font-size:14px;
 
   }
 
@@ -1569,6 +1576,8 @@ button{
   .nav{
 
     max-width:47vw;
+
+    gap:10px;
 
   }
 
@@ -1607,7 +1616,8 @@ button{
 
   .content-wrap{
 
-    width:calc(100% - 20px);
+    width:
+      calc(100% - 20px);
 
     padding:
       26px
@@ -1650,11 +1660,7 @@ button{
 
   .article-gallery{
 
-    width:min(88vw,430px);
-
-    grid-template-columns:1fr;
-
-    gap:16px;
+    width:100%;
 
   }
 
@@ -1709,29 +1715,29 @@ button{
 </div>
 
 
+
 <!-- =========================================================
      HEADER
+     SAMA DENGAN INDEX
+     STICKY SAAT SCROLL
 ========================================================= -->
 
-<header
-  class="site-header"
-  id="siteHeader"
->
+<header id="siteHeader">
 
   <div class="header-inner">
 
 
     <a
-      href="../index.html"
       class="brand"
+      href="../index.html"
       aria-label="Mandala Channel"
     >
 
-      <span class="brand-mark">
+      <div class="brand-mark">
         ✺
-      </span>
+      </div>
 
-      <span>
+      <div>
 
         <span class="brand-name">
           MANDALA
@@ -1741,7 +1747,7 @@ button{
           CHANNEL
         </span>
 
-      </span>
+      </div>
 
     </a>
 
@@ -1751,47 +1757,61 @@ button{
       aria-label="Navigasi utama"
     >
 
-      <a href="../index.html">
+      <a
+        href="../index.html"
+      >
         Beranda
       </a>
+
 
       <a
         href="artikel.html"
         class="active"
+        aria-current="page"
       >
         Artikel
       </a>
 
-      <a href="video.html">
+
+      <a
+        href="video.html"
+      >
         Video
       </a>
 
-      <a href="playlist.html">
+
+      <a
+        href="playlist.html"
+      >
         Playlist
       </a>
 
-      <a href="podcast.html">
+
+      <a
+        href="podcast.html"
+      >
         Podcast
       </a>
 
-      <a href="tentang-kami.html">
+
+      <a
+        href="tentang-kami.html"
+      >
         Tentang
       </a>
 
-      <!--
-        Tidak membuka YouTube untuk sementara.
-        Supaya halaman preview tetap bersih.
-      -->
 
       <a
-        href="#"
         class="nav-youtube"
-        id="youtubeButton"
+        href="https://www.youtube.com/"
+        target="_blank"
+        rel="noopener"
       >
         YOUTUBE ↗
       </a>
 
     </nav>
+
 
   </div>
 
@@ -1834,7 +1854,8 @@ button{
   </strong>
 
   <p id="errorMessage">
-    Artikel yang kamu cari belum tersedia atau belum dipublikasikan.
+    Artikel yang kamu cari belum tersedia
+    atau belum dipublikasikan.
   </p>
 
 </section>
@@ -1842,7 +1863,7 @@ button{
 
 
 <!-- =========================================================
-     ARTICLE PAGE
+     ARTICLE
 ========================================================= -->
 
 <main
@@ -1919,13 +1940,12 @@ button{
 
 
   <!-- =======================================================
-       CONTENT
+       ARTICLE CONTENT
   ======================================================== -->
 
   <section class="content-wrap">
 
 
-    <!-- COVER -->
     <figure class="main-media">
 
       <img
@@ -1943,15 +1963,6 @@ button{
     </figure>
 
 
-
-    <!--
-      ISI ARTIKEL DARI SUPABASE
-
-      Admin menulis menggunakan contenteditable
-      di admin/article-edit.html.
-
-      HTML hasil editor dimasukkan ke sini.
-    -->
 
     <article
       class="article-body"
@@ -2015,11 +2026,11 @@ button{
 
 
 
-<script>
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
-/* =========================================================
-   MANDALA ARTICLE ENGINE
-========================================================= */
+<script>
 
 (function(){
 
@@ -2027,34 +2038,28 @@ button{
 
 
   /* =======================================================
-     BASIC HELPERS
+     ELEMENTS
   ======================================================== */
 
-  const $ = selector =>
-    document.querySelector(selector);
-
-
   const loading =
-    $('#loading');
-
+    document.getElementById('loading');
 
   const articlePage =
-    $('#articlePage');
-
+    document.getElementById('articlePage');
 
   const errorState =
-    $('#errorState');
-
+    document.getElementById('errorState');
 
   const errorMessage =
-    $('#errorMessage');
+    document.getElementById('errorMessage');
+
+  const siteHeader =
+    document.getElementById('siteHeader');
 
 
-  /*
-    Supabase config berasal dari:
-
-    ../js/config.js
-  */
+  /* =======================================================
+     CONFIG SUPABASE
+  ======================================================== */
 
   const CONFIG =
     window.MANDALA_CONFIG || {};
@@ -2068,34 +2073,68 @@ button{
     CONFIG.SUPABASE_ANON_KEY || '';
 
 
-  /*
-    Base path.
-  */
-
   const BASE =
     '../';
 
 
   /* =======================================================
-     ESCAPE TEXT
+     HEADER SCROLL
+  ======================================================== */
+
+  function updateHeader(){
+
+    if(window.scrollY > 12){
+
+      siteHeader.classList.add(
+        'scrolled'
+      );
+
+    }else{
+
+      siteHeader.classList.remove(
+        'scrolled'
+      );
+
+    }
+
+  }
+
+
+  updateHeader();
+
+
+  window.addEventListener(
+    'scroll',
+    updateHeader,
+    {
+      passive:true
+    }
+  );
+
+
+  /* =======================================================
+     ESCAPE
   ======================================================== */
 
   function escapeHtml(value){
 
     return String(value ?? '')
-      .replace(/[&<>'"]/g, char => ({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        "'":'&#39;',
-        '"':'&quot;'
-      }[char]));
+      .replace(
+        /[&<>'"]/g,
+        char => ({
+          '&':'&amp;',
+          '<':'&lt;',
+          '>':'&gt;',
+          "'":'&#39;',
+          '"':'&quot;'
+        }[char])
+      );
 
   }
 
 
   /* =======================================================
-     URL SLUG
+     GET SLUG
   ======================================================== */
 
   function getSlug(){
@@ -2104,7 +2143,6 @@ button{
       new URLSearchParams(
         window.location.search
       );
-
 
     return (
       params.get('slug') ||
@@ -2115,7 +2153,7 @@ button{
 
 
   /* =======================================================
-     FORMAT DATE
+     DATE
   ======================================================== */
 
   function formatDate(value){
@@ -2124,15 +2162,18 @@ button{
       return '';
     }
 
-
     const date =
       new Date(value);
 
+    if(
+      Number.isNaN(
+        date.getTime()
+      )
+    ){
 
-    if(Number.isNaN(date.getTime())){
       return value;
-    }
 
+    }
 
     return new Intl.DateTimeFormat(
       'id-ID',
@@ -2147,7 +2188,7 @@ button{
 
 
   /* =======================================================
-     SUPABASE REST
+     SUPABASE REQUEST
   ======================================================== */
 
   async function supabaseRequest(path){
@@ -2173,7 +2214,9 @@ button{
           method:'GET',
 
           headers:{
-            apikey:SUPABASE_KEY,
+            apikey:
+              SUPABASE_KEY,
+
             Authorization:
               'Bearer ' +
               SUPABASE_KEY
@@ -2186,14 +2229,8 @@ button{
 
     if(!response.ok){
 
-      const message =
-        await response.text();
-
       throw new Error(
-        'Supabase: ' +
-        response.status +
-        ' ' +
-        message
+        await response.text()
       );
 
     }
@@ -2205,7 +2242,7 @@ button{
 
 
   /* =======================================================
-     GET ARTICLE FROM SUPABASE
+     GET ARTICLE
   ======================================================== */
 
   async function getArticle(){
@@ -2233,7 +2270,9 @@ button{
 
 
     const data =
-      await supabaseRequest(query);
+      await supabaseRequest(
+        query
+      );
 
 
     if(
@@ -2254,14 +2293,7 @@ button{
 
 
   /* =======================================================
-     LOCAL PREVIEW FALLBACK
-
-     Kalau Supabase belum bisa diakses,
-     halaman tetap bisa memberikan preview menggunakan
-     data lokal dan asset playlist yang sudah ada.
-
-     Ini TIDAK menggantikan CMS.
-     Hanya fallback preview.
+     LOCAL FALLBACK
   ======================================================== */
 
   async function getLocalFallback(){
@@ -2309,14 +2341,6 @@ button{
     }
 
 
-    /*
-      Mapping asset lokal.
-
-      Tidak menggunakan image URL dari JSON
-      karena data/articles.json lama masih berisi
-      URL gambar eksternal.
-    */
-
     const index =
       Math.max(
         0,
@@ -2328,7 +2352,8 @@ button{
       BASE +
       'assets/images/playlists/' +
       'playlist-' +
-      String(index + 1).padStart(2,'0') +
+      String(index + 1)
+        .padStart(2,'0') +
       '.jpg';
 
 
@@ -2341,42 +2366,52 @@ button{
       slug:item.slug,
 
       excerpt:
-        'Preview lokal artikel Mandala Channel.',
+        'Preview artikel Mandala Channel.',
 
       content:`
-        <p>
-          Ini adalah preview lokal artikel.
-          Ketika Supabase aktif, isi artikel yang
-          ditulis oleh admin akan otomatis menggantikan
-          konten contoh ini.
-        </p>
 
         <p>
-          Struktur halaman, ukuran gambar, tipografi,
-          jarak dan responsivitas tetap sama.
+          Ini adalah preview lokal artikel Mandala Channel.
+          Ketika sistem admin dan Supabase sudah aktif,
+          isi artikel yang dibuat admin akan otomatis
+          tampil di halaman ini.
         </p>
+
+
+        <p>
+          Struktur artikel sudah dibuat fleksibel
+          sehingga ukuran teks dan gambar tetap nyaman
+          ketika browser diperbesar maupun diperkecil.
+        </p>
+
 
         <h2>
-          Ruang artikel Mandala
+          Ruang Artikel Mandala
         </h2>
 
+
         <p>
-          Admin nantinya dapat mengubah judul,
-          ringkasan, isi, kategori dan gambar
-          melalui CMS tanpa mengubah file HTML.
+          Nantinya admin dapat mengubah judul,
+          ringkasan, kategori, isi artikel dan gambar
+          tanpa perlu mengubah file HTML ini.
         </p>
 
+
         <blockquote>
-          Konten dari admin akan tampil otomatis
-          di halaman ini setelah artikel dipublish.
+          Konten yang dipublish oleh admin akan tampil
+          otomatis di halaman artikel detail.
         </blockquote>
+
       `,
 
       cover_image_url:
         localImage,
 
       categories:{
-        name:item.category || 'Artikel',
+        name:
+          item.category ||
+          'Artikel',
+
         slug:''
       },
 
@@ -2393,19 +2428,17 @@ button{
 
 
   /* =======================================================
-     NORMALIZE IMAGE URL
+     IMAGE URL
   ======================================================== */
 
   function normalizeImageUrl(url){
 
     if(!url){
+
       return '';
+
     }
 
-
-    /*
-      Jika sudah URL absolut.
-    */
 
     if(
       /^https?:\/\//i.test(url) ||
@@ -2418,10 +2451,6 @@ button{
     }
 
 
-    /*
-      Jika path lokal.
-    */
-
     if(
       url.startsWith('../') ||
       url.startsWith('./') ||
@@ -2433,26 +2462,20 @@ button{
     }
 
 
-    /*
-      Path asset relatif.
-    */
-
     return BASE + url;
 
   }
 
 
   /* =======================================================
-     SET META TAG
+     META
   ======================================================== */
 
   function setMeta(article){
 
     document.title =
-      escapeHtml(
-        article.title ||
-        'Artikel — Mandala Channel'
-      );
+      article.title +
+      ' — Mandala Channel';
 
 
     const description =
@@ -2509,68 +2532,52 @@ button{
       );
 
 
-    const title =
+    document.getElementById(
+      'articleCategory'
+    ).textContent =
+      category;
+
+
+    document.getElementById(
+      'articleTitle'
+    ).textContent =
       article.title ||
       'Tanpa judul';
 
 
-    const excerpt =
+    document.getElementById(
+      'articleExcerpt'
+    ).textContent =
       article.excerpt ||
       '';
 
 
-    /* ---------- META ---------- */
-
-    $('#articleCategory')
-      .textContent =
-      category;
-
-
-    $('#articleTitle')
-      .textContent =
-      title;
-
-
-    $('#articleExcerpt')
-      .textContent =
-      excerpt;
-
-
-    const metaParts = [];
+    const meta = [];
 
 
     if(date){
 
-      metaParts.push(
+      meta.push(
         `<span>${escapeHtml(date)}</span>`
       );
 
     }
 
 
-    /*
-      Author sengaja tidak ditampilkan dari profiles
-      karena RLS public profiles memang tidak membuka
-      data author ke publik.
-
-      Nanti kalau ingin author publik,
-      kita buat field author_name khusus di articles.
-    */
-
-
-    metaParts.push(
-      `<span>Mandala Channel</span>`
+    meta.push(
+      '<span>Mandala Channel</span>'
     );
 
 
-    $('#articleMeta')
-      .innerHTML =
-      metaParts.join(
-        '<span class="dot">•</span>'
+    document.getElementById(
+      'articleMeta'
+    ).innerHTML =
+      meta.join(
+        '<span style="color:#b8bec6">•</span>'
       );
 
 
-    /* ---------- COVER ---------- */
+    /* COVER */
 
     const cover =
       normalizeImageUrl(
@@ -2579,7 +2586,9 @@ button{
 
 
     const coverImage =
-      $('#coverImage');
+      document.getElementById(
+        'coverImage'
+      );
 
 
     if(cover){
@@ -2588,7 +2597,8 @@ button{
         cover;
 
       coverImage.alt =
-        title;
+        article.title ||
+        'Artikel Mandala';
 
       coverImage.style.display =
         'block';
@@ -2601,29 +2611,54 @@ button{
     }
 
 
-    $('#coverCaption')
-      .textContent =
+    document.getElementById(
+      'coverCaption'
+    ).textContent =
       category +
       ' · Mandala Channel';
 
 
-    /* ---------- CONTENT ---------- */
+    /* CONTENT */
 
-    $('#articleContent')
-      .innerHTML =
+    const content =
+      document.getElementById(
+        'articleContent'
+      );
+
+
+    content.innerHTML =
       article.content ||
       '<p>Isi artikel belum tersedia.</p>';
 
 
     /*
-      Tambahkan keamanan dasar untuk link
-      yang ditulis admin.
-
-      Link tetap dapat digunakan,
-      tetapi membuka tab baru.
+      Semua gambar yang dimasukkan admin
+      otomatis lazy loading.
     */
 
-    $('#articleContent')
+    content
+      .querySelectorAll('img')
+      .forEach(image => {
+
+        image.loading =
+          'lazy';
+
+        image.decoding =
+          'async';
+
+        image.alt =
+          image.alt ||
+          article.title ||
+          'Artikel Mandala';
+
+      });
+
+
+    /*
+      Link artikel dibuka di tab baru.
+    */
+
+    content
       .querySelectorAll('a')
       .forEach(link => {
 
@@ -2636,35 +2671,8 @@ button{
       });
 
 
-    /*
-      Semua gambar yang dimasukkan admin
-      akan otomatis memiliki loading lazy,
-      kecuali cover.
-    */
-
-    $('#articleContent')
-      .querySelectorAll('img')
-      .forEach(image => {
-
-        image.loading =
-          'lazy';
-
-        image.decoding =
-          'async';
-
-        image.alt =
-          image.alt ||
-          title;
-
-      });
-
-
     setMeta(article);
 
-
-    /*
-      Simpan artikel untuk related.
-    */
 
     window.currentArticle =
       article;
@@ -2673,18 +2681,16 @@ button{
 
 
   /* =======================================================
-     RELATED ARTICLES
+     RELATED
   ======================================================== */
 
   async function renderRelated(article){
 
     const grid =
-      $('#relatedGrid');
+      document.getElementById(
+        'relatedGrid'
+      );
 
-
-    /*
-      Coba ambil artikel lain dari Supabase.
-    */
 
     try{
 
@@ -2703,7 +2709,9 @@ button{
 
 
       const data =
-        await supabaseRequest(query);
+        await supabaseRequest(
+          query
+        );
 
 
       if(
@@ -2714,7 +2722,7 @@ button{
         grid.innerHTML =
           data
             .map(
-              relatedCard
+              createRelatedCard
             )
             .join('');
 
@@ -2724,11 +2732,6 @@ button{
 
     }catch(error){
 
-      /*
-        Jika Supabase gagal,
-        lanjutkan ke fallback lokal.
-      */
-
       console.warn(
         'Related Supabase:',
         error
@@ -2737,9 +2740,7 @@ button{
     }
 
 
-    /*
-      Fallback lokal.
-    */
+    /* LOCAL FALLBACK */
 
     try{
 
@@ -2762,15 +2763,12 @@ button{
         await response.json();
 
 
-      const currentSlug =
-        article.slug;
-
-
       const items =
         data
           .filter(
             item =>
-              item.slug !== currentSlug
+              item.slug !==
+              article.slug
           )
           .slice(0,3);
 
@@ -2778,18 +2776,13 @@ button{
       grid.innerHTML =
         items
           .map(
-            (item,index) =>
-              relatedCard({
+            (item,index) => {
 
-                id:
-                  'local-' +
-                  index,
+              return createRelatedCard({
 
-                title:
-                  item.title,
+                title:item.title,
 
-                slug:
-                  item.slug,
+                slug:item.slug,
 
                 cover_image_url:
                   BASE +
@@ -2805,7 +2798,9 @@ button{
                     'Artikel'
                 }
 
-              })
+              });
+
+            }
           )
           .join('');
 
@@ -2824,17 +2819,17 @@ button{
      RELATED CARD
   ======================================================== */
 
-  function relatedCard(article){
-
-    const category =
-      article.categories?.name ||
-      'Artikel';
-
+  function createRelatedCard(article){
 
     const image =
       normalizeImageUrl(
         article.cover_image_url
       );
+
+
+    const category =
+      article.categories?.name ||
+      'Artikel';
 
 
     return `
@@ -2850,17 +2845,23 @@ button{
           loading="lazy"
         >
 
+
         <div class="related-copy">
 
           <div class="related-category">
+
             ${escapeHtml(category)}
+
           </div>
 
+
           <h3>
+
             ${escapeHtml(
               article.title ||
               'Tanpa judul'
             )}
+
           </h3>
 
         </div>
@@ -2878,12 +2879,10 @@ button{
 
   async function copyLink(){
 
-    const url =
-      window.location.href;
-
-
     const button =
-      $('#copyButton');
+      document.getElementById(
+        'copyButton'
+      );
 
 
     const original =
@@ -2893,7 +2892,7 @@ button{
     try{
 
       await navigator.clipboard.writeText(
-        url
+        window.location.href
       );
 
 
@@ -2903,16 +2902,14 @@ button{
 
     }catch(error){
 
-      /*
-        Fallback lama.
-      */
-
       const textarea =
-        document.createElement('textarea');
+        document.createElement(
+          'textarea'
+        );
 
 
       textarea.value =
-        url;
+        window.location.href;
 
 
       textarea.style.position =
@@ -2999,11 +2996,8 @@ button{
 
       }catch(error){
 
-        /*
-          User membatalkan share.
-        */
-
       }
+
 
       return;
 
@@ -3016,69 +3010,23 @@ button{
 
 
   /* =======================================================
-     HEADER
+     BUTTON EVENTS
   ======================================================== */
 
-  function initHeader(){
-
-    const header =
-      $('#siteHeader');
-
-
-    function update(){
-
-      header.classList.toggle(
-        'scrolled',
-        window.scrollY > 12
-      );
-
-    }
-
-
-    update();
-
-
-    window.addEventListener(
-      'scroll',
-      update,
-      {
-        passive:true
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     YOUTUBE BUTTON
-  ======================================================== */
-
-  function initYoutubeButton(){
-
-    const button =
-      $('#youtubeButton');
-
-
-    if(!button){
-      return;
-    }
-
-
-    /*
-      Sengaja tidak membuka URL eksternal
-      dari halaman artikel untuk saat ini.
-    */
-
-    button.addEventListener(
+  document
+    .getElementById('copyButton')
+    .addEventListener(
       'click',
-      event => {
-
-        event.preventDefault();
-
-      }
+      copyLink
     );
 
-  }
+
+  document
+    .getElementById('shareButton')
+    .addEventListener(
+      'click',
+      shareArticle
+    );
 
 
   /* =======================================================
@@ -3087,34 +3035,17 @@ button{
 
   async function init(){
 
-    initHeader();
-
-    initYoutubeButton();
-
-
-    $('#copyButton')
-      .addEventListener(
-        'click',
-        copyLink
-      );
-
-
-    $('#shareButton')
-      .addEventListener(
-        'click',
-        shareArticle
-      );
-
-
     let article;
 
 
     /*
-      1. PRIORITAS UTAMA:
-         Supabase.
+      PRIORITAS:
 
-      2. Jika Supabase tidak bisa diakses:
-         local fallback.
+      1. Supabase
+      2. data/articles.json
+
+      Jadi website tetap bisa dipreview
+      walaupun Supabase belum siap.
     */
 
     try{
@@ -3144,7 +3075,7 @@ button{
           'block';
 
         errorMessage.textContent =
-          'Artikel belum ditemukan. Pastikan URL menggunakan slug artikel yang benar dan artikel sudah berstatus published.';
+          'Artikel belum ditemukan. Pastikan URL menggunakan slug yang benar dan artikel sudah berstatus published.';
 
         return;
 
@@ -3167,8 +3098,8 @@ button{
 
 
     /*
-      Related dimuat setelah artikel utama
-      supaya tidak menghambat tampilan.
+      Related tidak menghambat
+      artikel utama.
     */
 
     renderRelated(
@@ -3179,7 +3110,6 @@ button{
 
 
   init();
-
 
 })();
 
