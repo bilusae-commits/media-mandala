@@ -17,7 +17,6 @@
   content="Hubungi Mandala Channel untuk informasi, kerja sama, liputan, dan kebutuhan redaksi."
 >
 
-
 <style>
 
 /* =========================================================
@@ -46,7 +45,8 @@ a{
 
 button,
 input,
-textarea{
+textarea,
+select{
   font:inherit;
 }
 
@@ -365,7 +365,7 @@ header.scrolled .links a:after{
 
 
 /* =========================================================
-   YOUTUBE
+   YOUTUBE BUTTON
 ========================================================= */
 
 .yt{
@@ -392,6 +392,13 @@ header.scrolled .links a:after{
   text-decoration:none;
 
   white-space:nowrap;
+
+  transition:
+    background .2s ease;
+}
+
+.yt:hover{
+  background:var(--navy-deep);
 }
 
 
@@ -420,7 +427,6 @@ header.scrolled .links a:after{
 
 
 .contactHero .w{
-
   max-width:1180px;
 }
 
@@ -493,7 +499,7 @@ header.scrolled .links a:after{
 
 
 /* =========================================================
-   MAIN CONTACT AREA
+   MAIN CONTACT
 ========================================================= */
 
 .contactSection{
@@ -530,7 +536,6 @@ header.scrolled .links a:after{
 ========================================================= */
 
 .contactInfo{
-
   padding-top:4px;
 }
 
@@ -690,13 +695,12 @@ header.scrolled .links a:after{
 
 
 a.contactValue:hover{
-
   color:var(--bronze);
 }
 
 
 /* =========================================================
-   SOCIAL
+   SOCIAL BUTTONS
 ========================================================= */
 
 .social{
@@ -734,7 +738,8 @@ a.contactValue:hover{
 
   transition:
     border-color .2s ease,
-    color .2s ease;
+    color .2s ease,
+    background .2s ease;
 }
 
 
@@ -743,11 +748,13 @@ a.contactValue:hover{
   border-color:var(--navy);
 
   color:var(--navy);
+
+  background:#fafbfd;
 }
 
 
 /* =========================================================
-   FORM WRAPPER
+   FORM BOX
 ========================================================= */
 
 .formBox{
@@ -819,7 +826,6 @@ a.contactValue:hover{
 
 
 .field{
-
   margin-bottom:17px;
 }
 
@@ -935,6 +941,8 @@ a.contactValue:hover{
 .check input{
 
   margin-top:2px;
+
+  flex:0 0 auto;
 }
 
 
@@ -995,7 +1003,8 @@ a.contactValue:hover{
 
   transition:
     background .2s ease,
-    transform .2s ease;
+    transform .2s ease,
+    opacity .2s ease;
 }
 
 
@@ -1008,6 +1017,16 @@ a.contactValue:hover{
 }
 
 
+.submit:disabled{
+
+  opacity:.65;
+
+  cursor:not-allowed;
+
+  transform:none;
+}
+
+
 .formStatus{
 
   min-height:18px;
@@ -1015,14 +1034,29 @@ a.contactValue:hover{
   margin:
     13px 0 0;
 
-  color:#718091;
-
   font-family:
     Arial,
     Helvetica,
     sans-serif;
 
   font-size:10px;
+
+  line-height:1.5;
+}
+
+
+.formStatus.success{
+  color:#657f43;
+}
+
+
+.formStatus.error{
+  color:#a34b43;
+}
+
+
+.formStatus.loading{
+  color:#718091;
 }
 
 
@@ -1048,7 +1082,6 @@ a.contactValue:hover{
 
 
 .quickHead{
-
   margin-bottom:25px;
 }
 
@@ -1188,7 +1221,6 @@ a.contactValue:hover{
     display:none;
   }
 
-
   .contactGrid{
 
     grid-template-columns:1fr;
@@ -1196,9 +1228,7 @@ a.contactValue:hover{
     gap:55px;
   }
 
-
   .contactInfo{
-
     max-width:720px;
   }
 
@@ -1212,11 +1242,9 @@ a.contactValue:hover{
     grid-template-columns:1fr;
   }
 
-
   .quickGrid{
 
-    grid-template-columns:
-      1fr;
+    grid-template-columns:1fr;
   }
 
 }
@@ -1225,35 +1253,24 @@ a.contactValue:hover{
 @media(max-width:560px){
 
   :root{
-
-    --max-fluid:
-      calc(100% - 28px);
+    --max-fluid:calc(100% - 28px);
   }
 
-
   .top{
-
     font-size:10px;
   }
 
-
   .top .w span:last-child{
-
     display:none;
   }
 
-
   header#siteHeader{
-
     height:66px;
   }
 
-
   header#siteHeader.scrolled{
-
     height:58px;
   }
-
 
   .logo .mark{
 
@@ -1262,18 +1279,13 @@ a.contactValue:hover{
     height:34px;
   }
 
-
   .logo b{
-
     font-size:15px;
   }
 
-
   .logo small{
-
     font-size:6px;
   }
-
 
   .contactHero{
 
@@ -1282,19 +1294,15 @@ a.contactValue:hover{
       43px;
   }
 
-
   .heroTitle{
 
     font-size:
       clamp(40px,11vw,56px);
   }
 
-
   .heroText{
-
     font-size:14px;
   }
-
 
   .contactSection{
 
@@ -1303,13 +1311,11 @@ a.contactValue:hover{
       65px;
   }
 
-
   .contactGrid{
 
     width:
       calc(100% - 20px);
   }
-
 
   .formBox{
 
@@ -1317,13 +1323,11 @@ a.contactValue:hover{
       22px 18px 24px;
   }
 
-
   .contactItem{
 
     grid-template-columns:
       37px 1fr;
   }
-
 
   .contactIcon{
 
@@ -1331,7 +1335,6 @@ a.contactValue:hover{
 
     height:31px;
   }
-
 
   .quick .w{
 
@@ -1442,7 +1445,9 @@ a.contactValue:hover{
         PODCAST
       </a>
 
-      <a href="tentang-kami.html">
+      <a
+        href="tentang-kami.html"
+      >
         TENTANG
       </a>
 
@@ -1451,7 +1456,10 @@ a.contactValue:hover{
 
     <a
       class="yt"
+      id="youtubeTop"
       href="#"
+      target="_blank"
+      rel="noopener"
     >
       YOUTUBE ↗
     </a>
@@ -1474,11 +1482,9 @@ a.contactValue:hover{
       Hubungi Kami
     </div>
 
-
     <h1 class="heroTitle">
       Mari terhubung dengan Mandala.
     </h1>
-
 
     <p class="heroText">
       Punya cerita, informasi, pertanyaan, atau ingin bekerja sama?
@@ -1493,408 +1499,437 @@ a.contactValue:hover{
 
 
 <!-- =========================================================
-     CONTACT
+     MAIN CONTACT
 ========================================================= -->
 
 <main>
 
 
-  <section class="contactSection">
+<section class="contactSection">
 
-    <div class="contactGrid">
-
-
-      <!-- ===============================================
-           LEFT
-      ================================================ -->
-
-      <div class="contactInfo">
+<div class="contactGrid">
 
 
-        <div class="sectionKicker">
-          Kontak
-        </div>
+<!-- =======================================================
+     LEFT CONTACT INFORMATION
+======================================================== -->
+
+<div class="contactInfo">
 
 
-        <h2 class="infoTitle">
-          Ruang untuk berbicara,
-          berbagi, dan bekerja sama.
-        </h2>
+  <div class="sectionKicker">
+    Kontak
+  </div>
 
 
-        <p class="infoIntro">
-          Untuk pertanyaan redaksi, kerja sama, informasi,
-          undangan liputan, maupun kebutuhan lainnya,
-          silakan gunakan salah satu kontak di bawah ini.
-        </p>
+  <h2 class="infoTitle">
+    Ruang untuk berbicara,
+    berbagi, dan bekerja sama.
+  </h2>
 
 
-        <div class="contactItems">
+  <p class="infoIntro">
+    Untuk pertanyaan redaksi, kerja sama, informasi,
+    undangan liputan, maupun kebutuhan lainnya,
+    silakan gunakan salah satu kontak di bawah ini.
+  </p>
 
 
-          <div class="contactItem">
-
-            <div class="contactIcon">
-              @
-            </div>
-
-            <div>
-
-              <div class="contactLabel">
-                Email
-              </div>
-
-              <a
-                class="contactValue"
-                href="mailto:redaksi@mandalachannel.id"
-              >
-                redaksi@mandalachannel.id
-              </a>
-
-            </div>
-
-          </div>
+  <div class="contactItems">
 
 
-          <div class="contactItem">
+    <div class="contactItem">
 
-            <div class="contactIcon">
-              WA
-            </div>
-
-            <div>
-
-              <div class="contactLabel">
-                WhatsApp
-              </div>
-
-              <a
-                class="contactValue"
-                href="#"
-              >
-                +62 812 0000 0000
-              </a>
-
-            </div>
-
-          </div>
-
-
-          <div class="contactItem">
-
-            <div class="contactIcon">
-              ↗
-            </div>
-
-            <div>
-
-              <div class="contactLabel">
-                Media Sosial
-              </div>
-
-              <div class="contactValue">
-                Instagram · YouTube
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="contactItem">
-
-            <div class="contactIcon">
-              ◌
-            </div>
-
-            <div>
-
-              <div class="contactLabel">
-                Redaksi
-              </div>
-
-              <div class="contactValue">
-                Mandala Channel
-              </div>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-
-        <div class="social">
-
-          <a href="#">
-            Instagram
-          </a>
-
-          <a href="#">
-            YouTube
-          </a>
-
-          <a href="#">
-            WhatsApp
-          </a>
-
-        </div>
-
-
+      <div class="contactIcon">
+        @
       </div>
 
+      <div>
 
-      <!-- ===============================================
-           FORM
-      ================================================ -->
+        <div class="contactLabel">
+          Email
+        </div>
 
-      <div class="formBox">
-
-
-        <h2 class="formTitle">
-          Kirim pesan
-        </h2>
-
-
-        <p class="formIntro">
-          Isi formulir berikut. Untuk sementara formulir ini
-          hanya berupa tampilan dan belum mengirim data ke server.
-        </p>
-
-
-        <form
-          id="contactForm"
+        <a
+          class="contactValue"
+          href="mailto:redaksi@mandalachannel.id"
         >
-
-
-          <div class="formRow">
-
-
-            <div class="field">
-
-              <label for="name">
-                Nama
-              </label>
-
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Nama lengkap"
-                required
-              >
-
-            </div>
-
-
-            <div class="field">
-
-              <label for="email">
-                Email
-              </label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="nama@email.com"
-                required
-              >
-
-            </div>
-
-
-          </div>
-
-
-          <div class="field">
-
-            <label for="subject">
-              Keperluan
-            </label>
-
-            <select
-              id="subject"
-              name="subject"
-              required
-            >
-
-              <option
-                value=""
-                selected
-                disabled
-              >
-                Pilih keperluan
-              </option>
-
-              <option value="redaksi">
-                Redaksi / Informasi
-              </option>
-
-              <option value="liputan">
-                Undangan / Liputan
-              </option>
-
-              <option value="kerjasama">
-                Kerja sama
-              </option>
-
-              <option value="media">
-                Media / Publikasi
-              </option>
-
-              <option value="lainnya">
-                Lainnya
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="field">
-
-            <label for="message">
-              Pesan
-            </label>
-
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Tulis pesan Anda..."
-              required
-            ></textarea>
-
-          </div>
-
-
-          <div class="check">
-
-            <input
-              id="agreement"
-              type="checkbox"
-              required
-            >
-
-            <label for="agreement">
-              Saya memahami bahwa pesan ini akan digunakan
-              untuk keperluan komunikasi dengan Mandala Channel.
-            </label>
-
-          </div>
-
-
-          <button
-            class="submit"
-            type="submit"
-          >
-            KIRIM PESAN
-          </button>
-
-
-          <div
-            class="formStatus"
-            id="formStatus"
-            aria-live="polite"
-          ></div>
-
-
-        </form>
-
+          redaksi@mandalachannel.id
+        </a>
 
       </div>
-
 
     </div>
 
-  </section>
+
+    <div class="contactItem">
+
+      <div class="contactIcon">
+        WA
+      </div>
+
+      <div>
+
+        <div class="contactLabel">
+          WhatsApp
+        </div>
+
+        <a
+          class="contactValue"
+          id="whatsappNumber"
+          href="#"
+          target="_blank"
+          rel="noopener"
+        >
+          +62 812 0000 0000
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="contactItem">
+
+      <div class="contactIcon">
+        ↗
+      </div>
+
+      <div>
+
+        <div class="contactLabel">
+          Media Sosial
+        </div>
+
+        <div class="contactValue">
+          Instagram · YouTube
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="contactItem">
+
+      <div class="contactIcon">
+        ◌
+      </div>
+
+      <div>
+
+        <div class="contactLabel">
+          Redaksi
+        </div>
+
+        <div class="contactValue">
+          Mandala Channel
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
 
 
   <!-- =====================================================
-       QUICK CONTACT
+       SOCIAL BUTTONS
   ====================================================== -->
 
-  <section class="quick">
+  <div class="social">
 
-    <div class="w">
+    <a
+      id="instagramLink"
+      href="#"
+      target="_blank"
+      rel="noopener"
+    >
+      Instagram
+    </a>
+
+    <a
+      id="youtubeLink"
+      href="#"
+      target="_blank"
+      rel="noopener"
+    >
+      YouTube
+    </a>
+
+    <a
+      id="whatsappLink"
+      href="#"
+      target="_blank"
+      rel="noopener"
+    >
+      WhatsApp
+    </a>
+
+  </div>
 
 
-      <div class="quickHead">
+</div>
 
-        <div class="sectionKicker">
-          Kebutuhan
-        </div>
 
-        <h2 class="quickTitle">
-          Anda ingin menghubungi kami untuk apa?
-        </h2>
+<!-- =======================================================
+     CONTACT FORM
+======================================================== -->
+
+<div class="formBox">
+
+
+  <h2 class="formTitle">
+    Kirim pesan
+  </h2>
+
+
+  <p class="formIntro">
+    Sampaikan pesan Anda melalui formulir berikut.
+    Pesan akan diterima oleh sistem redaksi Mandala Channel.
+  </p>
+
+
+  <form
+    id="contactForm"
+    novalidate
+  >
+
+
+    <div class="formRow">
+
+
+      <div class="field">
+
+        <label for="name">
+          Nama
+        </label>
+
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          placeholder="Nama lengkap"
+          maxlength="100"
+          required
+        >
 
       </div>
 
 
-      <div class="quickGrid">
+      <div class="field">
 
+        <label for="email">
+          Email
+        </label>
 
-        <div class="quickCard">
-
-          <small>
-            01 · Redaksi
-          </small>
-
-          <h3>
-            Punya informasi?
-          </h3>
-
-          <p>
-            Sampaikan informasi, cerita, atau isu yang menurut
-            Anda penting untuk diketahui dan dibicarakan.
-          </p>
-
-        </div>
-
-
-        <div class="quickCard">
-
-          <small>
-            02 · Liputan
-          </small>
-
-          <h3>
-            Ingin diliput?
-          </h3>
-
-          <p>
-            Kirimkan informasi mengenai kegiatan, komunitas,
-            tokoh, maupun cerita lokal yang menarik.
-          </p>
-
-        </div>
-
-
-        <div class="quickCard">
-
-          <small>
-            03 · Kerja Sama
-          </small>
-
-          <h3>
-            Mari berkolaborasi.
-          </h3>
-
-          <p>
-            Hubungi kami untuk pembahasan kerja sama media,
-            produksi konten, maupun bentuk kolaborasi lainnya.
-          </p>
-
-        </div>
-
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="nama@email.com"
+          maxlength="150"
+          required
+        >
 
       </div>
+
 
     </div>
 
-  </section>
+
+    <div class="field">
+
+      <label for="subject">
+        Keperluan
+      </label>
+
+      <select
+        id="subject"
+        name="subject"
+        required
+      >
+
+        <option
+          value=""
+          selected
+          disabled
+        >
+          Pilih keperluan
+        </option>
+
+        <option value="Redaksi / Informasi">
+          Redaksi / Informasi
+        </option>
+
+        <option value="Undangan / Liputan">
+          Undangan / Liputan
+        </option>
+
+        <option value="Kerja Sama">
+          Kerja Sama
+        </option>
+
+        <option value="Media / Publikasi">
+          Media / Publikasi
+        </option>
+
+        <option value="Lainnya">
+          Lainnya
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="message">
+        Pesan
+      </label>
+
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Tulis pesan Anda..."
+        maxlength="5000"
+        required
+      ></textarea>
+
+    </div>
+
+
+    <div class="check">
+
+      <input
+        id="agreement"
+        type="checkbox"
+        required
+      >
+
+      <label for="agreement">
+        Saya memahami bahwa pesan ini akan digunakan
+        untuk keperluan komunikasi dengan Mandala Channel.
+      </label>
+
+    </div>
+
+
+    <button
+      class="submit"
+      id="submitButton"
+      type="submit"
+    >
+      KIRIM PESAN
+    </button>
+
+
+    <div
+      class="formStatus"
+      id="formStatus"
+      aria-live="polite"
+    ></div>
+
+
+  </form>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     QUICK CONTACT
+========================================================= -->
+
+<section class="quick">
+
+<div class="w">
+
+
+  <div class="quickHead">
+
+    <div class="sectionKicker">
+      Kebutuhan
+    </div>
+
+    <h2 class="quickTitle">
+      Anda ingin menghubungi kami untuk apa?
+    </h2>
+
+  </div>
+
+
+  <div class="quickGrid">
+
+
+    <div class="quickCard">
+
+      <small>
+        REDAKSI
+      </small>
+
+      <h3>
+        Punya informasi?
+      </h3>
+
+      <p>
+        Sampaikan informasi, cerita, atau isu yang menurut
+        Anda penting untuk diketahui dan dibicarakan.
+      </p>
+
+    </div>
+
+
+    <div class="quickCard">
+
+      <small>
+        LIPUTAN
+      </small>
+
+      <h3>
+        Ingin diliput?
+      </h3>
+
+      <p>
+        Kirimkan informasi mengenai kegiatan, komunitas,
+        tokoh, maupun cerita lokal yang menarik.
+      </p>
+
+    </div>
+
+
+    <div class="quickCard">
+
+      <small>
+        KERJA SAMA
+      </small>
+
+      <h3>
+        Mari berkolaborasi.
+      </h3>
+
+      <p>
+        Hubungi kami untuk pembahasan kerja sama media,
+        produksi konten, maupun bentuk kolaborasi lainnya.
+      </p>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+</section>
 
 
 </main>
@@ -1914,22 +1949,75 @@ a.contactValue:hover{
 <script>
 
 /* =========================================================
+   MANDALA CHANNEL
+   KONFIGURASI KONTAK
+=========================================================
+
+   NANTI KAMU CUKUP MENGUBAH BAGIAN INI.
+
+   Instagram:
+   contoh:
+   https://instagram.com/namakun
+
+   YouTube:
+   contoh:
+   https://youtube.com/@namakun
+
+   WhatsApp:
+   masukkan NOMOR SAJA.
+   Jangan pakai +, spasi, atau tanda -.
+
+   Contoh:
+   628123456789
+
+========================================================= */
+
+const CONTACT = {
+
+  instagram:
+    "https://instagram.com/ISI_USERNAME_INSTAGRAM",
+
+  youtube:
+    "https://youtube.com/@ISI_USERNAME_YOUTUBE",
+
+  whatsapp:
+    "6281200000000"
+
+};
+
+
+/* =========================================================
+   SUPABASE CONFIG
+========================================================= */
+
+const SUPABASE_URL =
+  "https://roeckoabffhyctfkvbhw.supabase.co";
+
+
+const SUPABASE_KEY =
+  "sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr";
+
+
+const CONTACT_TABLE =
+  "contact_messages";
+
+
+/* =========================================================
    HEADER SCROLL
-   KONSISTEN DENGAN INDEX & ARTIKEL DETAIL
 ========================================================= */
 
 (function(){
 
   const header =
     document.getElementById(
-      'siteHeader'
+      "siteHeader"
     );
 
 
   function updateHeader(){
 
     header.classList.toggle(
-      'scrolled',
+      "scrolled",
       window.scrollY > 20
     );
 
@@ -1940,7 +2028,7 @@ a.contactValue:hover{
 
 
   window.addEventListener(
-    'scroll',
+    "scroll",
     updateHeader,
     {
       passive:true
@@ -1951,36 +2039,398 @@ a.contactValue:hover{
 
 
 /* =========================================================
-   FORM PREVIEW
+   SET CONTACT LINKS
+========================================================= */
+
+(function(){
+
+  const instagram =
+    document.getElementById(
+      "instagramLink"
+    );
+
+
+  const youtube =
+    document.getElementById(
+      "youtubeLink"
+    );
+
+
+  const youtubeTop =
+    document.getElementById(
+      "youtubeTop"
+    );
+
+
+  const whatsapp =
+    document.getElementById(
+      "whatsappLink"
+    );
+
+
+  const whatsappNumber =
+    document.getElementById(
+      "whatsappNumber"
+    );
+
+
+  /* Instagram */
+
+  instagram.href =
+    CONTACT.instagram;
+
+
+  /* YouTube */
+
+  youtube.href =
+    CONTACT.youtube;
+
+
+  youtubeTop.href =
+    CONTACT.youtube;
+
+
+  /* WhatsApp */
+
+  const whatsappURL =
+    "https://wa.me/" +
+    CONTACT.whatsapp;
+
+
+  whatsapp.href =
+    whatsappURL;
+
+
+  whatsappNumber.href =
+    whatsappURL;
+
+
+  whatsappNumber.textContent =
+    formatWhatsAppNumber(
+      CONTACT.whatsapp
+    );
+
+
+})();
+
+
+/* =========================================================
+   FORMAT WHATSAPP NUMBER
+========================================================= */
+
+function formatWhatsAppNumber(number){
+
+  if(
+    !number ||
+    number.length < 5
+  ){
+
+    return "Nomor WhatsApp";
+  }
+
+
+  if(number.startsWith("62")){
+
+    return "+" + number;
+
+  }
+
+
+  return number;
+
+}
+
+
+/* =========================================================
+   FORM
 ========================================================= */
 
 const contactForm =
   document.getElementById(
-    'contactForm'
+    "contactForm"
   );
+
+
+const submitButton =
+  document.getElementById(
+    "submitButton"
+  );
+
 
 const formStatus =
   document.getElementById(
-    'formStatus'
+    "formStatus"
   );
 
 
+/* =========================================================
+   STATUS HELPER
+========================================================= */
+
+function setStatus(
+  message,
+  type
+){
+
+  formStatus.textContent =
+    message;
+
+
+  formStatus.className =
+    "formStatus " +
+    (type || "");
+
+}
+
+
+/* =========================================================
+   SUBMIT CONTACT FORM
+========================================================= */
+
 contactForm.addEventListener(
-  'submit',
-  function(event){
+  "submit",
+  async function(event){
 
     event.preventDefault();
 
 
-    formStatus.textContent =
-      'Pesan sudah terisi. Formulir akan dihubungkan ke sistem admin pada tahap berikutnya.';
+    /* ---------------------------------------------
+       VALIDATION
+    --------------------------------------------- */
+
+    if(
+      !contactForm.checkValidity()
+    ){
+
+      contactForm.reportValidity();
+
+      return;
+
+    }
 
 
-    formStatus.style.color =
-      '#9b7837';
+    /* ---------------------------------------------
+       AMBIL DATA
+    --------------------------------------------- */
+
+    const name =
+      document
+        .getElementById("name")
+        .value
+        .trim();
 
 
-    contactForm.reset();
+    const email =
+      document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const subject =
+      document
+        .getElementById("subject")
+        .value
+        .trim();
+
+
+    const message =
+      document
+        .getElementById("message")
+        .value
+        .trim();
+
+
+    /* ---------------------------------------------
+       CEK DATA
+    --------------------------------------------- */
+
+    if(
+      !name ||
+      !email ||
+      !subject ||
+      !message
+    ){
+
+      setStatus(
+        "Mohon lengkapi semua kolom.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    /* ---------------------------------------------
+       LOADING
+    --------------------------------------------- */
+
+    submitButton.disabled =
+      true;
+
+
+    submitButton.textContent =
+      "MENGIRIM...";
+
+
+    setStatus(
+      "Pesan sedang dikirim...",
+      "loading"
+    );
+
+
+    try{
+
+
+      /* -------------------------------------------
+         REQUEST KE SUPABASE REST API
+
+         Tidak memakai library eksternal.
+      ------------------------------------------- */
+
+      const response =
+        await fetch(
+          SUPABASE_URL +
+          "/rest/v1/" +
+          CONTACT_TABLE,
+          {
+
+            method:"POST",
+
+            headers:{
+
+              "Content-Type":
+                "application/json",
+
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                "Bearer " +
+                SUPABASE_KEY,
+
+              "Prefer":
+                "return=minimal"
+
+            },
+
+            body:
+              JSON.stringify({
+
+                name:
+                  name,
+
+                email:
+                  email,
+
+                subject:
+                  subject,
+
+                message:
+                  message
+
+              })
+
+          }
+        );
+
+
+      /* -------------------------------------------
+         JIKA GAGAL
+      ------------------------------------------- */
+
+      if(
+        !response.ok
+      ){
+
+        let errorMessage =
+          "Pesan gagal dikirim.";
+
+
+        try{
+
+          const errorData =
+            await response.json();
+
+
+          if(
+            errorData &&
+            errorData.message
+          ){
+
+            errorMessage =
+              errorData.message;
+
+          }
+
+          else if(
+            errorData &&
+            errorData.hint
+          ){
+
+            errorMessage =
+              errorData.hint;
+
+          }
+
+        }
+
+        catch(error){
+
+          /* Tidak perlu melakukan apa-apa */
+
+        }
+
+
+        throw new Error(
+          errorMessage
+        );
+
+      }
+
+
+      /* -------------------------------------------
+         BERHASIL
+      ------------------------------------------- */
+
+      contactForm.reset();
+
+
+      setStatus(
+        "Pesan berhasil dikirim. Terima kasih telah menghubungi Mandala Channel.",
+        "success"
+      );
+
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Contact form error:",
+        error
+      );
+
+
+      setStatus(
+        "Pesan belum berhasil dikirim. Silakan coba kembali beberapa saat lagi.",
+        "error"
+      );
+
+    }
+
+
+    finally{
+
+      submitButton.disabled =
+        false;
+
+
+      submitButton.textContent =
+        "KIRIM PESAN";
+
+    }
 
   }
 );
