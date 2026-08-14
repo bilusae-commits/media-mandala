@@ -601,6 +601,261 @@ section{
   }
 }
 </style>
+
+<style id="mandala-v6-overrides">
+/* =========================================================
+   MANDALA V6 — visual refinement
+   ========================================================= */
+:root{
+  --max-fluid:94vw;
+  --bronze:#9b7837;
+  --bronze-soft:#b79a61;
+}
+
+/* Larger, readable utility bar */
+.top{
+  height:34px;
+  font-size:clamp(11px,.72vw,13px);
+  letter-spacing:.01em;
+}
+.top .w{
+  padding-inline:clamp(2px,1vw,18px);
+}
+
+/* Main navigation: readable but still elegant */
+header#siteHeader{
+  height:78px;
+}
+header#siteHeader.scrolled{
+  height:62px;
+}
+.links{
+  gap:clamp(16px,1.9vw,32px);
+}
+.links a{
+  font-size:clamp(11px,.78vw,14px);
+  padding:29px 0;
+}
+.links a:after{bottom:15px}
+header.scrolled .links a{padding:22px 0}
+header.scrolled .links a:after{bottom:11px}
+.yt{
+  font-size:clamp(10px,.68vw,12px);
+  padding:11px 16px;
+}
+
+/* Keep every major content block away from the browser edge */
+.w{
+  width:var(--max-fluid);
+  margin-inline:auto;
+}
+
+/* Hero: photo background, but with a light editorial veil */
+.hero{
+  position:relative;
+  isolation:isolate;
+  min-height:clamp(520px,57vh,650px);
+  padding:clamp(54px,6vw,82px) 0;
+  background:
+    linear-gradient(90deg,
+      rgba(248,250,252,.98) 0%,
+      rgba(248,250,252,.91) 34%,
+      rgba(248,250,252,.58) 66%,
+      rgba(248,250,252,.30) 100%),
+    var(--hero-bg, url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=88"))
+    center/cover no-repeat;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.14));
+  pointer-events:none;
+}
+.heroGrid{
+  width:var(--max-fluid);
+  margin-inline:auto;
+  grid-template-columns:minmax(0,1.04fr) minmax(340px,.76fr);
+  gap:clamp(38px,5vw,90px);
+}
+.heroCopy{
+  max-width:860px;
+  padding-left:clamp(0px,.4vw,8px);
+}
+.hero .k{
+  font-size:clamp(11px,.72vw,13px);
+  letter-spacing:.15em;
+}
+.hero h1{
+  margin:14px 0 22px;
+  max-width:820px;
+  font-size:clamp(42px,4.15vw,72px);
+  line-height:1.01;
+}
+.hero p{
+  max-width:760px;
+  margin-bottom:28px;
+  font-size:clamp(13px,.86vw,16px);
+  line-height:1.7;
+}
+.heroButtons .btn{
+  font-size:clamp(10px,.68vw,12px);
+}
+
+/* Stacked hero photos stay, but don't dominate */
+.visual{
+  width:min(100%,610px);
+  height:clamp(300px,31vw,420px);
+}
+.v1{width:62%;height:84%;right:3%;top:2%}
+.v2{width:38%;height:50%;left:0;bottom:5%}
+.v3{width:28%;height:40%;right:0;bottom:0}
+
+/* Editorial typography: eliminate tiny labels */
+section{
+  padding:clamp(56px,5.4vw,82px) 0;
+}
+.head{
+  margin-bottom:clamp(22px,2.1vw,32px);
+}
+.k{
+  font-size:clamp(11px,.72vw,13px);
+  letter-spacing:.15em;
+}
+.title{
+  font-size:clamp(31px,2.65vw,44px);
+}
+.view{
+  font-size:clamp(11px,.72vw,13px);
+}
+.card h3{
+  font-size:clamp(16px,1.02vw,20px);
+}
+.card p,.story p,.podcast p{
+  font-size:clamp(12px,.76vw,14px);
+}
+.story h3{
+  font-size:clamp(17px,1.08vw,21px);
+}
+
+/* Feature section */
+.feature{
+  min-height:clamp(330px,33vw,500px);
+}
+.feature h2{
+  font-size:clamp(26px,2.2vw,38px);
+}
+
+/* PLAYLIST: larger cards, tighter stage */
+.playlist{
+  padding-top:clamp(50px,4.5vw,68px);
+  padding-bottom:clamp(46px,4.2vw,64px);
+}
+.playlist-stage{
+  height:clamp(390px,31vw,460px);
+  margin-top:0;
+}
+.play-card{
+  width:clamp(230px,18vw,305px);
+  box-shadow:0 20px 44px rgba(0,0,0,.22);
+}
+.play-card .pc-info{
+  padding:clamp(13px,1.1vw,19px);
+}
+.play-card .pc-info strong{
+  font-size:clamp(16px,1.18vw,22px);
+}
+.play-card .pc-info span{
+  font-size:clamp(8px,.58vw,10px);
+}
+
+/* bring the 5-card group closer to the center */
+.play-card.pos-1{
+  transform:translate(-50%,-50%) translateX(clamp(155px,15.5vw,260px))
+    translateZ(-90px) rotateY(-16deg) scale(.78);
+}
+.play-card.pos--1{
+  transform:translate(-50%,-50%) translateX(clamp(-260px,-15.5vw,-155px))
+    translateZ(-90px) rotateY(16deg) scale(.78);
+}
+.play-card.pos-2{
+  transform:translate(-50%,-50%) translateX(clamp(255px,25vw,410px))
+    translateZ(-210px) rotateY(-24deg) scale(.61);
+}
+.play-card.pos--2{
+  transform:translate(-50%,-50%) translateX(clamp(-410px,-25vw,-255px))
+    translateZ(-210px) rotateY(24deg) scale(.61);
+}
+.play-arrow{
+  width:46px;
+  height:46px;
+  font-size:30px;
+}
+.play-arrow.prev{left:clamp(10px,1.5vw,26px)}
+.play-arrow.next{right:clamp(10px,1.5vw,26px)}
+.play-dots{bottom:12px}
+.play-hint{bottom:-3px}
+
+/* Topics: remove meaningless 01/02/03 numbering */
+.topic{
+  min-height:170px;
+  padding:clamp(28px,2.2vw,38px);
+}
+.topic .num{display:none}
+.topic h3{
+  margin-top:0;
+  font-size:clamp(19px,1.25vw,24px);
+}
+.topic p{
+  font-size:clamp(12px,.76vw,14px);
+  line-height:1.6;
+}
+
+/* Newsletter/footer text should follow the same scale */
+.news h2{font-size:clamp(28px,2.3vw,38px)}
+.news p{font-size:clamp(12px,.76vw,14px)}
+.foot p,.foot a{font-size:clamp(11px,.68vw,13px)}
+
+/* Keep mobile usable */
+@media(max-width:820px){
+  .top{height:32px}
+  .heroGrid{grid-template-columns:1fr}
+  .hero{
+    min-height:0;
+    background:
+      linear-gradient(180deg,rgba(248,250,252,.96),rgba(248,250,252,.76)),
+      var(--hero-bg, url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=88"))
+      center/cover no-repeat;
+  }
+  .heroCopy{padding:0}
+  .visual{margin-inline:auto}
+  .playlist-stage{height:410px}
+}
+@media(max-width:560px){
+  :root{--max-fluid:calc(100% - 28px)}
+  .top{font-size:10px}
+  .top .w span:last-child{display:none}
+  header#siteHeader{height:66px}
+  header#siteHeader.scrolled{height:58px}
+  .hero h1{font-size:clamp(37px,11vw,54px)}
+  .hero p{font-size:13px}
+  .playlist-stage{height:390px}
+  .play-card{width:190px}
+  .play-card.pos-1{
+    transform:translate(-50%,-50%) translateX(116px) translateZ(-70px) rotateY(-13deg) scale(.67);
+  }
+  .play-card.pos--1{
+    transform:translate(-50%,-50%) translateX(-116px) translateZ(-70px) rotateY(13deg) scale(.67);
+  }
+}
+
+/* Avoid a one-time reveal that leaves large blank hero on very slow pages */
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none}
+}
+</style>
+
 </head>
 
 <body data-base="./">
@@ -640,7 +895,7 @@ section{
      hero.image_main, hero.image_secondary,
      hero.image_tertiary, hero.primary_url, dst.
      ====================================================== -->
-<section class="hero reveal" id="heroSection">
+<section class="hero reveal" id="heroSection" data-cms-field="background_image">
   <div class="heroGrid">
     <div class="heroCopy">
       <div class="k" id="heroEyebrow" data-cms-field="eyebrow">Mandala Channel · Media Nusantara</div>
@@ -1019,6 +1274,11 @@ function renderHero(hero){
   setImage('heroImageMain',hero.image_main,hero.title||'Mandala Channel');
   setImage('heroImageSecondary',hero.image_secondary,hero.title||'Mandala Channel');
   setImage('heroImageTertiary',hero.image_tertiary,hero.title||'Mandala Channel');
+
+  const heroSection=document.getElementById('heroSection');
+  if(heroSection && hero.background_image){
+    heroSection.style.setProperty('--hero-bg', `url("${String(hero.background_image).replace(/"/g,'&quot;')}")`);
+  }
 }
 
 /*
@@ -1062,7 +1322,6 @@ function renderTopics(){
   document.querySelectorAll('[data-render="topics"]').forEach(el=>{
     el.innerHTML=DATA.topics.map((t,i)=>`
       <a class="topic" href="${BASE}topics/${t.slug}.html">
-        <div class="num">${String(i+1).padStart(2,'0')}</div>
         <h3>${t.name}</h3>
         <p>Jelajahi cerita Mandala tentang ${String(t.name).toLowerCase()}.</p>
       </a>
@@ -1102,7 +1361,8 @@ function renderPlaylists(){
           <img
             src="${BASE}assets/images/playlists/playlist-${id}.jpg"
             alt="${title}"
-            draggable="false">
+            draggable="false"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85';">
           <div class="pc-info">
             <strong>${title}</strong>
             <span>${p.category||''} · ${p.videoCount||0} video</span>
