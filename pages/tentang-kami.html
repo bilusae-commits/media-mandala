@@ -1,2330 +1,1299 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<title>Tentang Kami — Mandala Channel</title>
 
-  <meta
-    name="description"
-    content="Tentang Mandala Channel"
-  >
+<style>
+/* =========================================================
+   MANDALA CHANNEL — TENTANG KAMI
+   Versi final layout
+   ========================================================= */
 
-  <title>Tentang Kami — Mandala</title>
+:root {
+    --navy: #082b50;
+    --navy-dark: #062440;
+    --gold: #b58b45;
+    --gold-soft: #d9c29b;
+    --text: #173657;
+    --muted: #718196;
+    --line: #e5e9ed;
+    --cream: #f8f7f3;
+    --white: #ffffff;
 
-  <style>
-    /* =========================================================
-       RESET
-    ========================================================= */
+    --container: 1240px;
+    --header-height: 58px;
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+/* =========================
+   RESET
+   ========================= */
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: #ffffff;
-      color: #172536;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--white);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 
-    button {
-      font: inherit;
-    }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
 
-    /* =========================================================
-       VARIABLES
-    ========================================================= */
+/* =========================
+   GLOBAL CONTAINER
+   ========================= */
+
+.container {
+    width: min(
+        calc(100% - 48px),
+        var(--container)
+    );
+
+    margin-inline: auto;
+}
+
+/* =========================
+   TOP BAR
+   ========================= */
+
+.top-bar {
+    height: 28px;
+    background: var(--navy-dark);
+    color: #dce6f0;
+
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-inner {
+    width: min(
+        calc(100% - 48px),
+        1380px
+    );
+
+    margin-inline: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 11px;
+    line-height: 1;
+}
+
+.top-left {
+    letter-spacing: .15px;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.top-right a {
+    transition: opacity .2s ease;
+}
+
+.top-right a:hover {
+    opacity: .7;
+}
+
+/* =========================
+   MAIN HEADER
+   ========================= */
+
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    height: var(--header-height);
+
+    background: rgba(255,255,255,.97);
+    border-bottom: 1px solid #edf0f2;
+
+    backdrop-filter: blur(10px);
+}
+
+.header-inner {
+    width: min(
+        calc(100% - 48px),
+        1380px
+    );
+
+    height: 100%;
+    margin-inline: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* =========================
+   LOGO
+   ========================= */
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+.logo-symbol {
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--gold);
+
+    position: relative;
+}
+
+.logo-symbol::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+
+    position: absolute;
+}
+
+.logo-symbol::after {
+    content: "";
+    width: 2px;
+    height: 2px;
+
+    background: var(--gold);
+    border-radius: 50%;
+
+    position: absolute;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo-main {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--navy);
+}
+
+.logo-sub {
+    margin-top: 3px;
+
+    font-size: 7px;
+    letter-spacing: 2.4px;
+    color: #8793a0;
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.navigation a {
+    position: relative;
+
+    color: #596a7c;
+    font-size: 12px;
+    font-weight: 500;
+
+    padding: 21px 0 19px;
+
+    white-space: nowrap;
+}
+
+.navigation a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+
+    height: 2px;
+
+    background: var(--gold);
+
+    transform: scaleX(0);
+    transform-origin: center;
+
+    transition: transform .2s ease;
+}
+
+.navigation a:hover::after,
+.navigation a.active::after {
+    transform: scaleX(1);
+}
+
+.navigation a.active {
+    color: var(--navy);
+}
+
+.youtube-button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--navy);
+    color: white !important;
+
+    padding: 10px 16px !important;
+    border-radius: 3px;
+
+    font-size: 10px !important;
+    font-weight: 600 !important;
+}
+
+.youtube-button::after {
+    display: none !important;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero {
+    min-height: 500px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 88% 50%,
+            rgba(8,43,80,.025),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #fbfcfd 0%,
+            #ffffff 100%
+        );
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    border: 1px solid rgba(181,139,69,.16);
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.hero::before {
+    width: 440px;
+    height: 440px;
+
+    right: -120px;
+    top: 35px;
+}
+
+.hero::after {
+    width: 280px;
+    height: 280px;
+
+    right: -40px;
+    top: 115px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(
+        100%,
+        820px
+    );
+}
+
+.eyebrow {
+    margin: 0 0 14px;
+
+    color: var(--gold);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    margin: 0;
+
+    max-width: 760px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(48px, 6vw, 78px);
+    line-height: .98;
+    font-weight: 400;
+    letter-spacing: -2px;
+
+    color: var(--navy);
+}
+
+.hero-description {
+    margin: 28px 0 0;
+
+    max-width: 650px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.75;
+
+    color: #62758a;
+}
+
+/* =========================
+   WHO WE ARE
+   ========================= */
+
+.intro-section {
+    padding: 110px 0 120px;
+}
+
+.intro-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(260px, .85fr)
+        minmax(300px, 1.25fr);
+
+    gap: clamp(60px, 10vw, 150px);
+
+    align-items: start;
+}
+
+.section-label {
+    margin: 0 0 15px;
+
+    color: var(--gold);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.section-title {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 4vw, 54px);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -1px;
+
+    color: var(--navy);
+}
+
+.intro-text {
+    margin: 5px 0 0;
+
+    max-width: 650px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.9;
+
+    color: #65778b;
+}
+
+/* =========================
+   PRINCIPLES
+   ========================= */
+
+.principles-section {
+    padding: 0 0 115px;
+}
+
+.principles-heading {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 1.4fr)
+        minmax(250px, .7fr);
+
+    gap: 60px;
+
+    align-items: end;
+
+    padding-bottom: 28px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.principles-title {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(40px, 4.5vw, 58px);
+    line-height: 1.05;
+    font-weight: 400;
+
+    color: var(--navy);
+}
+
+.principles-description {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 1.7;
+
+    color: #7a8999;
+}
+
+.principles-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    border-bottom: 1px solid var(--line);
+}
+
+.principle {
+    min-height: 250px;
+
+    padding: 42px 28px 42px 28px;
+
+    border-right: 1px solid var(--line);
+}
+
+.principle:first-child {
+    padding-left: 24px;
+}
+
+.principle:last-child {
+    border-right: none;
+}
+
+.principle h3 {
+    margin: 0 0 13px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    line-height: 1.2;
+    font-weight: 400;
+
+    color: var(--navy);
+}
+
+.principle p {
+    margin: 0;
+
+    max-width: 300px;
+
+    font-size: 12px;
+    line-height: 1.7;
+
+    color: #7b8998;
+}
+
+/* =========================
+   STORY / HOW WE TELL
+   ========================= */
+
+.story-section {
+    padding: 115px 0 125px;
+
+    background: var(--navy);
+    color: white;
+}
+
+.story-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, .9fr)
+        minmax(360px, 1.1fr);
+
+    gap: clamp(70px, 10vw, 150px);
+
+    align-items: start;
+}
+
+.story-title {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 5vw, 62px);
+    line-height: 1.02;
+    font-weight: 400;
+    letter-spacing: -1px;
+
+    color: white;
+}
+
+.story-description {
+    margin: 26px 0 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.75;
+
+    color: #c5d2df;
+}
+
+.story-list {
+    border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.story-item {
+    display: grid;
+
+    grid-template-columns: 130px 1fr;
+
+    gap: 25px;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,.14);
+}
+
+.story-item h3 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    font-weight: 400;
+
+    color: white;
+}
+
+.story-item p {
+    margin: 3px 0 0;
+
+    font-size: 11px;
+    line-height: 1.7;
+
+    color: #aebed0;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+    padding: 26px 0;
+
+    background: var(--navy-dark);
+
+    color: #b7c6d5;
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 30px;
+
+    font-size: 11px;
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 1000px) {
 
     :root {
-      --navy: #082d56;
-      --navy-deep: #061f3c;
-      --ink: #172536;
-      --muted: #718091;
-      --paper: #f7f6f1;
-      --white: #ffffff;
-      --line: #e3e7eb;
-      --bronze: #9b7837;
-
-      --page-width: 94vw;
-      --content-width: 1180px;
+        --container: 900px;
     }
 
-
-    /* =========================================================
-       GLOBAL WIDTH
-    ========================================================= */
-
-    .page-width {
-      width: var(--page-width);
-      margin-inline: auto;
+    .navigation {
+        gap: 18px;
     }
 
-    .content-width {
-      width: min(var(--page-width), var(--content-width));
-      margin-inline: auto;
+    .navigation a {
+        font-size: 11px;
     }
 
-
-    /* =========================================================
-       TOP BAR
-    ========================================================= */
-
-    .topbar {
-      height: 34px;
-      background: var(--navy-deep);
-      color: #dbe4ed;
-      font-size: clamp(10px, 0.7vw, 13px);
+    .intro-grid,
+    .story-grid {
+        gap: 60px;
     }
 
-    .topbar-inner {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding-inline: clamp(2px, 1vw, 18px);
+    .principles-heading {
+        gap: 40px;
     }
 
-    .topbar-left,
-    .topbar-right {
-      white-space: nowrap;
+}
+
+/* =========================
+   SMALL TABLET
+   ========================= */
+
+@media (max-width: 820px) {
+
+    .container {
+        width: min(
+            calc(100% - 40px),
+            700px
+        );
     }
 
-
-    /* =========================================================
-       HEADER
-    ========================================================= */
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      height: 78px;
-
-      background: rgba(255, 255, 255, 0.97);
-      border-bottom: 1px solid rgba(8, 45, 86, 0.08);
-
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-
-      transition:
-        height 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+    .header-inner {
+        width: calc(100% - 32px);
     }
 
-    .site-header.scrolled {
-      height: 62px;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 7px 24px rgba(6, 31, 60, 0.10);
+    .navigation {
+        gap: 14px;
     }
 
-    .nav {
-      height: 100%;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: clamp(15px, 2vw, 35px);
+    .navigation a:nth-child(5) {
+        display: none;
     }
-
-
-    /* =========================================================
-       LOGO
-    ========================================================= */
-
-    .brand {
-      flex: 0 0 auto;
-
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      color: var(--navy);
-    }
-
-    .brand-mark {
-      width: clamp(34px, 2.8vw, 43px);
-      height: clamp(34px, 2.8vw, 43px);
-
-      display: grid;
-      place-items: center;
-
-      border: 1px solid var(--bronze);
-      border-radius: 50%;
-
-      color: var(--bronze);
-      font-size: clamp(15px, 1.1vw, 19px);
-    }
-
-    .brand-name {
-      display: block;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(16px, 1.2vw, 22px);
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      line-height: 1;
-    }
-
-    .brand-subtitle {
-      display: block;
-      margin-top: 4px;
-
-      color: #8794a0;
-
-      font-size: clamp(7px, 0.5vw, 9px);
-      letter-spacing: 0.28em;
-    }
-
-
-    /* =========================================================
-       DESKTOP NAV
-    ========================================================= */
-
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-
-      gap: clamp(16px, 1.9vw, 32px);
-
-      margin-left: auto;
-    }
-
-    .desktop-nav a {
-      position: relative;
-
-      padding: 29px 0;
-
-      color: #526170;
-
-      font-size: clamp(10px, 0.76vw, 14px);
-      white-space: nowrap;
-
-      transition: color 0.2s ease;
-    }
-
-    .desktop-nav a::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 15px;
-
-      height: 2px;
-
-      background: var(--bronze);
-
-      transform: scaleX(0);
-      transform-origin: center;
-
-      transition: transform 0.2s ease;
-    }
-
-    .desktop-nav a:hover,
-    .desktop-nav a.active {
-      color: var(--navy);
-    }
-
-    .desktop-nav a:hover::after,
-    .desktop-nav a.active::after {
-      transform: scaleX(1);
-    }
-
-    .site-header.scrolled .desktop-nav a {
-      padding: 22px 0;
-    }
-
-    .site-header.scrolled .desktop-nav a::after {
-      bottom: 11px;
-    }
-
-
-    /* =========================================================
-       YOUTUBE BUTTON
-    ========================================================= */
 
     .youtube-button {
-      flex: 0 0 auto;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      min-height: 38px;
-      padding: 0 16px;
-
-      border-radius: 3px;
-
-      background: var(--navy);
-      color: #ffffff;
-
-      font-size: clamp(10px, 0.67vw, 12px);
-
-      white-space: nowrap;
-
-      transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+        padding-inline: 12px !important;
     }
-
-    .youtube-button:hover {
-      background: var(--navy-deep);
-      transform: translateY(-1px);
-    }
-
-
-    /* =========================================================
-       MOBILE MENU BUTTON
-    ========================================================= */
-
-    .menu-button {
-      display: none;
-
-      width: 42px;
-      height: 42px;
-
-      border: 1px solid var(--line);
-      background: #ffffff;
-
-      cursor: pointer;
-    }
-
-    .menu-lines {
-      width: 18px;
-      margin: auto;
-    }
-
-    .menu-lines span {
-      display: block;
-
-      height: 1px;
-
-      margin: 4px 0;
-
-      background: var(--navy);
-    }
-
-
-    /* =========================================================
-       MOBILE NAV
-    ========================================================= */
-
-    .mobile-menu {
-      display: none;
-
-      position: fixed;
-      z-index: 999;
-
-      top: 100px;
-      left: 14px;
-      right: 14px;
-
-      padding: 8px;
-
-      background: #ffffff;
-
-      border: 1px solid var(--line);
-
-      box-shadow: 0 15px 40px rgba(6, 31, 60, 0.12);
-    }
-
-    .site-header.scrolled + .mobile-menu {
-      top: 72px;
-    }
-
-    .mobile-menu.open {
-      display: block;
-    }
-
-    .mobile-menu a {
-      display: block;
-
-      padding: 14px;
-
-      color: var(--navy);
-
-      font-size: 12px;
-
-      border-bottom: 1px solid #eef0f2;
-    }
-
-    .mobile-menu a:last-child {
-      border-bottom: 0;
-    }
-
-
-    /* =========================================================
-       LOADING
-    ========================================================= */
-
-    .page-loading {
-      min-height: 70vh;
-
-      display: grid;
-      place-items: center;
-
-      color: var(--muted);
-
-      font-size: 12px;
-      letter-spacing: 0.08em;
-    }
-
-    .page-loading-inner {
-      text-align: center;
-    }
-
-    .loading-symbol {
-      width: 38px;
-      height: 38px;
-
-      margin: 0 auto 18px;
-
-      border: 1px solid var(--line);
-      border-top-color: var(--bronze);
-
-      border-radius: 50%;
-
-      animation: loadingSpin 0.9s linear infinite;
-    }
-
-    @keyframes loadingSpin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-
-    /* =========================================================
-       ERROR
-    ========================================================= */
-
-    .page-error {
-      min-height: 60vh;
-
-      display: none;
-      place-items: center;
-
-      padding: 40px 20px;
-
-      text-align: center;
-    }
-
-    .page-error.show {
-      display: grid;
-    }
-
-    .error-inner {
-      max-width: 520px;
-    }
-
-    .error-inner h2 {
-      margin-bottom: 12px;
-
-      color: var(--navy);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 30px;
-      font-weight: 400;
-    }
-
-    .error-inner p {
-      color: var(--muted);
-
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-
-    /* =========================================================
-       MAIN CONTENT
-    ========================================================= */
-
-    #pageContent {
-      display: none;
-    }
-
-    #pageContent.ready {
-      display: block;
-    }
-
-
-    /* =========================================================
-       HERO
-    ========================================================= */
 
     .hero {
-      position: relative;
+        min-height: 430px;
+    }
 
-      min-height: clamp(470px, 58vh, 680px);
+    .intro-grid,
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
 
-      display: flex;
-      align-items: center;
+    .principles-heading {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 
-      overflow: hidden;
+    .principles-grid {
+        grid-template-columns: 1fr;
+    }
 
-      background:
-        linear-gradient(
-          115deg,
-          #f7f8f9 0%,
-          #ffffff 54%,
-          #f0f3f5 100%
-        );
+    .principle,
+    .principle:first-child {
+        min-height: auto;
+
+        padding: 35px 0;
+
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .principle:last-child {
+        border-bottom: none;
+    }
+
+    .story-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 640px) {
+
+    :root {
+        --header-height: 55px;
+    }
+
+    .top-bar {
+        display: none;
+    }
+
+    .main-header {
+        height: var(--header-height);
+    }
+
+    .header-inner {
+        width: calc(100% - 28px);
+    }
+
+    .logo-symbol {
+        width: 34px;
+        height: 34px;
+    }
+
+    .logo-main {
+        font-size: 17px;
+    }
+
+    .logo-sub {
+        font-size: 6px;
+    }
+
+    .navigation {
+        gap: 0;
+    }
+
+    .navigation a {
+        display: none;
+    }
+
+    .navigation a.active {
+        display: block;
+
+        margin-right: 12px;
+
+        font-size: 10px;
+    }
+
+    .navigation a.active::after {
+        bottom: 8px;
+    }
+
+    .youtube-button {
+        display: inline-flex !important;
+
+        padding: 9px 11px !important;
+
+        font-size: 9px !important;
+    }
+
+    .container {
+        width: calc(100% - 32px);
+    }
+
+    .hero {
+        min-height: 470px;
     }
 
     .hero::before {
-      content: "";
+        width: 300px;
+        height: 300px;
 
-      position: absolute;
-
-      width: clamp(280px, 34vw, 540px);
-      height: clamp(280px, 34vw, 540px);
-
-      right: clamp(-170px, -9vw, -70px);
-      top: 50%;
-
-      transform: translateY(-50%);
-
-      border: 1px solid rgba(155, 120, 55, 0.20);
-      border-radius: 50%;
+        right: -160px;
+        top: 100px;
     }
 
     .hero::after {
-      content: "";
+        width: 190px;
+        height: 190px;
 
-      position: absolute;
-
-      width: clamp(180px, 22vw, 340px);
-      height: clamp(180px, 22vw, 340px);
-
-      right: clamp(-70px, -3vw, -20px);
-      top: 50%;
-
-      transform: translateY(-50%);
-
-      border: 1px solid rgba(155, 120, 55, 0.13);
-      border-radius: 50%;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-
-      width: min(var(--page-width), var(--content-width));
-
-      padding: clamp(70px, 8vw, 110px) 0;
-    }
-
-    .eyebrow {
-      margin-bottom: 16px;
-
-      color: var(--bronze);
-
-      font-size: clamp(10px, 0.7vw, 13px);
-      font-weight: 600;
-      letter-spacing: 0.17em;
-      text-transform: uppercase;
+        right: -105px;
+        top: 155px;
     }
 
     .hero-title {
-      max-width: 900px;
-
-      margin-bottom: 25px;
-
-      color: var(--navy);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(46px, 6.2vw, 88px);
-      font-weight: 400;
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-    }
-
-    .hero-title .accent {
-      color: var(--bronze);
+        font-size: clamp(42px, 13vw, 60px);
+        letter-spacing: -1.5px;
     }
 
     .hero-description {
-      max-width: 720px;
-
-      color: #687888;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(16px, 1.12vw, 20px);
-      line-height: 1.8;
+        font-size: 16px;
+        line-height: 1.7;
     }
 
-
-    /* =========================================================
-       INTRO
-    ========================================================= */
-
-    .intro {
-      padding: clamp(70px, 8vw, 115px) 0;
-      background: #ffffff;
+    .intro-section {
+        padding: 75px 0 80px;
     }
 
-    .intro-grid {
-      width: min(var(--page-width), var(--content-width));
-
-      margin-inline: auto;
-
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, 0.8fr)
-        minmax(0, 1.2fr);
-
-      gap: clamp(40px, 8vw, 120px);
-
-      align-items: start;
+    .section-title {
+        font-size: 39px;
     }
 
-    .section-label {
-      color: var(--bronze);
-
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+    .intro-text {
+        font-size: 16px;
+        line-height: 1.8;
     }
 
-    .intro-title {
-      margin-top: 9px;
-
-      color: var(--navy);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(32px, 3.3vw, 52px);
-      font-weight: 400;
-      line-height: 1.08;
-      letter-spacing: -0.025em;
+    .principles-section {
+        padding-bottom: 80px;
     }
 
-    .intro-content {
-      color: #657484;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(15px, 1vw, 18px);
-      line-height: 1.9;
+    .principles-title {
+        font-size: 40px;
     }
 
-    .intro-content p {
-      margin-bottom: 20px;
+    .principle h3 {
+        font-size: 23px;
     }
 
-    .intro-content p:last-child {
-      margin-bottom: 0;
+    .story-section {
+        padding: 80px 0;
     }
 
-
-    /* =========================================================
-       MANIFESTO
-    ========================================================= */
-
-    .manifesto {
-      padding: clamp(65px, 8vw, 110px) 0;
-      background: var(--paper);
+    .story-title {
+        font-size: 43px;
     }
 
-    .manifesto-inner {
-      width: min(var(--page-width), 980px);
-
-      margin-inline: auto;
-
-      text-align: center;
+    .story-description {
+        font-size: 16px;
     }
-
-    .manifesto-mark {
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-      place-items: center;
-
-      margin: 0 auto 24px;
-
-      border: 1px solid var(--bronze);
-      border-radius: 50%;
-
-      color: var(--bronze);
-
-      font-size: 18px;
-    }
-
-    .manifesto-text {
-      color: var(--navy);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(25px, 3vw, 44px);
-      font-weight: 400;
-      line-height: 1.35;
-      letter-spacing: -0.02em;
-    }
-
-    .manifesto-credit {
-      display: block;
-
-      margin-top: 25px;
-
-      color: #7d8994;
-
-      font-size: 10px;
-      font-style: normal;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       VALUES
-    ========================================================= */
-
-    .values {
-      padding: clamp(70px, 8vw, 110px) 0;
-      background: #ffffff;
-    }
-
-    .values-head {
-      width: min(var(--page-width), var(--content-width));
-
-      margin: 0 auto 42px;
-
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-
-      gap: 30px;
-    }
-
-    .values-title {
-      margin-top: 8px;
-
-      color: var(--navy);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(31px, 3vw, 47px);
-      font-weight: 400;
-      line-height: 1.05;
-    }
-
-    .values-description {
-      max-width: 390px;
-
-      color: #788592;
-
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-    .values-grid {
-      width: min(var(--page-width), var(--content-width));
-
-      margin-inline: auto;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .value-card {
-      min-height: 260px;
-
-      padding: 30px 30px 35px;
-
-      border-right: 1px solid var(--line);
-    }
-
-    .value-card:last-child {
-      border-right: 0;
-    }
-
-    .value-number {
-      margin-bottom: 42px;
-
-      color: #bdc4ca;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 24px;
-    }
-
-    .value-title {
-      margin-bottom: 12px;
-
-      color: var(--navy);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(21px, 1.7vw, 28px);
-      font-weight: 400;
-    }
-
-    .value-description {
-      max-width: 310px;
-
-      color: #71808d;
-
-      font-size: 11px;
-      line-height: 1.75;
-    }
-
-
-    /* =========================================================
-       EDITORIAL
-    ========================================================= */
-
-    .editorial {
-      padding: clamp(70px, 8vw, 110px) 0;
-
-      background: var(--navy);
-      color: #ffffff;
-    }
-
-    .editorial-grid {
-      width: min(var(--page-width), var(--content-width));
-
-      margin-inline: auto;
-
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
-
-      gap: clamp(45px, 8vw, 120px);
-
-      align-items: center;
-    }
-
-    .editorial .section-label {
-      color: #c5a35f;
-    }
-
-    .editorial-title {
-      margin: 10px 0 22px;
-
-      color: #ffffff;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(34px, 3.7vw, 57px);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-    }
-
-    .editorial-description {
-      max-width: 550px;
-
-      color: #c4cfda;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(15px, 1vw, 18px);
-      line-height: 1.85;
-    }
-
-    .editorial-list {
-      border-top: 1px solid rgba(255, 255, 255, 0.16);
-    }
-
-    .editorial-item {
-      display: grid;
-
-      grid-template-columns: 45px 1fr;
-
-      gap: 18px;
-
-      padding: 20px 0;
-
-      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-    }
-
-    .editorial-number {
-      color: #c5a35f;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 18px;
-    }
-
-    .editorial-item-title {
-      margin-bottom: 5px;
-
-      color: #ffffff;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 19px;
-      font-weight: 400;
-    }
-
-    .editorial-item-description {
-      color: #aebdca;
-
-      font-size: 10px;
-      line-height: 1.65;
-    }
-
-
-    /* =========================================================
-       CLOSING
-    ========================================================= */
-
-    .closing {
-      padding: clamp(75px, 9vw, 120px) 0;
-
-      text-align: center;
-
-      background: #ffffff;
-    }
-
-    .closing-inner {
-      width: min(var(--page-width), 800px);
-
-      margin-inline: auto;
-    }
-
-    .closing-title {
-      margin: 8px 0 18px;
-
-      color: var(--navy);
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(34px, 4vw, 57px);
-      font-weight: 400;
-      line-height: 1.04;
-      letter-spacing: -0.03em;
-    }
-
-    .closing-description {
-      max-width: 610px;
-
-      margin: 0 auto 30px;
-
-      color: #74828f;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: clamp(15px, 1vw, 18px);
-      line-height: 1.8;
-    }
-
-    .contact-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      min-height: 45px;
-
-      padding: 0 23px;
-
-      border-radius: 3px;
-
-      background: var(--navy);
-      color: #ffffff;
-
-      font-size: 11px;
-      font-weight: 600;
-
-      transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .contact-button:hover {
-      background: var(--navy-deep);
-      transform: translateY(-1px);
-    }
-
-
-    /* =========================================================
-       FOOTER
-    ========================================================= */
 
     .footer {
-      padding: 30px 20px;
-
-      background: var(--navy-deep);
-      color: #c5d0dc;
-
-      text-align: center;
-
-      font-size: 12px;
+        padding: 22px 0;
     }
 
+}
 
-    /* =========================================================
-       RESPONSIVE
-    ========================================================= */
+/* =========================
+   VERY SMALL MOBILE
+   ========================= */
 
-    @media (max-width: 1050px) {
+@media (max-width: 390px) {
 
-      .desktop-nav {
-        display: none;
-      }
-
-      .menu-button {
-        display: block;
-      }
-
-      .youtube-button {
-        margin-left: auto;
-      }
-
+    .container {
+        width: calc(100% - 26px);
     }
 
-
-    @media (max-width: 850px) {
-
-      .intro-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .values-head {
-        display: block;
-      }
-
-      .values-description {
-        margin-top: 15px;
-      }
-
-      .editorial-grid {
-        grid-template-columns: 1fr;
-        gap: 45px;
-      }
-
-    }
-
-
-    @media (max-width: 700px) {
-
-      .values-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .value-card {
-        min-height: auto;
-
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .value-card:last-child {
-        border-bottom: 0;
-      }
-
-      .value-number {
-        margin-bottom: 25px;
-      }
-
-    }
-
-
-    @media (max-width: 560px) {
-
-      :root {
-        --page-width: calc(100% - 28px);
-      }
-
-      .topbar {
-        font-size: 10px;
-      }
-
-      .topbar-right {
-        display: none;
-      }
-
-      .site-header {
-        height: 66px;
-      }
-
-      .site-header.scrolled {
-        height: 58px;
-      }
-
-      .brand-mark {
-        width: 34px;
-        height: 34px;
-      }
-
-      .brand-name {
+    .logo-main {
         font-size: 15px;
-      }
+    }
 
-      .brand-subtitle {
-        font-size: 6px;
-      }
+    .navigation a.active {
+        display: none;
+    }
 
-      .youtube-button {
-        min-height: 34px;
-        padding-inline: 11px;
-        font-size: 9px;
-      }
+    .hero {
+        min-height: 430px;
+    }
 
-      .hero {
-        min-height: 470px;
-      }
+    .hero-title {
+        font-size: 40px;
+    }
 
-      .hero-inner {
-        width: calc(100% - 20px);
-      }
-
-      .hero-title {
-        font-size: clamp(45px, 13vw, 65px);
-      }
-
-      .hero-description {
-        font-size: 14px;
-        line-height: 1.75;
-      }
-
-      .intro,
-      .values,
-      .editorial,
-      .closing {
-        padding-top: 60px;
-        padding-bottom: 70px;
-      }
-
-      .intro-grid,
-      .values-grid,
-      .editorial-grid {
-        width: calc(100% - 20px);
-      }
-
-      .intro-content {
+    .hero-description {
         font-size: 15px;
-      }
-
-      .manifesto {
-        padding: 60px 0;
-      }
-
-      .manifesto-text {
-        font-size: 25px;
-      }
-
-      .value-card {
-        padding: 25px 20px 30px;
-      }
-
-      .editorial {
-        padding-top: 60px;
-        padding-bottom: 70px;
-      }
-
-      .closing {
-        padding-top: 65px;
-        padding-bottom: 75px;
-      }
-
     }
 
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation: none !important;
-        transition: none !important;
-      }
-
-    }
-
-  </style>
+}
+</style>
 </head>
-
 
 <body>
 
+<!-- =====================================================
+     TOP BAR
+     ===================================================== -->
 
-  <!-- =======================================================
-       TOP BAR
-  ======================================================== -->
+<div class="top-bar">
+    <div class="top-bar-inner">
 
-  <div class="topbar">
+        <div class="top-left">
+            MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA
+        </div>
 
-    <div class="page-width topbar-inner">
+        <div class="top-right">
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <span>·</span>
+            <a href="#" aria-label="YouTube">YouTube</a>
+            <span>·</span>
+            <a href="kontak.html">Kontak</a>
+        </div>
 
-      <span class="topbar-left">
-        MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA
-      </span>
+    </div>
+</div>
 
-      <span class="topbar-right">
-        Instagram · YouTube · Kontak
-      </span>
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header class="main-header">
+
+    <div class="header-inner">
+
+        <a href="../index.html" class="logo" aria-label="Mandala Channel">
+
+            <div class="logo-symbol"></div>
+
+            <div class="logo-text">
+                <div class="logo-main">MANDALA</div>
+                <div class="logo-sub">CHANNEL</div>
+            </div>
+
+        </a>
+
+
+        <nav class="navigation" aria-label="Navigasi utama">
+
+            <a href="../index.html">
+                BERANDA
+            </a>
+
+            <a href="artikel.html">
+                ARTIKEL
+            </a>
+
+            <a href="video.html">
+                VIDEO
+            </a>
+
+            <a href="playlist.html">
+                PLAYLIST
+            </a>
+
+            <a href="podcast.html">
+                PODCAST
+            </a>
+
+            <a href="tentang-kami.html" class="active">
+                TENTANG
+            </a>
+
+            <a
+                href="#"
+                class="youtube-button"
+                target="_blank"
+                rel="noopener"
+            >
+                YOUTUBE ↗
+            </a>
+
+        </nav>
 
     </div>
 
-  </div>
+</header>
 
 
-  <!-- =======================================================
-       HEADER
-  ======================================================== -->
+<!-- =====================================================
+     HERO
+     ===================================================== -->
 
-  <header
-    class="site-header"
-    id="siteHeader"
-  >
+<main>
 
-    <div class="page-width nav">
+<section class="hero">
 
+    <div class="container">
 
-      <a
-        href="index.html"
-        class="brand"
-        aria-label="Mandala Beranda"
-      >
+        <div class="hero-content">
 
-        <span class="brand-mark">
-          ✺
-        </span>
+            <p class="eyebrow">
+                Tentang Mandala
+            </p>
 
-        <span>
+            <h1 class="hero-title">
+                Melihat Nusantara lebih dekat.
+            </h1>
 
-          <span class="brand-name">
-            MANDALA
-          </span>
+            <p class="hero-description">
+                Mandala Channel adalah ruang media yang menghadirkan
+                cerita, gagasan, budaya, dan kehidupan masyarakat
+                Nusantara melalui sudut pandang yang dekat dan berimbang.
+            </p>
 
-          <span class="brand-subtitle">
-            CHANNEL
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="desktop-nav"
-        aria-label="Navigasi utama"
-      >
-
-        <a href="index.html">
-          BERANDA
-        </a>
-
-        <a href="artikel.html">
-          ARTIKEL
-        </a>
-
-        <a href="video.html">
-          VIDEO
-        </a>
-
-        <a href="playlist.html">
-          PLAYLIST
-        </a>
-
-        <a href="podcast.html">
-          PODCAST
-        </a>
-
-        <a
-          href="tentang-kami.html"
-          class="active"
-        >
-          TENTANG
-        </a>
-
-      </nav>
-
-
-      <a
-        href="#"
-        class="youtube-button"
-        id="youtubeButton"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        YOUTUBE ↗
-      </a>
-
-
-      <button
-        type="button"
-        class="menu-button"
-        id="menuButton"
-        aria-label="Buka menu"
-        aria-expanded="false"
-      >
-
-        <span class="menu-lines">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-
-      </button>
-
+        </div>
 
     </div>
 
-  </header>
+</section>
 
 
-  <!-- =======================================================
-       MOBILE MENU
-  ======================================================== -->
+<!-- =====================================================
+     SIAPA KAMI
+     ===================================================== -->
 
-  <div
-    class="mobile-menu"
-    id="mobileMenu"
-  >
+<section class="intro-section">
 
-    <a href="index.html">
-      BERANDA
-    </a>
+    <div class="container">
 
-    <a href="artikel.html">
-      ARTIKEL
-    </a>
+        <div class="intro-grid">
 
-    <a href="video.html">
-      VIDEO
-    </a>
+            <div>
 
-    <a href="playlist.html">
-      PLAYLIST
-    </a>
+                <p class="section-label">
+                    Siapa Kami
+                </p>
 
-    <a href="podcast.html">
-      PODCAST
-    </a>
+                <h2 class="section-title">
+                    Media yang memilih untuk mendengar.
+                </h2>
 
-    <a href="tentang-kami.html">
-      TENTANG
-    </a>
-
-    <a href="kontak.html">
-      KONTAK
-    </a>
-
-  </div>
+            </div>
 
 
-  <!-- =======================================================
-       LOADING
-  ======================================================== -->
+            <div>
 
-  <div
-    class="page-loading"
-    id="pageLoading"
-  >
+                <p class="intro-text">
+                    Mandala Channel hadir sebagai ruang untuk menemukan
+                    kembali cerita-cerita yang tumbuh di sekitar kita.
+                    Kami percaya bahwa sebuah cerita tidak hanya tentang
+                    apa yang terjadi, tetapi juga tentang manusia,
+                    konteks, dan suara yang ada di dalamnya.
+                </p>
 
-    <div class="page-loading-inner">
+                <p class="intro-text">
+                    Melalui artikel, video, podcast, dan berbagai bentuk
+                    cerita lainnya, Mandala berusaha menghadirkan informasi
+                    yang dekat dengan kehidupan masyarakat Nusantara.
+                </p>
 
-      <div class="loading-symbol"></div>
+            </div>
 
-      <div>
-        MEMUAT HALAMAN
-      </div>
+        </div>
 
     </div>
 
-  </div>
+</section>
 
 
-  <!-- =======================================================
-       ERROR
-  ======================================================== -->
+<!-- =====================================================
+     PRINSIP KAMI
+     ===================================================== -->
 
-  <section
-    class="page-error"
-    id="pageError"
-  >
+<section class="principles-section">
 
-    <div class="error-inner">
+    <div class="container">
 
-      <h2>
-        Halaman belum dapat dimuat.
-      </h2>
+        <div class="principles-heading">
 
-      <p>
-        Konten Tentang Kami tidak berhasil
-        diambil dari server. Silakan periksa
-        koneksi atau konfigurasi Supabase.
-      </p>
+            <div>
+
+                <p class="section-label">
+                    Prinsip Kami
+                </p>
+
+                <h2 class="principles-title">
+                    Tiga hal yang kami jaga.
+                </h2>
+
+            </div>
+
+            <p class="principles-description">
+                Dalam setiap cerita, kami berusaha menjaga kedekatan
+                dengan fakta, manusia, dan konteks yang menyertainya.
+            </p>
+
+        </div>
+
+
+        <div class="principles-grid">
+
+            <article class="principle">
+
+                <h3>
+                    Kedekatan
+                </h3>
+
+                <p>
+                    Mendekat kepada sumber cerita dan masyarakat agar
+                    sebuah peristiwa tidak hanya hadir dalam permukaannya.
+                </p>
+
+            </article>
+
+
+            <article class="principle">
+
+                <h3>
+                    Konteks
+                </h3>
+
+                <p>
+                    Sebuah cerita selalu memiliki latar. Kami berusaha
+                    menghadirkan konteks agar informasi dapat dipahami
+                    secara utuh.
+                </p>
+
+            </article>
+
+
+            <article class="principle">
+
+                <h3>
+                    Perspektif
+                </h3>
+
+                <p>
+                    Nusantara memiliki banyak suara dan sudut pandang.
+                    Kami membuka ruang untuk melihat cerita dari lebih
+                    banyak sisi.
+                </p>
+
+            </article>
+
+        </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- =======================================================
-       MAIN CONTENT
-  ======================================================== -->
+<!-- =====================================================
+     CARA KAMI BERCERITA
+     ===================================================== -->
 
-  <main id="pageContent">
+<section class="story-section">
 
+    <div class="container">
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-
-    <section class="hero">
-
-      <div class="hero-inner">
-
-        <div
-          class="eyebrow"
-          id="heroLabel"
-        ></div>
-
-        <h1
-          class="hero-title"
-          id="heroTitle"
-        ></h1>
-
-        <p
-          class="hero-description"
-          id="heroDescription"
-        ></p>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         INTRO
-    ====================================================== -->
-
-    <section class="intro">
-
-      <div class="intro-grid">
-
-        <div>
-
-          <div
-            class="section-label"
-            id="introLabel"
-          ></div>
-
-          <h2
-            class="intro-title"
-            id="introTitle"
-          ></h2>
-
-        </div>
-
-
-        <div
-          class="intro-content"
-          id="introContent"
-        ></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         MANIFESTO
-    ====================================================== -->
-
-    <section class="manifesto">
-
-      <div class="manifesto-inner">
-
-        <div class="manifesto-mark">
-          ✺
-        </div>
-
-        <blockquote
-          class="manifesto-text"
-          id="manifestoText"
-        ></blockquote>
-
-        <cite class="manifesto-credit">
-          Mandala Channel
-        </cite>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         VALUES
-    ====================================================== -->
-
-    <section class="values">
-
-      <div class="values-head">
-
-        <div>
-
-          <div
-            class="section-label"
-            id="valuesLabel"
-          ></div>
-
-          <h2
-            class="values-title"
-            id="valuesTitle"
-          ></h2>
-
-        </div>
-
-        <p
-          class="values-description"
-          id="valuesDescription"
-        ></p>
-
-      </div>
-
-
-      <div class="values-grid">
-
-
-        <article class="value-card">
-
-          <div class="value-number">
-            I
-          </div>
-
-          <h3
-            class="value-title"
-            id="value1Title"
-          ></h3>
-
-          <p
-            class="value-description"
-            id="value1Description"
-          ></p>
-
-        </article>
-
-
-        <article class="value-card">
-
-          <div class="value-number">
-            II
-          </div>
-
-          <h3
-            class="value-title"
-            id="value2Title"
-          ></h3>
-
-          <p
-            class="value-description"
-            id="value2Description"
-          ></p>
-
-        </article>
-
-
-        <article class="value-card">
-
-          <div class="value-number">
-            III
-          </div>
-
-          <h3
-            class="value-title"
-            id="value3Title"
-          ></h3>
-
-          <p
-            class="value-description"
-            id="value3Description"
-          ></p>
-
-        </article>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         EDITORIAL
-    ====================================================== -->
-
-    <section class="editorial">
-
-      <div class="editorial-grid">
-
-
-        <div>
-
-          <div
-            class="section-label"
-            id="editorialLabel"
-          ></div>
-
-          <h2
-            class="editorial-title"
-            id="editorialTitle"
-          ></h2>
-
-          <p
-            class="editorial-description"
-            id="editorialDescription"
-          ></p>
-
-        </div>
-
-
-        <div class="editorial-list">
-
-
-          <article class="editorial-item">
-
-            <div class="editorial-number">
-              01
-            </div>
+        <div class="story-grid">
 
             <div>
 
-              <h3
-                class="editorial-item-title"
-                id="editorial1Title"
-              ></h3>
+                <p class="section-label">
+                    Cara Kami Bercerita
+                </p>
 
-              <p
-                class="editorial-item-description"
-                id="editorial1Description"
-              ></p>
+                <h2 class="story-title">
+                    Tidak sekadar memberitakan.
+                </h2>
 
-            </div>
-
-          </article>
-
-
-          <article class="editorial-item">
-
-            <div class="editorial-number">
-              02
-            </div>
-
-            <div>
-
-              <h3
-                class="editorial-item-title"
-                id="editorial2Title"
-              ></h3>
-
-              <p
-                class="editorial-item-description"
-                id="editorial2Description"
-              ></p>
+                <p class="story-description">
+                    Kami ingin setiap konten memiliki alasan untuk hadir.
+                </p>
 
             </div>
 
-          </article>
+
+            <div class="story-list">
+
+                <article class="story-item">
+
+                    <div>
+                        <h3>
+                            Riset
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p>
+                            Memahami informasi dan latar cerita sebelum
+                            menyampaikannya kepada publik.
+                        </p>
+                    </div>
+
+                </article>
 
 
-          <article class="editorial-item">
+                <article class="story-item">
 
-            <div class="editorial-number">
-              03
+                    <div>
+                        <h3>
+                            Mendengar
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p>
+                            Memberikan ruang kepada orang-orang yang
+                            berada di dalam cerita.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="story-item">
+
+                    <div>
+                        <h3>
+                            Menyajikan
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p>
+                            Mengemas informasi dengan bahasa yang jelas,
+                            visual yang sederhana, dan konteks yang cukup.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="story-item">
+
+                    <div>
+                        <h3>
+                            Mengajak berpikir
+                        </h3>
+                    </div>
+
+                    <div>
+                        <p>
+                            Membuka percakapan, bukan sekadar memberikan
+                            kesimpulan.
+                        </p>
+                    </div>
+
+                </article>
+
             </div>
-
-            <div>
-
-              <h3
-                class="editorial-item-title"
-                id="editorial3Title"
-              ></h3>
-
-              <p
-                class="editorial-item-description"
-                id="editorial3Description"
-              ></p>
-
-            </div>
-
-          </article>
-
-
-          <article class="editorial-item">
-
-            <div class="editorial-number">
-              04
-            </div>
-
-            <div>
-
-              <h3
-                class="editorial-item-title"
-                id="editorial4Title"
-              ></h3>
-
-              <p
-                class="editorial-item-description"
-                id="editorial4Description"
-              ></p>
-
-            </div>
-
-          </article>
-
 
         </div>
 
+    </div>
 
-      </div>
+</section>
 
-    </section>
+</main>
 
 
-    <!-- =====================================================
-         CLOSING
-    ====================================================== -->
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
 
-    <section class="closing">
+<footer class="footer">
 
-      <div class="closing-inner">
+    <div class="container">
 
-        <div
-          class="section-label"
-          id="closingLabel"
-        ></div>
+        <div class="footer-inner">
+            © 2026 Mandala Channel
+        </div>
 
-        <h2
-          class="closing-title"
-          id="closingTitle"
-        ></h2>
+    </div>
 
-        <p
-          class="closing-description"
-          id="closingDescription"
-        ></p>
+</footer>
 
-        <a
-          href="kontak.html"
-          class="contact-button"
-        >
-          HUBUNGI MANDALA →
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer class="footer">
-      © 2026 Mandala Channel
-    </footer>
-
-
-  </main>
-
-
-  <!-- =======================================================
-       JAVASCRIPT
-  ======================================================== -->
-
-  <script>
-
-    /* =======================================================
-       SUPABASE
-    ======================================================== */
-
-    const SUPABASE_URL =
-      "https://roeckoabffhyctfkvbhw.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr";
-
-
-    /* =======================================================
-       CONFIG
-    ======================================================== */
-
-    const ABOUT_ENDPOINT =
-      SUPABASE_URL +
-      "/rest/v1/about_page?select=*";
-
-
-    /* =======================================================
-       ELEMENTS
-    ======================================================== */
-
-    const siteHeader =
-      document.getElementById("siteHeader");
-
-    const pageLoading =
-      document.getElementById("pageLoading");
-
-    const pageError =
-      document.getElementById("pageError");
-
-    const pageContent =
-      document.getElementById("pageContent");
-
-    const menuButton =
-      document.getElementById("menuButton");
-
-    const mobileMenu =
-      document.getElementById("mobileMenu");
-
-    const youtubeButton =
-      document.getElementById("youtubeButton");
-
-
-    /* =======================================================
-       HEADER SCROLL
-    ======================================================== */
-
-    function updateHeader() {
-
-      if (window.scrollY > 20) {
-
-        siteHeader.classList.add("scrolled");
-
-      } else {
-
-        siteHeader.classList.remove("scrolled");
-
-      }
-
-    }
-
-    updateHeader();
-
-    window.addEventListener(
-      "scroll",
-      updateHeader,
-      {
-        passive: true
-      }
-    );
-
-
-    /* =======================================================
-       MOBILE MENU
-    ======================================================== */
-
-    menuButton.addEventListener(
-      "click",
-      function () {
-
-        const isOpen =
-          mobileMenu.classList.toggle("open");
-
-        menuButton.setAttribute(
-          "aria-expanded",
-          String(isOpen)
-        );
-
-      }
-    );
-
-
-    mobileMenu
-      .querySelectorAll("a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            mobileMenu.classList.remove("open");
-
-            menuButton.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-          }
-        );
-
-      });
-
-
-    /* =======================================================
-       YOUTUBE
-
-       Ganti URL ini nanti dengan channel Mandala.
-    ======================================================== */
-
-    const YOUTUBE_URL =
-      "https://youtube.com/";
-
-    youtubeButton.href =
-      YOUTUBE_URL;
-
-
-    /* =======================================================
-       TEXT ESCAPE
-    ======================================================== */
-
-    function escapeHTML(value) {
-
-      if (value === null || value === undefined) {
-        return "";
-      }
-
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* =======================================================
-       SET TEXT
-    ======================================================== */
-
-    function setText(id, value) {
-
-      const element =
-        document.getElementById(id);
-
-      if (!element) {
-        return;
-      }
-
-      element.textContent =
-        value ?? "";
-
-    }
-
-
-    /* =======================================================
-       INTRO CONTENT
-
-       Supabase menyimpan intro_content
-       sebagai satu text panjang.
-
-       Setiap paragraf dipisahkan dengan
-       baris kosong.
-    ======================================================== */
-
-    function renderIntroContent(content) {
-
-      const element =
-        document.getElementById(
-          "introContent"
-        );
-
-      if (!element) {
-        return;
-      }
-
-      const text =
-        String(content || "")
-          .trim();
-
-      if (!text) {
-        element.innerHTML = "";
-        return;
-      }
-
-      const paragraphs =
-        text
-          .split(/\n\s*\n/)
-          .map(function (paragraph) {
-
-            return paragraph.trim();
-
-          })
-          .filter(Boolean);
-
-      element.innerHTML =
-        paragraphs
-          .map(function (paragraph) {
-
-            return (
-              "<p>" +
-              escapeHTML(paragraph)
-                .replace(/\n/g, "<br>") +
-              "</p>"
-            );
-
-          })
-          .join("");
-
-    }
-
-
-    /* =======================================================
-       RENDER DATA
-    ======================================================== */
-
-    function renderAboutPage(data) {
-
-      setText(
-        "heroLabel",
-        data.hero_label
-      );
-
-      setText(
-        "heroTitle",
-        data.hero_title
-      );
-
-      setText(
-        "heroDescription",
-        data.hero_description
-      );
-
-
-      setText(
-        "introLabel",
-        data.intro_label
-      );
-
-      setText(
-        "introTitle",
-        data.intro_title
-      );
-
-      renderIntroContent(
-        data.intro_content
-      );
-
-
-      setText(
-        "manifestoText",
-        data.manifesto
-      );
-
-
-      setText(
-        "valuesLabel",
-        data.values_label
-      );
-
-      setText(
-        "valuesTitle",
-        data.values_title
-      );
-
-      setText(
-        "valuesDescription",
-        data.values_description
-      );
-
-
-      setText(
-        "value1Title",
-        data.value_1_title
-      );
-
-      setText(
-        "value1Description",
-        data.value_1_description
-      );
-
-
-      setText(
-        "value2Title",
-        data.value_2_title
-      );
-
-      setText(
-        "value2Description",
-        data.value_2_description
-      );
-
-
-      setText(
-        "value3Title",
-        data.value_3_title
-      );
-
-      setText(
-        "value3Description",
-        data.value_3_description
-      );
-
-
-      setText(
-        "editorialLabel",
-        data.editorial_label
-      );
-
-      setText(
-        "editorialTitle",
-        data.editorial_title
-      );
-
-      setText(
-        "editorialDescription",
-        data.editorial_description
-      );
-
-
-      setText(
-        "editorial1Title",
-        data.editorial_1_title
-      );
-
-      setText(
-        "editorial1Description",
-        data.editorial_1_description
-      );
-
-
-      setText(
-        "editorial2Title",
-        data.editorial_2_title
-      );
-
-      setText(
-        "editorial2Description",
-        data.editorial_2_description
-      );
-
-
-      setText(
-        "editorial3Title",
-        data.editorial_3_title
-      );
-
-      setText(
-        "editorial3Description",
-        data.editorial_3_description
-      );
-
-
-      setText(
-        "editorial4Title",
-        data.editorial_4_title
-      );
-
-      setText(
-        "editorial4Description",
-        data.editorial_4_description
-      );
-
-
-      setText(
-        "closingLabel",
-        data.closing_label
-      );
-
-      setText(
-        "closingTitle",
-        data.closing_title
-      );
-
-      setText(
-        "closingDescription",
-        data.closing_description
-      );
-
-    }
-
-
-    /* =======================================================
-       LOAD FROM SUPABASE
-    ======================================================== */
-
-    async function loadAboutPage() {
-
-      try {
-
-        const response =
-          await fetch(
-            ABOUT_ENDPOINT,
-            {
-              method: "GET",
-
-              headers: {
-                "apikey": SUPABASE_KEY,
-
-                "Authorization":
-                  "Bearer " +
-                  SUPABASE_KEY,
-
-                "Content-Type":
-                  "application/json"
-              }
-            }
-          );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Supabase HTTP " +
-            response.status
-          );
-
-        }
-
-
-        const rows =
-          await response.json();
-
-
-        if (
-          !Array.isArray(rows) ||
-          rows.length === 0
-        ) {
-
-          throw new Error(
-            "Data about_page kosong."
-          );
-
-        }
-
-
-        /*
-          Kita mengambil row pertama.
-
-          Saat Editor nanti dibuat,
-          sistem akan mempertahankan
-          satu row utama untuk halaman
-          Tentang Kami.
-        */
-
-        renderAboutPage(
-          rows[0]
-        );
-
-
-        pageLoading.style.display =
-          "none";
-
-        pageError.classList.remove(
-          "show"
-        );
-
-        pageContent.classList.add(
-          "ready"
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Gagal memuat about_page:",
-          error
-        );
-
-
-        pageLoading.style.display =
-          "none";
-
-        pageContent.classList.remove(
-          "ready"
-        );
-
-        pageError.classList.add(
-          "show"
-        );
-
-      }
-
-    }
-
-
-    /* =======================================================
-       START
-    ======================================================== */
-
-    loadAboutPage();
-
-  </script>
 
 </body>
 </html>
