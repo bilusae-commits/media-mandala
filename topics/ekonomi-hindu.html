@@ -9,23 +9,21 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Ekonomi Hindu — Mandala Channel</title>
+<title>Ekonomi Hindu | Mandala</title>
 
 <style>
 
 /* =========================================================
-   MANDALA CHANNEL
-   TOPIC — EKONOMI HINDU
+   MANDALA
+   TOPIC : EKONOMI HINDU
 
-   STYLE:
-   - Editorial
-   - Formal
-   - Minimal
-   - Tidak banyak card
+   Catatan:
+   - Tetap satu keluarga desain dengan halaman Topics lain
    - Tidak menggunakan angka section
-   - Tidak menggunakan font eksternal
-   - Tidak menggunakan CDN
-   - Tidak membutuhkan akses internet
+   - Tidak menggunakan angka Romawi
+   - Tidak menggunakan "Rp"
+   - Tidak menggunakan library/CDN/external font
+   - Tidak ada popup internet access
    ========================================================= */
 
 
@@ -36,22 +34,22 @@
 :root{
 
     --navy:#082d56;
-    --navy-deep:#041d36;
-    --navy-soft:#174b73;
+    --navy-dark:#041d36;
+    --blue:#174b73;
 
     --gold:#ad8847;
     --gold-light:#ceb578;
 
-    --cream:#f4f1e9;
+    --cream:#f5f2ea;
     --paper:#faf9f6;
     --white:#ffffff;
 
-    --ink:#172536;
-    --muted:#6f7d8b;
+    --text:#172536;
+    --muted:#71808e;
 
-    --line:#e0e4e7;
+    --line:#e1e5e8;
 
-    --max:94vw;
+    --max-width:94vw;
 
 }
 
@@ -77,7 +75,7 @@ body{
 
     background:var(--paper);
 
-    color:var(--ink);
+    color:var(--text);
 
     font-family:
         Arial,
@@ -90,6 +88,8 @@ img{
     display:block;
 
     width:100%;
+
+    max-width:100%;
 }
 
 a{
@@ -104,9 +104,9 @@ button{
     font:inherit;
 }
 
-.w{
+.container{
 
-    width:var(--max);
+    width:var(--max-width);
 
     margin-inline:auto;
 }
@@ -116,20 +116,20 @@ button{
    TOP BAR
    ========================================================= */
 
-.topbar{
+.top-bar{
 
     height:28px;
 
-    background:var(--navy-deep);
+    background:var(--navy-dark);
 
     color:#aebdca;
 
     font-size:9px;
 
-    letter-spacing:.14em;
+    letter-spacing:.13em;
 }
 
-.topbar .w{
+.top-bar-inner{
 
     height:100%;
 
@@ -140,7 +140,7 @@ button{
     justify-content:space-between;
 }
 
-.topbar-right{
+.top-right{
 
     display:flex;
 
@@ -149,14 +149,14 @@ button{
     gap:14px;
 }
 
-.topbar-line{
+.top-line{
 
     width:25px;
 
     height:1px;
 
     background:
-        rgba(206,181,120,.65);
+        rgba(206,181,120,.7);
 }
 
 
@@ -164,7 +164,7 @@ button{
    HEADER
    ========================================================= */
 
-.header{
+.site-header{
 
     position:sticky;
 
@@ -185,7 +185,7 @@ button{
         box-shadow .3s ease;
 }
 
-.header.scrolled{
+.site-header.scrolled{
 
     height:60px;
 
@@ -193,7 +193,7 @@ button{
         0 8px 28px rgba(8,45,86,.09);
 }
 
-.nav{
+.navbar{
 
     height:100%;
 
@@ -222,7 +222,7 @@ button{
     flex-shrink:0;
 }
 
-.brand-mark{
+.brand-symbol{
 
     width:40px;
 
@@ -242,21 +242,21 @@ button{
         "Times New Roman",
         serif;
 
-    font-size:21px;
+    font-size:20px;
 
     transition:
         background .25s ease,
         color .25s ease;
 }
 
-.brand:hover .brand-mark{
+.brand:hover .brand-symbol{
 
     background:var(--gold);
 
-    color:white;
+    color:#fff;
 }
 
-.brand-name{
+.brand-text{
 
     display:flex;
 
@@ -265,7 +265,7 @@ button{
     line-height:1;
 }
 
-.brand-name strong{
+.brand-text strong{
 
     color:var(--navy);
 
@@ -281,20 +281,20 @@ button{
     letter-spacing:.15em;
 }
 
-.brand-name small{
+.brand-text small{
 
     margin-top:5px;
 
-    color:#778696;
+    color:#788795;
 
     font-size:7px;
 
-    letter-spacing:.34em;
+    letter-spacing:.33em;
 }
 
 
 /* =========================================================
-   NAV
+   NAVIGATION
    ========================================================= */
 
 .nav-menu{
@@ -346,8 +346,7 @@ button{
 
     background:var(--gold);
 
-    transform:
-        scaleX(0);
+    transform:scaleX(0);
 
     transition:
         transform .25s ease;
@@ -362,8 +361,7 @@ button{
 .nav-menu a:hover::after,
 .nav-menu a.active::after{
 
-    transform:
-        scaleX(1);
+    transform:scaleX(1);
 }
 
 
@@ -375,16 +373,16 @@ button{
 
     position:relative;
 
-    min-height:620px;
+    min-height:590px;
 
     overflow:hidden;
 
     background:
         linear-gradient(
-            120deg,
-            #041c35 0%,
-            #082f55 55%,
-            #345b67 100%
+            125deg,
+            #041d36 0%,
+            #082f55 58%,
+            #315b67 100%
         );
 
     color:white;
@@ -396,16 +394,16 @@ button{
 
     position:absolute;
 
-    width:600px;
+    width:580px;
 
-    height:600px;
+    height:580px;
 
-    right:-300px;
+    right:-280px;
 
-    top:-290px;
+    top:-300px;
 
     border:
-        1px solid rgba(255,255,255,.09);
+        1px solid rgba(255,255,255,.08);
 
     border-radius:50%;
 }
@@ -416,27 +414,27 @@ button{
 
     position:absolute;
 
-    width:420px;
+    width:390px;
 
-    height:420px;
+    height:390px;
 
-    left:-270px;
+    left:-280px;
 
     bottom:-300px;
 
     border:
-        1px solid rgba(206,181,120,.13);
+        1px solid rgba(206,181,120,.12);
 
     border-radius:50%;
 }
 
-.hero-grid{
+.hero-inner{
 
     position:relative;
 
     z-index:2;
 
-    min-height:620px;
+    min-height:590px;
 
     display:grid;
 
@@ -446,13 +444,17 @@ button{
 
     align-items:center;
 
-    gap:8vw;
+    gap:7vw;
 }
 
-.hero-copy{
 
-    padding:
-        70px 0;
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero-content{
+
+    padding:70px 0;
 }
 
 .eyebrow{
@@ -461,9 +463,9 @@ button{
 
     align-items:center;
 
-    gap:12px;
+    gap:11px;
 
-    margin-bottom:23px;
+    margin-bottom:22px;
 
     color:var(--gold-light);
 
@@ -471,7 +473,7 @@ button{
 
     font-weight:700;
 
-    letter-spacing:.22em;
+    letter-spacing:.21em;
 
     text-transform:uppercase;
 }
@@ -480,14 +482,14 @@ button{
 
     content:"";
 
-    width:34px;
+    width:32px;
 
     height:1px;
 
     background:var(--gold-light);
 }
 
-.hero h1{
+.hero-title{
 
     margin:0;
 
@@ -499,50 +501,54 @@ button{
         serif;
 
     font-size:
-        clamp(52px,7vw,90px);
+        clamp(50px,7vw,88px);
 
     font-weight:400;
 
-    line-height:.93;
+    line-height:.94;
 
     letter-spacing:-.055em;
 }
 
-.hero h1 span{
+.hero-title span{
 
     display:block;
 
     color:var(--gold-light);
 }
 
-.hero-lead{
+.hero-description{
 
-    max-width:535px;
+    max-width:540px;
 
-    margin:30px 0 0;
+    margin:28px 0 0;
 
-    color:#c3d0da;
+    color:#c5d1db;
 
-    font-size:14px;
+    font-size:13px;
 
     line-height:1.9;
 }
 
-.hero-actions{
+.hero-buttons{
 
     display:flex;
 
-    gap:12px;
+    align-items:center;
 
-    margin-top:32px;
+    flex-wrap:wrap;
+
+    gap:11px;
+
+    margin-top:30px;
 }
 
-.btn{
+.button{
 
-    min-height:44px;
+    min-height:43px;
 
     padding:
-        0 20px;
+        0 19px;
 
     display:inline-flex;
 
@@ -551,7 +557,7 @@ button{
     justify-content:center;
 
     border:
-        1px solid rgba(255,255,255,.28);
+        1px solid rgba(255,255,255,.27);
 
     font-size:9px;
 
@@ -567,36 +573,36 @@ button{
         color .25s ease;
 }
 
-.btn:hover{
+.button:hover{
 
     transform:
         translateY(-2px);
 }
 
-.btn-primary{
+.button-gold{
 
     background:var(--gold);
 
     border-color:var(--gold);
 
-    color:white;
+    color:#fff;
 }
 
-.btn-primary:hover{
+.button-gold:hover{
 
-    background:#bd9a57;
+    background:#bc9957;
 
-    border-color:#bd9a57;
+    border-color:#bc9957;
 }
 
-.btn-outline{
+.button-light{
 
-    color:white;
+    color:#fff;
 }
 
-.btn-outline:hover{
+.button-light:hover{
 
-    background:white;
+    background:#fff;
 
     color:var(--navy);
 }
@@ -608,53 +614,51 @@ button{
 
 .hero-visual{
 
-    position:relative;
-
-    min-height:450px;
-
     display:flex;
 
     align-items:center;
 
     justify-content:center;
+
+    min-height:430px;
 }
 
-.editorial-frame{
+.editorial-card{
 
     position:relative;
 
-    width:min(540px,100%);
+    width:min(520px,100%);
 
-    min-height:420px;
+    min-height:400px;
 
-    padding:34px;
+    padding:32px;
+
+    overflow:hidden;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.97),
-            rgba(246,243,235,.97)
+            #faf9f5,
+            #f1eee5
         );
 
     box-shadow:
-        0 35px 80px rgba(0,0,0,.25);
-
-    overflow:hidden;
+        0 35px 75px rgba(0,0,0,.23);
 }
 
-.editorial-frame::before{
+.editorial-card::before{
 
     content:"";
 
     position:absolute;
 
-    width:300px;
+    width:330px;
 
-    height:300px;
+    height:330px;
 
-    right:-150px;
+    right:-180px;
 
-    top:-150px;
+    top:-180px;
 
     border:
         1px solid rgba(173,136,71,.24);
@@ -662,19 +666,19 @@ button{
     border-radius:50%;
 }
 
-.editorial-frame::after{
+.editorial-card::after{
 
     content:"";
 
     position:absolute;
 
-    width:250px;
+    width:260px;
 
-    height:250px;
+    height:260px;
 
-    left:-150px;
+    left:-170px;
 
-    bottom:-150px;
+    bottom:-170px;
 
     border:
         1px solid rgba(8,45,86,.12);
@@ -682,7 +686,7 @@ button{
     border-radius:50%;
 }
 
-.frame-top{
+.card-top{
 
     position:relative;
 
@@ -694,13 +698,13 @@ button{
 
     justify-content:space-between;
 
-    padding-bottom:20px;
+    padding-bottom:18px;
 
     border-bottom:
         1px solid var(--line);
 }
 
-.frame-label{
+.card-label{
 
     color:var(--gold);
 
@@ -713,11 +717,11 @@ button{
     text-transform:uppercase;
 }
 
-.frame-symbol{
+.card-symbol{
 
-    width:36px;
+    width:35px;
 
-    height:36px;
+    height:35px;
 
     display:grid;
 
@@ -732,25 +736,21 @@ button{
         Georgia,
         "Times New Roman",
         serif;
-
-    font-size:18px;
 }
 
-.frame-content{
+.card-main{
 
     position:relative;
 
     z-index:2;
 
     padding:
-        55px 12px 30px;
+        48px 10px 25px;
 }
 
-.frame-content h2{
+.card-main h2{
 
     margin:0;
-
-    max-width:450px;
 
     color:var(--navy);
 
@@ -760,7 +760,7 @@ button{
         serif;
 
     font-size:
-        clamp(37px,4.7vw,59px);
+        clamp(34px,4.5vw,55px);
 
     font-weight:400;
 
@@ -769,17 +769,17 @@ button{
     letter-spacing:-.05em;
 }
 
-.frame-content h2 span{
+.card-main h2 span{
 
     color:var(--gold);
 }
 
-.frame-content p{
+.card-main p{
 
     max-width:430px;
 
     margin:
-        22px 0 0;
+        20px 0 0;
 
     color:var(--muted);
 
@@ -788,15 +788,15 @@ button{
     line-height:1.8;
 }
 
-.frame-bottom{
+.card-bottom{
 
     position:absolute;
 
-    left:46px;
+    left:42px;
 
-    right:46px;
+    right:42px;
 
-    bottom:38px;
+    bottom:30px;
 
     display:flex;
 
@@ -805,22 +805,22 @@ button{
     gap:10px;
 }
 
-.frame-bottom-line{
+.card-bottom-line{
 
-    width:70px;
+    width:65px;
 
     height:1px;
 
     background:var(--gold);
 }
 
-.frame-bottom span{
+.card-bottom span{
 
-    color:#8b969e;
+    color:#8a959d;
 
     font-size:7px;
 
-    letter-spacing:.16em;
+    letter-spacing:.14em;
 
     text-transform:uppercase;
 }
@@ -830,32 +830,32 @@ button{
    INTRO
    ========================================================= */
 
-.intro{
+.introduction{
 
     padding:
-        105px 0;
+        100px 0;
 
-    background:white;
+    background:#fff;
 }
 
-.intro-layout{
+.intro-grid{
 
     display:grid;
 
     grid-template-columns:
-        .75fr
-        1.25fr;
+        .78fr
+        1.22fr;
 
-    gap:9vw;
+    gap:8vw;
 }
 
-.label{
+.section-label{
 
     display:flex;
 
     align-items:center;
 
-    gap:11px;
+    gap:10px;
 
     color:var(--gold);
 
@@ -863,26 +863,26 @@ button{
 
     font-weight:700;
 
-    letter-spacing:.19em;
+    letter-spacing:.18em;
 
     text-transform:uppercase;
 }
 
-.label::before{
+.section-label::before{
 
     content:"";
 
-    width:30px;
+    width:29px;
 
     height:1px;
 
     background:var(--gold);
 }
 
-.intro h2{
+.intro-title{
 
     margin:
-        17px 0 0;
+        16px 0 0;
 
     color:var(--navy);
 
@@ -892,7 +892,7 @@ button{
         serif;
 
     font-size:
-        clamp(35px,4.5vw,58px);
+        clamp(34px,4.4vw,56px);
 
     font-weight:400;
 
@@ -901,21 +901,21 @@ button{
     letter-spacing:-.045em;
 }
 
-.intro-content p{
+.intro-text p{
 
     margin:
-        0 0 21px;
+        0 0 20px;
 
-    color:#63717f;
+    color:#647380;
 
     font-size:13px;
 
     line-height:1.9;
 }
 
-.intro-content p:first-child{
+.intro-text p:first-child{
 
-    color:var(--ink);
+    color:var(--text);
 
     font-family:
         Georgia,
@@ -924,42 +924,42 @@ button{
 
     font-size:19px;
 
-    line-height:1.7;
+    line-height:1.65;
 }
 
 
 /* =========================================================
-   PODCAST FEATURE
+   PODCAST
    ========================================================= */
 
-.podcast{
+.podcast-section{
 
     padding:
-        105px 0;
+        100px 0;
 
-    background:var(--navy-deep);
+    background:var(--navy-dark);
 
-    color:white;
+    color:#fff;
 }
 
-.podcast-layout{
+.podcast-grid{
 
     display:grid;
 
     grid-template-columns:
-        .8fr
-        1.2fr;
+        .82fr
+        1.18fr;
 
     align-items:center;
 
     gap:8vw;
 }
 
-.podcast-art{
+.podcast-visual{
 
     position:relative;
 
-    min-height:460px;
+    min-height:440px;
 
     display:flex;
 
@@ -972,61 +972,61 @@ button{
     background:
         linear-gradient(
             145deg,
-            #0b375b,
-            #214f63 55%,
-            #82683f
+            #0a3355,
+            #245264 60%,
+            #7e6740
         );
 }
 
-.podcast-art::before{
+.podcast-visual::before{
 
     content:"";
 
     position:absolute;
 
-    width:370px;
+    width:350px;
 
-    height:370px;
+    height:350px;
 
     border:
-        1px solid rgba(255,255,255,.17);
+        1px solid rgba(255,255,255,.15);
 
     border-radius:50%;
 }
 
-.podcast-art::after{
+.podcast-visual::after{
 
     content:"";
 
     position:absolute;
 
-    width:260px;
+    width:250px;
 
-    height:260px;
+    height:250px;
 
     border:
-        1px solid rgba(206,181,120,.35);
+        1px solid rgba(206,181,120,.3);
 
     border-radius:50%;
 }
 
-.microphone{
+.mic{
 
     position:relative;
 
     z-index:3;
 
-    width:78px;
+    width:74px;
 
-    height:132px;
+    height:125px;
 
     border:
-        2px solid rgba(255,255,255,.82);
+        2px solid rgba(255,255,255,.8);
 
-    border-radius:45px;
+    border-radius:42px;
 }
 
-.microphone::before{
+.mic::before{
 
     content:"";
 
@@ -1034,20 +1034,20 @@ button{
 
     left:50%;
 
-    bottom:-48px;
+    bottom:-45px;
 
     width:2px;
 
-    height:47px;
+    height:44px;
 
     background:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.8);
 
     transform:
         translateX(-50%);
 }
 
-.microphone::after{
+.mic::after{
 
     content:"";
 
@@ -1055,14 +1055,14 @@ button{
 
     left:50%;
 
-    bottom:-48px;
+    bottom:-45px;
 
-    width:100px;
+    width:95px;
 
     height:2px;
 
     background:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.8);
 
     transform:
         translateX(-50%);
@@ -1072,33 +1072,33 @@ button{
 
     position:absolute;
 
-    inset:20px 13px;
+    inset:19px 12px;
 
     border-left:
-        1px solid rgba(255,255,255,.35);
+        1px solid rgba(255,255,255,.3);
 
     border-right:
-        1px solid rgba(255,255,255,.35);
+        1px solid rgba(255,255,255,.3);
 
     border-radius:40px;
 }
 
-.podcast-copy .label{
+.podcast-copy .section-label{
 
     color:var(--gold-light);
 }
 
-.podcast-copy .label::before{
+.podcast-copy .section-label::before{
 
     background:var(--gold-light);
 }
 
-.podcast-copy h2{
+.podcast-title{
 
     margin:
-        17px 0 22px;
+        17px 0 21px;
 
-    color:white;
+    color:#fff;
 
     font-family:
         Georgia,
@@ -1106,66 +1106,66 @@ button{
         serif;
 
     font-size:
-        clamp(39px,4.8vw,63px);
+        clamp(38px,4.7vw,61px);
 
     font-weight:400;
 
-    line-height:1.02;
+    line-height:1.03;
 
     letter-spacing:-.045em;
 }
 
-.podcast-copy h2 span{
+.podcast-title span{
 
     color:var(--gold-light);
 }
 
-.podcast-copy p{
+.podcast-description{
 
     max-width:570px;
 
     margin:0;
 
-    color:#b8c6d1;
+    color:#b9c7d2;
 
     font-size:12px;
 
     line-height:1.9;
 }
 
-.podcast-btn{
+.podcast-button{
 
-    margin-top:30px;
-
-    background:var(--gold);
-
-    border-color:var(--gold);
+    margin-top:28px;
 }
 
 
 /* =========================================================
-   STORIES
+   FEATURE STORY
    ========================================================= */
 
-.stories{
+.feature-section{
 
     padding:
-        105px 0;
+        100px 0;
 
     background:var(--paper);
 }
 
-.section-head{
+.section-heading{
 
-    max-width:720px;
+    max-width:700px;
 
-    margin-bottom:50px;
+    margin-bottom:48px;
 }
 
-.section-head h2{
+.section-heading .section-label{
 
-    margin:
-        15px 0 0;
+    margin-bottom:14px;
+}
+
+.section-heading h2{
+
+    margin:0;
 
     color:var(--navy);
 
@@ -1175,21 +1175,21 @@ button{
         serif;
 
     font-size:
-        clamp(36px,4.5vw,58px);
+        clamp(35px,4.5vw,57px);
 
     font-weight:400;
 
-    line-height:1.02;
+    line-height:1.03;
 
     letter-spacing:-.045em;
 }
 
-.section-head p{
+.section-heading p{
 
     max-width:620px;
 
     margin:
-        20px 0 0;
+        19px 0 0;
 
     color:var(--muted);
 
@@ -1198,41 +1198,40 @@ button{
     line-height:1.85;
 }
 
-
-/* Main story */
-
-.main-story{
+.feature-story{
 
     display:grid;
 
     grid-template-columns:
-        1.1fr
-        .9fr;
+        1.08fr
+        .92fr;
 
-    min-height:470px;
+    min-height:460px;
 
-    background:white;
+    background:#fff;
 
     border:
         1px solid var(--line);
 }
 
-.story-image{
+.feature-image{
 
     position:relative;
+
+    min-height:460px;
 
     overflow:hidden;
 
     background:
         linear-gradient(
             135deg,
-            #0a3153,
-            #3e6470 60%,
-            #9a7b46
+            #082d50,
+            #486c72 58%,
+            #967747
         );
 }
 
-.story-image::before{
+.feature-image::before{
 
     content:"";
 
@@ -1244,11 +1243,32 @@ button{
         linear-gradient(
             145deg,
             rgba(4,28,53,.72),
-            rgba(4,28,53,.1)
+            rgba(4,28,53,.08)
         );
 }
 
-.story-silhouette{
+.feature-label{
+
+    position:absolute;
+
+    z-index:3;
+
+    top:24px;
+
+    left:25px;
+
+    color:#fff;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.16em;
+
+    text-transform:uppercase;
+}
+
+.person{
 
     position:absolute;
 
@@ -1272,9 +1292,9 @@ button{
 
     top:0;
 
-    width:74px;
+    width:72px;
 
-    height:74px;
+    height:72px;
 
     transform:
         translateX(-50%);
@@ -1282,7 +1302,7 @@ button{
     border-radius:50%;
 
     background:
-        rgba(235,222,199,.9);
+        rgba(234,221,199,.9);
 }
 
 .person-body{
@@ -1291,11 +1311,11 @@ button{
 
     left:50%;
 
-    top:67px;
+    top:66px;
 
-    width:185px;
+    width:180px;
 
-    height:250px;
+    height:254px;
 
     transform:
         translateX(-50%);
@@ -1307,35 +1327,14 @@ button{
         linear-gradient(
             90deg,
             #082d4d,
-            #355568
+            #355768
         );
 }
 
-.story-label{
-
-    position:absolute;
-
-    z-index:3;
-
-    left:25px;
-
-    top:25px;
-
-    color:white;
-
-    font-size:8px;
-
-    font-weight:700;
-
-    letter-spacing:.17em;
-
-    text-transform:uppercase;
-}
-
-.story-content{
+.feature-content{
 
     padding:
-        55px 50px;
+        50px;
 
     display:flex;
 
@@ -1344,10 +1343,10 @@ button{
     justify-content:center;
 }
 
-.story-content h3{
+.feature-content h3{
 
     margin:
-        16px 0;
+        15px 0 17px;
 
     color:var(--navy);
 
@@ -1357,7 +1356,7 @@ button{
         serif;
 
     font-size:
-        clamp(30px,3.4vw,45px);
+        clamp(29px,3.4vw,44px);
 
     font-weight:400;
 
@@ -1366,7 +1365,7 @@ button{
     letter-spacing:-.035em;
 }
 
-.story-content p{
+.feature-content p{
 
     margin:0;
 
@@ -1377,7 +1376,7 @@ button{
     line-height:1.85;
 }
 
-.text-link{
+.read-link{
 
     display:inline-flex;
 
@@ -1385,7 +1384,9 @@ button{
 
     gap:8px;
 
-    margin-top:25px;
+    width:max-content;
+
+    margin-top:24px;
 
     color:var(--gold);
 
@@ -1398,13 +1399,13 @@ button{
     text-transform:uppercase;
 }
 
-.text-link span{
+.read-link span{
 
     transition:
         transform .25s ease;
 }
 
-.text-link:hover span{
+.read-link:hover span{
 
     transform:
         translateX(5px);
@@ -1412,18 +1413,18 @@ button{
 
 
 /* =========================================================
-   JAVA SECTION
+   EKONOMI HINDU JAWA
    ========================================================= */
 
-.java{
+.java-section{
 
     padding:
-        105px 0;
+        100px 0;
 
     background:var(--cream);
 }
 
-.java-layout{
+.java-grid{
 
     display:grid;
 
@@ -1431,16 +1432,16 @@ button{
         .9fr
         1.1fr;
 
-    gap:8vw;
-
     align-items:center;
+
+    gap:8vw;
 }
 
-.java-image{
+.java-visual{
 
     position:relative;
 
-    min-height:500px;
+    min-height:480px;
 
     overflow:hidden;
 
@@ -1448,58 +1449,58 @@ button{
         linear-gradient(
             145deg,
             #082d50,
-            #527069 58%,
-            #987846
+            #506e70 58%,
+            #987947
         );
 }
 
-.java-image::before{
+.java-visual::before{
 
     content:"";
 
     position:absolute;
-
-    width:440px;
-
-    height:440px;
 
     left:50%;
 
     top:50%;
 
+    width:430px;
+
+    height:430px;
+
     transform:
         translate(-50%,-50%);
 
     border:
-        1px solid rgba(255,255,255,.17);
+        1px solid rgba(255,255,255,.16);
 
     border-radius:50%;
 }
 
-.java-image::after{
+.java-visual::after{
 
     content:"";
 
     position:absolute;
+
+    left:50%;
+
+    top:50%;
 
     width:280px;
 
     height:280px;
 
-    left:50%;
-
-    top:50%;
-
     transform:
         translate(-50%,-50%);
 
     border:
-        1px solid rgba(206,181,120,.32);
+        1px solid rgba(206,181,120,.3);
 
     border-radius:50%;
 }
 
-.java-word{
+.java-text{
 
     position:absolute;
 
@@ -1519,15 +1520,15 @@ button{
         serif;
 
     font-size:
-        clamp(90px,12vw,170px);
+        clamp(90px,12vw,165px);
 
     letter-spacing:-.08em;
 }
 
-.java-copy h2{
+.java-content h2{
 
     margin:
-        17px 0 22px;
+        16px 0 20px;
 
     color:var(--navy);
 
@@ -1537,7 +1538,7 @@ button{
         serif;
 
     font-size:
-        clamp(37px,4.5vw,59px);
+        clamp(36px,4.4vw,57px);
 
     font-weight:400;
 
@@ -1546,12 +1547,12 @@ button{
     letter-spacing:-.045em;
 }
 
-.java-copy p{
+.java-content p{
 
     max-width:580px;
 
     margin:
-        0 0 20px;
+        0 0 19px;
 
     color:var(--muted);
 
@@ -1560,9 +1561,9 @@ button{
     line-height:1.9;
 }
 
-.java-copy p:first-of-type{
+.java-content p:first-of-type{
 
-    color:var(--ink);
+    color:var(--text);
 
     font-family:
         Georgia,
@@ -1576,25 +1577,23 @@ button{
 
 
 /* =========================================================
-   EPISODES
+   PODCAST TOPICS
    ========================================================= */
 
-.episodes{
+.podcast-topics{
 
     padding:
-        105px 0;
+        100px 0;
 
-    background:white;
+    background:#fff;
 }
 
-.episode-list{
+.topic-list{
 
     display:grid;
 
     grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
-    gap:0;
+        repeat(3,1fr);
 
     border-top:
         1px solid var(--line);
@@ -1603,14 +1602,12 @@ button{
         1px solid var(--line);
 }
 
-.episode{
+.topic-item{
 
-    min-height:260px;
+    min-height:245px;
 
     padding:
-        32px;
-
-    background:white;
+        31px;
 
     border-right:
         1px solid var(--line);
@@ -1619,15 +1616,15 @@ button{
         1px solid var(--line);
 
     transition:
-        background .3s ease;
+        background .25s ease;
 }
 
-.episode:hover{
+.topic-item:hover{
 
     background:var(--cream);
 }
 
-.episode-top{
+.topic-item-head{
 
     display:flex;
 
@@ -1636,7 +1633,7 @@ button{
     justify-content:space-between;
 }
 
-.episode-type{
+.topic-type{
 
     color:var(--gold);
 
@@ -1649,7 +1646,7 @@ button{
     text-transform:uppercase;
 }
 
-.play{
+.topic-play{
 
     width:34px;
 
@@ -1673,17 +1670,17 @@ button{
         color .25s ease;
 }
 
-.episode:hover .play{
+.topic-item:hover .topic-play{
 
     background:var(--gold);
 
-    color:white;
+    color:#fff;
 }
 
-.episode h3{
+.topic-item h3{
 
     margin:
-        25px 0 12px;
+        24px 0 12px;
 
     color:var(--navy);
 
@@ -1692,14 +1689,14 @@ button{
         "Times New Roman",
         serif;
 
-    font-size:23px;
+    font-size:22px;
 
     font-weight:400;
 
     line-height:1.25;
 }
 
-.episode p{
+.topic-item p{
 
     margin:0;
 
@@ -1713,25 +1710,30 @@ button{
 
 /* =========================================================
    OTHER TOPICS
+   BAGIAN INI DISELARASKAN DENGAN TOPIC LAIN
    ========================================================= */
 
-.other{
+.other-topics{
 
     padding:
-        90px 0;
+        85px 0 90px;
 
     background:var(--paper);
 }
 
-.other-head{
+.other-topics-head{
 
-    margin-bottom:38px;
+    margin-bottom:32px;
 }
 
-.other-head h2{
+.other-topics-head .section-label{
 
-    margin:
-        14px 0 0;
+    margin-bottom:13px;
+}
+
+.other-topics-head h2{
+
+    margin:0;
 
     color:var(--navy);
 
@@ -1741,31 +1743,106 @@ button{
         serif;
 
     font-size:
-        clamp(34px,4vw,51px);
+        clamp(32px,4vw,50px);
 
     font-weight:400;
 
     line-height:1;
+
+    letter-spacing:-.04em;
 }
 
-.topic-list{
+.other-topics-list{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+}
+
+.other-topic{
+
+    position:relative;
+
+    min-height:125px;
+
+    padding:
+        25px 27px;
 
     display:flex;
 
-    flex-wrap:wrap;
+    flex-direction:column;
 
-    gap:10px;
-}
+    justify-content:flex-end;
 
-.topic-link{
+    overflow:hidden;
 
-    padding:
-        15px 20px;
-
-    background:white;
+    background:#fff;
 
     border:
         1px solid var(--line);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+.other-topic::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:38px;
+
+    height:2px;
+
+    background:var(--gold);
+
+    transition:
+        width .3s ease;
+}
+
+.other-topic:hover{
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(173,136,71,.45);
+
+    background:
+        #fffdf8;
+}
+
+.other-topic:hover::before{
+
+    width:70px;
+}
+
+.other-topic small{
+
+    margin-bottom:8px;
+
+    color:var(--gold);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.other-topic strong{
 
     color:var(--navy);
 
@@ -1774,21 +1851,9 @@ button{
         "Times New Roman",
         serif;
 
-    font-size:15px;
+    font-size:19px;
 
-    transition:
-        background .25s ease,
-        border-color .25s ease,
-        color .25s ease;
-}
-
-.topic-link:hover{
-
-    background:var(--navy);
-
-    border-color:var(--navy);
-
-    color:white;
+    font-weight:400;
 }
 
 
@@ -1824,7 +1889,7 @@ button{
 
     display:block;
 
-    color:white;
+    color:#fff;
 
     font-family:
         Georgia,
@@ -1893,21 +1958,21 @@ button{
 
 .footer-column a:hover{
 
-    color:white;
+    color:#fff;
 }
 
 .footer-bottom{
 
     padding-top:24px;
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
-
     display:flex;
 
     align-items:center;
 
     justify-content:space-between;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
 
     color:#607589;
 
@@ -1924,7 +1989,7 @@ button{
     opacity:0;
 
     transform:
-        translateY(22px);
+        translateY(20px);
 
     transition:
         opacity .7s ease,
@@ -1955,13 +2020,6 @@ button{
         font-size:9px;
     }
 
-    .main-story{
-
-        grid-template-columns:
-            1fr
-            1fr;
-    }
-
 }
 
 
@@ -1971,19 +2029,9 @@ button{
 
 @media(max-width:850px){
 
-    .topbar-right{
+    .top-right{
 
         display:none;
-    }
-
-    .header{
-
-        height:64px;
-    }
-
-    .header.scrolled{
-
-        height:58px;
     }
 
     .nav-menu{
@@ -1996,14 +2044,14 @@ button{
         min-height:auto;
     }
 
-    .hero-grid{
+    .hero-inner{
 
         grid-template-columns:1fr;
 
         min-height:auto;
     }
 
-    .hero-copy{
+    .hero-content{
 
         padding:
             70px 0 30px;
@@ -2011,59 +2059,59 @@ button{
 
     .hero-visual{
 
-        min-height:420px;
+        min-height:410px;
 
-        padding-bottom:70px;
+        padding-bottom:65px;
     }
 
-    .intro-layout{
+    .intro-grid{
 
         grid-template-columns:1fr;
 
         gap:35px;
     }
 
-    .podcast-layout{
+    .podcast-grid{
 
         grid-template-columns:1fr;
 
         gap:45px;
     }
 
-    .podcast-art{
+    .podcast-visual{
 
         min-height:390px;
     }
 
-    .main-story{
+    .feature-story{
 
         grid-template-columns:1fr;
     }
 
-    .story-image{
+    .feature-image{
 
         min-height:400px;
     }
 
-    .story-content{
-
-        padding:
-            45px 35px;
-    }
-
-    .java-layout{
+    .java-grid{
 
         grid-template-columns:1fr;
 
         gap:45px;
     }
 
-    .java-image{
+    .java-visual{
 
         min-height:400px;
     }
 
-    .episode-list{
+    .topic-list{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .other-topics-list{
 
         grid-template-columns:
             1fr 1fr;
@@ -2090,49 +2138,68 @@ button{
 
 @media(max-width:560px){
 
-    .topbar{
+    .top-bar{
 
         height:24px;
     }
 
-    .brand-mark{
+    .site-header{
+
+        height:64px;
+    }
+
+    .site-header.scrolled{
+
+        height:58px;
+    }
+
+    .brand-symbol{
 
         width:34px;
 
         height:34px;
 
-        font-size:18px;
+        font-size:17px;
     }
 
-    .brand-name strong{
+    .brand-text strong{
 
         font-size:16px;
     }
 
-    .brand-name small{
+    .brand-text small{
 
         font-size:6px;
     }
 
-    .hero-copy{
+    .hero-content{
 
         padding-top:58px;
     }
 
-    .hero h1{
+    .hero-title{
 
         font-size:
-            clamp(48px,15vw,72px);
+            clamp(47px,15vw,72px);
     }
 
-    .hero-lead{
+    .hero-description{
 
         font-size:12px;
     }
 
-    .hero-actions{
+    .hero-buttons{
 
-        flex-wrap:wrap;
+        align-items:stretch;
+
+        flex-direction:column;
+
+        width:100%;
+    }
+
+    .button{
+
+        width:max-content;
     }
 
     .hero-visual{
@@ -2142,81 +2209,80 @@ button{
         padding-bottom:55px;
     }
 
-    .editorial-frame{
+    .editorial-card{
 
         min-height:330px;
 
         padding:23px;
     }
 
-    .frame-content{
+    .card-main{
 
         padding:
-            40px 4px 20px;
+            38px 3px 20px;
     }
 
-    .frame-content h2{
+    .card-main h2{
 
         font-size:34px;
     }
 
-    .frame-bottom{
+    .card-bottom{
 
-        left:28px;
+        left:26px;
 
-        right:28px;
+        right:26px;
 
-        bottom:23px;
+        bottom:22px;
     }
 
-    .intro,
-    .podcast,
-    .stories,
-    .java,
-    .episodes,
-    .other{
+    .introduction,
+    .podcast-section,
+    .feature-section,
+    .java-section,
+    .podcast-topics{
 
         padding:
             70px 0;
     }
 
-    .podcast-art{
+    .podcast-visual{
 
         min-height:300px;
     }
 
-    .podcast-art::before{
+    .podcast-visual::before{
 
         width:250px;
 
         height:250px;
     }
 
-    .podcast-art::after{
+    .podcast-visual::after{
 
         width:175px;
 
         height:175px;
     }
 
-    .microphone{
+    .mic{
 
         width:64px;
 
         height:108px;
     }
 
-    .microphone::after{
+    .mic::after{
 
         width:80px;
     }
 
-    .story-image{
+    .feature-image{
 
         min-height:320px;
     }
 
-    .story-silhouette{
+    .person{
 
         transform:
             translateX(-50%)
@@ -2226,23 +2292,23 @@ button{
             bottom center;
     }
 
-    .story-content{
+    .feature-content{
 
         padding:
             38px 25px;
     }
 
-    .java-image{
+    .java-visual{
 
         min-height:320px;
     }
 
-    .episode-list{
+    .topic-list{
 
         grid-template-columns:1fr;
     }
 
-    .episode{
+    .topic-item{
 
         min-height:auto;
 
@@ -2250,16 +2316,20 @@ button{
             27px 23px;
     }
 
-    .topic-list{
+    .other-topics{
 
-        display:grid;
+        padding:
+            65px 0 70px;
+    }
+
+    .other-topics-list{
 
         grid-template-columns:1fr;
     }
 
-    .topic-link{
+    .other-topic{
 
-        width:100%;
+        min-height:110px;
     }
 
     .footer-grid{
@@ -2327,21 +2397,21 @@ button{
      TOP BAR
      ======================================================= -->
 
-<div class="topbar">
+<div class="top-bar">
 
-    <div class="w">
+    <div class="container top-bar-inner">
 
-        <div>
+        <span>
             MANDALA CHANNEL
-        </div>
+        </span>
 
-        <div class="topbar-right">
+        <div class="top-right">
 
             <span>
                 EKONOMI HINDU
             </span>
 
-            <span class="topbar-line"></span>
+            <span class="top-line"></span>
 
             <span>
                 USAHA • UMAT • KEMANDIRIAN
@@ -2360,11 +2430,11 @@ button{
      ======================================================= -->
 
 <header
-    class="header"
-    id="header"
+    class="site-header"
+    id="siteHeader"
 >
 
-    <div class="w nav">
+    <div class="container navbar">
 
 
         <a
@@ -2372,11 +2442,11 @@ button{
             class="brand"
         >
 
-            <div class="brand-mark">
+            <div class="brand-symbol">
                 ✦
             </div>
 
-            <div class="brand-name">
+            <div class="brand-text">
 
                 <strong>
                     MANDALA
@@ -2445,16 +2515,16 @@ button{
 
 <section class="hero">
 
-    <div class="w hero-grid">
+    <div class="container hero-inner">
 
 
-        <div class="hero-copy reveal">
+        <div class="hero-content reveal">
 
             <div class="eyebrow">
                 Ekonomi Hindu
             </div>
 
-            <h1>
+            <h1 class="hero-title">
 
                 Cerita
 
@@ -2464,27 +2534,28 @@ button{
 
             </h1>
 
-            <p class="hero-lead">
+            <p class="hero-description">
 
-                Ruang untuk mengenal pengusaha,
-                perjalanan usaha, dan dinamika
-                ekonomi masyarakat Hindu,
-                khususnya di Jawa.
+                Ruang Mandala untuk mengenal
+                perjalanan usaha, pengusaha,
+                pekerjaan, dan dinamika ekonomi
+                masyarakat Hindu, khususnya
+                di Jawa.
 
             </p>
 
-            <div class="hero-actions">
+            <div class="hero-buttons">
 
                 <a
                     href="#podcast"
-                    class="btn btn-primary"
+                    class="button button-gold"
                 >
                     Dengarkan Podcast
                 </a>
 
                 <a
                     href="#cerita"
-                    class="btn btn-outline"
+                    class="button button-light"
                 >
                     Lihat Cerita
                 </a>
@@ -2497,22 +2568,22 @@ button{
 
         <div class="hero-visual reveal">
 
-            <div class="editorial-frame">
+            <div class="editorial-card">
 
-                <div class="frame-top">
+                <div class="card-top">
 
-                    <div class="frame-label">
+                    <div class="card-label">
                         Ekonomi Hindu
                     </div>
 
-                    <div class="frame-symbol">
+                    <div class="card-symbol">
                         ✦
                     </div>
 
                 </div>
 
 
-                <div class="frame-content">
+                <div class="card-main">
 
                     <h2>
 
@@ -2530,17 +2601,17 @@ button{
 
                         Tentang keberanian memulai,
                         mempertahankan usaha, membangun
-                        keluarga, dan menciptakan kehidupan
-                        yang lebih mandiri.
+                        keluarga, dan menciptakan
+                        kehidupan yang lebih mandiri.
 
                     </p>
 
                 </div>
 
 
-                <div class="frame-bottom">
+                <div class="card-bottom">
 
-                    <div class="frame-bottom-line"></div>
+                    <div class="card-bottom-line"></div>
 
                     <span>
                         Mandala Economic Stories
@@ -2560,21 +2631,21 @@ button{
 
 
 <!-- =======================================================
-     INTRO
+     INTRODUCTION
      ======================================================= -->
 
-<section class="intro">
+<section class="introduction">
 
-    <div class="w intro-layout">
+    <div class="container intro-grid">
 
 
         <div class="reveal">
 
-            <div class="label">
+            <div class="section-label">
                 Tentang Ekonomi
             </div>
 
-            <h2>
+            <h2 class="intro-title">
 
                 Ekonomi bukan
                 hanya tentang
@@ -2585,7 +2656,7 @@ button{
         </div>
 
 
-        <div class="intro-content reveal">
+        <div class="intro-text reveal">
 
             <p>
 
@@ -2608,7 +2679,7 @@ button{
 
             <p>
 
-                Fokus kami bukan sekadar pada hasil
+                Fokus kami bukan hanya pada hasil
                 akhir sebuah usaha, tetapi pada cerita
                 di baliknya. Bagaimana usaha dimulai,
                 bagaimana menghadapi perubahan,
@@ -2628,6 +2699,7 @@ button{
 
         </div>
 
+
     </div>
 
 </section>
@@ -2639,16 +2711,16 @@ button{
      ======================================================= -->
 
 <section
-    class="podcast"
+    class="podcast-section"
     id="podcast"
 >
 
-    <div class="w podcast-layout">
+    <div class="container podcast-grid">
 
 
-        <div class="podcast-art reveal">
+        <div class="podcast-visual reveal">
 
-            <div class="microphone">
+            <div class="mic">
 
                 <div class="mic-inner"></div>
 
@@ -2659,11 +2731,11 @@ button{
 
         <div class="podcast-copy reveal">
 
-            <div class="label">
+            <div class="section-label">
                 Mandala Podcast
             </div>
 
-            <h2>
+            <h2 class="podcast-title">
 
                 Mendengar langsung
                 cerita dari
@@ -2674,7 +2746,7 @@ button{
 
             </h2>
 
-            <p>
+            <p class="podcast-description">
 
                 Percakapan bersama pengusaha,
                 pelaku UMKM, profesional, dan
@@ -2687,7 +2759,7 @@ button{
 
             <a
                 href="../pages/podcast.html"
-                class="btn podcast-btn"
+                class="button button-gold podcast-button"
             >
                 Buka Podcast
             </a>
@@ -2706,24 +2778,21 @@ button{
      ======================================================= -->
 
 <section
-    class="stories"
+    class="feature-section"
     id="cerita"
 >
 
-    <div class="w">
+    <div class="container">
 
 
-        <div class="section-head reveal">
+        <div class="section-heading reveal">
 
-            <div class="label">
+            <div class="section-label">
                 Cerita Pengusaha
             </div>
 
             <h2>
-
-                Di balik sebuah
-                usaha.
-
+                Di balik sebuah usaha.
             </h2>
 
             <p>
@@ -2739,16 +2808,16 @@ button{
 
 
 
-        <article class="main-story reveal">
+        <article class="feature-story reveal">
 
 
-            <div class="story-image">
+            <div class="feature-image">
 
-                <div class="story-label">
+                <div class="feature-label">
                     Profil Pengusaha
                 </div>
 
-                <div class="story-silhouette">
+                <div class="person">
 
                     <div class="person-head"></div>
 
@@ -2759,9 +2828,9 @@ button{
             </div>
 
 
-            <div class="story-content">
+            <div class="feature-content">
 
-                <div class="label">
+                <div class="section-label">
                     Kisah Usaha
                 </div>
 
@@ -2785,7 +2854,7 @@ button{
 
                 <a
                     href="../pages/artikel-detail.html"
-                    class="text-link"
+                    class="read-link"
                 >
 
                     Baca cerita
@@ -2811,23 +2880,23 @@ button{
      EKONOMI HINDU JAWA
      ======================================================= -->
 
-<section class="java">
+<section class="java-section">
 
-    <div class="w java-layout">
+    <div class="container java-grid">
 
 
-        <div class="java-image reveal">
+        <div class="java-visual reveal">
 
-            <div class="java-word">
+            <div class="java-text">
                 JAWA
             </div>
 
         </div>
 
 
-        <div class="java-copy reveal">
+        <div class="java-content reveal">
 
-            <div class="label">
+            <div class="section-label">
                 Ekonomi Hindu Jawa
             </div>
 
@@ -2878,34 +2947,30 @@ button{
 
 
 <!-- =======================================================
-     EPISODE PODCAST
+     PODCAST TOPICS
      ======================================================= -->
 
-<section class="episodes">
+<section class="podcast-topics">
 
-    <div class="w">
+    <div class="container">
 
 
-        <div class="section-head reveal">
+        <div class="section-heading reveal">
 
-            <div class="label">
+            <div class="section-label">
                 Podcast Ekonomi
             </div>
 
             <h2>
-
-                Percakapan
-                yang dekat dengan
-                kehidupan.
-
+                Percakapan yang dekat
+                dengan kehidupan.
             </h2>
 
             <p>
 
-                Beberapa tema yang akan menjadi
-                bagian dari perjalanan Mandala
-                dalam mendokumentasikan ekonomi
-                Hindu.
+                Tema-tema yang akan menjadi bagian
+                dari perjalanan Mandala dalam
+                mendokumentasikan ekonomi Hindu.
 
             </p>
 
@@ -2913,18 +2978,18 @@ button{
 
 
 
-        <div class="episode-list">
+        <div class="topic-list">
 
 
-            <article class="episode reveal">
+            <article class="topic-item reveal">
 
-                <div class="episode-top">
+                <div class="topic-item-head">
 
-                    <div class="episode-type">
+                    <div class="topic-type">
                         Pengusaha
                     </div>
 
-                    <div class="play">
+                    <div class="topic-play">
                         ▶
                     </div>
 
@@ -2948,15 +3013,15 @@ button{
 
 
 
-            <article class="episode reveal">
+            <article class="topic-item reveal">
 
-                <div class="episode-top">
+                <div class="topic-item-head">
 
-                    <div class="episode-type">
+                    <div class="topic-type">
                         UMKM
                     </div>
 
-                    <div class="play">
+                    <div class="topic-play">
                         ▶
                     </div>
 
@@ -2979,15 +3044,15 @@ button{
 
 
 
-            <article class="episode reveal">
+            <article class="topic-item reveal">
 
-                <div class="episode-top">
+                <div class="topic-item-head">
 
-                    <div class="episode-type">
+                    <div class="topic-type">
                         Generasi Muda
                     </div>
 
-                    <div class="play">
+                    <div class="topic-play">
                         ▶
                     </div>
 
@@ -3018,17 +3083,18 @@ button{
 
 
 <!-- =======================================================
-     TOPIK LAIN
+     TOPIK LAINNYA
+     SAMA POLANYA DENGAN HALAMAN TOPIC LAIN
      ======================================================= -->
 
-<section class="other">
+<section class="other-topics">
 
-    <div class="w">
+    <div class="container">
 
 
-        <div class="other-head reveal">
+        <div class="other-topics-head reveal">
 
-            <div class="label">
+            <div class="section-label">
                 Eksplorasi Mandala
             </div>
 
@@ -3039,54 +3105,103 @@ button{
         </div>
 
 
-        <div class="topic-list">
+
+        <div class="other-topics-list">
 
 
             <a
-                href="candika-nusantara.html"
-                class="topic-link"
+                href="candika.html"
+                class="other-topic reveal"
             >
-                Candika Nusantara
+
+                <small>
+                    Topik
+                </small>
+
+                <strong>
+                    Candika Nusantara
+                </strong>
+
             </a>
 
 
             <a
                 href="dharma-ajaran.html"
-                class="topic-link"
+                class="other-topic reveal"
             >
-                Dharma &amp; Ajaran
+
+                <small>
+                    Topik
+                </small>
+
+                <strong>
+                    Dharma &amp; Ajaran
+                </strong>
+
             </a>
 
 
             <a
                 href="dharmika.html"
-                class="topic-link"
+                class="other-topic reveal"
             >
-                Dharmika
+
+                <small>
+                    Topik
+                </small>
+
+                <strong>
+                    Dharmika
+                </strong>
+
             </a>
 
 
             <a
                 href="tokoh-hindu.html"
-                class="topic-link"
+                class="other-topic reveal"
             >
-                Tokoh Hindu
+
+                <small>
+                    Topik
+                </small>
+
+                <strong>
+                    Tokoh Hindu
+                </strong>
+
             </a>
 
 
             <a
                 href="jelajah-nusantara.html"
-                class="topic-link"
+                class="other-topic reveal"
             >
-                Jelajah Nusantara
+
+                <small>
+                    Topik
+                </small>
+
+                <strong>
+                    Jelajah Nusantara
+                </strong>
+
             </a>
 
 
             <a
                 href="tradisi-budaya.html"
-                class="topic-link"
+                class="other-topic reveal"
             >
-                Tradisi &amp; Budaya
+
+                <small>
+                    Topik
+                </small>
+
+                <strong>
+                    Tradisi &amp; Budaya
+                </strong>
+
             </a>
 
 
@@ -3095,7 +3210,6 @@ button{
     </div>
 
 </section>
-
 
 
 </main>
@@ -3108,7 +3222,7 @@ button{
 
 <footer class="footer">
 
-    <div class="w">
+    <div class="container">
 
 
         <div class="footer-grid">
@@ -3203,6 +3317,7 @@ button{
 
         </div>
 
+
     </div>
 
 </footer>
@@ -3218,15 +3333,20 @@ button{
 
 (function(){
 
+    "use strict";
+
+
     /* =====================================================
        HEADER SCROLL
        ===================================================== */
 
     const header =
-        document.getElementById("header");
+        document.getElementById(
+            "siteHeader"
+        );
 
 
-    function updateHeader(){
+    function handleHeader(){
 
         if(
             window.scrollY > 20
@@ -3249,22 +3369,22 @@ button{
 
     window.addEventListener(
         "scroll",
-        updateHeader,
+        handleHeader,
         {
             passive:true
         }
     );
 
 
-    updateHeader();
+    handleHeader();
 
 
 
     /* =====================================================
-       REVEAL
+       SCROLL REVEAL
        ===================================================== */
 
-    const elements =
+    const revealItems =
         document.querySelectorAll(
             ".reveal"
         );
@@ -3277,6 +3397,7 @@ button{
 
         const observer =
             new IntersectionObserver(
+
                 function(entries){
 
                     entries.forEach(
@@ -3301,16 +3422,17 @@ button{
 
                 },
                 {
-                    threshold:.12
+                    threshold:.1
                 }
+
             );
 
 
-        elements.forEach(
-            function(element){
+        revealItems.forEach(
+            function(item){
 
                 observer.observe(
-                    element
+                    item
                 );
 
             }
@@ -3318,10 +3440,10 @@ button{
 
     }else{
 
-        elements.forEach(
-            function(element){
+        revealItems.forEach(
+            function(item){
 
-                element.classList.add(
+                item.classList.add(
                     "visible"
                 );
 
@@ -3329,6 +3451,7 @@ button{
         );
 
     }
+
 
 })();
 
