@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Dharmika — Mandala Channel</title>
 
@@ -11,30 +15,54 @@
 /* =========================================================
    MANDALA CHANNEL
    TOPIC — DHARMIKA
+
+   Konsep:
+   - Human interest
+   - Kisah perjalanan
+   - Personal stories
+   - Formal editorial
+   - Tidak menggunakan angka section
+   - Tidak menggunakan external font/CDN
+   - Tidak membutuhkan internet
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT
    ========================================================= */
 
 :root{
-    --navy:#082d56;
-    --navy-deep:#061f3c;
-    --navy-soft:#174c73;
 
-    --cream:#f7f5ef;
+    --navy:#082d56;
+    --navy-deep:#041c35;
+    --navy-soft:#174b73;
+
+    --gold:#aa8747;
+    --gold-light:#cfb77d;
+
+    --cream:#f5f2ea;
+    --paper:#faf9f5;
+
     --white:#ffffff;
 
-    --ink:#182738;
-    --muted:#6f7d8b;
-    --soft:#edf0f1;
+    --ink:#182536;
+    --muted:#718090;
 
-    --gold:#a9823f;
-    --gold-light:#c8aa6b;
+    --line:#e2e5e7;
 
-    --line:#e1e5e8;
+    --soft-blue:#edf3f7;
 
-    --max-width:94vw;
+    --max:94vw;
 
     --shadow:
-        0 20px 55px rgba(6,31,60,.11);
+        0 24px 65px rgba(5,28,53,.12);
+
 }
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *{
     box-sizing:border-box;
@@ -42,30 +70,34 @@
 
 html{
     scroll-behavior:smooth;
-    scroll-padding-top:80px;
+
+    scroll-padding-top:85px;
 }
 
 body{
     margin:0;
 
-    background:var(--cream);
+    overflow-x:hidden;
+
+    background:var(--paper);
+
     color:var(--ink);
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
-
-    overflow-x:hidden;
 }
 
 img{
     display:block;
+
     width:100%;
 }
 
 a{
     color:inherit;
+
     text-decoration:none;
 }
 
@@ -74,7 +106,10 @@ button{
 }
 
 .w{
-    width:var(--max-width);
+    width:var(--max);
+
+    max-width:none;
+
     margin-inline:auto;
 }
 
@@ -84,38 +119,51 @@ button{
    ========================================================= */
 
 .topbar{
+
     height:28px;
 
     background:var(--navy-deep);
 
-    color:#bdcbd7;
+    color:#b8c6d3;
 
     font-size:9px;
 
-    letter-spacing:.1em;
+    letter-spacing:.13em;
 }
 
 .topbar .w{
+
     height:100%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
-.topbar-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.topbar-left{
+
+    text-transform:uppercase;
 }
 
-.topbar-dot{
-    width:4px;
-    height:4px;
+.topbar-right{
 
-    border-radius:50%;
+    display:flex;
 
-    background:var(--gold-light);
+    align-items:center;
+
+    gap:14px;
+}
+
+.topbar-line{
+
+    width:25px;
+
+    height:1px;
+
+    background:
+        rgba(207,183,125,.65);
 }
 
 
@@ -123,15 +171,18 @@ button{
    HEADER
    ========================================================= */
 
-header{
+.header{
+
     position:sticky;
+
     top:0;
 
     z-index:1000;
 
     height:74px;
 
-    background:rgba(255,255,255,.97);
+    background:
+        rgba(255,255,255,.97);
 
     border-bottom:
         1px solid rgba(8,45,86,.08);
@@ -141,18 +192,22 @@ header{
         box-shadow .3s ease;
 }
 
-header.scrolled{
+.header.scrolled{
+
     height:60px;
 
     box-shadow:
-        0 7px 25px rgba(6,31,60,.1);
+        0 8px 28px rgba(8,45,86,.1);
 }
 
 .nav{
+
     height:100%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     gap:30px;
@@ -160,11 +215,13 @@ header.scrolled{
 
 
 /* =========================================================
-   LOGO
+   BRAND
    ========================================================= */
 
-.logo{
+.brand{
+
     display:flex;
+
     align-items:center;
 
     gap:11px;
@@ -172,56 +229,70 @@ header.scrolled{
     flex-shrink:0;
 }
 
-.logo-symbol{
-    width:39px;
-    height:39px;
+.brand-mark{
+
+    width:40px;
+
+    height:40px;
 
     display:grid;
+
     place-items:center;
 
-    border:1px solid var(--gold);
+    border:
+        1px solid var(--gold);
 
     color:var(--gold);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:21px;
 
     transition:
-        transform .4s ease,
         background .3s ease,
         color .3s ease;
 }
 
-.logo:hover .logo-symbol{
-    transform:rotate(45deg);
+.brand:hover .brand-mark{
 
     background:var(--gold);
 
     color:white;
 }
 
-.logo-name{
+.brand-name{
+
     display:flex;
+
     flex-direction:column;
 
     line-height:1;
 }
 
-.logo-name strong{
+.brand-name strong{
+
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:18px;
 
-    letter-spacing:.14em;
+    font-weight:600;
+
+    letter-spacing:.15em;
 }
 
-.logo-name small{
+.brand-name small{
+
     margin-top:5px;
 
-    color:var(--muted);
+    color:#778696;
 
     font-size:7px;
 
@@ -230,60 +301,76 @@ header.scrolled{
 
 
 /* =========================================================
-   NAV
+   NAVIGATION
    ========================================================= */
 
 .nav-menu{
+
     height:100%;
 
     display:flex;
+
     align-items:center;
 
     gap:27px;
 }
 
 .nav-menu a{
+
     position:relative;
 
     height:100%;
 
     display:flex;
+
     align-items:center;
 
-    color:#566676;
+    color:#566778;
 
     font-size:10px;
-    font-weight:700;
 
-    letter-spacing:.08em;
+    font-weight:600;
+
+    letter-spacing:.07em;
+
+    transition:
+        color .25s ease;
 }
 
 .nav-menu a::after{
+
     content:"";
 
     position:absolute;
 
     left:0;
+
     right:0;
+
     bottom:0;
 
     height:2px;
 
     background:var(--gold);
 
-    transform:scaleX(0);
+    transform:
+        scaleX(0);
 
-    transition:transform .25s ease;
+    transition:
+        transform .25s ease;
 }
 
 .nav-menu a:hover,
 .nav-menu a.active{
+
     color:var(--navy);
 }
 
 .nav-menu a:hover::after,
 .nav-menu a.active::after{
-    transform:scaleX(1);
+
+    transform:
+        scaleX(1);
 }
 
 
@@ -292,6 +379,7 @@ header.scrolled{
    ========================================================= */
 
 .hero{
+
     position:relative;
 
     min-height:650px;
@@ -300,25 +388,28 @@ header.scrolled{
 
     background:
         linear-gradient(
-            110deg,
-            #061f3c 0%,
-            #0a345b 58%,
-            #194e72 100%
+            115deg,
+            #041c35 0%,
+            #092f55 52%,
+            #41677d 100%
         );
 
     color:white;
 }
 
 .hero::before{
+
     content:"";
 
     position:absolute;
 
     width:620px;
+
     height:620px;
 
     right:-300px;
-    top:-290px;
+
+    top:-300px;
 
     border:
         1px solid rgba(255,255,255,.08);
@@ -327,23 +418,27 @@ header.scrolled{
 }
 
 .hero::after{
+
     content:"";
 
     position:absolute;
 
-    width:330px;
-    height:330px;
+    width:340px;
 
-    left:-190px;
-    bottom:-190px;
+    height:340px;
+
+    left:-210px;
+
+    bottom:-210px;
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid rgba(207,183,125,.13);
 
     border-radius:50%;
 }
 
 .hero-grid{
+
     position:relative;
 
     z-index:2;
@@ -353,8 +448,8 @@ header.scrolled{
     display:grid;
 
     grid-template-columns:
-        .9fr
-        1.1fr;
+        .88fr
+        1.12fr;
 
     align-items:center;
 
@@ -367,63 +462,78 @@ header.scrolled{
    ========================================================= */
 
 .hero-copy{
-    padding:85px 0;
+
+    padding:
+        80px 0;
 }
 
 .eyebrow{
+
     display:flex;
+
     align-items:center;
 
     gap:12px;
 
-    color:#d6bb7e;
+    margin-bottom:23px;
+
+    color:var(--gold-light);
 
     font-size:9px;
+
     font-weight:700;
 
     letter-spacing:.22em;
 
     text-transform:uppercase;
-
-    margin-bottom:24px;
 }
 
 .eyebrow::before{
+
     content:"";
 
     width:34px;
+
     height:1px;
 
     background:var(--gold-light);
 }
 
 .hero h1{
+
     margin:0;
 
-    font-family:Georgia,serif;
+    max-width:650px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        clamp(55px,7vw,92px);
+        clamp(55px,7.2vw,94px);
 
     font-weight:400;
 
-    line-height:.91;
+    line-height:.92;
 
     letter-spacing:-.055em;
 }
 
 .hero h1 span{
+
     display:block;
 
-    color:#c6a762;
+    color:#cfb477;
 }
 
-.hero-text{
-    max-width:570px;
+.hero-lead{
 
-    margin:31px 0 0;
+    max-width:535px;
 
-    color:#c7d3dc;
+    margin:30px 0 0;
+
+    color:#c4d1dc;
 
     font-size:14px;
 
@@ -431,6 +541,7 @@ header.scrolled{
 }
 
 .hero-actions{
+
     display:flex;
 
     align-items:center;
@@ -441,20 +552,26 @@ header.scrolled{
 }
 
 .btn{
-    min-height:46px;
 
-    padding:0 22px;
+    min-height:45px;
+
+    padding:
+        0 21px;
 
     display:inline-flex;
+
     align-items:center;
+
     justify-content:center;
 
-    border:1px solid rgba(255,255,255,.25);
+    border:
+        1px solid rgba(255,255,255,.27);
 
     font-size:9px;
+
     font-weight:700;
 
-    letter-spacing:.13em;
+    letter-spacing:.12em;
 
     text-transform:uppercase;
 
@@ -465,10 +582,13 @@ header.scrolled{
 }
 
 .btn:hover{
-    transform:translateY(-3px);
+
+    transform:
+        translateY(-3px);
 }
 
 .btn-primary{
+
     background:var(--gold);
 
     border-color:var(--gold);
@@ -477,16 +597,19 @@ header.scrolled{
 }
 
 .btn-primary:hover{
-    background:#bd9958;
 
-    border-color:#bd9958;
+    background:#bd9a57;
+
+    border-color:#bd9a57;
 }
 
 .btn-outline{
+
     color:white;
 }
 
 .btn-outline:hover{
+
     background:white;
 
     color:var(--navy);
@@ -494,125 +617,240 @@ header.scrolled{
 
 
 /* =========================================================
-   HERO VISUAL
-   FORMAL PORTRAIT / DHARMIKA
+   HERO STORY VISUAL
+
+   Tidak menggunakan foto miring.
+   Dibuat seperti halaman editorial / portrait story.
    ========================================================= */
 
-.hero-visual{
+.story-stage{
+
     position:relative;
 
-    min-height:540px;
+    min-height:510px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
-.portrait-frame{
+.story-card{
+
     position:relative;
 
-    width:min(570px,92%);
+    width:min(590px,92%);
+
+    padding:12px;
 
     background:white;
 
-    padding:10px;
-
     box-shadow:
-        0 30px 70px rgba(0,0,0,.27);
+        0 32px 80px rgba(0,0,0,.27);
 }
 
-.portrait{
+.story-image{
+
     position:relative;
 
-    aspect-ratio:4 / 5;
+    aspect-ratio:16 / 11;
 
     overflow:hidden;
 
     background:
         linear-gradient(
-            145deg,
-            #173f60,
-            #78909d 52%,
-            #b38b4e
+            135deg,
+            #143c5f,
+            #607f8d 54%,
+            #a98247
         );
 }
 
-.portrait::before{
+.story-image::before{
+
     content:"";
 
     position:absolute;
+
     inset:0;
 
     background:
         linear-gradient(
-            to top,
-            rgba(4,25,47,.83),
-            rgba(8,45,86,.05) 62%
+            135deg,
+            rgba(4,28,53,.87),
+            rgba(23,75,109,.42) 55%,
+            rgba(169,130,71,.38)
         );
 }
 
-.portrait::after{
+.story-image::after{
+
     content:"";
 
     position:absolute;
 
-    left:9%;
-    right:9%;
-    top:8%;
-    bottom:8%;
+    inset:25px;
 
     border:
-        1px solid rgba(255,255,255,.23);
+        1px solid rgba(255,255,255,.18);
 }
 
-.portrait-symbol{
+
+/* Human silhouette */
+.person{
+
     position:absolute;
 
     z-index:2;
 
     left:50%;
-    top:44%;
 
-    transform:translate(-50%,-50%);
+    top:49%;
 
-    color:rgba(255,255,255,.73);
+    width:170px;
 
-    font-family:Georgia,serif;
+    height:245px;
 
-    font-size:
-        clamp(100px,12vw,165px);
-
-    line-height:1;
+    transform:
+        translate(-50%,-50%);
 }
 
-.portrait-caption{
+.person-head{
+
     position:absolute;
 
-    z-index:3;
+    left:50%;
+
+    top:0;
+
+    width:64px;
+
+    height:64px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:50%;
+
+    background:
+        rgba(238,226,204,.83);
+}
+
+.person-body{
+
+    position:absolute;
+
+    left:50%;
+
+    top:54px;
+
+    width:140px;
+
+    height:190px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        70px 70px 25px 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7,33,58,.96),
+            rgba(31,71,91,.88)
+        );
+}
+
+.person-light{
+
+    position:absolute;
+
+    left:50%;
+
+    top:78px;
+
+    width:80px;
+
+    height:130px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(207,183,125,.24),
+            transparent 70%
+        );
+}
+
+.story-label{
+
+    position:absolute;
+
+    z-index:4;
+
+    left:25px;
+
+    top:25px;
+
+    padding:
+        7px 10px;
+
+    background:
+        rgba(255,255,255,.95);
+
+    color:var(--navy);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+}
+
+.story-caption{
+
+    position:absolute;
+
+    z-index:4;
 
     left:30px;
-    right:30px;
-    bottom:28px;
+
+    bottom:26px;
+
+    max-width:350px;
 
     color:white;
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:24px;
 
-    line-height:1.25;
+    line-height:1.18;
 }
 
 
-/* Floating card */
+/* Quote card */
 
-.hero-card{
+.quote-card{
+
     position:absolute;
 
-    right:-4px;
-    bottom:4%;
+    right:-15px;
 
-    width:220px;
+    bottom:3%;
+
+    width:230px;
 
     padding:23px;
 
@@ -621,16 +859,19 @@ header.scrolled{
     color:var(--navy);
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.2);
+        0 20px 45px rgba(0,0,0,.2);
 }
 
-.hero-card::before{
+.quote-card::before{
+
     content:"";
 
     position:absolute;
 
     left:0;
+
     top:0;
+
     bottom:0;
 
     width:3px;
@@ -638,247 +879,290 @@ header.scrolled{
     background:var(--gold);
 }
 
-.hero-card small{
-    display:block;
-
-    margin-bottom:9px;
+.quote-mark{
 
     color:var(--gold);
 
-    font-size:8px;
-    font-weight:700;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    letter-spacing:.16em;
+    font-size:35px;
+
+    line-height:.7;
+}
+
+.quote-card p{
+
+    margin:10px 0 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:16px;
+
+    line-height:1.45;
+}
+
+.quote-card small{
+
+    display:block;
+
+    margin-top:13px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    letter-spacing:.11em;
 
     text-transform:uppercase;
 }
 
-.hero-card strong{
-    display:block;
-
-    font-family:Georgia,serif;
-
-    font-size:20px;
-
-    font-weight:400;
-
-    line-height:1.3;
-}
-
-.hero-card p{
-    margin:10px 0 0;
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    line-height:1.65;
-}
-
 
 /* =========================================================
-   INTRO
+   INTRODUCTION
    ========================================================= */
 
 .intro{
-    padding:105px 0 95px;
+
+    padding:
+        100px 0;
 
     background:white;
 }
 
-.intro-grid{
+.intro-layout{
+
     display:grid;
 
     grid-template-columns:
-        .85fr
-        1.15fr;
+        .72fr
+        1.28fr;
 
     gap:9vw;
-
-    align-items:start;
 }
 
 .label{
+
     display:flex;
+
     align-items:center;
 
-    gap:12px;
+    gap:11px;
 
     color:var(--gold);
 
     font-size:9px;
+
     font-weight:700;
 
-    letter-spacing:.2em;
+    letter-spacing:.19em;
 
     text-transform:uppercase;
 }
 
 .label::before{
+
     content:"";
 
-    width:31px;
+    width:30px;
+
     height:1px;
 
     background:var(--gold);
 }
 
 .intro h2{
+
     margin:17px 0 0;
 
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        clamp(35px,4.4vw,57px);
+        clamp(34px,4.5vw,58px);
 
     font-weight:400;
 
-    line-height:1.05;
+    line-height:1.04;
 
-    letter-spacing:-.04em;
+    letter-spacing:-.045em;
 }
 
-.intro-copy p{
-    margin:0 0 21px;
+.intro-content p{
 
-    color:#637382;
+    margin:
+        0 0 20px;
+
+    color:#617181;
 
     font-size:13px;
 
     line-height:1.9;
 }
 
-.intro-copy p:first-child{
+.intro-content p:first-child{
+
     color:var(--ink);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size:20px;
+    font-size:19px;
 
-    line-height:1.65;
+    line-height:1.7;
 }
 
 
 /* =========================================================
-   VALUES
+   WHY DHARMIKA
    ========================================================= */
 
-.values{
-    padding:100px 0;
+.meaning{
+
+    padding:
+        105px 0;
 
     background:var(--cream);
 }
 
-.values-head{
-    display:flex;
+.meaning-head{
 
-    justify-content:space-between;
-    align-items:flex-end;
+    max-width:680px;
 
-    gap:40px;
-
-    margin-bottom:45px;
+    margin-bottom:48px;
 }
 
-.values-head h2{
-    margin:14px 0 0;
+.meaning-head h2{
+
+    margin:15px 0 0;
 
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        clamp(35px,4vw,54px);
+        clamp(36px,4.5vw,57px);
 
     font-weight:400;
 
-    line-height:1;
+    line-height:1.03;
 }
 
-.values-head p{
-    max-width:410px;
+.meaning-grid{
 
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    line-height:1.8;
-
-    text-align:right;
-}
-
-.values-grid{
     display:grid;
 
     grid-template-columns:
-        repeat(4,minmax(0,1fr));
+        repeat(3,minmax(0,1fr));
 
-    gap:1px;
-
-    background:var(--line);
-
-    border:1px solid var(--line);
+    gap:18px;
 }
 
-.value{
+.meaning-card{
+
     position:relative;
 
     min-height:300px;
 
-    padding:35px 28px;
+    padding:36px 30px;
 
     background:white;
+
+    border:
+        1px solid var(--line);
 
     overflow:hidden;
 
     transition:
-        transform .3s ease,
-        background .3s ease;
+        transform .35s ease,
+        box-shadow .35s ease;
 }
 
-.value:hover{
-    transform:translateY(-5px);
+.meaning-card:hover{
 
-    background:#fcfbf7;
+    transform:
+        translateY(-7px);
 
-    z-index:2;
+    box-shadow:var(--shadow);
 }
 
-.value-symbol{
-    width:45px;
-    height:45px;
+.meaning-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-65px;
+
+    bottom:-65px;
+
+    width:160px;
+
+    height:160px;
+
+    border:
+        1px solid rgba(169,130,71,.13);
+
+    border-radius:50%;
+}
+
+.meaning-icon{
+
+    width:48px;
+
+    height:48px;
 
     display:grid;
+
     place-items:center;
 
     margin-bottom:28px;
 
-    border:1px solid var(--gold);
+    border:
+        1px solid var(--gold);
 
     color:var(--gold);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size:20px;
+    font-size:22px;
 }
 
-.value h3{
-    margin:0 0 14px;
+.meaning-card h3{
+
+    margin:0 0 13px;
 
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size:23px;
+    font-size:24px;
 
     font-weight:400;
 }
 
-.value p{
+.meaning-card p{
+
     margin:0;
 
     color:var(--muted);
@@ -888,94 +1172,73 @@ header.scrolled{
     line-height:1.8;
 }
 
-.value::after{
-    content:"";
-
-    position:absolute;
-
-    left:28px;
-    right:28px;
-    bottom:24px;
-
-    height:1px;
-
-    background:var(--line);
-}
-
 
 /* =========================================================
-   HUMAN STORY
+   FEATURE STORY
    ========================================================= */
 
-.story{
-    padding:100px 0;
+.feature{
+
+    padding:
+        100px 0;
 
     background:white;
 }
 
-.story-grid{
+.feature-layout{
+
     display:grid;
 
     grid-template-columns:
-        1.05fr
-        .95fr;
+        1fr
+        .92fr;
 
-    min-height:540px;
+    min-height:530px;
 }
 
-.story-visual{
+.feature-art{
+
     position:relative;
 
     overflow:hidden;
 
     background:
         linear-gradient(
-            135deg,
-            #0b3458,
-            #527687 55%,
-            #b38a4c
+            145deg,
+            #082d56,
+            #315f78 52%,
+            #ad874a
         );
 }
 
-.story-visual::before{
+.feature-art::before{
+
     content:"";
 
     position:absolute;
 
-    inset:0;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(6,31,60,.65),
-            transparent 55%,
-            rgba(169,130,63,.35)
-        );
-}
-
-.story-circle{
-    position:absolute;
-
-    width:380px;
-    height:380px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
+    inset:45px;
 
     border:
-        1px solid rgba(255,255,255,.25);
-
-    border-radius:50%;
+        1px solid rgba(255,255,255,.18);
 }
 
-.story-circle::before{
+.feature-art::after{
+
     content:"";
 
     position:absolute;
 
-    inset:38px;
+    width:420px;
+
+    height:420px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
 
     border:
         1px solid rgba(255,255,255,.18);
@@ -983,274 +1246,97 @@ header.scrolled{
     border-radius:50%;
 }
 
-.story-word{
+.feature-word{
+
     position:absolute;
 
     left:50%;
+
     top:50%;
 
-    transform:translate(-50%,-50%);
+    z-index:2;
 
-    color:rgba(255,255,255,.76);
+    transform:
+        translate(-50%,-50%);
 
-    font-family:Georgia,serif;
+    color:
+        rgba(255,255,255,.75);
 
-    font-size:100px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    letter-spacing:.02em;
+    font-size:
+        clamp(75px,10vw,145px);
+
+    letter-spacing:-.07em;
 }
 
-.story-visual-caption{
-    position:absolute;
-
-    left:30px;
-    right:30px;
-    bottom:28px;
-
-    color:white;
-
-    font-family:Georgia,serif;
-
-    font-size:22px;
-}
-
-.story-content{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+.feature-copy{
 
     padding:
-        clamp(40px,6vw,75px);
+        clamp(45px,6vw,75px);
 
     background:var(--navy);
 
     color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
 }
 
-.story-content h2{
-    margin:17px 0 20px;
+.feature-copy .label{
 
-    font-family:Georgia,serif;
+    color:var(--gold-light);
+}
+
+.feature-copy .label::before{
+
+    background:var(--gold-light);
+}
+
+.feature-copy h2{
+
+    margin:18px 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
         clamp(35px,4vw,53px);
 
     font-weight:400;
 
-    line-height:1.08;
+    line-height:1.06;
 }
 
-.story-content p{
+.feature-copy p{
+
     margin:0;
 
-    color:#c3d0da;
+    color:#c0ced9;
 
     font-size:13px;
 
-    line-height:1.9;
+    line-height:1.85;
 }
 
-.story-content a{
+.feature-link{
+
     display:inline-flex;
 
-    margin-top:29px;
+    margin-top:28px;
 
-    color:#d2b473;
+    color:var(--gold-light);
 
     font-size:9px;
-    font-weight:700;
 
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-}
-
-
-/* =========================================================
-   FEATURE ARTICLES
-   ========================================================= */
-
-.articles{
-    padding:100px 0;
-
-    background:var(--cream);
-}
-
-.section-head{
-    display:flex;
-
-    align-items:flex-end;
-    justify-content:space-between;
-
-    gap:30px;
-
-    margin-bottom:44px;
-}
-
-.section-head h2{
-    margin:14px 0 0;
-
-    color:var(--navy);
-
-    font-family:Georgia,serif;
-
-    font-size:
-        clamp(35px,4vw,54px);
-
-    font-weight:400;
-
-    line-height:1;
-}
-
-.section-description{
-    max-width:410px;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    line-height:1.8;
-
-    text-align:right;
-}
-
-.article-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
-    gap:24px;
-}
-
-.article-card{
-    background:white;
-
-    border:1px solid var(--line);
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.article-card:hover{
-    transform:translateY(-7px);
-
-    box-shadow:var(--shadow);
-}
-
-.article-image{
-    position:relative;
-
-    aspect-ratio:16 / 10;
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #133c5f,
-            #b28a4d
-        );
-}
-
-.article-image::before{
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(8,45,86,.78),
-            rgba(169,130,63,.2)
-        );
-}
-
-.article-image-symbol{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    color:rgba(255,255,255,.62);
-
-    font-family:Georgia,serif;
-
-    font-size:88px;
-}
-
-.article-tag{
-    position:absolute;
-
-    top:14px;
-    left:14px;
-
-    padding:7px 9px;
-
-    background:rgba(255,255,255,.94);
-
-    color:var(--navy);
-
-    font-size:8px;
-    font-weight:700;
-
-    letter-spacing:.1em;
-
-    text-transform:uppercase;
-}
-
-.article-body{
-    padding:24px;
-}
-
-.article-category{
-    color:var(--gold);
-
-    font-size:8px;
-    font-weight:700;
-
-    letter-spacing:.16em;
-
-    text-transform:uppercase;
-}
-
-.article-body h3{
-    margin:12px 0 13px;
-
-    color:var(--navy);
-
-    font-family:Georgia,serif;
-
-    font-size:21px;
-
-    font-weight:400;
-
-    line-height:1.3;
-}
-
-.article-body p{
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:11px;
-
-    line-height:1.75;
-}
-
-.read{
-    display:inline-flex;
-
-    margin-top:20px;
-
-    color:var(--gold);
-
-    font-size:9px;
     font-weight:700;
 
     letter-spacing:.13em;
@@ -1260,42 +1346,102 @@ header.scrolled{
 
 
 /* =========================================================
-   VIDEO / PLAYLIST
+   STORY COLLECTION
    ========================================================= */
 
-.media{
-    padding:100px 0;
+.stories{
 
-    background:white;
+    padding:
+        105px 0;
+
+    background:var(--paper);
 }
 
-.media-grid{
+.stories-head{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+    margin-bottom:43px;
+}
+
+.stories-head h2{
+
+    margin:14px 0 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(35px,4.2vw,55px);
+
+    font-weight:400;
+
+    line-height:1;
+}
+
+.stories-description{
+
+    max-width:400px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.8;
+
+    text-align:right;
+}
+
+.story-grid{
+
     display:grid;
 
     grid-template-columns:
-        repeat(3,minmax(0,1fr));
+        1.15fr
+        .85fr
+        .85fr;
 
-    gap:20px;
+    gap:18px;
 }
 
-.media-card{
-    background:var(--navy);
+.story-item{
 
-    overflow:hidden;
+    background:white;
+
+    border:
+        1px solid var(--line);
 
     transition:
         transform .35s ease,
         box-shadow .35s ease;
 }
 
-.media-card:hover{
-    transform:translateY(-6px);
+.story-item:hover{
 
-    box-shadow:
-        0 20px 45px rgba(6,31,60,.18);
+    transform:
+        translateY(-7px);
+
+    box-shadow:var(--shadow);
 }
 
-.media-image{
+.story-item.large{
+
+    grid-row:
+        span 2;
+}
+
+.story-thumb{
+
     position:relative;
 
     aspect-ratio:16 / 10;
@@ -1305,120 +1451,499 @@ header.scrolled{
     background:
         linear-gradient(
             135deg,
-            #153e61,
-            #ad8649
+            #123b5e,
+            #9b7c4a
         );
 }
 
-.media-image::before{
+.story-item.large .story-thumb{
+
+    aspect-ratio:
+        4 / 5;
+}
+
+.story-thumb::before{
+
     content:"";
 
     position:absolute;
+
     inset:0;
 
     background:
         linear-gradient(
-            to top,
-            rgba(4,25,47,.82),
-            transparent 70%
+            145deg,
+            rgba(4,28,53,.83),
+            rgba(25,74,104,.32) 58%,
+            rgba(169,130,71,.35)
         );
 }
 
-.play-button{
+.mini-person{
+
     position:absolute;
 
     left:50%;
+
     top:50%;
 
-    transform:translate(-50%,-50%);
+    width:85px;
 
-    width:48px;
-    height:48px;
+    height:130px;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+.mini-head{
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+    width:34px;
+
+    height:34px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:50%;
+
+    background:
+        rgba(238,226,204,.8);
+}
+
+.mini-body{
+
+    position:absolute;
+
+    left:50%;
+
+    top:31px;
+
+    width:72px;
+
+    height:98px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        36px 36px 12px 12px;
+
+    background:
+        rgba(8,32,55,.92);
+}
+
+.story-tag{
+
+    position:absolute;
+
+    left:13px;
+
+    top:13px;
+
+    z-index:3;
+
+    padding:
+        6px 8px;
+
+    background:
+        rgba(255,255,255,.94);
+
+    color:var(--navy);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+}
+
+.story-body{
+
+    padding:
+        22px;
+}
+
+.story-type{
+
+    color:var(--gold);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.story-body h3{
+
+    margin:
+        10px 0 11px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:20px;
+
+    font-weight:400;
+
+    line-height:1.28;
+}
+
+.story-body p{
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.75;
+}
+
+.story-more{
+
+    display:inline-flex;
+
+    margin-top:18px;
+
+    color:var(--gold);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   QUOTE SECTION
+   ========================================================= */
+
+.quote-section{
+
+    padding:
+        95px 0;
+
+    background:white;
+}
+
+.quote-inner{
+
+    position:relative;
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:
+        55px 70px;
+
+    border-top:
+        1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
+
+    text-align:center;
+}
+
+.quote-inner::before{
+
+    content:"“";
+
+    position:absolute;
+
+    left:50%;
+
+    top:-38px;
+
+    transform:
+        translateX(-50%);
+
+    padding:
+        0 20px;
+
+    background:white;
+
+    color:var(--gold);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:70px;
+
+    line-height:1;
+}
+
+.quote-inner p{
+
+    margin:0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(24px,3.2vw,39px);
+
+    font-weight:400;
+
+    line-height:1.35;
+}
+
+.quote-inner span{
+
+    display:block;
+
+    margin-top:22px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   VIDEO / AUDIO
+   ========================================================= */
+
+.media{
+
+    padding:
+        100px 0;
+
+    background:var(--cream);
+}
+
+.media-grid{
 
     display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:20px;
+}
+
+.media-card{
+
+    display:grid;
+
+    grid-template-columns:
+        .95fr
+        1.05fr;
+
+    min-height:210px;
+
+    background:white;
+
+    border:
+        1px solid var(--line);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.media-card:hover{
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:var(--shadow);
+}
+
+.media-thumb{
+
+    position:relative;
+
+    min-height:210px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0a3158,
+            #af894b
+        );
+}
+
+.media-thumb::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+
+    height:130px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    border-radius:50%;
+}
+
+.play-icon{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:45px;
+
+    height:45px;
+
+    display:grid;
+
     place-items:center;
 
     border:
-        1px solid rgba(255,255,255,.6);
+        1px solid rgba(255,255,255,.65);
 
     border-radius:50%;
 
     color:white;
 
     font-size:13px;
-
-    transition:
-        background .3s ease,
-        color .3s ease;
 }
 
-.media-card:hover .play-button{
-    background:white;
+.media-body{
 
-    color:var(--navy);
+    padding:27px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
 }
 
-.media-label{
-    position:absolute;
+.media-type{
 
-    left:15px;
-    bottom:14px;
-
-    color:#dfc27f;
+    color:var(--gold);
 
     font-size:8px;
+
     font-weight:700;
 
-    letter-spacing:.14em;
+    letter-spacing:.15em;
 
     text-transform:uppercase;
 }
 
-.media-body{
-    padding:20px;
-}
-
 .media-body h3{
-    margin:0;
 
-    color:white;
+    margin:
+        10px 0 12px;
 
-    font-family:Georgia,serif;
+    color:var(--navy);
 
-    font-size:19px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:20px;
 
     font-weight:400;
 
-    line-height:1.3;
+    line-height:1.28;
 }
 
 .media-body p{
-    margin:10px 0 0;
 
-    color:#9eb0bf;
+    margin:0;
+
+    color:var(--muted);
 
     font-size:10px;
 
     line-height:1.7;
 }
 
+.media-link{
+
+    margin-top:17px;
+
+    color:var(--gold);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+}
+
 
 /* =========================================================
-   TOPICS
+   OTHER TOPICS
    ========================================================= */
 
-.topics{
-    padding:100px 0;
+.other{
+
+    padding:
+        100px 0;
 
     background:var(--navy-deep);
 
     color:white;
 }
 
-.topics h2{
-    margin:14px 0 42px;
+.other h2{
 
-    font-family:Georgia,serif;
+    margin:
+        14px 0 40px;
+
+    color:white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
         clamp(35px,4vw,54px);
@@ -1428,15 +1953,18 @@ header.scrolled{
     line-height:1;
 }
 
-.topics .label{
-    color:#d3b574;
+.other .label{
+
+    color:var(--gold-light);
 }
 
-.topics .label::before{
-    background:#d3b574;
+.other .label::before{
+
+    background:var(--gold-light);
 }
 
 .topic-grid{
+
     display:grid;
 
     grid-template-columns:
@@ -1447,11 +1975,13 @@ header.scrolled{
 }
 
 .topic{
+
     position:relative;
 
-    min-height:135px;
+    min-height:125px;
 
-    padding:30px 25px;
+    padding:
+        30px 25px;
 
     border-right:
         1px solid rgba(255,255,255,.13);
@@ -1465,25 +1995,32 @@ header.scrolled{
 }
 
 .topic:nth-child(3n){
+
     border-right:0;
 }
 
 .topic:hover{
-    background:rgba(255,255,255,.055);
 
     padding-left:33px;
+
+    background:
+        rgba(255,255,255,.05);
 }
 
 .topic h3{
+
     margin:0;
 
     max-width:78%;
 
     color:white;
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size:20px;
+    font-size:19px;
 
     font-weight:400;
 
@@ -1491,20 +2028,25 @@ header.scrolled{
 }
 
 .topic-arrow{
+
     position:absolute;
 
     right:24px;
-    bottom:26px;
 
-    color:#caae70;
+    bottom:24px;
+
+    color:var(--gold-light);
 
     font-size:16px;
 
-    transition:transform .3s ease;
+    transition:
+        transform .25s ease;
 }
 
 .topic:hover .topic-arrow{
-    transform:translateX(5px);
+
+    transform:
+        translateX(5px);
 }
 
 
@@ -1513,12 +2055,15 @@ header.scrolled{
    ========================================================= */
 
 .cta{
-    padding:90px 0;
 
-    background:var(--cream);
+    padding:
+        90px 0;
+
+    background:var(--paper);
 }
 
 .cta-box{
+
     position:relative;
 
     overflow:hidden;
@@ -1526,57 +2071,72 @@ header.scrolled{
     padding:
         clamp(45px,6vw,80px);
 
-    border:1px solid var(--line);
-
     background:
         linear-gradient(
-            115deg,
-            #efede5,
+            120deg,
+            #ece8dc,
             #faf9f5
         );
+
+    border:
+        1px solid var(--line);
 }
 
 .cta-box::after{
-    content:"ॐ";
+
+    content:"✦";
 
     position:absolute;
 
-    right:5%;
+    right:7%;
+
     top:50%;
 
-    transform:translateY(-50%);
+    transform:
+        translateY(-50%);
 
-    color:rgba(169,130,63,.07);
+    color:
+        rgba(169,130,71,.09);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:190px;
 }
 
 .cta-content{
+
     position:relative;
 
     z-index:2;
 
-    max-width:690px;
+    max-width:700px;
 }
 
 .cta h2{
-    margin:15px 0;
+
+    margin:
+        15px 0;
 
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        clamp(35px,4vw,55px);
+        clamp(35px,4vw,56px);
 
     font-weight:400;
 
-    line-height:1.08;
+    line-height:1.05;
 }
 
 .cta p{
+
     max-width:610px;
 
     margin:0;
@@ -1588,38 +2148,22 @@ header.scrolled{
     line-height:1.85;
 }
 
-.cta-button{
-    display:inline-flex;
+.cta .btn{
 
-    min-height:45px;
-
-    align-items:center;
-    justify-content:center;
-
-    margin-top:28px;
-
-    padding:0 22px;
+    margin-top:27px;
 
     background:var(--navy);
 
+    border-color:var(--navy);
+
     color:white;
-
-    font-size:9px;
-    font-weight:700;
-
-    letter-spacing:.13em;
-
-    text-transform:uppercase;
-
-    transition:
-        transform .25s ease,
-        background .25s ease;
 }
 
-.cta-button:hover{
-    transform:translateY(-3px);
+.cta .btn:hover{
 
     background:var(--gold);
+
+    border-color:var(--gold);
 }
 
 
@@ -1627,69 +2171,81 @@ header.scrolled{
    FOOTER
    ========================================================= */
 
-footer{
-    padding:65px 0 30px;
+.footer{
 
-    background:#041a31;
+    padding:
+        65px 0 30px;
 
-    color:#91a4b5;
+    background:#03182e;
+
+    color:#91a2b2;
 }
 
 .footer-grid{
+
     display:grid;
 
     grid-template-columns:
-        1.2fr
-        .8fr
-        .8fr;
+        1.25fr
+        .75fr
+        .75fr;
 
     gap:60px;
 
-    padding-bottom:55px;
+    padding-bottom:50px;
 }
 
 .footer-brand strong{
+
     display:block;
 
     color:white;
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:21px;
 
-    letter-spacing:.12em;
+    letter-spacing:.13em;
 }
 
 .footer-brand small{
+
     display:block;
 
     margin-top:6px;
 
-    color:#71869a;
+    color:#687c90;
 
-    font-size:8px;
+    font-size:7px;
 
     letter-spacing:.3em;
 }
 
 .footer-brand p{
-    max-width:370px;
 
-    margin:21px 0 0;
+    max-width:360px;
 
-    color:#8296a9;
+    margin:
+        22px 0 0;
 
-    font-size:11px;
+    color:#7f93a7;
+
+    font-size:10px;
 
     line-height:1.85;
 }
 
 .footer-column h4{
-    margin:0 0 18px;
 
-    color:#d3b575;
+    margin:
+        0 0 18px;
 
-    font-size:9px;
+    color:var(--gold-light);
+
+    font-size:8px;
 
     letter-spacing:.15em;
 
@@ -1697,37 +2253,42 @@ footer{
 }
 
 .footer-column a{
+
     display:block;
 
     margin-bottom:11px;
 
-    color:#8da1b3;
+    color:#8498aa;
 
     font-size:10px;
 
-    transition:color .2s ease;
+    transition:
+        color .2s ease;
 }
 
 .footer-column a:hover{
+
     color:white;
 }
 
 .footer-bottom{
-    display:flex;
 
-    align-items:center;
-    justify-content:space-between;
-
-    gap:20px;
-
-    padding-top:25px;
+    padding-top:24px;
 
     border-top:
         1px solid rgba(255,255,255,.08);
 
-    color:#5f7488;
+    display:flex;
 
-    font-size:9px;
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    color:#607589;
+
+    font-size:8px;
 }
 
 
@@ -1736,9 +2297,11 @@ footer{
    ========================================================= */
 
 .reveal{
+
     opacity:0;
 
-    transform:translateY(25px);
+    transform:
+        translateY(25px);
 
     transition:
         opacity .75s ease,
@@ -1746,6 +2309,7 @@ footer{
 }
 
 .reveal.visible{
+
     opacity:1;
 
     transform:none;
@@ -1756,23 +2320,40 @@ footer{
    TABLET
    ========================================================= */
 
-@media (max-width:1100px){
+@media(max-width:1100px){
 
     .nav-menu{
+
         gap:17px;
     }
 
     .nav-menu a{
+
         font-size:9px;
     }
 
     .hero-grid{
+
         gap:4vw;
     }
 
-    .values-grid{
+    .story-grid{
+
         grid-template-columns:
-            repeat(2,minmax(0,1fr));
+            1fr 1fr;
+    }
+
+    .story-item.large{
+
+        grid-column:
+            1 / -1;
+
+        grid-row:auto;
+    }
+
+    .story-item.large .story-thumb{
+
+        aspect-ratio:16 / 9;
     }
 
 }
@@ -1782,108 +2363,130 @@ footer{
    TABLET / MOBILE
    ========================================================= */
 
-@media (max-width:850px){
+@media(max-width:850px){
 
     .topbar-right{
+
         display:none;
     }
 
-    header{
+    .header{
+
         height:64px;
     }
 
-    header.scrolled{
+    .header.scrolled{
+
         height:58px;
     }
 
     .nav-menu{
+
         display:none;
     }
 
     .hero{
+
         min-height:auto;
     }
 
     .hero-grid{
+
         grid-template-columns:1fr;
 
         min-height:auto;
 
-        padding-bottom:70px;
+        padding-bottom:75px;
     }
 
     .hero-copy{
-        padding:70px 0 25px;
+
+        padding:
+            70px 0 30px;
     }
 
-    .hero-visual{
-        min-height:470px;
+    .story-stage{
+
+        min-height:440px;
     }
 
-    .portrait-frame{
-        width:min(550px,90%);
-    }
+    .intro-layout{
 
-    .hero-card{
-        right:2%;
-    }
-
-    .intro-grid{
         grid-template-columns:1fr;
 
         gap:35px;
     }
 
-    .values-head,
-    .section-head{
+    .meaning-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .meaning-card{
+
+        min-height:245px;
+    }
+
+    .feature-layout{
+
+        grid-template-columns:1fr;
+    }
+
+    .feature-art{
+
+        min-height:390px;
+    }
+
+    .stories-head{
+
         flex-direction:column;
 
         align-items:flex-start;
     }
 
-    .values-head p,
-    .section-description{
+    .stories-description{
+
         text-align:left;
     }
 
     .story-grid{
-        grid-template-columns:1fr;
-    }
 
-    .story-visual{
-        min-height:430px;
-    }
-
-    .article-grid{
         grid-template-columns:
             repeat(2,minmax(0,1fr));
     }
 
     .media-grid{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
+
+        grid-template-columns:1fr;
     }
 
     .topic-grid{
+
         grid-template-columns:
             repeat(2,minmax(0,1fr));
     }
 
     .topic:nth-child(3n){
+
         border-right:
             1px solid rgba(255,255,255,.13);
     }
 
     .topic:nth-child(2n){
+
         border-right:0;
     }
 
     .footer-grid{
-        grid-template-columns:1fr 1fr;
+
+        grid-template-columns:
+            1fr 1fr;
     }
 
     .footer-brand{
-        grid-column:1 / -1;
+
+        grid-column:
+            1 / -1;
     }
 
 }
@@ -1893,172 +2496,220 @@ footer{
    MOBILE
    ========================================================= */
 
-@media (max-width:560px){
+@media(max-width:560px){
 
     .topbar{
+
         height:24px;
 
         font-size:8px;
     }
 
-    .logo-symbol{
+    .brand-mark{
+
         width:34px;
+
         height:34px;
 
-        font-size:19px;
+        font-size:18px;
     }
 
-    .logo-name strong{
+    .brand-name strong{
+
         font-size:16px;
     }
 
-    .logo-name small{
+    .brand-name small{
+
         font-size:6px;
     }
 
     .hero-copy{
+
         padding-top:60px;
     }
 
     .hero h1{
+
         font-size:
-            clamp(50px,16vw,75px);
+            clamp(49px,16vw,72px);
     }
 
-    .hero-text{
-        font-size:13px;
+    .hero-lead{
+
+        font-size:12px;
     }
 
     .hero-actions{
+
         flex-wrap:wrap;
     }
 
-    .hero-visual{
-        min-height:375px;
+    .story-stage{
+
+        min-height:365px;
     }
 
-    .portrait-frame{
-        width:91%;
+    .story-card{
+
+        width:93%;
 
         padding:8px;
     }
 
-    .portrait-caption{
-        left:20px;
-        right:20px;
-        bottom:20px;
+    .story-caption{
+
+        left:21px;
+
+        bottom:19px;
+
+        max-width:240px;
 
         font-size:18px;
     }
 
-    .hero-card{
-        width:160px;
+    .quote-card{
 
         right:-2px;
-        bottom:2%;
 
-        padding:17px;
+        width:165px;
+
+        padding:16px;
     }
 
-    .hero-card strong{
-        font-size:16px;
+    .quote-card p{
+
+        font-size:12px;
     }
 
-    .hero-card p{
-        font-size:9px;
+    .quote-mark{
+
+        font-size:27px;
     }
 
     .intro,
-    .values,
-    .story,
-    .articles,
+    .meaning,
+    .feature,
+    .stories,
+    .quote-section,
     .media,
-    .topics{
-        padding:70px 0;
+    .other{
+
+        padding:
+            70px 0;
     }
 
-    .intro-copy p:first-child{
-        font-size:18px;
+    .meaning-card{
+
+        padding:
+            29px 24px;
     }
 
-    .values-grid{
+    .feature-art{
+
+        min-height:300px;
+    }
+
+    .feature-art::before{
+
+        inset:25px;
+    }
+
+    .feature-art::after{
+
+        width:230px;
+
+        height:230px;
+    }
+
+    .feature-copy{
+
+        padding:
+            40px 25px;
+    }
+
+    .story-grid{
+
         grid-template-columns:1fr;
     }
 
-    .value{
-        min-height:230px;
+    .story-item.large{
 
-        padding:30px 25px;
+        grid-column:auto;
     }
 
-    .value::after{
-        left:25px;
-        right:25px;
+    .story-item.large .story-thumb{
+
+        aspect-ratio:16 / 10;
     }
 
-    .story-visual{
-        min-height:320px;
+    .quote-inner{
+
+        padding:
+            45px 22px;
     }
 
-    .story-circle{
-        width:240px;
-        height:240px;
+    .quote-inner p{
+
+        font-size:22px;
     }
 
-    .story-word{
-        font-size:65px;
-    }
+    .media-card{
 
-    .story-visual-caption{
-        left:22px;
-        right:22px;
-        bottom:22px;
-
-        font-size:18px;
-    }
-
-    .story-content{
-        padding:40px 25px;
-    }
-
-    .article-grid,
-    .media-grid{
         grid-template-columns:1fr;
+    }
+
+    .media-thumb{
+
+        min-height:190px;
+    }
+
+    .media-body{
+
+        padding:24px;
     }
 
     .topic-grid{
+
         grid-template-columns:1fr;
     }
 
     .topic,
     .topic:nth-child(2n),
     .topic:nth-child(3n){
+
         border-right:0;
     }
 
     .cta{
-        padding:65px 0;
+
+        padding:
+            65px 0;
     }
 
     .cta-box{
-        padding:40px 25px;
+
+        padding:
+            38px 25px;
     }
 
     .cta-box::after{
+
         font-size:120px;
     }
 
     .footer-grid{
-        grid-template-columns:1fr;
 
-        gap:35px;
+        grid-template-columns:1fr;
     }
 
     .footer-brand{
+
         grid-column:auto;
     }
 
     .footer-bottom{
+
         flex-direction:column;
 
         align-items:flex-start;
@@ -2071,27 +2722,35 @@ footer{
    REDUCED MOTION
    ========================================================= */
 
-@media (prefers-reduced-motion:reduce){
+@media(prefers-reduced-motion:reduce){
 
     html{
+
         scroll-behavior:auto;
     }
 
     *,
     *::before,
     *::after{
-        transition-duration:.01ms !important;
+
         animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        transition-duration:.01ms !important;
     }
 
     .reveal{
+
         opacity:1;
+
         transform:none;
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -2099,27 +2758,27 @@ footer{
 
 
 <!-- =======================================================
-     TOPBAR
+     TOP BAR
      ======================================================= -->
 
 <div class="topbar">
 
     <div class="w">
 
-        <span>
+        <div class="topbar-left">
             MANDALA CHANNEL
-        </span>
+        </div>
 
         <div class="topbar-right">
 
             <span>
-                MEDIA DHARMA NUSANTARA
+                KISAH DHARMIKA
             </span>
 
-            <span class="topbar-dot"></span>
+            <span class="topbar-line"></span>
 
             <span>
-                DHARMIKA
+                MEDIA DHARMA NUSANTARA
             </span>
 
         </div>
@@ -2134,21 +2793,24 @@ footer{
      HEADER
      ======================================================= -->
 
-<header id="siteHeader">
+<header
+    class="header"
+    id="header"
+>
 
     <div class="w nav">
 
 
         <a
+            class="brand"
             href="../index.html"
-            class="logo"
         >
 
-            <div class="logo-symbol">
-                ✺
+            <div class="brand-mark">
+                ✦
             </div>
 
-            <div class="logo-name">
+            <div class="brand-name">
 
                 <strong>
                     MANDALA
@@ -2187,7 +2849,7 @@ footer{
             </a>
 
             <a
-                href="#topik"
+                href="#dharmika"
                 class="active"
             >
                 TOPIK
@@ -2209,7 +2871,7 @@ footer{
      MAIN
      ======================================================= -->
 
-<main id="topik">
+<main id="dharmika">
 
 
 <!-- =======================================================
@@ -2224,19 +2886,29 @@ footer{
         <div class="hero-copy reveal">
 
             <div class="eyebrow">
-                Topik Mandala
+                Kisah Dharmika
             </div>
 
             <h1>
-                Dhar<span>mika</span>
+
+                Menemukan
+
+                <span>
+                    Dharma
+                </span>
+
             </h1>
 
-            <p class="hero-text">
-                Ruang yang menghadirkan kisah manusia,
-                nilai kehidupan, keteladanan, dan
-                semangat untuk menjalani Dharma dalam
-                kehidupan nyata.
+
+            <p class="hero-lead">
+
+                Ruang untuk mengenal kisah mereka
+                yang memilih jalan Hindu, menemukan
+                Dharma, dan menjalani perjalanan baru
+                dalam kehidupan.
+
             </p>
+
 
             <div class="hero-actions">
 
@@ -2244,14 +2916,14 @@ footer{
                     href="#kisah"
                     class="btn btn-primary"
                 >
-                    Jelajahi Dharmika
+                    Baca Kisah
                 </a>
 
                 <a
-                    href="#artikel"
+                    href="#makna"
                     class="btn btn-outline"
                 >
-                    Baca Kisah
+                    Kenali Dharmika
                 </a>
 
             </div>
@@ -2260,20 +2932,34 @@ footer{
 
 
 
-        <div class="hero-visual reveal">
+        <div class="story-stage reveal">
 
 
-            <div class="portrait-frame">
+            <div class="story-card">
 
-                <div class="portrait">
+                <div class="story-image">
 
-                    <div class="portrait-symbol">
-                        ॐ
+                    <div class="story-label">
+                        Human Interest
                     </div>
 
-                    <div class="portrait-caption">
-                        Menjalani Dharma
-                        melalui kehidupan.
+
+                    <div class="person">
+
+                        <div class="person-head"></div>
+
+                        <div class="person-body"></div>
+
+                        <div class="person-light"></div>
+
+                    </div>
+
+
+                    <div class="story-caption">
+
+                        Setiap perjalanan
+                        memiliki cerita.
+
                     </div>
 
                 </div>
@@ -2282,22 +2968,21 @@ footer{
 
 
 
-            <div class="hero-card">
+            <div class="quote-card">
 
-                <small>
-                    Dharmika
-                </small>
-
-                <strong>
-                    Keteladanan
-                    yang hidup.
-                </strong>
+                <div class="quote-mark">
+                    “
+                </div>
 
                 <p>
-                    Karena Dharma juga hadir
-                    melalui tindakan dan
-                    perjalanan manusia.
+                    Mengenal Dharma,
+                    lalu menemukan
+                    makna di dalamnya.
                 </p>
+
+                <small>
+                    Kisah Dharmika
+                </small>
 
             </div>
 
@@ -2316,7 +3001,7 @@ footer{
 
 <section class="intro">
 
-    <div class="w intro-grid">
+    <div class="w intro-layout">
 
 
         <div class="reveal">
@@ -2326,39 +3011,45 @@ footer{
             </div>
 
             <h2>
-                Tentang manusia
-                yang memilih
-                untuk berbuat baik.
+                Di balik sebuah
+                pilihan, ada
+                perjalanan.
             </h2>
 
         </div>
 
 
-
-        <div class="intro-copy reveal">
+        <div class="intro-content reveal">
 
             <p>
-                Dharmika adalah ruang untuk mengenal
-                manusia dan kisah-kisah yang memperlihatkan
-                bagaimana nilai Dharma hadir dalam
-                kehidupan.
+                Menjadi seorang Dharmika bukan hanya
+                tentang berpindah keyakinan. Di balik
+                pilihan tersebut terdapat perjalanan
+                panjang untuk mengenal ajaran, memahami
+                diri, membangun kehidupan baru, dan
+                menemukan makna spiritual.
             </p>
 
             <p>
-                Di sini Mandala mengangkat sosok,
-                komunitas, perjalanan, karya, serta
-                berbagai bentuk pengabdian yang memiliki
-                nilai dan keteladanan.
+                Mandala menghadirkan ruang bagi kisah
+                mereka yang memilih Hindu untuk diceritakan
+                secara manusiawi. Bukan untuk menghakimi
+                masa lalu, melainkan untuk memahami
+                perjalanan seseorang dari dekat.
             </p>
 
             <p>
-                Bukan sekadar tentang siapa mereka,
-                tetapi tentang nilai apa yang dapat
-                dipelajari dari perjalanan tersebut.
-                Sebuah kisah dapat menjadi refleksi,
-                inspirasi, dan pengingat bahwa Dharma
-                dapat diwujudkan melalui hal-hal yang
-                sederhana.
+                Setiap cerita memiliki latar belakang
+                yang berbeda. Ada yang menemukan Hindu
+                melalui keluarga, pertemanan, perjalanan
+                spiritual, membaca sastra, budaya
+                Nusantara, maupun pengalaman hidup.
+            </p>
+
+            <p>
+                Karena itu, Dharmika menjadi ruang untuk
+                mendengar pengalaman, bukan sekadar
+                menyajikan informasi.
             </p>
 
         </div>
@@ -2370,119 +3061,92 @@ footer{
 
 
 <!-- =======================================================
-     NILAI
+     MAKNA DHARMIKA
      ======================================================= -->
 
 <section
-    class="values"
-    id="kisah"
+    class="meaning"
+    id="makna"
 >
 
     <div class="w">
 
 
-        <div class="values-head reveal">
+        <div class="meaning-head reveal">
 
-            <div>
-
-                <div class="label">
-                    Nilai Dharmika
-                </div>
-
-                <h2>
-                    Nilai yang
-                    menjadi teladan
-                </h2>
-
+            <div class="label">
+                Memahami Perjalanan
             </div>
 
-            <p>
-                Berbagai nilai yang menjadi benang merah
-                dalam kisah manusia, komunitas, dan
-                perjalanan pengabdian.
-            </p>
+            <h2>
+                Tidak ada satu
+                jalan yang sama.
+            </h2>
 
         </div>
 
 
 
-        <div class="values-grid">
+        <div class="meaning-grid">
 
 
-            <article class="value reveal">
+            <article class="meaning-card reveal">
 
-                <div class="value-symbol">
-                    ✦
-                </div>
-
-                <h3>
-                    Pengabdian
-                </h3>
-
-                <p>
-                    Ketika kemampuan, waktu, dan tenaga
-                    digunakan untuk memberikan manfaat
-                    bagi sesama dan lingkungan.
-                </p>
-
-            </article>
-
-
-
-            <article class="value reveal">
-
-                <div class="value-symbol">
+                <div class="meaning-icon">
                     ◇
                 </div>
 
                 <h3>
-                    Keteladanan
+                    Pencarian
                 </h3>
 
                 <p>
-                    Nilai yang tidak hanya disampaikan
-                    melalui kata-kata, tetapi terlihat
-                    melalui sikap dan tindakan sehari-hari.
+                    Banyak perjalanan spiritual bermula
+                    dari pertanyaan. Tentang kehidupan,
+                    makna keberadaan, Tuhan, dan jalan
+                    yang ingin ditempuh.
                 </p>
 
             </article>
 
 
 
-            <article class="value reveal">
+            <article class="meaning-card reveal">
 
-                <div class="value-symbol">
-                    ❖
+                <div class="meaning-icon">
+                    ✦
                 </div>
 
                 <h3>
-                    Kejujuran
+                    Pengenalan
                 </h3>
 
                 <p>
-                    Menjaga kebenaran dan integritas
-                    sebagai bagian dari perjalanan
-                    menjalankan kehidupan yang selaras.
+                    Mengenal Hindu dapat menjadi proses
+                    yang panjang. Dari ajaran dan sastra,
+                    hingga tradisi dan pengalaman hidup
+                    bersama masyarakat.
                 </p>
 
             </article>
 
 
 
-            <article class="value reveal">
+            <article class="meaning-card reveal">
 
-                <div class="value-symbol">
-                    ∞
+                <div class="meaning-icon">
+                    ○
                 </div>
 
                 <h3>
-                    Kepedulian
+                    Penghayatan
                 </h3>
 
                 <p>
-                    Kesadaran untuk melihat kebutuhan
-                    sekitar dan mengambil bagian dalam
-                    menciptakan kehidupan yang lebih baik.
+                    Setelah memilih jalan, perjalanan
+                    terus berlangsung. Dharma kemudian
+                    dipelajari, dihayati, dan dijalankan
+                    dalam kehidupan sehari-hari.
                 </p>
 
             </article>
@@ -2500,52 +3164,323 @@ footer{
      FEATURE STORY
      ======================================================= -->
 
-<section class="story">
+<section class="feature">
 
-    <div class="w story-grid">
+    <div class="w feature-layout">
 
 
-        <div class="story-visual reveal">
+        <div class="feature-art reveal">
 
-            <div class="story-circle"></div>
-
-            <div class="story-word">
+            <div class="feature-word">
                 Dharma
             </div>
 
-            <div class="story-visual-caption">
-                Nilai yang tumbuh
-                melalui tindakan.
+        </div>
+
+
+        <div class="feature-copy reveal">
+
+            <div class="label">
+                Kisah Utama
+            </div>
+
+            <h2>
+                Ketika pencarian
+                menemukan jalan.
+            </h2>
+
+            <p>
+                Sebuah perjalanan menuju Hindu dapat
+                dimulai dari sesuatu yang sederhana:
+                sebuah pertemuan, sebuah pertanyaan,
+                sebuah buku, atau pengalaman yang
+                mengubah cara seseorang memandang
+                kehidupan.
+            </p>
+
+            <p style="margin-top:18px;">
+
+                Mandala ingin mendokumentasikan kisah
+                tersebut dengan menghadirkan manusia
+                di balik perjalanan itu.
+
+            </p>
+
+            <a
+                href="../pages/artikel.html"
+                class="feature-link"
+            >
+                Lihat kisah lengkap →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     STORIES
+     ======================================================= -->
+
+<section
+    class="stories"
+    id="kisah"
+>
+
+    <div class="w">
+
+
+        <div class="stories-head reveal">
+
+            <div>
+
+                <div class="label">
+                    Cerita Mereka
+                </div>
+
+                <h2>
+                    Kisah yang
+                    layak didengar.
+                </h2>
+
+            </div>
+
+            <div class="stories-description">
+
+                Cerita personal tentang pencarian,
+                keputusan, keluarga, kehidupan,
+                dan perjalanan mengenal Dharma.
+
             </div>
 
         </div>
 
 
 
-        <div class="story-content reveal">
+        <div class="story-grid">
 
-            <div class="label">
-                Kisah Manusia
-            </div>
 
-            <h2>
-                Setiap perjalanan
-                memiliki sesuatu
-                untuk dipelajari.
-            </h2>
+            <!-- STORY LARGE -->
 
-            <p>
-                Mandala percaya bahwa pengetahuan tidak
-                selalu hadir melalui buku atau ruang kelas.
-                Ia juga hadir melalui pengalaman manusia,
-                perjalanan hidup, pekerjaan, pengabdian,
-                dan keputusan-keputusan kecil yang dibuat
-                setiap hari.
-            </p>
+            <article
+                class="story-item large reveal"
+            >
 
-            <a href="../pages/artikel.html">
-                Temukan kisah lainnya →
-            </a>
+                <a href="../pages/artikel-detail.html">
+
+                    <div class="story-thumb">
+
+                        <div class="story-tag">
+                            Kisah Dharmika
+                        </div>
+
+
+                        <div class="mini-person">
+
+                            <div class="mini-head"></div>
+
+                            <div class="mini-body"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="story-body">
+
+                        <div class="story-type">
+                            Perjalanan Spiritual
+                        </div>
+
+                        <h3>
+                            Dari Pencarian Panjang
+                            hingga Menemukan Dharma
+                        </h3>
+
+                        <p>
+                            Kisah seseorang yang melewati
+                            berbagai pertanyaan dalam hidup
+                            sebelum akhirnya menemukan
+                            kedekatan dengan ajaran Hindu.
+                        </p>
+
+                        <span class="story-more">
+                            Baca kisah →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+
+            <!-- STORY -->
+
+            <article
+                class="story-item reveal"
+            >
+
+                <a href="../pages/artikel-detail.html">
+
+                    <div class="story-thumb">
+
+                        <div class="story-tag">
+                            Keluarga
+                        </div>
+
+                        <div class="mini-person">
+
+                            <div class="mini-head"></div>
+
+                            <div class="mini-body"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="story-body">
+
+                        <div class="story-type">
+                            Kehidupan
+                        </div>
+
+                        <h3>
+                            Ketika Pilihan
+                            Menjadi Bagian Keluarga
+                        </h3>
+
+                        <p>
+                            Tentang bagaimana perjalanan
+                            spiritual berproses bersama
+                            keluarga dan lingkungan.
+                        </p>
+
+                        <span class="story-more">
+                            Baca kisah →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+
+            <!-- STORY -->
+
+            <article
+                class="story-item reveal"
+            >
+
+                <a href="../pages/artikel-detail.html">
+
+                    <div class="story-thumb">
+
+                        <div class="story-tag">
+                            Dharma
+                        </div>
+
+                        <div class="mini-person">
+
+                            <div class="mini-head"></div>
+
+                            <div class="mini-body"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="story-body">
+
+                        <div class="story-type">
+                            Penghayatan
+                        </div>
+
+                        <h3>
+                            Belajar Menjalani
+                            Dharma Setiap Hari
+                        </h3>
+
+                        <p>
+                            Setelah memilih jalan,
+                            perjalanan mengenal Dharma
+                            justru terus dimulai.
+                        </p>
+
+                        <span class="story-more">
+                            Baca kisah →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+
+            <!-- STORY -->
+
+            <article
+                class="story-item reveal"
+            >
+
+                <a href="../pages/artikel-detail.html">
+
+                    <div class="story-thumb">
+
+                        <div class="story-tag">
+                            Nusantara
+                        </div>
+
+                        <div class="mini-person">
+
+                            <div class="mini-head"></div>
+
+                            <div class="mini-body"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="story-body">
+
+                        <div class="story-type">
+                            Budaya
+                        </div>
+
+                        <h3>
+                            Menemukan Hindu
+                            melalui Budaya Nusantara
+                        </h3>
+
+                        <p>
+                            Ketertarikan terhadap budaya
+                            menjadi pintu untuk mengenal
+                            lebih dalam tentang Dharma.
+                        </p>
+
+                        <span class="story-more">
+                            Baca kisah →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
 
         </div>
 
@@ -2556,183 +3491,25 @@ footer{
 
 
 <!-- =======================================================
-     ARTICLES
+     QUOTE
      ======================================================= -->
 
-<section
-    class="articles"
-    id="artikel"
->
+<section class="quote-section">
 
     <div class="w">
 
+        <div class="quote-inner reveal">
 
-        <div class="section-head reveal">
+            <p>
+                Perjalanan spiritual bukan tentang
+                seberapa cepat seseorang menemukan
+                jawaban, tetapi tentang keberanian
+                untuk terus mencari dan menjalani.
+            </p>
 
-            <div>
-
-                <div class="label">
-                    Cerita Dharmika
-                </div>
-
-                <h2>
-                    Kisah yang
-                    menginspirasi
-                </h2>
-
-            </div>
-
-            <div class="section-description">
-                Cerita tentang manusia, pengabdian,
-                karya, dan perjalanan yang memiliki
-                nilai untuk dibagikan.
-            </div>
-
-        </div>
-
-
-
-        <div class="article-grid">
-
-
-            <article class="article-card reveal">
-
-                <a href="../pages/artikel-detail.html">
-
-                    <div class="article-image">
-
-                        <div class="article-image-symbol">
-                            ✦
-                        </div>
-
-                        <span class="article-tag">
-                            Sosok
-                        </span>
-
-                    </div>
-
-
-                    <div class="article-body">
-
-                        <div class="article-category">
-                            Dharmika
-                        </div>
-
-                        <h3>
-                            Mereka yang Memilih
-                            Jalan Pengabdian
-                        </h3>
-
-                        <p>
-                            Kisah tentang mereka yang
-                            mengabdikan waktu dan kemampuan
-                            untuk memberi manfaat bagi
-                            lingkungan sekitarnya.
-                        </p>
-
-                        <span class="read">
-                            Baca kisah →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
-
-
-            <article class="article-card reveal">
-
-                <a href="../pages/artikel-detail.html">
-
-                    <div class="article-image">
-
-                        <div class="article-image-symbol">
-                            ◇
-                        </div>
-
-                        <span class="article-tag">
-                            Inspirasi
-                        </span>
-
-                    </div>
-
-
-                    <div class="article-body">
-
-                        <div class="article-category">
-                            Dharmika
-                        </div>
-
-                        <h3>
-                            Menemukan Makna
-                            dalam Hal yang Sederhana
-                        </h3>
-
-                        <p>
-                            Sebuah refleksi tentang
-                            bagaimana kebaikan dapat tumbuh
-                            dari tindakan sederhana dalam
-                            kehidupan sehari-hari.
-                        </p>
-
-                        <span class="read">
-                            Baca kisah →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
-
-
-            <article class="article-card reveal">
-
-                <a href="../pages/artikel-detail.html">
-
-                    <div class="article-image">
-
-                        <div class="article-image-symbol">
-                            ❖
-                        </div>
-
-                        <span class="article-tag">
-                            Komunitas
-                        </span>
-
-                    </div>
-
-
-                    <div class="article-body">
-
-                        <div class="article-category">
-                            Dharmika
-                        </div>
-
-                        <h3>
-                            Ketika Kepedulian
-                            Menjadi Gerakan
-                        </h3>
-
-                        <p>
-                            Tentang komunitas dan orang-orang
-                            yang bergerak bersama membangun
-                            kehidupan yang lebih harmonis.
-                        </p>
-
-                        <span class="read">
-                            Baca kisah →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
+            <span>
+                Mandala — Dharmika
+            </span>
 
         </div>
 
@@ -2751,25 +3528,26 @@ footer{
     <div class="w">
 
 
-        <div class="section-head reveal">
+        <div class="stories-head reveal">
 
             <div>
 
                 <div class="label">
-                    Video Dharmika
+                    Mandala Media
                 </div>
 
                 <h2>
-                    Kisah dalam
-                    tayangan
+                    Dengarkan
+                    perjalanan mereka.
                 </h2>
 
             </div>
 
-            <div class="section-description">
-                Saksikan kisah dan perjalanan orang-orang
-                yang menghadirkan nilai melalui tindakan
-                nyata.
+            <div class="stories-description">
+
+                Kisah Dharmika juga dapat hadir melalui
+                percakapan, wawancara, video, dan podcast.
+
             </div>
 
         </div>
@@ -2781,35 +3559,40 @@ footer{
 
             <article class="media-card reveal">
 
-                <a href="../pages/video-detail.html">
+                <div class="media-thumb">
 
-                    <div class="media-image">
-
-                        <div class="play-button">
-                            ▶
-                        </div>
-
-                        <div class="media-label">
-                            Kisah Dharmika
-                        </div>
-
+                    <div class="play-icon">
+                        ▶
                     </div>
 
-                    <div class="media-body">
+                </div>
 
-                        <h3>
-                            Menjalani Dharma
-                            melalui Pengabdian
-                        </h3>
 
-                        <p>
-                            Kisah dan pengalaman dari
-                            perjalanan pengabdian.
-                        </p>
+                <div class="media-body">
 
+                    <div class="media-type">
+                        Video
                     </div>
 
-                </a>
+                    <h3>
+                        Cerita di Balik
+                        Sebuah Perjalanan
+                    </h3>
+
+                    <p>
+                        Percakapan langsung bersama
+                        mereka yang menjalani perjalanan
+                        menuju Dharma.
+                    </p>
+
+                    <a
+                        href="../pages/video.html"
+                        class="media-link"
+                    >
+                        Tonton video →
+                    </a>
+
+                </div>
 
             </article>
 
@@ -2817,71 +3600,40 @@ footer{
 
             <article class="media-card reveal">
 
-                <a href="../pages/video-detail.html">
+                <div class="media-thumb">
 
-                    <div class="media-image">
-
-                        <div class="play-button">
-                            ▶
-                        </div>
-
-                        <div class="media-label">
-                            Tokoh
-                        </div>
-
+                    <div class="play-icon">
+                        ▶
                     </div>
 
-                    <div class="media-body">
+                </div>
 
-                        <h3>
-                            Sosok yang Menjadi
-                            Teladan
-                        </h3>
 
-                        <p>
-                            Mengenal perjalanan dan nilai
-                            dari seorang tokoh.
-                        </p>
+                <div class="media-body">
 
+                    <div class="media-type">
+                        Podcast
                     </div>
 
-                </a>
+                    <h3>
+                        Suara dari
+                        Perjalanan Dharma
+                    </h3>
 
-            </article>
+                    <p>
+                        Percakapan yang lebih dekat dan
+                        personal tentang pencarian,
+                        keyakinan, dan kehidupan.
+                    </p>
 
+                    <a
+                        href="../pages/podcast.html"
+                        class="media-link"
+                    >
+                        Dengarkan podcast →
+                    </a>
 
-
-            <article class="media-card reveal">
-
-                <a href="../pages/video-detail.html">
-
-                    <div class="media-image">
-
-                        <div class="play-button">
-                            ▶
-                        </div>
-
-                        <div class="media-label">
-                            Komunitas
-                        </div>
-
-                    </div>
-
-                    <div class="media-body">
-
-                        <h3>
-                            Bergerak Bersama
-                            untuk Kebaikan
-                        </h3>
-
-                        <p>
-                            Cerita tentang komunitas dan
-                            semangat kebersamaan.
-                        </p>
-
-                    </div>
-
-                </a>
+                </div>
 
             </article>
 
@@ -2898,7 +3650,7 @@ footer{
      OTHER TOPICS
      ======================================================= -->
 
-<section class="topics">
+<section class="other">
 
     <div class="w">
 
@@ -2917,8 +3669,8 @@ footer{
 
 
             <a
-                class="topic reveal"
                 href="candika-nusantara.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2932,10 +3684,9 @@ footer{
             </a>
 
 
-
             <a
-                class="topic reveal"
                 href="dharma-ajaran.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2949,10 +3700,9 @@ footer{
             </a>
 
 
-
             <a
-                class="topic reveal"
                 href="tokoh-hindu.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2966,10 +3716,9 @@ footer{
             </a>
 
 
-
             <a
-                class="topic reveal"
                 href="jelajah-nusantara.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2983,10 +3732,9 @@ footer{
             </a>
 
 
-
             <a
-                class="topic reveal"
                 href="tradisi-budaya.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -3000,10 +3748,9 @@ footer{
             </a>
 
 
-
             <a
-                class="topic reveal"
                 href="spiritual.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -3017,10 +3764,9 @@ footer{
             </a>
 
 
-
             <a
-                class="topic reveal"
                 href="kabar-umat.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -3034,33 +3780,14 @@ footer{
             </a>
 
 
-
             <a
-                class="topic reveal"
                 href="ekonomi-hindu.html"
+                class="topic reveal"
             >
 
                 <h3>
                     Ekonomi &amp;
                     Kemandirian
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-
-            <a
-                class="topic reveal"
-                href="sastra.html"
-            >
-
-                <h3>
-                    Sastra &amp;
-                    Pengetahuan
                 </h3>
 
                 <span class="topic-arrow">
@@ -3095,22 +3822,24 @@ footer{
                 </div>
 
                 <h2>
-                    Kisah manusia,
-                    nilai yang diwariskan.
+                    Karena setiap
+                    perjalanan punya
+                    cerita.
                 </h2>
 
                 <p>
-                    Temukan lebih banyak cerita tentang
-                    manusia, komunitas, pengabdian,
-                    keteladanan, dan perjalanan Dharma
-                    melalui Mandala Channel.
+                    Kenali lebih dekat kisah-kisah
+                    Dharmika di Mandala melalui artikel,
+                    video, dan podcast yang menghadirkan
+                    pengalaman manusia di balik perjalanan
+                    menuju Dharma.
                 </p>
 
                 <a
-                    href="../index.html"
-                    class="cta-button"
+                    href="../pages/artikel.html"
+                    class="btn"
                 >
-                    Kembali ke Beranda
+                    Jelajahi Artikel
                 </a>
 
             </div>
@@ -3130,7 +3859,7 @@ footer{
      FOOTER
      ======================================================= -->
 
-<footer>
+<footer class="footer">
 
     <div class="w">
 
@@ -3242,23 +3971,29 @@ footer{
 
 (function(){
 
-    const header =
-        document.getElementById("siteHeader");
-
-
     /* =====================================================
-       HEADER SCROLL
+       HEADER
        ===================================================== */
+
+    const header =
+        document.getElementById("header");
+
 
     function updateHeader(){
 
-        if(window.scrollY > 20){
+        if(
+            window.scrollY > 20
+        ){
 
-            header.classList.add("scrolled");
+            header.classList.add(
+                "scrolled"
+            );
 
         }else{
 
-            header.classList.remove("scrolled");
+            header.classList.remove(
+                "scrolled"
+            );
 
         }
 
@@ -3279,11 +4014,13 @@ footer{
 
 
     /* =====================================================
-       SCROLL REVEAL
+       REVEAL ANIMATION
        ===================================================== */
 
     const elements =
-        document.querySelectorAll(".reveal");
+        document.querySelectorAll(
+            ".reveal"
+        );
 
 
     if(
@@ -3325,7 +4062,9 @@ footer{
         elements.forEach(
             function(element){
 
-                observer.observe(element);
+                observer.observe(
+                    element
+                );
 
             }
         );
@@ -3347,6 +4086,7 @@ footer{
 })();
 
 </script>
+
 
 </body>
 </html>
