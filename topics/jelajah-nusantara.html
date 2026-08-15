@@ -15,33 +15,11 @@
 
 /* =========================================================
    MANDALA CHANNEL
-   TOPIC — JELAJAH NUSANTARA
-
-   Fokus:
-   - Perjalanan
-   - Tempat
-   - Jejak Hindu
-   - Sejarah lokal
-   - Lanskap Nusantara
-   - Masyarakat
-   - Budaya
-
-   LOCAL ONLY
-   Tidak menggunakan:
-   - CDN
-   - External Font
-   - External JS
-   - External API
-   - Internet Access
-   ========================================================= */
-
-
-/* =========================================================
-   ROOT
+   JELAJAH NUSANTARA
+   LOCAL ONLY — TANPA CDN / FONT / API / EXTERNAL SCRIPT
    ========================================================= */
 
 :root{
-
     --navy:#082d56;
     --navy-deep:#041c35;
     --navy-soft:#123e60;
@@ -51,134 +29,84 @@
 
     --cream:#f3f0e7;
     --paper:#faf9f5;
-    --white:#ffffff;
+    --white:#fff;
 
     --ink:#182536;
     --muted:#718090;
 
     --green:#536f60;
-    --green-dark:#304d42;
-
     --line:#dfe3e3;
 
     --max:94vw;
-
-    --shadow:
-        0 25px 65px rgba(5,28,53,.12);
-
 }
-
-
-/* =========================================================
-   RESET
-   ========================================================= */
 
 *{
     box-sizing:border-box;
 }
 
 html{
-
     scroll-behavior:smooth;
-
     scroll-padding-top:85px;
 }
 
 body{
-
     margin:0;
-
     overflow-x:hidden;
-
     background:var(--paper);
-
     color:var(--ink);
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-img{
-
+img,
+video{
     display:block;
-
     width:100%;
 }
 
 a{
-
     color:inherit;
-
     text-decoration:none;
 }
 
 button{
-
     font:inherit;
 }
 
 .w{
-
     width:var(--max);
-
-    max-width:none;
-
-    margin-inline:auto;
+    margin:auto;
 }
 
 
 /* =========================================================
-   TOPBAR
+   TOP BAR
    ========================================================= */
 
 .topbar{
-
     height:28px;
-
     background:var(--navy-deep);
-
     color:#b7c5d2;
-
     font-size:9px;
-
     letter-spacing:.13em;
 }
 
 .topbar .w{
-
     height:100%;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 }
 
-.topbar-left{
-
-    text-transform:uppercase;
-}
-
 .topbar-right{
-
     display:flex;
-
     align-items:center;
-
     gap:15px;
 }
 
 .topbar-line{
-
-    width:27px;
-
+    width:28px;
     height:1px;
-
-    background:
-        rgba(207,183,125,.7);
+    background:rgba(207,183,125,.7);
 }
 
 
@@ -187,44 +115,25 @@ button{
    ========================================================= */
 
 .header{
-
     position:sticky;
-
     top:0;
-
     z-index:1000;
-
     height:74px;
-
-    background:
-        rgba(255,255,255,.97);
-
-    border-bottom:
-        1px solid rgba(8,45,86,.08);
-
-    transition:
-        height .3s ease,
-        box-shadow .3s ease;
+    background:rgba(255,255,255,.97);
+    border-bottom:1px solid rgba(8,45,86,.08);
+    transition:.3s ease;
 }
 
 .header.scrolled{
-
     height:60px;
-
-    box-shadow:
-        0 8px 28px rgba(8,45,86,.1);
+    box-shadow:0 8px 28px rgba(8,45,86,.1);
 }
 
 .nav{
-
     height:100%;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:30px;
 }
 
@@ -234,158 +143,93 @@ button{
    ========================================================= */
 
 .brand{
-
     display:flex;
-
     align-items:center;
-
     gap:11px;
-
     flex-shrink:0;
 }
 
 .brand-mark{
-
     width:40px;
-
     height:40px;
-
     display:grid;
-
     place-items:center;
-
-    border:
-        1px solid var(--gold);
-
+    border:1px solid var(--gold);
     color:var(--gold);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     font-size:21px;
-
-    transition:
-        background .3s ease,
-        color .3s ease;
+    transition:.3s ease;
 }
 
 .brand:hover .brand-mark{
-
     background:var(--gold);
-
-    color:white;
+    color:#fff;
 }
 
 .brand-name{
-
     display:flex;
-
     flex-direction:column;
-
     line-height:1;
 }
 
 .brand-name strong{
-
     color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     font-size:18px;
-
     font-weight:600;
-
     letter-spacing:.15em;
 }
 
 .brand-name small{
-
     margin-top:5px;
-
     color:#778696;
-
     font-size:7px;
-
     letter-spacing:.34em;
 }
 
 
 /* =========================================================
-   NAVIGATION
+   NAV
    ========================================================= */
 
 .nav-menu{
-
     height:100%;
-
     display:flex;
-
     align-items:center;
-
     gap:27px;
 }
 
 .nav-menu a{
-
     position:relative;
-
     height:100%;
-
     display:flex;
-
     align-items:center;
-
     color:#566778;
-
     font-size:10px;
-
     font-weight:600;
-
     letter-spacing:.07em;
-
-    transition:
-        color .25s ease;
 }
 
 .nav-menu a::after{
-
     content:"";
-
     position:absolute;
-
     left:0;
-
     right:0;
-
     bottom:0;
-
     height:2px;
-
     background:var(--gold);
-
-    transform:
-        scaleX(0);
-
-    transition:
-        transform .25s ease;
+    transform:scaleX(0);
+    transition:.25s ease;
 }
 
 .nav-menu a:hover,
 .nav-menu a.active{
-
     color:var(--navy);
 }
 
 .nav-menu a:hover::after,
 .nav-menu a.active::after{
-
-    transform:
-        scaleX(1);
+    transform:scaleX(1);
 }
 
 
@@ -394,2129 +238,1025 @@ button{
    ========================================================= */
 
 .hero{
-
     position:relative;
-
     overflow:hidden;
-
-    min-height:700px;
-
+    min-height:630px;
     background:
         linear-gradient(
             135deg,
             #041c35 0%,
-            #0b3657 47%,
+            #0b3657 50%,
             #506f64 100%
         );
-
-    color:white;
+    color:#fff;
 }
 
 .hero::before{
-
     content:"";
-
     position:absolute;
-
     width:800px;
-
     height:800px;
-
     right:-470px;
-
     top:-390px;
-
-    border:
-        1px solid rgba(255,255,255,.09);
-
+    border:1px solid rgba(255,255,255,.09);
     border-radius:50%;
 }
 
 .hero::after{
-
     content:"";
-
     position:absolute;
-
     width:470px;
-
     height:470px;
-
     left:-300px;
-
     bottom:-290px;
-
-    border:
-        1px solid rgba(207,183,125,.13);
-
+    border:1px solid rgba(207,183,125,.13);
     border-radius:50%;
 }
 
 .hero-grid{
-
     position:relative;
-
     z-index:2;
-
-    min-height:700px;
-
+    min-height:630px;
     display:grid;
-
-    grid-template-columns:
-        .85fr
-        1.15fr;
-
+    grid-template-columns:.9fr 1.1fr;
     align-items:center;
-
     gap:7vw;
 }
 
-
-/* =========================================================
-   HERO COPY
-   ========================================================= */
-
 .hero-copy{
-
-    padding:
-        80px 0;
+    padding:70px 0;
 }
 
 .eyebrow{
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     margin-bottom:22px;
-
     color:var(--gold-light);
-
     font-size:9px;
-
     font-weight:700;
-
     letter-spacing:.22em;
-
     text-transform:uppercase;
 }
 
 .eyebrow::before{
-
     content:"";
-
     width:34px;
-
     height:1px;
-
     background:var(--gold-light);
 }
 
 .hero h1{
-
     margin:0;
-
     max-width:650px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(55px,7vw,94px);
-
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(55px,7vw,94px);
     font-weight:400;
-
     line-height:.9;
-
     letter-spacing:-.06em;
 }
 
 .hero h1 span{
-
     display:block;
-
     color:var(--gold-light);
 }
 
 .hero-lead{
-
     max-width:545px;
-
-    margin:
-        30px 0 0;
-
+    margin:30px 0 0;
     color:#c5d1da;
-
     font-size:14px;
-
     line-height:1.9;
 }
 
 .hero-actions{
-
     display:flex;
-
     flex-wrap:wrap;
-
-    align-items:center;
-
     gap:12px;
-
     margin-top:32px;
 }
 
 .btn{
-
     min-height:45px;
-
-    padding:
-        0 21px;
-
+    padding:0 21px;
     display:inline-flex;
-
     align-items:center;
-
     justify-content:center;
-
-    border:
-        1px solid rgba(255,255,255,.28);
-
+    border:1px solid rgba(255,255,255,.28);
     font-size:9px;
-
     font-weight:700;
-
     letter-spacing:.12em;
-
     text-transform:uppercase;
-
-    transition:
-        transform .25s ease,
-        background .25s ease,
-        color .25s ease;
+    transition:.25s ease;
 }
 
 .btn:hover{
-
-    transform:
-        translateY(-3px);
+    transform:translateY(-3px);
 }
 
 .btn-primary{
-
     background:var(--gold);
-
     border-color:var(--gold);
-
-    color:white;
-}
-
-.btn-primary:hover{
-
-    background:#bc9958;
-
-    border-color:#bc9958;
+    color:#fff;
 }
 
 .btn-outline{
-
-    color:white;
+    color:#fff;
 }
 
 .btn-outline:hover{
-
-    background:white;
-
+    background:#fff;
     color:var(--navy);
 }
 
 
 /* =========================================================
-   HERO MAP
+   HERO VISUAL
    ========================================================= */
 
-.map-stage{
-
+.hero-visual{
     position:relative;
-
-    min-height:570px;
-
+    min-height:500px;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 }
 
-.map-card{
-
+.hero-frame{
     position:relative;
-
-    width:min(620px,94%);
-
-    aspect-ratio:
-        1.05 / 1;
-
-    background:
-        rgba(255,255,255,.96);
-
-    box-shadow:
-        0 35px 90px rgba(0,0,0,.27);
-
+    width:min(620px,95%);
+    aspect-ratio:1.12/1;
+    background:#fff;
+    box-shadow:0 35px 90px rgba(0,0,0,.28);
     overflow:hidden;
 }
 
-.map-card::before{
-
+.hero-frame::before{
     content:"";
-
     position:absolute;
-
     inset:18px;
-
-    border:
-        1px solid rgba(8,45,86,.13);
-
-    pointer-events:none;
-
     z-index:5;
+    border:1px solid rgba(8,45,86,.13);
+    pointer-events:none;
 }
 
-.map-title{
-
+.hero-landscape{
     position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            180deg,
+            #d9e2df 0%,
+            #eef0e8 50%,
+            #b8c5b6 50%,
+            #667e6d 100%
+        );
+}
 
-    z-index:8;
+.sun{
+    position:absolute;
+    width:120px;
+    height:120px;
+    right:14%;
+    top:14%;
+    background:rgba(207,183,125,.5);
+    border-radius:50%;
+}
 
+.mountain-a,
+.mountain-b{
+    position:absolute;
+    bottom:22%;
+    background:#547062;
+    clip-path:polygon(
+        0 100%,
+        50% 0,
+        100% 100%
+    );
+}
+
+.mountain-a{
+    left:7%;
+    width:55%;
+    height:57%;
+}
+
+.mountain-b{
+    right:4%;
+    width:50%;
+    height:45%;
+    background:#6c8371;
+}
+
+.field{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:29%;
+    background:#3e5d4d;
+}
+
+.field::before,
+.field::after{
+    content:"";
+    position:absolute;
+    left:10%;
+    right:10%;
+    height:1px;
+    background:rgba(255,255,255,.15);
+}
+
+.field::before{
+    top:35%;
+}
+
+.field::after{
+    top:62%;
+}
+
+.hero-frame-title{
+    position:absolute;
+    z-index:7;
     left:30px;
-
-    top:27px;
-
+    top:28px;
     color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     font-size:23px;
 }
 
-.map-subtitle{
-
+.hero-frame-subtitle{
     position:absolute;
-
-    z-index:8;
-
-    left:31px;
-
-    top:58px;
-
-    color:var(--gold);
-
-    font-size:7px;
-
-    font-weight:700;
-
-    letter-spacing:.18em;
-
-    text-transform:uppercase;
-}
-
-
-/* =========================================================
-   ABSTRACT NUSANTARA MAP
-   ========================================================= */
-
-.map-art{
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            145deg,
-            #eef0e9,
-            #f9f8f3
-        );
-}
-
-.grid-lines{
-
-    position:absolute;
-
-    inset:0;
-
-    opacity:.45;
-
-    background-image:
-        linear-gradient(
-            rgba(8,45,86,.055) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(8,45,86,.055) 1px,
-            transparent 1px
-        );
-
-    background-size:
-        35px 35px;
-}
-
-
-/* Island shapes */
-
-.island{
-
-    position:absolute;
-
-    background:
-        #6e8774;
-
-    opacity:.9;
-
-    box-shadow:
-        0 5px 15px rgba(8,45,86,.08);
-}
-
-.island::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:3px;
-
-    border:
-        1px solid rgba(255,255,255,.3);
-}
-
-
-/* Sumatra */
-
-.sumatra{
-
-    left:9%;
-
-    top:29%;
-
-    width:145px;
-
-    height:48px;
-
-    transform:
-        rotate(27deg);
-
-    border-radius:
-        65% 35% 60% 40%;
-
-}
-
-
-/* Java */
-
-.java{
-
-    left:31%;
-
-    top:62%;
-
-    width:180px;
-
-    height:25px;
-
-    transform:
-        rotate(-4deg);
-
-    border-radius:
-        70% 30% 50% 50%;
-}
-
-
-/* Bali */
-
-.bali{
-
-    left:62%;
-
-    top:57%;
-
-    width:28px;
-
-    height:15px;
-
-    transform:
-        rotate(-8deg);
-
-    border-radius:
-        60% 40% 55% 45%;
-}
-
-
-/* Nusa */
-
-.nusa{
-
-    left:68%;
-
-    top:62%;
-
-    width:120px;
-
-    height:15px;
-
-    transform:
-        rotate(5deg);
-
-    border-radius:50%;
-}
-
-
-/* Kalimantan */
-
-.kalimantan{
-
-    left:47%;
-
-    top:25%;
-
-    width:145px;
-
-    height:110px;
-
-    border-radius:
-        45% 55% 42% 58%;
-
-}
-
-
-/* Sulawesi */
-
-.sulawesi{
-
-    left:70%;
-
-    top:29%;
-
-    width:115px;
-
-    height:120px;
-
-    background:#607e6e;
-
-    border-radius:
-        55% 25% 65% 35%;
-
-    transform:
-        rotate(18deg);
-
-}
-
-
-/* Papua */
-
-.papua{
-
-    right:7%;
-
-    top:48%;
-
-    width:125px;
-
-    height:72px;
-
-    border-radius:
-        35% 65% 50% 50%;
-
-    transform:
-        rotate(-10deg);
-
-}
-
-
-/* =========================================================
-   MAP ROUTE
-   ========================================================= */
-
-.route{
-
-    position:absolute;
-
-    z-index:4;
-
-    left:19%;
-
-    top:48%;
-
-    width:410px;
-
-    height:150px;
-
-    border-top:
-        1px dashed rgba(170,135,71,.65);
-
-    border-radius:50%;
-
-    transform:
-        rotate(7deg);
-}
-
-.route-dot{
-
-    position:absolute;
-
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:var(--gold);
-
-    border:
-        2px solid white;
-
-    box-shadow:
-        0 0 0 1px var(--gold);
-}
-
-.route-dot.a{
-
-    left:2%;
-
-    top:-5px;
-}
-
-.route-dot.b{
-
-    left:31%;
-
-    top:43px;
-}
-
-.route-dot.c{
-
-    left:61%;
-
-    top:67px;
-}
-
-.route-dot.d{
-
-    right:0;
-
-    bottom:-4px;
-}
-
-
-/* =========================================================
-   MAP LABELS
-   ========================================================= */
-
-.map-label{
-
-    position:absolute;
-
     z-index:7;
-
-    color:var(--navy);
-
-    font-size:7px;
-
-    font-weight:700;
-
-    letter-spacing:.1em;
-
-    text-transform:uppercase;
-}
-
-.label-sumatra{
-
-    left:11%;
-
-    top:39%;
-}
-
-.label-java{
-
-    left:37%;
-
-    top:70%;
-}
-
-.label-bali{
-
-    left:62%;
-
-    top:53%;
-}
-
-.label-borneo{
-
-    left:51%;
-
-    top:21%;
-}
-
-.label-sulawesi{
-
-    left:76%;
-
-    top:44%;
-}
-
-.label-papua{
-
-    right:8%;
-
-    top:60%;
-}
-
-
-/* =========================================================
-   COMPASS
-   ========================================================= */
-
-.compass{
-
-    position:absolute;
-
-    z-index:8;
-
-    right:30px;
-
-    bottom:27px;
-
-    width:62px;
-
-    height:62px;
-
-    display:grid;
-
-    place-items:center;
-
-    border:
-        1px solid rgba(8,45,86,.22);
-
-    border-radius:50%;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:11px;
-}
-
-.compass::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:1px;
-
-    height:45px;
-
-    background:var(--gold);
-}
-
-.compass::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:45px;
-
-    height:1px;
-
-    background:var(--gold);
-}
-
-
-/* =========================================================
-   HERO FLOAT
-   ========================================================= */
-
-.explore-card{
-
-    position:absolute;
-
-    z-index:10;
-
-    left:-20px;
-
-    bottom:7%;
-
-    width:220px;
-
-    padding:
-        22px;
-
-    background:white;
-
-    color:var(--navy);
-
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.2);
-}
-
-.explore-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    top:0;
-
-    bottom:0;
-
-    width:3px;
-
-    background:var(--gold);
-}
-
-.explore-card small{
-
-    display:block;
-
+    left:31px;
+    top:59px;
     color:var(--gold);
-
-    font-size:8px;
-
+    font-size:7px;
     font-weight:700;
-
-    letter-spacing:.15em;
-
+    letter-spacing:.18em;
     text-transform:uppercase;
 }
 
-.explore-card strong{
+.location-pin{
+    position:absolute;
+    z-index:8;
+    left:50%;
+    bottom:29%;
+    width:17px;
+    height:17px;
+    background:var(--gold);
+    border:3px solid #fff;
+    border-radius:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 0 1px var(--gold);
+}
 
+.location-pin::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:100%;
+    width:1px;
+    height:45px;
+    background:var(--gold);
+}
+
+.hero-note{
+    position:absolute;
+    z-index:10;
+    left:-20px;
+    bottom:7%;
+    width:220px;
+    padding:22px;
+    background:#fff;
+    color:var(--navy);
+    box-shadow:0 20px 45px rgba(0,0,0,.2);
+}
+
+.hero-note::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:var(--gold);
+}
+
+.hero-note small{
     display:block;
+    color:var(--gold);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+}
 
+.hero-note strong{
+    display:block;
     margin-top:9px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     font-size:20px;
-
     font-weight:400;
-
     line-height:1.2;
 }
 
-.explore-card p{
-
-    margin:
-        10px 0 0;
-
+.hero-note p{
+    margin:10px 0 0;
     color:var(--muted);
-
     font-size:9px;
-
     line-height:1.65;
 }
 
 
 /* =========================================================
-   INTRO
+   VIDEO SECTION
    ========================================================= */
 
-.intro{
-
-    padding:
-        105px 0;
-
-    background:white;
+.video-section{
+    padding:105px 0;
+    background:#fff;
 }
 
-.intro-layout{
-
-    display:grid;
-
-    grid-template-columns:
-        .7fr
-        1.3fr;
-
-    gap:9vw;
+.section-head{
+    max-width:750px;
+    margin-bottom:45px;
 }
 
 .label{
-
     display:flex;
-
     align-items:center;
-
     gap:11px;
-
     color:var(--gold);
-
     font-size:9px;
-
     font-weight:700;
-
     letter-spacing:.19em;
-
     text-transform:uppercase;
 }
 
 .label::before{
-
     content:"";
-
     width:30px;
-
     height:1px;
-
     background:var(--gold);
 }
 
-.intro h2{
-
-    margin:
-        17px 0 0;
-
+.section-head h2{
+    margin:15px 0 0;
     color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(36px,4.5vw,58px);
-
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(38px,4.5vw,60px);
     font-weight:400;
-
     line-height:1.03;
-
     letter-spacing:-.045em;
 }
 
-.intro-content p{
-
-    margin:
-        0 0 20px;
-
-    color:#617181;
-
-    font-size:13px;
-
-    line-height:1.9;
-}
-
-.intro-content p:first-child{
-
-    color:var(--ink);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:19px;
-
-    line-height:1.7;
-}
-
-
-/* =========================================================
-   PLACES
-   ========================================================= */
-
-.places{
-
-    padding:
-        105px 0;
-
-    background:var(--cream);
-}
-
-.section-head{
-
-    max-width:730px;
-
-    margin-bottom:48px;
-}
-
-.section-head h2{
-
-    margin:
-        15px 0 0;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(36px,4.5vw,58px);
-
-    font-weight:400;
-
-    line-height:1.03;
-
-    letter-spacing:-.04em;
-}
-
 .section-head p{
-
-    max-width:610px;
-
-    margin:
-        18px 0 0;
-
+    max-width:620px;
+    margin:18px 0 0;
     color:var(--muted);
-
     font-size:12px;
-
     line-height:1.8;
 }
 
 
-/* =========================================================
-   PLACE GRID
-   ========================================================= */
+/* Main video */
 
-.place-grid{
-
+.video-feature{
     display:grid;
-
-    grid-template-columns:
-        1.3fr
-        .85fr
-        .85fr;
-
-    grid-template-rows:
-        260px
-        260px;
-
-    gap:16px;
-}
-
-.place{
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            #183d59,
-            #637967
-        );
-
-    color:white;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.place:hover{
-
-    transform:
-        translateY(-7px);
-
-    box-shadow:var(--shadow);
-}
-
-.place.large{
-
-    grid-row:
-        1 / 3;
-}
-
-.place-bg{
-
-    position:absolute;
-
-    inset:0;
-
-    opacity:.95;
-
-    background:
-        linear-gradient(
-            140deg,
-            rgba(4,28,53,.8),
-            rgba(73,106,87,.58)
-        );
-}
-
-.place-bg::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:260px;
-
-    height:260px;
-
-    right:-90px;
-
-    top:-100px;
-
-    border:
-        1px solid rgba(255,255,255,.15);
-
-    border-radius:50%;
-}
-
-.place-bg::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-
-    height:180px;
-
-    left:-75px;
-
-    bottom:-80px;
-
-    border:
-        1px solid rgba(207,183,125,.16);
-
-    border-radius:50%;
-}
-
-
-/* mountain */
-
-.mountain{
-
-    position:absolute;
-
-    left:8%;
-
-    right:8%;
-
-    bottom:17%;
-
-    height:55%;
-
-    opacity:.22;
-
-}
-
-.mountain::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:4%;
-
-    bottom:0;
-
-    width:45%;
-
-    height:90%;
-
-    background:
-        white;
-
-    clip-path:
-        polygon(
-            0 100%,
-            53% 0,
-            100% 100%
-        );
-}
-
-.mountain::after{
-
-    content:"";
-
-    position:absolute;
-
-    right:5%;
-
-    bottom:0;
-
-    width:48%;
-
-    height:70%;
-
-    background:
-        white;
-
-    clip-path:
-        polygon(
-            0 100%,
-            48% 10%,
-            100% 100%
-        );
-}
-
-
-/* water */
-
-.water{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:0;
-
-    height:25%;
-
-    background:
-        rgba(3,28,52,.35);
-
-    border-top:
-        1px solid rgba(255,255,255,.1);
-}
-
-.water::before,
-.water::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:12%;
-
-    right:12%;
-
-    height:1px;
-
-    background:
-        rgba(255,255,255,.18);
-}
-
-.water::before{
-
-    top:34%;
-}
-
-.water::after{
-
-    top:64%;
-}
-
-
-/* place content */
-
-.place-content{
-
-    position:absolute;
-
-    z-index:5;
-
-    left:27px;
-
-    right:27px;
-
-    bottom:25px;
-}
-
-.place.large .place-content{
-
-    left:35px;
-
-    right:35px;
-
-    bottom:32px;
-}
-
-.place-location{
-
-    color:var(--gold-light);
-
-    font-size:8px;
-
-    font-weight:700;
-
-    letter-spacing:.17em;
-
-    text-transform:uppercase;
-}
-
-.place h3{
-
-    margin:
-        9px 0 0;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:25px;
-
-    font-weight:400;
-
-    line-height:1.15;
-}
-
-.place.large h3{
-
-    font-size:
-        clamp(30px,3.6vw,49px);
-}
-
-.place p{
-
-    max-width:500px;
-
-    margin:
-        10px 0 0;
-
-    color:#d5dfe3;
-
-    font-size:10px;
-
-    line-height:1.7;
-}
-
-.place-arrow{
-
-    display:inline-flex;
-
-    margin-top:13px;
-
-    color:white;
-
-    font-size:9px;
-
-    font-weight:700;
-
-    letter-spacing:.13em;
-
-    text-transform:uppercase;
-}
-
-
-/* =========================================================
-   JOURNEY SECTION
-   ========================================================= */
-
-.journey{
-
-    padding:
-        105px 0;
-
-    background:white;
-}
-
-.journey-layout{
-
-    display:grid;
-
-    grid-template-columns:
-        .75fr
-        1.25fr;
-
-    gap:9vw;
-}
-
-.journey-title h2{
-
-    margin:
-        15px 0 0;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(36px,4.5vw,58px);
-
-    font-weight:400;
-
-    line-height:1.02;
-}
-
-.journey-title p{
-
-    max-width:390px;
-
-    margin:
-        22px 0 0;
-
-    color:var(--muted);
-
-    font-size:11px;
-
-    line-height:1.85;
-}
-
-
-/* Timeline without numbers */
-
-.journey-list{
-
-    border-top:
-        1px solid var(--line);
-}
-
-.journey-item{
-
-    position:relative;
-
-    display:grid;
-
-    grid-template-columns:
-        42px
-        1fr;
-
-    gap:22px;
-
-    padding:
-        27px 0;
-
-    border-bottom:
-        1px solid var(--line);
-}
-
-.journey-dot{
-
-    position:relative;
-
-    width:32px;
-
-    height:32px;
-
-    display:grid;
-
-    place-items:center;
-
-    border:
-        1px solid var(--gold);
-
-    border-radius:50%;
-
-    color:var(--gold);
-
-    font-size:10px;
-}
-
-.journey-item:not(:last-child)
-.journey-dot::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    top:32px;
-
-    width:1px;
-
-    height:55px;
-
-    background:
-        var(--line);
-}
-
-.journey-item h3{
-
-    margin:0;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:21px;
-
-    font-weight:400;
-}
-
-.journey-item p{
-
-    margin:
-        8px 0 0;
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    line-height:1.8;
-}
-
-
-/* =========================================================
-   STORY FEATURE
-   ========================================================= */
-
-.story-feature{
-
-    padding:
-        105px 0;
-
+    grid-template-columns:1.5fr .8fr;
+    min-height:450px;
     background:var(--navy);
 }
 
-.story-layout{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    min-height:530px;
+.video-player{
+    position:relative;
+    min-height:450px;
+    background:#071e34;
+    overflow:hidden;
 }
 
-.story-visual{
-
-    position:relative;
-
-    overflow:hidden;
-
+.video-player video{
+    height:100%;
+    min-height:450px;
+    object-fit:cover;
     background:
         linear-gradient(
             145deg,
-            #587866,
-            #193f5c
+            #163d59,
+            #547564
+        );
+}
+
+/*
+   Jika nanti ingin memakai video lokal,
+   cukup ubah:
+   src="assets/video/jelajah-nusantara.mp4"
+
+   Sekarang video akan menampilkan poster visual
+   sampai file video dimasukkan.
+*/
+
+.video-placeholder{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(4,28,53,.85),
+            rgba(65,95,79,.85)
+        );
+    pointer-events:none;
+}
+
+.video-placeholder::before{
+    content:"";
+    position:absolute;
+    width:270px;
+    height:270px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:50%;
+}
+
+.play-button{
+    position:relative;
+    z-index:2;
+    width:82px;
+    height:82px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:50%;
+    color:#fff;
+    font-size:22px;
+    padding-left:4px;
+}
+
+.video-badge{
+    position:absolute;
+    z-index:5;
+    top:24px;
+    left:24px;
+    padding:8px 11px;
+    background:#fff;
+    color:var(--navy);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+}
+
+.video-duration{
+    position:absolute;
+    z-index:5;
+    right:22px;
+    bottom:22px;
+    padding:7px 9px;
+    background:rgba(4,28,53,.8);
+    color:#fff;
+    font-size:8px;
+    letter-spacing:.08em;
+}
+
+.video-info{
+    padding:45px 40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.video-info .label{
+    color:var(--gold-light);
+}
+
+.video-info .label::before{
+    background:var(--gold-light);
+}
+
+.video-info h3{
+    margin:17px 0 17px;
+    color:#fff;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(28px,3vw,42px);
+    font-weight:400;
+    line-height:1.08;
+}
+
+.video-info p{
+    margin:0;
+    color:#b9c9d3;
+    font-size:11px;
+    line-height:1.85;
+}
+
+.video-link{
+    display:inline-flex;
+    margin-top:27px;
+    color:var(--gold-light);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   VIDEO GRID
+   ========================================================= */
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+    margin-top:22px;
+}
+
+.video-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    overflow:hidden;
+    transition:.35s ease;
+}
+
+.video-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 50px rgba(8,45,86,.1);
+}
+
+.video-thumb{
+    position:relative;
+    height:210px;
+    overflow:hidden;
+    background:
+        linear-gradient(
+            140deg,
+            #173e59,
+            #67816f
+        );
+}
+
+.video-thumb::before{
+    content:"";
+    position:absolute;
+    width:190px;
+    height:190px;
+    right:-65px;
+    top:-80px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:50%;
+}
+
+.video-thumb::after{
+    content:"";
+    position:absolute;
+    left:10%;
+    right:10%;
+    bottom:24%;
+    height:45%;
+    background:rgba(255,255,255,.12);
+    clip-path:polygon(
+        0 100%,
+        42% 10%,
+        62% 60%,
+        100% 0,
+        100% 100%
+    );
+}
+
+.thumb-play{
+    position:absolute;
+    z-index:4;
+    left:25px;
+    bottom:22px;
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(255,255,255,.7);
+    border-radius:50%;
+    color:#fff;
+    font-size:12px;
+}
+
+.thumb-category{
+    position:absolute;
+    z-index:5;
+    top:18px;
+    left:18px;
+    color:#fff;
+    font-size:7px;
+    font-weight:700;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+}
+
+.video-card-body{
+    padding:23px 22px 25px;
+}
+
+.video-card-body h3{
+    margin:0;
+    color:var(--navy);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:21px;
+    font-weight:400;
+    line-height:1.2;
+}
+
+.video-card-body p{
+    margin:9px 0 0;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.75;
+}
+
+.video-card-link{
+    display:inline-flex;
+    margin-top:16px;
+    color:var(--gold);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   DESTINATIONS
+   ========================================================= */
+
+.destinations{
+    padding:105px 0;
+    background:var(--cream);
+}
+
+.destination-grid{
+    display:grid;
+    grid-template-columns:1.3fr .85fr .85fr;
+    grid-template-rows:280px 280px;
+    gap:16px;
+}
+
+.destination{
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+    background:
+        linear-gradient(
+            145deg,
+            #173c58,
+            #5d7868
+        );
+    transition:.35s ease;
+}
+
+.destination:hover{
+    transform:translateY(-6px);
+    box-shadow:0 25px 60px rgba(8,45,86,.14);
+}
+
+.destination.large{
+    grid-row:1/3;
+}
+
+.destination-bg{
+    position:absolute;
+    inset:0;
+}
+
+.destination-bg::before{
+    content:"";
+    position:absolute;
+    width:320px;
+    height:320px;
+    right:-130px;
+    top:-120px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:50%;
+}
+
+.destination-bg::after{
+    content:"";
+    position:absolute;
+    left:-80px;
+    bottom:-110px;
+    width:230px;
+    height:230px;
+    border:1px solid rgba(207,183,125,.14);
+    border-radius:50%;
+}
+
+.destination-mountain{
+    position:absolute;
+    left:5%;
+    right:5%;
+    bottom:0;
+    height:70%;
+    background:rgba(255,255,255,.13);
+    clip-path:polygon(
+        0 100%,
+        34% 20%,
+        48% 47%,
+        72% 0,
+        100% 100%
+    );
+}
+
+.destination-water{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:23%;
+    background:rgba(3,28,52,.35);
+}
+
+.destination-content{
+    position:absolute;
+    z-index:5;
+    left:28px;
+    right:28px;
+    bottom:27px;
+}
+
+.destination.large .destination-content{
+    left:35px;
+    right:35px;
+    bottom:34px;
+}
+
+.destination-location{
+    color:var(--gold-light);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.17em;
+    text-transform:uppercase;
+}
+
+.destination h3{
+    margin:9px 0 0;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:24px;
+    font-weight:400;
+    line-height:1.15;
+}
+
+.destination.large h3{
+    font-size:clamp(31px,3.5vw,49px);
+}
+
+.destination p{
+    max-width:500px;
+    margin:10px 0 0;
+    color:#d5dfe3;
+    font-size:10px;
+    line-height:1.7;
+}
+
+.destination-link{
+    display:inline-flex;
+    margin-top:13px;
+    color:#fff;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   STORY
+   ========================================================= */
+
+.story{
+    padding:105px 0;
+    background:#fff;
+}
+
+.story-layout{
+    display:grid;
+    grid-template-columns:.85fr 1.15fr;
+    gap:9vw;
+    align-items:center;
+}
+
+.story-copy h2{
+    margin:16px 0 22px;
+    color:var(--navy);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(38px,4.5vw,60px);
+    font-weight:400;
+    line-height:1.02;
+    letter-spacing:-.045em;
+}
+
+.story-copy p{
+    margin:0 0 17px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.9;
+}
+
+.story-copy p:first-of-type{
+    color:var(--ink);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:18px;
+    line-height:1.7;
+}
+
+.story-visual{
+    position:relative;
+    min-height:430px;
+    overflow:hidden;
+    background:
+        linear-gradient(
+            145deg,
+            #dfe7e2,
+            #728a78
         );
 }
 
 .story-visual::before{
-
     content:"";
-
     position:absolute;
-
-    width:480px;
-
-    height:480px;
-
+    width:350px;
+    height:350px;
     left:50%;
-
     top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-
+    transform:translate(-50%,-50%);
+    border:1px solid rgba(255,255,255,.4);
     border-radius:50%;
 }
 
-.temple{
-
+.story-sun{
     position:absolute;
-
-    z-index:3;
-
-    left:50%;
-
-    top:54%;
-
-    transform:
-        translate(-50%,-50%);
-
-    width:270px;
-
-    height:260px;
+    right:18%;
+    top:15%;
+    width:80px;
+    height:80px;
+    background:rgba(207,183,125,.55);
+    border-radius:50%;
 }
 
-.temple-base{
-
+.story-mountain{
     position:absolute;
-
+    left:0;
+    right:0;
     bottom:0;
-
-    left:15px;
-
-    right:15px;
-
-    height:85px;
-
-    background:
-        rgba(255,255,255,.88);
+    height:75%;
+    background:#4e6d5b;
+    clip-path:polygon(
+        0 100%,
+        28% 42%,
+        43% 62%,
+        64% 10%,
+        100% 100%
+    );
 }
 
-.temple-middle{
-
+.story-label{
     position:absolute;
-
-    left:50%;
-
-    bottom:70px;
-
-    width:180px;
-
-    height:115px;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        rgba(255,255,255,.92);
-
-    clip-path:
-        polygon(
-            8% 100%,
-            8% 47%,
-            25% 47%,
-            25% 26%,
-            40% 26%,
-            40% 7%,
-            50% 0,
-            60% 7%,
-            60% 26%,
-            75% 26%,
-            75% 47%,
-            92% 47%,
-            92% 100%
-        );
-}
-
-.temple-roof{
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:174px;
-
-    transform:
-        translateX(-50%);
-
-    width:75px;
-
-    height:60px;
-
-    background:
-        var(--gold);
-
-    clip-path:
-        polygon(
-            50% 0,
-            100% 100%,
-            0 100%
-        );
-}
-
-.temple-spire{
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:227px;
-
-    width:4px;
-
-    height:50px;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        var(--gold);
-}
-
-.story-visual-label{
-
-    position:absolute;
-
     z-index:5;
-
-    left:27px;
-
-    top:27px;
-
-    padding:
-        7px 10px;
-
-    background:white;
-
+    top:23px;
+    left:23px;
+    padding:8px 11px;
+    background:#fff;
     color:var(--navy);
-
     font-size:8px;
-
     font-weight:700;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-}
-
-.story-copy{
-
-    padding:
-        clamp(45px,6vw,75px);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    color:white;
-}
-
-.story-copy .label{
-
-    color:var(--gold-light);
-}
-
-.story-copy .label::before{
-
-    background:var(--gold-light);
-}
-
-.story-copy h2{
-
-    margin:
-        17px 0 20px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(36px,4vw,55px);
-
-    font-weight:400;
-
-    line-height:1.04;
-}
-
-.story-copy p{
-
-    margin:
-        0 0 17px;
-
-    color:#c0ced8;
-
-    font-size:12px;
-
-    line-height:1.85;
-}
-
-.story-copy .text-link{
-
-    display:inline-flex;
-
-    margin-top:10px;
-
-    color:var(--gold-light);
-
-    font-size:8px;
-
-    font-weight:700;
-
     letter-spacing:.13em;
-
     text-transform:uppercase;
+}
+
+.story-caption{
+    position:absolute;
+    z-index:5;
+    left:25px;
+    right:25px;
+    bottom:25px;
+    color:#fff;
+}
+
+.story-caption strong{
+    display:block;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:24px;
+    font-weight:400;
+}
+
+.story-caption span{
+    display:block;
+    margin-top:6px;
+    color:#dbe3e3;
+    font-size:9px;
 }
 
 
 /* =========================================================
-   EXPLORATION CARDS
+   RELATED ARTICLES
    ========================================================= */
 
-.explore{
-
-    padding:
-        105px 0;
-
+.articles{
+    padding:105px 0;
     background:var(--paper);
 }
 
-.explore-grid{
-
+.article-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:18px;
 }
 
-.explore-item{
+.article-card{
+    background:#fff;
+    border:1px solid var(--line);
+    transition:.35s ease;
+}
 
+.article-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 50px rgba(8,45,86,.1);
+}
+
+.article-image{
     position:relative;
-
-    min-height:280px;
-
-    padding:
-        30px 27px;
-
-    background:white;
-
-    border:
-        1px solid var(--line);
-
+    height:190px;
     overflow:hidden;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
+    background:
+        linear-gradient(
+            140deg,
+            #1c435e,
+            #758a77
+        );
 }
 
-.explore-item:hover{
-
-    transform:
-        translateY(-7px);
-
-    box-shadow:var(--shadow);
-}
-
-.explore-art{
-
-    position:absolute;
-
-    right:-45px;
-
-    top:-45px;
-
-    width:170px;
-
-    height:170px;
-
-    border:
-        1px solid rgba(170,135,71,.16);
-
-    border-radius:50%;
-}
-
-.explore-art::after{
-
+.article-image::before{
     content:"";
-
     position:absolute;
-
-    left:30px;
-
-    top:30px;
-
-    width:105px;
-
-    height:105px;
-
-    border:
-        1px solid rgba(8,45,86,.08);
-
+    width:200px;
+    height:200px;
+    right:-70px;
+    top:-90px;
+    border:1px solid rgba(255,255,255,.16);
     border-radius:50%;
 }
 
-.explore-icon{
-
-    position:relative;
-
-    z-index:3;
-
-    width:48px;
-
-    height:48px;
-
-    display:grid;
-
-    place-items:center;
-
-    border:
-        1px solid var(--gold);
-
-    color:var(--gold);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:20px;
-
-    margin-bottom:29px;
-}
-
-.explore-item h3{
-
-    position:relative;
-
-    z-index:3;
-
-    margin:
-        0 0 12px;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:23px;
-
-    font-weight:400;
-}
-
-.explore-item p{
-
-    position:relative;
-
-    z-index:3;
-
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    line-height:1.8;
-}
-
-
-/* =========================================================
-   QUOTE
-   ========================================================= */
-
-.quote-section{
-
-    padding:
-        100px 0;
-
-    background:var(--cream);
-}
-
-.quote-box{
-
-    position:relative;
-
-    max-width:940px;
-
-    margin:auto;
-
-    padding:
-        60px 70px;
-
-    text-align:center;
-
-    border-top:
-        1px solid #dcd9d0;
-
-    border-bottom:
-        1px solid #dcd9d0;
-}
-
-.quote-box::before{
-
-    content:"“";
-
+.article-image::after{
+    content:"";
     position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:65%;
+    background:rgba(4,28,53,.2);
+    clip-path:polygon(
+        0 100%,
+        34% 30%,
+        54% 57%,
+        75% 0,
+        100% 100%
+    );
+}
 
-    left:50%;
+.article-body{
+    padding:23px;
+}
 
-    top:-40px;
-
-    transform:
-        translateX(-50%);
-
-    padding:
-        0 20px;
-
-    background:var(--cream);
-
+.article-category{
     color:var(--gold);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:72px;
-}
-
-.quote-box p{
-
-    margin:0;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(24px,3.2vw,40px);
-
-    line-height:1.35;
-}
-
-.quote-box span{
-
-    display:block;
-
-    margin-top:23px;
-
-    color:var(--muted);
-
-    font-size:8px;
-
+    font-size:7px;
     font-weight:700;
-
-    letter-spacing:.15em;
-
+    letter-spacing:.14em;
     text-transform:uppercase;
 }
 
-
-/* =========================================================
-   OTHER TOPICS
-   ========================================================= */
-
-.other{
-
-    padding:
-        100px 0;
-
-    background:var(--navy-deep);
-
-    color:white;
-}
-
-.other h2{
-
-    margin:
-        14px 0 40px;
-
-    color:white;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(35px,4vw,54px);
-
+.article-body h3{
+    margin:10px 0 9px;
+    color:var(--navy);
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:21px;
     font-weight:400;
-
-    line-height:1;
+    line-height:1.25;
 }
 
-.other .label{
-
-    color:var(--gold-light);
-}
-
-.other .label::before{
-
-    background:var(--gold-light);
-}
-
-.topic-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
-    border-top:
-        1px solid rgba(255,255,255,.13);
-}
-
-.topic{
-
-    position:relative;
-
-    min-height:125px;
-
-    padding:
-        30px 25px;
-
-    border-right:
-        1px solid rgba(255,255,255,.13);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.13);
-
-    transition:
-        background .3s ease,
-        padding-left .3s ease;
-}
-
-.topic:nth-child(3n){
-
-    border-right:0;
-}
-
-.topic:hover{
-
-    padding-left:33px;
-
-    background:
-        rgba(255,255,255,.05);
-}
-
-.topic h3{
-
+.article-body p{
     margin:0;
-
-    max-width:78%;
-
-    color:white;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:19px;
-
-    font-weight:400;
-
-    line-height:1.3;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.75;
 }
 
-.topic-arrow{
-
-    position:absolute;
-
-    right:24px;
-
-    bottom:24px;
-
-    color:var(--gold-light);
-
-    font-size:16px;
-
-    transition:
-        transform .25s ease;
-}
-
-.topic:hover .topic-arrow{
-
-    transform:
-        translateX(5px);
+.article-link{
+    display:inline-flex;
+    margin-top:16px;
+    color:var(--gold);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
 }
 
 
@@ -2525,114 +1265,66 @@ button{
    ========================================================= */
 
 .cta{
-
-    padding:
-        90px 0;
-
-    background:var(--paper);
+    padding:90px 0;
+    background:var(--cream);
 }
 
 .cta-box{
-
     position:relative;
-
     overflow:hidden;
-
-    padding:
-        clamp(45px,6vw,80px);
-
+    padding:clamp(45px,6vw,80px);
     background:
         linear-gradient(
             120deg,
-            #ece8dc,
+            #ebe7dc,
             #faf9f5
         );
-
-    border:
-        1px solid var(--line);
+    border:1px solid var(--line);
 }
 
 .cta-box::after{
-
     content:"✦";
-
     position:absolute;
-
     right:7%;
-
     top:50%;
-
-    transform:
-        translateY(-50%);
-
-    color:
-        rgba(169,130,71,.09);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    transform:translateY(-50%);
+    color:rgba(169,130,71,.09);
+    font-family:Georgia,"Times New Roman",serif;
     font-size:190px;
 }
 
 .cta-content{
-
     position:relative;
-
     z-index:2;
-
     max-width:700px;
 }
 
 .cta h2{
-
-    margin:
-        15px 0;
-
+    margin:15px 0;
     color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(35px,4vw,56px);
-
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(35px,4vw,56px);
     font-weight:400;
-
     line-height:1.05;
 }
 
 .cta p{
-
     max-width:620px;
-
     margin:0;
-
     color:var(--muted);
-
     font-size:13px;
-
     line-height:1.85;
 }
 
 .cta .btn{
-
     margin-top:27px;
-
     background:var(--navy);
-
     border-color:var(--navy);
-
-    color:white;
+    color:#fff;
 }
 
 .cta .btn:hover{
-
     background:var(--gold);
-
     border-color:var(--gold);
 }
 
@@ -2642,122 +1334,70 @@ button{
    ========================================================= */
 
 .footer{
-
-    padding:
-        65px 0 30px;
-
+    padding:65px 0 30px;
     background:#03182e;
-
     color:#91a2b2;
 }
 
 .footer-grid{
-
     display:grid;
-
-    grid-template-columns:
-        1.25fr
-        .75fr
-        .75fr;
-
+    grid-template-columns:1.25fr .75fr .75fr;
     gap:60px;
-
     padding-bottom:50px;
 }
 
 .footer-brand strong{
-
     display:block;
-
-    color:white;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    color:#fff;
+    font-family:Georgia,"Times New Roman",serif;
     font-size:21px;
-
     letter-spacing:.13em;
 }
 
 .footer-brand small{
-
     display:block;
-
     margin-top:6px;
-
     color:#687c90;
-
     font-size:7px;
-
     letter-spacing:.3em;
 }
 
 .footer-brand p{
-
     max-width:370px;
-
-    margin:
-        22px 0 0;
-
+    margin:22px 0 0;
     color:#7f93a7;
-
     font-size:10px;
-
     line-height:1.85;
 }
 
 .footer-column h4{
-
-    margin:
-        0 0 18px;
-
+    margin:0 0 18px;
     color:var(--gold-light);
-
     font-size:8px;
-
     letter-spacing:.15em;
-
     text-transform:uppercase;
 }
 
 .footer-column a{
-
     display:block;
-
     margin-bottom:11px;
-
     color:#8498aa;
-
     font-size:10px;
-
-    transition:
-        color .2s ease;
+    transition:.2s ease;
 }
 
 .footer-column a:hover{
-
-    color:white;
+    color:#fff;
 }
 
 .footer-bottom{
-
     padding-top:24px;
-
-    border-top:
-        1px solid rgba(255,255,255,.08);
-
+    border-top:1px solid rgba(255,255,255,.08);
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:20px;
-
     color:#607589;
-
     font-size:8px;
 }
 
@@ -2767,21 +1407,15 @@ button{
    ========================================================= */
 
 .reveal{
-
     opacity:0;
-
-    transform:
-        translateY(25px);
-
+    transform:translateY(25px);
     transition:
         opacity .75s ease,
         transform .75s ease;
 }
 
 .reveal.visible{
-
     opacity:1;
-
     transform:none;
 }
 
@@ -2793,154 +1427,100 @@ button{
 @media(max-width:1100px){
 
     .nav-menu{
-
         gap:17px;
     }
 
     .nav-menu a{
-
         font-size:9px;
     }
 
     .hero-grid{
-
         gap:4vw;
     }
 
-    .place-grid{
-
-        grid-template-columns:
-            1fr 1fr;
-
-        grid-template-rows:
-            260px
-            260px
-            260px;
+    .destination-grid{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:280px 280px 280px;
     }
 
-    .place.large{
-
-        grid-row:
-            1 / 3;
+    .destination.large{
+        grid-row:1/3;
     }
 
-    .place:nth-child(4){
-
-        grid-column:
-            1 / -1;
+    .destination:nth-child(4){
+        grid-column:1/-1;
     }
 
 }
 
 
 /* =========================================================
-   TABLET SMALL
+   TABLET
    ========================================================= */
 
 @media(max-width:850px){
 
     .topbar-right{
-
         display:none;
     }
 
     .header{
-
         height:64px;
     }
 
     .header.scrolled{
-
         height:58px;
     }
 
     .nav-menu{
-
         display:none;
     }
 
     .hero{
-
         min-height:auto;
     }
 
     .hero-grid{
-
         grid-template-columns:1fr;
-
         min-height:auto;
-
-        padding-bottom:75px;
+        padding-bottom:70px;
     }
 
     .hero-copy{
-
-        padding:
-            70px 0 30px;
+        padding:65px 0 25px;
     }
 
-    .map-stage{
-
-        min-height:500px;
+    .hero-visual{
+        min-height:480px;
     }
 
-    .intro-layout{
-
+    .video-feature{
         grid-template-columns:1fr;
-
-        gap:35px;
     }
 
-    .journey-layout{
+    .video-player{
+        min-height:430px;
+    }
 
-        grid-template-columns:1fr;
+    .video-player video{
+        min-height:430px;
+    }
 
-        gap:50px;
+    .video-info{
+        padding:42px;
     }
 
     .story-layout{
-
         grid-template-columns:1fr;
-    }
-
-    .story-visual{
-
-        min-height:450px;
-    }
-
-    .explore-grid{
-
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .topic-grid{
-
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
-    .topic:nth-child(3n){
-
-        border-right:
-            1px solid rgba(255,255,255,.13);
-    }
-
-    .topic:nth-child(2n){
-
-        border-right:0;
+        gap:45px;
     }
 
     .footer-grid{
-
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .footer-brand{
-
-        grid-column:
-            1 / -1;
+        grid-column:1/-1;
     }
 
 }
@@ -2953,293 +1533,154 @@ button{
 @media(max-width:560px){
 
     .topbar{
-
         height:24px;
-
         font-size:8px;
     }
 
     .brand-mark{
-
         width:34px;
-
         height:34px;
-
         font-size:18px;
     }
 
     .brand-name strong{
-
         font-size:16px;
     }
 
     .brand-name small{
-
         font-size:6px;
     }
 
     .hero-copy{
-
-        padding-top:60px;
+        padding-top:55px;
     }
 
     .hero h1{
-
-        font-size:
-            clamp(48px,16vw,73px);
+        font-size:clamp(48px,16vw,73px);
     }
 
     .hero-lead{
-
         font-size:12px;
     }
 
-    .map-stage{
-
+    .hero-visual{
         min-height:360px;
     }
 
-    .map-card{
-
+    .hero-frame{
         width:98%;
     }
 
-    .map-card::before{
-
+    .hero-frame::before{
         inset:10px;
     }
 
-    .map-title{
-
+    .hero-frame-title{
         left:19px;
-
         top:18px;
-
         font-size:18px;
     }
 
-    .map-subtitle{
-
+    .hero-frame-subtitle{
         left:20px;
-
         top:45px;
     }
 
-    .sumatra{
-
-        width:95px;
-
-        height:34px;
-    }
-
-    .java{
-
-        width:125px;
-
-        height:18px;
-    }
-
-    .kalimantan{
-
-        width:100px;
-
-        height:75px;
-    }
-
-    .sulawesi{
-
-        width:80px;
-
-        height:90px;
-    }
-
-    .papua{
-
-        width:90px;
-
-        height:53px;
-    }
-
-    .nusa{
-
-        width:85px;
-
-        height:11px;
-    }
-
-    .bali{
-
-        width:20px;
-
-        height:11px;
-    }
-
-    .route{
-
-        width:270px;
-
-        height:100px;
-    }
-
-    .map-label{
-
-        font-size:6px;
-    }
-
-    .compass{
-
-        width:47px;
-
-        height:47px;
-
-        right:18px;
-
-        bottom:18px;
-    }
-
-    .compass::before{
-
-        height:33px;
-    }
-
-    .compass::after{
-
-        width:33px;
-    }
-
-    .explore-card{
-
+    .hero-note{
         left:-2px;
-
         bottom:4%;
-
         width:165px;
-
         padding:16px;
     }
 
-    .explore-card strong{
-
+    .hero-note strong{
         font-size:15px;
     }
 
-    .explore-card p{
-
+    .hero-note p{
         font-size:8px;
     }
 
-    .intro,
-    .places,
-    .journey,
-    .story-feature,
-    .explore,
-    .quote-section,
-    .other{
-
-        padding:
-            70px 0;
+    .video-section,
+    .destinations,
+    .story,
+    .articles{
+        padding:70px 0;
     }
 
-    .place-grid{
+    .video-feature{
+        display:block;
+    }
 
+    .video-player,
+    .video-player video{
+        min-height:260px;
+        height:260px;
+    }
+
+    .video-info{
+        padding:35px 25px;
+    }
+
+    .video-grid{
         grid-template-columns:1fr;
-
-        grid-template-rows:
-            repeat(4,260px);
     }
 
-    .place.large{
+    .video-thumb{
+        height:210px;
+    }
 
+    .destination-grid{
+        grid-template-columns:1fr;
+        grid-template-rows:repeat(4,260px);
+    }
+
+    .destination.large{
         grid-row:auto;
     }
 
-    .place:nth-child(4){
-
+    .destination:nth-child(4){
         grid-column:auto;
     }
 
-    .place.large h3{
-
+    .destination.large h3{
         font-size:31px;
     }
 
     .story-visual{
-
-        min-height:340px;
+        min-height:330px;
     }
 
-    .temple{
-
-        transform:
-            translate(-50%,-50%)
-            scale(.75);
+    .story-copy h2{
+        font-size:40px;
     }
 
-    .story-copy{
-
-        padding:
-            45px 25px;
-    }
-
-    .explore-grid{
-
+    .article-grid{
         grid-template-columns:1fr;
-    }
-
-    .quote-box{
-
-        padding:
-            45px 22px;
-    }
-
-    .quote-box p{
-
-        font-size:22px;
-    }
-
-    .topic-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .topic,
-    .topic:nth-child(2n),
-    .topic:nth-child(3n){
-
-        border-right:0;
     }
 
     .cta{
-
-        padding:
-            65px 0;
+        padding:65px 0;
     }
 
     .cta-box{
-
-        padding:
-            38px 25px;
+        padding:38px 25px;
     }
 
     .cta-box::after{
-
         font-size:120px;
     }
 
     .footer-grid{
-
         grid-template-columns:1fr;
     }
 
     .footer-brand{
-
         grid-column:auto;
     }
 
     .footer-bottom{
-
         flex-direction:column;
-
         align-items:flex-start;
     }
 
@@ -3253,25 +1694,19 @@ button{
 @media(prefers-reduced-motion:reduce){
 
     html{
-
         scroll-behavior:auto;
     }
 
     *,
     *::before,
     *::after{
-
-        animation-duration:.01ms !important;
-
-        animation-iteration-count:1 !important;
-
-        transition-duration:.01ms !important;
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
     }
 
     .reveal{
-
         opacity:1;
-
         transform:none;
     }
 
@@ -3286,14 +1721,14 @@ button{
 
 
 <!-- =======================================================
-     TOPBAR
+     TOP BAR
      ======================================================= -->
 
 <div class="topbar">
 
     <div class="w">
 
-        <div class="topbar-left">
+        <div>
             MANDALA CHANNEL
         </div>
 
@@ -3353,7 +1788,6 @@ button{
         </a>
 
 
-
         <nav class="nav-menu">
 
             <a href="../index.html">
@@ -3395,12 +1829,7 @@ button{
 
 
 
-<!-- =======================================================
-     MAIN
-     ======================================================= -->
-
 <main id="jelajah">
-
 
 
 <!-- =======================================================
@@ -3443,17 +1872,17 @@ button{
             <div class="hero-actions">
 
                 <a
-                    href="#destinasi"
+                    href="#video"
                     class="btn btn-primary"
                 >
-                    Mulai Menjelajah
+                    Tonton Jelajah
                 </a>
 
                 <a
-                    href="#cerita"
+                    href="#destinasi"
                     class="btn btn-outline"
                 >
-                    Lihat Cerita
+                    Lihat Destinasi
                 </a>
 
             </div>
@@ -3462,90 +1891,39 @@ button{
 
 
 
-        <div class="map-stage reveal">
+        <div class="hero-visual reveal">
 
 
-            <div class="map-card">
+            <div class="hero-frame">
 
+                <div class="hero-landscape">
 
-                <div class="map-art">
+                    <div class="sun"></div>
 
-                    <div class="grid-lines"></div>
+                    <div class="mountain-a"></div>
 
+                    <div class="mountain-b"></div>
 
-                    <div class="island sumatra"></div>
-
-                    <div class="island java"></div>
-
-                    <div class="island bali"></div>
-
-                    <div class="island nusa"></div>
-
-                    <div class="island kalimantan"></div>
-
-                    <div class="island sulawesi"></div>
-
-                    <div class="island papua"></div>
-
-
-                    <div class="route">
-
-                        <span class="route-dot a"></span>
-
-                        <span class="route-dot b"></span>
-
-                        <span class="route-dot c"></span>
-
-                        <span class="route-dot d"></span>
-
-                    </div>
-
-
-                    <span class="map-label label-sumatra">
-                        Sumatra
-                    </span>
-
-                    <span class="map-label label-java">
-                        Jawa
-                    </span>
-
-                    <span class="map-label label-bali">
-                        Bali
-                    </span>
-
-                    <span class="map-label label-borneo">
-                        Kalimantan
-                    </span>
-
-                    <span class="map-label label-sulawesi">
-                        Sulawesi
-                    </span>
-
-                    <span class="map-label label-papua">
-                        Papua
-                    </span>
+                    <div class="field"></div>
 
                 </div>
 
 
-                <div class="map-title">
+                <div class="hero-frame-title">
                     Nusantara
                 </div>
 
-                <div class="map-subtitle">
+                <div class="hero-frame-subtitle">
                     Ruang perjalanan Mandala
                 </div>
 
 
-                <div class="compass">
-                    N
-                </div>
+                <div class="location-pin"></div>
 
             </div>
 
 
-
-            <div class="explore-card">
+            <div class="hero-note">
 
                 <small>
                     Perjalanan
@@ -3574,63 +1952,250 @@ button{
 
 
 <!-- =======================================================
-     INTRO
+     VIDEO
      ======================================================= -->
 
-<section class="intro">
+<section
+    class="video-section"
+    id="video"
+>
 
-    <div class="w intro-layout">
+    <div class="w">
 
 
-        <div class="reveal">
+        <div class="section-head reveal">
 
             <div class="label">
-                Tentang Jelajah
+                Video Jelajah
             </div>
 
             <h2>
-                Nusantara adalah
-                cerita yang terus
-                bergerak.
+                Melihat Nusantara
+                melalui cerita.
             </h2>
+
+            <p>
+                Dokumentasi perjalanan Mandala dari
+                berbagai tempat dan sudut kehidupan
+                masyarakat Nusantara.
+            </p>
 
         </div>
 
 
-        <div class="intro-content reveal">
 
-            <p>
-                Setiap perjalanan membawa kita pada
-                cerita yang berbeda. Sebuah pura,
-                desa, sungai, gunung, jalan lama,
-                atau pasar dapat menjadi pintu untuk
-                memahami kehidupan masyarakat.
-            </p>
+        <!-- VIDEO UTAMA -->
 
-            <p>
-                Jelajah Nusantara Mandala tidak hanya
-                membicarakan tempat wisata. Kami ingin
-                melihat bagaimana sebuah wilayah tumbuh,
-                bagaimana masyarakat menjaganya, dan
-                bagaimana jejak sejarah serta kebudayaan
-                masih hadir dalam kehidupan hari ini.
-            </p>
+        <div class="video-feature reveal">
 
-            <p>
-                Perjalanan juga menjadi cara untuk
-                mengenal keberadaan Hindu di berbagai
-                wilayah Nusantara. Jejak tersebut dapat
-                hadir dalam pura, tradisi, nama tempat,
-                peninggalan sejarah, kesenian, hingga
-                kehidupan masyarakat.
-            </p>
 
-            <p>
-                Dengan pendekatan yang dekat dan
-                dokumenter, halaman ini menjadi ruang
-                untuk menyimpan cerita perjalanan
-                Mandala dari berbagai sudut Nusantara.
-            </p>
+            <div class="video-player">
+
+                <!--
+                    VIDEO LOKAL
+
+                    Jika sudah memiliki video:
+                    masukkan file ke:
+
+                    assets/video/
+
+                    lalu ubah src menjadi contoh:
+
+                    src="../assets/video/jelajah-jawa.mp4"
+
+                    Tidak menggunakan internet.
+                -->
+
+                <video
+                    controls
+                    preload="metadata"
+                    poster=""
+                >
+                    <!--
+                    <source
+                        src="../assets/video/jelajah-nusantara.mp4"
+                        type="video/mp4"
+                    >
+                    -->
+                </video>
+
+
+                <div class="video-placeholder">
+
+                    <div class="play-button">
+                        ▶
+                    </div>
+
+                </div>
+
+
+                <div class="video-badge">
+                    Video Jelajah
+                </div>
+
+                <div class="video-duration">
+                    DOKUMENTASI
+                </div>
+
+            </div>
+
+
+            <div class="video-info">
+
+                <div class="label">
+                    Cerita Utama
+                </div>
+
+                <h3>
+                    Menyusuri jejak
+                    Hindu di tanah
+                    Nusantara
+                </h3>
+
+                <p>
+                    Sebuah perjalanan untuk melihat
+                    bagaimana sejarah, tempat suci,
+                    masyarakat, tradisi, dan kehidupan
+                    Hindu hadir dalam ruang Nusantara.
+                </p>
+
+                <a
+                    href="../pages/video.html"
+                    class="video-link"
+                >
+                    Lihat koleksi video →
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- VIDEO LAIN -->
+
+        <div class="video-grid">
+
+
+            <article class="video-card reveal">
+
+                <div class="video-thumb">
+
+                    <span class="thumb-category">
+                        Perjalanan
+                    </span>
+
+                    <span class="thumb-play">
+                        ▶
+                    </span>
+
+                </div>
+
+                <div class="video-card-body">
+
+                    <h3>
+                        Menemukan cerita
+                        dari sebuah desa
+                    </h3>
+
+                    <p>
+                        Perjalanan bertemu masyarakat
+                        dan melihat kehidupan lokal
+                        dari dekat.
+                    </p>
+
+                    <a
+                        href="../pages/video.html"
+                        class="video-card-link"
+                    >
+                        Tonton video →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="video-card reveal">
+
+                <div class="video-thumb">
+
+                    <span class="thumb-category">
+                        Jejak Hindu
+                    </span>
+
+                    <span class="thumb-play">
+                        ▶
+                    </span>
+
+                </div>
+
+                <div class="video-card-body">
+
+                    <h3>
+                        Pura dan ruang
+                        kehidupan masyarakat
+                    </h3>
+
+                    <p>
+                        Melihat hubungan antara tempat
+                        suci dan kehidupan umat di
+                        sekitarnya.
+                    </p>
+
+                    <a
+                        href="../pages/video.html"
+                        class="video-card-link"
+                    >
+                        Tonton video →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <article class="video-card reveal">
+
+                <div class="video-thumb">
+
+                    <span class="thumb-category">
+                        Budaya
+                    </span>
+
+                    <span class="thumb-play">
+                        ▶
+                    </span>
+
+                </div>
+
+                <div class="video-card-body">
+
+                    <h3>
+                        Tradisi yang tetap
+                        hidup di masyarakat
+                    </h3>
+
+                    <p>
+                        Cerita tentang tradisi lokal
+                        dan generasi yang terus
+                        menjaganya.
+                    </p>
+
+                    <a
+                        href="../pages/video.html"
+                        class="video-card-link"
+                    >
+                        Tonton video →
+                    </a>
+
+                </div>
+
+            </article>
+
 
         </div>
 
@@ -3641,11 +2206,11 @@ button{
 
 
 <!-- =======================================================
-     DESTINATIONS
+     DESTINASI
      ======================================================= -->
 
 <section
-    class="places"
+    class="destinations"
     id="destinasi"
 >
 
@@ -3655,44 +2220,38 @@ button{
         <div class="section-head reveal">
 
             <div class="label">
-                Ruang Jelajah
+                Destinasi &amp; Cerita
             </div>
 
             <h2>
-                Tempat-tempat yang
-                menyimpan cerita.
+                Tempat yang
+                menyimpan jejak.
             </h2>
 
             <p>
-                Dari pulau, desa, kawasan pegunungan,
-                pesisir, hingga pusat kehidupan masyarakat,
-                setiap tempat memiliki lapisan cerita
-                yang berbeda.
+                Dari desa, pura, pegunungan hingga
+                pesisir, setiap tempat mempunyai
+                cerita dan karakter yang berbeda.
             </p>
 
         </div>
 
 
 
-        <div class="place-grid">
+        <div class="destination-grid">
 
 
-            <article
-                class="place large reveal"
-            >
+            <article class="destination large reveal">
 
-                <div class="place-bg">
+                <div class="destination-bg">
 
-                    <div class="mountain"></div>
-
-                    <div class="water"></div>
+                    <div class="destination-mountain"></div>
 
                 </div>
 
+                <div class="destination-content">
 
-                <div class="place-content">
-
-                    <div class="place-location">
+                    <div class="destination-location">
                         Jawa
                     </div>
 
@@ -3702,13 +2261,13 @@ button{
                     </h3>
 
                     <p>
-                        Menyusuri ruang-ruang kehidupan,
+                        Menyusuri ruang kehidupan,
                         sejarah, pura, tradisi, dan
                         masyarakat Hindu yang tumbuh
                         di berbagai wilayah Jawa.
                     </p>
 
-                    <span class="place-arrow">
+                    <span class="destination-link">
                         Jelajahi cerita →
                     </span>
 
@@ -3718,26 +2277,22 @@ button{
 
 
 
-            <article
-                class="place reveal"
-            >
+            <article class="destination reveal">
 
-                <div class="place-bg">
+                <div class="destination-bg">
 
-                    <div class="mountain"></div>
+                    <div class="destination-mountain"></div>
 
                 </div>
 
+                <div class="destination-content">
 
-                <div class="place-content">
-
-                    <div class="place-location">
+                    <div class="destination-location">
                         Bali
                     </div>
 
                     <h3>
-                        Pulau
-                        Dewata
+                        Pulau Dewata
                     </h3>
 
                     <p>
@@ -3745,30 +2300,23 @@ button{
                         masyarakat Hindu Bali.
                     </p>
 
-                    <span class="place-arrow">
-                        Jelajahi →
-                    </span>
-
                 </div>
 
             </article>
 
 
 
-            <article
-                class="place reveal"
-            >
+            <article class="destination reveal">
 
-                <div class="place-bg">
+                <div class="destination-bg">
 
-                    <div class="water"></div>
+                    <div class="destination-water"></div>
 
                 </div>
 
+                <div class="destination-content">
 
-                <div class="place-content">
-
-                    <div class="place-location">
+                    <div class="destination-location">
                         Nusantara Timur
                     </div>
 
@@ -3778,13 +2326,9 @@ button{
                     </h3>
 
                     <p>
-                        Melihat perjalanan komunitas
-                        Hindu di wilayah timur.
+                        Perjalanan komunitas Hindu
+                        di wilayah timur.
                     </p>
-
-                    <span class="place-arrow">
-                        Jelajahi →
-                    </span>
 
                 </div>
 
@@ -3792,36 +2336,29 @@ button{
 
 
 
-            <article
-                class="place reveal"
-            >
+            <article class="destination reveal">
 
-                <div class="place-bg">
+                <div class="destination-bg">
 
-                    <div class="mountain"></div>
+                    <div class="destination-mountain"></div>
 
                 </div>
 
+                <div class="destination-content">
 
-                <div class="place-content">
-
-                    <div class="place-location">
+                    <div class="destination-location">
                         Nusantara
                     </div>
 
                     <h3>
-                        Desa dan
-                        Komunitas
+                        Desa &amp;
+                        Masyarakat
                     </h3>
 
                     <p>
-                        Kehidupan masyarakat dari
-                        dekat dan apa yang mereka jaga.
+                        Kehidupan masyarakat dan
+                        tradisi yang mereka jaga.
                     </p>
-
-                    <span class="place-arrow">
-                        Jelajahi →
-                    </span>
 
                 </div>
 
@@ -3829,25 +2366,22 @@ button{
 
 
 
-            <article
-                class="place reveal"
-            >
+            <article class="destination reveal">
 
-                <div class="place-bg">
+                <div class="destination-bg">
 
-                    <div class="water"></div>
+                    <div class="destination-water"></div>
 
                 </div>
 
+                <div class="destination-content">
 
-                <div class="place-content">
-
-                    <div class="place-location">
+                    <div class="destination-location">
                         Pesisir
                     </div>
 
                     <h3>
-                        Laut dan
+                        Laut &amp;
                         Kehidupan
                     </h3>
 
@@ -3856,10 +2390,6 @@ button{
                         ruang pesisir Nusantara.
                     </p>
 
-                    <span class="place-arrow">
-                        Jelajahi →
-                    </span>
-
                 </div>
 
             </article>
@@ -3874,178 +2404,34 @@ button{
 
 
 <!-- =======================================================
-     JOURNEY
+     STORY
      ======================================================= -->
 
-<section class="journey">
-
-    <div class="w journey-layout">
-
-
-        <div class="journey-title reveal">
-
-            <div class="label">
-                Cara Kami Menjelajah
-            </div>
-
-            <h2>
-                Tidak hanya
-                datang.
-            </h2>
-
-            <p>
-                Setiap perjalanan Mandala diarahkan
-                untuk memahami tempat melalui cerita
-                manusia dan konteks yang ada di baliknya.
-            </p>
-
-        </div>
-
-
-
-        <div class="journey-list">
-
-
-            <article
-                class="journey-item reveal"
-            >
-
-                <div class="journey-dot">
-                    ◇
-                </div>
-
-                <div>
-
-                    <h3>
-                        Mengenal Tempat
-                    </h3>
-
-                    <p>
-                        Memahami lanskap, sejarah,
-                        lingkungan, dan karakter sebuah
-                        wilayah sebelum melihat lebih jauh.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <article
-                class="journey-item reveal"
-            >
-
-                <div class="journey-dot">
-                    ○
-                </div>
-
-                <div>
-
-                    <h3>
-                        Bertemu Masyarakat
-                    </h3>
-
-                    <p>
-                        Mendengarkan pengalaman orang-orang
-                        yang hidup dan menjaga tempat
-                        tersebut setiap hari.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <article
-                class="journey-item reveal"
-            >
-
-                <div class="journey-dot">
-                    ✦
-                </div>
-
-                <div>
-
-                    <h3>
-                        Menemukan Jejak
-                    </h3>
-
-                    <p>
-                        Melihat peninggalan, pura, tradisi,
-                        kesenian, serta berbagai jejak
-                        yang menghubungkan masa lalu dan
-                        kehidupan sekarang.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <article
-                class="journey-item reveal"
-            >
-
-                <div class="journey-dot">
-                    △
-                </div>
-
-                <div>
-
-                    <h3>
-                        Membawa Pulang Cerita
-                    </h3>
-
-                    <p>
-                        Mengubah perjalanan menjadi
-                        dokumentasi yang dapat dinikmati
-                        dan dipelajari kembali.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     FEATURE STORY
-     ======================================================= -->
-
-<section
-    class="story-feature"
-    id="cerita"
->
+<section class="story">
 
     <div class="w story-layout">
 
 
         <div class="story-visual reveal">
 
-            <div class="story-visual-label">
-                Jejak Hindu
+            <div class="story-sun"></div>
+
+            <div class="story-mountain"></div>
+
+            <div class="story-label">
+                Cerita Perjalanan
             </div>
 
+            <div class="story-caption">
 
-            <div class="temple">
+                <strong>
+                    Di balik tempat,
+                    ada kehidupan.
+                </strong>
 
-                <div class="temple-spire"></div>
-
-                <div class="temple-roof"></div>
-
-                <div class="temple-middle"></div>
-
-                <div class="temple-base"></div>
+                <span>
+                    Mandala — Jelajah Nusantara
+                </span>
 
             </div>
 
@@ -4056,36 +2442,33 @@ button{
         <div class="story-copy reveal">
 
             <div class="label">
-                Cerita Perjalanan
+                Cara Melihat
             </div>
 
             <h2>
-                Di balik sebuah
-                tempat, ada
-                kehidupan.
+                Kami tidak hanya
+                datang untuk melihat.
             </h2>
 
             <p>
-                Sebuah pura tidak berdiri sendirian.
-                Ada keluarga yang merawatnya,
-                masyarakat yang menjalankan upacara,
-                sejarah yang membentuknya, dan
-                generasi yang meneruskan kehidupan
-                di sekitarnya.
+                Sebuah tempat selalu memiliki cerita
+                yang lebih luas dari apa yang terlihat
+                oleh mata.
             </p>
 
             <p>
-                Karena itu perjalanan Mandala mencoba
-                melihat tempat sebagai bagian dari
-                kehidupan yang lebih luas.
+                Ada masyarakat yang hidup di dalamnya,
+                sejarah yang membentuknya, tradisi
+                yang dijaga, serta perubahan yang terus
+                berjalan.
             </p>
 
-            <a
-                href="../pages/artikel.html"
-                class="text-link"
-            >
-                Baca cerita perjalanan →
-            </a>
+            <p>
+                Karena itu Jelajah Nusantara Mandala
+                mencoba mendokumentasikan perjalanan
+                dengan pendekatan yang lebih dekat
+                kepada manusia dan kehidupan.
+            </p>
 
         </div>
 
@@ -4097,10 +2480,10 @@ button{
 
 
 <!-- =======================================================
-     EXPLORE CATEGORIES
+     ARTIKEL TERKAIT
      ======================================================= -->
 
-<section class="explore">
+<section class="articles">
 
     <div class="w">
 
@@ -4108,356 +2491,123 @@ button{
         <div class="section-head reveal">
 
             <div class="label">
-                Yang Kami Cari
+                Cerita Terkait
             </div>
 
             <h2>
-                Banyak jalan untuk
-                mengenal Nusantara.
+                Baca perjalanan
+                lainnya.
             </h2>
 
             <p>
-                Jelajah dapat dimulai dari sebuah tempat,
-                manusia, tradisi, perjalanan sejarah,
-                ataupun kehidupan sehari-hari.
+                Cerita perjalanan dapat dilanjutkan
+                melalui artikel dan dokumentasi Mandala.
             </p>
 
         </div>
 
 
 
-        <div class="explore-grid">
+        <div class="article-grid">
 
 
-            <article
-                class="explore-item reveal"
-            >
+            <article class="article-card reveal">
 
-                <div class="explore-art"></div>
+                <div class="article-image"></div>
 
-                <div class="explore-icon">
-                    ◇
+                <div class="article-body">
+
+                    <div class="article-category">
+                        Jejak Hindu
+                    </div>
+
+                    <h3>
+                        Mengenal kehidupan
+                        Hindu di tengah desa
+                    </h3>
+
+                    <p>
+                        Sebuah perjalanan untuk memahami
+                        masyarakat, tradisi, dan ruang
+                        kehidupan mereka.
+                    </p>
+
+                    <a
+                        href="../pages/artikel.html"
+                        class="article-link"
+                    >
+                        Baca artikel →
+                    </a>
+
                 </div>
-
-                <h3>
-                    Pura &amp; Tempat Suci
-                </h3>
-
-                <p>
-                    Mengenal pura dan ruang sakral,
-                    sejarahnya, kehidupan masyarakat,
-                    serta tradisi yang berlangsung
-                    di dalamnya.
-                </p>
 
             </article>
 
 
 
-            <article
-                class="explore-item reveal"
-            >
+            <article class="article-card reveal">
 
-                <div class="explore-art"></div>
+                <div class="article-image"></div>
 
-                <div class="explore-icon">
-                    ○
+                <div class="article-body">
+
+                    <div class="article-category">
+                        Budaya
+                    </div>
+
+                    <h3>
+                        Tradisi yang tumbuh
+                        bersama masyarakat
+                    </h3>
+
+                    <p>
+                        Cerita tentang bagaimana sebuah
+                        tradisi terus dijaga dan diwariskan.
+                    </p>
+
+                    <a
+                        href="../pages/artikel.html"
+                        class="article-link"
+                    >
+                        Baca artikel →
+                    </a>
+
                 </div>
-
-                <h3>
-                    Desa &amp; Masyarakat
-                </h3>
-
-                <p>
-                    Melihat kehidupan masyarakat dari
-                    dekat, termasuk cara mereka menjaga
-                    tradisi dan membangun kehidupan.
-                </p>
 
             </article>
 
 
 
-            <article
-                class="explore-item reveal"
-            >
+            <article class="article-card reveal">
 
-                <div class="explore-art"></div>
+                <div class="article-image"></div>
 
-                <div class="explore-icon">
-                    ✦
+                <div class="article-body">
+
+                    <div class="article-category">
+                        Nusantara
+                    </div>
+
+                    <h3>
+                        Menelusuri jejak
+                        di balik sebuah tempat
+                    </h3>
+
+                    <p>
+                        Melihat hubungan antara tempat,
+                        sejarah, dan kehidupan masyarakat.
+                    </p>
+
+                    <a
+                        href="../pages/artikel.html"
+                        class="article-link"
+                    >
+                        Baca artikel →
+                    </a>
+
                 </div>
 
-                <h3>
-                    Sejarah &amp; Jejak
-                </h3>
-
-                <p>
-                    Menelusuri peninggalan, kisah lama,
-                    nama tempat, dan jejak perjalanan
-                    Hindu di berbagai wilayah.
-                </p>
-
             </article>
-
-
-
-            <article
-                class="explore-item reveal"
-            >
-
-                <div class="explore-art"></div>
-
-                <div class="explore-icon">
-                    △
-                </div>
-
-                <h3>
-                    Alam Nusantara
-                </h3>
-
-                <p>
-                    Gunung, sungai, hutan, pesisir,
-                    dan lanskap yang menjadi bagian
-                    dari kehidupan masyarakat.
-                </p>
-
-            </article>
-
-
-
-            <article
-                class="explore-item reveal"
-            >
-
-                <div class="explore-art"></div>
-
-                <div class="explore-icon">
-                    □
-                </div>
-
-                <h3>
-                    Kota &amp; Perjalanan
-                </h3>
-
-                <p>
-                    Melihat perubahan ruang dan
-                    kehidupan masyarakat Hindu
-                    di tengah perkembangan kota.
-                </p>
-
-            </article>
-
-
-
-            <article
-                class="explore-item reveal"
-            >
-
-                <div class="explore-art"></div>
-
-                <div class="explore-icon">
-                    ◌
-                </div>
-
-                <h3>
-                    Tradisi Lokal
-                </h3>
-
-                <p>
-                    Mengenal praktik budaya dan tradisi
-                    yang hidup serta terus mengalami
-                    perkembangan di masyarakat.
-                </p>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     QUOTE
-     ======================================================= -->
-
-<section class="quote-section">
-
-    <div class="w">
-
-        <div class="quote-box reveal">
-
-            <p>
-                Perjalanan bukan hanya tentang
-                seberapa jauh kita pergi,
-                tetapi tentang seberapa dalam
-                kita memahami tempat yang kita datangi.
-            </p>
-
-            <span>
-                Mandala — Jelajah Nusantara
-            </span>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     OTHER TOPICS
-     ======================================================= -->
-
-<section class="other">
-
-    <div class="w">
-
-
-        <div class="label reveal">
-            Eksplorasi
-        </div>
-
-        <h2 class="reveal">
-            Topik Mandala lainnya
-        </h2>
-
-
-
-        <div class="topic-grid">
-
-
-            <a
-                href="candika-nusantara.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Candika Nusantara
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="dharma-ajaran.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Dharma &amp; Ajaran
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="dharmika.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Dharmika
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="ekonomi-hindu.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Ekonomi Hindu
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="tokoh-hindu.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Tokoh Hindu
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="tradisi-budaya.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Tradisi &amp; Budaya
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="spiritual.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Spiritual
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="kabar-umat.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Kabar Umat
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
 
 
         </div>
@@ -4490,17 +2640,17 @@ button{
                 </h2>
 
                 <p>
-                    Temukan tempat, masyarakat, sejarah,
-                    tradisi, dan berbagai cerita yang
-                    membentuk perjalanan Hindu di
-                    Nusantara.
+                    Temukan tempat, masyarakat,
+                    sejarah, tradisi, dan berbagai
+                    cerita yang membentuk perjalanan
+                    Hindu di Nusantara.
                 </p>
 
                 <a
-                    href="../pages/artikel.html"
+                    href="../pages/video.html"
                     class="btn"
                 >
-                    Jelajahi Artikel
+                    Lihat Semua Video
                 </a>
 
             </div>
@@ -4510,7 +2660,6 @@ button{
     </div>
 
 </section>
-
 
 
 </main>
@@ -4595,7 +2744,7 @@ button{
                     Kontak
                 </a>
 
-                <a href="../index.html#topics">
+                <a href="../index.html">
                     Semua Topik
                 </a>
 
@@ -4624,46 +2773,35 @@ button{
 
 
 
-<!-- =======================================================
-     JAVASCRIPT
-     LOCAL ONLY
-     ======================================================= -->
-
 <script>
 
-(function(){
+/* =========================================================
+   MANDALA — JELAJAH NUSANTARA
+   LOCAL JAVASCRIPT ONLY
+   ========================================================= */
 
+(function(){
 
     /* =====================================================
        HEADER SCROLL
        ===================================================== */
 
     const header =
-        document.getElementById(
-            "header"
-        );
-
+        document.getElementById("header");
 
     function updateHeader(){
 
-        if(
-            window.scrollY > 20
-        ){
+        if(window.scrollY > 20){
 
-            header.classList.add(
-                "scrolled"
-            );
+            header.classList.add("scrolled");
 
         }else{
 
-            header.classList.remove(
-                "scrolled"
-            );
+            header.classList.remove("scrolled");
 
         }
 
     }
-
 
     window.addEventListener(
         "scroll",
@@ -4673,25 +2811,19 @@ button{
         }
     );
 
-
     updateHeader();
 
 
 
     /* =====================================================
-       REVEAL ON SCROLL
+       SCROLL REVEAL
        ===================================================== */
 
     const elements =
-        document.querySelectorAll(
-            ".reveal"
-        );
+        document.querySelectorAll(".reveal");
 
 
-    if(
-        "IntersectionObserver"
-        in window
-    ){
+    if("IntersectionObserver" in window){
 
         const observer =
             new IntersectionObserver(
@@ -4700,9 +2832,7 @@ button{
                     entries.forEach(
                         function(entry){
 
-                            if(
-                                entry.isIntersecting
-                            ){
+                            if(entry.isIntersecting){
 
                                 entry.target.classList.add(
                                     "visible"
@@ -4727,9 +2857,7 @@ button{
         elements.forEach(
             function(element){
 
-                observer.observe(
-                    element
-                );
+                observer.observe(element);
 
             }
         );
@@ -4739,9 +2867,7 @@ button{
         elements.forEach(
             function(element){
 
-                element.classList.add(
-                    "visible"
-                );
+                element.classList.add("visible");
 
             }
         );
@@ -4751,59 +2877,42 @@ button{
 
 
     /* =====================================================
-       MAP PARALLAX
-       HANYA GERAKAN VISUAL LOKAL
-
-       Tidak menggunakan:
-       - API
-       - internet
-       - geolocation
+       HERO VISUAL MOVEMENT
+       Tidak memakai internet / API / geolocation.
        ===================================================== */
 
-    const mapCard =
-        document.querySelector(
-            ".map-card"
-        );
+    const heroFrame =
+        document.querySelector(".hero-frame");
 
 
-    if(mapCard){
+    if(heroFrame){
 
         window.addEventListener(
             "mousemove",
             function(event){
 
-                if(
-                    window.innerWidth < 850
-                ){
+                if(window.innerWidth < 850){
 
                     return;
 
                 }
 
                 const x =
-                    (
-                        event.clientX
-                        /
-                        window.innerWidth
-                    )
-                    - .5;
+                    (event.clientX /
+                    window.innerWidth) - .5;
 
                 const y =
-                    (
-                        event.clientY
-                        /
-                        window.innerHeight
-                    )
-                    - .5;
+                    (event.clientY /
+                    window.innerHeight) - .5;
 
 
-                mapCard.style.transform =
-                    "perspective(1000px) " +
-                    "rotateY(" +
-                    (x * 2.2) +
-                    "deg) " +
-                    "rotateX(" +
-                    (y * -2.2) +
+                heroFrame.style.transform =
+                    "perspective(1000px)" +
+                    " rotateY(" +
+                    (x * 2) +
+                    "deg)" +
+                    " rotateX(" +
+                    (y * -2) +
                     "deg)";
 
             }
@@ -4814,8 +2923,47 @@ button{
             "mouseleave",
             function(){
 
-                mapCard.style.transform =
-                    "";
+                heroFrame.style.transform = "";
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       VIDEO PLACEHOLDER
+
+       Ketika video lokal sudah dimasukkan,
+       placeholder otomatis disembunyikan
+       setelah video dapat dimainkan.
+       ===================================================== */
+
+    const video =
+        document.querySelector(".video-player video");
+
+    const placeholder =
+        document.querySelector(".video-placeholder");
+
+
+    if(video && placeholder){
+
+        video.addEventListener(
+            "loadeddata",
+            function(){
+
+                placeholder.style.display = "none";
+
+            }
+        );
+
+
+        video.addEventListener(
+            "canplay",
+            function(){
+
+                placeholder.style.display = "none";
 
             }
         );
