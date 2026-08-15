@@ -1,1 +1,4656 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>tradisi budaya — Mandala</title><link rel="stylesheet" href="../css/main.css"></head><body data-base="../"><header><div class="w nav"><a class="logo" href="../index.html"><div class="mark">✺</div><div><b>MANDALA</b><small>CHANNEL</small></div></a></div></header><section class="page"><div class="w"><div class="k">Topik Mandala</div><h1>tradisi budaya</h1><p>Kumpulan artikel, video dan playlist Mandala tentang tradisi budaya.</p></div></section><section><div class="w"><div class="head"><div><div class="k">Artikel</div><h2 class="title">Cerita pilihan</h2></div></div><div class="cards" data-render="articles"></div></div></section><section class="playlist"><div class="w"><div class="head"><div><div class="k">Serial</div><h2 class="title">Playlist terkait</h2></div></div><div class="playlists" data-render="playlists"></div></div></section><footer><div class="w"><div class="copy">© 2026 Mandala Channel</div></div></footer><script src="../js/main.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Tradisi & Budaya Hindu Nusantara — Mandala Channel"
+>
+
+<title>Tradisi & Budaya — Mandala Channel</title>
+
+
+<style>
+
+/* =========================================================
+   MANDALA CHANNEL
+   TOPIC — TRADISI & BUDAYA
+
+   LOCAL ONLY
+   Tidak menggunakan CDN
+   Tidak menggunakan Google Fonts
+   Tidak menggunakan resource internet
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+:root{
+
+    --navy:#082d56;
+    --navy-deep:#041d35;
+    --navy-soft:#123e5d;
+
+    --gold:#a9874c;
+    --gold-light:#d0b87e;
+
+    --cream:#f1ece0;
+    --cream-dark:#e5ddce;
+
+    --paper:#faf9f5;
+    --white:#ffffff;
+
+    --ink:#1c2934;
+    --muted:#71808d;
+
+    --earth:#806b51;
+    --sage:#667766;
+    --sage-dark:#445948;
+
+    --line:#dedfd9;
+
+    --shadow:
+        0 24px 65px rgba(4,29,53,.12);
+
+    --max:94vw;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+    scroll-padding-top:80px;
+}
+
+body{
+
+    margin:0;
+
+    overflow-x:hidden;
+
+    background:var(--paper);
+
+    color:var(--ink);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+img{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+}
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+}
+
+button{
+
+    font:inherit;
+}
+
+.w{
+
+    width:var(--max);
+
+    max-width:none;
+
+    margin-inline:auto;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar{
+
+    height:28px;
+
+    background:var(--navy-deep);
+
+    color:#b8c5cf;
+
+    font-size:9px;
+
+    letter-spacing:.13em;
+}
+
+.topbar .w{
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.topbar-left{
+
+    text-transform:uppercase;
+}
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.topbar-line{
+
+    width:28px;
+
+    height:1px;
+
+    background:
+        rgba(208,184,126,.7);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    height:74px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    border-bottom:
+        1px solid rgba(8,45,86,.08);
+
+    transition:
+        height .3s ease,
+        box-shadow .3s ease;
+}
+
+.header.scrolled{
+
+    height:60px;
+
+    box-shadow:
+        0 8px 28px rgba(8,45,86,.1);
+}
+
+.nav{
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:30px;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    flex-shrink:0;
+}
+
+.brand-mark{
+
+    width:40px;
+
+    height:40px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+        1px solid var(--gold);
+
+    color:var(--gold);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:21px;
+
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+.brand:hover .brand-mark{
+
+    background:var(--gold);
+
+    color:white;
+}
+
+.brand-name{
+
+    display:flex;
+
+    flex-direction:column;
+
+    line-height:1;
+}
+
+.brand-name strong{
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    letter-spacing:.15em;
+}
+
+.brand-name small{
+
+    margin-top:5px;
+
+    color:#778696;
+
+    font-size:7px;
+
+    letter-spacing:.34em;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav-menu{
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:27px;
+}
+
+.nav-menu a{
+
+    position:relative;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    color:#566778;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    letter-spacing:.07em;
+
+    transition:
+        color .25s ease;
+}
+
+.nav-menu a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:2px;
+
+    background:var(--gold);
+
+    transform:
+        scaleX(0);
+
+    transition:
+        transform .25s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+
+    color:var(--navy);
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after{
+
+    transform:
+        scaleX(1);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:620px;
+
+    background:
+        linear-gradient(
+            125deg,
+            #041d35 0%,
+            #183d52 50%,
+            #72684e 100%
+        );
+
+    color:white;
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:760px;
+
+    height:760px;
+
+    right:-390px;
+
+    top:-400px;
+
+    border:
+        1px solid rgba(208,184,126,.18);
+
+    border-radius:50%;
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:510px;
+
+    height:510px;
+
+    left:-360px;
+
+    bottom:-350px;
+
+    border:
+        1px solid rgba(208,184,126,.14);
+
+    border-radius:50%;
+}
+
+.hero-grid{
+
+    position:relative;
+
+    z-index:2;
+
+    min-height:620px;
+
+    display:grid;
+
+    grid-template-columns:
+        .9fr
+        1.1fr;
+
+    align-items:center;
+
+    gap:40px;
+}
+
+
+/* =========================================================
+   HERO COPY
+   ========================================================= */
+
+.hero-copy{
+
+    padding:
+        75px 0;
+}
+
+.eyebrow{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:21px;
+
+    color:var(--gold-light);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.22em;
+
+    text-transform:uppercase;
+}
+
+.eyebrow::before{
+
+    content:"";
+
+    width:35px;
+
+    height:1px;
+
+    background:var(--gold-light);
+}
+
+.hero h1{
+
+    margin:0;
+
+    color:white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(51px,7vw,88px);
+
+    font-weight:400;
+
+    line-height:.91;
+
+    letter-spacing:-.065em;
+}
+
+.hero h1 span{
+
+    display:block;
+
+    color:var(--gold-light);
+}
+
+.hero-lead{
+
+    max-width:530px;
+
+    margin:
+        28px 0 0;
+
+    color:#c4d0d7;
+
+    font-size:12px;
+
+    line-height:1.95;
+}
+
+.hero-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:11px;
+
+    margin-top:30px;
+}
+
+.btn{
+
+    min-height:43px;
+
+    padding:
+        0 20px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid rgba(255,255,255,.3);
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+.btn:hover{
+
+    transform:
+        translateY(-3px);
+}
+
+.btn-primary{
+
+    background:var(--gold);
+
+    border-color:var(--gold);
+}
+
+.btn-primary:hover{
+
+    background:#bd9958;
+
+    border-color:#bd9958;
+}
+
+.btn-outline:hover{
+
+    background:white;
+
+    color:var(--navy);
+}
+
+
+/* =========================================================
+   HERO ART
+   ========================================================= */
+
+.hero-art{
+
+    position:relative;
+
+    min-height:620px;
+
+    overflow:hidden;
+}
+
+.art-frame{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:440px;
+
+    height:480px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(208,184,126,.5);
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+.art-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+}
+
+
+/* Stylised traditional composition */
+
+.art-circle{
+
+    position:absolute;
+
+    width:330px;
+
+    height:330px;
+
+    left:50%;
+
+    top:47%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(208,184,126,.65);
+
+    border-radius:50%;
+}
+
+.art-circle::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:30px;
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
+    border-radius:50%;
+}
+
+.art-circle::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    color:rgba(208,184,126,.72);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:65px;
+}
+
+
+/* Temple silhouette */
+
+.temple{
+
+    position:absolute;
+
+    z-index:3;
+
+    left:50%;
+
+    bottom:70px;
+
+    width:280px;
+
+    height:220px;
+
+    transform:
+        translateX(-50%);
+}
+
+.temple-base{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:0;
+
+    width:250px;
+
+    height:70px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #8d7146,
+            #c0a56b,
+            #80633b
+        );
+
+    clip-path:
+        polygon(
+            5% 100%,
+            0 75%,
+            10% 75%,
+            15% 50%,
+            85% 50%,
+            90% 75%,
+            100% 75%,
+            95% 100%
+        );
+}
+
+.temple-roof{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:56px;
+
+    width:205px;
+
+    height:95px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #9a7945,
+            #d0b577,
+            #8a693c
+        );
+
+    clip-path:
+        polygon(
+            50% 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+.temple-top{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:145px;
+
+    width:32px;
+
+    height:85px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #856438,
+            #d0b477,
+            #856438
+        );
+
+    clip-path:
+        polygon(
+            40% 100%,
+            60% 100%,
+            75% 15%,
+            50% 0,
+            25% 15%
+        );
+}
+
+.art-label{
+
+    position:absolute;
+
+    padding:
+        11px 15px;
+
+    background:
+        rgba(4,29,53,.72);
+
+    border:
+        1px solid rgba(208,184,126,.38);
+
+    backdrop-filter:
+        blur(8px);
+
+    color:#d9e0e3;
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+}
+
+.art-label.one{
+
+    left:4%;
+
+    top:25%;
+}
+
+.art-label.two{
+
+    right:2%;
+
+    bottom:23%;
+}
+
+.art-label.three{
+
+    left:10%;
+
+    bottom:14%;
+}
+
+
+/* =========================================================
+   GOLD BAR
+   ========================================================= */
+
+.gold-bar{
+
+    background:var(--gold);
+
+    color:white;
+}
+
+.gold-bar-inner{
+
+    min-height:51px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:15px;
+
+    text-align:center;
+}
+
+.gold-bar-inner span{
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.17em;
+
+    text-transform:uppercase;
+}
+
+.gold-symbol{
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.intro{
+
+    padding:
+        95px 0;
+
+    background:white;
+}
+
+.intro-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        .78fr
+        1.22fr;
+
+    gap:9vw;
+}
+
+.label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    color:var(--gold);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.19em;
+
+    text-transform:uppercase;
+}
+
+.label::before{
+
+    content:"";
+
+    width:31px;
+
+    height:1px;
+
+    background:var(--gold);
+}
+
+.intro h2{
+
+    margin:
+        17px 0 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(37px,4.7vw,59px);
+
+    font-weight:400;
+
+    line-height:1.02;
+
+    letter-spacing:-.045em;
+}
+
+.intro-content p{
+
+    margin:
+        0 0 18px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.9;
+}
+
+.intro-content p:first-child{
+
+    color:var(--ink);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:20px;
+
+    line-height:1.65;
+}
+
+
+/* =========================================================
+   TRADITION FEATURE
+   ========================================================= */
+
+.feature{
+
+    padding:
+        95px 0;
+
+    background:var(--cream);
+}
+
+.feature-head{
+
+    max-width:780px;
+
+    margin-bottom:42px;
+}
+
+.feature-head h2{
+
+    margin:
+        15px 0 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(39px,4.6vw,60px);
+
+    font-weight:400;
+
+    line-height:1.03;
+
+    letter-spacing:-.045em;
+}
+
+.feature-head p{
+
+    max-width:630px;
+
+    margin:
+        17px 0 0;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.85;
+}
+
+
+/* Feature card */
+
+.feature-card{
+
+    display:grid;
+
+    grid-template-columns:
+        1.15fr
+        .85fr;
+
+    min-height:520px;
+
+    background:white;
+
+    box-shadow:var(--shadow);
+}
+
+
+/* Feature visual */
+
+.feature-visual{
+
+    position:relative;
+
+    min-height:520px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #6d614c,
+            #173b50
+        );
+}
+
+.feature-visual::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:540px;
+
+    height:540px;
+
+    left:54%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(208,184,126,.24);
+
+    border-radius:50%;
+}
+
+.feature-visual::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:390px;
+
+    height:390px;
+
+    left:54%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:50%;
+}
+
+
+/* Decorative traditional object */
+
+.ritual-object{
+
+    position:absolute;
+
+    z-index:4;
+
+    left:54%;
+
+    top:50%;
+
+    width:230px;
+
+    height:300px;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+
+/* Base */
+
+.ritual-base{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:30px;
+
+    width:200px;
+
+    height:62px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            #8c6a3e,
+            #c4a86b,
+            #806039
+        );
+
+    clip-path:
+        polygon(
+            4% 100%,
+            0 80%,
+            10% 65%,
+            90% 65%,
+            100% 80%,
+            96% 100%
+        );
+}
+
+
+/* Bowl */
+
+.ritual-bowl{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:76px;
+
+    width:170px;
+
+    height:105px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            145deg,
+            #a98149,
+            #d0b578,
+            #80603b
+        );
+
+    border-radius:
+        0 0 50% 50%;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            86% 80%,
+            65% 100%,
+            35% 100%,
+            14% 80%
+        );
+}
+
+
+/* Leaves */
+
+.leaf{
+
+    position:absolute;
+
+    width:80px;
+
+    height:32px;
+
+    border-radius:
+        100% 0 100% 0;
+
+    background:
+        #718069;
+
+    opacity:.85;
+}
+
+.leaf.a{
+
+    left:30px;
+
+    top:76px;
+
+    transform:rotate(-34deg);
+}
+
+.leaf.b{
+
+    right:30px;
+
+    top:65px;
+
+    transform:rotate(32deg);
+}
+
+.leaf.c{
+
+    left:65px;
+
+    top:44px;
+
+    transform:rotate(-7deg);
+}
+
+
+/* Flower */
+
+.flower{
+
+    position:absolute;
+
+    left:50%;
+
+    top:30px;
+
+    width:55px;
+
+    height:55px;
+
+    transform:
+        translateX(-50%);
+}
+
+.petal{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:27px;
+
+    height:40px;
+
+    transform-origin:
+        50% 100%;
+
+    border-radius:
+        70% 70% 20% 20%;
+
+    background:
+        #d0b477;
+}
+
+.petal:nth-child(1){
+    transform:
+        translate(-50%,-100%)
+        rotate(0deg);
+}
+
+.petal:nth-child(2){
+    transform:
+        translate(-50%,-100%)
+        rotate(60deg);
+}
+
+.petal:nth-child(3){
+    transform:
+        translate(-50%,-100%)
+        rotate(120deg);
+}
+
+.petal:nth-child(4){
+    transform:
+        translate(-50%,-100%)
+        rotate(180deg);
+}
+
+.petal:nth-child(5){
+    transform:
+        translate(-50%,-100%)
+        rotate(240deg);
+}
+
+.petal:nth-child(6){
+    transform:
+        translate(-50%,-100%)
+        rotate(300deg);
+}
+
+.flower-center{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:16px;
+
+    height:16px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#80603b;
+}
+
+
+/* Feature copy */
+
+.feature-copy{
+
+    padding:
+        60px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+.feature-type{
+
+    color:var(--gold);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.16em;
+
+    text-transform:uppercase;
+}
+
+.feature-copy h3{
+
+    margin:
+        13px 0 17px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(32px,3.5vw,47px);
+
+    font-weight:400;
+
+    line-height:1.04;
+
+    letter-spacing:-.04em;
+}
+
+.feature-copy p{
+
+    max-width:570px;
+
+    margin:
+        0 0 16px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.85;
+}
+
+.feature-meta{
+
+    margin:
+        10px 0 23px;
+
+    padding:
+        16px 0;
+
+    border-top:
+        1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:16px;
+
+    line-height:1.5;
+}
+
+.feature-link{
+
+    color:var(--navy);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   CULTURAL ELEMENTS
+   ========================================================= */
+
+.elements{
+
+    padding:
+        95px 0;
+
+    background:white;
+}
+
+.section-head{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+    margin-bottom:42px;
+}
+
+.section-head h2{
+
+    margin:
+        15px 0 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(37px,4.5vw,57px);
+
+    font-weight:400;
+
+    line-height:1.02;
+
+    letter-spacing:-.045em;
+}
+
+.section-head p{
+
+    max-width:520px;
+
+    margin:
+        15px 0 0;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+.see-all{
+
+    flex-shrink:0;
+
+    padding-bottom:6px;
+
+    border-bottom:
+        1px solid var(--gold);
+
+    color:var(--navy);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+}
+
+
+/* Element grid */
+
+.element-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:15px;
+}
+
+.element-card{
+
+    position:relative;
+
+    min-height:330px;
+
+    padding:
+        28px 24px;
+
+    overflow:hidden;
+
+    background:var(--cream);
+
+    border:
+        1px solid var(--line);
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+}
+
+.element-card:hover{
+
+    transform:
+        translateY(-7px);
+
+    background:white;
+
+    box-shadow:
+        var(--shadow);
+}
+
+.element-symbol{
+
+    width:64px;
+
+    height:64px;
+
+    margin-bottom:80px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+        1px solid rgba(169,135,76,.5);
+
+    color:var(--gold);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:27px;
+}
+
+.element-card h3{
+
+    margin:
+        0 0 10px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:24px;
+
+    font-weight:400;
+
+    line-height:1.1;
+}
+
+.element-card p{
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.7;
+}
+
+.element-arrow{
+
+    position:absolute;
+
+    right:20px;
+
+    top:29px;
+
+    color:var(--gold);
+
+    font-size:16px;
+
+    transition:
+        transform .25s ease;
+}
+
+.element-card:hover .element-arrow{
+
+    transform:
+        translateX(5px);
+}
+
+
+/* =========================================================
+   NUSANTARA
+   ========================================================= */
+
+.nusantara{
+
+    padding:
+        95px 0;
+
+    background:var(--cream);
+}
+
+.nusantara-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        .78fr
+        1.22fr;
+
+    gap:8vw;
+
+    align-items:start;
+}
+
+.nusantara-copy h2{
+
+    margin:
+        15px 0 17px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(38px,4.5vw,57px);
+
+    font-weight:400;
+
+    line-height:1.03;
+
+    letter-spacing:-.045em;
+}
+
+.nusantara-copy p{
+
+    max-width:450px;
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.85;
+}
+
+
+/* Region cards */
+
+.region-list{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    border-top:
+        1px solid var(--line);
+
+    border-left:
+        1px solid var(--line);
+}
+
+.region{
+
+    position:relative;
+
+    min-height:145px;
+
+    padding:
+        27px 24px;
+
+    background:white;
+
+    border-right:
+        1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
+
+    transition:
+        background .25s ease,
+        padding-left .25s ease;
+}
+
+.region:hover{
+
+    background:#f8f5ed;
+
+    padding-left:30px;
+}
+
+.region small{
+
+    color:var(--gold);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+}
+
+.region strong{
+
+    display:block;
+
+    margin-top:7px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:21px;
+
+    font-weight:400;
+}
+
+.region p{
+
+    margin:
+        8px 0 0;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.6;
+}
+
+.region span{
+
+    position:absolute;
+
+    right:20px;
+
+    bottom:18px;
+
+    color:var(--gold);
+
+    font-size:15px;
+}
+
+
+/* =========================================================
+   DOCUMENTARY STORIES
+   ========================================================= */
+
+.stories{
+
+    padding:
+        95px 0;
+
+    background:white;
+}
+
+.story-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.15fr
+        .85fr;
+
+    gap:18px;
+}
+
+.story-main{
+
+    position:relative;
+
+    min-height:470px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #6b604c,
+            #123a51
+        );
+
+    color:white;
+}
+
+.story-main::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+
+    height:550px;
+
+    left:58%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    border-radius:50%;
+}
+
+.story-main::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    left:58%;
+
+    top:44%;
+
+    transform:
+        translate(-50%,-50%);
+
+    color:
+        rgba(208,184,126,.5);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:120px;
+}
+
+.story-copy{
+
+    position:absolute;
+
+    z-index:5;
+
+    left:35px;
+
+    right:35px;
+
+    bottom:31px;
+}
+
+.story-copy small{
+
+    color:var(--gold-light);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.story-copy h3{
+
+    max-width:700px;
+
+    margin:
+        9px 0 10px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(30px,4vw,48px);
+
+    font-weight:400;
+
+    line-height:1.04;
+}
+
+.story-copy p{
+
+    max-width:620px;
+
+    margin:0;
+
+    color:#c6d1d6;
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+.story-side{
+
+    display:grid;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap:18px;
+}
+
+.story-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:
+        29px;
+
+    background:var(--cream);
+
+    border:
+        1px solid var(--line);
+}
+
+.story-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    right:-90px;
+
+    top:-90px;
+
+    border:
+        1px solid rgba(169,135,76,.2);
+
+    border-radius:50%;
+}
+
+.story-card small{
+
+    position:relative;
+
+    z-index:2;
+
+    color:var(--gold);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.story-card h3{
+
+    position:relative;
+
+    z-index:2;
+
+    margin:
+        10px 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:27px;
+
+    font-weight:400;
+
+    line-height:1.08;
+}
+
+.story-card p{
+
+    position:relative;
+
+    z-index:2;
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.7;
+}
+
+.story-link{
+
+    position:relative;
+
+    z-index:2;
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    color:var(--navy);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+
+.video-section{
+
+    padding:
+        95px 0;
+
+    background:var(--navy-deep);
+
+    color:white;
+}
+
+.video-head{
+
+    max-width:720px;
+
+    margin-bottom:40px;
+}
+
+.video-section .label{
+
+    color:var(--gold-light);
+}
+
+.video-section .label::before{
+
+    background:var(--gold-light);
+}
+
+.video-section h2{
+
+    margin:
+        15px 0 0;
+
+    color:white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(38px,4.5vw,58px);
+
+    font-weight:400;
+
+    line-height:1.02;
+}
+
+.video-section p{
+
+    margin:
+        17px 0 0;
+
+    color:#9caebb;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+.video-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.2fr
+        .8fr;
+
+    gap:18px;
+}
+
+.video-card{
+
+    position:relative;
+
+    min-height:390px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #665b48,
+            #173b51
+        );
+}
+
+.video-card.small{
+
+    min-height:390px;
+}
+
+.video-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:440px;
+
+    height:440px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    border-radius:50%;
+}
+
+.video-play{
+
+    position:absolute;
+
+    z-index:4;
+
+    left:50%;
+
+    top:45%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:67px;
+
+    height:67px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+        1px solid rgba(255,255,255,.75);
+
+    border-radius:50%;
+
+    font-size:17px;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+.video-card:hover .video-play{
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.08);
+
+    background:
+        rgba(255,255,255,.1);
+}
+
+.video-copy{
+
+    position:absolute;
+
+    z-index:5;
+
+    left:27px;
+
+    right:27px;
+
+    bottom:25px;
+}
+
+.video-copy small{
+
+    color:var(--gold-light);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.video-copy h3{
+
+    margin:
+        8px 0 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:29px;
+
+    font-weight:400;
+
+    line-height:1.08;
+}
+
+
+/* =========================================================
+   OTHER TOPICS
+   ========================================================= */
+
+.other-topics{
+
+    padding:
+        90px 0;
+
+    background:var(--cream);
+}
+
+.other-topics h2{
+
+    margin:
+        15px 0 38px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(36px,4vw,54px);
+
+    font-weight:400;
+
+    line-height:1;
+}
+
+.topic-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    border-top:
+        1px solid var(--line);
+
+    border-left:
+        1px solid var(--line);
+}
+
+.topic{
+
+    position:relative;
+
+    min-height:125px;
+
+    padding:
+        30px 25px;
+
+    background:white;
+
+    border-right:
+        1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
+
+    transition:
+        background .3s ease,
+        padding-left .3s ease;
+}
+
+.topic:hover{
+
+    padding-left:33px;
+
+    background:#f6f3eb;
+}
+
+.topic h3{
+
+    margin:0;
+
+    max-width:78%;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:19px;
+
+    font-weight:400;
+
+    line-height:1.3;
+}
+
+.topic-arrow{
+
+    position:absolute;
+
+    right:24px;
+
+    bottom:24px;
+
+    color:var(--gold);
+
+    font-size:16px;
+
+    transition:
+        transform .25s ease;
+}
+
+.topic:hover .topic-arrow{
+
+    transform:
+        translateX(5px);
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.cta{
+
+    padding:
+        80px 0;
+
+    background:white;
+}
+
+.cta-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:
+        clamp(42px,6vw,72px);
+
+    background:
+        linear-gradient(
+            120deg,
+            #ebe5d8,
+            #faf9f5
+        );
+
+    border:
+        1px solid var(--line);
+}
+
+.cta-box::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    right:7%;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        rgba(169,135,76,.08);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:190px;
+}
+
+.cta-content{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:720px;
+}
+
+.cta h2{
+
+    margin:
+        15px 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(35px,4vw,55px);
+
+    font-weight:400;
+
+    line-height:1.05;
+}
+
+.cta p{
+
+    max-width:630px;
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.85;
+}
+
+.cta .btn{
+
+    margin-top:26px;
+
+    background:var(--navy);
+
+    border-color:var(--navy);
+
+    color:white;
+}
+
+.cta .btn:hover{
+
+    background:var(--gold);
+
+    border-color:var(--gold);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+
+    padding:
+        65px 0 30px;
+
+    background:#03182e;
+
+    color:#91a2b2;
+}
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.25fr
+        .75fr
+        .75fr;
+
+    gap:60px;
+
+    padding-bottom:50px;
+}
+
+.footer-brand strong{
+
+    display:block;
+
+    color:white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:21px;
+
+    letter-spacing:.13em;
+}
+
+.footer-brand small{
+
+    display:block;
+
+    margin-top:6px;
+
+    color:#687c90;
+
+    font-size:7px;
+
+    letter-spacing:.3em;
+}
+
+.footer-brand p{
+
+    max-width:370px;
+
+    margin:
+        22px 0 0;
+
+    color:#7f93a7;
+
+    font-size:10px;
+
+    line-height:1.85;
+}
+
+.footer-column h4{
+
+    margin:
+        0 0 18px;
+
+    color:var(--gold-light);
+
+    font-size:8px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.footer-column a{
+
+    display:block;
+
+    margin-bottom:11px;
+
+    color:#8498aa;
+
+    font-size:10px;
+
+    transition:
+        color .2s ease;
+}
+
+.footer-column a:hover{
+
+    color:white;
+}
+
+.footer-bottom{
+
+    padding-top:24px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    color:#607589;
+
+    font-size:8px;
+}
+
+
+/* =========================================================
+   REVEAL
+   ========================================================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+        translateY(24px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.reveal.visible{
+
+    opacity:1;
+
+    transform:none;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media(max-width:1100px){
+
+    .nav-menu{
+
+        gap:17px;
+    }
+
+    .nav-menu a{
+
+        font-size:9px;
+    }
+
+    .element-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .feature-copy{
+
+        padding:45px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media(max-width:850px){
+
+    .topbar-right{
+
+        display:none;
+    }
+
+    .header{
+
+        height:64px;
+    }
+
+    .header.scrolled{
+
+        height:58px;
+    }
+
+    .nav-menu{
+
+        display:none;
+    }
+
+    .hero-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .hero-copy{
+
+        padding:
+            70px 0 30px;
+    }
+
+    .hero-art{
+
+        min-height:470px;
+    }
+
+    .art-frame{
+
+        width:380px;
+
+        height:430px;
+    }
+
+    .intro-grid{
+
+        grid-template-columns:1fr;
+
+        gap:35px;
+    }
+
+    .feature-card{
+
+        grid-template-columns:1fr;
+    }
+
+    .feature-visual{
+
+        min-height:450px;
+    }
+
+    .section-head{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .nusantara-layout{
+
+        grid-template-columns:1fr;
+
+        gap:40px;
+    }
+
+    .story-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .video-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .topic-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .footer-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .footer-brand{
+
+        grid-column:
+            1 / -1;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:560px){
+
+    .topbar{
+
+        height:24px;
+
+        font-size:8px;
+    }
+
+    .brand-mark{
+
+        width:34px;
+
+        height:34px;
+
+        font-size:18px;
+    }
+
+    .brand-name strong{
+
+        font-size:16px;
+    }
+
+    .brand-name small{
+
+        font-size:6px;
+    }
+
+    .hero-copy{
+
+        padding-top:58px;
+    }
+
+    .hero h1{
+
+        font-size:
+            clamp(48px,15vw,72px);
+    }
+
+    .hero-art{
+
+        min-height:390px;
+    }
+
+    .art-frame{
+
+        width:275px;
+
+        height:350px;
+    }
+
+    .art-circle{
+
+        width:250px;
+
+        height:250px;
+    }
+
+    .temple{
+
+        transform:
+            translateX(-50%)
+            scale(.78);
+
+        transform-origin:
+            bottom center;
+    }
+
+    .art-label{
+
+        padding:
+            8px 10px;
+
+        font-size:6px;
+    }
+
+    .art-label.one{
+
+        left:0;
+
+        top:24%;
+    }
+
+    .art-label.two{
+
+        right:0;
+
+        bottom:23%;
+    }
+
+    .art-label.three{
+
+        left:3%;
+
+        bottom:12%;
+    }
+
+    .intro,
+    .feature,
+    .elements,
+    .nusantara,
+    .stories,
+    .video-section,
+    .other-topics{
+
+        padding:
+            70px 0;
+    }
+
+    .feature-visual{
+
+        min-height:370px;
+    }
+
+    .ritual-object{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.78);
+
+        transform-origin:
+            center center;
+    }
+
+    .feature-copy{
+
+        padding:
+            40px 25px;
+    }
+
+    .element-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .element-card{
+
+        min-height:270px;
+    }
+
+    .element-symbol{
+
+        margin-bottom:55px;
+    }
+
+    .region-list{
+
+        grid-template-columns:1fr;
+    }
+
+    .story-main{
+
+        min-height:390px;
+    }
+
+    .story-side{
+
+        grid-template-rows:
+            auto auto;
+    }
+
+    .video-card,
+    .video-card.small{
+
+        min-height:330px;
+    }
+
+    .topic-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .cta{
+
+        padding:
+            65px 0;
+    }
+
+    .cta-box{
+
+        padding:
+            38px 25px;
+    }
+
+    .cta-box::after{
+
+        font-size:120px;
+    }
+
+    .footer-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .footer-brand{
+
+        grid-column:auto;
+    }
+
+    .footer-bottom{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        transition-duration:.01ms !important;
+    }
+
+    .reveal{
+
+        opacity:1;
+
+        transform:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     TOPBAR
+     ======================================================= -->
+
+<div class="topbar">
+
+    <div class="w">
+
+        <div class="topbar-left">
+            MANDALA CHANNEL
+        </div>
+
+        <div class="topbar-right">
+
+            <span>
+                TRADISI &amp; BUDAYA
+            </span>
+
+            <span class="topbar-line"></span>
+
+            <span>
+                WARISAN • RITUAL • SENI • NUSANTARA
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
+
+<header
+    class="header"
+    id="header"
+>
+
+    <div class="w nav">
+
+
+        <a
+            class="brand"
+            href="../../index.html"
+        >
+
+            <div class="brand-mark">
+                ✦
+            </div>
+
+            <div class="brand-name">
+
+                <strong>
+                    MANDALA
+                </strong>
+
+                <small>
+                    CHANNEL
+                </small>
+
+            </div>
+
+        </a>
+
+
+
+        <nav class="nav-menu">
+
+            <a href="../../index.html">
+                HOME
+            </a>
+
+            <a href="../../pages/artikel.html">
+                ARTIKEL
+            </a>
+
+            <a href="../../pages/video.html">
+                VIDEO
+            </a>
+
+            <a href="../../pages/podcast.html">
+                PODCAST
+            </a>
+
+            <a href="../../pages/playlist.html">
+                PLAYLIST
+            </a>
+
+            <a
+                href="#tradisi"
+                class="active"
+            >
+                TOPIK
+            </a>
+
+            <a href="../../pages/tentang-kami.html">
+                TENTANG
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =======================================================
+     MAIN
+     ======================================================= -->
+
+<main id="tradisi">
+
+
+
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
+<section class="hero">
+
+    <div class="w hero-grid">
+
+
+        <div class="hero-copy reveal">
+
+            <div class="eyebrow">
+                Tradisi &amp; Budaya
+            </div>
+
+            <h1>
+
+                Warisan yang
+
+                <span>
+                    tetap hidup
+                </span>
+
+            </h1>
+
+            <p class="hero-lead">
+
+                Menelusuri tradisi, ritual, seni,
+                simbol, arsitektur, dan kebiasaan
+                masyarakat Hindu Nusantara yang
+                terus diwariskan dari satu generasi
+                ke generasi berikutnya.
+
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a
+                    href="#warisan"
+                    class="btn btn-primary"
+                >
+                    Jelajahi Tradisi
+                </a>
+
+                <a
+                    href="#video"
+                    class="btn btn-outline"
+                >
+                    Lihat Dokumenter
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="hero-art reveal">
+
+            <div class="art-frame">
+
+                <div class="art-circle"></div>
+
+                <div class="temple">
+
+                    <div class="temple-top"></div>
+
+                    <div class="temple-roof"></div>
+
+                    <div class="temple-base"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="art-label one">
+                Ritual
+            </div>
+
+            <div class="art-label two">
+                Warisan
+            </div>
+
+            <div class="art-label three">
+                Nusantara
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     GOLD BAR
+     ======================================================= -->
+
+<div class="gold-bar">
+
+    <div class="w gold-bar-inner">
+
+        <div class="gold-symbol">
+            ✦
+        </div>
+
+        <span>
+            Merawat tradisi bukan berarti berhenti pada masa lalu
+        </span>
+
+        <div class="gold-symbol">
+            ✦
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     INTRO
+     ======================================================= -->
+
+<section class="intro">
+
+    <div class="w intro-grid">
+
+
+        <div class="reveal">
+
+            <div class="label">
+                Tentang Tradisi
+            </div>
+
+            <h2>
+                Yang diwariskan
+                bukan sekadar
+                bentuk.
+            </h2>
+
+        </div>
+
+
+
+        <div class="intro-content reveal">
+
+            <p>
+                Di balik setiap tradisi terdapat
+                nilai, ingatan, simbol, dan cara
+                masyarakat memahami kehidupan.
+            </p>
+
+            <p>
+                Tradisi Hindu Nusantara tumbuh dalam
+                lingkungan yang beragam. Karena itu,
+                bentuknya dapat berbeda dari satu
+                daerah ke daerah lainnya, sementara
+                nilai yang menjadi dasarnya tetap
+                memiliki hubungan dengan Dharma.
+            </p>
+
+            <p>
+                Mandala menghadirkan tradisi bukan
+                sekadar sebagai tontonan budaya,
+                tetapi sebagai cerita tentang manusia,
+                ruang, keyakinan, dan hubungan antar
+                generasi.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FEATURE
+     ======================================================= -->
+
+<section
+    class="feature"
+    id="warisan"
+>
+
+    <div class="w">
+
+
+        <div class="feature-head reveal">
+
+            <div class="label">
+                Cerita Pilihan
+            </div>
+
+            <h2>
+                Membaca makna
+                di balik sebuah
+                tradisi.
+            </h2>
+
+            <p>
+                Setiap ritual memiliki bahasa sendiri.
+                Bentuk, benda, gerakan, tempat, dan
+                waktu dapat menjadi bagian dari pesan
+                yang diwariskan.
+            </p>
+
+        </div>
+
+
+
+        <article class="feature-card reveal">
+
+
+            <div class="feature-visual">
+
+                <div class="ritual-object">
+
+                    <div class="flower">
+
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+
+                        <div class="flower-center"></div>
+
+                    </div>
+
+                    <div class="leaf a"></div>
+
+                    <div class="leaf b"></div>
+
+                    <div class="leaf c"></div>
+
+                    <div class="ritual-bowl"></div>
+
+                    <div class="ritual-base"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature-copy">
+
+                <div class="feature-type">
+                    Tradisi &amp; Ritual
+                </div>
+
+                <h3>
+                    Ketika simbol
+                    menjadi bahasa
+                    yang diwariskan.
+                </h3>
+
+                <p>
+                    Mengenal bagaimana benda-benda
+                    sederhana dalam sebuah ritual
+                    memiliki makna yang lebih dalam
+                    ketika dilihat dari konteks
+                    spiritual dan kebudayaan.
+                </p>
+
+                <p>
+                    Dari persembahan, ruang suci,
+                    gerak, suara, hingga waktu
+                    pelaksanaan, semuanya dapat
+                    menjadi bagian dari cerita.
+                </p>
+
+                <div class="feature-meta">
+                    Tradisi adalah ingatan yang
+                    terus diceritakan.
+                </div>
+
+                <a
+                    href="../../pages/artikel.html"
+                    class="feature-link"
+                >
+                    Baca cerita lengkap →
+                </a>
+
+            </div>
+
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     CULTURAL ELEMENTS
+     ======================================================= -->
+
+<section class="elements">
+
+    <div class="w">
+
+
+        <div class="section-head reveal">
+
+            <div>
+
+                <div class="label">
+                    Unsur Kebudayaan
+                </div>
+
+                <h2>
+                    Banyak wajah,
+                    satu warisan.
+                </h2>
+
+                <p>
+                    Budaya Hindu tidak berdiri pada
+                    satu bentuk saja. Ia hadir melalui
+                    banyak unsur kehidupan masyarakat.
+                </p>
+
+            </div>
+
+            <a
+                href="../../pages/artikel.html"
+                class="see-all"
+            >
+                Semua cerita →
+            </a>
+
+        </div>
+
+
+
+        <div class="element-grid">
+
+
+            <article class="element-card reveal">
+
+                <div class="element-symbol">
+                    ✦
+                </div>
+
+                <h3>
+                    Upacara
+                </h3>
+
+                <p>
+                    Mengenal rangkaian ritual dan
+                    makna yang hidup dalam kehidupan
+                    keagamaan masyarakat.
+                </p>
+
+                <span class="element-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+
+            <article class="element-card reveal">
+
+                <div class="element-symbol">
+                    ◇
+                </div>
+
+                <h3>
+                    Seni
+                </h3>
+
+                <p>
+                    Tari, musik, suara, rupa, dan
+                    berbagai bentuk ekspresi yang
+                    menjadi bagian dari kehidupan.
+                </p>
+
+                <span class="element-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+
+            <article class="element-card reveal">
+
+                <div class="element-symbol">
+                    ✧
+                </div>
+
+                <h3>
+                    Arsitektur
+                </h3>
+
+                <p>
+                    Menelusuri pura, tempat suci,
+                    bangunan tradisional, dan
+                    filosofi ruang.
+                </p>
+
+                <span class="element-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+
+            <article class="element-card reveal">
+
+                <div class="element-symbol">
+                    ❋
+                </div>
+
+                <h3>
+                    Busana
+                </h3>
+
+                <p>
+                    Pakaian dan perlengkapan tradisional
+                    sebagai bagian dari identitas
+                    budaya masyarakat.
+                </p>
+
+                <span class="element-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     NUSANTARA
+     ======================================================= -->
+
+<section class="nusantara">
+
+    <div class="w nusantara-layout">
+
+
+        <div class="nusantara-copy reveal">
+
+            <div class="label">
+                Tradisi Nusantara
+            </div>
+
+            <h2>
+                Satu Nusantara,
+                banyak cara
+                merayakan Dharma.
+            </h2>
+
+            <p>
+                Perbedaan lingkungan, sejarah, dan
+                budaya melahirkan bentuk tradisi
+                yang beragam. Mandala ingin
+                mendokumentasikan keberagaman itu
+                dengan tetap menghargai konteks
+                masyarakat masing-masing.
+            </p>
+
+        </div>
+
+
+
+        <div class="region-list">
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="region reveal"
+            >
+
+                <small>
+                    Wilayah
+                </small>
+
+                <strong>
+                    Jawa
+                </strong>
+
+                <p>
+                    Jejak tradisi Hindu yang hidup
+                    berdampingan dengan kebudayaan
+                    Jawa.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="region reveal"
+            >
+
+                <small>
+                    Wilayah
+                </small>
+
+                <strong>
+                    Bali
+                </strong>
+
+                <p>
+                    Ritual, seni, arsitektur, dan
+                    kehidupan sosial yang kaya.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="region reveal"
+            >
+
+                <small>
+                    Wilayah
+                </small>
+
+                <strong>
+                    Lombok
+                </strong>
+
+                <p>
+                    Cerita masyarakat Hindu dan
+                    tradisi yang tumbuh di Lombok.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="region reveal"
+            >
+
+                <small>
+                    Wilayah
+                </small>
+
+                <strong>
+                    Nusantara
+                </strong>
+
+                <p>
+                    Berbagai jejak tradisi Hindu
+                    dari wilayah lain Indonesia.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     STORIES
+     ======================================================= -->
+
+<section class="stories">
+
+    <div class="w">
+
+
+        <div class="section-head reveal">
+
+            <div>
+
+                <div class="label">
+                    Dokumentasi Budaya
+                </div>
+
+                <h2>
+                    Cerita dari
+                    tempat tradisi hidup.
+                </h2>
+
+                <p>
+                    Bukan hanya melihat sebuah upacara,
+                    tetapi memahami orang-orang dan
+                    ruang yang membuatnya tetap hidup.
+                </p>
+
+            </div>
+
+            <a
+                href="../../pages/artikel.html"
+                class="see-all"
+            >
+                Jelajahi dokumentasi →
+            </a>
+
+        </div>
+
+
+
+        <div class="story-grid">
+
+
+            <article class="story-main reveal">
+
+                <div class="story-copy">
+
+                    <small>
+                        Feature Budaya
+                    </small>
+
+                    <h3>
+                        Ketika sebuah kampung
+                        menjaga tradisi
+                        lintas generasi.
+                    </h3>
+
+                    <p>
+                        Kisah masyarakat yang terus
+                        merawat ritual, kesenian,
+                        dan kebiasaan leluhur di tengah
+                        perubahan zaman.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <div class="story-side">
+
+
+                <article class="story-card reveal">
+
+                    <small>
+                        Seni &amp; Tradisi
+                    </small>
+
+                    <h3>
+                        Suara, gerak,
+                        dan cerita.
+                    </h3>
+
+                    <p>
+                        Bagaimana seni menjadi bagian
+                        dari cara masyarakat menjaga
+                        ingatan budaya.
+                    </p>
+
+                    <a
+                        href="../../pages/video.html"
+                        class="story-link"
+                    >
+                        Lihat dokumentasi →
+                    </a>
+
+                </article>
+
+
+
+                <article class="story-card reveal">
+
+                    <small>
+                        Ruang Suci
+                    </small>
+
+                    <h3>
+                        Membaca filosofi
+                        sebuah tempat.
+                    </h3>
+
+                    <p>
+                        Mengenal hubungan antara
+                        arsitektur, ruang, manusia,
+                        dan kehidupan spiritual.
+                    </p>
+
+                    <a
+                        href="../../pages/artikel.html"
+                        class="story-link"
+                    >
+                        Baca cerita →
+                    </a>
+
+                </article>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     VIDEO
+     ======================================================= -->
+
+<section
+    class="video-section"
+    id="video"
+>
+
+    <div class="w">
+
+
+        <div class="video-head reveal">
+
+            <div class="label">
+                Dokumenter Tradisi
+            </div>
+
+            <h2>
+                Melihat budaya
+                dalam gerak.
+            </h2>
+
+            <p>
+                Video menjadi ruang untuk melihat
+                suasana, mendengar cerita, dan
+                menyaksikan tradisi sebagaimana
+                ia berlangsung di masyarakat.
+            </p>
+
+        </div>
+
+
+
+        <div class="video-grid">
+
+
+            <a
+                href="../../pages/video.html"
+                class="video-card reveal"
+            >
+
+                <div class="video-play">
+                    ▶
+                </div>
+
+                <div class="video-copy">
+
+                    <small>
+                        Dokumenter
+                    </small>
+
+                    <h3>
+                        Menyaksikan tradisi
+                        dari dekat
+                    </h3>
+
+                </div>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/video.html"
+                class="video-card small reveal"
+            >
+
+                <div class="video-play">
+                    ▶
+                </div>
+
+                <div class="video-copy">
+
+                    <small>
+                        Cerita Budaya
+                    </small>
+
+                    <h3>
+                        Suara dari
+                        para pelaku tradisi
+                    </h3>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     OTHER TOPICS
+     ======================================================= -->
+
+<section class="other-topics">
+
+    <div class="w">
+
+
+        <div class="label reveal">
+            Eksplorasi Mandala
+        </div>
+
+        <h2 class="reveal">
+            Topik lainnya
+        </h2>
+
+
+
+        <div class="topic-grid">
+
+
+            <a
+                href="candika-nusantara.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Candika Nusantara
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="dharma-ajaran.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Dharma &amp; Ajaran
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="dharmika.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Dharmika
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="ekonomi-hindu.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Ekonomi Hindu
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="jelajah-nusantara.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Jelajah Nusantara
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="kabar-umat.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Kabar Umat
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="spiritual.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Spiritual
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="tokoh-hindu.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Tokoh Hindu
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="pendidikan.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Pendidikan
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     CTA
+     ======================================================= -->
+
+<section class="cta">
+
+    <div class="w">
+
+        <div class="cta-box reveal">
+
+            <div class="cta-content">
+
+                <div class="label">
+                    Tradisi &amp; Budaya
+                </div>
+
+                <h2>
+                    Ada tradisi yang
+                    perlu kita ceritakan?
+                </h2>
+
+                <p>
+                    Mandala membuka ruang untuk
+                    mendokumentasikan tradisi,
+                    kesenian, ritual, cerita masyarakat,
+                    dan warisan budaya Hindu yang
+                    masih hidup di berbagai penjuru
+                    Nusantara.
+                </p>
+
+                <a
+                    href="../../pages/kontak.html"
+                    class="btn"
+                >
+                    Hubungi Mandala
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
+<footer class="footer">
+
+    <div class="w">
+
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <strong>
+                    MANDALA
+                </strong>
+
+                <small>
+                    CHANNEL
+                </small>
+
+                <p>
+                    Media yang menghadirkan cerita,
+                    pengetahuan, budaya, kehidupan,
+                    dan dinamika Dharma Nusantara
+                    melalui artikel, video, podcast,
+                    serta berbagai ruang eksplorasi.
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Jelajahi
+                </h4>
+
+                <a href="../../index.html">
+                    Home
+                </a>
+
+                <a href="../../pages/artikel.html">
+                    Artikel
+                </a>
+
+                <a href="../../pages/video.html">
+                    Video
+                </a>
+
+                <a href="../../pages/podcast.html">
+                    Podcast
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Mandala
+                </h4>
+
+                <a href="../../pages/playlist.html">
+                    Playlist
+                </a>
+
+                <a href="../../pages/tentang-kami.html">
+                    Tentang Kami
+                </a>
+
+                <a href="../../pages/kontak.html">
+                    Kontak
+                </a>
+
+                <a href="../../index.html#topics">
+                    Semua Topik
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Mandala Channel
+            </span>
+
+            <span>
+                Media Dharma Nusantara
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =======================================================
+     JAVASCRIPT
+     LOCAL ONLY
+     ======================================================= -->
+
+<script>
+
+(function(){
+
+
+    /* =====================================================
+       HEADER
+       ===================================================== */
+
+    const header =
+        document.getElementById(
+            "header"
+        );
+
+
+    function updateHeader(){
+
+        if(
+            window.scrollY > 20
+        ){
+
+            header.classList.add(
+                "scrolled"
+            );
+
+        }else{
+
+            header.classList.remove(
+                "scrolled"
+            );
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        {
+            passive:true
+        }
+    );
+
+
+    updateHeader();
+
+
+
+    /* =====================================================
+       REVEAL
+       ===================================================== */
+
+    const elements =
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+
+    if(
+        "IntersectionObserver"
+        in window
+    ){
+
+        const observer =
+            new IntersectionObserver(
+                function(entries){
+
+                    entries.forEach(
+                        function(entry){
+
+                            if(
+                                entry.isIntersecting
+                            ){
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold:.12
+                }
+            );
+
+
+        elements.forEach(
+            function(element){
+
+                observer.observe(
+                    element
+                );
+
+            }
+        );
+
+    }else{
+
+        elements.forEach(
+            function(element){
+
+                element.classList.add(
+                    "visible"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       HERO ART PARALLAX
+       ===================================================== */
+
+    const artFrame =
+        document.querySelector(
+            ".art-frame"
+        );
+
+    const artCircle =
+        document.querySelector(
+            ".art-circle"
+        );
+
+
+    if(
+        artFrame &&
+        artCircle
+    ){
+
+        window.addEventListener(
+            "mousemove",
+            function(event){
+
+                if(
+                    window.innerWidth < 850
+                ){
+
+                    return;
+
+                }
+
+
+                const x =
+                    (
+                        event.clientX
+                        /
+                        window.innerWidth
+                    ) - .5;
+
+                const y =
+                    (
+                        event.clientY
+                        /
+                        window.innerHeight
+                    ) - .5;
+
+
+                artFrame.style.transform =
+                    "translate(calc(-50% + " +
+                    (x * -5) +
+                    "px), calc(-50% + " +
+                    (y * -4) +
+                    "px))";
+
+                artCircle.style.transform =
+                    "translate(calc(-50% + " +
+                    (x * 7) +
+                    "px), calc(-50% + " +
+                    (y * 6) +
+                    "px))";
+
+            },
+            {
+                passive:true
+            }
+        );
+
+    }
+
+
+
+})();
+
+</script>
+
+
+</body>
+</html>
