@@ -7,9 +7,11 @@
 <title>Candika Nusantara — Mandala Channel</title>
 
 <style>
+
 /* =========================================================
    MANDALA CHANNEL
    TOPIC PAGE — CANDIKA NUSANTARA
+   FORMAL EDITORIAL VERSION
    ========================================================= */
 
 :root{
@@ -44,6 +46,7 @@ html{
 
 body{
     margin:0;
+
     background:var(--paper);
     color:var(--ink);
 
@@ -73,6 +76,7 @@ button{
 .w{
     width:var(--max-width);
     max-width:none;
+
     margin-inline:auto;
 }
 
@@ -126,6 +130,7 @@ button{
 .site-header{
     position:sticky;
     top:0;
+
     z-index:1000;
 
     height:74px;
@@ -160,7 +165,9 @@ button{
 }
 
 
-/* LOGO */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo{
     display:flex;
@@ -227,7 +234,9 @@ button{
 }
 
 
-/* MENU */
+/* =========================================================
+   MENU
+   ========================================================= */
 
 .nav-menu{
     display:flex;
@@ -346,6 +355,7 @@ button{
 
 .hero-grid{
     position:relative;
+
     z-index:2;
 
     display:grid;
@@ -362,7 +372,9 @@ button{
 }
 
 
-/* HERO COPY */
+/* =========================================================
+   HERO COPY
+   ========================================================= */
 
 .hero-copy{
     padding:70px 0;
@@ -494,27 +506,32 @@ button{
 }
 
 
-/* HERO VISUAL */
+/* =========================================================
+   HERO VISUAL
+   FORMAL — NO ROTATION
+   ========================================================= */
 
 .hero-visual{
     position:relative;
 
     min-height:460px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
+
+/* Main image frame */
+
 .hero-card-main{
-    position:absolute;
+    position:relative;
 
-    width:min(380px,72%);
+    z-index:2;
 
-    right:4%;
-    top:50%;
+    width:min(390px,72%);
 
-    transform:
-        translateY(-50%)
-        rotate(2deg);
-
-    padding:11px;
+    padding:10px;
 
     background:white;
 
@@ -522,17 +539,20 @@ button{
         0 28px 65px rgba(0,0,0,.25);
 
     transition:
-        transform .5s ease;
+        transform .45s ease,
+        box-shadow .45s ease;
 }
 
 .hero-card-main:hover{
-    transform:
-        translateY(-50%)
-        rotate(0deg)
-        scale(1.015);
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 35px 75px rgba(0,0,0,.30);
 }
 
 .hero-card-main .visual{
+    position:relative;
+
     aspect-ratio:4 / 5;
 
     overflow:hidden;
@@ -545,20 +565,59 @@ button{
         );
 }
 
-.hero-card-main .visual-inner{
-    width:100%;
-    height:100%;
+
+/*
+   Image placeholder.
+   Nanti bisa langsung diganti dengan gambar
+   dari assets/images atau Supabase.
+*/
+
+.hero-card-main .visual::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #214d6e 0%,
+            #557b91 45%,
+            #b18a4d 100%
+        );
+}
+
+.hero-card-main .visual::after{
+    content:"";
+
+    position:absolute;
+
+    inset:15%;
+
+    border:
+        1px solid rgba(255,255,255,.28);
+
+    border-radius:50%;
+}
+
+.visual-inner{
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
 
     display:flex;
+
     align-items:flex-end;
 
-    padding:26px;
+    padding:28px;
 
     background:
         linear-gradient(
             to top,
-            rgba(0,0,0,.72),
-            rgba(0,0,0,0) 65%
+            rgba(0,0,0,.76),
+            rgba(0,0,0,0) 68%
         );
 }
 
@@ -567,18 +626,23 @@ button{
 
     font-family:Georgia,serif;
 
-    font-size:23px;
+    font-size:25px;
 
     line-height:1.2;
 }
 
+
+/* Secondary image */
+
 .hero-card-small{
     position:absolute;
 
-    width:205px;
+    z-index:3;
+
+    width:190px;
 
     left:0;
-    top:17%;
+    bottom:7%;
 
     padding:8px;
 
@@ -587,18 +651,24 @@ button{
     box-shadow:
         0 18px 45px rgba(0,0,0,.18);
 
-    transform:rotate(-6deg);
-
     transition:
-        transform .4s ease;
+        transform .4s ease,
+        box-shadow .4s ease;
 }
 
 .hero-card-small:hover{
-    transform:rotate(-2deg) translateY(-5px);
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,.23);
 }
 
 .hero-card-small .small-visual{
+    position:relative;
+
     aspect-ratio:1 / 1.15;
+
+    overflow:hidden;
 
     background:
         linear-gradient(
@@ -606,6 +676,37 @@ button{
             #c7a663,
             #315e7d
         );
+}
+
+.hero-card-small .small-visual::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,45,86,.18),
+            rgba(169,130,63,.42)
+        );
+}
+
+.hero-card-small .small-visual::after{
+    content:"";
+
+    position:absolute;
+
+    width:70%;
+    height:70%;
+
+    left:15%;
+    top:15%;
+
+    border:
+        1px solid rgba(255,255,255,.35);
+
+    border-radius:50%;
 }
 
 .hero-card-small-label{
@@ -1336,6 +1437,7 @@ button{
 
 .cta-content{
     position:relative;
+
     z-index:2;
 
     max-width:680px;
@@ -1542,6 +1644,7 @@ footer{
         grid-template-columns:
             repeat(2,minmax(0,1fr));
     }
+
 }
 
 
@@ -1584,9 +1687,7 @@ footer{
     }
 
     .hero-card-main{
-        right:7%;
-
-        width:min(340px,70%);
+        width:min(350px,72%);
     }
 
     .hero-card-small{
@@ -1644,6 +1745,7 @@ footer{
     .footer-brand{
         grid-column:1 / -1;
     }
+
 }
 
 
@@ -1688,20 +1790,18 @@ footer{
     }
 
     .hero-visual{
-        min-height:360px;
+        min-height:370px;
     }
 
     .hero-card-main{
-        width:72%;
-
-        right:2%;
+        width:73%;
     }
 
     .hero-card-small{
         width:135px;
 
         left:0;
-        top:14%;
+        bottom:10%;
     }
 
     .intro{
@@ -1787,6 +1887,7 @@ footer{
 
         align-items:flex-start;
     }
+
 }
 
 
@@ -1813,6 +1914,7 @@ footer{
 
         transform:none;
     }
+
 }
 
 </style>
@@ -1991,6 +2093,8 @@ footer{
         <div class="hero-visual reveal">
 
 
+            <!-- FOTO PENDUKUNG -->
+
             <div class="hero-card-small">
 
                 <div class="small-visual"></div>
@@ -2003,6 +2107,8 @@ footer{
             </div>
 
 
+
+            <!-- FOTO UTAMA -->
 
             <div class="hero-card-main">
 
@@ -2857,6 +2963,7 @@ footer{
     const header =
         document.getElementById("siteHeader");
 
+
     function updateHeader(){
 
         if(window.scrollY > 20){
@@ -2871,6 +2978,7 @@ footer{
 
     }
 
+
     window.addEventListener(
         "scroll",
         updateHeader,
@@ -2878,6 +2986,7 @@ footer{
             passive:true
         }
     );
+
 
     updateHeader();
 
