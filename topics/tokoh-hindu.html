@@ -1,125 +1,178 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Tokoh Hindu — Mandala Channel"
+>
 
 <title>Tokoh Hindu — Mandala Channel</title>
+
 
 <style>
 
 /* =========================================================
    MANDALA CHANNEL
    TOPIC — TOKOH HINDU
-   CONCEPT : JEJAK PERJUMPAAN
+
+   LOCAL ONLY
+   Tidak menggunakan CDN, Google Fonts, API,
+   atau resource internet.
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT
    ========================================================= */
 
 :root{
+
     --navy:#082d56;
-    --navy-deep:#061f3c;
-    --navy-soft:#123f6c;
+    --navy-deep:#041d35;
+    --navy-soft:#123e5d;
 
-    --ink:#172536;
-    --muted:#718091;
+    --gold:#a9874c;
+    --gold-light:#d0b87e;
 
-    --paper:#f7f6f1;
+    --cream:#f2eee4;
+    --paper:#faf9f5;
     --white:#ffffff;
 
-    --line:#e4e8ec;
+    --ink:#1b2835;
+    --muted:#71808e;
 
-    --bronze:#a9823f;
-    --bronze-soft:#c2a66e;
+    --sage:#667867;
+    --sage-dark:#435b4b;
 
-    --shadow:0 18px 50px rgba(6,31,60,.10);
+    --line:#dfe3df;
 
-    --max-width:94vw;
+    --max:94vw;
+
+    --shadow:
+        0 24px 65px rgba(4,29,53,.12);
 }
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *{
     box-sizing:border-box;
 }
 
 html{
+
     scroll-behavior:smooth;
-    scroll-padding-top:90px;
+
+    scroll-padding-top:85px;
 }
 
 body{
+
     margin:0;
 
+    overflow-x:hidden;
+
     background:var(--paper);
+
     color:var(--ink);
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
-
-    overflow-x:hidden;
 }
 
 img{
+
     display:block;
+
     width:100%;
-    max-width:100%;
+
+    height:auto;
 }
 
 a{
+
     color:inherit;
+
     text-decoration:none;
 }
 
 button{
+
     font:inherit;
 }
 
 .w{
-    width:var(--max-width);
+
+    width:var(--max);
+
     max-width:none;
+
     margin-inline:auto;
 }
 
 
 /* =========================================================
-   TOP BAR
+   TOPBAR
    ========================================================= */
 
-.top{
+.topbar{
+
     height:28px;
 
     background:var(--navy-deep);
-    color:#dbe5ef;
 
-    font-size:10px;
-    letter-spacing:.08em;
+    color:#b9c6d0;
+
+    font-size:9px;
+
+    letter-spacing:.13em;
 }
 
-.top .w{
+.topbar .w{
+
     height:100%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
-.top-left{
-    opacity:.85;
+.topbar-left{
+
+    text-transform:uppercase;
 }
 
-.top-right{
+.topbar-right{
+
     display:flex;
+
     align-items:center;
 
-    gap:18px;
+    gap:15px;
 }
 
-.top-dot{
-    width:4px;
-    height:4px;
+.topbar-line{
 
-    border-radius:50%;
+    width:28px;
 
-    background:var(--bronze-soft);
+    height:1px;
+
+    background:
+        rgba(208,184,126,.7);
 }
 
 
@@ -127,37 +180,43 @@ button{
    HEADER
    ========================================================= */
 
-.site-header{
+.header{
+
     position:sticky;
+
     top:0;
+
     z-index:1000;
 
     height:74px;
 
-    background:rgba(255,255,255,.97);
+    background:
+        rgba(255,255,255,.97);
 
-    border-bottom:1px solid rgba(8,45,86,.08);
+    border-bottom:
+        1px solid rgba(8,45,86,.08);
 
     transition:
-        height .28s ease,
-        box-shadow .28s ease,
-        background .28s ease;
+        height .3s ease,
+        box-shadow .3s ease;
 }
 
-.site-header.scrolled{
+.header.scrolled{
+
     height:60px;
 
-    background:rgba(255,255,255,.95);
-
     box-shadow:
-        0 7px 24px rgba(6,31,60,.10);
+        0 8px 28px rgba(8,45,86,.1);
 }
 
 .nav{
+
     height:100%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     gap:30px;
@@ -165,11 +224,13 @@ button{
 
 
 /* =========================================================
-   LOGO
+   BRAND
    ========================================================= */
 
-.logo{
+.brand{
+
     display:flex;
+
     align-items:center;
 
     gap:11px;
@@ -177,55 +238,70 @@ button{
     flex-shrink:0;
 }
 
-.logo-mark{
-    width:39px;
-    height:39px;
+.brand-mark{
+
+    width:40px;
+
+    height:40px;
 
     display:grid;
+
     place-items:center;
 
-    border:1px solid var(--bronze);
+    border:
+        1px solid var(--gold);
 
-    color:var(--bronze);
+    color:var(--gold);
 
-    font-family:Georgia,serif;
-    font-size:23px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:21px;
 
     transition:
-        transform .45s ease,
         background .3s ease,
         color .3s ease;
 }
 
-.logo:hover .logo-mark{
-    transform:rotate(45deg);
+.brand:hover .brand-mark{
 
-    background:var(--bronze);
+    background:var(--gold);
 
     color:white;
 }
 
-.logo-text{
+.brand-name{
+
     display:flex;
+
     flex-direction:column;
 
     line-height:1;
 }
 
-.logo-text strong{
+.brand-name strong{
+
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:18px;
 
-    letter-spacing:.14em;
+    font-weight:600;
+
+    letter-spacing:.15em;
 }
 
-.logo-text small{
+.brand-name small{
+
     margin-top:5px;
 
-    color:var(--muted);
+    color:#778696;
 
     font-size:7px;
 
@@ -238,60 +314,72 @@ button{
    ========================================================= */
 
 .nav-menu{
+
+    height:100%;
+
     display:flex;
+
     align-items:center;
 
     gap:27px;
-
-    height:100%;
 }
 
 .nav-menu a{
-    position:relative;
 
-    display:flex;
-    align-items:center;
+    position:relative;
 
     height:100%;
 
-    color:#536477;
+    display:flex;
 
-    font-size:11px;
+    align-items:center;
+
+    color:#566778;
+
+    font-size:10px;
+
     font-weight:600;
 
-    letter-spacing:.08em;
+    letter-spacing:.07em;
 
-    transition:color .25s ease;
+    transition:
+        color .25s ease;
 }
 
 .nav-menu a::after{
+
     content:"";
 
     position:absolute;
 
     left:0;
+
     right:0;
+
     bottom:0;
 
     height:2px;
 
-    background:var(--bronze);
+    background:var(--gold);
 
-    transform:scaleX(0);
+    transform:
+        scaleX(0);
 
-    transform-origin:center;
-
-    transition:transform .25s ease;
+    transition:
+        transform .25s ease;
 }
 
 .nav-menu a:hover,
 .nav-menu a.active{
+
     color:var(--navy);
 }
 
 .nav-menu a:hover::after,
 .nav-menu a.active::after{
-    transform:scaleX(1);
+
+    transform:
+        scaleX(1);
 }
 
 
@@ -299,73 +387,82 @@ button{
    HERO
    ========================================================= */
 
-.people-hero{
-    position:relative;
+.hero{
 
-    min-height:630px;
+    position:relative;
 
     overflow:hidden;
 
+    min-height:620px;
+
     background:
         linear-gradient(
-            115deg,
-            var(--navy-deep) 0%,
-            var(--navy) 48%,
-            #174f79 100%
+            125deg,
+            #041d35 0%,
+            #0a3150 54%,
+            #667667 100%
         );
 
     color:white;
 }
 
-.people-hero::before{
+.hero::before{
+
     content:"";
 
     position:absolute;
 
-    width:700px;
-    height:700px;
+    width:760px;
 
-    right:-330px;
-    top:-230px;
+    height:760px;
+
+    right:-400px;
+
+    top:-390px;
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid rgba(255,255,255,.1);
 
     border-radius:50%;
 }
 
-.people-hero::after{
+.hero::after{
+
     content:"";
 
     position:absolute;
 
-    width:470px;
-    height:470px;
+    width:520px;
 
-    left:-270px;
-    bottom:-300px;
+    height:520px;
+
+    left:-370px;
+
+    bottom:-350px;
 
     border:
-        1px solid rgba(255,255,255,.06);
+        1px solid rgba(208,184,126,.15);
 
     border-radius:50%;
 }
 
-.people-hero-grid{
+.hero-grid{
+
     position:relative;
+
     z-index:2;
+
+    min-height:620px;
 
     display:grid;
 
     grid-template-columns:
-        .78fr
-        1.22fr;
+        .85fr
+        1.15fr;
 
     align-items:center;
 
-    gap:6vw;
-
-    min-height:630px;
+    gap:30px;
 }
 
 
@@ -373,21 +470,26 @@ button{
    HERO COPY
    ========================================================= */
 
-.people-copy{
-    padding:70px 0;
+.hero-copy{
+
+    padding:
+        80px 0;
 }
 
 .eyebrow{
+
     display:flex;
+
     align-items:center;
 
-    gap:13px;
+    gap:12px;
 
-    margin-bottom:25px;
+    margin-bottom:21px;
 
-    color:#d8c291;
+    color:var(--gold-light);
 
-    font-size:10px;
+    font-size:9px;
+
     font-weight:700;
 
     letter-spacing:.22em;
@@ -396,16 +498,21 @@ button{
 }
 
 .eyebrow::before{
+
     content:"";
 
-    width:34px;
+    width:35px;
+
     height:1px;
 
-    background:var(--bronze-soft);
+    background:var(--gold-light);
 }
 
-.people-copy h1{
+.hero h1{
+
     margin:0;
+
+    color:white;
 
     font-family:
         Georgia,
@@ -413,54 +520,67 @@ button{
         serif;
 
     font-size:
-        clamp(52px,7vw,96px);
+        clamp(55px,7vw,88px);
 
     font-weight:400;
 
-    line-height:.9;
+    line-height:.92;
 
-    letter-spacing:-.05em;
+    letter-spacing:-.065em;
 }
 
-.people-copy h1 span{
+.hero h1 span{
+
     display:block;
 
-    color:#c9a967;
+    color:var(--gold-light);
 }
 
-.people-copy p{
-    max-width:520px;
+.hero-lead{
 
-    margin:31px 0 0;
+    max-width:500px;
 
-    color:#c7d3df;
+    margin:
+        28px 0 0;
 
-    font-size:15px;
+    color:#c4d0d7;
 
-    line-height:1.85;
+    font-size:12px;
+
+    line-height:1.95;
 }
 
-.people-actions{
+.hero-actions{
+
     display:flex;
-    align-items:center;
 
-    gap:14px;
+    flex-wrap:wrap;
 
-    margin-top:32px;
+    gap:11px;
+
+    margin-top:30px;
 }
 
 .btn{
+
+    min-height:43px;
+
+    padding:
+        0 20px;
+
     display:inline-flex;
+
     align-items:center;
+
     justify-content:center;
 
-    min-height:46px;
+    border:
+        1px solid rgba(255,255,255,.3);
 
-    padding:0 22px;
+    color:white;
 
-    border:1px solid rgba(255,255,255,.25);
+    font-size:9px;
 
-    font-size:10px;
     font-weight:700;
 
     letter-spacing:.12em;
@@ -469,31 +589,31 @@ button{
 
     transition:
         transform .25s ease,
-        background .25s ease,
-        color .25s ease;
+        background .25s ease;
 }
 
 .btn:hover{
-    transform:translateY(-3px);
+
+    transform:
+        translateY(-3px);
 }
 
 .btn-primary{
-    background:var(--bronze);
 
-    border-color:var(--bronze);
+    background:var(--gold);
 
-    color:white;
+    border-color:var(--gold);
 }
 
 .btn-primary:hover{
-    background:#bd9956;
-}
 
-.btn-outline{
-    color:white;
+    background:#bd9958;
+
+    border-color:#bd9958;
 }
 
 .btn-outline:hover{
+
     background:white;
 
     color:var(--navy);
@@ -501,155 +621,1108 @@ button{
 
 
 /* =========================================================
-   HERO PORTRAIT WALL
+   HERO PORTRAIT COMPOSITION
    ========================================================= */
 
-.people-wall{
+.hero-visual{
+
     position:relative;
 
-    height:520px;
-
-    perspective:1200px;
-}
-
-.portrait{
-    position:absolute;
+    min-height:620px;
 
     overflow:hidden;
-
-    background:#d7d4ca;
-
-    border:8px solid white;
-
-    box-shadow:
-        0 24px 55px rgba(0,0,0,.28);
-
-    transition:
-        transform .45s ease,
-        z-index .2s ease;
 }
 
-.portrait:hover{
-    z-index:20;
-
-    transform:
-        translateY(-8px)
-        rotate(0deg)
-        scale(1.035) !important;
-}
-
-.portrait::after{
-    content:"";
+.portrait-frame{
 
     position:absolute;
-    inset:0;
+
+    left:50%;
+
+    top:50%;
+
+    width:350px;
+
+    height:470px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(208,184,126,.55);
 
     background:
         linear-gradient(
-            to top,
-            rgba(0,0,0,.45),
-            transparent 45%
+            150deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.02)
         );
 
-    pointer-events:none;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.18);
 }
 
-.portrait-photo{
-    width:100%;
+.portrait-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:15px;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+}
+
+.portrait-frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    right:-110px;
+
+    top:-110px;
+
+    border:
+        1px solid rgba(208,184,126,.25);
+
+    border-radius:50%;
+}
+
+
+/* Abstract portrait */
+
+.portrait{
+
+    position:absolute;
+
+    left:50%;
+
+    top:49%;
+
+    width:190px;
+
+    height:330px;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+.portrait-head{
+
+    position:absolute;
+
+    left:50%;
+
+    top:25px;
+
+    width:92px;
+
+    height:112px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        48% 48% 43% 43%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d4b28b,
+            #a87f5e
+        );
+}
+
+.portrait-head::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:-15px;
+
+    width:104px;
+
+    height:55px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        60% 60% 20% 20%;
+
+    background:#182a32;
+}
+
+.portrait-head::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:24px;
+
+    top:62px;
+
+    width:44px;
+
+    height:1px;
+
+    background:
+        rgba(70,40,25,.55);
+
+    box-shadow:
+        0 17px 0 rgba(70,40,25,.45);
+}
+
+.portrait-body{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:0;
+
+    width:180px;
+
+    height:205px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            135deg,
+            #d0b875,
+            #8b6c38
+        );
+
+    clip-path:
+        polygon(
+            33% 0,
+            67% 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+.portrait-body::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+    width:1px;
+
     height:100%;
 
-    display:flex;
-    align-items:flex-end;
+    background:
+        rgba(255,255,255,.2);
+}
 
-    padding:18px;
+
+/* Floating labels */
+
+.hero-tag{
+
+    position:absolute;
+
+    padding:
+        11px 15px;
+
+    background:
+        rgba(4,29,53,.72);
+
+    border:
+        1px solid rgba(208,184,126,.38);
+
+    backdrop-filter:
+        blur(8px);
+
+    color:#d9e0e3;
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+}
+
+.hero-tag.one{
+
+    left:5%;
+
+    top:27%;
+}
+
+.hero-tag.two{
+
+    right:2%;
+
+    bottom:26%;
+}
+
+.hero-tag.three{
+
+    left:8%;
+
+    bottom:17%;
+}
+
+
+/* =========================================================
+   GOLD BAR
+   ========================================================= */
+
+.gold-bar{
+
+    background:var(--gold);
 
     color:white;
+}
 
-    font-family:Georgia,serif;
+.gold-bar-inner{
 
-    font-size:18px;
+    min-height:51px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:15px;
+
+    text-align:center;
+}
+
+.gold-bar-inner span{
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.17em;
+
+    text-transform:uppercase;
+}
+
+.gold-symbol{
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.intro{
+
+    padding:
+        95px 0;
+
+    background:white;
+}
+
+.intro-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        .75fr
+        1.25fr;
+
+    gap:9vw;
+}
+
+.label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    color:var(--gold);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.19em;
+
+    text-transform:uppercase;
+}
+
+.label::before{
+
+    content:"";
+
+    width:31px;
+
+    height:1px;
+
+    background:var(--gold);
+}
+
+.intro h2{
+
+    margin:
+        17px 0 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(38px,4.7vw,59px);
+
+    font-weight:400;
+
+    line-height:1.02;
+
+    letter-spacing:-.045em;
+}
+
+.intro-content p{
+
+    margin:
+        0 0 18px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.9;
+}
+
+.intro-content p:first-child{
+
+    color:var(--ink);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:20px;
+
+    line-height:1.65;
+}
+
+
+/* =========================================================
+   FEATURE PROFILE
+   ========================================================= */
+
+.feature{
+
+    padding:
+        95px 0;
+
+    background:var(--cream);
+}
+
+.feature-head{
+
+    max-width:780px;
+
+    margin-bottom:42px;
+}
+
+.feature-head h2{
+
+    margin:
+        15px 0 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(39px,4.6vw,60px);
+
+    font-weight:400;
+
+    line-height:1.03;
+
+    letter-spacing:-.045em;
+}
+
+.feature-head p{
+
+    max-width:620px;
+
+    margin:
+        17px 0 0;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.85;
+}
+
+
+/* Profile */
+
+.profile-card{
+
+    display:grid;
+
+    grid-template-columns:
+        .85fr
+        1.15fr;
+
+    background:white;
+
+    min-height:510px;
+
+    box-shadow:var(--shadow);
+}
+
+
+/* Profile visual */
+
+.profile-visual{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:510px;
 
     background:
         linear-gradient(
             145deg,
-            #214c6c,
-            #ad884c
+            #0a3150,
+            #526b60
         );
 }
 
+.profile-visual::before{
 
-/* individual portraits */
+    content:"";
 
-.portrait-a{
-    width:225px;
-    height:285px;
-
-    left:0;
-    top:65px;
-
-    transform:rotate(-7deg);
-}
-
-.portrait-b{
-    width:235px;
-    height:300px;
-
-    left:28%;
-    top:0;
-
-    transform:rotate(3deg);
-}
-
-.portrait-c{
-    width:215px;
-    height:275px;
-
-    right:0;
-    top:75px;
-
-    transform:rotate(7deg);
-}
-
-.portrait-d{
-    width:220px;
-    height:275px;
-
-    left:18%;
-    bottom:0;
-
-    transform:rotate(5deg);
-}
-
-.portrait-e{
-    width:205px;
-    height:260px;
-
-    right:13%;
-    bottom:-12px;
-
-    transform:rotate(-5deg);
-}
-
-.portrait-label{
     position:absolute;
 
-    left:18px;
-    right:18px;
-    bottom:16px;
+    width:480px;
+
+    height:480px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(208,184,126,.2);
+
+    border-radius:50%;
+}
+
+.profile-visual::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:330px;
+
+    height:330px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:50%;
+}
+
+.profile-person{
+
+    position:absolute;
+
+    z-index:4;
+
+    left:50%;
+
+    bottom:0;
+
+    width:250px;
+
+    height:420px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+/* Person */
+
+.profile-person .head{
+
+    position:absolute;
+
+    z-index:3;
+
+    left:50%;
+
+    top:34px;
+
+    width:108px;
+
+    height:128px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        48% 48% 43% 43%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d8b993,
+            #9c7454
+        );
+}
+
+.profile-person .head::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:-19px;
+
+    width:118px;
+
+    height:66px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        60% 60% 25% 25%;
+
+    background:#172831;
+}
+
+.profile-person .body{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:0;
+
+    width:250px;
+
+    height:285px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            145deg,
+            #d3ba7c,
+            #806535
+        );
+
+    clip-path:
+        polygon(
+            31% 0,
+            69% 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+.profile-person .body::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+    width:1px;
+
+    height:100%;
+
+    background:
+        rgba(255,255,255,.2);
+}
+
+.profile-quote{
+
+    position:absolute;
+
+    z-index:7;
+
+    left:25px;
+
+    bottom:25px;
+
+    color:#d7dfdf;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:12px;
+
+    font-style:italic;
+
+    line-height:1.5;
+}
+
+
+/* Profile content */
+
+.profile-content{
+
+    padding:
+        60px 60px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+.profile-role{
+
+    color:var(--gold);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.16em;
+
+    text-transform:uppercase;
+}
+
+.profile-content h3{
+
+    margin:
+        13px 0 17px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(32px,3.6vw,48px);
+
+    font-weight:400;
+
+    line-height:1.04;
+
+    letter-spacing:-.04em;
+}
+
+.profile-content p{
+
+    max-width:590px;
+
+    margin:
+        0 0 16px;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.85;
+}
+
+.profile-meta{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    margin:
+        10px 0 24px;
+
+    border-top:
+        1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.meta-item{
+
+    padding:
+        16px 12px;
+
+    border-right:
+        1px solid var(--line);
+}
+
+.meta-item:last-child{
+
+    border-right:0;
+}
+
+.meta-item small{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    color:var(--gold);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+}
+
+.meta-item strong{
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:16px;
+
+    font-weight:400;
+}
+
+.profile-link{
+
+    color:var(--navy);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   FIGURES
+   ========================================================= */
+
+.figures{
+
+    padding:
+        95px 0;
+
+    background:white;
+}
+
+.section-head{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+    margin-bottom:42px;
+}
+
+.section-head h2{
+
+    margin:
+        15px 0 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(37px,4.5vw,57px);
+
+    font-weight:400;
+
+    line-height:1.02;
+
+    letter-spacing:-.045em;
+}
+
+.section-head p{
+
+    max-width:520px;
+
+    margin:
+        15px 0 0;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+.see-all{
+
+    flex-shrink:0;
+
+    padding-bottom:6px;
+
+    border-bottom:
+        1px solid var(--gold);
+
+    color:var(--navy);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+}
+
+
+/* Figure grid */
+
+.figure-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:18px;
+}
+
+.figure-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:410px;
+
+    background:
+        var(--cream);
+
+    border:
+        1px solid var(--line);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.figure-card:hover{
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        var(--shadow);
+}
+
+
+/* Figure image */
+
+.figure-image{
+
+    position:relative;
+
+    height:255px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #183b55,
+            #6b7968
+        );
+}
+
+.figure-image::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:240px;
+
+    height:240px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    border-radius:50%;
+}
+
+
+/* Simple portrait */
+
+.figure-head{
+
+    position:absolute;
+
+    left:50%;
+
+    top:61px;
+
+    width:78px;
+
+    height:93px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        50% 50% 44% 44%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d8b792,
+            #9d7656
+        );
 
     z-index:3;
 }
 
-.portrait-label small{
-    display:block;
+.figure-head::before{
 
-    margin-bottom:5px;
+    content:"";
 
-    color:#dfc98e;
+    position:absolute;
 
-    font-family:Arial,sans-serif;
+    left:50%;
+
+    top:-13px;
+
+    width:84px;
+
+    height:49px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        60% 60% 20% 20%;
+
+    background:#182a31;
+}
+
+.figure-body{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-45px;
+
+    width:150px;
+
+    height:165px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            145deg,
+            #d0b575,
+            #806438
+        );
+
+    clip-path:
+        polygon(
+            31% 0,
+            69% 0,
+            100% 100%,
+            0 100%
+        );
+
+    z-index:2;
+}
+
+
+/* Figure content */
+
+.figure-content{
+
+    padding:
+        23px 23px 25px;
+}
+
+.figure-content small{
+
+    color:var(--gold);
 
     font-size:7px;
+
     font-weight:700;
 
     letter-spacing:.15em;
@@ -657,30 +1730,73 @@ button{
     text-transform:uppercase;
 }
 
-.portrait-label strong{
-    display:block;
+.figure-content h3{
 
-    color:white;
+    margin:
+        8px 0 9px;
 
-    font-family:Georgia,serif;
+    color:var(--navy);
 
-    font-size:17px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:24px;
 
     font-weight:400;
+
+    line-height:1.1;
+}
+
+.figure-content p{
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+.figure-arrow{
+
+    position:absolute;
+
+    right:22px;
+
+    bottom:24px;
+
+    color:var(--gold);
+
+    font-size:16px;
+
+    transition:
+        transform .25s ease;
+}
+
+.figure-card:hover .figure-arrow{
+
+    transform:
+        translateX(5px);
 }
 
 
 /* =========================================================
-   INTRODUCTION
+   CATEGORY / CHARACTER
    ========================================================= */
 
-.intro{
-    padding:100px 0;
+.categories{
 
-    background:white;
+    padding:
+        95px 0;
+
+    background:var(--cream);
 }
 
-.intro-grid{
+.categories-grid{
+
     display:grid;
 
     grid-template-columns:
@@ -688,431 +1804,131 @@ button{
         1.25fr;
 
     gap:8vw;
+
+    align-items:start;
 }
 
-.section-label{
-    display:flex;
-    align-items:center;
+.categories-copy h2{
 
-    gap:12px;
-
-    color:var(--bronze);
-
-    font-size:9px;
-    font-weight:700;
-
-    letter-spacing:.2em;
-
-    text-transform:uppercase;
-}
-
-.section-label::before{
-    content:"";
-
-    width:30px;
-    height:1px;
-
-    background:var(--bronze);
-}
-
-.intro h2{
-    margin:17px 0 0;
+    margin:
+        15px 0 17px;
 
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        clamp(34px,4vw,55px);
+        clamp(37px,4.4vw,55px);
 
     font-weight:400;
 
-    line-height:1.05;
-
-    letter-spacing:-.035em;
-}
-
-.intro-copy p{
-    margin:0 0 20px;
-
-    color:#5f6e7d;
-
-    font-size:14px;
-
-    line-height:1.9;
-}
-
-.intro-copy p:first-child{
-    color:var(--ink);
-
-    font-size:18px;
-
-    line-height:1.75;
-}
-
-
-/* =========================================================
-   MEETINGS INTRO
-   ========================================================= */
-
-.meetings{
-    padding:100px 0;
-
-    background:var(--paper);
-}
-
-.meetings-head{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-
-    gap:40px;
-
-    margin-bottom:48px;
-}
-
-.meetings-head h2{
-    margin:13px 0 0;
-
-    color:var(--navy);
-
-    font-family:Georgia,serif;
-
-    font-size:
-        clamp(38px,5vw,62px);
-
-    font-weight:400;
-
-    line-height:.98;
+    line-height:1.04;
 
     letter-spacing:-.04em;
 }
 
-.meetings-description{
-    max-width:420px;
+.categories-copy p{
 
-    color:var(--muted);
+    max-width:460px;
 
-    font-size:12px;
-
-    line-height:1.8;
-
-    text-align:right;
-}
-
-
-/* =========================================================
-   PEOPLE CARDS
-   ========================================================= */
-
-.people-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
-    gap:22px;
-}
-
-.person-card{
-    position:relative;
-
-    background:white;
-
-    border:1px solid var(--line);
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.person-card:hover{
-    transform:translateY(-8px);
-
-    box-shadow:var(--shadow);
-}
-
-.person-image{
-    position:relative;
-
-    aspect-ratio:
-        4 / 5;
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1b4869,
-            #b48d50
-        );
-}
-
-.person-image::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(8,45,86,.2),
-            rgba(169,130,63,.25)
-        );
-}
-
-.person-placeholder{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:115px;
-    height:115px;
-
-    border:
-        1px solid rgba(255,255,255,.4);
-
-    border-radius:50%;
-
-    display:grid;
-    place-items:center;
-
-    color:rgba(255,255,255,.7);
-
-    font-family:Georgia,serif;
-
-    font-size:48px;
-}
-
-.person-tag{
-    position:absolute;
-
-    left:14px;
-    top:14px;
-
-    padding:7px 9px;
-
-    background:rgba(255,255,255,.94);
-
-    color:var(--navy);
-
-    font-size:7px;
-    font-weight:700;
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
-}
-
-.person-body{
-    padding:21px 21px 24px;
-}
-
-.person-body h3{
     margin:0;
-
-    color:var(--navy);
-
-    font-family:Georgia,serif;
-
-    font-size:22px;
-
-    font-weight:400;
-
-    line-height:1.15;
-}
-
-.person-role{
-    margin-top:8px;
-
-    color:var(--bronze);
-
-    font-size:8px;
-    font-weight:700;
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
-}
-
-.person-body p{
-    margin:15px 0 0;
 
     color:var(--muted);
 
     font-size:11px;
 
-    line-height:1.7;
+    line-height:1.85;
 }
 
-.person-link{
-    display:inline-flex;
+.category-list{
 
-    margin-top:18px;
-
-    color:var(--bronze);
-
-    font-size:9px;
-    font-weight:700;
-
-    letter-spacing:.1em;
-
-    text-transform:uppercase;
-}
-
-
-/* =========================================================
-   FEATURE INTERVIEW
-   ========================================================= */
-
-.interview{
-    padding:100px 0;
-
-    background:white;
-}
-
-.interview-box{
     display:grid;
 
     grid-template-columns:
         1fr 1fr;
 
-    min-height:480px;
+    border-top:
+        1px solid var(--line);
 
-    background:var(--navy);
-
-    overflow:hidden;
+    border-left:
+        1px solid var(--line);
 }
 
-.interview-visual{
+.category-item{
+
     position:relative;
 
-    min-height:480px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1c4b6d,
-            #a9823f
-        );
-}
-
-.interview-visual::before{
-    content:"";
-
-    position:absolute;
-
-    width:330px;
-    height:330px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    border:
-        1px solid rgba(255,255,255,.22);
-
-    border-radius:50%;
-}
-
-.interview-visual::after{
-    content:"";
-
-    position:absolute;
-
-    width:200px;
-    height:200px;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-
-    border-radius:50%;
-}
-
-.interview-symbol{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    color:rgba(255,255,255,.65);
-
-    font-family:Georgia,serif;
-
-    font-size:125px;
-
-    z-index:2;
-}
-
-.interview-copy{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    min-height:140px;
 
     padding:
-        clamp(40px,6vw,75px);
+        27px 24px;
 
-    color:white;
+    background:white;
+
+    border-right:
+        1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
+
+    transition:
+        background .25s ease,
+        padding-left .25s ease;
 }
 
-.interview-copy .section-label{
-    color:#d5b878;
+.category-item:hover{
+
+    background:#f8f6ef;
+
+    padding-left:30px;
 }
 
-.interview-copy .section-label::before{
-    background:#d5b878;
-}
+.category-item strong{
 
-.interview-copy h2{
-    margin:18px 0;
+    display:block;
 
-    font-family:Georgia,serif;
+    max-width:82%;
 
-    font-size:
-        clamp(34px,4vw,53px);
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:20px;
 
     font-weight:400;
 
-    line-height:1.05;
+    line-height:1.2;
 }
 
-.interview-copy p{
-    margin:0;
+.category-item p{
 
-    color:#c4d0db;
+    margin:
+        9px 0 0;
 
-    font-size:13px;
-
-    line-height:1.85;
-}
-
-.interview-link{
-    display:inline-flex;
-
-    align-self:flex-start;
-
-    margin-top:28px;
-
-    color:#d5b878;
+    color:var(--muted);
 
     font-size:9px;
-    font-weight:700;
 
-    letter-spacing:.14em;
+    line-height:1.65;
+}
 
-    text-transform:uppercase;
+.category-item span{
+
+    position:absolute;
+
+    right:20px;
+
+    bottom:19px;
+
+    color:var(--gold);
+
+    font-size:15px;
 }
 
 
@@ -1121,101 +1937,216 @@ button{
    ========================================================= */
 
 .stories{
-    padding:100px 0;
 
-    background:var(--paper);
+    padding:
+        95px 0;
+
+    background:white;
 }
 
-.stories-grid{
+.story-layout{
+
     display:grid;
 
     grid-template-columns:
-        1.3fr
-        .7fr;
+        1.2fr
+        .8fr;
 
-    gap:24px;
-}
-
-.story-main,
-.story-side{
-    background:white;
-
-    border:1px solid var(--line);
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.story-main:hover,
-.story-side:hover{
-    transform:translateY(-6px);
-
-    box-shadow:var(--shadow);
+    gap:18px;
 }
 
 .story-main{
-    display:grid;
 
-    grid-template-columns:
-        1fr 1fr;
-}
+    position:relative;
 
-.story-visual{
-    min-height:390px;
+    min-height:470px;
+
+    overflow:hidden;
 
     background:
         linear-gradient(
             145deg,
-            #163f61,
-            #bd9654
+            #0b3150,
+            #536a5d
         );
+
+    color:white;
 }
 
-.story-content{
-    padding:38px;
+.story-main::before{
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    content:"";
+
+    position:absolute;
+
+    width:520px;
+
+    height:520px;
+
+    left:58%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:50%;
 }
 
-.story-content .section-label{
-    margin-bottom:15px;
+.story-main-copy{
+
+    position:absolute;
+
+    z-index:5;
+
+    left:35px;
+
+    right:35px;
+
+    bottom:32px;
 }
 
-.story-content h3{
-    margin:0;
+.story-main-copy small,
+.story-side-copy small{
 
-    color:var(--navy);
+    color:var(--gold-light);
 
-    font-family:Georgia,serif;
+    font-size:7px;
 
-    font-size:30px;
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.story-main-copy h3{
+
+    max-width:680px;
+
+    margin:
+        9px 0 10px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(31px,4vw,49px);
 
     font-weight:400;
 
-    line-height:1.15;
+    line-height:1.04;
 }
 
-.story-content p{
-    margin:18px 0 0;
+.story-main-copy p{
+
+    max-width:620px;
+
+    margin:0;
+
+    color:#c7d3d7;
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+.story-side{
+
+    display:grid;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap:18px;
+}
+
+.story-side-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:28px;
+
+    background:var(--cream);
+
+    border:
+        1px solid var(--line);
+}
+
+.story-side-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    right:-85px;
+
+    top:-85px;
+
+    border:
+        1px solid rgba(169,135,76,.18);
+
+    border-radius:50%;
+}
+
+.story-side-copy{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.story-side-copy h3{
+
+    margin:
+        10px 0;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:26px;
+
+    font-weight:400;
+
+    line-height:1.08;
+}
+
+.story-side-copy p{
+
+    margin:0;
 
     color:var(--muted);
 
-    font-size:12px;
+    font-size:9px;
 
-    line-height:1.8;
+    line-height:1.7;
 }
 
-.story-link{
-    display:inline-flex;
+.story-side-link{
 
-    margin-top:22px;
+    display:inline-block;
 
-    color:var(--bronze);
+    margin-top:18px;
 
-    font-size:9px;
+    color:var(--navy);
+
+    font-size:8px;
+
     font-weight:700;
 
     letter-spacing:.12em;
@@ -1223,36 +2154,209 @@ button{
     text-transform:uppercase;
 }
 
-.story-side{
-    padding:35px;
+
+/* =========================================================
+   VIDEO
+   ========================================================= */
+
+.video-section{
+
+    padding:
+        95px 0;
+
+    background:var(--navy-deep);
+
+    color:white;
 }
 
-.story-side h3{
-    margin:15px 0 0;
+.video-head{
 
-    color:var(--navy);
+    max-width:720px;
 
-    font-family:Georgia,serif;
+    margin-bottom:40px;
+}
 
-    font-size:27px;
+.video-section .label{
+
+    color:var(--gold-light);
+}
+
+.video-section .label::before{
+
+    background:var(--gold-light);
+}
+
+.video-section h2{
+
+    margin:
+        15px 0 0;
+
+    color:white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(38px,4.5vw,58px);
 
     font-weight:400;
 
-    line-height:1.15;
+    line-height:1.02;
 }
 
-.story-side p{
-    margin:18px 0 0;
+.video-section p{
 
-    color:var(--muted);
+    margin:
+        17px 0 0;
 
-    font-size:12px;
+    color:#9caebb;
+
+    font-size:11px;
 
     line-height:1.8;
 }
 
-.story-side .story-link{
-    margin-top:25px;
+.video-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.2fr
+        .8fr;
+
+    gap:18px;
+}
+
+.video-card{
+
+    position:relative;
+
+    min-height:390px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #153b56,
+            #607566
+        );
+}
+
+.video-card.small{
+
+    min-height:390px;
+}
+
+.video-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:440px;
+
+    height:440px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    border-radius:50%;
+}
+
+.video-play{
+
+    position:absolute;
+
+    z-index:4;
+
+    left:50%;
+
+    top:45%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:67px;
+
+    height:67px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+        1px solid rgba(255,255,255,.75);
+
+    border-radius:50%;
+
+    font-size:17px;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+}
+
+.video-card:hover .video-play{
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.08);
+
+    background:
+        rgba(255,255,255,.1);
+}
+
+.video-copy{
+
+    position:absolute;
+
+    z-index:5;
+
+    left:27px;
+
+    right:27px;
+
+    bottom:25px;
+}
+
+.video-copy small{
+
+    color:var(--gold-light);
+
+    font-size:7px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.video-copy h3{
+
+    margin:
+        8px 0 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:29px;
+
+    font-weight:400;
+
+    line-height:1.08;
 }
 
 
@@ -1261,95 +2365,116 @@ button{
    ========================================================= */
 
 .other-topics{
-    padding:100px 0;
 
-    background:var(--navy-deep);
+    padding:
+        90px 0;
 
-    color:white;
-}
-
-.other-topics .section-label{
-    color:#d5b878;
-}
-
-.other-topics .section-label::before{
-    background:#d5b878;
+    background:var(--cream);
 }
 
 .other-topics h2{
-    margin:13px 0 42px;
 
-    font-family:Georgia,serif;
+    margin:
+        15px 0 38px;
+
+    color:var(--navy);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        clamp(34px,4vw,55px);
+        clamp(36px,4vw,54px);
 
     font-weight:400;
+
+    line-height:1;
 }
 
-.topic-list{
+.topic-grid{
+
     display:grid;
 
     grid-template-columns:
         repeat(3,minmax(0,1fr));
 
-    border-top:1px solid rgba(255,255,255,.14);
+    border-top:
+        1px solid var(--line);
+
+    border-left:
+        1px solid var(--line);
 }
 
-.topic-link{
+.topic{
+
     position:relative;
 
-    min-height:135px;
+    min-height:125px;
 
-    padding:30px 25px;
+    padding:
+        30px 25px;
 
-    border-right:1px solid rgba(255,255,255,.14);
-    border-bottom:1px solid rgba(255,255,255,.14);
+    background:white;
+
+    border-right:
+        1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
 
     transition:
         background .3s ease,
         padding-left .3s ease;
 }
 
-.topic-link:nth-child(3n){
-    border-right:0;
-}
+.topic:hover{
 
-.topic-link:hover{
     padding-left:33px;
 
-    background:rgba(255,255,255,.06);
+    background:#f6f3eb;
 }
 
-.topic-link h3{
+.topic h3{
+
     margin:0;
 
-    max-width:80%;
+    max-width:78%;
 
-    color:white;
+    color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    font-size:21px;
+    font-size:19px;
 
     font-weight:400;
+
+    line-height:1.3;
 }
 
 .topic-arrow{
+
     position:absolute;
 
-    right:25px;
-    bottom:27px;
+    right:24px;
 
-    color:#c6a664;
+    bottom:24px;
+
+    color:var(--gold);
 
     font-size:16px;
 
-    transition:transform .3s ease;
+    transition:
+        transform .25s ease;
 }
 
-.topic-link:hover .topic-arrow{
-    transform:translateX(5px);
+.topic:hover .topic-arrow{
+
+    transform:
+        translateX(5px);
 }
 
 
@@ -1358,82 +2483,102 @@ button{
    ========================================================= */
 
 .cta{
-    padding:90px 0;
 
-    background:var(--paper);
+    padding:
+        80px 0;
+
+    background:white;
 }
 
 .cta-box{
+
     position:relative;
 
     overflow:hidden;
 
     padding:
-        clamp(45px,6vw,80px);
+        clamp(42px,6vw,72px);
 
     background:
         linear-gradient(
-            110deg,
-            #f0ede3,
+            120deg,
+            #ece8dc,
             #faf9f5
         );
 
-    border:1px solid var(--line);
+    border:
+        1px solid var(--line);
 }
 
 .cta-box::after{
-    content:"✺";
+
+    content:"✦";
 
     position:absolute;
 
-    right:5%;
+    right:7%;
+
     top:50%;
 
-    transform:translateY(-50%);
+    transform:
+        translateY(-50%);
 
-    color:rgba(169,130,63,.10);
+    color:
+        rgba(169,135,76,.08);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:190px;
 }
 
 .cta-content{
+
     position:relative;
+
     z-index:2;
 
-    max-width:680px;
+    max-width:720px;
 }
 
 .cta h2{
-    margin:15px 0;
+
+    margin:
+        15px 0;
 
     color:var(--navy);
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        clamp(34px,4vw,55px);
+        clamp(35px,4vw,55px);
 
     font-weight:400;
 
-    line-height:1.08;
+    line-height:1.05;
 }
 
 .cta p{
-    max-width:600px;
+
+    max-width:630px;
 
     margin:0;
 
     color:var(--muted);
 
-    font-size:14px;
+    font-size:12px;
 
-    line-height:1.8;
+    line-height:1.85;
 }
 
 .cta .btn{
-    margin-top:28px;
+
+    margin-top:26px;
 
     background:var(--navy);
 
@@ -1443,9 +2588,10 @@ button{
 }
 
 .cta .btn:hover{
-    background:var(--bronze);
 
-    border-color:var(--bronze);
+    background:var(--gold);
+
+    border-color:var(--gold);
 }
 
 
@@ -1453,71 +2599,81 @@ button{
    FOOTER
    ========================================================= */
 
-footer{
-    padding:65px 0 30px;
+.footer{
 
-    background:#041a31;
+    padding:
+        65px 0 30px;
 
-    color:#a9b7c5;
+    background:#03182e;
+
+    color:#91a2b2;
 }
 
 .footer-grid{
+
     display:grid;
 
     grid-template-columns:
-        1.2fr
-        .8fr
-        .8fr;
+        1.25fr
+        .75fr
+        .75fr;
 
     gap:60px;
 
-    padding-bottom:55px;
-}
-
-.footer-brand{
-    max-width:360px;
+    padding-bottom:50px;
 }
 
 .footer-brand strong{
+
     display:block;
 
     color:white;
 
-    font-family:Georgia,serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:21px;
 
-    letter-spacing:.12em;
+    letter-spacing:.13em;
 }
 
 .footer-brand small{
+
     display:block;
 
     margin-top:6px;
 
-    color:#71869a;
+    color:#687c90;
 
-    font-size:8px;
+    font-size:7px;
 
     letter-spacing:.3em;
 }
 
 .footer-brand p{
-    margin:22px 0 0;
 
-    color:#8397aa;
+    max-width:370px;
 
-    font-size:11px;
+    margin:
+        22px 0 0;
 
-    line-height:1.8;
+    color:#7f93a7;
+
+    font-size:10px;
+
+    line-height:1.85;
 }
 
 .footer-column h4{
-    margin:0 0 18px;
 
-    color:#d4b774;
+    margin:
+        0 0 18px;
 
-    font-size:9px;
+    color:var(--gold-light);
+
+    font-size:8px;
 
     letter-spacing:.15em;
 
@@ -1525,37 +2681,42 @@ footer{
 }
 
 .footer-column a{
+
     display:block;
 
-    margin:0 0 11px;
+    margin-bottom:11px;
 
-    color:#92a5b7;
+    color:#8498aa;
 
     font-size:10px;
 
-    transition:color .2s ease;
+    transition:
+        color .2s ease;
 }
 
 .footer-column a:hover{
+
     color:white;
 }
 
 .footer-bottom{
-    padding-top:25px;
 
-    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:24px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     gap:20px;
 
-    color:#617589;
+    color:#607589;
 
-    font-size:9px;
-
-    letter-spacing:.04em;
+    font-size:8px;
 }
 
 
@@ -1564,16 +2725,19 @@ footer{
    ========================================================= */
 
 .reveal{
+
     opacity:0;
 
-    transform:translateY(25px);
+    transform:
+        translateY(24px);
 
     transition:
-        opacity .75s ease,
-        transform .75s ease;
+        opacity .7s ease,
+        transform .7s ease;
 }
 
 .reveal.visible{
+
     opacity:1;
 
     transform:none;
@@ -1581,321 +2745,396 @@ footer{
 
 
 /* =========================================================
-   RESPONSIVE
+   TABLET
    ========================================================= */
 
-@media (max-width:1100px){
+@media(max-width:1100px){
 
     .nav-menu{
+
         gap:17px;
     }
 
     .nav-menu a{
+
         font-size:9px;
     }
 
-    .people-grid{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
+    .profile-content{
+
+        padding:
+            45px;
     }
 
-    .people-wall{
-        transform:scale(.92);
-        transform-origin:center;
-    }
 }
 
 
-@media (max-width:850px){
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
 
-    .top-right{
+@media(max-width:850px){
+
+    .topbar-right{
+
         display:none;
     }
 
-    .site-header{
+    .header{
+
         height:64px;
     }
 
-    .site-header.scrolled{
+    .header.scrolled{
+
         height:58px;
     }
 
     .nav-menu{
+
         display:none;
     }
 
-    .people-hero{
-        min-height:auto;
-    }
+    .hero-grid{
 
-    .people-hero-grid{
         grid-template-columns:1fr;
-
-        min-height:auto;
-
-        padding-bottom:65px;
     }
 
-    .people-copy{
-        padding:70px 0 25px;
+    .hero-copy{
+
+        padding:
+            70px 0 30px;
     }
 
-    .people-wall{
-        height:470px;
+    .hero-visual{
 
-        transform:none;
+        min-height:480px;
+    }
+
+    .portrait-frame{
+
+        width:310px;
+
+        height:420px;
     }
 
     .intro-grid{
+
         grid-template-columns:1fr;
 
         gap:35px;
     }
 
-    .meetings-head{
+    .profile-card{
+
+        grid-template-columns:1fr;
+    }
+
+    .profile-visual{
+
+        min-height:450px;
+    }
+
+    .figure-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .section-head{
+
         align-items:flex-start;
 
         flex-direction:column;
     }
 
-    .meetings-description{
-        text-align:left;
+    .categories-grid{
+
+        grid-template-columns:1fr;
+
+        gap:40px;
     }
 
-    .interview-box{
+    .story-layout{
+
         grid-template-columns:1fr;
     }
 
-    .interview-visual{
-        min-height:350px;
-    }
+    .video-grid{
 
-    .stories-grid{
         grid-template-columns:1fr;
     }
 
-    .story-main{
-        grid-template-columns:1fr;
-    }
+    .topic-grid{
 
-    .story-visual{
-        min-height:300px;
-    }
-
-    .topic-list{
         grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
-    .topic-link:nth-child(3n){
-        border-right:1px solid rgba(255,255,255,.14);
-    }
-
-    .topic-link:nth-child(2n){
-        border-right:0;
+            1fr 1fr;
     }
 
     .footer-grid{
-        grid-template-columns:1fr 1fr;
+
+        grid-template-columns:
+            1fr 1fr;
     }
 
     .footer-brand{
-        grid-column:1 / -1;
+
+        grid-column:
+            1 / -1;
     }
+
 }
 
 
-@media (max-width:560px){
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-    .top{
+@media(max-width:560px){
+
+    .topbar{
+
         height:24px;
 
         font-size:8px;
     }
 
-    .logo-mark{
+    .brand-mark{
+
         width:34px;
+
         height:34px;
 
-        font-size:20px;
+        font-size:18px;
     }
 
-    .logo-text strong{
+    .brand-name strong{
+
         font-size:16px;
     }
 
-    .logo-text small{
+    .brand-name small{
+
         font-size:6px;
     }
 
-    .people-copy{
+    .hero-copy{
+
         padding-top:58px;
     }
 
-    .people-copy h1{
+    .hero h1{
+
         font-size:
-            clamp(50px,16vw,74px);
+            clamp(49px,15vw,72px);
     }
 
-    .people-copy p{
-        font-size:13px;
+    .hero-visual{
+
+        min-height:390px;
     }
 
-    .people-actions{
-        flex-wrap:wrap;
-    }
+    .portrait-frame{
 
-    .people-wall{
-        height:400px;
+        width:250px;
+
+        height:345px;
     }
 
     .portrait{
-        border-width:6px;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.75);
     }
 
-    .portrait-a{
-        width:145px;
-        height:190px;
+    .hero-tag{
+
+        padding:
+            8px 10px;
+
+        font-size:6px;
+    }
+
+    .hero-tag.one{
 
         left:0;
-        top:55px;
+
+        top:25%;
     }
 
-    .portrait-b{
-        width:155px;
-        height:205px;
-
-        left:25%;
-        top:5px;
-    }
-
-    .portrait-c{
-        width:145px;
-        height:190px;
+    .hero-tag.two{
 
         right:0;
-        top:70px;
+
+        bottom:24%;
     }
 
-    .portrait-d{
-        width:150px;
-        height:190px;
+    .hero-tag.three{
 
-        left:12%;
-        bottom:0;
-    }
+        left:2%;
 
-    .portrait-e{
-        width:140px;
-        height:180px;
-
-        right:5%;
-        bottom:-4px;
-    }
-
-    .portrait-label{
-        left:10px;
-        right:10px;
-        bottom:9px;
-    }
-
-    .portrait-label strong{
-        font-size:12px;
+        bottom:12%;
     }
 
     .intro,
-    .meetings,
-    .interview,
+    .feature,
+    .figures,
+    .categories,
     .stories,
+    .video-section,
     .other-topics{
-        padding:70px 0;
+
+        padding:
+            70px 0;
     }
 
-    .people-grid{
+    .profile-visual{
+
+        min-height:370px;
+    }
+
+    .profile-person{
+
+        transform:
+            translateX(-50%)
+            scale(.76);
+
+        transform-origin:
+            bottom center;
+    }
+
+    .profile-content{
+
+        padding:
+            40px 25px;
+    }
+
+    .profile-meta{
+
         grid-template-columns:1fr;
-
-        gap:18px;
     }
 
-    .interview-visual{
-        min-height:280px;
-    }
+    .meta-item{
 
-    .interview-symbol{
-        font-size:95px;
-    }
-
-    .interview-copy{
-        padding:40px 25px;
-    }
-
-    .story-content,
-    .story-side{
-        padding:28px 24px;
-    }
-
-    .topic-list{
-        grid-template-columns:1fr;
-    }
-
-    .topic-link,
-    .topic-link:nth-child(2n),
-    .topic-link:nth-child(3n){
         border-right:0;
+
+        border-bottom:
+            1px solid var(--line);
+    }
+
+    .meta-item:last-child{
+
+        border-bottom:0;
+    }
+
+    .figure-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .figure-card{
+
+        min-height:390px;
+    }
+
+    .category-list{
+
+        grid-template-columns:1fr;
+    }
+
+    .story-main{
+
+        min-height:390px;
+    }
+
+    .story-side{
+
+        grid-template-rows:
+            auto auto;
+    }
+
+    .video-card,
+    .video-card.small{
+
+        min-height:330px;
+    }
+
+    .topic-grid{
+
+        grid-template-columns:1fr;
     }
 
     .cta{
-        padding:65px 0;
+
+        padding:
+            65px 0;
     }
 
     .cta-box{
-        padding:38px 25px;
+
+        padding:
+            38px 25px;
     }
 
     .cta-box::after{
+
         font-size:120px;
     }
 
     .footer-grid{
-        grid-template-columns:1fr;
 
-        gap:35px;
+        grid-template-columns:1fr;
     }
 
     .footer-brand{
+
         grid-column:auto;
     }
 
     .footer-bottom{
+
         flex-direction:column;
 
         align-items:flex-start;
     }
+
 }
 
 
-@media (prefers-reduced-motion:reduce){
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
 
     html{
+
         scroll-behavior:auto;
     }
 
     *,
     *::before,
     *::after{
+
         animation-duration:.01ms !important;
+
         animation-iteration-count:1 !important;
+
         transition-duration:.01ms !important;
     }
 
     .reveal{
+
         opacity:1;
 
         transform:none;
     }
+
 }
 
 </style>
+
 </head>
 
 
@@ -1903,27 +3142,27 @@ footer{
 
 
 <!-- =======================================================
-     TOP BAR
+     TOPBAR
      ======================================================= -->
 
-<div class="top">
+<div class="topbar">
 
     <div class="w">
 
-        <div class="top-left">
+        <div class="topbar-left">
             MANDALA CHANNEL
         </div>
 
-        <div class="top-right">
+        <div class="topbar-right">
 
             <span>
-                MEDIA DHARMA NUSANTARA
+                TOKOH HINDU
             </span>
 
-            <span class="top-dot"></span>
+            <span class="topbar-line"></span>
 
             <span>
-                TOKOH &amp; PERJUMPAAN
+                PROFIL • PEMIKIRAN • KARYA • PENGABDIAN
             </span>
 
         </div>
@@ -1939,23 +3178,23 @@ footer{
      ======================================================= -->
 
 <header
-    class="site-header"
-    id="siteHeader"
+    class="header"
+    id="header"
 >
 
     <div class="w nav">
 
 
         <a
-            class="logo"
-            href="../index.html"
+            class="brand"
+            href="../../index.html"
         >
 
-            <div class="logo-mark">
-                ✺
+            <div class="brand-mark">
+                ✦
             </div>
 
-            <div class="logo-text">
+            <div class="brand-name">
 
                 <strong>
                     MANDALA
@@ -1973,34 +3212,34 @@ footer{
 
         <nav class="nav-menu">
 
-            <a href="../index.html">
+            <a href="../../index.html">
                 HOME
             </a>
 
-            <a href="../pages/artikel.html">
+            <a href="../../pages/artikel.html">
                 ARTIKEL
             </a>
 
-            <a href="../pages/video.html">
+            <a href="../../pages/video.html">
                 VIDEO
             </a>
 
-            <a href="../pages/podcast.html">
+            <a href="../../pages/podcast.html">
                 PODCAST
             </a>
 
-            <a href="../pages/playlist.html">
+            <a href="../../pages/playlist.html">
                 PLAYLIST
             </a>
 
             <a
+                href="#tokoh"
                 class="active"
-                href="#topik"
             >
                 TOPIK
             </a>
 
-            <a href="../pages/tentang-kami.html">
+            <a href="../../pages/tentang-kami.html">
                 TENTANG
             </a>
 
@@ -2016,51 +3255,63 @@ footer{
      MAIN
      ======================================================= -->
 
-<main id="topik">
+<main id="tokoh">
+
 
 
 <!-- =======================================================
      HERO
      ======================================================= -->
 
-<section class="people-hero">
+<section class="hero">
 
-    <div class="w people-hero-grid">
+    <div class="w hero-grid">
 
 
-        <div class="people-copy reveal">
+        <div class="hero-copy reveal">
 
             <div class="eyebrow">
                 Tokoh Hindu
             </div>
 
             <h1>
-                Jejak
-                <span>Perjumpaan</span>
+
+                Mereka yang
+
+                <span>
+                    memberi
+                </span>
+
+                arti
+
             </h1>
 
-            <p>
-                Di balik perjalanan Mandala Channel ada
-                banyak perjumpaan. Para tokoh, pemikir,
-                pemangku, seniman, akademisi, dan pribadi
-                yang dengan caranya masing-masing menjaga
-                kehidupan Dharma dan kebudayaan Nusantara.
+            <p class="hero-lead">
+
+                Mengenal sosok-sosok yang memberi
+                warna bagi kehidupan Hindu:
+                pemikir, rohaniwan, akademisi,
+                seniman, budayawan, pengusaha,
+                pemuda, dan mereka yang mengabdikan
+                hidupnya untuk masyarakat.
+
             </p>
 
-            <div class="people-actions">
+
+            <div class="hero-actions">
 
                 <a
-                    href="#tokoh"
+                    href="#tokoh-pilihan"
                     class="btn btn-primary"
                 >
-                    Lihat Para Tokoh
+                    Kenali Tokoh
                 </a>
 
                 <a
                     href="#cerita"
                     class="btn btn-outline"
                 >
-                    Cerita Perjumpaan
+                    Baca Cerita
                 </a>
 
             </div>
@@ -2069,127 +3320,65 @@ footer{
 
 
 
-        <!-- =================================================
-             VISUAL WALL
-             ================================================= -->
+        <div class="hero-visual reveal">
 
-        <div class="people-wall reveal">
+            <div class="portrait-frame">
 
+                <div class="portrait">
 
-            <div class="portrait portrait-a">
+                    <div class="portrait-head"></div>
 
-                <div class="portrait-photo">
-
-                    <div class="portrait-label">
-
-                        <small>
-                            Perjumpaan
-                        </small>
-
-                        <strong>
-                            Tokoh Dharma
-                        </strong>
-
-                    </div>
+                    <div class="portrait-body"></div>
 
                 </div>
 
             </div>
 
 
-
-            <div class="portrait portrait-b">
-
-                <div class="portrait-photo">
-
-                    <div class="portrait-label">
-
-                        <small>
-                            Dialog
-                        </small>
-
-                        <strong>
-                            Pemimpin Umat
-                        </strong>
-
-                    </div>
-
-                </div>
-
+            <div class="hero-tag one">
+                Pemikiran
             </div>
 
-
-
-            <div class="portrait portrait-c">
-
-                <div class="portrait-photo">
-
-                    <div class="portrait-label">
-
-                        <small>
-                            Wawancara
-                        </small>
-
-                        <strong>
-                            Budayawan
-                        </strong>
-
-                    </div>
-
-                </div>
-
+            <div class="hero-tag two">
+                Pengabdian
             </div>
 
-
-
-            <div class="portrait portrait-d">
-
-                <div class="portrait-photo">
-
-                    <div class="portrait-label">
-
-                        <small>
-                            Perspektif
-                        </small>
-
-                        <strong>
-                            Akademisi
-                        </strong>
-
-                    </div>
-
-                </div>
-
+            <div class="hero-tag three">
+                Inspirasi
             </div>
-
-
-
-            <div class="portrait portrait-e">
-
-                <div class="portrait-photo">
-
-                    <div class="portrait-label">
-
-                        <small>
-                            Inspirasi
-                        </small>
-
-                        <strong>
-                            Generasi Dharma
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
 
         </div>
+
 
     </div>
 
 </section>
+
+
+
+<!-- =======================================================
+     GOLD BAR
+     ======================================================= -->
+
+<div class="gold-bar">
+
+    <div class="w gold-bar-inner">
+
+        <div class="gold-symbol">
+            ✦
+        </div>
+
+        <span>
+            Menghadirkan manusia di balik perjalanan Dharma
+        </span>
+
+        <div class="gold-symbol">
+            ✦
+        </div>
+
+    </div>
+
+</div>
 
 
 
@@ -2204,42 +3393,42 @@ footer{
 
         <div class="reveal">
 
-            <div class="section-label">
-                Tentang Tokoh
+            <div class="label">
+                Tentang Tokoh Hindu
             </div>
 
             <h2>
-                Setiap perjumpaan
-                meninggalkan cerita.
+                Karena setiap
+                perjalanan memiliki
+                manusia di baliknya.
             </h2>
 
         </div>
 
 
 
-        <div class="intro-copy reveal">
+        <div class="intro-content reveal">
 
             <p>
-                Mandala Channel tidak hanya merekam peristiwa.
-                Kami juga merekam gagasan yang lahir dari
-                perjumpaan dengan orang-orang yang memiliki
-                pengalaman dan pandangan tentang Dharma,
-                budaya, masyarakat, dan kehidupan.
+                Tokoh bukan hanya tentang nama besar.
+                Ada pemikiran, perjuangan, keputusan,
+                pengabdian, dan perjalanan panjang
+                yang membuat seseorang berarti.
             </p>
 
             <p>
-                Dari tokoh agama hingga budayawan, dari
-                akademisi hingga generasi muda, setiap
-                percakapan membuka sudut pandang baru
-                tentang bagaimana nilai-nilai Hindu hidup
-                dan berkembang di tengah masyarakat.
+                Mandala menghadirkan kisah manusia
+                yang berkontribusi bagi kehidupan Hindu
+                dan masyarakat luas, baik melalui
+                pemikiran, pendidikan, spiritualitas,
+                kebudayaan, ekonomi, maupun karya.
             </p>
 
             <p>
-                Halaman ini menjadi ruang untuk mengenal
-                kembali mereka yang pernah berbagi waktu,
-                pengalaman, pengetahuan, dan pemikiran
-                bersama Mandala.
+                Kami ingin mengenal mereka bukan hanya
+                dari jabatan atau gelarnya, tetapi juga
+                dari gagasan dan nilai yang mereka
+                tinggalkan.
             </p>
 
         </div>
@@ -2251,224 +3440,286 @@ footer{
 
 
 <!-- =======================================================
-     PEOPLE
+     TOKOH PILIHAN
      ======================================================= -->
 
 <section
-    class="meetings"
-    id="tokoh"
+    class="feature"
+    id="tokoh-pilihan"
 >
 
     <div class="w">
 
 
-        <div class="meetings-head reveal">
+        <div class="feature-head reveal">
+
+            <div class="label">
+                Profil Pilihan
+            </div>
+
+            <h2>
+                Mengenal sosok
+                dari dekat.
+            </h2>
+
+            <p>
+                Sebuah profil tidak berhenti pada
+                biodata. Kami mencoba memahami
+                perjalanan, pemikiran, dan kontribusi
+                seorang tokoh.
+            </p>
+
+        </div>
+
+
+
+        <article class="profile-card reveal">
+
+
+            <div class="profile-visual">
+
+                <div class="profile-person">
+
+                    <div class="head"></div>
+
+                    <div class="body"></div>
+
+                </div>
+
+                <div class="profile-quote">
+                    “Gagasan yang baik akan hidup
+                    ketika diteruskan.”
+                </div>
+
+            </div>
+
+
+
+            <div class="profile-content">
+
+                <div class="profile-role">
+                    Profil Tokoh
+                </div>
+
+                <h3>
+                    Sosok yang
+                    mengabdikan hidup
+                    untuk Dharma
+                </h3>
+
+                <p>
+                    Kisah tentang perjalanan seorang
+                    tokoh dalam membangun kehidupan
+                    spiritual, pendidikan, kebudayaan,
+                    dan masyarakat.
+                </p>
+
+                <p>
+                    Bagaimana pengalaman hidup,
+                    lingkungan, dan keyakinannya
+                    membentuk cara pandang terhadap
+                    kehidupan Hindu hari ini.
+                </p>
+
+
+                <div class="profile-meta">
+
+                    <div class="meta-item">
+
+                        <small>
+                            Fokus
+                        </small>
+
+                        <strong>
+                            Pengabdian
+                        </strong>
+
+                    </div>
+
+                    <div class="meta-item">
+
+                        <small>
+                            Bentuk
+                        </small>
+
+                        <strong>
+                            Profil &amp; Wawancara
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="../../pages/artikel.html"
+                    class="profile-link"
+                >
+                    Baca profil lengkap →
+                </a>
+
+            </div>
+
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FIGURES
+     ======================================================= -->
+
+<section class="figures">
+
+    <div class="w">
+
+
+        <div class="section-head reveal">
 
             <div>
 
-                <div class="section-label">
-                    Arsip Perjumpaan
+                <div class="label">
+                    Sosok Inspiratif
                 </div>
 
                 <h2>
-                    Orang-orang
-                    di balik cerita.
+                    Beragam jalan,
+                    satu pengabdian.
                 </h2>
 
+                <p>
+                    Tokoh Hindu hadir dari berbagai
+                    bidang dan latar belakang. Setiap
+                    perjalanan memiliki cerita yang
+                    berbeda.
+                </p>
+
             </div>
 
-            <div class="meetings-description">
-                Kenali para tokoh yang pernah hadir dalam
-                perjalanan Mandala Channel melalui wawancara,
-                percakapan, dokumentasi, dan liputan.
-            </div>
+            <a
+                href="../../pages/artikel.html"
+                class="see-all"
+            >
+                Semua profil →
+            </a>
 
         </div>
 
 
 
-        <div class="people-grid">
+        <div class="figure-grid">
 
 
-            <!-- PERSON -->
+            <article class="figure-card reveal">
 
-            <article class="person-card reveal">
+                <div class="figure-image">
 
-                <a href="../pages/tokoh-detail.html">
+                    <div class="figure-head"></div>
 
-                    <div class="person-image">
+                    <div class="figure-body"></div>
 
-                        <div class="person-placeholder">
-                            ✦
-                        </div>
+                </div>
 
-                        <span class="person-tag">
-                            Tokoh Dharma
-                        </span>
+                <div class="figure-content">
 
-                    </div>
+                    <small>
+                        Rohaniwan
+                    </small>
 
-                    <div class="person-body">
+                    <h3>
+                        Penjaga nilai
+                        spiritual
+                    </h3>
 
-                        <h3>
-                            Tokoh Dharma
-                        </h3>
+                    <p>
+                        Mengenal perjalanan mereka
+                        dalam membimbing umat dan
+                        menjaga nilai Dharma.
+                    </p>
 
-                        <div class="person-role">
-                            Pemangku &amp; Tokoh Umat
-                        </div>
+                </div>
 
-                        <p>
-                            Percakapan tentang kehidupan
-                            Dharma, tradisi, dan tanggung
-                            jawab umat di tengah perubahan.
-                        </p>
-
-                        <span class="person-link">
-                            Lihat cerita →
-                        </span>
-
-                    </div>
-
-                </a>
+                <span class="figure-arrow">
+                    →
+                </span>
 
             </article>
 
 
 
-            <!-- PERSON -->
+            <article class="figure-card reveal">
 
-            <article class="person-card reveal">
+                <div class="figure-image">
 
-                <a href="../pages/tokoh-detail.html">
+                    <div class="figure-head"></div>
 
-                    <div class="person-image">
+                    <div class="figure-body"></div>
 
-                        <div class="person-placeholder">
-                            ✦
-                        </div>
+                </div>
 
-                        <span class="person-tag">
-                            Budaya
-                        </span>
+                <div class="figure-content">
 
-                    </div>
+                    <small>
+                        Akademisi
+                    </small>
 
-                    <div class="person-body">
+                    <h3>
+                        Pemikir dan
+                        pendidik
+                    </h3>
 
-                        <h3>
-                            Budayawan Nusantara
-                        </h3>
+                    <p>
+                        Gagasan, penelitian, dan
+                        pemikiran yang ikut membentuk
+                        wacana Hindu kontemporer.
+                    </p>
 
-                        <div class="person-role">
-                            Seniman &amp; Budayawan
-                        </div>
+                </div>
 
-                        <p>
-                            Membicarakan hubungan antara
-                            kebudayaan, tradisi, seni,
-                            dan identitas masyarakat.
-                        </p>
-
-                        <span class="person-link">
-                            Lihat cerita →
-                        </span>
-
-                    </div>
-
-                </a>
+                <span class="figure-arrow">
+                    →
+                </span>
 
             </article>
 
 
 
-            <!-- PERSON -->
+            <article class="figure-card reveal">
 
-            <article class="person-card reveal">
+                <div class="figure-image">
 
-                <a href="../pages/tokoh-detail.html">
+                    <div class="figure-head"></div>
 
-                    <div class="person-image">
+                    <div class="figure-body"></div>
 
-                        <div class="person-placeholder">
-                            ✦
-                        </div>
+                </div>
 
-                        <span class="person-tag">
-                            Pengetahuan
-                        </span>
+                <div class="figure-content">
 
-                    </div>
+                    <small>
+                        Budayawan
+                    </small>
 
-                    <div class="person-body">
+                    <h3>
+                        Merawat warisan
+                        budaya
+                    </h3>
 
-                        <h3>
-                            Akademisi Hindu
-                        </h3>
+                    <p>
+                        Mereka yang menjaga tradisi,
+                        seni, dan identitas Hindu
+                        tetap hidup di masyarakat.
+                    </p>
 
-                        <div class="person-role">
-                            Akademisi &amp; Peneliti
-                        </div>
+                </div>
 
-                        <p>
-                            Membaca sejarah dan perkembangan
-                            Hindu Nusantara melalui penelitian
-                            dan pengetahuan akademik.
-                        </p>
-
-                        <span class="person-link">
-                            Lihat cerita →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
-
-
-            <!-- PERSON -->
-
-            <article class="person-card reveal">
-
-                <a href="../pages/tokoh-detail.html">
-
-                    <div class="person-image">
-
-                        <div class="person-placeholder">
-                            ✦
-                        </div>
-
-                        <span class="person-tag">
-                            Generasi Muda
-                        </span>
-
-                    </div>
-
-                    <div class="person-body">
-
-                        <h3>
-                            Generasi Dharma
-                        </h3>
-
-                        <div class="person-role">
-                            Pemuda &amp; Penggerak
-                        </div>
-
-                        <p>
-                            Cerita tentang generasi muda
-                            yang membawa semangat Dharma
-                            ke ruang dan zaman yang baru.
-                        </p>
-
-                        <span class="person-link">
-                            Lihat cerita →
-                        </span>
-
-                    </div>
-
-                </a>
+                <span class="figure-arrow">
+                    →
+                </span>
 
             </article>
 
@@ -2482,61 +3733,178 @@ footer{
 
 
 <!-- =======================================================
-     FEATURE INTERVIEW
+     CATEGORY
      ======================================================= -->
 
-<section
-    class="interview"
-    id="cerita"
->
+<section class="categories">
 
-    <div class="w">
+    <div class="w categories-grid">
 
 
-        <div class="interview-box reveal">
+        <div class="categories-copy reveal">
 
-
-            <div class="interview-visual">
-
-                <div class="interview-symbol">
-                    ✺
-                </div>
-
+            <div class="label">
+                Ruang Tokoh
             </div>
 
+            <h2>
+                Bukan hanya
+                tentang siapa,
+                tetapi apa yang
+                mereka lakukan.
+            </h2>
+
+            <p>
+                Mandala membuka ruang untuk berbagai
+                karakter tokoh dan bidang pengabdian.
+                Dengan begitu, kisah yang hadir tidak
+                hanya berasal dari satu lingkungan.
+            </p>
+
+        </div>
 
 
-            <div class="interview-copy">
 
-                <div class="section-label">
-                    Di Balik Perjumpaan
-                </div>
+        <div class="category-list">
 
-                <h2>
-                    Bukan sekadar
-                    wawancara.
-                </h2>
+
+            <a
+                href="../../pages/artikel.html"
+                class="category-item reveal"
+            >
+
+                <strong>
+                    Sulinggih &amp;
+                    Rohaniwan
+                </strong>
 
                 <p>
-                    Setiap percakapan adalah kesempatan
-                    untuk mendengar pengalaman seseorang
-                    secara lebih dekat. Apa yang mereka
-                    jalani, apa yang mereka yakini, dan
-                    bagaimana mereka melihat perubahan
-                    zaman.
+                    Perjalanan spiritual dan
+                    pengabdian kepada umat.
                 </p>
 
-                <a
-                    class="interview-link"
-                    href="../pages/video.html"
-                >
-                    Lihat koleksi wawancara →
-                </a>
+                <span>
+                    →
+                </span>
 
-            </div>
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="category-item reveal"
+            >
+
+                <strong>
+                    Akademisi &
+                    Intelektual
+                </strong>
+
+                <p>
+                    Gagasan, ilmu pengetahuan,
+                    dan pemikiran Hindu.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="category-item reveal"
+            >
+
+                <strong>
+                    Seniman &
+                    Budayawan
+                </strong>
+
+                <p>
+                    Karya yang menjaga budaya
+                    dan identitas tetap hidup.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="category-item reveal"
+            >
+
+                <strong>
+                    Pengusaha
+                    Hindu
+                </strong>
+
+                <p>
+                    Perjalanan ekonomi, usaha,
+                    dan kontribusi sosial.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="category-item reveal"
+            >
+
+                <strong>
+                    Pemuda Hindu
+                </strong>
+
+                <p>
+                    Generasi yang membawa
+                    Dharma ke masa depan.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/artikel.html"
+                class="category-item reveal"
+            >
+
+                <strong>
+                    Penggerak Umat
+                </strong>
+
+                <p>
+                    Mereka yang bekerja di balik
+                    kehidupan komunitas.
+                </p>
+
+                <span>
+                    →
+                </span>
+
+            </a>
 
 
         </div>
+
 
     </div>
 
@@ -2548,84 +3916,231 @@ footer{
      STORIES
      ======================================================= -->
 
-<section class="stories">
+<section
+    class="stories"
+    id="cerita"
+>
 
     <div class="w">
 
 
-        <div class="section-label reveal">
-            Cerita Pilihan
+        <div class="section-head reveal">
+
+            <div>
+
+                <div class="label">
+                    Cerita Tokoh
+                </div>
+
+                <h2>
+                    Kisah yang layak
+                    untuk didengar.
+                </h2>
+
+            </div>
+
+            <a
+                href="../../pages/artikel.html"
+                class="see-all"
+            >
+                Lihat semua cerita →
+            </a>
+
         </div>
 
 
 
-        <div class="stories-grid">
+        <div class="story-layout">
 
 
             <article class="story-main reveal">
 
-                <div class="story-visual"></div>
+                <div class="story-main-copy">
 
-                <div class="story-content">
-
-                    <div class="section-label">
-                        Perjumpaan
-                    </div>
+                    <small>
+                        Feature Story
+                    </small>
 
                     <h3>
-                        Ketika sebuah
-                        percakapan membuka
-                        cara pandang baru.
+                        Dari perjalanan pribadi
+                        menjadi pengabdian
+                        untuk banyak orang.
                     </h3>
 
                     <p>
-                        Cerita pilihan dari ruang
-                        perjumpaan Mandala dengan
-                        tokoh-tokoh yang memiliki
-                        perjalanan dan pengalaman
-                        yang menarik untuk disimak.
+                        Sebuah cerita panjang tentang
+                        bagaimana pengalaman hidup
+                        membentuk seseorang dan akhirnya
+                        mendorongnya untuk berbuat bagi
+                        masyarakat.
                     </p>
 
-                    <a
-                        href="../pages/artikel-detail.html"
-                        class="story-link"
-                    >
-                        Baca ceritanya →
-                    </a>
-
                 </div>
 
             </article>
 
 
 
-            <article class="story-side reveal">
+            <div class="story-side">
 
-                <div class="section-label">
-                    Perspektif
+
+                <article class="story-side-card reveal">
+
+                    <div class="story-side-copy">
+
+                        <small>
+                            Wawancara
+                        </small>
+
+                        <h3>
+                            Apa yang mereka
+                            pikirkan tentang
+                            Hindu hari ini?
+                        </h3>
+
+                        <p>
+                            Percakapan mendalam mengenai
+                            Dharma, masyarakat, generasi
+                            muda, dan masa depan Hindu.
+                        </p>
+
+                        <a
+                            href="../../pages/podcast.html"
+                            class="story-side-link"
+                        >
+                            Dengarkan wawancara →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="story-side-card reveal">
+
+                    <div class="story-side-copy">
+
+                        <small>
+                            Perjalanan
+                        </small>
+
+                        <h3>
+                            Di balik karya
+                            dan pengabdian.
+                        </h3>
+
+                        <p>
+                            Mengenal sisi manusiawi
+                            seorang tokoh melalui
+                            perjalanan hidupnya.
+                        </p>
+
+                        <a
+                            href="../../pages/video.html"
+                            class="story-side-link"
+                        >
+                            Saksikan cerita →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     VIDEO
+     ======================================================= -->
+
+<section class="video-section">
+
+    <div class="w">
+
+
+        <div class="video-head reveal">
+
+            <div class="label">
+                Tokoh Dalam Video
+            </div>
+
+            <h2>
+                Dengarkan langsung
+                dari mereka.
+            </h2>
+
+            <p>
+                Wawancara, percakapan, dokumenter,
+                dan cerita perjalanan tokoh dalam
+                format video.
+            </p>
+
+        </div>
+
+
+
+        <div class="video-grid">
+
+
+            <a
+                href="../../pages/video.html"
+                class="video-card reveal"
+            >
+
+                <div class="video-play">
+                    ▶
                 </div>
 
-                <h3>
-                    Mendengar sebelum
-                    menyimpulkan.
-                </h3>
+                <div class="video-copy">
 
-                <p>
-                    Mandala percaya bahwa setiap tokoh
-                    memiliki cerita yang layak didengar.
-                    Karena dari pengalaman seseorang,
-                    sering kali kita menemukan pertanyaan
-                    baru untuk kehidupan bersama.
-                </p>
+                    <small>
+                        Wawancara
+                    </small>
 
-                <a
-                    href="../pages/artikel.html"
-                    class="story-link"
-                >
-                    Jelajahi artikel →
-                </a>
+                    <h3>
+                        Percakapan tentang
+                        Dharma dan kehidupan
+                    </h3>
 
-            </article>
+                </div>
+
+            </a>
+
+
+
+            <a
+                href="../../pages/video.html"
+                class="video-card small reveal"
+            >
+
+                <div class="video-play">
+                    ▶
+                </div>
+
+                <div class="video-copy">
+
+                    <small>
+                        Dokumenter
+                    </small>
+
+                    <h3>
+                        Sebuah perjalanan
+                        pengabdian
+                    </h3>
+
+                </div>
+
+            </a>
 
 
         </div>
@@ -2645,22 +4160,22 @@ footer{
     <div class="w">
 
 
-        <div class="section-label reveal">
-            Eksplorasi
+        <div class="label reveal">
+            Eksplorasi Mandala
         </div>
 
         <h2 class="reveal">
-            Topik Mandala lainnya
+            Topik lainnya
         </h2>
 
 
 
-        <div class="topic-list">
+        <div class="topic-grid">
 
 
             <a
-                class="topic-link reveal"
-                href="cand ika-nusantara.html"
+                href="candika-nusantara.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2676,8 +4191,8 @@ footer{
 
 
             <a
-                class="topic-link reveal"
                 href="dharma-ajaran.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2693,8 +4208,8 @@ footer{
 
 
             <a
-                class="topic-link reveal"
                 href="dharmika.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2710,8 +4225,25 @@ footer{
 
 
             <a
-                class="topic-link reveal"
+                href="ekonomi-hindu.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Ekonomi Hindu
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
                 href="jelajah-nusantara.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2727,42 +4259,8 @@ footer{
 
 
             <a
-                class="topic-link reveal"
-                href="tradisi-budaya.html"
-            >
-
-                <h3>
-                    Tradisi &amp; Budaya
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-
-            <a
-                class="topic-link reveal"
-                href="spiritual.html"
-            >
-
-                <h3>
-                    Spiritual
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-
-            <a
-                class="topic-link reveal"
                 href="kabar-umat.html"
+                class="topic reveal"
             >
 
                 <h3>
@@ -2778,13 +4276,46 @@ footer{
 
 
             <a
-                class="topic-link reveal"
-                href="ekonomi-hindu.html"
+                href="spiritual.html"
+                class="topic reveal"
             >
 
                 <h3>
-                    Ekonomi &amp;
-                    Kemandirian
+                    Spiritual
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="tradisi-budaya.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Tradisi &amp; Budaya
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="pendidikan.html"
+                class="topic reveal"
+            >
+
+                <h3>
+                    Pendidikan
                 </h3>
 
                 <span class="topic-arrow">
@@ -2814,28 +4345,29 @@ footer{
 
             <div class="cta-content">
 
-                <div class="section-label">
-                    Mandala Channel
+                <div class="label">
+                    Tokoh Hindu
                 </div>
 
                 <h2>
-                    Masih banyak
-                    cerita yang belum
-                    kita dengar.
+                    Ada sosok yang
+                    layak kami kenalkan?
                 </h2>
 
                 <p>
-                    Perjalanan Mandala terus berjalan.
-                    Setiap tempat membawa cerita baru,
-                    dan setiap perjumpaan menghadirkan
-                    perspektif yang berbeda.
+                    Mandala membuka ruang untuk
+                    mengenalkan tokoh Hindu yang
+                    memiliki pemikiran, karya,
+                    perjalanan, atau pengabdian
+                    yang memberi manfaat bagi umat
+                    dan masyarakat.
                 </p>
 
                 <a
-                    href="../pages/video.html"
+                    href="../../pages/kontak.html"
                     class="btn"
                 >
-                    Lihat Perjumpaan Lainnya
+                    Hubungi Mandala
                 </a>
 
             </div>
@@ -2847,6 +4379,7 @@ footer{
 </section>
 
 
+
 </main>
 
 
@@ -2855,7 +4388,7 @@ footer{
      FOOTER
      ======================================================= -->
 
-<footer>
+<footer class="footer">
 
     <div class="w">
 
@@ -2875,10 +4408,10 @@ footer{
 
                 <p>
                     Media yang menghadirkan cerita,
-                    pengetahuan, budaya, dan kehidupan
-                    Dharma Nusantara melalui artikel,
-                    video, podcast, dan berbagai
-                    ruang eksplorasi.
+                    pengetahuan, budaya, kehidupan,
+                    dan dinamika Dharma Nusantara
+                    melalui artikel, video, podcast,
+                    serta berbagai ruang eksplorasi.
                 </p>
 
             </div>
@@ -2891,19 +4424,19 @@ footer{
                     Jelajahi
                 </h4>
 
-                <a href="../index.html">
+                <a href="../../index.html">
                     Home
                 </a>
 
-                <a href="../pages/artikel.html">
+                <a href="../../pages/artikel.html">
                     Artikel
                 </a>
 
-                <a href="../pages/video.html">
+                <a href="../../pages/video.html">
                     Video
                 </a>
 
-                <a href="../pages/podcast.html">
+                <a href="../../pages/podcast.html">
                     Podcast
                 </a>
 
@@ -2917,19 +4450,19 @@ footer{
                     Mandala
                 </h4>
 
-                <a href="../pages/playlist.html">
+                <a href="../../pages/playlist.html">
                     Playlist
                 </a>
 
-                <a href="../pages/tentang-kami.html">
+                <a href="../../pages/tentang-kami.html">
                     Tentang Kami
                 </a>
 
-                <a href="../pages/kontak.html">
+                <a href="../../pages/kontak.html">
                     Kontak
                 </a>
 
-                <a href="../index.html#topics">
+                <a href="../../index.html#topics">
                     Semua Topik
                 </a>
 
@@ -2959,33 +4492,45 @@ footer{
 
 
 <!-- =======================================================
-     LOCAL JAVASCRIPT
+     JAVASCRIPT
+     LOCAL ONLY
      ======================================================= -->
 
 <script>
 
 (function(){
 
+
     /* =====================================================
-       STICKY HEADER
+       HEADER
        ===================================================== */
 
     const header =
-        document.getElementById("siteHeader");
+        document.getElementById(
+            "header"
+        );
+
 
     function updateHeader(){
 
-        if(window.scrollY > 20){
+        if(
+            window.scrollY > 20
+        ){
 
-            header.classList.add("scrolled");
+            header.classList.add(
+                "scrolled"
+            );
 
         }else{
 
-            header.classList.remove("scrolled");
+            header.classList.remove(
+                "scrolled"
+            );
 
         }
 
     }
+
 
     window.addEventListener(
         "scroll",
@@ -2995,16 +4540,19 @@ footer{
         }
     );
 
+
     updateHeader();
 
 
 
     /* =====================================================
-       SCROLL REVEAL
+       REVEAL
        ===================================================== */
 
-    const revealItems =
-        document.querySelectorAll(".reveal");
+    const elements =
+        document.querySelectorAll(
+            ".reveal"
+        );
 
 
     if(
@@ -3043,20 +4591,22 @@ footer{
             );
 
 
-        revealItems.forEach(
-            function(item){
+        elements.forEach(
+            function(element){
 
-                observer.observe(item);
+                observer.observe(
+                    element
+                );
 
             }
         );
 
     }else{
 
-        revealItems.forEach(
-            function(item){
+        elements.forEach(
+            function(element){
 
-                item.classList.add(
+                element.classList.add(
                     "visible"
                 );
 
@@ -3065,9 +4615,84 @@ footer{
 
     }
 
+
+
+    /* =====================================================
+       HERO PORTRAIT PARALLAX
+       ===================================================== */
+
+    const portrait =
+        document.querySelector(
+            ".portrait"
+        );
+
+    const portraitFrame =
+        document.querySelector(
+            ".portrait-frame"
+        );
+
+
+    if(
+        portrait &&
+        portraitFrame
+    ){
+
+        window.addEventListener(
+            "mousemove",
+            function(event){
+
+                if(
+                    window.innerWidth < 850
+                ){
+
+                    return;
+
+                }
+
+
+                const x =
+                    (
+                        event.clientX
+                        /
+                        window.innerWidth
+                    ) - .5;
+
+                const y =
+                    (
+                        event.clientY
+                        /
+                        window.innerHeight
+                    ) - .5;
+
+
+                portrait.style.transform =
+                    "translate(calc(-50% + " +
+                    (x * 10) +
+                    "px), calc(-50% + " +
+                    (y * 8) +
+                    "px))";
+
+                portraitFrame.style.transform =
+                    "translate(calc(-50% + " +
+                    (x * -4) +
+                    "px), calc(-50% + " +
+                    (y * -3) +
+                    "px))";
+
+            },
+            {
+                passive:true
+            }
+        );
+
+    }
+
+
+
 })();
 
 </script>
+
 
 </body>
 </html>
