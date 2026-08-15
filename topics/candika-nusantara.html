@@ -1,1 +1,2922 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>candika nusantara — Mandala</title><link rel="stylesheet" href="../css/main.css"></head><body data-base="../"><header><div class="w nav"><a class="logo" href="../index.html"><div class="mark">✺</div><div><b>MANDALA</b><small>CHANNEL</small></div></a></div></header><section class="page"><div class="w"><div class="k">Topik Mandala</div><h1>candika nusantara</h1><p>Kumpulan artikel, video dan playlist Mandala tentang candika nusantara.</p></div></section><section><div class="w"><div class="head"><div><div class="k">Artikel</div><h2 class="title">Cerita pilihan</h2></div></div><div class="cards" data-render="articles"></div></div></section><section class="playlist"><div class="w"><div class="head"><div><div class="k">Serial</div><h2 class="title">Playlist terkait</h2></div></div><div class="playlists" data-render="playlists"></div></div></section><footer><div class="w"><div class="copy">© 2026 Mandala Channel</div></div></footer><script src="../js/main.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Candika Nusantara — Mandala Channel</title>
+
+<style>
+/* =========================================================
+   MANDALA CHANNEL
+   TOPIC PAGE — CANDIKA NUSANTARA
+   LOCAL / OFFLINE SAFE
+   Tidak menggunakan:
+   - Google Fonts
+   - CDN
+   - Unsplash
+   - API
+   - iframe
+   - external resource
+   ========================================================= */
+
+:root{
+    --navy:#082d56;
+    --navy-deep:#061f3c;
+    --navy-soft:#123f6c;
+
+    --ink:#172536;
+    --muted:#718091;
+
+    --paper:#f7f6f1;
+    --white:#ffffff;
+
+    --line:#e4e8ec;
+
+    --bronze:#a9823f;
+    --bronze-soft:#c2a66e;
+
+    --shadow:0 18px 50px rgba(6,31,60,.10);
+
+    --max-width:94vw;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+    scroll-padding-top:90px;
+}
+
+body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow-x:hidden;
+}
+
+img{
+    display:block;
+    width:100%;
+    max-width:100%;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font:inherit;
+}
+
+.w{
+    width:var(--max-width);
+    max-width:none;
+    margin-inline:auto;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.top{
+    height:28px;
+    background:var(--navy-deep);
+    color:#dbe5ef;
+
+    font-size:10px;
+    letter-spacing:.08em;
+}
+
+.top .w{
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.top-left{
+    opacity:.85;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.top-dot{
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:var(--bronze-soft);
+}
+
+
+/* =========================================================
+   HEADER / NAVIGATION
+   ========================================================= */
+
+.site-header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:74px;
+
+    background:rgba(255,255,255,.97);
+
+    border-bottom:1px solid rgba(8,45,86,.08);
+
+    transition:
+        height .28s ease,
+        box-shadow .28s ease,
+        background .28s ease;
+}
+
+.site-header.scrolled{
+    height:60px;
+
+    background:rgba(255,255,255,.95);
+
+    box-shadow:
+        0 7px 24px rgba(6,31,60,.10);
+}
+
+.nav{
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+
+/* logo */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    flex-shrink:0;
+}
+
+.logo-mark{
+    width:39px;
+    height:39px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid var(--bronze);
+
+    color:var(--bronze);
+
+    font-family:Georgia,serif;
+    font-size:23px;
+
+    transform:rotate(0deg);
+
+    transition:
+        transform .45s ease,
+        background .3s ease,
+        color .3s ease;
+}
+
+.logo:hover .logo-mark{
+    transform:rotate(45deg);
+    background:var(--bronze);
+    color:white;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+}
+
+.logo-text strong{
+    color:var(--navy);
+
+    font-family:Georgia,serif;
+
+    font-size:18px;
+    letter-spacing:.14em;
+}
+
+.logo-text small{
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:7px;
+    letter-spacing:.34em;
+}
+
+
+/* desktop menu */
+
+.nav-menu{
+    display:flex;
+    align-items:center;
+    gap:27px;
+
+    height:100%;
+}
+
+.nav-menu a{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    height:100%;
+
+    color:#536477;
+
+    font-size:11px;
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    transition:color .25s ease;
+}
+
+.nav-menu a::after{
+    content:"";
+
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:2px;
+
+    background:var(--bronze);
+
+    transform:scaleX(0);
+    transform-origin:center;
+
+    transition:transform .25s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+    color:var(--navy);
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after{
+    transform:scaleX(1);
+}
+
+
+/* =========================================================
+   HERO TOPIC
+   ========================================================= */
+
+.topic-hero{
+    position:relative;
+
+    min-height:570px;
+
+    display:flex;
+    align-items:center;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            105deg,
+            var(--navy-deep) 0%,
+            var(--navy) 52%,
+            #174d79 100%
+        );
+
+    color:white;
+}
+
+.topic-hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:520px;
+    height:520px;
+
+    right:-180px;
+    top:-170px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:50%;
+}
+
+.topic-hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    right:-100px;
+    bottom:-170px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:50%;
+}
+
+.hero-grid{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.05fr)
+        minmax(350px,.95fr);
+
+    align-items:center;
+
+    gap:7vw;
+
+    min-height:570px;
+}
+
+
+/* hero copy */
+
+.hero-copy{
+    padding:70px 0;
+}
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    margin-bottom:24px;
+
+    color:#d8c291;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:.22em;
+    text-transform:uppercase;
+}
+
+.eyebrow::before{
+    content:"";
+
+    width:34px;
+    height:1px;
+
+    background:var(--bronze-soft);
+}
+
+.hero-copy h1{
+    margin:0;
+
+    max-width:700px;
+
+    font-family:Georgia,"Times New Roman",serif;
+
+    font-size:
+        clamp(48px,7vw,92px);
+
+    font-weight:400;
+
+    line-height:.94;
+
+    letter-spacing:-.045em;
+}
+
+.hero-copy h1 span{
+    display:block;
+
+    color:#c9a967;
+}
+
+.hero-description{
+    max-width:570px;
+
+    margin:30px 0 0;
+
+    color:#c7d3df;
+
+    font-size:15px;
+
+    line-height:1.85;
+}
+
+.hero-actions{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    margin-top:34px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:46px;
+
+    padding:0 22px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:.12em;
+    text-transform:uppercase;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.btn-primary{
+    background:var(--bronze);
+    border-color:var(--bronze);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#bb9854;
+}
+
+.btn-outline{
+    color:white;
+}
+
+.btn-outline:hover{
+    background:white;
+    color:var(--navy);
+}
+
+
+/* hero visual */
+
+.hero-visual{
+    position:relative;
+
+    min-height:460px;
+}
+
+.hero-card-main{
+    position:absolute;
+
+    width:min(380px,72%);
+
+    right:4%;
+    top:50%;
+
+    transform:
+        translateY(-50%)
+        rotate(2deg);
+
+    padding:11px;
+
+    background:white;
+
+    box-shadow:
+        0 28px 65px rgba(0,0,0,.25);
+
+    transition:
+        transform .5s ease;
+}
+
+.hero-card-main:hover{
+    transform:
+        translateY(-50%)
+        rotate(0deg)
+        scale(1.015);
+}
+
+.hero-card-main .visual{
+    aspect-ratio:4 / 5;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1c4b6f,
+            #c09a58
+        );
+}
+
+.hero-card-main .visual-inner{
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:flex-end;
+
+    padding:26px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.72),
+            rgba(0,0,0,0) 65%
+        );
+}
+
+.visual-title{
+    color:white;
+
+    font-family:Georgia,serif;
+
+    font-size:23px;
+
+    line-height:1.2;
+}
+
+.hero-card-small{
+    position:absolute;
+
+    width:205px;
+
+    left:0;
+    top:17%;
+
+    padding:8px;
+
+    background:white;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.18);
+
+    transform:rotate(-6deg);
+
+    transition:
+        transform .4s ease;
+}
+
+.hero-card-small:hover{
+    transform:rotate(-2deg) translateY(-5px);
+}
+
+.hero-card-small .small-visual{
+    aspect-ratio:1 / 1.15;
+
+    background:
+        linear-gradient(
+            145deg,
+            #c7a663,
+            #315e7d
+        );
+}
+
+.hero-card-small-label{
+    padding:12px 7px 8px;
+
+    color:var(--navy);
+
+    font-family:Georgia,serif;
+
+    font-size:13px;
+    line-height:1.35;
+}
+
+.hero-number{
+    position:absolute;
+
+    right:0;
+    bottom:11%;
+
+    color:rgba(255,255,255,.08);
+
+    font-family:Georgia,serif;
+
+    font-size:170px;
+    line-height:1;
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.intro{
+    padding:95px 0 80px;
+
+    background:var(--white);
+}
+
+.intro-grid{
+    display:grid;
+
+    grid-template-columns:
+        .75fr
+        1.25fr;
+
+    gap:8vw;
+
+    align-items:start;
+}
+
+.section-label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:var(--bronze);
+
+    font-size:9px;
+    font-weight:700;
+
+    letter-spacing:.2em;
+    text-transform:uppercase;
+}
+
+.section-label::before{
+    content:"";
+
+    width:30px;
+    height:1px;
+
+    background:var(--bronze);
+}
+
+.intro h2{
+    margin:16px 0 0;
+
+    color:var(--navy);
+
+    font-family:Georgia,serif;
+
+    font-size:
+        clamp(30px,4vw,52px);
+
+    font-weight:400;
+
+    line-height:1.08;
+
+    letter-spacing:-.035em;
+}
+
+.intro-copy p{
+    margin:0 0 20px;
+
+    color:#5f6e7d;
+
+    font-size:15px;
+
+    line-height:1.9;
+}
+
+.intro-copy p:first-child{
+    color:var(--ink);
+
+    font-size:18px;
+
+    line-height:1.75;
+}
+
+
+/* =========================================================
+   FEATURE STORY
+   ========================================================= */
+
+.feature{
+    padding:0 0 100px;
+
+    background:var(--white);
+}
+
+.feature-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.25fr
+        .75fr;
+
+    min-height:490px;
+}
+
+.feature-visual{
+    position:relative;
+
+    min-height:490px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #173f61,
+            #b18b4d
+        );
+}
+
+.feature-visual::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            45deg,
+            rgba(255,255,255,.07) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(255,255,255,.07) 75%
+        );
+
+    background-size:50px 50px;
+
+    opacity:.35;
+}
+
+.feature-visual::after{
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.20);
+
+    border-radius:50%;
+}
+
+.feature-symbol{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    color:rgba(255,255,255,.7);
+
+    font-family:Georgia,serif;
+
+    font-size:145px;
+
+    line-height:1;
+}
+
+.feature-content{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    padding:
+        clamp(35px,5vw,70px);
+
+    background:var(--navy);
+
+    color:white;
+}
+
+.feature-content .section-label{
+    color:#d5b878;
+}
+
+.feature-content .section-label::before{
+    background:#d5b878;
+}
+
+.feature-content h2{
+    margin:20px 0;
+
+    font-family:Georgia,serif;
+
+    font-size:
+        clamp(30px,3.5vw,48px);
+
+    font-weight:400;
+
+    line-height:1.1;
+}
+
+.feature-content p{
+    margin:0;
+
+    color:#c3cfdb;
+
+    font-size:14px;
+
+    line-height:1.85;
+}
+
+.feature-meta{
+    margin-top:25px;
+
+    color:#a9b7c5;
+
+    font-size:9px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   ARTICLE SECTION
+   ========================================================= */
+
+.content-section{
+    padding:100px 0;
+
+    background:var(--paper);
+}
+
+.section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:30px;
+
+    margin-bottom:40px;
+}
+
+.section-head h2{
+    margin:12px 0 0;
+
+    color:var(--navy);
+
+    font-family:Georgia,serif;
+
+    font-size:
+        clamp(34px,4vw,54px);
+
+    font-weight:400;
+
+    line-height:1;
+}
+
+.section-head-copy{
+    max-width:420px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.7;
+
+    text-align:right;
+}
+
+
+/* article grid */
+
+.article-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:25px;
+}
+
+.article-card{
+    position:relative;
+
+    background:white;
+
+    border:1px solid var(--line);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.article-card:hover{
+    transform:translateY(-7px);
+
+    box-shadow:var(--shadow);
+}
+
+.article-thumb{
+    position:relative;
+
+    aspect-ratio:16 / 10;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #163f62,
+            #c19a59
+        );
+}
+
+.article-thumb::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8,45,86,.75),
+            rgba(169,130,63,.30)
+        );
+}
+
+.article-pattern{
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.30);
+
+    border-radius:50%;
+}
+
+.article-pattern::before,
+.article-pattern::after{
+    content:"";
+
+    position:absolute;
+
+    inset:25px;
+
+    border:
+        1px solid rgba(255,255,255,.20);
+
+    border-radius:50%;
+}
+
+.article-pattern::after{
+    inset:53px;
+}
+
+.article-badge{
+    position:absolute;
+
+    left:15px;
+    top:15px;
+
+    padding:7px 9px;
+
+    background:rgba(255,255,255,.94);
+
+    color:var(--navy);
+
+    font-size:8px;
+    font-weight:700;
+
+    letter-spacing:.1em;
+    text-transform:uppercase;
+}
+
+.article-body{
+    padding:24px;
+}
+
+.article-date{
+    color:var(--bronze);
+
+    font-size:8px;
+    font-weight:700;
+
+    letter-spacing:.16em;
+    text-transform:uppercase;
+}
+
+.article-card h3{
+    margin:12px 0 14px;
+
+    color:var(--navy);
+
+    font-family:Georgia,serif;
+
+    font-size:22px;
+
+    font-weight:400;
+
+    line-height:1.25;
+}
+
+.article-card p{
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+.read-more{
+    display:inline-flex;
+
+    margin-top:20px;
+
+    color:var(--bronze);
+
+    font-size:9px;
+    font-weight:700;
+
+    letter-spacing:.12em;
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   PLAYLIST
+   ========================================================= */
+
+.playlist-section{
+    padding:100px 0;
+
+    background:white;
+}
+
+.playlist-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:18px;
+}
+
+.playlist-card{
+    position:relative;
+
+    overflow:hidden;
+
+    background:var(--navy);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.playlist-card:hover{
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 20px 45px rgba(6,31,60,.18);
+}
+
+.playlist-thumb{
+    position:relative;
+
+    aspect-ratio:16 / 10;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #123e65,
+            #a9823f
+        );
+}
+
+.playlist-thumb img{
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:.92;
+
+    transition:
+        transform .6s ease;
+}
+
+.playlist-card:hover .playlist-thumb img{
+    transform:scale(1.07);
+}
+
+.playlist-overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(6,31,60,.85),
+            transparent 65%
+        );
+}
+
+.playlist-count{
+    position:absolute;
+
+    left:12px;
+    bottom:12px;
+
+    padding:6px 8px;
+
+    background:rgba(255,255,255,.92);
+
+    color:var(--navy);
+
+    font-size:8px;
+    font-weight:700;
+
+    letter-spacing:.08em;
+}
+
+.playlist-body{
+    padding:20px 19px 22px;
+}
+
+.playlist-category{
+    color:#cdb071;
+
+    font-size:8px;
+
+    letter-spacing:.13em;
+    text-transform:uppercase;
+}
+
+.playlist-card h3{
+    margin:9px 0 0;
+
+    color:white;
+
+    font-family:Georgia,serif;
+
+    font-size:18px;
+
+    font-weight:400;
+
+    line-height:1.25;
+}
+
+
+/* =========================================================
+   TOPIC LINKS
+   ========================================================= */
+
+.other-topics{
+    padding:100px 0;
+
+    background:var(--navy-deep);
+
+    color:white;
+}
+
+.other-topics .section-label{
+    color:#d5b878;
+}
+
+.other-topics .section-label::before{
+    background:#d5b878;
+}
+
+.other-topics h2{
+    margin:13px 0 42px;
+
+    font-family:Georgia,serif;
+
+    font-size:
+        clamp(34px,4vw,55px);
+
+    font-weight:400;
+}
+
+.topic-list{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    border-top:1px solid rgba(255,255,255,.14);
+}
+
+.topic-link{
+    position:relative;
+
+    min-height:135px;
+
+    padding:30px 25px;
+
+    border-right:1px solid rgba(255,255,255,.14);
+    border-bottom:1px solid rgba(255,255,255,.14);
+
+    transition:
+        background .3s ease,
+        padding-left .3s ease;
+}
+
+.topic-link:nth-child(3n){
+    border-right:0;
+}
+
+.topic-link:hover{
+    padding-left:33px;
+
+    background:rgba(255,255,255,.06);
+}
+
+.topic-index{
+    color:#9fb1c3;
+
+    font-size:8px;
+
+    letter-spacing:.15em;
+}
+
+.topic-link h3{
+    margin:10px 0 0;
+
+    color:white;
+
+    font-family:Georgia,serif;
+
+    font-size:21px;
+
+    font-weight:400;
+}
+
+.topic-arrow{
+    position:absolute;
+
+    right:25px;
+    bottom:27px;
+
+    color:#c6a664;
+
+    font-size:16px;
+
+    transition:transform .3s ease;
+}
+
+.topic-link:hover .topic-arrow{
+    transform:translateX(5px);
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.cta{
+    padding:90px 0;
+
+    background:var(--paper);
+}
+
+.cta-box{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:
+        clamp(45px,6vw,80px);
+
+    background:
+        linear-gradient(
+            110deg,
+            #f0ede3,
+            #faf9f5
+        );
+
+    border:1px solid var(--line);
+}
+
+.cta-box::after{
+    content:"✺";
+
+    position:absolute;
+
+    right:5%;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:rgba(169,130,63,.10);
+
+    font-family:Georgia,serif;
+
+    font-size:190px;
+}
+
+.cta-content{
+    position:relative;
+    z-index:2;
+
+    max-width:680px;
+}
+
+.cta h2{
+    margin:15px 0;
+
+    color:var(--navy);
+
+    font-family:Georgia,serif;
+
+    font-size:
+        clamp(34px,4vw,55px);
+
+    font-weight:400;
+
+    line-height:1.08;
+}
+
+.cta p{
+    max-width:600px;
+
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+.cta .btn{
+    margin-top:28px;
+
+    background:var(--navy);
+
+    border-color:var(--navy);
+
+    color:white;
+}
+
+.cta .btn:hover{
+    background:var(--bronze);
+
+    border-color:var(--bronze);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer{
+    padding:65px 0 30px;
+
+    background:#041a31;
+
+    color:#a9b7c5;
+}
+
+.footer-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.2fr
+        .8fr
+        .8fr;
+
+    gap:60px;
+
+    padding-bottom:55px;
+}
+
+.footer-brand{
+    max-width:360px;
+}
+
+.footer-brand strong{
+    display:block;
+
+    color:white;
+
+    font-family:Georgia,serif;
+
+    font-size:21px;
+
+    letter-spacing:.12em;
+}
+
+.footer-brand small{
+    display:block;
+
+    margin-top:6px;
+
+    color:#71869a;
+
+    font-size:8px;
+
+    letter-spacing:.3em;
+}
+
+.footer-brand p{
+    margin:22px 0 0;
+
+    color:#8397aa;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+.footer-column h4{
+    margin:0 0 18px;
+
+    color:#d4b774;
+
+    font-size:9px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+.footer-column a{
+    display:block;
+
+    margin:0 0 11px;
+
+    color:#92a5b7;
+
+    font-size:10px;
+
+    transition:color .2s ease;
+}
+
+.footer-column a:hover{
+    color:white;
+}
+
+.footer-bottom{
+    padding-top:25px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+
+    color:#617589;
+
+    font-size:9px;
+
+    letter-spacing:.04em;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+.reveal{
+    opacity:0;
+
+    transform:translateY(25px);
+
+    transition:
+        opacity .75s ease,
+        transform .75s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+
+    transform:none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width:1100px){
+
+    .nav-menu{
+        gap:17px;
+    }
+
+    .nav-menu a{
+        font-size:9px;
+    }
+
+    .hero-grid{
+        gap:4vw;
+    }
+
+    .hero-card-main{
+        width:70%;
+    }
+
+    .playlist-grid{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+}
+
+
+@media (max-width:850px){
+
+    .top-right{
+        display:none;
+    }
+
+    .site-header{
+        height:64px;
+    }
+
+    .site-header.scrolled{
+        height:58px;
+    }
+
+    .nav-menu{
+        display:none;
+    }
+
+    .topic-hero{
+        min-height:auto;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+
+        min-height:auto;
+
+        padding-bottom:70px;
+    }
+
+    .hero-copy{
+        padding:75px 0 30px;
+    }
+
+    .hero-visual{
+        min-height:420px;
+    }
+
+    .hero-card-main{
+        right:7%;
+        width:min(340px,70%);
+    }
+
+    .hero-card-small{
+        left:5%;
+        width:175px;
+    }
+
+    .intro-grid{
+        grid-template-columns:1fr;
+
+        gap:35px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .feature-visual{
+        min-height:390px;
+    }
+
+    .article-grid{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+    .topic-list{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+    .topic-link:nth-child(3n){
+        border-right:1px solid rgba(255,255,255,.14);
+    }
+
+    .topic-link:nth-child(2n){
+        border-right:0;
+    }
+
+    .section-head{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .section-head-copy{
+        text-align:left;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-brand{
+        grid-column:1 / -1;
+    }
+}
+
+
+@media (max-width:560px){
+
+    :root{
+        --max-fluid:89vw;
+    }
+
+    .top{
+        height:24px;
+
+        font-size:8px;
+    }
+
+    .logo-mark{
+        width:34px;
+        height:34px;
+
+        font-size:20px;
+    }
+
+    .logo-text strong{
+        font-size:16px;
+    }
+
+    .logo-text small{
+        font-size:6px;
+    }
+
+    .hero-copy{
+        padding-top:60px;
+    }
+
+    .hero-copy h1{
+        font-size:
+            clamp(48px,16vw,72px);
+    }
+
+    .hero-description{
+        font-size:13px;
+    }
+
+    .hero-actions{
+        flex-wrap:wrap;
+    }
+
+    .hero-visual{
+        min-height:360px;
+    }
+
+    .hero-card-main{
+        width:72%;
+        right:2%;
+    }
+
+    .hero-card-small{
+        width:135px;
+        left:0;
+        top:14%;
+    }
+
+    .hero-number{
+        font-size:100px;
+        bottom:4%;
+    }
+
+    .intro{
+        padding:70px 0 60px;
+    }
+
+    .feature{
+        padding-bottom:70px;
+    }
+
+    .feature-visual{
+        min-height:300px;
+    }
+
+    .feature-symbol{
+        font-size:100px;
+    }
+
+    .feature-content{
+        padding:38px 25px;
+    }
+
+    .content-section,
+    .playlist-section,
+    .other-topics{
+        padding:70px 0;
+    }
+
+    .article-grid{
+        grid-template-columns:1fr;
+
+        gap:18px;
+    }
+
+    .playlist-grid{
+        grid-template-columns:1fr 1fr;
+
+        gap:12px;
+    }
+
+    .playlist-body{
+        padding:15px;
+    }
+
+    .playlist-card h3{
+        font-size:15px;
+    }
+
+    .topic-list{
+        grid-template-columns:1fr;
+    }
+
+    .topic-link,
+    .topic-link:nth-child(2n),
+    .topic-link:nth-child(3n){
+        border-right:0;
+    }
+
+    .cta{
+        padding:65px 0;
+    }
+
+    .cta-box{
+        padding:38px 25px;
+    }
+
+    .cta-box::after{
+        font-size:120px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .footer-brand{
+        grid-column:auto;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
+
+    .reveal{
+        opacity:1;
+        transform:none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     TOP BAR
+     ======================================================= -->
+
+<div class="top">
+    <div class="w">
+
+        <div class="top-left">
+            MANDALA CHANNEL
+        </div>
+
+        <div class="top-right">
+            <span>MEDIA DHARMA NUSANTARA</span>
+            <span class="top-dot"></span>
+            <span>2026</span>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
+
+<header class="site-header" id="siteHeader">
+
+    <div class="w nav">
+
+        <a class="logo" href="../index.html">
+
+            <div class="logo-mark">✺</div>
+
+            <div class="logo-text">
+                <strong>MANDALA</strong>
+                <small>CHANNEL</small>
+            </div>
+
+        </a>
+
+
+        <nav class="nav-menu">
+
+            <a href="../index.html">
+                HOME
+            </a>
+
+            <a href="../pages/artikel.html">
+                ARTIKEL
+            </a>
+
+            <a href="../pages/video.html">
+                VIDEO
+            </a>
+
+            <a href="../pages/podcast.html">
+                PODCAST
+            </a>
+
+            <a href="../pages/playlist.html">
+                PLAYLIST
+            </a>
+
+            <a class="active" href="#topik">
+                TOPIK
+            </a>
+
+            <a href="../pages/tentang-kami.html">
+                TENTANG
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
+<main id="topik">
+
+<section class="topic-hero">
+
+    <div class="w hero-grid">
+
+        <div class="hero-copy reveal">
+
+            <div class="eyebrow">
+                Topik Mandala
+            </div>
+
+            <h1>
+                Candika
+                <span>Nusantara</span>
+            </h1>
+
+            <p class="hero-description">
+                Ruang untuk menyusuri kembali jejak candi,
+                sejarah, kebudayaan, dan ingatan Nusantara
+                yang menjadi bagian dari perjalanan panjang
+                peradaban Hindu di Indonesia.
+            </p>
+
+            <div class="hero-actions">
+
+                <a
+                    class="btn btn-primary"
+                    href="#artikel"
+                >
+                    Jelajahi Cerita
+                </a>
+
+                <a
+                    class="btn btn-outline"
+                    href="#playlist"
+                >
+                    Lihat Playlist
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual reveal">
+
+            <div class="hero-card-small">
+
+                <div class="small-visual"></div>
+
+                <div class="hero-card-small-label">
+                    Jejak warisan
+                    Nusantara
+                </div>
+
+            </div>
+
+
+            <div class="hero-card-main">
+
+                <div class="visual">
+
+                    <div class="visual-inner">
+
+                        <div class="visual-title">
+                            Menyusuri
+                            Jejak Candika
+                            Nusantara
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-number">
+                08
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     INTRO
+     ======================================================= -->
+
+<section class="intro">
+
+    <div class="w intro-grid">
+
+        <div class="reveal">
+
+            <div class="section-label">
+                Tentang Topik
+            </div>
+
+            <h2>
+                Membaca kembali
+                warisan yang
+                ditinggalkan zaman.
+            </h2>
+
+        </div>
+
+
+        <div class="intro-copy reveal">
+
+            <p>
+                Candika Nusantara adalah ruang editorial
+                Mandala untuk mengajak pembaca melihat
+                kembali peninggalan sejarah dan kebudayaan
+                melalui sudut pandang yang lebih dekat
+                dengan kehidupan Nusantara.
+            </p>
+
+            <p>
+                Candi tidak hanya hadir sebagai bangunan
+                masa lalu. Di dalamnya tersimpan pengetahuan,
+                simbol, tradisi, perjalanan masyarakat,
+                serta jejak hubungan manusia dengan ruang
+                dan alam.
+            </p>
+
+            <p>
+                Melalui artikel, video, dan serial pilihan,
+                Mandala menghadirkan cerita tentang warisan
+                tersebut secara lebih kontekstual dan mudah
+                dinikmati oleh generasi hari ini.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     FEATURE
+     ======================================================= -->
+
+<section class="feature">
+
+    <div class="w feature-grid">
+
+        <div class="feature-visual reveal">
+
+            <div class="feature-symbol">
+                ✺
+            </div>
+
+        </div>
+
+
+        <div class="feature-content reveal">
+
+            <div class="section-label">
+                Cerita Utama
+            </div>
+
+            <h2>
+                Dari batu,
+                menjadi cerita.
+            </h2>
+
+            <p>
+                Setiap peninggalan menyimpan lebih dari
+                sekadar bentuk arsitektur. Ia menjadi pintu
+                untuk memahami bagaimana masyarakat
+                Nusantara membangun pengetahuan, keyakinan,
+                seni, dan kehidupan bersama.
+            </p>
+
+            <div class="feature-meta">
+                CANDIKA NUSANTARA · MANDALA CHANNEL
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     ARTICLES
+     ======================================================= -->
+
+<section
+    class="content-section"
+    id="artikel"
+>
+
+    <div class="w">
+
+        <div class="section-head reveal">
+
+            <div>
+
+                <div class="section-label">
+                    Artikel
+                </div>
+
+                <h2>
+                    Cerita pilihan
+                </h2>
+
+            </div>
+
+            <div class="section-head-copy">
+                Temukan tulisan Mandala tentang sejarah,
+                warisan, budaya, dan perjalanan Candika
+                Nusantara.
+            </div>
+
+        </div>
+
+
+        <div class="article-grid">
+
+            <!-- ARTICLE 01 -->
+
+            <article class="article-card reveal">
+
+                <a href="../pages/artikel-detail.html">
+
+                    <div class="article-thumb">
+
+                        <div class="article-pattern"></div>
+
+                        <span class="article-badge">
+                            Tradisi &amp; Budaya
+                        </span>
+
+                    </div>
+
+                    <div class="article-body">
+
+                        <div class="article-date">
+                            13 Agustus 2026
+                        </div>
+
+                        <h3>
+                            Menjaga Jejak Dharma
+                            di Tengah Perubahan Zaman
+                        </h3>
+
+                        <p>
+                            Membaca kembali warisan
+                            pengetahuan dan nilai yang
+                            tetap hidup di Nusantara.
+                        </p>
+
+                        <span class="read-more">
+                            Baca selengkapnya →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+            <!-- ARTICLE 02 -->
+
+            <article class="article-card reveal">
+
+                <a href="../pages/artikel-detail.html">
+
+                    <div class="article-thumb">
+
+                        <div class="article-pattern"></div>
+
+                        <span class="article-badge">
+                            Candika Nusantara
+                        </span>
+
+                    </div>
+
+                    <div class="article-body">
+
+                        <div class="article-date">
+                            12 Agustus 2026
+                        </div>
+
+                        <h3>
+                            Mengenal Kembali
+                            Jejak Hindu Jawa
+                            di Nusantara
+                        </h3>
+
+                        <p>
+                            Menelusuri hubungan sejarah,
+                            kebudayaan, dan kehidupan
+                            masyarakat Jawa.
+                        </p>
+
+                        <span class="read-more">
+                            Baca selengkapnya →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+            <!-- ARTICLE 03 -->
+
+            <article class="article-card reveal">
+
+                <a href="../pages/artikel-detail.html">
+
+                    <div class="article-thumb">
+
+                        <div class="article-pattern"></div>
+
+                        <span class="article-badge">
+                            Sejarah
+                        </span>
+
+                    </div>
+
+                    <div class="article-body">
+
+                        <div class="article-date">
+                            11 Agustus 2026
+                        </div>
+
+                        <h3>
+                            Ketika Warisan Menjadi
+                            Jembatan Pengetahuan
+                        </h3>
+
+                        <p>
+                            Memahami peninggalan masa lalu
+                            melalui cerita dan konteks
+                            kehidupan hari ini.
+                        </p>
+
+                        <span class="read-more">
+                            Baca selengkapnya →
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     PLAYLIST
+     ======================================================= -->
+
+<section
+    class="playlist-section"
+    id="playlist"
+>
+
+    <div class="w">
+
+        <div class="section-head reveal">
+
+            <div>
+
+                <div class="section-label">
+                    Serial Video
+                </div>
+
+                <h2>
+                    Playlist terkait
+                </h2>
+
+            </div>
+
+            <div class="section-head-copy">
+                Ikuti rangkaian video Mandala yang
+                berkaitan dengan Candika Nusantara
+                dan warisan budaya.
+            </div>
+
+        </div>
+
+
+        <div class="playlist-grid">
+
+
+            <!-- PLAYLIST 01 -->
+
+            <article class="playlist-card reveal">
+
+                <a href="../pages/playlist-detail.html?id=3">
+
+                    <div class="playlist-thumb">
+
+                        <img
+                            src="../assets/images/playlists/playlist-03.jpg"
+                            alt="Candika Nusantara"
+                        >
+
+                        <div class="playlist-overlay"></div>
+
+                        <span class="playlist-count">
+                            2 VIDEO
+                        </span>
+
+                    </div>
+
+                    <div class="playlist-body">
+
+                        <div class="playlist-category">
+                            Candika Nusantara
+                        </div>
+
+                        <h3>
+                            CANDIKA NUSANTARA
+                        </h3>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+            <!-- PLAYLIST 02 -->
+
+            <article class="playlist-card reveal">
+
+                <a href="../pages/playlist-detail.html?id=9">
+
+                    <div class="playlist-thumb">
+
+                        <img
+                            src="../assets/images/playlists/playlist-09.jpg"
+                            alt="Tradisi dan Budaya Hindu Jawa"
+                        >
+
+                        <div class="playlist-overlay"></div>
+
+                        <span class="playlist-count">
+                            269 VIDEO
+                        </span>
+
+                    </div>
+
+                    <div class="playlist-body">
+
+                        <div class="playlist-category">
+                            Tradisi &amp; Budaya
+                        </div>
+
+                        <h3>
+                            TRADISI DAN BUDAYA
+                            HINDU JAWA
+                        </h3>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+            <!-- PLAYLIST 03 -->
+
+            <article class="playlist-card reveal">
+
+                <a href="../pages/playlist-detail.html?id=7">
+
+                    <div class="playlist-thumb">
+
+                        <img
+                            src="../assets/images/playlists/playlist-07.jpg"
+                            alt="Jelajah Nusantara"
+                        >
+
+                        <div class="playlist-overlay"></div>
+
+                        <span class="playlist-count">
+                            83 VIDEO
+                        </span>
+
+                    </div>
+
+                    <div class="playlist-body">
+
+                        <div class="playlist-category">
+                            Jelajah Nusantara
+                        </div>
+
+                        <h3>
+                            JELAJAH
+                            NUSANTARA
+                        </h3>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+            <!-- PLAYLIST 04 -->
+
+            <article class="playlist-card reveal">
+
+                <a href="../pages/playlist-detail.html?id=13">
+
+                    <div class="playlist-thumb">
+
+                        <img
+                            src="../assets/images/playlists/playlist-13.jpg"
+                            alt="Mengenal Kembali Sesaji Hindu Jawa"
+                        >
+
+                        <div class="playlist-overlay"></div>
+
+                        <span class="playlist-count">
+                            57 VIDEO
+                        </span>
+
+                    </div>
+
+                    <div class="playlist-body">
+
+                        <div class="playlist-category">
+                            Tradisi &amp; Budaya
+                        </div>
+
+                        <h3>
+                            MENGENAL KEMBALI
+                            SESAJI HINDU JAWA
+                        </h3>
+
+                    </div>
+
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     OTHER TOPICS
+     ======================================================= -->
+
+<section class="other-topics">
+
+    <div class="w">
+
+        <div class="section-label reveal">
+            Eksplorasi
+        </div>
+
+        <h2 class="reveal">
+            Topik Mandala lainnya
+        </h2>
+
+
+        <div class="topic-list">
+
+
+            <a
+                class="topic-link reveal"
+                href="tokoh-hindu.html"
+            >
+
+                <span class="topic-index">
+                    01
+                </span>
+
+                <h3>
+                    Tokoh Hindu
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                class="topic-link reveal"
+                href="dharma-ajaran.html"
+            >
+
+                <span class="topic-index">
+                    02
+                </span>
+
+                <h3>
+                    Dharma &amp; Ajaran
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                class="topic-link reveal"
+                href="dharmika.html"
+            >
+
+                <span class="topic-index">
+                    03
+                </span>
+
+                <h3>
+                    Dharmika
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                class="topic-link reveal"
+                href="jelajah-nusantara.html"
+            >
+
+                <span class="topic-index">
+                    04
+                </span>
+
+                <h3>
+                    Jelajah Nusantara
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                class="topic-link reveal"
+                href="tradisi-budaya.html"
+            >
+
+                <span class="topic-index">
+                    05
+                </span>
+
+                <h3>
+                    Tradisi &amp; Budaya
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                class="topic-link reveal"
+                href="spiritual.html"
+            >
+
+                <span class="topic-index">
+                    06
+                </span>
+
+                <h3>
+                    Spiritual
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                class="topic-link reveal"
+                href="kabar-umat.html"
+            >
+
+                <span class="topic-index">
+                    07
+                </span>
+
+                <h3>
+                    Kabar Umat
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                class="topic-link reveal"
+                href="ekonomi-hindu.html"
+            >
+
+                <span class="topic-index">
+                    08
+                </span>
+
+                <h3>
+                    Ekonomi &amp;
+                    Kemandirian
+                </h3>
+
+                <span class="topic-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     CTA
+     ======================================================= -->
+
+<section class="cta">
+
+    <div class="w">
+
+        <div class="cta-box reveal">
+
+            <div class="cta-content">
+
+                <div class="section-label">
+                    Mandala Channel
+                </div>
+
+                <h2>
+                    Temukan cerita
+                    Nusantara lainnya.
+                </h2>
+
+                <p>
+                    Jelajahi artikel, video, podcast,
+                    dan playlist Mandala dari berbagai
+                    topik yang menghubungkan sejarah,
+                    budaya, Dharma, dan kehidupan
+                    masyarakat Nusantara.
+                </p>
+
+                <a
+                    href="../index.html"
+                    class="btn"
+                >
+                    Kembali ke Beranda
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
+<footer>
+
+    <div class="w">
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <strong>
+                    MANDALA
+                </strong>
+
+                <small>
+                    CHANNEL
+                </small>
+
+                <p>
+                    Media yang menghadirkan cerita,
+                    pengetahuan, budaya, dan kehidupan
+                    Dharma Nusantara melalui artikel,
+                    video, podcast, dan berbagai
+                    ruang eksplorasi.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Jelajahi
+                </h4>
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="../pages/artikel.html">
+                    Artikel
+                </a>
+
+                <a href="../pages/video.html">
+                    Video
+                </a>
+
+                <a href="../pages/podcast.html">
+                    Podcast
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Mandala
+                </h4>
+
+                <a href="../pages/playlist.html">
+                    Playlist
+                </a>
+
+                <a href="../pages/tentang-kami.html">
+                    Tentang Kami
+                </a>
+
+                <a href="../pages/kontak.html">
+                    Kontak
+                </a>
+
+                <a href="../index.html#topics">
+                    Semua Topik
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Mandala Channel
+            </span>
+
+            <span>
+                Media Dharma Nusantara
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =======================================================
+     JAVASCRIPT
+     LOCAL ONLY
+     Tidak fetch internet / API / CDN
+     ======================================================= -->
+
+<script>
+
+(function(){
+
+    /* ---------------------------------------------
+       Sticky header
+       --------------------------------------------- */
+
+    const header =
+        document.getElementById("siteHeader");
+
+    function updateHeader(){
+
+        if(window.scrollY > 20){
+
+            header.classList.add("scrolled");
+
+        }else{
+
+            header.classList.remove("scrolled");
+
+        }
+
+    }
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        {passive:true}
+    );
+
+    updateHeader();
+
+
+    /* ---------------------------------------------
+       Scroll reveal
+       --------------------------------------------- */
+
+    const revealItems =
+        document.querySelectorAll(".reveal");
+
+    if(
+        "IntersectionObserver"
+        in window
+    ){
+
+        const observer =
+            new IntersectionObserver(
+                function(entries){
+
+                    entries.forEach(
+                        function(entry){
+
+                            if(entry.isIntersecting){
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold:.12
+                }
+            );
+
+        revealItems.forEach(
+            function(item){
+
+                observer.observe(item);
+
+            }
+        );
+
+    }else{
+
+        revealItems.forEach(
+            function(item){
+
+                item.classList.add(
+                    "visible"
+                );
+
+            }
+        );
+
+    }
+
+})();
+
+</script>
+
+</body>
+</html>
