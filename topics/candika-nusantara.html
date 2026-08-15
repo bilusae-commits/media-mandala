@@ -10,14 +10,6 @@
 /* =========================================================
    MANDALA CHANNEL
    TOPIC PAGE — CANDIKA NUSANTARA
-   LOCAL / OFFLINE SAFE
-   Tidak menggunakan:
-   - Google Fonts
-   - CDN
-   - Unsplash
-   - API
-   - iframe
-   - external resource
    ========================================================= */
 
 :root{
@@ -91,6 +83,7 @@ button{
 
 .top{
     height:28px;
+
     background:var(--navy-deep);
     color:#dbe5ef;
 
@@ -119,13 +112,15 @@ button{
 .top-dot{
     width:4px;
     height:4px;
+
     border-radius:50%;
+
     background:var(--bronze-soft);
 }
 
 
 /* =========================================================
-   HEADER / NAVIGATION
+   HEADER
    ========================================================= */
 
 .site-header{
@@ -160,15 +155,17 @@ button{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:30px;
 }
 
 
-/* logo */
+/* LOGO */
 
 .logo{
     display:flex;
     align-items:center;
+
     gap:11px;
 
     flex-shrink:0;
@@ -188,8 +185,6 @@ button{
     font-family:Georgia,serif;
     font-size:23px;
 
-    transform:rotate(0deg);
-
     transition:
         transform .45s ease,
         background .3s ease,
@@ -198,13 +193,16 @@ button{
 
 .logo:hover .logo-mark{
     transform:rotate(45deg);
+
     background:var(--bronze);
+
     color:white;
 }
 
 .logo-text{
     display:flex;
     flex-direction:column;
+
     line-height:1;
 }
 
@@ -214,6 +212,7 @@ button{
     font-family:Georgia,serif;
 
     font-size:18px;
+
     letter-spacing:.14em;
 }
 
@@ -223,15 +222,17 @@ button{
     color:var(--muted);
 
     font-size:7px;
+
     letter-spacing:.34em;
 }
 
 
-/* desktop menu */
+/* MENU */
 
 .nav-menu{
     display:flex;
     align-items:center;
+
     gap:27px;
 
     height:100%;
@@ -259,6 +260,7 @@ button{
     content:"";
 
     position:absolute;
+
     left:0;
     right:0;
     bottom:0;
@@ -268,6 +270,7 @@ button{
     background:var(--bronze);
 
     transform:scaleX(0);
+
     transform-origin:center;
 
     transition:transform .25s ease;
@@ -285,7 +288,7 @@ button{
 
 
 /* =========================================================
-   HERO TOPIC
+   HERO
    ========================================================= */
 
 .topic-hero{
@@ -359,7 +362,7 @@ button{
 }
 
 
-/* hero copy */
+/* HERO COPY */
 
 .hero-copy{
     padding:70px 0;
@@ -368,6 +371,7 @@ button{
 .eyebrow{
     display:flex;
     align-items:center;
+
     gap:13px;
 
     margin-bottom:24px;
@@ -378,6 +382,7 @@ button{
     font-weight:700;
 
     letter-spacing:.22em;
+
     text-transform:uppercase;
 }
 
@@ -395,7 +400,10 @@ button{
 
     max-width:700px;
 
-    font-family:Georgia,"Times New Roman",serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
         clamp(48px,7vw,92px);
@@ -428,6 +436,7 @@ button{
 .hero-actions{
     display:flex;
     align-items:center;
+
     gap:14px;
 
     margin-top:34px;
@@ -448,6 +457,7 @@ button{
     font-weight:700;
 
     letter-spacing:.12em;
+
     text-transform:uppercase;
 
     transition:
@@ -463,7 +473,9 @@ button{
 
 .btn-primary{
     background:var(--bronze);
+
     border-color:var(--bronze);
+
     color:white;
 }
 
@@ -477,11 +489,12 @@ button{
 
 .btn-outline:hover{
     background:white;
+
     color:var(--navy);
 }
 
 
-/* hero visual */
+/* HERO VISUAL */
 
 .hero-visual{
     position:relative;
@@ -603,23 +616,8 @@ button{
     font-family:Georgia,serif;
 
     font-size:13px;
+
     line-height:1.35;
-}
-
-.hero-number{
-    position:absolute;
-
-    right:0;
-    bottom:11%;
-
-    color:rgba(255,255,255,.08);
-
-    font-family:Georgia,serif;
-
-    font-size:170px;
-    line-height:1;
-
-    pointer-events:none;
 }
 
 
@@ -648,6 +646,7 @@ button{
 .section-label{
     display:flex;
     align-items:center;
+
     gap:12px;
 
     color:var(--bronze);
@@ -656,6 +655,7 @@ button{
     font-weight:700;
 
     letter-spacing:.2em;
+
     text-transform:uppercase;
 }
 
@@ -705,7 +705,7 @@ button{
 
 
 /* =========================================================
-   FEATURE STORY
+   FEATURE
    ========================================================= */
 
 .feature{
@@ -853,7 +853,7 @@ button{
 
 
 /* =========================================================
-   ARTICLE SECTION
+   ARTICLE
    ========================================================= */
 
 .content-section{
@@ -898,9 +898,6 @@ button{
 
     text-align:right;
 }
-
-
-/* article grid */
 
 .article-grid{
     display:grid;
@@ -1009,6 +1006,7 @@ button{
     font-weight:700;
 
     letter-spacing:.1em;
+
     text-transform:uppercase;
 }
 
@@ -1023,6 +1021,7 @@ button{
     font-weight:700;
 
     letter-spacing:.16em;
+
     text-transform:uppercase;
 }
 
@@ -1061,6 +1060,7 @@ button{
     font-weight:700;
 
     letter-spacing:.12em;
+
     text-transform:uppercase;
 }
 
@@ -1173,6 +1173,7 @@ button{
     font-size:8px;
 
     letter-spacing:.13em;
+
     text-transform:uppercase;
 }
 
@@ -1192,7 +1193,7 @@ button{
 
 
 /* =========================================================
-   TOPIC LINKS
+   OTHER TOPICS
    ========================================================= */
 
 .other-topics{
@@ -1256,16 +1257,10 @@ button{
     background:rgba(255,255,255,.06);
 }
 
-.topic-index{
-    color:#9fb1c3;
-
-    font-size:8px;
-
-    letter-spacing:.15em;
-}
-
 .topic-link h3{
-    margin:10px 0 0;
+    margin:0;
+
+    max-width:80%;
 
     color:white;
 
@@ -1590,11 +1585,13 @@ footer{
 
     .hero-card-main{
         right:7%;
+
         width:min(340px,70%);
     }
 
     .hero-card-small{
         left:5%;
+
         width:175px;
     }
 
@@ -1652,10 +1649,6 @@ footer{
 
 @media (max-width:560px){
 
-    :root{
-        --max-fluid:89vw;
-    }
-
     .top{
         height:24px;
 
@@ -1700,18 +1693,15 @@ footer{
 
     .hero-card-main{
         width:72%;
+
         right:2%;
     }
 
     .hero-card-small{
         width:135px;
+
         left:0;
         top:14%;
-    }
-
-    .hero-number{
-        font-size:100px;
-        bottom:4%;
     }
 
     .intro{
@@ -1784,6 +1774,7 @@ footer{
 
     .footer-grid{
         grid-template-columns:1fr;
+
         gap:35px;
     }
 
@@ -1819,6 +1810,7 @@ footer{
 
     .reveal{
         opacity:1;
+
         transform:none;
     }
 }
@@ -1826,13 +1818,16 @@ footer{
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =======================================================
      TOP BAR
      ======================================================= -->
 
 <div class="top">
+
     <div class="w">
 
         <div class="top-left">
@@ -1840,33 +1835,60 @@ footer{
         </div>
 
         <div class="top-right">
-            <span>MEDIA DHARMA NUSANTARA</span>
+
+            <span>
+                MEDIA DHARMA NUSANTARA
+            </span>
+
             <span class="top-dot"></span>
-            <span>2026</span>
+
+            <span>
+                MANDALA
+            </span>
+
         </div>
 
     </div>
+
 </div>
+
 
 
 <!-- =======================================================
      HEADER
      ======================================================= -->
 
-<header class="site-header" id="siteHeader">
+<header
+    class="site-header"
+    id="siteHeader"
+>
 
     <div class="w nav">
 
-        <a class="logo" href="../index.html">
 
-            <div class="logo-mark">✺</div>
+        <a
+            class="logo"
+            href="../index.html"
+        >
+
+            <div class="logo-mark">
+                ✺
+            </div>
 
             <div class="logo-text">
-                <strong>MANDALA</strong>
-                <small>CHANNEL</small>
+
+                <strong>
+                    MANDALA
+                </strong>
+
+                <small>
+                    CHANNEL
+                </small>
+
             </div>
 
         </a>
+
 
 
         <nav class="nav-menu">
@@ -1891,7 +1913,10 @@ footer{
                 PLAYLIST
             </a>
 
-            <a class="active" href="#topik">
+            <a
+                class="active"
+                href="#topik"
+            >
                 TOPIK
             </a>
 
@@ -1906,15 +1931,22 @@ footer{
 </header>
 
 
+
 <!-- =======================================================
-     HERO
+     MAIN
      ======================================================= -->
 
 <main id="topik">
 
+
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
 <section class="topic-hero">
 
     <div class="w hero-grid">
+
 
         <div class="hero-copy reveal">
 
@@ -1955,7 +1987,9 @@ footer{
         </div>
 
 
+
         <div class="hero-visual reveal">
+
 
             <div class="hero-card-small">
 
@@ -1967,6 +2001,7 @@ footer{
                 </div>
 
             </div>
+
 
 
             <div class="hero-card-main">
@@ -1988,15 +2023,12 @@ footer{
             </div>
 
 
-            <div class="hero-number">
-                08
-            </div>
-
         </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =======================================================
@@ -2006,6 +2038,7 @@ footer{
 <section class="intro">
 
     <div class="w intro-grid">
+
 
         <div class="reveal">
 
@@ -2020,6 +2053,7 @@ footer{
             </h2>
 
         </div>
+
 
 
         <div class="intro-copy reveal">
@@ -2054,6 +2088,7 @@ footer{
 </section>
 
 
+
 <!-- =======================================================
      FEATURE
      ======================================================= -->
@@ -2062,6 +2097,7 @@ footer{
 
     <div class="w feature-grid">
 
+
         <div class="feature-visual reveal">
 
             <div class="feature-symbol">
@@ -2069,6 +2105,7 @@ footer{
             </div>
 
         </div>
+
 
 
         <div class="feature-content reveal">
@@ -2101,6 +2138,7 @@ footer{
 </section>
 
 
+
 <!-- =======================================================
      ARTICLES
      ======================================================= -->
@@ -2111,6 +2149,7 @@ footer{
 >
 
     <div class="w">
+
 
         <div class="section-head reveal">
 
@@ -2135,9 +2174,9 @@ footer{
         </div>
 
 
+
         <div class="article-grid">
 
-            <!-- ARTICLE 01 -->
 
             <article class="article-card reveal">
 
@@ -2153,10 +2192,11 @@ footer{
 
                     </div>
 
+
                     <div class="article-body">
 
                         <div class="article-date">
-                            13 Agustus 2026
+                            Artikel Mandala
                         </div>
 
                         <h3>
@@ -2181,7 +2221,6 @@ footer{
             </article>
 
 
-            <!-- ARTICLE 02 -->
 
             <article class="article-card reveal">
 
@@ -2197,10 +2236,11 @@ footer{
 
                     </div>
 
+
                     <div class="article-body">
 
                         <div class="article-date">
-                            12 Agustus 2026
+                            Artikel Mandala
                         </div>
 
                         <h3>
@@ -2226,7 +2266,6 @@ footer{
             </article>
 
 
-            <!-- ARTICLE 03 -->
 
             <article class="article-card reveal">
 
@@ -2242,10 +2281,11 @@ footer{
 
                     </div>
 
+
                     <div class="article-body">
 
                         <div class="article-date">
-                            11 Agustus 2026
+                            Artikel Mandala
                         </div>
 
                         <h3>
@@ -2269,11 +2309,13 @@ footer{
 
             </article>
 
+
         </div>
 
     </div>
 
 </section>
+
 
 
 <!-- =======================================================
@@ -2286,6 +2328,7 @@ footer{
 >
 
     <div class="w">
+
 
         <div class="section-head reveal">
 
@@ -2310,10 +2353,9 @@ footer{
         </div>
 
 
+
         <div class="playlist-grid">
 
-
-            <!-- PLAYLIST 01 -->
 
             <article class="playlist-card reveal">
 
@@ -2334,6 +2376,7 @@ footer{
 
                     </div>
 
+
                     <div class="playlist-body">
 
                         <div class="playlist-category">
@@ -2351,7 +2394,6 @@ footer{
             </article>
 
 
-            <!-- PLAYLIST 02 -->
 
             <article class="playlist-card reveal">
 
@@ -2372,6 +2414,7 @@ footer{
 
                     </div>
 
+
                     <div class="playlist-body">
 
                         <div class="playlist-category">
@@ -2390,7 +2433,6 @@ footer{
             </article>
 
 
-            <!-- PLAYLIST 03 -->
 
             <article class="playlist-card reveal">
 
@@ -2411,6 +2453,7 @@ footer{
 
                     </div>
 
+
                     <div class="playlist-body">
 
                         <div class="playlist-category">
@@ -2429,7 +2472,6 @@ footer{
             </article>
 
 
-            <!-- PLAYLIST 04 -->
 
             <article class="playlist-card reveal">
 
@@ -2449,6 +2491,7 @@ footer{
                         </span>
 
                     </div>
+
 
                     <div class="playlist-body">
 
@@ -2475,6 +2518,7 @@ footer{
 </section>
 
 
+
 <!-- =======================================================
      OTHER TOPICS
      ======================================================= -->
@@ -2482,6 +2526,7 @@ footer{
 <section class="other-topics">
 
     <div class="w">
+
 
         <div class="section-label reveal">
             Eksplorasi
@@ -2492,6 +2537,7 @@ footer{
         </h2>
 
 
+
         <div class="topic-list">
 
 
@@ -2499,10 +2545,6 @@ footer{
                 class="topic-link reveal"
                 href="tokoh-hindu.html"
             >
-
-                <span class="topic-index">
-                    01
-                </span>
 
                 <h3>
                     Tokoh Hindu
@@ -2515,14 +2557,11 @@ footer{
             </a>
 
 
+
             <a
                 class="topic-link reveal"
                 href="dharma-ajaran.html"
             >
-
-                <span class="topic-index">
-                    02
-                </span>
 
                 <h3>
                     Dharma &amp; Ajaran
@@ -2535,14 +2574,11 @@ footer{
             </a>
 
 
+
             <a
                 class="topic-link reveal"
                 href="dharmika.html"
             >
-
-                <span class="topic-index">
-                    03
-                </span>
 
                 <h3>
                     Dharmika
@@ -2555,14 +2591,11 @@ footer{
             </a>
 
 
+
             <a
                 class="topic-link reveal"
                 href="jelajah-nusantara.html"
             >
-
-                <span class="topic-index">
-                    04
-                </span>
 
                 <h3>
                     Jelajah Nusantara
@@ -2575,14 +2608,11 @@ footer{
             </a>
 
 
+
             <a
                 class="topic-link reveal"
                 href="tradisi-budaya.html"
             >
-
-                <span class="topic-index">
-                    05
-                </span>
 
                 <h3>
                     Tradisi &amp; Budaya
@@ -2595,14 +2625,11 @@ footer{
             </a>
 
 
+
             <a
                 class="topic-link reveal"
                 href="spiritual.html"
             >
-
-                <span class="topic-index">
-                    06
-                </span>
 
                 <h3>
                     Spiritual
@@ -2615,14 +2642,11 @@ footer{
             </a>
 
 
+
             <a
                 class="topic-link reveal"
                 href="kabar-umat.html"
             >
-
-                <span class="topic-index">
-                    07
-                </span>
 
                 <h3>
                     Kabar Umat
@@ -2635,14 +2659,11 @@ footer{
             </a>
 
 
+
             <a
                 class="topic-link reveal"
                 href="ekonomi-hindu.html"
             >
-
-                <span class="topic-index">
-                    08
-                </span>
 
                 <h3>
                     Ekonomi &amp;
@@ -2661,6 +2682,7 @@ footer{
     </div>
 
 </section>
+
 
 
 <!-- =======================================================
@@ -2707,7 +2729,9 @@ footer{
 
 </section>
 
+
 </main>
+
 
 
 <!-- =======================================================
@@ -2717,6 +2741,7 @@ footer{
 <footer>
 
     <div class="w">
+
 
         <div class="footer-grid">
 
@@ -2742,6 +2767,7 @@ footer{
             </div>
 
 
+
             <div class="footer-column">
 
                 <h4>
@@ -2765,6 +2791,7 @@ footer{
                 </a>
 
             </div>
+
 
 
             <div class="footer-column">
@@ -2795,6 +2822,7 @@ footer{
         </div>
 
 
+
         <div class="footer-bottom">
 
             <span>
@@ -2812,19 +2840,19 @@ footer{
 </footer>
 
 
+
 <!-- =======================================================
      JAVASCRIPT
      LOCAL ONLY
-     Tidak fetch internet / API / CDN
      ======================================================= -->
 
 <script>
 
 (function(){
 
-    /* ---------------------------------------------
-       Sticky header
-       --------------------------------------------- */
+    /* =====================================================
+       STICKY HEADER
+       ===================================================== */
 
     const header =
         document.getElementById("siteHeader");
@@ -2846,18 +2874,22 @@ footer{
     window.addEventListener(
         "scroll",
         updateHeader,
-        {passive:true}
+        {
+            passive:true
+        }
     );
 
     updateHeader();
 
 
-    /* ---------------------------------------------
-       Scroll reveal
-       --------------------------------------------- */
+
+    /* =====================================================
+       SCROLL REVEAL
+       ===================================================== */
 
     const revealItems =
         document.querySelectorAll(".reveal");
+
 
     if(
         "IntersectionObserver"
@@ -2871,7 +2903,9 @@ footer{
                     entries.forEach(
                         function(entry){
 
-                            if(entry.isIntersecting){
+                            if(
+                                entry.isIntersecting
+                            ){
 
                                 entry.target.classList.add(
                                     "visible"
@@ -2891,6 +2925,7 @@ footer{
                     threshold:.12
                 }
             );
+
 
         revealItems.forEach(
             function(item){
