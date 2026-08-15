@@ -11,29 +11,21 @@
 
 <title>Ekonomi Hindu — Mandala Channel</title>
 
-
 <style>
 
 /* =========================================================
    MANDALA CHANNEL
    TOPIC — EKONOMI HINDU
 
-   Fokus:
-   - Podcast
-   - Pengusaha Hindu
-   - Ekonomi Hindu Jawa
-   - UMKM
-   - Kemandirian ekonomi
-   - Cerita usaha
-   - Jaringan ekonomi umat
-
-   CATATAN:
-   Tidak menggunakan:
-   - Google Fonts
-   - CDN
-   - API eksternal
-   - library eksternal
-   - popup internet
+   STYLE:
+   - Editorial
+   - Formal
+   - Minimal
+   - Tidak banyak card
+   - Tidak menggunakan angka section
+   - Tidak menggunakan font eksternal
+   - Tidak menggunakan CDN
+   - Tidak membutuhkan akses internet
    ========================================================= */
 
 
@@ -44,28 +36,22 @@
 :root{
 
     --navy:#082d56;
-    --navy-deep:#041c35;
+    --navy-deep:#041d36;
     --navy-soft:#174b73;
 
-    --gold:#aa8747;
-    --gold-light:#cfb77d;
+    --gold:#ad8847;
+    --gold-light:#ceb578;
 
-    --cream:#f5f2ea;
-    --paper:#faf9f5;
-
+    --cream:#f4f1e9;
+    --paper:#faf9f6;
     --white:#ffffff;
 
-    --ink:#182536;
-    --muted:#718090;
+    --ink:#172536;
+    --muted:#6f7d8b;
 
-    --line:#e1e5e8;
-
-    --soft-blue:#edf3f7;
+    --line:#e0e4e7;
 
     --max:94vw;
-
-    --shadow:
-        0 24px 65px rgba(5,28,53,.12);
 
 }
 
@@ -79,9 +65,7 @@
 }
 
 html{
-
     scroll-behavior:smooth;
-
     scroll-padding-top:80px;
 }
 
@@ -124,8 +108,6 @@ button{
 
     width:var(--max);
 
-    max-width:none;
-
     margin-inline:auto;
 }
 
@@ -140,11 +122,11 @@ button{
 
     background:var(--navy-deep);
 
-    color:#b8c6d3;
+    color:#aebdca;
 
     font-size:9px;
 
-    letter-spacing:.13em;
+    letter-spacing:.14em;
 }
 
 .topbar .w{
@@ -156,11 +138,6 @@ button{
     align-items:center;
 
     justify-content:space-between;
-}
-
-.topbar-left{
-
-    text-transform:uppercase;
 }
 
 .topbar-right{
@@ -179,7 +156,7 @@ button{
     height:1px;
 
     background:
-        rgba(207,183,125,.65);
+        rgba(206,181,120,.65);
 }
 
 
@@ -213,7 +190,7 @@ button{
     height:60px;
 
     box-shadow:
-        0 8px 28px rgba(8,45,86,.1);
+        0 8px 28px rgba(8,45,86,.09);
 }
 
 .nav{
@@ -268,8 +245,8 @@ button{
     font-size:21px;
 
     transition:
-        background .3s ease,
-        color .3s ease;
+        background .25s ease,
+        color .25s ease;
 }
 
 .brand:hover .brand-mark{
@@ -317,7 +294,7 @@ button{
 
 
 /* =========================================================
-   NAVIGATION
+   NAV
    ========================================================= */
 
 .nav-menu{
@@ -398,7 +375,7 @@ button{
 
     position:relative;
 
-    min-height:650px;
+    min-height:620px;
 
     overflow:hidden;
 
@@ -406,8 +383,8 @@ button{
         linear-gradient(
             120deg,
             #041c35 0%,
-            #082f55 48%,
-            #5b715f 100%
+            #082f55 55%,
+            #345b67 100%
         );
 
     color:white;
@@ -419,13 +396,13 @@ button{
 
     position:absolute;
 
-    width:620px;
+    width:600px;
 
-    height:620px;
+    height:600px;
 
-    right:-310px;
+    right:-300px;
 
-    top:-300px;
+    top:-290px;
 
     border:
         1px solid rgba(255,255,255,.09);
@@ -439,16 +416,16 @@ button{
 
     position:absolute;
 
-    width:400px;
+    width:420px;
 
-    height:400px;
+    height:420px;
 
-    left:-250px;
+    left:-270px;
 
-    bottom:-250px;
+    bottom:-300px;
 
     border:
-        1px solid rgba(207,183,125,.13);
+        1px solid rgba(206,181,120,.13);
 
     border-radius:50%;
 }
@@ -459,28 +436,23 @@ button{
 
     z-index:2;
 
-    min-height:650px;
+    min-height:620px;
 
     display:grid;
 
     grid-template-columns:
-        .94fr
-        1.06fr;
+        1fr
+        .9fr;
 
     align-items:center;
 
-    gap:6vw;
+    gap:8vw;
 }
-
-
-/* =========================================================
-   HERO COPY
-   ========================================================= */
 
 .hero-copy{
 
     padding:
-        80px 0;
+        70px 0;
 }
 
 .eyebrow{
@@ -527,7 +499,7 @@ button{
         serif;
 
     font-size:
-        clamp(50px,6.8vw,88px);
+        clamp(52px,7vw,90px);
 
     font-weight:400;
 
@@ -540,16 +512,16 @@ button{
 
     display:block;
 
-    color:#cfb477;
+    color:var(--gold-light);
 }
 
 .hero-lead{
 
-    max-width:540px;
+    max-width:535px;
 
     margin:30px 0 0;
 
-    color:#c4d1dc;
+    color:#c3d0da;
 
     font-size:14px;
 
@@ -560,8 +532,6 @@ button{
 
     display:flex;
 
-    align-items:center;
-
     gap:12px;
 
     margin-top:32px;
@@ -569,10 +539,10 @@ button{
 
 .btn{
 
-    min-height:45px;
+    min-height:44px;
 
     padding:
-        0 21px;
+        0 20px;
 
     display:inline-flex;
 
@@ -581,7 +551,7 @@ button{
     justify-content:center;
 
     border:
-        1px solid rgba(255,255,255,.27);
+        1px solid rgba(255,255,255,.28);
 
     font-size:9px;
 
@@ -600,7 +570,7 @@ button{
 .btn:hover{
 
     transform:
-        translateY(-3px);
+        translateY(-2px);
 }
 
 .btn-primary{
@@ -633,16 +603,14 @@ button{
 
 
 /* =========================================================
-   HERO BUSINESS VISUAL
-
-   Visual dibuat formal seperti cover majalah ekonomi.
+   HERO VISUAL
    ========================================================= */
 
-.business-stage{
+.hero-visual{
 
     position:relative;
 
-    min-height:500px;
+    min-height:450px;
 
     display:flex;
 
@@ -651,11 +619,11 @@ button{
     justify-content:center;
 }
 
-.business-panel{
+.editorial-frame{
 
     position:relative;
 
-    width:min(600px,94%);
+    width:min(540px,100%);
 
     min-height:420px;
 
@@ -668,47 +636,45 @@ button{
             rgba(246,243,235,.97)
         );
 
-    color:var(--navy);
-
     box-shadow:
-        0 35px 80px rgba(0,0,0,.27);
+        0 35px 80px rgba(0,0,0,.25);
 
     overflow:hidden;
 }
 
-.business-panel::before{
+.editorial-frame::before{
 
     content:"";
 
     position:absolute;
-
-    right:-100px;
-
-    top:-100px;
 
     width:300px;
 
     height:300px;
 
+    right:-150px;
+
+    top:-150px;
+
     border:
-        1px solid rgba(169,130,71,.25);
+        1px solid rgba(173,136,71,.24);
 
     border-radius:50%;
 }
 
-.business-panel::after{
+.editorial-frame::after{
 
     content:"";
 
     position:absolute;
 
-    left:-90px;
+    width:250px;
 
-    bottom:-130px;
+    height:250px;
 
-    width:310px;
+    left:-150px;
 
-    height:310px;
+    bottom:-150px;
 
     border:
         1px solid rgba(8,45,86,.12);
@@ -716,7 +682,7 @@ button{
     border-radius:50%;
 }
 
-.panel-top{
+.frame-top{
 
     position:relative;
 
@@ -734,7 +700,7 @@ button{
         1px solid var(--line);
 }
 
-.panel-label{
+.frame-label{
 
     color:var(--gold);
 
@@ -747,11 +713,11 @@ button{
     text-transform:uppercase;
 }
 
-.panel-symbol{
+.frame-symbol{
 
-    width:38px;
+    width:36px;
 
-    height:38px;
+    height:36px;
 
     display:grid;
 
@@ -770,21 +736,23 @@ button{
     font-size:18px;
 }
 
-.panel-content{
+.frame-content{
 
     position:relative;
 
     z-index:2;
 
     padding:
-        55px 15px 30px;
+        55px 12px 30px;
 }
 
-.panel-content h2{
+.frame-content h2{
 
     margin:0;
 
-    max-width:430px;
+    max-width:450px;
+
+    color:var(--navy);
 
     font-family:
         Georgia,
@@ -792,23 +760,23 @@ button{
         serif;
 
     font-size:
-        clamp(35px,4.3vw,56px);
+        clamp(37px,4.7vw,59px);
 
     font-weight:400;
 
-    line-height:1.04;
+    line-height:1.02;
 
-    letter-spacing:-.045em;
+    letter-spacing:-.05em;
 }
 
-.panel-content h2 span{
+.frame-content h2 span{
 
     color:var(--gold);
 }
 
-.panel-content p{
+.frame-content p{
 
-    max-width:450px;
+    max-width:430px;
 
     margin:
         22px 0 0;
@@ -820,135 +788,41 @@ button{
     line-height:1.8;
 }
 
-
-/* Economic line graphic */
-
-.economic-graph{
+.frame-bottom{
 
     position:absolute;
 
-    z-index:1;
+    left:46px;
 
-    right:40px;
+    right:46px;
 
-    bottom:40px;
+    bottom:38px;
 
-    width:190px;
+    display:flex;
 
-    height:90px;
+    align-items:center;
 
-    opacity:.32;
+    gap:10px;
 }
 
-.graph-line{
+.frame-bottom-line{
 
-    position:absolute;
-
-    left:0;
-
-    bottom:15px;
-
-    width:100%;
+    width:70px;
 
     height:1px;
 
     background:var(--gold);
-
-    transform:
-        rotate(-8deg);
 }
 
-.graph-line::before,
-.graph-line::after{
+.frame-bottom span{
 
-    content:"";
+    color:#8b969e;
 
-    position:absolute;
+    font-size:7px;
 
-    width:7px;
+    letter-spacing:.16em;
 
-    height:7px;
-
-    border:
-        1px solid var(--gold);
-
-    border-radius:50%;
-
-    background:white;
-}
-
-.graph-line::before{
-
-    left:28%;
-
-    top:-3px;
-}
-
-.graph-line::after{
-
-    right:5%;
-
-    top:-22px;
-}
-
-.graph-bars{
-
-    position:absolute;
-
-    left:0;
-
-    bottom:15px;
-
-    width:100%;
-
-    height:65px;
-
-    display:flex;
-
-    align-items:flex-end;
-
-    gap:9px;
-}
-
-.graph-bars span{
-
-    flex:1;
-
-    background:
-        rgba(8,45,86,.12);
-
-    border-top:
-        2px solid var(--gold);
-}
-
-.graph-bars span:nth-child(1){
-
-    height:28%;
-}
-
-.graph-bars span:nth-child(2){
-
-    height:42%;
-}
-
-.graph-bars span:nth-child(3){
-
-    height:36%;
-}
-
-.graph-bars span:nth-child(4){
-
-    height:61%;
-}
-
-.graph-bars span:nth-child(5){
-
-    height:76%;
-}
-
-.graph-bars span:nth-child(6){
-
-    height:90%;
+    text-transform:uppercase;
 }
 
 
@@ -959,7 +833,7 @@ button{
 .intro{
 
     padding:
-        100px 0;
+        105px 0;
 
     background:white;
 }
@@ -1007,7 +881,8 @@ button{
 
 .intro h2{
 
-    margin:17px 0 0;
+    margin:
+        17px 0 0;
 
     color:var(--navy);
 
@@ -1017,7 +892,7 @@ button{
         serif;
 
     font-size:
-        clamp(34px,4.5vw,58px);
+        clamp(35px,4.5vw,58px);
 
     font-weight:400;
 
@@ -1029,9 +904,9 @@ button{
 .intro-content p{
 
     margin:
-        0 0 20px;
+        0 0 21px;
 
-    color:#617181;
+    color:#63717f;
 
     font-size:13px;
 
@@ -1054,160 +929,6 @@ button{
 
 
 /* =========================================================
-   ECONOMIC LANDSCAPE
-   ========================================================= */
-
-.landscape{
-
-    padding:
-        105px 0;
-
-    background:var(--cream);
-}
-
-.landscape-head{
-
-    max-width:710px;
-
-    margin-bottom:50px;
-}
-
-.landscape-head h2{
-
-    margin:
-        15px 0 0;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(35px,4.5vw,57px);
-
-    font-weight:400;
-
-    line-height:1.03;
-}
-
-.landscape-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
-    gap:15px;
-}
-
-.landscape-card{
-
-    position:relative;
-
-    min-height:250px;
-
-    padding:
-        31px 25px;
-
-    background:white;
-
-    border:
-        1px solid var(--line);
-
-    overflow:hidden;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.landscape-card:hover{
-
-    transform:
-        translateY(-7px);
-
-    box-shadow:var(--shadow);
-}
-
-.landscape-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:120px;
-
-    height:120px;
-
-    right:-60px;
-
-    bottom:-60px;
-
-    border:
-        1px solid rgba(169,130,71,.15);
-
-    border-radius:50%;
-}
-
-.landscape-icon{
-
-    width:46px;
-
-    height:46px;
-
-    display:grid;
-
-    place-items:center;
-
-    margin-bottom:28px;
-
-    border:
-        1px solid var(--gold);
-
-    color:var(--gold);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:20px;
-}
-
-.landscape-card h3{
-
-    margin:
-        0 0 12px;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:21px;
-
-    font-weight:400;
-
-    line-height:1.2;
-}
-
-.landscape-card p{
-
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    line-height:1.8;
-}
-
-
-/* =========================================================
    PODCAST FEATURE
    ========================================================= */
 
@@ -1219,8 +940,6 @@ button{
     background:var(--navy-deep);
 
     color:white;
-
-    overflow:hidden;
 }
 
 .podcast-layout{
@@ -1228,19 +947,19 @@ button{
     display:grid;
 
     grid-template-columns:
-        .85fr
-        1.15fr;
+        .8fr
+        1.2fr;
 
     align-items:center;
 
-    gap:7vw;
+    gap:8vw;
 }
 
 .podcast-art{
 
     position:relative;
 
-    min-height:470px;
+    min-height:460px;
 
     display:flex;
 
@@ -1248,15 +967,15 @@ button{
 
     justify-content:center;
 
+    overflow:hidden;
+
     background:
         linear-gradient(
             145deg,
-            #0c3b62,
-            #163e54 50%,
-            #82663c
+            #0b375b,
+            #214f63 55%,
+            #82683f
         );
-
-    overflow:hidden;
 }
 
 .podcast-art::before{
@@ -1270,7 +989,7 @@ button{
     height:370px;
 
     border:
-        1px solid rgba(255,255,255,.18);
+        1px solid rgba(255,255,255,.17);
 
     border-radius:50%;
 }
@@ -1286,28 +1005,28 @@ button{
     height:260px;
 
     border:
-        1px solid rgba(207,183,125,.35);
+        1px solid rgba(206,181,120,.35);
 
     border-radius:50%;
 }
 
-.podcast-mic{
+.microphone{
 
     position:relative;
 
     z-index:3;
 
-    width:90px;
+    width:78px;
 
-    height:150px;
+    height:132px;
 
     border:
-        2px solid rgba(255,255,255,.8);
+        2px solid rgba(255,255,255,.82);
 
-    border-radius:48px;
+    border-radius:45px;
 }
 
-.podcast-mic::before{
+.microphone::before{
 
     content:"";
 
@@ -1315,20 +1034,20 @@ button{
 
     left:50%;
 
-    bottom:-54px;
+    bottom:-48px;
 
     width:2px;
 
-    height:52px;
+    height:47px;
 
     background:
-        rgba(255,255,255,.8);
+        rgba(255,255,255,.82);
 
     transform:
         translateX(-50%);
 }
 
-.podcast-mic::after{
+.microphone::after{
 
     content:"";
 
@@ -1336,24 +1055,24 @@ button{
 
     left:50%;
 
-    bottom:-54px;
+    bottom:-48px;
 
-    width:105px;
+    width:100px;
 
     height:2px;
 
     background:
-        rgba(255,255,255,.8);
+        rgba(255,255,255,.82);
 
     transform:
         translateX(-50%);
 }
 
-.mic-lines{
+.mic-inner{
 
     position:absolute;
 
-    inset:22px 15px;
+    inset:20px 13px;
 
     border-left:
         1px solid rgba(255,255,255,.35);
@@ -1377,7 +1096,7 @@ button{
 .podcast-copy h2{
 
     margin:
-        17px 0 20px;
+        17px 0 22px;
 
     color:white;
 
@@ -1387,7 +1106,7 @@ button{
         serif;
 
     font-size:
-        clamp(38px,4.8vw,62px);
+        clamp(39px,4.8vw,63px);
 
     font-weight:400;
 
@@ -1407,41 +1126,11 @@ button{
 
     margin:0;
 
-    color:#b6c6d3;
+    color:#b8c6d1;
 
     font-size:12px;
 
     line-height:1.9;
-}
-
-.podcast-meta{
-
-    display:flex;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin-top:28px;
-}
-
-.meta-item{
-
-    padding:
-        9px 12px;
-
-    border:
-        1px solid rgba(255,255,255,.13);
-
-    color:#aebdca;
-
-    font-size:8px;
-
-    letter-spacing:.1em;
-
-    text-transform:uppercase;
 }
 
 .podcast-btn{
@@ -1451,13 +1140,11 @@ button{
     background:var(--gold);
 
     border-color:var(--gold);
-
-    color:white;
 }
 
 
 /* =========================================================
-   BUSINESS STORIES
+   STORIES
    ========================================================= */
 
 .stories{
@@ -1465,26 +1152,20 @@ button{
     padding:
         105px 0;
 
-    background:white;
+    background:var(--paper);
 }
 
-.stories-head{
+.section-head{
 
-    display:flex;
+    max-width:720px;
 
-    align-items:flex-end;
-
-    justify-content:space-between;
-
-    gap:30px;
-
-    margin-bottom:45px;
+    margin-bottom:50px;
 }
 
-.stories-head h2{
+.section-head h2{
 
     margin:
-        14px 0 0;
+        15px 0 0;
 
     color:var(--navy);
 
@@ -1494,88 +1175,64 @@ button{
         serif;
 
     font-size:
-        clamp(35px,4.2vw,55px);
+        clamp(36px,4.5vw,58px);
 
     font-weight:400;
 
-    line-height:1;
+    line-height:1.02;
+
+    letter-spacing:-.045em;
 }
 
-.stories-description{
+.section-head p{
 
-    max-width:430px;
+    max-width:620px;
+
+    margin:
+        20px 0 0;
 
     color:var(--muted);
 
-    font-size:11px;
+    font-size:12px;
 
-    line-height:1.8;
-
-    text-align:right;
+    line-height:1.85;
 }
 
-.story-grid{
+
+/* Main story */
+
+.main-story{
 
     display:grid;
 
     grid-template-columns:
         1.1fr
-        .9fr
         .9fr;
 
-    gap:18px;
-}
+    min-height:470px;
 
-.story-item{
-
-    background:var(--paper);
+    background:white;
 
     border:
         1px solid var(--line);
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
 }
 
-.story-item:hover{
-
-    transform:
-        translateY(-7px);
-
-    box-shadow:var(--shadow);
-}
-
-.story-item.featured{
-
-    grid-row:
-        span 2;
-}
-
-.story-thumb{
+.story-image{
 
     position:relative;
-
-    aspect-ratio:
-        16 / 10;
 
     overflow:hidden;
 
     background:
         linear-gradient(
             135deg,
-            #123c60,
-            #67745f
+            #0a3153,
+            #3e6470 60%,
+            #9a7b46
         );
 }
 
-.story-item.featured .story-thumb{
-
-    aspect-ratio:
-        4 / 5;
-}
-
-.story-thumb::before{
+.story-image::before{
 
     content:"";
 
@@ -1586,79 +1243,12 @@ button{
     background:
         linear-gradient(
             145deg,
-            rgba(4,28,53,.83),
-            rgba(23,75,109,.30) 55%,
-            rgba(169,130,71,.34)
+            rgba(4,28,53,.72),
+            rgba(4,28,53,.1)
         );
 }
 
-.story-person{
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    width:125px;
-
-    height:190px;
-
-    transform:
-        translate(-50%,-50%);
-}
-
-.story-person-head{
-
-    position:absolute;
-
-    left:50%;
-
-    top:0;
-
-    width:52px;
-
-    height:52px;
-
-    transform:
-        translateX(-50%);
-
-    border-radius:50%;
-
-    background:
-        rgba(238,226,204,.82);
-}
-
-.story-person-body{
-
-    position:absolute;
-
-    left:50%;
-
-    top:47px;
-
-    width:105px;
-
-    height:142px;
-
-    transform:
-        translateX(-50%);
-
-    border-radius:
-        52px 52px 15px 15px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #092e50,
-            #284d5b
-        );
-}
-
-
-/* Business building silhouette */
-
-.business-building{
+.story-silhouette{
 
     position:absolute;
 
@@ -1668,86 +1258,96 @@ button{
 
     width:230px;
 
-    height:160px;
+    height:320px;
+
+    transform:
+        translateX(-50%);
+}
+
+.person-head{
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+    width:74px;
+
+    height:74px;
 
     transform:
         translateX(-50%);
 
-    border-top:
-        4px solid rgba(255,255,255,.55);
+    border-radius:50%;
 
     background:
-        rgba(5,27,48,.55);
+        rgba(235,222,199,.9);
 }
 
-.business-building::before{
-
-    content:"";
+.person-body{
 
     position:absolute;
 
-    inset:25px 25px 0;
+    left:50%;
+
+    top:67px;
+
+    width:185px;
+
+    height:250px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        90px 90px 0 0;
 
     background:
-        repeating-linear-gradient(
+        linear-gradient(
             90deg,
-            rgba(255,255,255,.2) 0,
-            rgba(255,255,255,.2) 10px,
-            transparent 10px,
-            transparent 28px
+            #082d4d,
+            #355568
         );
 }
 
-.story-tag{
+.story-label{
 
     position:absolute;
 
     z-index:3;
 
-    left:13px;
+    left:25px;
 
-    top:13px;
+    top:25px;
 
-    padding:
-        6px 8px;
-
-    background:
-        rgba(255,255,255,.94);
-
-    color:var(--navy);
-
-    font-size:7px;
-
-    font-weight:700;
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
-}
-
-.story-body{
-
-    padding:
-        23px;
-}
-
-.story-type{
-
-    color:var(--gold);
+    color:white;
 
     font-size:8px;
 
     font-weight:700;
 
-    letter-spacing:.15em;
+    letter-spacing:.17em;
 
     text-transform:uppercase;
 }
 
-.story-body h3{
+.story-content{
+
+    padding:
+        55px 50px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+.story-content h3{
 
     margin:
-        10px 0 11px;
+        16px 0;
 
     color:var(--navy);
 
@@ -1756,29 +1356,36 @@ button{
         "Times New Roman",
         serif;
 
-    font-size:20px;
+    font-size:
+        clamp(30px,3.4vw,45px);
 
     font-weight:400;
 
-    line-height:1.28;
+    line-height:1.08;
+
+    letter-spacing:-.035em;
 }
 
-.story-body p{
+.story-content p{
 
     margin:0;
 
     color:var(--muted);
 
-    font-size:10px;
+    font-size:11px;
 
-    line-height:1.75;
+    line-height:1.85;
 }
 
-.story-more{
+.text-link{
 
     display:inline-flex;
 
-    margin-top:18px;
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:25px;
 
     color:var(--gold);
 
@@ -1786,14 +1393,26 @@ button{
 
     font-weight:700;
 
-    letter-spacing:.12em;
+    letter-spacing:.13em;
 
     text-transform:uppercase;
 }
 
+.text-link span{
+
+    transition:
+        transform .25s ease;
+}
+
+.text-link:hover span{
+
+    transform:
+        translateX(5px);
+}
+
 
 /* =========================================================
-   ECONOMY JAVA
+   JAVA SECTION
    ========================================================= */
 
 .java{
@@ -1809,52 +1428,90 @@ button{
     display:grid;
 
     grid-template-columns:
-        1fr
-        1fr;
+        .9fr
+        1.1fr;
 
-    gap:20px;
+    gap:8vw;
+
+    align-items:center;
 }
 
-.java-main{
+.java-image{
 
     position:relative;
 
-    min-height:480px;
-
-    padding:
-        clamp(40px,6vw,70px);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-end;
+    min-height:500px;
 
     overflow:hidden;
 
     background:
         linear-gradient(
             145deg,
-            #072a4c,
-            #23546a 56%,
-            #947542
+            #082d50,
+            #527069 58%,
+            #987846
         );
-
-    color:white;
 }
 
-.java-main::before{
+.java-image::before{
 
-    content:"JAWA";
+    content:"";
 
     position:absolute;
 
-    right:-15px;
+    width:440px;
 
-    top:15px;
+    height:440px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,255,255,.17);
+
+    border-radius:50%;
+}
+
+.java-image::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        1px solid rgba(206,181,120,.32);
+
+    border-radius:50%;
+}
+
+.java-word{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
 
     color:
-        rgba(255,255,255,.055);
+        rgba(255,255,255,.1);
 
     font-family:
         Georgia,
@@ -1862,107 +1519,15 @@ button{
         serif;
 
     font-size:
-        clamp(90px,14vw,190px);
+        clamp(90px,12vw,170px);
 
     letter-spacing:-.08em;
 }
 
-.java-main h2{
-
-    position:relative;
-
-    z-index:2;
-
-    max-width:520px;
+.java-copy h2{
 
     margin:
-        17px 0;
-
-    color:white;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(38px,4.5vw,59px);
-
-    font-weight:400;
-
-    line-height:1.04;
-}
-
-.java-main p{
-
-    position:relative;
-
-    z-index:2;
-
-    max-width:550px;
-
-    margin:0;
-
-    color:#c1ced8;
-
-    font-size:12px;
-
-    line-height:1.85;
-}
-
-.java-main .label{
-
-    position:relative;
-
-    z-index:2;
-
-    color:var(--gold-light);
-}
-
-.java-main .label::before{
-
-    background:var(--gold-light);
-}
-
-
-.java-side{
-
-    display:grid;
-
-    grid-template-rows:
-        1fr
-        1fr;
-
-    gap:20px;
-}
-
-.java-card{
-
-    padding:
-        32px;
-
-    background:white;
-
-    border:
-        1px solid var(--line);
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-}
-
-.java-card:hover{
-
-    transform:
-        translateY(-5px);
-
-    box-shadow:var(--shadow);
-}
-
-.java-card h3{
-
-    margin:
-        0 0 12px;
+        17px 0 22px;
 
     color:var(--navy);
 
@@ -1971,42 +1536,47 @@ button{
         "Times New Roman",
         serif;
 
-    font-size:25px;
+    font-size:
+        clamp(37px,4.5vw,59px);
 
     font-weight:400;
+
+    line-height:1.03;
+
+    letter-spacing:-.045em;
 }
 
-.java-card p{
+.java-copy p{
 
-    margin:0;
+    max-width:580px;
+
+    margin:
+        0 0 20px;
 
     color:var(--muted);
 
-    font-size:11px;
+    font-size:12px;
 
-    line-height:1.8;
+    line-height:1.9;
 }
 
-.java-card-link{
+.java-copy p:first-of-type{
 
-    display:inline-flex;
+    color:var(--ink);
 
-    margin-top:20px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-    color:var(--gold);
+    font-size:17px;
 
-    font-size:8px;
-
-    font-weight:700;
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
+    line-height:1.7;
 }
 
 
 /* =========================================================
-   PODCAST EPISODES
+   EPISODES
    ========================================================= */
 
 .episodes{
@@ -2024,32 +1594,37 @@ button{
     grid-template-columns:
         repeat(3,minmax(0,1fr));
 
-    gap:18px;
+    gap:0;
+
+    border-top:
+        1px solid var(--line);
+
+    border-left:
+        1px solid var(--line);
 }
 
 .episode{
 
-    position:relative;
+    min-height:260px;
 
     padding:
-        29px;
+        32px;
 
-    background:var(--paper);
+    background:white;
 
-    border:
+    border-right:
+        1px solid var(--line);
+
+    border-bottom:
         1px solid var(--line);
 
     transition:
-        transform .3s ease,
-        box-shadow .3s ease;
+        background .3s ease;
 }
 
 .episode:hover{
 
-    transform:
-        translateY(-6px);
-
-    box-shadow:var(--shadow);
+    background:var(--cream);
 }
 
 .episode-top{
@@ -2059,13 +1634,6 @@ button{
     align-items:center;
 
     justify-content:space-between;
-
-    gap:20px;
-
-    padding-bottom:20px;
-
-    border-bottom:
-        1px solid var(--line);
 }
 
 .episode-type{
@@ -2076,16 +1644,16 @@ button{
 
     font-weight:700;
 
-    letter-spacing:.14em;
+    letter-spacing:.15em;
 
     text-transform:uppercase;
 }
 
-.episode-play{
+.play{
 
-    width:35px;
+    width:34px;
 
-    height:35px;
+    height:34px;
 
     display:grid;
 
@@ -2098,14 +1666,14 @@ button{
 
     color:var(--gold);
 
-    font-size:10px;
+    font-size:9px;
 
     transition:
         background .25s ease,
         color .25s ease;
 }
 
-.episode:hover .episode-play{
+.episode:hover .play{
 
     background:var(--gold);
 
@@ -2115,7 +1683,7 @@ button{
 .episode h3{
 
     margin:
-        21px 0 11px;
+        25px 0 12px;
 
     color:var(--navy);
 
@@ -2124,7 +1692,7 @@ button{
         "Times New Roman",
         serif;
 
-    font-size:22px;
+    font-size:23px;
 
     font-weight:400;
 
@@ -2139,150 +1707,7 @@ button{
 
     font-size:10px;
 
-    line-height:1.75;
-}
-
-.episode-info{
-
-    display:flex;
-
-    gap:13px;
-
-    margin-top:19px;
-
-    color:#8794a0;
-
-    font-size:8px;
-
-    letter-spacing:.07em;
-
-    text-transform:uppercase;
-}
-
-
-/* =========================================================
-   NETWORK
-   ========================================================= */
-
-.network{
-
-    padding:
-        105px 0;
-
-    background:var(--navy-deep);
-
-    color:white;
-}
-
-.network-head{
-
-    max-width:700px;
-
-    margin-bottom:48px;
-}
-
-.network .label{
-
-    color:var(--gold-light);
-}
-
-.network .label::before{
-
-    background:var(--gold-light);
-}
-
-.network-head h2{
-
-    margin:
-        15px 0 0;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(36px,4.5vw,57px);
-
-    font-weight:400;
-
-    line-height:1.03;
-}
-
-.network-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
-    border-top:
-        1px solid rgba(255,255,255,.12);
-
-    border-left:
-        1px solid rgba(255,255,255,.12);
-}
-
-.network-item{
-
-    min-height:185px;
-
-    padding:
-        29px;
-
-    border-right:
-        1px solid rgba(255,255,255,.12);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.12);
-
-    transition:
-        background .3s ease;
-}
-
-.network-item:hover{
-
-    background:
-        rgba(255,255,255,.045);
-}
-
-.network-item h3{
-
-    margin:
-        0 0 12px;
-
-    color:white;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:21px;
-
-    font-weight:400;
-}
-
-.network-item p{
-
-    margin:0;
-
-    color:#8398aa;
-
-    font-size:10px;
-
     line-height:1.8;
-}
-
-.network-arrow{
-
-    display:inline-flex;
-
-    margin-top:20px;
-
-    color:var(--gold-light);
-
-    font-size:15px;
 }
 
 
@@ -2293,15 +1718,20 @@ button{
 .other{
 
     padding:
-        100px 0;
+        90px 0;
 
     background:var(--paper);
 }
 
-.other h2{
+.other-head{
+
+    margin-bottom:38px;
+}
+
+.other-head h2{
 
     margin:
-        14px 0 40px;
+        14px 0 0;
 
     color:var(--navy);
 
@@ -2311,170 +1741,31 @@ button{
         serif;
 
     font-size:
-        clamp(35px,4vw,54px);
+        clamp(34px,4vw,51px);
 
     font-weight:400;
 
     line-height:1;
 }
 
-.topic-grid{
+.topic-list{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
+    flex-wrap:wrap;
 
-    border-top:
-        1px solid var(--line);
-
-    border-left:
-        1px solid var(--line);
+    gap:10px;
 }
 
-.topic{
-
-    position:relative;
-
-    min-height:125px;
+.topic-link{
 
     padding:
-        30px 25px;
+        15px 20px;
 
     background:white;
-
-    border-right:
-        1px solid var(--line);
-
-    border-bottom:
-        1px solid var(--line);
-
-    transition:
-        background .3s ease,
-        padding-left .3s ease;
-}
-
-.topic:hover{
-
-    padding-left:33px;
-
-    background:#f5f2ea;
-}
-
-.topic h3{
-
-    margin:0;
-
-    max-width:78%;
-
-    color:var(--navy);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:19px;
-
-    font-weight:400;
-
-    line-height:1.3;
-}
-
-.topic-arrow{
-
-    position:absolute;
-
-    right:24px;
-
-    bottom:24px;
-
-    color:var(--gold);
-
-    font-size:16px;
-
-    transition:
-        transform .25s ease;
-}
-
-.topic:hover .topic-arrow{
-
-    transform:
-        translateX(5px);
-}
-
-
-/* =========================================================
-   CTA
-   ========================================================= */
-
-.cta{
-
-    padding:
-        90px 0;
-
-    background:white;
-}
-
-.cta-box{
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:
-        clamp(45px,6vw,80px);
-
-    background:
-        linear-gradient(
-            120deg,
-            #ece8dc,
-            #faf9f5
-        );
 
     border:
         1px solid var(--line);
-}
-
-.cta-box::after{
-
-    content:"Rp";
-
-    position:absolute;
-
-    right:7%;
-
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    color:
-        rgba(169,130,71,.08);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:180px;
-
-    font-weight:400;
-}
-
-.cta-content{
-
-    position:relative;
-
-    z-index:2;
-
-    max-width:720px;
-}
-
-.cta h2{
-
-    margin:
-        15px 0;
 
     color:var(--navy);
 
@@ -2483,43 +1774,21 @@ button{
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(35px,4vw,56px);
+    font-size:15px;
 
-    font-weight:400;
-
-    line-height:1.05;
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease;
 }
 
-.cta p{
-
-    max-width:610px;
-
-    margin:0;
-
-    color:var(--muted);
-
-    font-size:13px;
-
-    line-height:1.85;
-}
-
-.cta .btn{
-
-    margin-top:27px;
+.topic-link:hover{
 
     background:var(--navy);
 
     border-color:var(--navy);
 
     color:white;
-}
-
-.cta .btn:hover{
-
-    background:var(--gold);
-
-    border-color:var(--gold);
 }
 
 
@@ -2534,7 +1803,7 @@ button{
 
     background:#03182e;
 
-    color:#91a2b2;
+    color:#8da0b1;
 }
 
 .footer-grid{
@@ -2542,9 +1811,9 @@ button{
     display:grid;
 
     grid-template-columns:
-        1.25fr
-        .75fr
-        .75fr;
+        1.4fr
+        .7fr
+        .7fr;
 
     gap:60px;
 
@@ -2582,7 +1851,7 @@ button{
 
 .footer-brand p{
 
-    max-width:360px;
+    max-width:390px;
 
     margin:
         22px 0 0;
@@ -2640,8 +1909,6 @@ button{
 
     justify-content:space-between;
 
-    gap:20px;
-
     color:#607589;
 
     font-size:8px;
@@ -2657,11 +1924,11 @@ button{
     opacity:0;
 
     transform:
-        translateY(25px);
+        translateY(22px);
 
     transition:
-        opacity .75s ease,
-        transform .75s ease;
+        opacity .7s ease,
+        transform .7s ease;
 }
 
 .reveal.visible{
@@ -2676,7 +1943,7 @@ button{
    TABLET
    ========================================================= */
 
-@media(max-width:1100px){
+@media(max-width:1050px){
 
     .nav-menu{
 
@@ -2688,37 +1955,18 @@ button{
         font-size:9px;
     }
 
-    .landscape-grid{
+    .main-story{
 
         grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
-    .story-grid{
-
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .story-item.featured{
-
-        grid-column:
-            1 / -1;
-
-        grid-row:auto;
-    }
-
-    .story-item.featured .story-thumb{
-
-        aspect-ratio:
-            16 / 9;
+            1fr
+            1fr;
     }
 
 }
 
 
 /* =========================================================
-   TABLET / MOBILE
+   TABLET
    ========================================================= */
 
 @media(max-width:850px){
@@ -2753,8 +2001,6 @@ button{
         grid-template-columns:1fr;
 
         min-height:auto;
-
-        padding-bottom:75px;
     }
 
     .hero-copy{
@@ -2763,9 +2009,11 @@ button{
             70px 0 30px;
     }
 
-    .business-stage{
+    .hero-visual{
 
-        min-height:440px;
+        min-height:420px;
+
+        padding-bottom:70px;
     }
 
     .intro-layout{
@@ -2787,37 +2035,38 @@ button{
         min-height:390px;
     }
 
-    .java-layout{
+    .main-story{
 
         grid-template-columns:1fr;
     }
 
-    .java-main{
+    .story-image{
 
-        min-height:420px;
+        min-height:400px;
+    }
+
+    .story-content{
+
+        padding:
+            45px 35px;
+    }
+
+    .java-layout{
+
+        grid-template-columns:1fr;
+
+        gap:45px;
+    }
+
+    .java-image{
+
+        min-height:400px;
     }
 
     .episode-list{
 
         grid-template-columns:
             1fr 1fr;
-    }
-
-    .network-grid{
-
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .network-item:nth-child(2n){
-
-        border-right:0;
-    }
-
-    .topic-grid{
-
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
     }
 
     .footer-grid{
@@ -2844,8 +2093,6 @@ button{
     .topbar{
 
         height:24px;
-
-        font-size:8px;
     }
 
     .brand-mark{
@@ -2869,7 +2116,7 @@ button{
 
     .hero-copy{
 
-        padding-top:60px;
+        padding-top:58px;
     }
 
     .hero h1{
@@ -2888,59 +2135,49 @@ button{
         flex-wrap:wrap;
     }
 
-    .business-stage{
+    .hero-visual{
 
         min-height:350px;
+
+        padding-bottom:55px;
     }
 
-    .business-panel{
+    .editorial-frame{
 
         min-height:330px;
 
-        padding:22px;
+        padding:23px;
     }
 
-    .panel-content{
+    .frame-content{
 
         padding:
-            38px 5px 20px;
+            40px 4px 20px;
     }
 
-    .panel-content h2{
+    .frame-content h2{
 
         font-size:34px;
     }
 
-    .economic-graph{
+    .frame-bottom{
 
-        right:18px;
+        left:28px;
 
-        bottom:20px;
+        right:28px;
 
-        width:145px;
+        bottom:23px;
     }
 
     .intro,
-    .landscape,
     .podcast,
     .stories,
     .java,
     .episodes,
-    .network,
     .other{
 
         padding:
             70px 0;
-    }
-
-    .landscape-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .landscape-card{
-
-        min-height:225px;
     }
 
     .podcast-art{
@@ -2962,62 +2199,42 @@ button{
         height:175px;
     }
 
-    .podcast-mic{
+    .microphone{
 
-        width:65px;
+        width:64px;
 
-        height:110px;
+        height:108px;
     }
 
-    .podcast-mic::after{
+    .microphone::after{
 
         width:80px;
     }
 
-    .stories-head{
+    .story-image{
 
-        flex-direction:column;
-
-        align-items:flex-start;
+        min-height:320px;
     }
 
-    .stories-description{
+    .story-silhouette{
 
-        text-align:left;
+        transform:
+            translateX(-50%)
+            scale(.82);
+
+        transform-origin:
+            bottom center;
     }
 
-    .story-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .story-item.featured{
-
-        grid-column:auto;
-    }
-
-    .story-item.featured .story-thumb{
-
-        aspect-ratio:
-            16 / 10;
-    }
-
-    .java-main{
-
-        min-height:340px;
+    .story-content{
 
         padding:
-            34px 25px;
+            38px 25px;
     }
 
-    .java-side{
+    .java-image{
 
-        grid-template-rows:auto;
-    }
-
-    .java-card{
-
-        padding:27px 24px;
+        min-height:320px;
     }
 
     .episode-list{
@@ -3025,37 +2242,24 @@ button{
         grid-template-columns:1fr;
     }
 
-    .network-grid{
+    .episode{
+
+        min-height:auto;
+
+        padding:
+            27px 23px;
+    }
+
+    .topic-list{
+
+        display:grid;
 
         grid-template-columns:1fr;
     }
 
-    .network-item,
-    .network-item:nth-child(2n){
+    .topic-link{
 
-        border-right:0;
-    }
-
-    .topic-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .cta{
-
-        padding:
-            65px 0;
-    }
-
-    .cta-box{
-
-        padding:
-            38px 25px;
-    }
-
-    .cta-box::after{
-
-        font-size:120px;
+        width:100%;
     }
 
     .footer-grid{
@@ -3073,6 +2277,8 @@ button{
         flex-direction:column;
 
         align-items:flex-start;
+
+        gap:8px;
     }
 
 }
@@ -3125,7 +2331,7 @@ button{
 
     <div class="w">
 
-        <div class="topbar-left">
+        <div>
             MANDALA CHANNEL
         </div>
 
@@ -3162,8 +2368,8 @@ button{
 
 
         <a
-            class="brand"
             href="../index.html"
+            class="brand"
         >
 
             <div class="brand-mark">
@@ -3183,7 +2389,6 @@ button{
             </div>
 
         </a>
-
 
 
         <nav class="nav-menu">
@@ -3259,16 +2464,14 @@ button{
 
             </h1>
 
-
             <p class="hero-lead">
 
-                Ruang untuk membicarakan usaha,
-                pengusaha, ekonomi umat, dan
-                perjalanan membangun kemandirian
-                ekonomi Hindu di Jawa.
+                Ruang untuk mengenal pengusaha,
+                perjalanan usaha, dan dinamika
+                ekonomi masyarakat Hindu,
+                khususnya di Jawa.
 
             </p>
-
 
             <div class="hero-actions">
 
@@ -3280,10 +2483,10 @@ button{
                 </a>
 
                 <a
-                    href="#cerita-usaha"
+                    href="#cerita"
                     class="btn btn-outline"
                 >
-                    Cerita Pengusaha
+                    Lihat Cerita
                 </a>
 
             </div>
@@ -3292,65 +2495,63 @@ button{
 
 
 
-        <div class="business-stage reveal">
+        <div class="hero-visual reveal">
 
+            <div class="editorial-frame">
 
-            <div class="business-panel">
+                <div class="frame-top">
 
-                <div class="panel-top">
-
-                    <div class="panel-label">
-                        Mandala Economic Stories
+                    <div class="frame-label">
+                        Ekonomi Hindu
                     </div>
 
-                    <div class="panel-symbol">
-                        Rp
+                    <div class="frame-symbol">
+                        ✦
                     </div>
 
                 </div>
 
 
-                <div class="panel-content">
+                <div class="frame-content">
 
                     <h2>
-                        Ekonomi yang
-                        tumbuh dari
+
+                        Di balik
+                        setiap usaha
+                        ada sebuah
+
                         <span>
-                            masyarakat.
+                            perjalanan.
                         </span>
+
                     </h2>
 
                     <p>
-                        Dari usaha kecil, keluarga,
-                        komunitas, hingga pengusaha
-                        yang membangun jaringan ekonomi
-                        bersama.
+
+                        Tentang keberanian memulai,
+                        mempertahankan usaha, membangun
+                        keluarga, dan menciptakan kehidupan
+                        yang lebih mandiri.
+
                     </p>
 
                 </div>
 
 
-                <div class="economic-graph">
+                <div class="frame-bottom">
 
-                    <div class="graph-bars">
+                    <div class="frame-bottom-line"></div>
 
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-
-                    </div>
-
-                    <div class="graph-line"></div>
+                    <span>
+                        Mandala Economic Stories
+                    </span>
 
                 </div>
 
             </div>
 
-
         </div>
+
 
     </div>
 
@@ -3370,14 +2571,15 @@ button{
         <div class="reveal">
 
             <div class="label">
-                Ekonomi &amp; Kehidupan
+                Tentang Ekonomi
             </div>
 
             <h2>
-                Berbicara
-                tentang usaha,
-                berarti berbicara
-                tentang manusia.
+
+                Ekonomi bukan
+                hanya tentang
+                angka.
+
             </h2>
 
         </div>
@@ -3386,151 +2588,43 @@ button{
         <div class="intro-content reveal">
 
             <p>
-                Ekonomi Hindu bukan hanya tentang angka
-                dan transaksi. Di dalamnya ada keluarga,
-                kerja keras, keberanian mengambil risiko,
-                jaringan sosial, serta cita-cita untuk
-                membangun kehidupan yang lebih mandiri.
+
+                Di dalam sebuah usaha ada keluarga,
+                kerja keras, keberanian, kegagalan,
+                harapan, dan perjalanan panjang
+                untuk bertahan.
+
             </p>
 
             <p>
-                Mandala menghadirkan cerita pengusaha dan
-                pelaku ekonomi Hindu, khususnya dari Jawa,
-                sebagai bagian dari dokumentasi kehidupan
-                umat yang sering kali belum banyak
-                mendapatkan ruang untuk bercerita.
+
+                Mandala menghadirkan cerita ekonomi
+                Hindu melalui pengalaman langsung
+                para pengusaha, pelaku UMKM,
+                profesional, dan masyarakat yang
+                menjalani kehidupan ekonominya.
+
             </p>
 
             <p>
-                Dari warung, perdagangan, jasa, pertanian,
-                industri rumahan, profesi, hingga usaha
-                modern yang berkembang di tengah perubahan
-                zaman.
+
+                Fokus kami bukan sekadar pada hasil
+                akhir sebuah usaha, tetapi pada cerita
+                di baliknya. Bagaimana usaha dimulai,
+                bagaimana menghadapi perubahan,
+                dan bagaimana seseorang menemukan
+                jalan untuk terus berkembang.
+
             </p>
 
             <p>
-                Yang kami cari bukan sekadar keberhasilan,
-                tetapi proses: bagaimana usaha dimulai,
-                bagaimana menghadapi kesulitan, bagaimana
-                membangun jaringan, dan bagaimana ekonomi
-                dapat menjadi bagian dari kemandirian
-                masyarakat.
+
+                Dari usaha keluarga hingga generasi
+                muda yang membangun bisnis baru,
+                semua menjadi bagian dari cerita
+                ekonomi Hindu di Nusantara.
+
             </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     LANDSCAPE
-     ======================================================= -->
-
-<section class="landscape">
-
-    <div class="w">
-
-
-        <div class="landscape-head reveal">
-
-            <div class="label">
-                Ruang Ekonomi
-            </div>
-
-            <h2>
-                Melihat ekonomi
-                dari dekat.
-            </h2>
-
-        </div>
-
-
-
-        <div class="landscape-grid">
-
-
-            <article class="landscape-card reveal">
-
-                <div class="landscape-icon">
-                    ◇
-                </div>
-
-                <h3>
-                    Pengusaha
-                </h3>
-
-                <p>
-                    Mengenal sosok di balik usaha,
-                    keputusan yang diambil, dan
-                    perjalanan membangun bisnis
-                    dari bawah.
-                </p>
-
-            </article>
-
-
-
-            <article class="landscape-card reveal">
-
-                <div class="landscape-icon">
-                    □
-                </div>
-
-                <h3>
-                    UMKM
-                </h3>
-
-                <p>
-                    Cerita usaha kecil dan menengah
-                    yang menjadi bagian penting dari
-                    kehidupan ekonomi masyarakat.
-                </p>
-
-            </article>
-
-
-
-            <article class="landscape-card reveal">
-
-                <div class="landscape-icon">
-                    ∞
-                </div>
-
-                <h3>
-                    Jaringan
-                </h3>
-
-                <p>
-                    Bagaimana relasi, komunitas,
-                    koperasi, dan jaringan usaha
-                    dapat memperkuat ekonomi umat.
-                </p>
-
-            </article>
-
-
-
-            <article class="landscape-card reveal">
-
-                <div class="landscape-icon">
-                    ✦
-                </div>
-
-                <h3>
-                    Kemandirian
-                </h3>
-
-                <p>
-                    Membicarakan pentingnya kemampuan
-                    masyarakat membangun dan mengelola
-                    sumber daya ekonominya sendiri.
-                </p>
-
-            </article>
-
 
         </div>
 
@@ -3554,14 +2648,13 @@ button{
 
         <div class="podcast-art reveal">
 
-            <div class="podcast-mic">
+            <div class="microphone">
 
-                <div class="mic-lines"></div>
+                <div class="mic-inner"></div>
 
             </div>
 
         </div>
-
 
 
         <div class="podcast-copy reveal">
@@ -3571,49 +2664,32 @@ button{
             </div>
 
             <h2>
-                Mendengar suara
+
+                Mendengar langsung
+                cerita dari
+
                 <span>
-                    para pelaku ekonomi.
+                    pelaku ekonomi.
                 </span>
+
             </h2>
 
             <p>
-                Ekonomi akan terasa lebih dekat ketika
-                kita mendengarnya langsung dari orang
-                yang menjalaninya. Mandala Podcast
-                menghadirkan percakapan bersama pengusaha,
-                pekerja, profesional, pelaku UMKM, dan
-                tokoh masyarakat Hindu Jawa.
+
+                Percakapan bersama pengusaha,
+                pelaku UMKM, profesional, dan
+                masyarakat Hindu tentang pekerjaan,
+                usaha, tantangan, keluarga,
+                serta perjalanan membangun
+                kehidupan ekonomi.
+
             </p>
-
-
-            <div class="podcast-meta">
-
-                <div class="meta-item">
-                    Pengusaha
-                </div>
-
-                <div class="meta-item">
-                    UMKM
-                </div>
-
-                <div class="meta-item">
-                    Ekonomi Umat
-                </div>
-
-                <div class="meta-item">
-                    Jawa
-                </div>
-
-            </div>
-
 
             <a
                 href="../pages/podcast.html"
                 class="btn podcast-btn"
             >
                 Buka Podcast
-
             </a>
 
         </div>
@@ -3626,272 +2702,104 @@ button{
 
 
 <!-- =======================================================
-     BUSINESS STORIES
+     CERITA PENGUSAHA
      ======================================================= -->
 
 <section
     class="stories"
-    id="cerita-usaha"
+    id="cerita"
 >
 
     <div class="w">
 
 
-        <div class="stories-head reveal">
+        <div class="section-head reveal">
 
-            <div>
+            <div class="label">
+                Cerita Pengusaha
+            </div>
 
-                <div class="label">
-                    Cerita Pengusaha
+            <h2>
+
+                Di balik sebuah
+                usaha.
+
+            </h2>
+
+            <p>
+
+                Kisah tentang orang-orang yang
+                membangun usaha dari tempat mereka
+                berada, dengan kemampuan dan
+                keadaan yang mereka miliki.
+
+            </p>
+
+        </div>
+
+
+
+        <article class="main-story reveal">
+
+
+            <div class="story-image">
+
+                <div class="story-label">
+                    Profil Pengusaha
                 </div>
 
-                <h2>
-                    Di balik sebuah
-                    usaha.
-                </h2>
+                <div class="story-silhouette">
+
+                    <div class="person-head"></div>
+
+                    <div class="person-body"></div>
+
+                </div>
 
             </div>
 
-            <div class="stories-description">
 
-                Cerita tentang bagaimana usaha dimulai,
-                bertahan, berkembang, dan memberi arti
-                bagi keluarga maupun lingkungan.
+            <div class="story-content">
+
+                <div class="label">
+                    Kisah Usaha
+                </div>
+
+                <h3>
+
+                    Dari usaha keluarga
+                    menjadi jalan kehidupan.
+
+                </h3>
+
+                <p>
+
+                    Sebuah cerita tentang bagaimana
+                    usaha sederhana tumbuh bersama
+                    keluarga, menghadapi berbagai
+                    perubahan, dan akhirnya menjadi
+                    bagian penting dari kehidupan
+                    sehari-hari.
+
+                </p>
+
+                <a
+                    href="../pages/artikel-detail.html"
+                    class="text-link"
+                >
+
+                    Baca cerita
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
 
             </div>
 
-        </div>
 
-
-
-        <div class="story-grid">
-
-
-            <!-- FEATURED -->
-
-            <article
-                class="story-item featured reveal"
-            >
-
-                <a href="../pages/artikel-detail.html">
-
-                    <div class="story-thumb">
-
-                        <div class="story-tag">
-                            Profil Pengusaha
-                        </div>
-
-
-                        <div class="story-person">
-
-                            <div class="story-person-head"></div>
-
-                            <div class="story-person-body"></div>
-
-                        </div>
-
-
-                        <div class="business-building"></div>
-
-                    </div>
-
-
-                    <div class="story-body">
-
-                        <div class="story-type">
-                            Kisah Usaha
-                        </div>
-
-                        <h3>
-                            Dari Usaha Keluarga
-                            Menjadi Sumber Kehidupan
-                        </h3>
-
-                        <p>
-                            Perjalanan seorang pengusaha
-                            Hindu membangun usaha dari
-                            skala sederhana hingga menjadi
-                            bagian penting dari ekonomi
-                            keluarganya.
-                        </p>
-
-                        <span class="story-more">
-                            Baca cerita →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
-
-
-            <!-- STORY -->
-
-            <article
-                class="story-item reveal"
-            >
-
-                <a href="../pages/artikel-detail.html">
-
-                    <div class="story-thumb">
-
-                        <div class="story-tag">
-                            UMKM
-                        </div>
-
-
-                        <div class="story-person">
-
-                            <div class="story-person-head"></div>
-
-                            <div class="story-person-body"></div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="story-body">
-
-                        <div class="story-type">
-                            Usaha Lokal
-                        </div>
-
-                        <h3>
-                            Menjaga Usaha
-                            di Tengah Perubahan
-                        </h3>
-
-                        <p>
-                            Cerita pelaku usaha kecil
-                            menghadapi perubahan pasar
-                            dan kebiasaan konsumen.
-                        </p>
-
-                        <span class="story-more">
-                            Baca cerita →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
-
-
-            <!-- STORY -->
-
-            <article
-                class="story-item reveal"
-            >
-
-                <a href="../pages/artikel-detail.html">
-
-                    <div class="story-thumb">
-
-                        <div class="story-tag">
-                            Generasi
-                        </div>
-
-
-                        <div class="story-person">
-
-                            <div class="story-person-head"></div>
-
-                            <div class="story-person-body"></div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="story-body">
-
-                        <div class="story-type">
-                            Regenerasi
-                        </div>
-
-                        <h3>
-                            Ketika Anak Muda
-                            Meneruskan Usaha Keluarga
-                        </h3>
-
-                        <p>
-                            Antara tradisi usaha keluarga
-                            dan keberanian generasi baru
-                            menciptakan cara yang berbeda.
-                        </p>
-
-                        <span class="story-more">
-                            Baca cerita →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
-
-
-            <!-- STORY -->
-
-            <article
-                class="story-item reveal"
-            >
-
-                <a href="../pages/artikel-detail.html">
-
-                    <div class="story-thumb">
-
-                        <div class="story-tag">
-                            Komunitas
-                        </div>
-
-
-                        <div class="story-person">
-
-                            <div class="story-person-head"></div>
-
-                            <div class="story-person-body"></div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="story-body">
-
-                        <div class="story-type">
-                            Jaringan
-                        </div>
-
-                        <h3>
-                            Ketika Pelaku Usaha
-                            Saling Menguatkan
-                        </h3>
-
-                        <p>
-                            Bagaimana hubungan antar pelaku
-                            usaha dapat membentuk jaringan
-                            ekonomi yang lebih kuat.
-                        </p>
-
-                        <span class="story-more">
-                            Baca cerita →
-                        </span>
-
-                    </div>
-
-                </a>
-
-            </article>
-
-
-        </div>
+        </article>
 
     </div>
 
@@ -3908,78 +2816,57 @@ button{
     <div class="w java-layout">
 
 
-        <div class="java-main reveal">
+        <div class="java-image reveal">
+
+            <div class="java-word">
+                JAWA
+            </div>
+
+        </div>
+
+
+        <div class="java-copy reveal">
 
             <div class="label">
                 Ekonomi Hindu Jawa
             </div>
 
             <h2>
+
                 Membaca ekonomi
-                dari akar masyarakat.
+                dari kehidupan
+                masyarakat.
+
             </h2>
 
             <p>
-                Jawa memiliki sejarah panjang tentang
+
+                Jawa memiliki perjalanan ekonomi
+                yang panjang. Di dalamnya terdapat
                 perdagangan, pertanian, kerajinan,
-                industri rumah tangga, jasa, dan berbagai
-                bentuk kehidupan ekonomi masyarakat.
-                Mandala ingin melihat bagaimana umat Hindu
-                menjadi bagian dari dinamika tersebut.
+                jasa, usaha keluarga, dan berbagai
+                bentuk pekerjaan yang menjadi bagian
+                dari kehidupan masyarakat.
+
             </p>
 
-        </div>
+            <p>
 
+                Mandala ingin melihat bagaimana
+                masyarakat Hindu ikut tumbuh di
+                dalam dinamika tersebut.
 
+            </p>
 
-        <div class="java-side">
+            <p>
 
+                Kami akan mengangkat cerita lokal,
+                usaha masyarakat, generasi muda,
+                serta perubahan cara orang Hindu
+                bekerja dan membangun kehidupan
+                ekonominya.
 
-            <article class="java-card reveal">
-
-                <h3>
-                    Tradisi &amp; Usaha
-                </h3>
-
-                <p>
-                    Menelusuri hubungan antara tradisi,
-                    keterampilan, profesi, dan sumber
-                    penghidupan masyarakat Hindu di Jawa.
-                </p>
-
-                <a
-                    href="../pages/artikel.html"
-                    class="java-card-link"
-                >
-                    Jelajahi artikel →
-                </a>
-
-            </article>
-
-
-
-            <article class="java-card reveal">
-
-                <h3>
-                    Generasi Baru
-                </h3>
-
-                <p>
-                    Mengenal anak muda Hindu yang memilih
-                    menjadi pengusaha, profesional,
-                    kreator, dan pelaku ekonomi di era
-                    digital.
-                </p>
-
-                <a
-                    href="../pages/podcast.html"
-                    class="java-card-link"
-                >
-                    Dengarkan cerita →
-                </a>
-
-            </article>
-
+            </p>
 
         </div>
 
@@ -3991,7 +2878,7 @@ button{
 
 
 <!-- =======================================================
-     PODCAST EPISODES
+     EPISODE PODCAST
      ======================================================= -->
 
 <section class="episodes">
@@ -3999,28 +2886,28 @@ button{
     <div class="w">
 
 
-        <div class="stories-head reveal">
+        <div class="section-head reveal">
 
-            <div>
-
-                <div class="label">
-                    Episode Pilihan
-                </div>
-
-                <h2>
-                    Percakapan
-                    tentang usaha.
-                </h2>
-
+            <div class="label">
+                Podcast Ekonomi
             </div>
 
-            <div class="stories-description">
+            <h2>
 
-                Beberapa tema yang nantinya dapat
-                dikembangkan menjadi serial podcast
-                Ekonomi Hindu Mandala.
+                Percakapan
+                yang dekat dengan
+                kehidupan.
 
-            </div>
+            </h2>
+
+            <p>
+
+                Beberapa tema yang akan menjadi
+                bagian dari perjalanan Mandala
+                dalam mendokumentasikan ekonomi
+                Hindu.
+
+            </p>
 
         </div>
 
@@ -4034,37 +2921,28 @@ button{
                 <div class="episode-top">
 
                     <div class="episode-type">
-                        Podcast
-                    </div>
-
-                    <div class="episode-play">
-                        ▶
-                    </div>
-
-                </div>
-
-                <h3>
-                    Membangun Usaha
-                    dari Nol
-                </h3>
-
-                <p>
-                    Bagaimana sebuah usaha dimulai ketika
-                    modal terbatas tetapi keberanian dan
-                    kemauan terus ada.
-                </p>
-
-                <div class="episode-info">
-
-                    <span>
                         Pengusaha
-                    </span>
+                    </div>
 
-                    <span>
-                        Ekonomi
-                    </span>
+                    <div class="play">
+                        ▶
+                    </div>
 
                 </div>
+
+                <h3>
+                    Membangun usaha
+                    dari nol.
+                </h3>
+
+                <p>
+
+                    Tentang keberanian memulai,
+                    modal yang terbatas, dan
+                    keputusan-keputusan kecil
+                    yang membentuk sebuah usaha.
+
+                </p>
 
             </article>
 
@@ -4075,37 +2953,27 @@ button{
                 <div class="episode-top">
 
                     <div class="episode-type">
-                        Podcast
-                    </div>
-
-                    <div class="episode-play">
-                        ▶
-                    </div>
-
-                </div>
-
-                <h3>
-                    Menjaga Usaha
-                    di Tengah Perubahan
-                </h3>
-
-                <p>
-                    Percakapan tentang pelanggan,
-                    persaingan, teknologi, dan bagaimana
-                    usaha keluarga tetap bertahan.
-                </p>
-
-                <div class="episode-info">
-
-                    <span>
                         UMKM
-                    </span>
+                    </div>
 
-                    <span>
-                        Jawa
-                    </span>
+                    <div class="play">
+                        ▶
+                    </div>
 
                 </div>
+
+                <h3>
+                    Bertahan di tengah
+                    perubahan.
+                </h3>
+
+                <p>
+
+                    Bagaimana pelaku usaha menghadapi
+                    perubahan pasar, teknologi,
+                    pelanggan, dan persaingan.
+
+                </p>
 
             </article>
 
@@ -4116,37 +2984,27 @@ button{
                 <div class="episode-top">
 
                     <div class="episode-type">
-                        Podcast
+                        Generasi Muda
                     </div>
 
-                    <div class="episode-play">
+                    <div class="play">
                         ▶
                     </div>
 
                 </div>
 
                 <h3>
-                    Membangun Jaringan
-                    Ekonomi Umat
+                    Anak muda dan
+                    dunia usaha.
                 </h3>
 
                 <p>
-                    Mengapa hubungan antar pelaku usaha
-                    penting untuk menciptakan ekosistem
-                    ekonomi yang saling mendukung.
+
+                    Cerita generasi muda Hindu yang
+                    memilih membangun usaha dan
+                    mencari jalannya sendiri.
+
                 </p>
-
-                <div class="episode-info">
-
-                    <span>
-                        Komunitas
-                    </span>
-
-                    <span>
-                        Ekonomi Umat
-                    </span>
-
-                </div>
 
             </article>
 
@@ -4160,161 +3018,7 @@ button{
 
 
 <!-- =======================================================
-     NETWORK
-     ======================================================= -->
-
-<section class="network">
-
-    <div class="w">
-
-
-        <div class="network-head reveal">
-
-            <div class="label">
-                Ekosistem
-            </div>
-
-            <h2>
-                Ekonomi tidak
-                berjalan sendirian.
-            </h2>
-
-        </div>
-
-
-
-        <div class="network-grid">
-
-
-            <article class="network-item reveal">
-
-                <h3>
-                    Usaha Keluarga
-                </h3>
-
-                <p>
-                    Melihat bagaimana usaha menjadi bagian
-                    dari kehidupan keluarga dan diwariskan
-                    lintas generasi.
-                </p>
-
-                <span class="network-arrow">
-                    →
-                </span>
-
-            </article>
-
-
-
-            <article class="network-item reveal">
-
-                <h3>
-                    Pelaku UMKM
-                </h3>
-
-                <p>
-                    Mendokumentasikan perjuangan usaha
-                    kecil yang tumbuh dari kebutuhan
-                    dan keberanian.
-                </p>
-
-                <span class="network-arrow">
-                    →
-                </span>
-
-            </article>
-
-
-
-            <article class="network-item reveal">
-
-                <h3>
-                    Profesional
-                </h3>
-
-                <p>
-                    Menghadirkan pengalaman umat Hindu
-                    yang bekerja di berbagai bidang
-                    profesional.
-                </p>
-
-                <span class="network-arrow">
-                    →
-                </span>
-
-            </article>
-
-
-
-            <article class="network-item reveal">
-
-                <h3>
-                    Komunitas
-                </h3>
-
-                <p>
-                    Mencari bagaimana komunitas dapat
-                    menjadi ruang bertemu, berbagi,
-                    dan membangun peluang.
-                </p>
-
-                <span class="network-arrow">
-                    →
-                </span>
-
-            </article>
-
-
-
-            <article class="network-item reveal">
-
-                <h3>
-                    Generasi Muda
-                </h3>
-
-                <p>
-                    Membuka ruang bagi generasi muda
-                    Hindu yang sedang membangun masa
-                    depan ekonominya.
-                </p>
-
-                <span class="network-arrow">
-                    →
-                </span>
-
-            </article>
-
-
-
-            <article class="network-item reveal">
-
-                <h3>
-                    Kemandirian
-                </h3>
-
-                <p>
-                    Membicarakan visi ekonomi yang mampu
-                    memberikan manfaat lebih luas bagi
-                    masyarakat.
-                </p>
-
-                <span class="network-arrow">
-                    →
-                </span>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     OTHER TOPICS
+     TOPIK LAIN
      ======================================================= -->
 
 <section class="other">
@@ -4322,144 +3026,67 @@ button{
     <div class="w">
 
 
-        <div class="label reveal">
-            Eksplorasi
+        <div class="other-head reveal">
+
+            <div class="label">
+                Eksplorasi Mandala
+            </div>
+
+            <h2>
+                Topik lainnya
+            </h2>
+
         </div>
 
-        <h2 class="reveal">
-            Topik Mandala lainnya
-        </h2>
 
-
-
-        <div class="topic-grid">
+        <div class="topic-list">
 
 
             <a
                 href="candika-nusantara.html"
-                class="topic reveal"
+                class="topic-link"
             >
-
-                <h3>
-                    Candika Nusantara
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
+                Candika Nusantara
             </a>
 
 
             <a
                 href="dharma-ajaran.html"
-                class="topic reveal"
+                class="topic-link"
             >
-
-                <h3>
-                    Dharma &amp; Ajaran
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
+                Dharma &amp; Ajaran
             </a>
 
 
             <a
                 href="dharmika.html"
-                class="topic reveal"
+                class="topic-link"
             >
-
-                <h3>
-                    Dharmika
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
+                Dharmika
             </a>
 
 
             <a
                 href="tokoh-hindu.html"
-                class="topic reveal"
+                class="topic-link"
             >
-
-                <h3>
-                    Tokoh Hindu
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
+                Tokoh Hindu
             </a>
 
 
             <a
                 href="jelajah-nusantara.html"
-                class="topic reveal"
+                class="topic-link"
             >
-
-                <h3>
-                    Jelajah Nusantara
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
+                Jelajah Nusantara
             </a>
 
 
             <a
                 href="tradisi-budaya.html"
-                class="topic reveal"
+                class="topic-link"
             >
-
-                <h3>
-                    Tradisi &amp; Budaya
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="spiritual.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Spiritual
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
-            </a>
-
-
-            <a
-                href="kabar-umat.html"
-                class="topic reveal"
-            >
-
-                <h3>
-                    Kabar Umat
-                </h3>
-
-                <span class="topic-arrow">
-                    →
-                </span>
-
+                Tradisi &amp; Budaya
             </a>
 
 
@@ -4469,50 +3096,6 @@ button{
 
 </section>
 
-
-
-<!-- =======================================================
-     CTA
-     ======================================================= -->
-
-<section class="cta">
-
-    <div class="w">
-
-        <div class="cta-box reveal">
-
-            <div class="cta-content">
-
-                <div class="label">
-                    Mandala Podcast
-                </div>
-
-                <h2>
-                    Dengarkan orang-orang
-                    di balik ekonomi Hindu.
-                </h2>
-
-                <p>
-                    Cerita tentang usaha, keberanian,
-                    keluarga, komunitas, dan perjalanan
-                    membangun kemandirian ekonomi dari
-                    masyarakat Hindu Jawa.
-                </p>
-
-                <a
-                    href="../pages/podcast.html"
-                    class="btn"
-                >
-                    Dengarkan Podcast
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
 
 
 </main>
@@ -4542,16 +3125,17 @@ button{
                 </small>
 
                 <p>
+
                     Media yang menghadirkan cerita,
                     pengetahuan, budaya, kehidupan,
                     dan dinamika masyarakat Hindu
                     Nusantara melalui artikel, video,
                     podcast, dan berbagai ruang
                     eksplorasi.
+
                 </p>
 
             </div>
-
 
 
             <div class="footer-column">
@@ -4579,7 +3163,6 @@ button{
             </div>
 
 
-
             <div class="footer-column">
 
                 <h4>
@@ -4598,7 +3181,7 @@ button{
                     Kontak
                 </a>
 
-                <a href="../index.html#topics">
+                <a href="../index.html">
                     Semua Topik
                 </a>
 
@@ -4606,7 +3189,6 @@ button{
 
 
         </div>
-
 
 
         <div class="footer-bottom">
@@ -4636,9 +3218,8 @@ button{
 
 (function(){
 
-
     /* =====================================================
-       HEADER
+       HEADER SCROLL
        ===================================================== */
 
     const header =
@@ -4680,7 +3261,7 @@ button{
 
 
     /* =====================================================
-       REVEAL ANIMATION
+       REVEAL
        ===================================================== */
 
     const elements =
@@ -4748,7 +3329,6 @@ button{
         );
 
     }
-
 
 })();
 
