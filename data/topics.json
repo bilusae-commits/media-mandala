@@ -1,1 +1,121 @@
-[{"slug":"tokoh-hindu","name":"Tokoh Hindu"},{"slug":"dharma-ajaran","name":"Dharma & Ajaran"},{"slug":"dharmika","name":"Dharmika"},{"slug":"jelajah-nusantara","name":"Jelajah Nusantara"},{"slug":"tradisi-budaya","name":"Tradisi & Budaya"},{"slug":"spiritual","name":"Spiritual"},{"slug":"kabar-umat","name":"Kabar Umat"},{"slug":"candika-nusantara","name":"Candika Nusantara"},{"slug":"ekonomi-hindu","name":"Ekonomi & Kemandirian"}]
+{
+  "topics": [
+    {
+      "id": "candika",
+      "slug": "candika",
+      "name": "Candika",
+      "title": "Candika",
+      "description": "Ruang untuk mengenal jejak sejarah, pemikiran, dan perkembangan Hindu di Jawa dan Nusantara.",
+      "short_description": "Sejarah, jejak, dan perjalanan Hindu Nusantara.",
+      "category": "sejarah",
+      "type": "article",
+      "featured": true,
+      "status": "published",
+      "order": 1
+    },
+    {
+      "id": "dharma-ajaran",
+      "slug": "dharma-ajaran",
+      "name": "Dharma Ajaran",
+      "title": "Dharma Ajaran",
+      "description": "Membahas ajaran, nilai, filosofi, dan pemahaman Hindu yang relevan dengan kehidupan.",
+      "short_description": "Ajaran, filosofi, nilai, dan pemahaman Dharma.",
+      "category": "ajaran",
+      "type": "article",
+      "featured": true,
+      "status": "published",
+      "order": 2
+    },
+    {
+      "id": "dharmika",
+      "slug": "dharmika",
+      "name": "Dharmika",
+      "title": "Dharmika",
+      "description": "Cerita dan pengalaman perjalanan spiritual mereka yang menemukan jalan Dharma dan memilih untuk mengenal serta menjalani Hindu.",
+      "short_description": "Kisah perjalanan menuju dan menjalani Dharma.",
+      "category": "dharmika",
+      "type": "story",
+      "featured": true,
+      "status": "published",
+      "order": 3
+    },
+    {
+      "id": "ekonomi-hindu",
+      "slug": "ekonomi-hindu",
+      "name": "Ekonomi Hindu",
+      "title": "Ekonomi Hindu",
+      "description": "Podcast dan cerita mengenai pengusaha, ekonomi, kemandirian, serta perkembangan perekonomian Hindu di Jawa.",
+      "short_description": "Pengusaha, ekonomi, dan kemandirian umat.",
+      "category": "ekonomi",
+      "type": "podcast",
+      "featured": true,
+      "status": "published",
+      "order": 4
+    },
+    {
+      "id": "jelajah-nusantara",
+      "slug": "jelajah-nusantara",
+      "name": "Jelajah Nusantara",
+      "title": "Jelajah Nusantara",
+      "description": "Menjelajahi tempat, komunitas, peninggalan, kehidupan, dan berbagai jejak Hindu yang tersebar di Nusantara.",
+      "short_description": "Tempat, komunitas, dan jejak Hindu Nusantara.",
+      "category": "jelajah",
+      "type": "video",
+      "featured": true,
+      "status": "published",
+      "order": 5
+    },
+    {
+      "id": "kabar-umat",
+      "slug": "kabar-umat",
+      "name": "Kabar Umat",
+      "title": "Kabar Umat",
+      "description": "Menghadirkan kabar, kegiatan, perkembangan, dan berbagai cerita dari umat Hindu di berbagai daerah.",
+      "short_description": "Kabar dan aktivitas umat Hindu.",
+      "category": "berita",
+      "type": "news",
+      "featured": true,
+      "status": "published",
+      "order": 6
+    },
+    {
+      "id": "spiritual",
+      "slug": "spiritual",
+      "name": "Spiritual",
+      "title": "Spiritual",
+      "description": "Meliput kegiatan spiritual dan upacara keagamaan Hindu, termasuk tradisi, ritual, makna, dan kehidupan keagamaan umat.",
+      "short_description": "Upacara, ritual, dan kehidupan spiritual Hindu.",
+      "category": "spiritual",
+      "type": "video",
+      "featured": true,
+      "status": "published",
+      "order": 7
+    },
+    {
+      "id": "tokoh-hindu",
+      "slug": "tokoh-hindu",
+      "name": "Tokoh Hindu",
+      "title": "Tokoh Hindu",
+      "description": "Mengenal sosok-sosok Hindu yang memiliki pemikiran, karya, perjuangan, dan kontribusi bagi masyarakat serta Dharma.",
+      "short_description": "Mengenal sosok dan pemikiran tokoh Hindu.",
+      "category": "tokoh",
+      "type": "profile",
+      "featured": true,
+      "status": "published",
+      "order": 8
+    },
+    {
+      "id": "tradisi-budaya",
+      "slug": "tradisi-budaya",
+      "name": "Tradisi Budaya",
+      "title": "Tradisi Budaya",
+      "description": "Mengangkat kekayaan tradisi dan budaya Hindu yang hidup, berkembang, dan diwariskan dari generasi ke generasi.",
+      "short_description": "Tradisi, budaya, dan warisan Hindu.",
+      "category": "budaya",
+      "type": "article",
+      "featured": true,
+      "status": "published",
+      "order": 9
+    }
+  ]
+}
