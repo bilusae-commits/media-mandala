@@ -1,19 +1,13 @@
 import { supabase } from "../../js/supabase-client.js";
 
-const LOGIN_PAGE = "login.html";
-const DASHBOARD_PAGE = "index.html";
-
 export async function getCurrentUser() {
-    const {
-        data: { session },
-        error
-    } = await supabase.auth.getSession();
+    const { data, error } = await supabase.auth.getUser();
 
-    if (error || !session?.user) {
+    if (error || !data?.user) {
         return null;
     }
 
-    return session.user;
+    return data.user;
 }
 
 export async function getCurrentProfile() {
@@ -25,12 +19,17 @@ export async function getCurrentProfile() {
 
     const { data, error } = await supabase
         .from("profiles")
-        .select("id, full_name, role, avatar_url, created_at, updated_at")
+        .select("id, full_name, role, avatar_url")
         .eq("id", user.id)
-        .single();
+        .maybeSingle();
 
     if (error) {
         console.error("Profile error:", error);
+        return null;
+    }
+
+    if (!data) {
+        console.error("Profile tidak ditemukan.");
         return null;
     }
 
@@ -41,25 +40,26 @@ export async function getCurrentProfile() {
 }
 
 export async function requireAuth() {
-    const profile = await getCurrentProfile();
+    const user = await getCurrentUser();
 
-    if (!profile) {
-        window.location.replace(LOGIN_PAGE);
+    if (!user) {
+        window.location.href = "./login.html";
         return null;
     }
 
-    return profile;
+    return user;
 }
 
 export async function requireAdmin() {
-    const profile = await requireAuth();
+    const profile = await getCurrentProfile();
 
     if (!profile) {
+        window.location.href = "./login.html";
         return null;
     }
 
     if (profile.role !== "admin") {
-        window.location.replace(DASHBOARD_PAGE);
+        window.location.href = "./index.html";
         return null;
     }
 
@@ -70,12 +70,12 @@ export async function logout() {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-        console.error("Logout error:", error);
-        alert("Gagal keluar. Silakan coba lagi.");
+        console.error(error);
+        alert("Gagal keluar.");
         return;
     }
 
-    window.location.replace(LOGIN_PAGE);
+    window.location.href = "./login.html";
 }
 
 export { supabase };
