@@ -1,1065 +1,741 @@
 /* =========================================================
    MANDALA CHANNEL
-   SUPABASE-CLIENT.JS
+   SUPABASE CLIENT
    ---------------------------------------------------------
-   SUPABASE CLIENT FOUNDATION
+   File ini khusus untuk area Admin / Editor.
 
-   Tahap:
-   - Belum melakukan koneksi otomatis
-   - Tidak menggunakan CDN
-   - Tidak memuat library eksternal
-   - Tidak meminta akses internet saat halaman dibuka
-   - Tidak mengubah tampilan website
-   - Disiapkan untuk Admin & Editor
+   Website publik tidak perlu memuat file ini.
+
+   Tugas file:
+   - Memuat Supabase client
+   - Menyediakan koneksi database
+   - Authentication
+   - Mengambil profile user
+   - Mengecek role Admin / Editor
+   - Helper permission
    ========================================================= */
 
 (function (window) {
-
     "use strict";
-
-
-    /* =====================================================
-       NAMESPACE
-       ===================================================== */
-
-    window.Mandala =
-        window.Mandala || {};
-
-
-    const Supabase =
-        window.Mandala.Supabase =
-        window.Mandala.Supabase || {};
-
-
-
-    /* =====================================================
-       STATUS
-       ===================================================== */
-
-    Supabase.status = {
-
-        configured: false,
-
-        initialized: false,
-
-        connected: false,
-
-        authenticated: false
-
-    };
-
-
 
     /* =====================================================
        CONFIGURATION
        ===================================================== */
 
-    let configuration = {
+    const CONFIG = window.MANDALA_CONFIG || {};
 
-        url: "",
+    const SUPABASE_URL =
+        CONFIG.SUPABASE_URL ||
+        window.SUPABASE_URL ||
+        "";
 
-        anonKey: ""
-
-    };
-
-
-    Supabase.configuration =
-        configuration;
-
-
+    const SUPABASE_KEY =
+        CONFIG.SUPABASE_PUBLISHABLE_KEY ||
+        CONFIG.SUPABASE_ANON_KEY ||
+        window.SUPABASE_PUBLISHABLE_KEY ||
+        window.SUPABASE_ANON_KEY ||
+        "";
 
     /* =====================================================
-       SET CONFIGURATION
+       INTERNAL STATE
        ===================================================== */
 
-    function setConfig(
-        url,
-        anonKey
-    ) {
+    let supabaseClient = null;
+    let supabaseLibraryPromise = null;
 
-        configuration = {
-
-            url:
-                typeof url ===
-                "string"
-                    ? url.trim()
-                    : "",
-
-            anonKey:
-                typeof anonKey ===
-                "string"
-                    ? anonKey.trim()
-                    : ""
-
-        };
-
-
-        Supabase.configuration =
-            configuration;
-
-
-        Supabase.status.configured =
-            Boolean(
-                configuration.url &&
-                configuration.anonKey
-            );
-
-
-        return (
-            Supabase.status.configured
-        );
-
-    }
-
-
-    Supabase.setConfig =
-        setConfig;
-
-
+    let currentUser = null;
+    let currentProfile = null;
 
     /* =====================================================
-       GET CONFIGURATION
-       ===================================================== */
-
-    function getConfig() {
-
-        return Object.assign(
-            {},
-            configuration
-        );
-
-    }
-
-
-    Supabase.getConfig =
-        getConfig;
-
-
-
-    /* =====================================================
-       CONFIG VALIDATION
+       VALIDATION
        ===================================================== */
 
     function validateConfig() {
-
-        const url =
-            configuration.url;
-
-
-        const key =
-            configuration.anonKey;
-
-
-        if (
-            !url ||
-            !key
-        ) {
-
-            return {
-
-                valid: false,
-
-                reason:
-                    "Supabase URL atau publishable key belum tersedia."
-
-            };
-
+        if (!SUPABASE_URL) {
+            throw new Error(
+                "MANDALA: SUPABASE_URL belum dikonfigurasi."
+            );
         }
 
-
-        let parsedURL;
-
-
-        try {
-
-            parsedURL =
-                new URL(url);
-
-        } catch (
-            error
-        ) {
-
-            return {
-
-                valid: false,
-
-                reason:
-                    "Format Supabase URL tidak valid."
-
-            };
-
+        if (!SUPABASE_KEY) {
+            throw new Error(
+                "MANDALA: Supabase publishable/anon key belum dikonfigurasi."
+            );
         }
-
-
-        if (
-            parsedURL.protocol !==
-            "https:"
-        ) {
-
-            return {
-
-                valid: false,
-
-                reason:
-                    "Supabase URL harus menggunakan HTTPS."
-
-            };
-
-        }
-
-
-        return {
-
-            valid: true,
-
-            reason: ""
-
-        };
-
     }
 
-
-    Supabase.validateConfig =
-        validateConfig;
-
-
-
     /* =====================================================
-       CLIENT
+       LOAD SUPABASE LIBRARY
        -----------------------------------------------------
-       Pada tahap sekarang tidak ada client eksternal.
-       Nanti akan kita aktifkan setelah seluruh fondasi
-       website selesai.
+       Library hanya dimuat ketika CMS benar-benar
+       membutuhkan Supabase.
        ===================================================== */
 
-    let client =
-        null;
+    async function loadSupabaseLibrary() {
+        if (window.supabase && typeof window.supabase.createClient === "function") {
+            return window.supabase;
+        }
 
+        if (supabaseLibraryPromise) {
+            return supabaseLibraryPromise;
+        }
 
-    Supabase.client =
-        client;
-
-
-
-    /* =====================================================
-       INITIALIZE
-       ===================================================== */
-
-    function init(
-        options
-    ) {
-
-        options =
-            options || {};
-
-
-        if (
-            options.url &&
-            options.anonKey
-        ) {
-
-            setConfig(
-                options.url,
-                options.anonKey
+        supabaseLibraryPromise = new Promise(function (resolve, reject) {
+            const existingScript = document.querySelector(
+                'script[data-mandala-supabase]'
             );
 
-        }
+            if (existingScript) {
+                existingScript.addEventListener("load", function () {
+                    if (
+                        window.supabase &&
+                        typeof window.supabase.createClient === "function"
+                    ) {
+                        resolve(window.supabase);
+                    } else {
+                        reject(
+                            new Error(
+                                "Supabase library berhasil dimuat tetapi createClient tidak tersedia."
+                            )
+                        );
+                    }
+                });
 
+                existingScript.addEventListener("error", function () {
+                    reject(
+                        new Error(
+                            "Gagal memuat Supabase library."
+                        )
+                    );
+                });
 
-        Supabase.status.initialized =
-            true;
+                return;
+            }
 
+            const script = document.createElement("script");
 
-        /*
-         * Jangan membuat koneksi otomatis.
-         *
-         * Tidak ada:
-         * - fetch()
-         * - import CDN
-         * - script injection
-         * - request Supabase
-         *
-         * di tahap ini.
-         */
+            script.src =
+                "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
 
+            script.async = true;
+            script.dataset.mandalaSupabase = "true";
 
-        return {
-
-            initialized:
-                true,
-
-            configured:
-                Supabase.status.configured,
-
-            connected:
-                false
-
-        };
-
-    }
-
-
-    Supabase.init =
-        init;
-
-
-
-    /* =====================================================
-       CONNECT
-       -----------------------------------------------------
-       Placeholder.
-       Sengaja belum membuat koneksi.
-       ===================================================== */
-
-    async function connect() {
-
-        const validation =
-            validateConfig();
-
-
-        if (
-            !validation.valid
-        ) {
-
-            Supabase.status.connected =
-                false;
-
-
-            return {
-
-                success: false,
-
-                connected: false,
-
-                error:
-                    validation.reason
-
+            script.onload = function () {
+                if (
+                    window.supabase &&
+                    typeof window.supabase.createClient === "function"
+                ) {
+                    resolve(window.supabase);
+                } else {
+                    reject(
+                        new Error(
+                            "Supabase library berhasil dimuat tetapi createClient tidak tersedia."
+                        )
+                    );
+                }
             };
 
-        }
+            script.onerror = function () {
+                reject(
+                    new Error(
+                        "Tidak dapat memuat Supabase. Pastikan koneksi internet tersedia pada area Admin/Editor."
+                    )
+                );
+            };
 
+            document.head.appendChild(script);
+        });
 
-        /*
-         * Koneksi aktual akan diaktifkan
-         * setelah struktur database selesai.
-         */
-
-
-        Supabase.status.connected =
-            false;
-
-
-        return {
-
-            success: false,
-
-            connected: false,
-
-            pending: true,
-
-            message:
-                "Supabase client belum diaktifkan."
-
-        };
-
+        return supabaseLibraryPromise;
     }
-
-
-    Supabase.connect =
-        connect;
-
-
 
     /* =====================================================
-       DISCONNECT
+       INITIALIZE CLIENT
        ===================================================== */
 
-    function disconnect() {
+    async function initSupabase() {
+        if (supabaseClient) {
+            return supabaseClient;
+        }
 
-        client =
-            null;
+        validateConfig();
 
+        const supabase = await loadSupabaseLibrary();
 
-        Supabase.client =
-            null;
+        supabaseClient = supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY,
+            {
+                auth: {
+                    persistSession: true,
+                    autoRefreshToken: true,
+                    detectSessionInUrl: true,
+                    flowType: "pkce"
+                }
+            }
+        );
 
-
-        Supabase.status.connected =
-            false;
-
-
-        Supabase.status.authenticated =
-            false;
-
+        return supabaseClient;
     }
-
-
-    Supabase.disconnect =
-        disconnect;
-
-
 
     /* =====================================================
        GET CLIENT
        ===================================================== */
 
-    function getClient() {
-
-        return client;
-
+    async function getClient() {
+        return initSupabase();
     }
 
-
-    Supabase.getClient =
-        getClient;
-
-
-
     /* =====================================================
-       AUTH STATUS
+       AUTH
        ===================================================== */
 
-    function isAuthenticated() {
+    async function getSession() {
+        const client = await initSupabase();
 
-        return (
-            Supabase.status
-                .authenticated ===
-            true
-        );
+        const result = await client.auth.getSession();
 
-    }
-
-
-    Supabase.isAuthenticated =
-        isAuthenticated;
-
-
-
-    /* =====================================================
-       USER
-       ===================================================== */
-
-    function getUser() {
-
-        return null;
-
-    }
-
-
-    Supabase.getUser =
-        getUser;
-
-
-
-    /* =====================================================
-       SESSION
-       ===================================================== */
-
-    function getSession() {
-
-        return null;
-
-    }
-
-
-    Supabase.getSession =
-        getSession;
-
-
-
-    /* =====================================================
-       ROLE
-       -----------------------------------------------------
-       Nanti digunakan untuk:
-       - admin
-       - editor
-       - public
-       ===================================================== */
-
-    function getRole() {
-
-        return null;
-
-    }
-
-
-    Supabase.getRole =
-        getRole;
-
-
-
-    /* =====================================================
-       ROLE CHECK
-       ===================================================== */
-
-    function hasRole(
-        role
-    ) {
-
-        const currentRole =
-            getRole();
-
-
-        if (
-            !currentRole ||
-            !role
-        ) {
-
-            return false;
-
+        if (result.error) {
+            throw result.error;
         }
 
-
-        return (
-            String(
-                currentRole
-            ).toLowerCase() ===
-            String(
-                role
-            ).toLowerCase()
-        );
-
+        return result.data.session || null;
     }
 
+    async function getUser() {
+        const client = await initSupabase();
 
-    Supabase.hasRole =
-        hasRole;
+        const result = await client.auth.getUser();
 
+        if (result.error) {
+            return null;
+        }
 
+        return result.data.user || null;
+    }
 
     /* =====================================================
-       ADMIN CHECK
+       LOGIN
+       ===================================================== */
+
+    async function signIn(email, password) {
+        const client = await initSupabase();
+
+        const cleanEmail = String(email || "").trim();
+        const cleanPassword = String(password || "");
+
+        if (!cleanEmail) {
+            throw new Error("Email wajib diisi.");
+        }
+
+        if (!cleanPassword) {
+            throw new Error("Password wajib diisi.");
+        }
+
+        const result = await client.auth.signInWithPassword({
+            email: cleanEmail,
+            password: cleanPassword
+        });
+
+        if (result.error) {
+            throw result.error;
+        }
+
+        currentUser = result.data.user || null;
+
+        if (!currentUser) {
+            throw new Error(
+                "Login gagal: user tidak ditemukan."
+            );
+        }
+
+        currentProfile = await getProfile(
+            currentUser.id
+        );
+
+        return {
+            user: currentUser,
+            profile: currentProfile,
+            session: result.data.session || null
+        };
+    }
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    async function signOut() {
+        const client = await initSupabase();
+
+        const result = await client.auth.signOut();
+
+        if (result.error) {
+            throw result.error;
+        }
+
+        currentUser = null;
+        currentProfile = null;
+
+        return true;
+    }
+
+    /* =====================================================
+       PROFILE
+       ===================================================== */
+
+    async function getProfile(userId) {
+        const client = await initSupabase();
+
+        const id = userId || (
+            currentUser ? currentUser.id : null
+        );
+
+        if (!id) {
+            return null;
+        }
+
+        const result = await client
+            .from("profiles")
+            .select(
+                "id, display_name, avatar_url, role, created_at, updated_at"
+            )
+            .eq("id", id)
+            .maybeSingle();
+
+        if (result.error) {
+            throw result.error;
+        }
+
+        return result.data || null;
+    }
+
+    /* =====================================================
+       CURRENT AUTH STATE
+       ===================================================== */
+
+    async function getCurrentAuth() {
+        const session = await getSession();
+
+        if (!session) {
+            currentUser = null;
+            currentProfile = null;
+
+            return {
+                authenticated: false,
+                user: null,
+                profile: null,
+                role: null
+            };
+        }
+
+        currentUser = session.user || null;
+
+        currentProfile = await getProfile(
+            currentUser.id
+        );
+
+        return {
+            authenticated: true,
+            user: currentUser,
+            profile: currentProfile,
+            role: currentProfile
+                ? currentProfile.role
+                : null
+        };
+    }
+
+    /* =====================================================
+       REQUIRE LOGIN
+       -----------------------------------------------------
+       Digunakan halaman CMS yang membutuhkan user login.
+       ===================================================== */
+
+    async function requireAuth(options) {
+        const settings = options || {};
+
+        const redirect =
+            settings.redirect !== false;
+
+        const auth = await getCurrentAuth();
+
+        if (!auth.authenticated) {
+            if (redirect) {
+                const target =
+                    settings.loginPage ||
+                    "index.html";
+
+                window.location.href = target;
+            }
+
+            return false;
+        }
+
+        return auth;
+    }
+
+    /* =====================================================
+       REQUIRE STAFF
+       -----------------------------------------------------
+       Admin + Editor
+       ===================================================== */
+
+    async function requireStaff(options) {
+        const settings = options || {};
+
+        const auth = await requireAuth({
+            redirect: settings.redirect,
+            loginPage: settings.loginPage
+        });
+
+        if (!auth || auth === false) {
+            return false;
+        }
+
+        const role = auth.role;
+
+        if (
+            role !== "admin" &&
+            role !== "editor"
+        ) {
+            if (settings.redirect !== false) {
+                window.location.href =
+                    settings.deniedPage ||
+                    "index.html";
+            }
+
+            return false;
+        }
+
+        return auth;
+    }
+
+    /* =====================================================
+       REQUIRE ADMIN
+       ===================================================== */
+
+    async function requireAdmin(options) {
+        const settings = options || {};
+
+        const auth = await requireAuth({
+            redirect: settings.redirect,
+            loginPage: settings.loginPage
+        });
+
+        if (!auth || auth === false) {
+            return false;
+        }
+
+        if (auth.role !== "admin") {
+            if (settings.redirect !== false) {
+                window.location.href =
+                    settings.deniedPage ||
+                    "index.html";
+            }
+
+            return false;
+        }
+
+        return auth;
+    }
+
+    /* =====================================================
+       ROLE HELPERS
        ===================================================== */
 
     function isAdmin() {
-
-        return hasRole(
-            "admin"
+        return !!(
+            currentProfile &&
+            currentProfile.role === "admin"
         );
-
     }
-
-
-    Supabase.isAdmin =
-        isAdmin;
-
-
-
-    /* =====================================================
-       EDITOR CHECK
-       ===================================================== */
 
     function isEditor() {
-
-        return hasRole(
-            "editor"
+        return !!(
+            currentProfile &&
+            currentProfile.role === "editor"
         );
-
     }
 
-
-    Supabase.isEditor =
-        isEditor;
-
-
-
-    /* =====================================================
-       CONTENT PERMISSION
-       ===================================================== */
-
-    function canEditContent() {
-
+    function isStaff() {
         return (
             isAdmin() ||
             isEditor()
         );
-
     }
 
-
-    Supabase.canEditContent =
-        canEditContent;
-
-
-
     /* =====================================================
-       ADMIN PERMISSION
+       PERMISSION HELPERS
        ===================================================== */
 
-    function canManageSystem() {
-
+    function canManageUsers() {
         return isAdmin();
-
     }
 
-
-    Supabase.canManageSystem =
-        canManageSystem;
-
-
-
-    /* =====================================================
-       DATABASE PLACEHOLDER
-       ===================================================== */
-
-    async function select(
-        table,
-        options
-    ) {
-
-        return {
-
-            success: false,
-
-            data: [],
-
-            error:
-                "Database belum diaktifkan."
-
-        };
-
+    function canManageRoles() {
+        return isAdmin();
     }
 
-
-    Supabase.select =
-        select;
-
-
-
-    /* =====================================================
-       INSERT PLACEHOLDER
-       ===================================================== */
-
-    async function insert(
-        table,
-        data
-    ) {
-
-        return {
-
-            success: false,
-
-            data: null,
-
-            error:
-                "Database belum diaktifkan."
-
-        };
-
+    function canManageSettings() {
+        return isAdmin();
     }
 
-
-    Supabase.insert =
-        insert;
-
-
-
-    /* =====================================================
-       UPDATE PLACEHOLDER
-       ===================================================== */
-
-    async function update(
-        table,
-        data,
-        filter
-    ) {
-
-        return {
-
-            success: false,
-
-            data: null,
-
-            error:
-                "Database belum diaktifkan."
-
-        };
-
+    function canDeleteContent() {
+        return isAdmin();
     }
 
-
-    Supabase.update =
-        update;
-
-
-
-    /* =====================================================
-       DELETE PLACEHOLDER
-       ===================================================== */
-
-    async function remove(
-        table,
-        filter
-    ) {
-
-        return {
-
-            success: false,
-
-            data: null,
-
-            error:
-                "Database belum diaktifkan."
-
-        };
-
+    function canPublishContent() {
+        return isAdmin();
     }
 
-
-    Supabase.remove =
-        remove;
-
-
-
-    /* =====================================================
-       STORAGE PLACEHOLDER
-       ===================================================== */
-
-    async function uploadFile(
-        bucket,
-        path,
-        file
-    ) {
-
-        return {
-
-            success: false,
-
-            data: null,
-
-            error:
-                "Storage belum diaktifkan."
-
-        };
-
+    function canEditContent() {
+        return isStaff();
     }
 
-
-    Supabase.uploadFile =
-        uploadFile;
-
-
-
-    /* =====================================================
-       STORAGE DELETE
-       ===================================================== */
-
-    async function deleteFile(
-        bucket,
-        path
-    ) {
-
-        return {
-
-            success: false,
-
-            data: null,
-
-            error:
-                "Storage belum diaktifkan."
-
-        };
-
+    function canCreateContent() {
+        return isStaff();
     }
 
-
-    Supabase.deleteFile =
-        deleteFile;
-
-
+    function canReviewContent() {
+        return isAdmin();
+    }
 
     /* =====================================================
-       STORAGE PUBLIC URL
+       CONTENT STATUS
        ===================================================== */
 
-    function getStorageURL(
-        bucket,
-        path
-    ) {
+    const CONTENT_STATUS = Object.freeze({
+        DRAFT: "draft",
+        REVIEW: "review",
+        PUBLISHED: "published",
+        ARCHIVED: "archived"
+    });
 
-        if (
-            !configuration.url ||
-            !bucket ||
-            !path
-        ) {
-
-            return "";
-
+    function canChangeStatus(status) {
+        if (!isStaff()) {
+            return false;
         }
 
+        if (isAdmin()) {
+            return [
+                CONTENT_STATUS.DRAFT,
+                CONTENT_STATUS.REVIEW,
+                CONTENT_STATUS.PUBLISHED,
+                CONTENT_STATUS.ARCHIVED
+            ].includes(status);
+        }
 
-        const base =
-            configuration.url
-                .replace(
-                    /\/$/,
-                    ""
-                );
+        return [
+            CONTENT_STATUS.DRAFT,
+            CONTENT_STATUS.REVIEW
+        ].includes(status);
+    }
 
+    /* =====================================================
+       DATABASE HELPER
+       ===================================================== */
 
-        return (
-            base +
-            "/storage/v1/object/public/" +
-            encodeURIComponent(
-                bucket
-            ) +
+    async function query(table) {
+        const client = await initSupabase();
+
+        if (!table) {
+            throw new Error(
+                "Nama table wajib diberikan."
+            );
+        }
+
+        return client.from(table);
+    }
+
+    /* =====================================================
+       STORAGE HELPER
+       ===================================================== */
+
+    async function uploadMedia(
+        file,
+        folder
+    ) {
+        const client = await initSupabase();
+
+        if (!file) {
+            throw new Error(
+                "File wajib diberikan."
+            );
+        }
+
+        if (!isStaff()) {
+            throw new Error(
+                "Anda tidak memiliki izin untuk mengunggah media."
+            );
+        }
+
+        const safeFolder =
+            String(folder || "general")
+                .replace(/[^a-zA-Z0-9/_-]/g, "");
+
+        const originalName =
+            String(file.name || "file")
+                .replace(/[^a-zA-Z0-9._-]/g, "-");
+
+        const timestamp =
+            Date.now();
+
+        const filePath =
+            safeFolder +
             "/" +
-            path
-                .split("/")
-                .map(
-                    function (part) {
+            timestamp +
+            "-" +
+            originalName;
 
-                        return encodeURIComponent(
-                            part
-                        );
+        const result = await client
+            .storage
+            .from("mandala-media")
+            .upload(
+                filePath,
+                file,
+                {
+                    cacheControl: "3600",
+                    upsert: false
+                }
+            );
 
-                    }
-                )
-                .join("/")
-        );
-
-    }
-
-
-    Supabase.getStorageURL =
-        getStorageURL;
-
-
-
-    /* =====================================================
-       ERROR HANDLER
-       ===================================================== */
-
-    function normalizeError(
-        error
-    ) {
-
-        if (
-            !error
-        ) {
-
-            return null;
-
+        if (result.error) {
+            throw result.error;
         }
 
-
-        if (
-            typeof error ===
-            "string"
-        ) {
-
-            return {
-
-                message:
-                    error
-
-            };
-
-        }
-
+        const publicResult =
+            client
+                .storage
+                .from("mandala-media")
+                .getPublicUrl(filePath);
 
         return {
-
-            message:
-                error.message ||
-                "Terjadi kesalahan.",
-
-            code:
-                error.code ||
-                null,
-
-            details:
-                error.details ||
-                null,
-
-            hint:
-                error.hint ||
-                null
-
+            path: filePath,
+            url: publicResult.data.publicUrl
         };
-
     }
-
-
-    Supabase.normalizeError =
-        normalizeError;
-
-
 
     /* =====================================================
-       SAFE ERROR
+       AUTH STATE LISTENER
        ===================================================== */
 
-    function handleError(
-        error,
-        context
-    ) {
+    async function onAuthStateChange(callback) {
+        const client = await initSupabase();
 
-        const normalized =
-            normalizeError(
-                error
-            );
+        return client.auth.onAuthStateChange(
+            async function (event, session) {
+                currentUser =
+                    session
+                        ? session.user
+                        : null;
 
+                currentProfile = null;
 
-        if (
-            typeof console !==
-            "undefined"
-        ) {
-
-            console.error(
-                "[Mandala Supabase]",
-                context || "",
-                normalized
-            );
-
-        }
-
-
-        return normalized;
-
-    }
-
-
-    Supabase.handleError =
-        handleError;
-
-
-
-    /* =====================================================
-       EVENT SYSTEM
-       ===================================================== */
-
-    const events = {};
-
-
-    function on(
-        event,
-        callback
-    ) {
-
-        if (
-            typeof callback !==
-            "function"
-        ) {
-
-            return;
-
-        }
-
-
-        if (
-            !events[event]
-        ) {
-
-            events[event] = [];
-
-        }
-
-
-        events[event].push(
-            callback
-        );
-
-    }
-
-
-    function off(
-        event,
-        callback
-    ) {
-
-        if (
-            !events[event]
-        ) {
-
-            return;
-
-        }
-
-
-        events[event] =
-            events[event].filter(
-                function (item) {
-
-                    return (
-                        item !==
-                        callback
-                    );
-
+                if (currentUser) {
+                    try {
+                        currentProfile =
+                            await getProfile(
+                                currentUser.id
+                            );
+                    } catch (error) {
+                        console.error(
+                            "Mandala profile error:",
+                            error
+                        );
+                    }
                 }
-            );
 
-    }
-
-
-    function emit(
-        event,
-        data
-    ) {
-
-        if (
-            !events[event]
-        ) {
-
-            return;
-
-        }
-
-
-        events[event].forEach(
-            function (callback) {
-
-                try {
-
-                    callback(
-                        data
-                    );
-
-                } catch (
-                    error
+                if (
+                    typeof callback ===
+                    "function"
                 ) {
-
-                    handleError(
-                        error,
-                        "Event: " +
-                        event
-                    );
-
+                    callback({
+                        event: event,
+                        session: session,
+                        user: currentUser,
+                        profile: currentProfile
+                    });
                 }
-
             }
         );
-
     }
 
-
-    Supabase.on =
-        on;
-
-    Supabase.off =
-        off;
-
-    Supabase.emit =
-        emit;
-
-
-
     /* =====================================================
-       INITIAL STATE
+       GETTERS
        ===================================================== */
 
-    /*
-     * Kita tidak mengambil konfigurasi dari internet.
-     *
-     * Jika config.js nanti memanggil:
-     *
-     * Mandala.Supabase.setConfig(...)
-     *
-     * maka konfigurasi akan tersimpan di sini.
-     */
+    function getCurrentUser() {
+        return currentUser;
+    }
 
+    function getCurrentProfile() {
+        return currentProfile;
+    }
 
-    Supabase.init();
+    function getCurrentRole() {
+        return currentProfile
+            ? currentProfile.role
+            : null;
+    }
 
+    /* =====================================================
+       PUBLIC API
+       ===================================================== */
 
+    window.MandalaSupabase = {
+        init: initSupabase,
+        getClient: getClient,
+
+        auth: {
+            getSession: getSession,
+            getUser: getUser,
+            getCurrent: getCurrentAuth,
+            signIn: signIn,
+            signOut: signOut,
+            onAuthStateChange: onAuthStateChange,
+            requireAuth: requireAuth,
+            requireStaff: requireStaff,
+            requireAdmin: requireAdmin
+        },
+
+        profile: {
+            get: getProfile,
+            current: getCurrentProfile
+        },
+
+        role: {
+            isAdmin: isAdmin,
+            isEditor: isEditor,
+            isStaff: isStaff,
+            current: getCurrentRole
+        },
+
+        permissions: {
+            manageUsers: canManageUsers,
+            manageRoles: canManageRoles,
+            manageSettings: canManageSettings,
+            deleteContent: canDeleteContent,
+            publishContent: canPublishContent,
+            editContent: canEditContent,
+            createContent: canCreateContent,
+            reviewContent: canReviewContent,
+            changeStatus: canChangeStatus
+        },
+
+        content: {
+            status: CONTENT_STATUS
+        },
+
+        db: {
+            query: query
+        },
+
+        storage: {
+            upload: uploadMedia
+        },
+
+        getCurrentUser: getCurrentUser,
+        getCurrentProfile: getCurrentProfile,
+        getCurrentRole: getCurrentRole
+    };
 
 })(window);
