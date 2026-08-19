@@ -58,25 +58,22 @@ export async function getCurrentProfile() {
             return null;
         }
 
+
         const {
             data,
             error
         } = await supabase
-
             .from("profiles")
-
             .select(`
                 id,
                 full_name,
                 role,
                 avatar_url
             `)
-
             .eq(
                 "id",
                 user.id
             )
-
             .maybeSingle();
 
 
@@ -113,8 +110,10 @@ export async function getCurrentProfile() {
                 "Pengguna",
 
             /*
-             * Role berasal dari database.
-             * Jangan fallback ke editor.
+             * Role HARUS berasal dari database.
+             *
+             * Jangan fallback ke "editor".
+             * User baru sekarang default = "user".
              */
             role:
                 data.role,
@@ -152,6 +151,7 @@ export async function requireAuth() {
     const profile =
         await getCurrentProfile();
 
+
     if (!profile) {
 
         window.location.href =
@@ -159,6 +159,7 @@ export async function requireAuth() {
 
         return null;
     }
+
 
     return profile;
 }
@@ -174,6 +175,7 @@ export async function requireStaff() {
     const profile =
         await getCurrentProfile();
 
+
     if (!profile) {
 
         window.location.href =
@@ -181,6 +183,7 @@ export async function requireStaff() {
 
         return null;
     }
+
 
     if (
         profile.role !== "admin" &&
@@ -192,6 +195,7 @@ export async function requireStaff() {
 
         return null;
     }
+
 
     return profile;
 }
@@ -206,6 +210,7 @@ export async function requireAdmin() {
     const profile =
         await getCurrentProfile();
 
+
     if (!profile) {
 
         window.location.href =
@@ -213,6 +218,7 @@ export async function requireAdmin() {
 
         return null;
     }
+
 
     if (
         profile.role !== "admin"
@@ -223,6 +229,7 @@ export async function requireAdmin() {
 
         return null;
     }
+
 
     return profile;
 }
@@ -240,6 +247,7 @@ export async function logout() {
             error
         } = await supabase.auth.signOut();
 
+
         if (error) {
 
             console.error(
@@ -249,6 +257,7 @@ export async function logout() {
 
             throw error;
         }
+
 
         window.location.href =
             "./login.html";
