@@ -1,23 +1,915 @@
-<!doctype html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Login — Mandala CMS</title><link rel="stylesheet" href="css/admin.css">
-<script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script>
-</head><body>
-<div class="login"><div class="loginBox">
-<div class="brand"><div class="mark">✺</div><h1>MANDALA</h1><p>CHANNEL CMS</p></div>
-<div id="error" class="error"></div>
-<form id="loginForm"><div class="field"><label>EMAIL</label><input id="email" type="email" required></div>
-<div class="field"><label>PASSWORD</label><input id="password" type="password" required></div>
-<button class="btn primary" style="width:100%">MASUK KE CMS</button></form>
-<p class="hint" style="margin-top:18px">Akun karyawan dibuat dari Authentication Supabase. Tidak ada password karyawan yang disimpan di HTML.</p>
-</div></div>
-<script>
-document.getElementById("loginForm").addEventListener("submit", async e=>{
- e.preventDefault();
- const db=await MandalaCMS.ready();
- const {error}=await db.auth.signInWithPassword({email:email.value,password:password.value});
- if(error){const x=document.getElementById("error");x.textContent="Email atau password salah atau akun belum aktif.";x.style.display="block";return;}
- location.href="dashboard.html";
-});
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard — Mandala Channel</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            --navy: #071b33;
+            --navy-2: #0d2949;
+            --gold: #b9975b;
+            --bg: #f4f6f9;
+            --white: #ffffff;
+            --text: #172033;
+            --muted: #718096;
+            --border: #e5e9ef;
+            --green: #238b5b;
+            --shadow: 0 10px 30px rgba(7,27,51,0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .app {
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: 255px;
+            background: var(--navy);
+            color: white;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease;
+        }
+
+        .brand {
+            height: 92px;
+            display: flex;
+            align-items: center;
+            padding: 0 27px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .brand-title {
+            font-family: "Playfair Display", serif;
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: 5px;
+            color: var(--gold);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            flex: 1;
+            padding: 24px 14px;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin: 18px 13px 8px;
+            color: rgba(255,255,255,0.35);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 13px;
+            margin-bottom: 3px;
+            border-radius: 7px;
+            color: rgba(255,255,255,0.72);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: 0.18s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.06);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .sidebar-footer {
+            padding: 18px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .user-mini {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--navy);
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .user-info {
+            min-width: 0;
+        }
+
+        .user-name {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-role {
+            margin-top: 2px;
+            color: rgba(255,255,255,0.45);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .logout-button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 7px;
+            background: transparent;
+            color: rgba(255,255,255,0.65);
+            font: inherit;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            color: white;
+            border-color: rgba(255,255,255,0.25);
+        }
+
+        .main {
+            margin-left: 255px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 92px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 38px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .menu-button {
+            display: none;
+            border: 0;
+            background: transparent;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .page-title h1 {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            color: var(--navy);
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .page-title p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .view-site {
+            color: var(--navy);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .content {
+            padding: 38px;
+            max-width: 1400px;
+        }
+
+        .welcome {
+            background: var(--navy);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 50%;
+            right: -100px;
+            top: -150px;
+        }
+
+        .welcome h2 {
+            margin: 0 0 8px;
+            font-family: "Playfair Display", serif;
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: rgba(255,255,255,0.65);
+            font-size: 13px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 6px 10px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .section-heading h3 {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .section-heading span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-label {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .card-number {
+            margin-top: 10px;
+            color: var(--navy);
+            font-family: "Playfair Display", serif;
+            font-size: 34px;
+            font-weight: 600;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action {
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+        .action:hover {
+            border-color: var(--navy);
+            transform: translateY(-2px);
+        }
+
+        .action strong {
+            display: block;
+            color: var(--navy);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .action span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .loading {
+            opacity: 0.5;
+        }
+
+        .overlay {
+            display: none;
+        }
+
+        @media (max-width: 1100px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.35);
+                z-index: 90;
+            }
+
+            .overlay.show {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .topbar {
+                height: 75px;
+                padding: 0 20px;
+                gap: 15px;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .page-title h1 {
+                font-size: 23px;
+            }
+
+            .view-site {
+                display: none;
+            }
+
+            .content {
+                padding: 22px 18px;
+            }
+
+            .welcome {
+                padding: 25px;
+            }
+
+            .welcome h2 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .cards,
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 18px 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div>
+                <div class="brand-title">Mandala</div>
+                <span class="brand-subtitle">Channel Admin</span>
+            </div>
+        </div>
+
+        <nav class="nav">
+
+            <div class="nav-section">
+                Workspace
+            </div>
+
+            <a
+                href="index.html"
+                class="nav-link active"
+            >
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <div class="nav-section">
+                Konten
+            </div>
+
+            <a href="artikel.html" class="nav-link">
+                <span class="nav-icon">A</span>
+                Artikel
+            </a>
+
+            <a href="video.html" class="nav-link">
+                <span class="nav-icon">▶</span>
+                Video
+            </a>
+
+            <a href="playlist.html" class="nav-link">
+                <span class="nav-icon">▤</span>
+                Playlist
+            </a>
+
+            <a href="podcast.html" class="nav-link">
+                <span class="nav-icon">◉</span>
+                Podcast
+            </a>
+
+            <a href="media.html" class="nav-link">
+                <span class="nav-icon">▧</span>
+                Media
+            </a>
+
+            <div id="adminMenu">
+
+                <div class="nav-section">
+                    Administrasi
+                </div>
+
+                <a href="kategori.html" class="nav-link">
+                    <span class="nav-icon">#</span>
+                    Kategori
+                </a>
+
+                <a href="users.html" class="nav-link">
+                    <span class="nav-icon">◌</span>
+                    Pengguna
+                </a>
+
+                <a href="about.html" class="nav-link">
+                    <span class="nav-icon">i</span>
+                    Tentang Kami
+                </a>
+
+            </div>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="user-mini">
+
+                <div class="avatar" id="avatar">
+                    M
+                </div>
+
+                <div class="user-info">
+
+                    <div
+                        class="user-name"
+                        id="userName"
+                    >
+                        Memuat...
+                    </div>
+
+                    <div
+                        class="user-role"
+                        id="userRole"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="logout-button"
+                id="logoutButton"
+            >
+                Keluar
+            </button>
+
+        </div>
+
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;gap:14px;">
+
+                <button
+                    type="button"
+                    class="menu-button"
+                    id="menuButton"
+                    aria-label="Buka menu"
+                >
+                    ☰
+                </button>
+
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                    <p>Ruang kerja Mandala Channel</p>
+                </div>
+
+            </div>
+
+            <a
+                href="../index.html"
+                class="view-site"
+                target="_blank"
+                rel="noopener"
+            >
+                Lihat Website →
+            </a>
+
+        </header>
+
+        <div class="content">
+
+            <section class="welcome">
+
+                <h2 id="welcomeTitle">
+                    Selamat datang.
+                </h2>
+
+                <p id="welcomeDescription">
+                    Memuat informasi akun...
+                </p>
+
+                <div
+                    class="role-badge"
+                    id="welcomeRole"
+                >
+                    —
+                </div>
+
+            </section>
+
+            <div class="section-heading">
+                <h3>Ringkasan Konten</h3>
+                <span>Data akan terhubung ke Supabase</span>
+            </div>
+
+            <section class="cards">
+
+                <div class="card">
+                    <div class="card-label">
+                        Artikel
+                    </div>
+
+                    <div
+                        class="card-number loading"
+                        id="articleCount"
+                    >
+                        —
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">
+                        Video
+                    </div>
+
+                    <div
+                        class="card-number loading"
+                        id="videoCount"
+                    >
+                        —
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">
+                        Playlist
+                    </div>
+
+                    <div
+                        class="card-number loading"
+                        id="playlistCount"
+                    >
+                        —
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">
+                        Podcast
+                    </div>
+
+                    <div
+                        class="card-number loading"
+                        id="podcastCount"
+                    >
+                        —
+                    </div>
+                </div>
+
+            </section>
+
+            <div
+                class="section-heading"
+                style="margin-top:34px;"
+            >
+                <h3>Akses Cepat</h3>
+                <span>Kelola konten</span>
+            </div>
+
+            <section class="quick-actions">
+
+                <a href="artikel.html" class="action">
+                    <strong>Kelola Artikel</strong>
+                    <span>Tambah dan edit artikel Mandala.</span>
+                </a>
+
+                <a href="video.html" class="action">
+                    <strong>Kelola Video</strong>
+                    <span>Kelola video dan konten YouTube.</span>
+                </a>
+
+                <a href="playlist.html" class="action">
+                    <strong>Kelola Playlist</strong>
+                    <span>Atur playlist dan konten terkait.</span>
+                </a>
+
+                <a href="podcast.html" class="action">
+                    <strong>Kelola Podcast</strong>
+                    <span>Kelola konten podcast Mandala.</span>
+                </a>
+
+                <a href="media.html" class="action">
+                    <strong>Media Library</strong>
+                    <span>Kelola gambar dan aset media.</span>
+                </a>
+
+                <a
+                    href="users.html"
+                    class="action"
+                    id="usersQuickAction"
+                >
+                    <strong>Pengguna</strong>
+                    <span>Kelola akun dan role pengguna.</span>
+                </a>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script type="module">
+    import {
+        requireAuth,
+        logout,
+        supabase
+    } from "./js/auth.js";
+
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const menuButton = document.getElementById("menuButton");
+
+    const userName = document.getElementById("userName");
+    const userRole = document.getElementById("userRole");
+    const avatar = document.getElementById("avatar");
+
+    const welcomeTitle = document.getElementById("welcomeTitle");
+    const welcomeDescription =
+        document.getElementById("welcomeDescription");
+    const welcomeRole =
+        document.getElementById("welcomeRole");
+
+    const adminMenu =
+        document.getElementById("adminMenu");
+
+    const usersQuickAction =
+        document.getElementById("usersQuickAction");
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+    async function countTable(tableName) {
+
+        const { count, error } = await supabase
+            .from(tableName)
+            .select("*", {
+                count: "exact",
+                head: true
+            });
+
+        if (error) {
+            console.warn(
+                `Gagal menghitung ${tableName}:`,
+                error.message
+            );
+
+            return 0;
+        }
+
+        return count ?? 0;
+    }
+
+    function setCount(elementId, value) {
+
+        const element =
+            document.getElementById(elementId);
+
+        element.textContent = value;
+        element.classList.remove("loading");
+    }
+
+    async function loadDashboard() {
+
+        const profile = await requireAuth();
+
+        if (!profile) {
+            return;
+        }
+
+        const displayName =
+            profile.full_name ||
+            profile.email ||
+            "Pengguna";
+
+        const role =
+            profile.role === "admin"
+                ? "Administrator"
+                : "Editor";
+
+        userName.textContent = displayName;
+        userRole.textContent = role;
+
+        const initials =
+            displayName
+                .trim()
+                .split(/\s+/)
+                .slice(0, 2)
+                .map(word => word[0])
+                .join("")
+                .toUpperCase();
+
+        avatar.textContent = initials || "M";
+
+        welcomeTitle.textContent =
+            `Selamat datang, ${displayName}.`;
+
+        welcomeDescription.textContent =
+            profile.role === "admin"
+                ? "Anda memiliki akses penuh untuk mengelola Mandala Channel."
+                : "Anda dapat mengelola konten editorial yang tersedia untuk Editor.";
+
+        welcomeRole.textContent = role;
+
+        if (profile.role !== "admin") {
+            adminMenu.style.display = "none";
+            usersQuickAction.style.display = "none";
+        }
+
+        const [
+            articles,
+            videos,
+            playlists,
+            podcasts
+        ] = await Promise.all([
+            countTable("articles"),
+            countTable("videos"),
+            countTable("playlists"),
+            countTable("podcasts")
+        ]);
+
+        setCount("articleCount", articles);
+        setCount("videoCount", videos);
+        setCount("playlistCount", playlists);
+        setCount("podcastCount", podcasts);
+    }
+
+    logoutButton.addEventListener(
+        "click",
+        async () => {
+            logoutButton.disabled = true;
+            logoutButton.textContent = "Keluar...";
+
+            await logout();
+        }
+    );
+
+    function closeMenu() {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+    }
+
+    menuButton.addEventListener("click", () => {
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+    });
+
+    overlay.addEventListener(
+        "click",
+        closeMenu
+    );
+
+    document
+        .querySelectorAll(".nav-link")
+        .forEach(link => {
+            link.addEventListener(
+                "click",
+                closeMenu
+            );
+        });
+
+    loadDashboard();
 </script>
-</body></html>
+
+</body>
+</html>
