@@ -2,25 +2,12 @@
    MANDALA CHANNEL
    SUPABASE CLIENT
    ---------------------------------------------------------
-   File ini khusus untuk area Admin / Editor.
-
-   Website publik tidak perlu memuat file ini.
-
-   Tugas file:
-   - Memuat Supabase client
-   - Menyediakan koneksi database
-   - Authentication
-   - Mengambil profile user
-   - Mengecek role Admin / Editor
-   - Helper permission
+   Khusus Admin / Editor CMS
    ========================================================= */
 
 (function (window) {
-    "use strict";
 
-    /* =====================================================
-       CONFIGURATION
-       ===================================================== */
+    "use strict";
 
     const CONFIG = window.MANDALA_CONFIG || {};
 
@@ -36,164 +23,201 @@
         window.SUPABASE_ANON_KEY ||
         "";
 
-    /* =====================================================
-       INTERNAL STATE
-       ===================================================== */
-
-    let supabaseClient = null;
-    let supabaseLibraryPromise = null;
+    let client = null;
+    let libraryPromise = null;
 
     let currentUser = null;
     let currentProfile = null;
 
+
     /* =====================================================
-       VALIDATION
+       CONFIG
        ===================================================== */
 
     function validateConfig() {
+
         if (!SUPABASE_URL) {
             throw new Error(
-                "MANDALA: SUPABASE_URL belum dikonfigurasi."
+                "Supabase URL belum dikonfigurasi."
             );
         }
 
         if (!SUPABASE_KEY) {
             throw new Error(
-                "MANDALA: Supabase publishable/anon key belum dikonfigurasi."
+                "Supabase publishable key belum dikonfigurasi."
             );
         }
     }
+
 
     /* =====================================================
        LOAD SUPABASE LIBRARY
-       -----------------------------------------------------
-       Library hanya dimuat ketika CMS benar-benar
-       membutuhkan Supabase.
        ===================================================== */
 
-    async function loadSupabaseLibrary() {
-        if (window.supabase && typeof window.supabase.createClient === "function") {
+    async function loadLibrary() {
+
+        if (
+            window.supabase &&
+            typeof window.supabase.createClient === "function"
+        ) {
             return window.supabase;
         }
 
-        if (supabaseLibraryPromise) {
-            return supabaseLibraryPromise;
+        if (libraryPromise) {
+            return libraryPromise;
         }
 
-        supabaseLibraryPromise = new Promise(function (resolve, reject) {
-            const existingScript = document.querySelector(
-                'script[data-mandala-supabase]'
-            );
+        libraryPromise = new Promise(
+            function (resolve, reject) {
 
-            if (existingScript) {
-                existingScript.addEventListener("load", function () {
-                    if (
-                        window.supabase &&
-                        typeof window.supabase.createClient === "function"
-                    ) {
-                        resolve(window.supabase);
-                    } else {
+                const existing =
+                    document.querySelector(
+                        "script[data-mandala-supabase]"
+                    );
+
+                if (existing) {
+
+                    existing.addEventListener(
+                        "load",
+                        function () {
+
+                            if (
+                                window.supabase &&
+                                typeof window.supabase.createClient ===
+                                "function"
+                            ) {
+                                resolve(
+                                    window.supabase
+                                );
+                            } else {
+                                reject(
+                                    new Error(
+                                        "Supabase library tidak tersedia."
+                                    )
+                                );
+                            }
+
+                        }
+                    );
+
+                    existing.addEventListener(
+                        "error",
+                        function () {
+
+                            reject(
+                                new Error(
+                                    "Gagal memuat Supabase library."
+                                )
+                            );
+
+                        }
+                    );
+
+                    return;
+                }
+
+                const script =
+                    document.createElement("script");
+
+                script.src =
+                    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+                script.async = true;
+
+                script.dataset.mandalaSupabase =
+                    "true";
+
+                script.onload =
+                    function () {
+
+                        if (
+                            window.supabase &&
+                            typeof window.supabase.createClient ===
+                            "function"
+                        ) {
+                            resolve(
+                                window.supabase
+                            );
+                        } else {
+                            reject(
+                                new Error(
+                                    "Supabase createClient tidak tersedia."
+                                )
+                            );
+                        }
+
+                    };
+
+                script.onerror =
+                    function () {
+
                         reject(
                             new Error(
-                                "Supabase library berhasil dimuat tetapi createClient tidak tersedia."
+                                "Supabase tidak dapat dimuat. Periksa koneksi internet."
                             )
                         );
-                    }
-                });
 
-                existingScript.addEventListener("error", function () {
-                    reject(
-                        new Error(
-                            "Gagal memuat Supabase library."
-                        )
-                    );
-                });
+                    };
 
-                return;
-            }
-
-            const script = document.createElement("script");
-
-            script.src =
-                "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-
-            script.async = true;
-            script.dataset.mandalaSupabase = "true";
-
-            script.onload = function () {
-                if (
-                    window.supabase &&
-                    typeof window.supabase.createClient === "function"
-                ) {
-                    resolve(window.supabase);
-                } else {
-                    reject(
-                        new Error(
-                            "Supabase library berhasil dimuat tetapi createClient tidak tersedia."
-                        )
-                    );
-                }
-            };
-
-            script.onerror = function () {
-                reject(
-                    new Error(
-                        "Tidak dapat memuat Supabase. Pastikan koneksi internet tersedia pada area Admin/Editor."
-                    )
+                document.head.appendChild(
+                    script
                 );
-            };
+            }
+        );
 
-            document.head.appendChild(script);
-        });
-
-        return supabaseLibraryPromise;
+        return libraryPromise;
     }
 
+
     /* =====================================================
-       INITIALIZE CLIENT
+       INITIALIZE
        ===================================================== */
 
-    async function initSupabase() {
-        if (supabaseClient) {
-            return supabaseClient;
+    async function init() {
+
+        if (client) {
+            return client;
         }
 
         validateConfig();
 
-        const supabase = await loadSupabaseLibrary();
+        const supabase =
+            await loadLibrary();
 
-        supabaseClient = supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY,
-            {
-                auth: {
-                    persistSession: true,
-                    autoRefreshToken: true,
-                    detectSessionInUrl: true,
-                    flowType: "pkce"
+        client =
+            supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY,
+                {
+                    auth: {
+                        persistSession: true,
+                        autoRefreshToken: true,
+                        detectSessionInUrl: true,
+                        flowType: "pkce"
+                    }
                 }
-            }
-        );
+            );
 
-        return supabaseClient;
+        return client;
     }
 
-    /* =====================================================
-       GET CLIENT
-       ===================================================== */
 
     async function getClient() {
-        return initSupabase();
+        return await init();
     }
 
+
     /* =====================================================
-       AUTH
+       SESSION
        ===================================================== */
 
     async function getSession() {
-        const client = await initSupabase();
 
-        const result = await client.auth.getSession();
+        const db =
+            await init();
+
+        const result =
+            await db.auth.getSession();
 
         if (result.error) {
             throw result.error;
@@ -202,10 +226,18 @@
         return result.data.session || null;
     }
 
-    async function getUser() {
-        const client = await initSupabase();
 
-        const result = await client.auth.getUser();
+    /* =====================================================
+       USER
+       ===================================================== */
+
+    async function getUser() {
+
+        const db =
+            await init();
+
+        const result =
+            await db.auth.getUser();
 
         if (result.error) {
             return null;
@@ -214,93 +246,48 @@
         return result.data.user || null;
     }
 
-    /* =====================================================
-       LOGIN
-       ===================================================== */
-
-    async function signIn(email, password) {
-        const client = await initSupabase();
-
-        const cleanEmail = String(email || "").trim();
-        const cleanPassword = String(password || "");
-
-        if (!cleanEmail) {
-            throw new Error("Email wajib diisi.");
-        }
-
-        if (!cleanPassword) {
-            throw new Error("Password wajib diisi.");
-        }
-
-        const result = await client.auth.signInWithPassword({
-            email: cleanEmail,
-            password: cleanPassword
-        });
-
-        if (result.error) {
-            throw result.error;
-        }
-
-        currentUser = result.data.user || null;
-
-        if (!currentUser) {
-            throw new Error(
-                "Login gagal: user tidak ditemukan."
-            );
-        }
-
-        currentProfile = await getProfile(
-            currentUser.id
-        );
-
-        return {
-            user: currentUser,
-            profile: currentProfile,
-            session: result.data.session || null
-        };
-    }
-
-    /* =====================================================
-       LOGOUT
-       ===================================================== */
-
-    async function signOut() {
-        const client = await initSupabase();
-
-        const result = await client.auth.signOut();
-
-        if (result.error) {
-            throw result.error;
-        }
-
-        currentUser = null;
-        currentProfile = null;
-
-        return true;
-    }
 
     /* =====================================================
        PROFILE
        ===================================================== */
 
-    async function getProfile(userId) {
-        const client = await initSupabase();
+    async function getProfile(
+        userId
+    ) {
 
-        const id = userId || (
-            currentUser ? currentUser.id : null
-        );
+        const db =
+            await init();
+
+        const id =
+            userId ||
+            (
+                currentUser
+                    ? currentUser.id
+                    : null
+            );
 
         if (!id) {
             return null;
         }
 
-        const result = await client
-            .from("profiles")
-            .select(
-                "id, display_name, avatar_url, role, created_at, updated_at"
-            )
-            .eq("id", id)
-            .maybeSingle();
+        const result =
+            await db
+                .from("profiles")
+                .select(
+                    `
+                    id,
+                    full_name,
+                    role,
+                    avatar_url,
+                    created_at,
+                    updated_at
+                    `
+                )
+                .eq(
+                    "id",
+                    id
+                )
+                .maybeSingle();
 
         if (result.error) {
             throw result.error;
@@ -309,14 +296,18 @@
         return result.data || null;
     }
 
+
     /* =====================================================
-       CURRENT AUTH STATE
+       CURRENT AUTH
        ===================================================== */
 
     async function getCurrentAuth() {
-        const session = await getSession();
+
+        const session =
+            await getSession();
 
         if (!session) {
+
             currentUser = null;
             currentProfile = null;
 
@@ -328,144 +319,270 @@
             };
         }
 
-        currentUser = session.user || null;
+        currentUser =
+            session.user || null;
 
-        currentProfile = await getProfile(
-            currentUser.id
-        );
+        currentProfile =
+            await getProfile(
+                currentUser.id
+            );
 
         return {
             authenticated: true,
             user: currentUser,
             profile: currentProfile,
-            role: currentProfile
-                ? currentProfile.role
-                : null
+            role:
+                currentProfile
+                    ? currentProfile.role
+                    : null
         };
     }
 
+
     /* =====================================================
-       REQUIRE LOGIN
-       -----------------------------------------------------
-       Digunakan halaman CMS yang membutuhkan user login.
+       LOGIN
        ===================================================== */
 
-    async function requireAuth(options) {
-        const settings = options || {};
+    async function signIn(
+        email,
+        password
+    ) {
 
-        const redirect =
-            settings.redirect !== false;
+        const db =
+            await init();
 
-        const auth = await getCurrentAuth();
+        email =
+            String(
+                email || ""
+            ).trim();
 
-        if (!auth.authenticated) {
-            if (redirect) {
-                const target =
-                    settings.loginPage ||
-                    "index.html";
+        password =
+            String(
+                password || ""
+            );
 
-                window.location.href = target;
-            }
-
-            return false;
+        if (!email) {
+            throw new Error(
+                "Email wajib diisi."
+            );
         }
 
-        return auth;
+        if (!password) {
+            throw new Error(
+                "Password wajib diisi."
+            );
+        }
+
+        const result =
+            await db.auth.signInWithPassword({
+                email,
+                password
+            });
+
+        if (result.error) {
+            throw result.error;
+        }
+
+        currentUser =
+            result.data.user || null;
+
+        if (!currentUser) {
+            throw new Error(
+                "User tidak ditemukan setelah login."
+            );
+        }
+
+        currentProfile =
+            await getProfile(
+                currentUser.id
+            );
+
+        return {
+            user: currentUser,
+            profile: currentProfile,
+            session:
+                result.data.session || null
+        };
     }
 
+
     /* =====================================================
-       REQUIRE STAFF
-       -----------------------------------------------------
-       Admin + Editor
+       LOGOUT
        ===================================================== */
 
-    async function requireStaff(options) {
-        const settings = options || {};
+    async function signOut() {
 
-        const auth = await requireAuth({
-            redirect: settings.redirect,
-            loginPage: settings.loginPage
-        });
+        const db =
+            await init();
 
-        if (!auth || auth === false) {
-            return false;
+        const result =
+            await db.auth.signOut();
+
+        if (result.error) {
+            throw result.error;
         }
 
-        const role = auth.role;
+        currentUser = null;
+        currentProfile = null;
 
-        if (
-            role !== "admin" &&
-            role !== "editor"
-        ) {
-            if (settings.redirect !== false) {
-                window.location.href =
-                    settings.deniedPage ||
-                    "index.html";
-            }
-
-            return false;
-        }
-
-        return auth;
+        return true;
     }
 
-    /* =====================================================
-       REQUIRE ADMIN
-       ===================================================== */
-
-    async function requireAdmin(options) {
-        const settings = options || {};
-
-        const auth = await requireAuth({
-            redirect: settings.redirect,
-            loginPage: settings.loginPage
-        });
-
-        if (!auth || auth === false) {
-            return false;
-        }
-
-        if (auth.role !== "admin") {
-            if (settings.redirect !== false) {
-                window.location.href =
-                    settings.deniedPage ||
-                    "index.html";
-            }
-
-            return false;
-        }
-
-        return auth;
-    }
 
     /* =====================================================
-       ROLE HELPERS
+       ROLE
        ===================================================== */
 
     function isAdmin() {
+
         return !!(
             currentProfile &&
             currentProfile.role === "admin"
         );
     }
 
+
     function isEditor() {
+
         return !!(
             currentProfile &&
             currentProfile.role === "editor"
         );
     }
 
+
     function isStaff() {
+
         return (
             isAdmin() ||
             isEditor()
         );
     }
 
+
+    function getRole() {
+
+        return currentProfile
+            ? currentProfile.role
+            : null;
+    }
+
+
     /* =====================================================
-       PERMISSION HELPERS
+       AUTH GUARDS
        ===================================================== */
+
+    async function requireAuth(
+        options = {}
+    ) {
+
+        const auth =
+            await getCurrentAuth();
+
+        if (!auth.authenticated) {
+
+            if (
+                options.redirect !== false
+            ) {
+
+                window.location.href =
+                    options.loginPage ||
+                    "index.html";
+            }
+
+            return false;
+        }
+
+        return auth;
+    }
+
+
+    async function requireStaff(
+        options = {}
+    ) {
+
+        const auth =
+            await requireAuth(
+                options
+            );
+
+        if (!auth) {
+            return false;
+        }
+
+        if (
+            auth.role !== "admin" &&
+            auth.role !== "editor"
+        ) {
+
+            if (
+                options.redirect !== false
+            ) {
+
+                window.location.href =
+                    options.deniedPage ||
+                    "index.html";
+            }
+
+            return false;
+        }
+
+        return auth;
+    }
+
+
+    async function requireAdmin(
+        options = {}
+    ) {
+
+        const auth =
+            await requireAuth(
+                options
+            );
+
+        if (!auth) {
+            return false;
+        }
+
+        if (
+            auth.role !== "admin"
+        ) {
+
+            if (
+                options.redirect !== false
+            ) {
+
+                window.location.href =
+                    options.deniedPage ||
+                    "dashboard.html";
+            }
+
+            return false;
+        }
+
+        return auth;
+    }
+
+
+    /* =====================================================
+       PERMISSIONS
+       ===================================================== */
+
+    function canEditContent() {
+        return isStaff();
+    }
+
+    function canCreateContent() {
+        return isStaff();
+    }
+
+    function canDeleteContent() {
+        return isAdmin();
+    }
+
+    function canPublishContent() {
+        return isAdmin();
+    }
 
     function canManageUsers() {
         return isAdmin();
@@ -479,150 +596,178 @@
         return isAdmin();
     }
 
-    function canDeleteContent() {
-        return isAdmin();
-    }
-
-    function canPublishContent() {
-        return isAdmin();
-    }
-
-    function canEditContent() {
-        return isStaff();
-    }
-
-    function canCreateContent() {
-        return isStaff();
-    }
-
-    function canReviewContent() {
-        return isAdmin();
-    }
 
     /* =====================================================
        CONTENT STATUS
        ===================================================== */
 
-    const CONTENT_STATUS = Object.freeze({
-        DRAFT: "draft",
-        REVIEW: "review",
-        PUBLISHED: "published",
-        ARCHIVED: "archived"
-    });
+    const STATUS =
+        Object.freeze({
 
-    function canChangeStatus(status) {
+            DRAFT: "draft",
+
+            REVIEW: "review",
+
+            PUBLISHED: "published",
+
+            ARCHIVED: "archived"
+
+        });
+
+
+    function canUseStatus(
+        status
+    ) {
+
         if (!isStaff()) {
             return false;
         }
 
         if (isAdmin()) {
+
             return [
-                CONTENT_STATUS.DRAFT,
-                CONTENT_STATUS.REVIEW,
-                CONTENT_STATUS.PUBLISHED,
-                CONTENT_STATUS.ARCHIVED
+                STATUS.DRAFT,
+                STATUS.REVIEW,
+                STATUS.PUBLISHED,
+                STATUS.ARCHIVED
             ].includes(status);
         }
 
         return [
-            CONTENT_STATUS.DRAFT,
-            CONTENT_STATUS.REVIEW
+            STATUS.DRAFT,
+            STATUS.REVIEW,
+            STATUS.ARCHIVED
         ].includes(status);
     }
 
+
     /* =====================================================
-       DATABASE HELPER
+       DATABASE
        ===================================================== */
 
-    async function query(table) {
-        const client = await initSupabase();
+    async function table(
+        tableName
+    ) {
 
-        if (!table) {
+        const db =
+            await init();
+
+        if (!tableName) {
             throw new Error(
-                "Nama table wajib diberikan."
+                "Nama tabel wajib diberikan."
             );
         }
 
-        return client.from(table);
+        return db.from(
+            tableName
+        );
     }
 
+
     /* =====================================================
-       STORAGE HELPER
+       STORAGE
        ===================================================== */
 
     async function uploadMedia(
         file,
-        folder
+        folder = "general"
     ) {
-        const client = await initSupabase();
 
-        if (!file) {
+        if (!isStaff()) {
+
             throw new Error(
-                "File wajib diberikan."
+                "Anda tidak memiliki izin upload."
             );
         }
 
-        if (!isStaff()) {
+        const db =
+            await init();
+
+        if (!file) {
+
             throw new Error(
-                "Anda tidak memiliki izin untuk mengunggah media."
+                "File belum dipilih."
             );
         }
 
         const safeFolder =
-            String(folder || "general")
-                .replace(/[^a-zA-Z0-9/_-]/g, "");
+            String(folder)
+                .replace(
+                    /[^a-zA-Z0-9/_-]/g,
+                    ""
+                );
 
-        const originalName =
-            String(file.name || "file")
-                .replace(/[^a-zA-Z0-9._-]/g, "-");
+        const filename =
+            String(
+                file.name ||
+                "file"
+            )
+                .replace(
+                    /[^a-zA-Z0-9._-]/g,
+                    "-"
+                );
 
-        const timestamp =
-            Date.now();
-
-        const filePath =
-            safeFolder +
+        const path =
+            (
+                safeFolder ||
+                "general"
+            ) +
             "/" +
-            timestamp +
+            Date.now() +
             "-" +
-            originalName;
+            filename;
 
-        const result = await client
-            .storage
-            .from("mandala-media")
-            .upload(
-                filePath,
-                file,
-                {
-                    cacheControl: "3600",
-                    upsert: false
-                }
-            );
+        const result =
+            await db
+                .storage
+                .from("mandala-media")
+                .upload(
+                    path,
+                    file,
+                    {
+                        cacheControl:
+                            "3600",
+                        upsert:
+                            false
+                    }
+                );
 
         if (result.error) {
             throw result.error;
         }
 
-        const publicResult =
-            client
-                .storage
-                .from("mandala-media")
-                .getPublicUrl(filePath);
-
         return {
-            path: filePath,
-            url: publicResult.data.publicUrl
+            path,
+            url:
+                db
+                    .storage
+                    .from("mandala-media")
+                    .getPublicUrl(
+                        path
+                    )
+                    .data
+                    .publicUrl
         };
     }
 
+
     /* =====================================================
-       AUTH STATE LISTENER
+       AUTH STATE
        ===================================================== */
 
-    async function onAuthStateChange(callback) {
-        const client = await initSupabase();
+    async function onAuthStateChange(
+        callback
+    ) {
 
-        return client.auth.onAuthStateChange(
-            async function (event, session) {
+        const db =
+            await init();
+
+        return db.auth.onAuthStateChange(
+            async function (
+                event,
+                session
+            ) {
+
                 currentUser =
                     session
                         ? session.user
@@ -631,12 +776,16 @@
                 currentProfile = null;
 
                 if (currentUser) {
+
                     try {
+
                         currentProfile =
                             await getProfile(
                                 currentUser.id
                             );
+
                     } catch (error) {
+
                         console.error(
                             "Mandala profile error:",
                             error
@@ -648,94 +797,134 @@
                     typeof callback ===
                     "function"
                 ) {
+
                     callback({
-                        event: event,
-                        session: session,
-                        user: currentUser,
-                        profile: currentProfile
+                        event,
+                        session,
+                        user:
+                            currentUser,
+                        profile:
+                            currentProfile
                     });
                 }
             }
         );
     }
 
-    /* =====================================================
-       GETTERS
-       ===================================================== */
-
-    function getCurrentUser() {
-        return currentUser;
-    }
-
-    function getCurrentProfile() {
-        return currentProfile;
-    }
-
-    function getCurrentRole() {
-        return currentProfile
-            ? currentProfile.role
-            : null;
-    }
 
     /* =====================================================
        PUBLIC API
        ===================================================== */
 
     window.MandalaSupabase = {
-        init: initSupabase,
-        getClient: getClient,
+
+        init,
+
+        getClient,
 
         auth: {
-            getSession: getSession,
-            getUser: getUser,
-            getCurrent: getCurrentAuth,
-            signIn: signIn,
-            signOut: signOut,
-            onAuthStateChange: onAuthStateChange,
-            requireAuth: requireAuth,
-            requireStaff: requireStaff,
-            requireAdmin: requireAdmin
+
+            getSession,
+
+            getUser,
+
+            getCurrent:
+                getCurrentAuth,
+
+            signIn,
+
+            signOut,
+
+            onAuthStateChange,
+
+            requireAuth,
+
+            requireStaff,
+
+            requireAdmin
+
         },
 
         profile: {
-            get: getProfile,
-            current: getCurrentProfile
+
+            get:
+                getProfile
+
         },
 
         role: {
-            isAdmin: isAdmin,
-            isEditor: isEditor,
-            isStaff: isStaff,
-            current: getCurrentRole
+
+            isAdmin,
+
+            isEditor,
+
+            isStaff,
+
+            current:
+                getRole
+
         },
 
         permissions: {
-            manageUsers: canManageUsers,
-            manageRoles: canManageRoles,
-            manageSettings: canManageSettings,
-            deleteContent: canDeleteContent,
-            publishContent: canPublishContent,
-            editContent: canEditContent,
-            createContent: canCreateContent,
-            reviewContent: canReviewContent,
-            changeStatus: canChangeStatus
+
+            editContent:
+                canEditContent,
+
+            createContent:
+                canCreateContent,
+
+            deleteContent:
+                canDeleteContent,
+
+            publishContent:
+                canPublishContent,
+
+            manageUsers:
+                canManageUsers,
+
+            manageRoles:
+                canManageRoles,
+
+            manageSettings:
+                canManageSettings
+
         },
 
         content: {
-            status: CONTENT_STATUS
+
+            status:
+                STATUS,
+
+            canUseStatus
+
         },
 
         db: {
-            query: query
+
+            table
+
         },
 
         storage: {
-            upload: uploadMedia
+
+            upload:
+                uploadMedia
+
         },
 
-        getCurrentUser: getCurrentUser,
-        getCurrentProfile: getCurrentProfile,
-        getCurrentRole: getCurrentRole
+        getCurrentUser:
+            function () {
+                return currentUser;
+            },
+
+        getCurrentProfile:
+            function () {
+                return currentProfile;
+            },
+
+        getCurrentRole:
+            getRole
+
     };
 
 })(window);
