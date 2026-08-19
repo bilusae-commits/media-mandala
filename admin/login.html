@@ -419,86 +419,78 @@
 <script type="module">
     import { supabase } from "./js/auth.js";
 
-    const loginForm = document.getElementById("loginForm");
-    const loginButton = document.getElementById("loginButton");
-    const errorMessage = document.getElementById("errorMessage");
-
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const togglePassword = document.getElementById("togglePassword");
+    const form = document.getElementById("loginForm");
+    const button = document.getElementById("loginButton");
+    const errorBox = document.getElementById("errorMessage");
 
     function showError(message) {
-        errorMessage.textContent = message;
-        errorMessage.style.display = "block";
+        errorBox.textContent = message;
+        errorBox.style.display = "block";
     }
 
-    function hideError() {
-        errorMessage.style.display = "none";
-    }
-
-    togglePassword.addEventListener("click", () => {
-        const isPassword =
-            passwordInput.type === "password";
-
-        passwordInput.type =
-            isPassword ? "text" : "password";
-
-        togglePassword.textContent =
-            isPassword ? "Sembunyikan" : "Tampilkan";
-    });
-
-    async function checkExistingSession() {
-        const {
-            data: { session }
-        } = await supabase.auth.getSession();
-
-        if (session?.user) {
-            window.location.replace("index.html");
-        }
-    }
-
-    checkExistingSession();
-
-    loginForm.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        hideError();
+        errorBox.style.display = "none";
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
+        const email =
+            document.getElementById("email").value.trim();
 
-        loginButton.disabled = true;
-        loginButton.textContent = "Memeriksa...";
+        const password =
+            document.getElementById("password").value;
 
-        const {
-            data,
-            error
-        } = await supabase.auth.signInWithPassword({
-            email,
-            password
-        });
+        button.disabled = true;
+        button.textContent = "Memeriksa...";
 
-        if (error) {
+        try {
+
+            const { data, error } =
+                await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+            if (error) {
+                console.error(error);
+
+                showError(
+                    error.message ||
+                    "Email atau password salah."
+                );
+
+                button.disabled = false;
+                button.textContent = "Masuk ke Dashboard";
+
+                return;
+            }
+
+            if (!data?.user) {
+                showError("Login tidak menghasilkan user.");
+
+                button.disabled = false;
+                button.textContent = "Masuk ke Dashboard";
+
+                return;
+            }
+
+            /*
+             * Login berhasil.
+             * Jangan cek profile di sini.
+             * Langsung masuk dashboard.
+             */
+            window.location.href = "./index.html";
+
+        } catch (error) {
+
+            console.error(error);
+
             showError(
-                "Email atau password tidak benar. Silakan periksa kembali."
+                "Terjadi kesalahan saat login. Silakan coba lagi."
             );
 
-            loginButton.disabled = false;
-            loginButton.textContent = "Masuk ke Dashboard";
-            return;
+            button.disabled = false;
+            button.textContent = "Masuk ke Dashboard";
         }
-
-        if (!data.user) {
-            showError(
-                "Login gagal. Silakan coba kembali."
-            );
-
-            loginButton.disabled = false;
-            loginButton.textContent = "Masuk ke Dashboard";
-            return;
-        }
-
-        window.location.replace("index.html");
     });
 </script>
 
