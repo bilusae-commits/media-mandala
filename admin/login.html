@@ -1,185 +1,404 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Login Admin — Mandala Channel</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
         rel="stylesheet"
     >
 
+
     <style>
+
         :root {
+
             --navy: #071b33;
+            --navy-2: #0d2949;
+
             --gold: #b9975b;
+
             --text: #172033;
             --muted: #718096;
+
             --border: #e3e7ed;
+
             --bg: #f4f6f9;
+
             --danger: #b43b32;
             --success: #237a51;
+
         }
+
 
         * {
             box-sizing: border-box;
         }
 
+
+        html,
         body {
+
             margin: 0;
-            min-height: 100vh;
-            background: var(--bg);
-            color: var(--text);
-            font-family: "DM Sans", sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 25px;
+            padding: 0;
+
+            min-height: 100%;
+
         }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+        }
+
 
         .login-wrapper {
+
             width: 100%;
+
             max-width: 430px;
+
         }
+
+
+        /* =========================================
+           BRAND
+        ========================================= */
 
         .brand {
+
             text-align: center;
+
             margin-bottom: 28px;
+
         }
+
 
         .brand-title {
+
             color: var(--navy);
-            font-family: "Playfair Display", serif;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
             font-size: 38px;
-            font-weight: 600;
+
             line-height: 1;
+
+            font-weight: 600;
+
         }
+
 
         .brand-subtitle {
+
             margin-top: 9px;
+
             color: var(--gold);
+
             font-size: 9px;
+
             font-weight: 700;
+
             letter-spacing: .2em;
+
             text-transform: uppercase;
+
         }
+
+
+        /* =========================================
+           CARD
+        ========================================= */
 
         .login-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
+
             padding: 34px;
+
+            background: #fff;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 12px;
+
             box-shadow:
-                0 20px 50px rgba(7, 27, 51, .08);
+                0 20px 50px
+                rgba(7, 27, 51, .08);
+
         }
+
 
         .login-card h1 {
+
             margin: 0;
+
             color: var(--navy);
-            font-family: "Playfair Display", serif;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
             font-size: 26px;
+
             font-weight: 600;
+
         }
+
 
         .login-card-description {
-            margin: 8px 0 27px;
+
+            margin:
+                8px 0 27px;
+
             color: var(--muted);
+
             font-size: 11px;
+
             line-height: 1.6;
+
         }
 
-        .field {
-            margin-bottom: 17px;
-        }
 
-        .field label {
-            display: block;
-            margin-bottom: 7px;
-            color: var(--text);
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .field input {
-            width: 100%;
-            height: 45px;
-            padding: 0 13px;
-            border: 1px solid var(--border);
-            border-radius: 7px;
-            outline: none;
-            background: #fff;
-            color: var(--text);
-            font-size: 12px;
-            transition: border-color .18s ease;
-        }
-
-        .field input:focus {
-            border-color: var(--navy);
-        }
-
-        .login-button {
-            width: 100%;
-            height: 46px;
-            margin-top: 7px;
-            border: 0;
-            border-radius: 7px;
-            background: var(--navy);
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: .18s ease;
-        }
-
-        .login-button:hover {
-            background: #0d2949;
-        }
-
-        .login-button:disabled {
-            opacity: .65;
-            cursor: wait;
-        }
+        /* =========================================
+           MESSAGE
+        ========================================= */
 
         .message {
+
             display: none;
+
             margin-bottom: 18px;
+
             padding: 12px 13px;
+
             border-radius: 7px;
+
             font-size: 11px;
+
             line-height: 1.55;
+
         }
+
 
         .message.error {
-            border: 1px solid #edcfcb;
+
+            border:
+                1px solid
+                #edcfcb;
+
             background: #fff5f4;
+
             color: var(--danger);
+
         }
+
 
         .message.success {
-            border: 1px solid #c9e5d7;
+
+            border:
+                1px solid
+                #c9e5d7;
+
             background: #f2fbf6;
+
             color: var(--success);
+
         }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .field {
+
+            margin-bottom: 17px;
+
+        }
+
+
+        .field label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--text);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        .field input {
+
+            width: 100%;
+
+            height: 45px;
+
+            padding:
+                0 13px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 7px;
+
+            outline: none;
+
+            background: #fff;
+
+            color: var(--text);
+
+            font-size: 12px;
+
+            transition:
+                border-color .18s ease,
+                box-shadow .18s ease;
+
+        }
+
+
+        .field input:focus {
+
+            border-color:
+                var(--navy);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(7, 27, 51, .06);
+
+        }
+
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 46px;
+
+            margin-top: 7px;
+
+            border: 0;
+
+            border-radius: 7px;
+
+            background: var(--navy);
+
+            color: #fff;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background .18s ease,
+                opacity .18s ease;
+
+        }
+
+
+        .login-button:hover {
+
+            background:
+                var(--navy-2);
+
+        }
+
+
+        .login-button:disabled {
+
+            opacity: .65;
+
+            cursor: wait;
+
+        }
+
+
+        /* =========================================
+           BACK
+        ========================================= */
 
         .back {
+
             margin-top: 20px;
+
             text-align: center;
+
         }
+
 
         .back a {
+
             color: var(--muted);
+
             font-size: 10px;
+
             text-decoration: none;
+
         }
 
+
         .back a:hover {
+
             color: var(--navy);
+
         }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
 
         @media (max-width: 500px) {
 
@@ -187,22 +406,36 @@
                 padding: 17px;
             }
 
+
             .login-card {
-                padding: 26px 22px;
+
+                padding:
+                    26px 22px;
+
             }
 
+
             .brand-title {
+
                 font-size: 34px;
+
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <div class="login-wrapper">
 
+
     <div class="brand">
+
         <div class="brand-title">
             Mandala
         </div>
@@ -210,19 +443,26 @@
         <div class="brand-subtitle">
             Channel Administration
         </div>
+
     </div>
 
 
+
     <div class="login-card">
+
 
         <h1>
             Masuk ke Dashboard
         </h1>
 
+
         <p class="login-card-description">
+
             Gunakan akun administrator atau editor
             untuk mengelola konten Mandala Channel.
+
         </p>
+
 
 
         <div
@@ -231,13 +471,16 @@
         ></div>
 
 
+
         <form id="loginForm">
+
 
             <div class="field">
 
                 <label for="email">
                     Email
                 </label>
+
 
                 <input
                     id="email"
@@ -250,11 +493,13 @@
             </div>
 
 
+
             <div class="field">
 
                 <label for="password">
                     Password
                 </label>
+
 
                 <input
                     id="password"
@@ -267,159 +512,286 @@
             </div>
 
 
+
             <button
                 id="loginButton"
                 class="login-button"
                 type="submit"
             >
+
                 Masuk ke Dashboard
+
             </button>
 
+
         </form>
+
 
 
         <div class="back">
 
             <a href="../index.html">
+
                 ← Kembali ke website
+
             </a>
 
         </div>
 
+
     </div>
+
 
 </div>
 
 
-<script type="module">
 
-    import { supabase }
-        from "../js/supabase-client.js";
+<!-- =====================================================
+     SUPABASE CLIENT
+====================================================== -->
+
+<script
+    src="../js/supabase-client.js"
+></script>
+
+
+
+<!-- =====================================================
+     LOGIN SCRIPT
+====================================================== -->
+
+<script>
+
+    "use strict";
 
 
     const form =
-        document.getElementById("loginForm");
+        document.getElementById(
+            "loginForm"
+        );
+
 
     const emailInput =
-        document.getElementById("email");
+        document.getElementById(
+            "email"
+        );
+
 
     const passwordInput =
-        document.getElementById("password");
+        document.getElementById(
+            "password"
+        );
+
 
     const button =
-        document.getElementById("loginButton");
+        document.getElementById(
+            "loginButton"
+        );
+
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "message"
+        );
 
+
+
+    /* =========================================
+       MESSAGE
+    ========================================= */
 
     function showMessage(
         text,
-        type = "error"
+        type
     ) {
 
-        message.textContent = text;
+        message.textContent =
+            text;
+
 
         message.className =
-            `message ${type}`;
+            "message " +
+            (
+                type ||
+                "error"
+            );
+
 
         message.style.display =
             "block";
+
     }
 
 
+
+    function hideMessage() {
+
+        message.textContent =
+            "";
+
+        message.style.display =
+            "none";
+
+    }
+
+
+
+    /* =========================================
+       CHECK CLIENT
+    ========================================= */
+
+    if (
+        !window.MandalaSupabase
+    ) {
+
+        showMessage(
+            "Supabase client tidak ditemukan. Periksa file js/supabase-client.js."
+        );
+
+    }
+
+
+
+    /* =========================================
+       LOGIN
+    ========================================= */
+
     form.addEventListener(
         "submit",
-        async (event) => {
+        async function (event) {
 
             event.preventDefault();
 
 
+            hideMessage();
+
+
             const email =
-                emailInput.value.trim();
+                emailInput
+                    .value
+                    .trim();
+
 
             const password =
-                passwordInput.value;
+                passwordInput
+                    .value;
 
 
-            if (!email || !password) {
+            if (!email) {
 
                 showMessage(
-                    "Email dan password wajib diisi."
+                    "Email wajib diisi."
                 );
 
+                emailInput.focus();
+
                 return;
+
+            }
+
+
+            if (!password) {
+
+                showMessage(
+                    "Password wajib diisi."
+                );
+
+                passwordInput.focus();
+
+                return;
+
             }
 
 
             button.disabled =
                 true;
 
+
             button.textContent =
                 "Memeriksa...";
-
-            message.style.display =
-                "none";
 
 
             try {
 
-                const {
-                    data,
-                    error
-                } =
-                    await supabase.auth
-                        .signInWithPassword({
+
+                /*
+                 * Panggil fungsi signIn
+                 * milik MandalaSupabase.
+                 */
+
+                const result =
+                    await window
+                        .MandalaSupabase
+                        .auth
+                        .signIn(
                             email,
                             password
-                        });
+                        );
+
 
 
                 /*
-                 * PASSWORD / EMAIL SALAH
+                 * Pastikan user benar-benar ada.
                  */
 
-                if (error) {
+                if (
+                    !result ||
+                    !result.user
+                ) {
 
-                    console.error(
-                        "LOGIN ERROR:",
-                        error
+                    throw new Error(
+                        "Login gagal. User tidak ditemukan."
                     );
 
-                    showMessage(
-                        error.message ||
-                        "Email atau password salah."
-                    );
-
-                    button.disabled =
-                        false;
-
-                    button.textContent =
-                        "Masuk ke Dashboard";
-
-                    return;
                 }
+
+
+
+                /*
+                 * Pastikan profile ditemukan.
+                 */
+
+                if (
+                    !result.profile
+                ) {
+
+                    throw new Error(
+                        "Login berhasil, tetapi profile pengguna tidak ditemukan."
+                    );
+
+                }
+
+
+
+                /*
+                 * Cek role.
+                 */
+
+                if (
+                    result.profile.role !==
+                        "admin" &&
+
+                    result.profile.role !==
+                        "editor"
+                ) {
+
+                    await window
+                        .MandalaSupabase
+                        .auth
+                        .signOut();
+
+
+                    throw new Error(
+                        "Akun Anda belum memiliki role admin atau editor."
+                    );
+
+                }
+
 
 
                 /*
                  * LOGIN BERHASIL
                  */
-
-                if (!data || !data.user) {
-
-                    showMessage(
-                        "Login tidak menghasilkan data pengguna."
-                    );
-
-                    button.disabled =
-                        false;
-
-                    button.textContent =
-                        "Masuk ke Dashboard";
-
-                    return;
-                }
-
 
                 showMessage(
                     "Login berhasil. Membuka dashboard...",
@@ -427,42 +799,78 @@
                 );
 
 
+                button.textContent =
+                    "Berhasil";
+
+
                 /*
-                 * Beri waktu sedikit agar
+                 * Sedikit jeda agar
                  * session tersimpan.
                  */
 
-                setTimeout(() => {
+                setTimeout(
+                    function () {
 
-                    window.location.replace(
-                        "./index.html"
-                    );
+                        window.location.replace(
+                            "./index.html"
+                        );
 
-                }, 500);
+                    },
+                    500
+                );
 
 
             } catch (error) {
 
+
                 console.error(
-                    "SYSTEM LOGIN ERROR:",
+                    "Mandala Login Error:",
                     error
                 );
 
+
+                /*
+                 * INI BAGIAN PENTING:
+                 *
+                 * Kalau password salah,
+                 * Supabase akan masuk ke sini.
+                 */
+
+                let errorMessage =
+                    "Login gagal.";
+
+
+                if (
+                    error &&
+                    error.message
+                ) {
+
+                    errorMessage =
+                        error.message;
+
+                }
+
+
                 showMessage(
-                    "Terjadi kesalahan koneksi. Silakan coba lagi."
+                    errorMessage,
+                    "error"
                 );
+
 
                 button.disabled =
                     false;
 
+
                 button.textContent =
                     "Masuk ke Dashboard";
+
             }
 
         }
     );
 
 </script>
+
 
 </body>
 </html>
