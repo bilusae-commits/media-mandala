@@ -1,6 +1,3 @@
-# `admin/js/auth.js` — Versi Final
-
-```javascript
 import { supabase } from "../../js/supabase-client.js";
 
 
@@ -17,7 +14,6 @@ export async function getCurrentUser() {
             error
         } = await supabase.auth.getUser();
 
-
         if (error) {
 
             console.error(
@@ -28,12 +24,9 @@ export async function getCurrentUser() {
             return null;
         }
 
-
         if (!data?.user) {
-
             return null;
         }
-
 
         return data.user;
 
@@ -61,12 +54,9 @@ export async function getCurrentProfile() {
         const user =
             await getCurrentUser();
 
-
         if (!user) {
-
             return null;
         }
-
 
         const {
             data,
@@ -101,11 +91,6 @@ export async function getCurrentProfile() {
         }
 
 
-        /*
-         * User Supabase ada,
-         * tetapi profile belum ditemukan.
-         */
-
         if (!data) {
 
             console.error(
@@ -127,9 +112,12 @@ export async function getCurrentProfile() {
                 user.email ||
                 "Pengguna",
 
+            /*
+             * Role berasal dari database.
+             * Jangan fallback ke editor.
+             */
             role:
-                data.role ||
-                "editor",
+                data.role,
 
             avatar_url:
                 data.avatar_url ||
@@ -156,14 +144,13 @@ export async function getCurrentProfile() {
 
 
 /* =====================================================
-   REQUIRE AUTH
+   REQUIRE AUTHENTICATED USER
 ===================================================== */
 
 export async function requireAuth() {
 
     const profile =
         await getCurrentProfile();
-
 
     if (!profile) {
 
@@ -173,6 +160,38 @@ export async function requireAuth() {
         return null;
     }
 
+    return profile;
+}
+
+
+/* =====================================================
+   REQUIRE STAFF
+   ADMIN + EDITOR
+===================================================== */
+
+export async function requireStaff() {
+
+    const profile =
+        await getCurrentProfile();
+
+    if (!profile) {
+
+        window.location.href =
+            "./login.html";
+
+        return null;
+    }
+
+    if (
+        profile.role !== "admin" &&
+        profile.role !== "editor"
+    ) {
+
+        window.location.href =
+            "./index.html";
+
+        return null;
+    }
 
     return profile;
 }
@@ -187,7 +206,6 @@ export async function requireAdmin() {
     const profile =
         await getCurrentProfile();
 
-
     if (!profile) {
 
         window.location.href =
@@ -195,7 +213,6 @@ export async function requireAdmin() {
 
         return null;
     }
-
 
     if (
         profile.role !== "admin"
@@ -206,7 +223,6 @@ export async function requireAdmin() {
 
         return null;
     }
-
 
     return profile;
 }
@@ -224,7 +240,6 @@ export async function logout() {
             error
         } = await supabase.auth.signOut();
 
-
         if (error) {
 
             console.error(
@@ -234,7 +249,6 @@ export async function logout() {
 
             throw error;
         }
-
 
         window.location.href =
             "./login.html";
@@ -264,4 +278,3 @@ export async function logout() {
 export {
     supabase
 };
-```
