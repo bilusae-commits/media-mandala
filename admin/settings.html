@@ -1,3 +1,134 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pengaturan — Mandala CMS</title><link rel="stylesheet" href="css/admin.css"><script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script><script src="js/shell.js"></script></head><body><script>initShell("Pengaturan","settings")</script><div id="page" style="margin-left:245px;padding-top:70px"></div><script>
-document.getElementById("page").innerHTML="<div class=\"panel\"><div class=\"panelHead\"><h3>Identitas website</h3></div><div class=\"panelBody\"><div class=\"field\"><label>NAMA WEBSITE</label><input value=\"Mandala Channel\"></div><div class=\"field\"><label>TAGLINE</label><input value=\"Dharma, budaya dan cerita Nusantara.\"></div><p class=\"hint\">Konfigurasi koneksi database disimpan di js/config.js, bukan di sini.</p></div></div>";
-</script></body></html>
+<!doctype html>
+<html lang="id">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1"
+    >
+
+    <title>Pengaturan — Mandala CMS</title>
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
+
+    <script src="../js/config.js"></script>
+    <script src="../js/supabase-client.js"></script>
+    <script src="js/cms-service.js"></script>
+    <script src="js/shell.js"></script>
+
+</head>
+
+
+<body>
+
+<div
+    id="page"
+    style="margin-left:245px;padding-top:70px"
+></div>
+
+
+<script>
+
+async function initSettingsPage() {
+
+    const allowed =
+        await MandalaCMS.requireAdmin();
+
+    if (!allowed) {
+        return;
+    }
+
+
+    await initShell(
+        "Pengaturan",
+        "settings"
+    );
+
+
+    document.getElementById(
+        "page"
+    ).innerHTML = `
+
+        <div class="panel">
+
+            <div class="panelHead">
+
+                <h3>
+                    Identitas Website
+                </h3>
+
+            </div>
+
+
+            <div class="panelBody">
+
+                <div class="field">
+
+                    <label>
+                        NAMA WEBSITE
+                    </label>
+
+                    <input
+                        value="Mandala Channel"
+                        disabled
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        TAGLINE
+                    </label>
+
+                    <input
+                        value="Dharma, budaya dan cerita Nusantara."
+                        disabled
+                    >
+
+                </div>
+
+
+                <p class="hint">
+
+                    Konfigurasi koneksi database
+                    disimpan di
+                    <code>js/config.js</code>.
+
+                </p>
+
+
+                <p class="hint">
+
+                    Pengaturan website belum
+                    menggunakan penyimpanan database.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initSettingsPage
+);
+
+</script>
+
+
+</body>
+
+</html>
