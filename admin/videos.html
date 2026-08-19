@@ -1,3 +1,92 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Video — Mandala CMS</title><link rel="stylesheet" href="css/admin.css"><script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script><script src="js/shell.js"></script></head><body><script>initShell("Video","videos")</script><div id="page" style="margin-left:245px;padding-top:70px"></div><script>
-document.getElementById("page").innerHTML="<div class=\"space\"><span class=\"hint\">Kelola Video YouTube.</span><a class=\"btn primary\" href=\"video-edit.html\">+ TAMBAH</a></div><div class=\"panel\"><div class=\"panelBody\"><div class=\"empty\">Daftar Video YouTube akan tampil dari database.</div></div></div>";
-</script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Video — Mandala Channel CMS</title>
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <div>
+
+            <h1>Video</h1>
+
+            <p>
+                Kelola video Mandala Channel
+            </p>
+
+        </div>
+
+
+        <nav>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <button
+                id="logout-button"
+                type="button"
+            >
+                Keluar
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section>
+
+            <div>
+
+                <h2>Daftar Video</h2>
+
+                <button
+                    id="new-video-button"
+                    type="button"
+                >
+                    + Video Baru
+                </button>
+
+            </div>
+
+
+            <div id="page-message"></div>
+
+
+            <div id="videos-container">
+
+                <p>
+                    Memuat video...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="./js/videos.js"
+    ></script>
+
+</body>
+
+</html>
