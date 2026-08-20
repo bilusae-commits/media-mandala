@@ -1,318 +1,151 @@
-import {
-    requireStaff,
-    videos,
-    deleteVideo,
-    changeStatus,
-    logout
-} from "./cms-service.js";
+import "./cms-service.js";
 
+const CMS = window.MandalaCMS;
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const container =
-    document.getElementById(
-        "videos-container"
-    );
-
-
-const message =
-    document.getElementById(
-        "page-message"
-    );
-
-
-const newButton =
-    document.getElementById(
-        "new-video-button"
-    );
-
-
-const logoutButton =
-    document.getElementById(
-        "logout-button"
-    );
-
-
-/* =====================================================
-   STATE
-===================================================== */
+const container = document.getElementById("videos-container");
+const message = document.getElementById("page-message");
 
 let profile = null;
 
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(
-    text,
-    type = "info"
-) {
-
-    if (!message) {
-        return;
-    }
-
-
-    message.textContent =
-        text;
-
-
-    message.dataset.type =
-        type;
-}
-
-
-/* =====================================================
-   ESCAPE
-===================================================== */
-
 function escapeHtml(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-    }
-
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }
 
-
-/* =====================================================
-   STATUS LABEL
-===================================================== */
-
-function statusLabel(status) {
-
-    const labels = {
-
-        draft:
-            "Draft",
-
-        review:
-            "Review",
-
-        published:
-            "Published",
-
-        archived:
-            "Archived"
-
-    };
-
-
-    return (
-        labels[status] ||
-        status ||
-        "-"
-    );
+function showMessage(text, type = "info") {
+    if (!message) return;
+    message.textContent = text;
+    message.dataset.type = type;
 }
-
-
-/* =====================================================
-   DATE
-===================================================== */
 
 function formatDate(value) {
+    if (!value) return "-";
 
-    if (!value) {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
         return "-";
     }
 
-
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "-";
-    }
-
-
-    return date.toLocaleDateString(
-        "id-ID",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric"
-        }
-    );
+    return date.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
 }
 
+function statusClass(status) {
+    const value = String(status || "draft").toLowerCase();
 
-/* =====================================================
-   LOAD
-===================================================== */
+    return [
+        "draft",
+        "review",
+        "published",
+        "archived"
+    ].includes(value)
+        ? value
+        : "draft";
+}
+
+function statusLabel(status) {
+    return {
+        draft: "Draft",
+        review: "Review",
+        published: "Published",
+        archived: "Archived"
+    }[status] || status || "-";
+}
 
 async function loadVideos() {
 
     try {
 
-        showMessage(
-            "Memuat video..."
-        );
+        showMessage("Memuat video...");
 
+        const data = await CMS.videos();
 
-        const data =
-            await videos();
-
-
-        renderVideos(
-            data
-        );
-
+        renderVideos(data);
 
         showMessage(
-            `${data.length} video ditemukan.`
+            `${data.length} video ditemukan.`,
+            "success"
         );
-
 
     } catch (error) {
 
-        console.error(
-            "Load videos error:",
-            error
-        );
-
-
-        showMessage(
-            error.message ||
-            "Gagal memuat video.",
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   RENDER
-===================================================== */
-
-function renderVideos(
-    data
-) {
-
-    if (!container) {
-        return;
-    }
-
-
-    if (
-        !data ||
-        data.length === 0
-    ) {
+        console.error(error);
 
         container.innerHTML = `
-
-            <div>
-
-                <p>
-                    Belum ada video.
-                </p>
-
-                <button
-                    type="button"
-                    data-action="create"
-                >
-                    Buat Video Pertama
-                </button>
-
+            <div class="empty">
+                Gagal memuat video.
             </div>
-
         `;
 
+        showMessage(
+            error?.message || "Gagal memuat video.",
+            "error"
+        );
+    }
+}
+
+function renderVideos(data) {
+
+    if (!data || !data.length) {
+
+        container.innerHTML = `
+            <div class="empty">
+
+                <p>Belum ada video.</p>
+
+                <a
+                    class="btn"
+                    href="video-edit.html"
+                >
+                    + Buat Video
+                </a>
+
+            </div>
+        `;
 
         return;
     }
 
-
     container.innerHTML = `
+        <div class="table-wrapper">
 
-        <table>
+            <table>
 
-            <thead>
+                <thead>
+                    <tr>
+                        <th>Video</th>
+                        <th>Status</th>
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
 
-                <tr>
+                <tbody>
 
-                    <th>Video</th>
+                    ${data
+                        .map(renderRow)
+                        .join("")}
 
-                    <th>Status</th>
+                </tbody>
 
-                    <th>Kategori</th>
+            </table>
 
-                    <th>Dibuat</th>
-
-                    <th>Aksi</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                ${data
-                    .map(
-                        video =>
-                            renderRow(video)
-                    )
-                    .join("")
-                }
-
-            </tbody>
-
-        </table>
-
+        </div>
     `;
 }
 
-
-/* =====================================================
-   ROW
-===================================================== */
-
-function renderRow(
-    video
-) {
+function renderRow(video) {
 
     const id =
-        escapeHtml(
-            video.id
-        );
-
+        escapeHtml(video.id);
 
     const title =
         escapeHtml(
@@ -320,425 +153,223 @@ function renderRow(
             "Tanpa judul"
         );
 
-
     const status =
-        video.status ||
-        "draft";
+        String(
+            video.status ||
+            "draft"
+        ).toLowerCase();
 
+    let actions = `
+        <a
+            class="action-link"
+            href="video-edit.html?id=${encodeURIComponent(
+                video.id
+            )}"
+        >
+            Edit
+        </a>
+    `;
 
-    const category =
-        escapeHtml(
-            video.categories?.name ||
-            "-"
-        );
+    if (profile?.role === "admin") {
 
-
-    const date =
-        formatDate(
-            video.created_at
-        );
-
-
-    const thumbnail =
-        video.thumbnail_url
-            ? `
-                <img
-                    src="${escapeHtml(
-                        video.thumbnail_url
-                    )}"
-                    alt="${title}"
-                    width="120"
-                    loading="lazy"
-                >
-              `
-            : "";
-
-
-    const isPublished =
-        status === "published";
-
-
-    const isAdmin =
-        profile?.role === "admin";
-
-
-    let actions = "";
-
-
-    /* =============================================
-       EDIT
-    ============================================= */
-
-    if (
-        isAdmin ||
-        !isPublished
-    ) {
-
-        actions += `
-
-            <a
-                href="video-edit.html?id=${encodeURIComponent(
-                    video.id
-                )}"
-            >
-                Edit
-            </a>
-
-        `;
-
-    }
-
-
-    /* =============================================
-       STATUS
-    ============================================= */
-
-    if (isAdmin) {
-
-        if (
-            status !== "published"
-        ) {
+        if (status !== "published") {
 
             actions += `
-
                 <button
-                    type="button"
+                    class="action-button"
                     data-action="publish"
                     data-id="${id}"
                 >
                     Publish
                 </button>
-
             `;
-
         }
 
-
-        if (
-            status === "published"
-        ) {
+        if (status !== "archived") {
 
             actions += `
-
                 <button
-                    type="button"
+                    class="action-button"
                     data-action="archive"
                     data-id="${id}"
                 >
                     Arsipkan
                 </button>
-
             `;
-
-        } else if (
-            status !== "review"
-        ) {
-
-            actions += `
-
-                <button
-                    type="button"
-                    data-action="review"
-                    data-id="${id}"
-                >
-                    Review
-                </button>
-
-            `;
-
         }
 
     } else {
 
-        /* =========================================
-           EDITOR
-        ========================================= */
-
-        if (
-            status === "draft"
-        ) {
+        if (status === "draft") {
 
             actions += `
-
                 <button
-                    type="button"
+                    class="action-button"
                     data-action="review"
                     data-id="${id}"
                 >
                     Kirim Review
                 </button>
-
             `;
-
         }
 
-
-        if (
-            status === "review"
-        ) {
+        if (status === "review") {
 
             actions += `
-
                 <button
-                    type="button"
+                    class="action-button"
                     data-action="archive"
                     data-id="${id}"
                 >
                     Arsipkan
                 </button>
-
             `;
-
         }
-
     }
 
-
-    /* =============================================
-       DELETE
-    ============================================= */
-
-    if (
-        !isPublished
-    ) {
+    if (status !== "published") {
 
         actions += `
-
             <button
-                type="button"
+                class="action-button danger"
                 data-action="delete"
                 data-id="${id}"
             >
                 Hapus
             </button>
-
         `;
-
     }
 
-
     return `
-
         <tr>
 
             <td>
+                <div class="video-title">
+                    ${title}
+                </div>
+            </td>
 
-                <div>
+            <td>
+                <span
+                    class="status status-${statusClass(status)}"
+                >
+                    ${escapeHtml(
+                        statusLabel(status)
+                    )}
+                </span>
+            </td>
 
-                    ${thumbnail}
+            <td>
+                ${formatDate(video.created_at)}
+            </td>
 
-                    <strong>
-                        ${title}
-                    </strong>
+            <td>
 
+                <div class="actions">
+                    ${actions}
                 </div>
 
             </td>
 
-
-            <td>
-
-                ${escapeHtml(
-                    statusLabel(
-                        status
-                    )
-                )}
-
-            </td>
-
-
-            <td>
-                ${category}
-            </td>
-
-
-            <td>
-                ${date}
-            </td>
-
-
-            <td>
-                ${actions}
-            </td>
-
         </tr>
-
     `;
 }
 
-
-/* =====================================================
-   ACTION
-===================================================== */
-
-async function handleAction(
-    action,
-    id
-) {
+async function handleAction(action, id) {
 
     try {
 
-        if (!id) {
+        if (action === "delete") {
 
-            throw new Error(
-                "ID video tidak ditemukan."
-            );
-        }
-
-
-        /* =========================================
-           DELETE
-        ========================================= */
-
-        if (
-            action === "delete"
-        ) {
-
-            const confirmed =
-                window.confirm(
-                    "Hapus video ini?"
-                );
-
-
-            if (!confirmed) {
+            if (
+                !confirm(
+                    "Yakin ingin menghapus video ini?"
+                )
+            ) {
                 return;
             }
 
-
-            await deleteVideo(
-                id
-            );
-
+            await CMS.deleteVideo(id);
 
             showMessage(
                 "Video berhasil dihapus.",
                 "success"
             );
 
-
             await loadVideos();
-
 
             return;
         }
 
+        if (action === "publish") {
 
-        /* =========================================
-           PUBLISH
-        ========================================= */
-
-        if (
-            action === "publish"
-        ) {
-
-            if (
-                profile?.role !==
-                "admin"
-            ) {
-
+            if (profile?.role !== "admin") {
                 throw new Error(
                     "Hanya Admin yang dapat publish video."
                 );
             }
 
-
-            await changeStatus(
+            await CMS.changeStatus(
                 "videos",
                 id,
                 "published"
             );
-
 
             showMessage(
                 "Video berhasil dipublish.",
                 "success"
             );
 
-
             await loadVideos();
-
 
             return;
         }
 
+        if (action === "review") {
 
-        /* =========================================
-           REVIEW
-        ========================================= */
-
-        if (
-            action === "review"
-        ) {
-
-            await changeStatus(
+            await CMS.changeStatus(
                 "videos",
                 id,
                 "review"
             );
 
-
             showMessage(
-                "Video dikirim ke status review.",
+                "Video dikirim ke review.",
                 "success"
             );
 
-
             await loadVideos();
-
 
             return;
         }
 
+        if (action === "archive") {
 
-        /* =========================================
-           ARCHIVE
-        ========================================= */
-
-        if (
-            action === "archive"
-        ) {
-
-            await changeStatus(
+            await CMS.changeStatus(
                 "videos",
                 id,
                 "archived"
             );
-
 
             showMessage(
                 "Video berhasil diarsipkan.",
                 "success"
             );
 
-
             await loadVideos();
-
-
-            return;
         }
 
     } catch (error) {
 
-        console.error(
-            "Video action error:",
-            error
-        );
-
+        console.error(error);
 
         showMessage(
-            error.message ||
-            "Operasi video gagal.",
+            error?.message ||
+            "Aksi gagal.",
             "error"
         );
-
     }
-
 }
-
-
-/* =====================================================
-   CLICK
-===================================================== */
 
 container?.addEventListener(
     "click",
@@ -749,109 +380,36 @@ container?.addEventListener(
                 "[data-action]"
             );
 
-
-        if (!button) {
-            return;
-        }
-
-
-        const action =
-            button.dataset.action;
-
-
-        const id =
-            button.dataset.id;
-
-
-        if (
-            action === "create"
-        ) {
-
-            window.location.href =
-                "video-edit.html";
-
-            return;
-        }
-
+        if (!button) return;
 
         handleAction(
-            action,
-            id
+            button.dataset.action,
+            button.dataset.id
         );
-
     }
 );
-
-
-/* =====================================================
-   NEW VIDEO
-===================================================== */
-
-newButton?.addEventListener(
-    "click",
-    () => {
-
-        window.location.href =
-            "video-edit.html";
-
-    }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-logoutButton?.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            await logout();
-
-        } catch (error) {
-
-            console.error(
-                "Logout error:",
-                error
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   INIT
-===================================================== */
 
 async function init() {
 
     try {
 
         profile =
-            await requireStaff();
+            await CMS.requireStaff();
 
-
-        if (!profile) {
-            return;
-        }
-
+        if (!profile) return;
 
         await loadVideos();
 
     } catch (error) {
 
-        console.error(
-            "Videos init error:",
-            error
+        console.error(error);
+
+        showMessage(
+            error?.message ||
+            "Gagal membuka video.",
+            "error"
         );
-
     }
-
 }
-
 
 init();
