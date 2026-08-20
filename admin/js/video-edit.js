@@ -1,20 +1,18 @@
-const CMS = window.MandalaCMS;
-
-const form = document.getElementById("video-form");
-
-const titleInput = document.getElementById("judul_video");
-
-const CMS = window.MandalaCMS;
+import { supabase } from "../../js/supabase-client.js";
 
 
 /* =====================================================
    ELEMENT
 ===================================================== */
 
-const form = document.getElementById("video-form");
+const form =
+    document.getElementById("video-form");
 
-const titleInput = document.getElementById("judul_video");
-const slugInput = document.getElementById("slug");
+const titleInput =
+    document.getElementById("judul_video");
+
+const slugInput =
+    document.getElementById("slug");
 
 const youtubeUrlInput =
     document.getElementById("youtube_url");
@@ -61,38 +59,21 @@ const message =
 
 let profile = null;
 let currentVideo = null;
-let slugEdited = false;
+let slugManual = false;
 
 
 /* =====================================================
    MESSAGE
 ===================================================== */
 
-function showMessage(
-    text,
-    type = "info"
-) {
+function showMessage(text, type = "") {
 
     if (!message) return;
 
     message.textContent = text;
+
     message.className =
         `form-message ${type}`;
-}
-
-
-/* =====================================================
-   ESCAPE
-===================================================== */
-
-function escapeHtml(value) {
-
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
 }
 
 
@@ -100,7 +81,7 @@ function escapeHtml(value) {
    SLUG
 ===================================================== */
 
-function makeSlug(text) {
+function createSlug(text) {
 
     return String(text || "")
         .toLowerCase()
@@ -110,18 +91,18 @@ function makeSlug(text) {
         .replace(/[^a-z0-9\s-]/g, "")
         .replace(/\s+/g, "-")
         .replace(/-+/g, "-")
-        .replace(/^-+|-+$/g, "");
+        .replace(/^-|-$/g, "");
 }
 
 
-titleInput?.addEventListener(
+titleInput.addEventListener(
     "input",
     () => {
 
-        if (!slugEdited) {
+        if (!slugManual) {
 
             slugInput.value =
-                makeSlug(
+                createSlug(
                     titleInput.value
                 );
         }
@@ -129,11 +110,11 @@ titleInput?.addEventListener(
 );
 
 
-slugInput?.addEventListener(
+slugInput.addEventListener(
     "input",
     () => {
 
-        slugEdited = true;
+        slugManual = true;
     }
 );
 
@@ -142,21 +123,20 @@ slugInput?.addEventListener(
    YOUTUBE
 ===================================================== */
 
-function getYoutubeId(value) {
+function extractYoutubeId(url) {
 
-    const text =
-        String(value || "").trim();
+    const value =
+        String(url || "").trim();
 
-    if (!text) {
+    if (!value) {
         return "";
     }
 
 
     if (
-        /^[A-Za-z0-9_-]{11}$/.test(text)
+        /^[A-Za-z0-9_-]{11}$/.test(value)
     ) {
-
-        return text;
+        return value;
     }
 
 
@@ -168,19 +148,15 @@ function getYoutubeId(value) {
 
         /youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/i,
 
-        /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/i,
-
-        /youtube-nocookie\.com\/embed\/([A-Za-z0-9_-]{11})/i
+        /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/i
 
     ];
 
 
-    for (
-        const pattern of patterns
-    ) {
+    for (const pattern of patterns) {
 
         const match =
-            text.match(pattern);
+            value.match(pattern);
 
         if (match) {
 
@@ -193,32 +169,47 @@ function getYoutubeId(value) {
 }
 
 
-/* =====================================================
-   YOUTUBE INPUT
-===================================================== */
+function updateYoutube() {
 
-youtubeUrlInput?.addEventListener(
+    const id =
+        extractYoutubeId(
+            youtubeUrlInput.value
+        );
+
+
+    youtubeIdInput.value =
+        id;
+
+
+    if (
+        id &&
+        !thumbnailInput.value.trim()
+    ) {
+
+        thumbnailInput.value =
+            `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+    }
+}
+
+
+youtubeUrlInput.addEventListener(
     "input",
+    updateYoutube
+);
+
+youtubeUrlInput.addEventListener(
+    "change",
+    updateYoutube
+);
+
+youtubeUrlInput.addEventListener(
+    "paste",
     () => {
 
-        const id =
-            getYoutubeId(
-                youtubeUrlInput.value
-            );
-
-
-        youtubeIdInput.value =
-            id;
-
-
-        if (
-            id &&
-            !thumbnailInput.value.trim()
-        ) {
-
-            thumbnailInput.value =
-                `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-        }
+        setTimeout(
+            updateYoutube,
+            50
+        );
     }
 );
 
@@ -236,72 +227,125 @@ async function loadCategories() {
     `;
 
 
-    try {
-
-        const categories =
-            await CMS.categories();
-
-
-        if (
-            !categories ||
-            categories.length === 0
-        ) {
-
-            categoryInput.innerHTML = `
-                <option value="">
-                    -- Belum ada kategori --
-                </option>
-            `;
-
-            return;
-        }
+    const {
+        data,
+        error
+    } = await supabase
+        .from("categories")
+        .select("*")
+        .order("name", {
+            ascending: true
+        });
 
 
-        categoryInput.innerHTML = `
-            <option value="">
-                -- Pilih Kategori --
-            </option>
-
-            ${categories
-                .map(category => `
-                    <option
-                        value="${escapeHtml(category.id)}"
-                    >
-                        ${escapeHtml(category.name)}
-                    </option>
-                `)
-                .join("")}
-        `;
-
-
-        if (
-            currentVideo?.category_id
-        ) {
-
-            categoryInput.value =
-                currentVideo.category_id;
-        }
-
-
-    } catch (error) {
+    if (error) {
 
         console.error(
-            "Category error:",
+            "CATEGORY ERROR:",
             error
         );
 
-
         categoryInput.innerHTML = `
             <option value="">
-                -- Gagal memuat kategori --
+                Gagal memuat kategori
             </option>
         `;
 
-        showMessage(
-            "Kategori gagal dimuat. Cek akses tabel categories.",
-            "warning"
+        return;
+    }
+
+
+    categoryInput.innerHTML = `
+        <option value="">
+            -- Pilih Kategori --
+        </option>
+    `;
+
+
+    for (
+        const category of data || []
+    ) {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            category.id;
+
+        option.textContent =
+            category.name;
+
+        categoryInput.appendChild(
+            option
         );
     }
+
+
+    if (
+        currentVideo?.category_id
+    ) {
+
+        categoryInput.value =
+            currentVideo.category_id;
+    }
+}
+
+
+/* =====================================================
+   LOAD CURRENT USER
+===================================================== */
+
+async function getUser() {
+
+    const {
+        data,
+        error
+    } =
+        await supabase.auth.getUser();
+
+
+    if (error) {
+        throw error;
+    }
+
+
+    if (!data?.user) {
+
+        throw new Error(
+            "Anda belum login."
+        );
+    }
+
+
+    return data.user;
+}
+
+
+/* =====================================================
+   LOAD PROFILE
+===================================================== */
+
+async function loadProfile(userId) {
+
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", userId)
+            .maybeSingle();
+
+
+    if (error) {
+        throw error;
+    }
+
+
+    return data;
 }
 
 
@@ -309,39 +353,25 @@ async function loadCategories() {
    LOAD VIDEO
 ===================================================== */
 
-function getVideoIdFromUrl() {
-
-    return new URLSearchParams(
-        window.location.search
-    ).get("id");
-}
-
-
 async function loadVideo(id) {
 
-    showMessage(
-        "Memuat video..."
-    );
-
-
-    const db =
-        await CMS.ready();
-
-
-    const result =
-        await db
+    const {
+        data,
+        error
+    } =
+        await supabase
             .from("videos")
             .select("*")
             .eq("id", id)
             .maybeSingle();
 
 
-    if (result.error) {
-        throw result.error;
+    if (error) {
+        throw error;
     }
 
 
-    if (!result.data) {
+    if (!data) {
 
         throw new Error(
             "Video tidak ditemukan."
@@ -350,41 +380,42 @@ async function loadVideo(id) {
 
 
     currentVideo =
-        result.data;
+        data;
 
 
     titleInput.value =
-        currentVideo.title || "";
+        data.title || "";
 
     slugInput.value =
-        currentVideo.slug || "";
+        data.slug || "";
 
     youtubeUrlInput.value =
-        currentVideo.youtube_url || "";
+        data.youtube_url || "";
 
     youtubeIdInput.value =
-        currentVideo.youtube_video_id || "";
+        data.youtube_video_id ||
+        extractYoutubeId(
+            data.youtube_url
+        );
 
     thumbnailInput.value =
-        currentVideo.thumbnail_url || "";
+        data.thumbnail_url || "";
 
     descriptionInput.value =
-        currentVideo.description || "";
+        data.description || "";
 
     featuredInput.checked =
-        currentVideo.featured === true;
+        data.featured === true;
 
     statusInput.value =
-        currentVideo.status || "draft";
+        data.status || "draft";
+
+    slugManual = true;
 
 
-    slugEdited = true;
-
+    updateYoutube();
 
     await loadCategories();
-
-
-    updateButtons();
 
 
     showMessage(
@@ -398,7 +429,7 @@ async function loadVideo(id) {
    PAYLOAD
 ===================================================== */
 
-function getPayload() {
+function getPayload(status) {
 
     const title =
         titleInput.value.trim();
@@ -416,13 +447,13 @@ function getPayload() {
         youtubeUrlInput.value.trim();
 
 
-    const videoId =
-        getYoutubeId(
+    const youtubeId =
+        extractYoutubeId(
             youtubeUrl
         );
 
 
-    if (!videoId) {
+    if (!youtubeId) {
 
         throw new Error(
             "Masukkan URL YouTube yang valid."
@@ -432,25 +463,21 @@ function getPayload() {
 
     return {
 
-        id:
-            currentVideo?.id ||
-            null,
-
         title,
 
         slug:
             slugInput.value.trim() ||
-            makeSlug(title),
+            createSlug(title),
 
         youtube_url:
             youtubeUrl,
 
         youtube_video_id:
-            videoId,
+            youtubeId,
 
         thumbnail_url:
             thumbnailInput.value.trim() ||
-            `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+            `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
 
         description:
             descriptionInput.value.trim() ||
@@ -461,11 +488,12 @@ function getPayload() {
             null,
 
         featured:
-            featuredInput.checked === true,
+            featuredInput.checked,
 
-        status:
-            statusInput.value ||
-            "draft"
+        status,
+
+        author_id:
+            profile?.id
     };
 }
 
@@ -474,310 +502,197 @@ function getPayload() {
    SAVE
 ===================================================== */
 
-async function saveVideo(
-    status = "draft",
-    publish = false
-) {
+async function saveVideo(status) {
 
-    const payload =
-        getPayload();
+    try {
 
-
-    payload.status =
-        status;
+        saveButton.disabled = true;
+        draftButton.disabled = true;
+        reviewButton.disabled = true;
+        publishButton.disabled = true;
+        archiveButton.disabled = true;
 
 
-    showMessage(
-        "Menyimpan..."
-    );
-
-
-    const result =
-        await CMS.saveVideo(
-            payload,
-            publish
+        showMessage(
+            "Menyimpan..."
         );
 
 
-    currentVideo =
-        result;
+        const payload =
+            getPayload(status);
 
 
-    /*
-     * Update form dari database
-     */
+        let result;
 
-    titleInput.value =
-        result.title || "";
 
-    slugInput.value =
-        result.slug || "";
+        if (currentVideo?.id) {
 
-    youtubeUrlInput.value =
-        result.youtube_url || "";
+            const {
+                data,
+                error
+            } =
+                await supabase
+                    .from("videos")
+                    .update(payload)
+                    .eq("id", currentVideo.id)
+                    .select()
+                    .single();
 
-    youtubeIdInput.value =
-        result.youtube_video_id || "";
 
-    thumbnailInput.value =
-        result.thumbnail_url || "";
-
-    descriptionInput.value =
-        result.description || "";
-
-    featuredInput.checked =
-        result.featured === true;
-
-    statusInput.value =
-        result.status || "draft";
-
-
-    /*
-     * URL edit
-     */
-
-    if (result.id) {
-
-        const url =
-            new URL(
-                window.location.href
-            );
-
-        url.searchParams.set(
-            "id",
-            result.id
-        );
-
-        window.history.replaceState(
-            {},
-            "",
-            url
-        );
-    }
-
-
-    updateButtons();
-
-
-    showMessage(
-        "Video berhasil disimpan.",
-        "success"
-    );
-}
-
-
-/* =====================================================
-   BUTTON STATE
-===================================================== */
-
-function updateButtons() {
-
-    const status =
-        currentVideo?.status ||
-        statusInput.value ||
-        "draft";
-
-
-    const isAdmin =
-        profile?.role === "admin";
-
-
-    if (publishButton) {
-
-        publishButton.style.display =
-            isAdmin
-                ? ""
-                : "none";
-    }
-
-
-    if (
-        status === "published"
-    ) {
-
-        if (draftButton)
-            draftButton.style.display =
-                "none";
-
-        if (reviewButton)
-            reviewButton.style.display =
-                "none";
-
-    } else {
-
-        if (draftButton)
-            draftButton.style.display =
-                "";
-
-        if (reviewButton)
-            reviewButton.style.display =
-                "";
-    }
-
-
-    if (archiveButton) {
-
-        archiveButton.style.display =
-            status === "archived"
-                ? "none"
-                : "";
-    }
-}
-
-
-/* =====================================================
-   SIMPAN
-===================================================== */
-
-form?.addEventListener(
-    "submit",
-    async event => {
-
-        event.preventDefault();
-
-        try {
-
-            await saveVideo(
-                "draft",
-                false
-            );
-
-        } catch (error) {
-
-            console.error(error);
-
-            showMessage(
-                error?.message ||
-                "Gagal menyimpan video.",
-                "error"
-            );
-        }
-    }
-);
-
-
-/* =====================================================
-   SIMPAN DRAFT
-===================================================== */
-
-draftButton?.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            await saveVideo(
-                "draft",
-                false
-            );
-
-        } catch (error) {
-
-            console.error(error);
-
-            showMessage(
-                error?.message ||
-                "Gagal menyimpan draft.",
-                "error"
-            );
-        }
-    }
-);
-
-
-/* =====================================================
-   REVIEW
-===================================================== */
-
-reviewButton?.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            await saveVideo(
-                "review",
-                false
-            );
-
-        } catch (error) {
-
-            console.error(error);
-
-            showMessage(
-                error?.message ||
-                "Gagal mengirim review.",
-                "error"
-            );
-        }
-    }
-);
-
-
-/* =====================================================
-   PUBLISH
-===================================================== */
-
-publishButton?.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            if (
-                profile?.role !== "admin"
-            ) {
-
-                throw new Error(
-                    "Hanya Admin yang dapat publish."
-                );
+            if (error) {
+                throw error;
             }
 
 
-            await saveVideo(
-                "published",
-                true
+            result = data;
+
+        } else {
+
+            const {
+                data,
+                error
+            } =
+                await supabase
+                    .from("videos")
+                    .insert(payload)
+                    .select()
+                    .single();
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            result = data;
+        }
+
+
+        currentVideo =
+            result;
+
+
+        /*
+         * Masukkan ID ke URL
+         */
+
+        if (result?.id) {
+
+            const url =
+                new URL(
+                    window.location.href
+                );
+
+            url.searchParams.set(
+                "id",
+                result.id
             );
 
-        } catch (error) {
-
-            console.error(error);
-
-            showMessage(
-                error?.message ||
-                "Gagal publish video.",
-                "error"
+            window.history.replaceState(
+                {},
+                "",
+                url
             );
         }
+
+
+        statusInput.value =
+            result.status ||
+            status;
+
+
+        showMessage(
+            "Video berhasil disimpan.",
+            "success"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "SAVE VIDEO ERROR:",
+            error
+        );
+
+
+        showMessage(
+            error?.message ||
+            "Gagal menyimpan video.",
+            "error"
+        );
+
+
+    } finally {
+
+        saveButton.disabled = false;
+        draftButton.disabled = false;
+        reviewButton.disabled = false;
+        publishButton.disabled = false;
+        archiveButton.disabled = false;
+    }
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+form.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        saveVideo("draft");
     }
 );
 
 
-/* =====================================================
-   ARCHIVE
-===================================================== */
-
-archiveButton?.addEventListener(
+draftButton.addEventListener(
     "click",
-    async () => {
+    () => {
 
-        try {
+        saveVideo("draft");
+    }
+);
 
-            await saveVideo(
-                "archived",
-                false
-            );
 
-        } catch (error) {
+reviewButton.addEventListener(
+    "click",
+    () => {
 
-            console.error(error);
+        saveVideo("review");
+    }
+);
+
+
+publishButton.addEventListener(
+    "click",
+    () => {
+
+        if (
+            profile?.role !== "admin"
+        ) {
 
             showMessage(
-                error?.message ||
-                "Gagal mengarsipkan video.",
+                "Hanya Admin yang dapat publish.",
                 "error"
             );
+
+            return;
         }
+
+
+        saveVideo("published");
+    }
+);
+
+
+archiveButton.addEventListener(
+    "click",
+    () => {
+
+        saveVideo("archived");
     }
 );
 
@@ -786,17 +701,33 @@ archiveButton?.addEventListener(
    LOGOUT
 ===================================================== */
 
-logoutButton?.addEventListener(
+logoutButton.addEventListener(
     "click",
     async () => {
 
         try {
 
-            await CMS.logout();
+            const {
+                error
+            } =
+                await supabase.auth.signOut();
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            window.location.href =
+                "index.html";
+
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "LOGOUT ERROR:",
+                error
+            );
 
             showMessage(
                 error?.message ||
@@ -816,47 +747,57 @@ async function init() {
 
     try {
 
+        showMessage(
+            "Memuat..."
+        );
+
+
+        const user =
+            await getUser();
+
+
         profile =
-            await CMS.currentProfile();
+            await loadProfile(
+                user.id
+            );
 
 
         if (!profile) {
 
-            window.location.href =
-                "index.html";
-
-            return;
+            throw new Error(
+                "Profile admin tidak ditemukan."
+            );
         }
-
-
-        if (
-            profile.role !== "admin" &&
-            profile.role !== "editor"
-        ) {
-
-            window.location.href =
-                "index.html";
-
-            return;
-        }
-
-
-        const id =
-            getVideoIdFromUrl();
 
 
         /*
-         * Load kategori dulu
+         * Kategori
          */
 
         await loadCategories();
 
 
         /*
-         * Kalau edit
+         * Edit mode
          */
 
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const id =
+            params.get("id");
+
+
         if (id) {
+
+            document.getElementById(
+                "page-title"
+            ).textContent =
+                "Edit Video";
+
 
             await loadVideo(id);
 
@@ -865,7 +806,6 @@ async function init() {
             statusInput.value =
                 "draft";
 
-            updateButtons();
 
             showMessage(
                 "Siap membuat video."
@@ -876,13 +816,14 @@ async function init() {
     } catch (error) {
 
         console.error(
-            "VIDEO EDIT INIT ERROR:",
+            "VIDEO INIT ERROR:",
             error
         );
 
+
         showMessage(
             error?.message ||
-            "Halaman video gagal dimuat.",
+            "Gagal memuat editor video.",
             "error"
         );
     }
