@@ -1,167 +1,77 @@
-import {
-    requireStaff,
-    articles,
-    deleteArticle,
-    changeStatus,
-    logout
-} from "./cms-service.js";
+import "./cms-service.js";
 
+const CMS = window.MandalaCMS;
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const container =
-    document.getElementById(
-        "articles-container"
-    );
-
-
-const message =
-    document.getElementById(
-        "page-message"
-    );
-
-
-const newButton =
-    document.getElementById(
-        "new-article-button"
-    );
-
-
-const logoutButton =
-    document.getElementById(
-        "logout-button"
-    );
-
+const container = document.getElementById("articles-container");
+const message = document.getElementById("page-message");
+const newButton = document.getElementById("new-article-button");
+const logoutButton = document.getElementById("logout-button");
 
 let profile = null;
 
 
 /* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(
-    text,
-    type = "info"
-) {
-
-    if (!message) {
-        return;
-    }
-
-
-    message.textContent =
-        text;
-
-
-    message.dataset.type =
-        type;
-}
-
-
-/* =====================================================
-   ESCAPE HTML
+   HELPERS
 ===================================================== */
 
 function escapeHtml(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }
 
 
-/* =====================================================
-   STATUS LABEL
-===================================================== */
+function showMessage(text, type = "info") {
+    if (!message) return;
 
-function statusLabel(status) {
-
-    const labels = {
-
-        draft:
-            "Draft",
-
-        review:
-            "Review",
-
-        published:
-            "Published",
-
-        archived:
-            "Archived"
-
-    };
-
-
-    return (
-        labels[status] ||
-        status ||
-        "-"
-    );
+    message.textContent = text;
+    message.dataset.type = type;
 }
 
-
-/* =====================================================
-   FORMAT DATE
-===================================================== */
 
 function formatDate(value) {
+    if (!value) return "-";
 
-    if (!value) {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
         return "-";
     }
 
+    return date.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
+}
 
-    const date =
-        new Date(value);
 
+function statusLabel(status) {
+    const labels = {
+        draft: "Draft",
+        review: "Review",
+        published: "Published",
+        archived: "Archived"
+    };
+
+    return labels[status] || status || "-";
+}
+
+
+function statusClass(status) {
+    const value = String(status || "draft").toLowerCase();
 
     if (
-        Number.isNaN(
-            date.getTime()
-        )
+        ["draft", "review", "published", "archived"]
+            .includes(value)
     ) {
-        return "-";
+        return value;
     }
 
-
-    return date.toLocaleDateString(
-        "id-ID",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric"
-        }
-    );
+    return "draft";
 }
 
 
@@ -173,24 +83,15 @@ async function loadArticles() {
 
     try {
 
-        showMessage(
-            "Memuat artikel..."
-        );
+        showMessage("Memuat artikel...");
 
+        const data = await CMS.articles();
 
-        const data =
-            await articles();
-
-
-        renderArticles(
-            data
-        );
-
+        renderArticles(data);
 
         showMessage(
             `${data.length} artikel ditemukan.`
         );
-
 
     } catch (error) {
 
@@ -199,15 +100,18 @@ async function loadArticles() {
             error
         );
 
+        container.innerHTML = `
+            <div class="empty">
+                Gagal memuat artikel.
+            </div>
+        `;
 
         showMessage(
-            error.message ||
+            error?.message ||
             "Gagal memuat artikel.",
             "error"
         );
-
     }
-
 }
 
 
@@ -215,33 +119,29 @@ async function loadArticles() {
    RENDER
 ===================================================== */
 
-function renderArticles(
-    data
-) {
+function renderArticles(data) {
 
-    if (!container) {
-        return;
-    }
+    if (!container) return;
 
 
-    if (
-        !data ||
-        data.length === 0
-    ) {
+    if (!data || data.length === 0) {
 
         container.innerHTML = `
-            <div>
-                <p>Belum ada artikel.</p>
+            <div class="empty">
+
+                <p>
+                    Belum ada artikel.
+                </p>
 
                 <button
                     type="button"
                     data-action="create"
                 >
-                    Buat Artikel Pertama
+                    + Buat Artikel Pertama
                 </button>
+
             </div>
         `;
-
 
         return;
     }
@@ -249,54 +149,45 @@ function renderArticles(
 
     container.innerHTML = `
 
-        <table>
+        <div class="table-wrapper">
 
-            <thead>
+            <table>
 
-                <tr>
+                <thead>
 
-                    <th>Judul</th>
+                    <tr>
+                        <th>Artikel</th>
+                        <th>Status</th>
+                        <th>Kategori</th>
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                    </tr>
 
-                    <th>Status</th>
+                </thead>
 
-                    <th>Kategori</th>
+                <tbody>
 
-                    <th>Dibuat</th>
+                    ${data
+                        .map(renderRow)
+                        .join("")}
 
-                    <th>Aksi</th>
+                </tbody>
 
-                </tr>
+            </table>
 
-            </thead>
-
-
-            <tbody>
-
-                ${data.map(
-                    article => renderRow(article)
-                ).join("")}
-
-            </tbody>
-
-        </table>
-
+        </div>
     `;
 }
 
 
 /* =====================================================
-   RENDER ROW
+   ROW
 ===================================================== */
 
-function renderRow(
-    article
-) {
+function renderRow(article) {
 
     const id =
-        escapeHtml(
-            article.id
-        );
-
+        escapeHtml(article.id);
 
     const title =
         escapeHtml(
@@ -304,11 +195,11 @@ function renderRow(
             "Tanpa judul"
         );
 
-
     const status =
-        article.status ||
-        "draft";
-
+        String(
+            article.status ||
+            "draft"
+        ).toLowerCase();
 
     const category =
         escapeHtml(
@@ -316,27 +207,24 @@ function renderRow(
             "-"
         );
 
-
     const date =
         formatDate(
             article.created_at
         );
 
+    const isAdmin =
+        profile?.role === "admin";
 
     const isPublished =
         status === "published";
 
 
-    const isAdmin =
-        profile?.role === "admin";
-
-
     let actions = "";
 
 
-    /* ---------------------------------------------
-       EDIT
-    --------------------------------------------- */
+    /*
+     * EDIT
+     */
 
     if (
         isAdmin ||
@@ -344,155 +232,141 @@ function renderRow(
     ) {
 
         actions += `
-
             <a
-                href="article-edit.html?id=${encodeURIComponent(article.id)}"
+                class="action-link"
+                href="article-edit.html?id=${encodeURIComponent(
+                    article.id
+                )}"
             >
                 Edit
             </a>
-
         `;
     }
 
 
-    /* ---------------------------------------------
-       STATUS
-    --------------------------------------------- */
+    /*
+     * ADMIN
+     */
 
     if (isAdmin) {
 
-        if (
-            status !== "published"
-        ) {
+        if (!isPublished) {
 
             actions += `
-
                 <button
+                    class="action-button"
                     type="button"
                     data-action="publish"
                     data-id="${id}"
                 >
                     Publish
                 </button>
-
             `;
         }
 
 
-        if (
-            status === "published"
-        ) {
+        if (isPublished) {
 
             actions += `
-
                 <button
+                    class="action-button"
                     type="button"
                     data-action="archive"
                     data-id="${id}"
                 >
                     Arsipkan
                 </button>
-
             `;
 
-        } else if (
-            status !== "review"
-        ) {
+        } else if (status !== "review") {
 
             actions += `
-
                 <button
+                    class="action-button"
                     type="button"
                     data-action="review"
                     data-id="${id}"
                 >
                     Review
                 </button>
-
             `;
         }
+    }
 
-    } else {
 
-        /*
-         * EDITOR
-         */
+    /*
+     * EDITOR
+     */
 
-        if (
-            status === "draft"
-        ) {
+    else {
+
+        if (status === "draft") {
 
             actions += `
-
                 <button
+                    class="action-button"
                     type="button"
                     data-action="review"
                     data-id="${id}"
                 >
                     Kirim Review
                 </button>
-
             `;
         }
 
 
-        if (
-            status === "review"
-        ) {
+        if (status === "review") {
 
             actions += `
-
                 <button
+                    class="action-button"
                     type="button"
                     data-action="archive"
                     data-id="${id}"
                 >
                     Arsipkan
                 </button>
-
             `;
         }
-
     }
 
 
-    /* ---------------------------------------------
-       DELETE
-    --------------------------------------------- */
+    /*
+     * DELETE
+     */
 
-    if (
-        !isPublished
-    ) {
+    if (!isPublished) {
 
         actions += `
-
             <button
+                class="action-button danger"
                 type="button"
                 data-action="delete"
                 data-id="${id}"
             >
                 Hapus
             </button>
-
         `;
-
     }
 
 
     return `
-
         <tr>
 
             <td>
-                <strong>
+                <div class="article-title">
                     ${title}
-                </strong>
+                </div>
             </td>
 
             <td>
-                ${escapeHtml(
-                    statusLabel(status)
-                )}
+                <span
+                    class="status status-${statusClass(status)}"
+                >
+                    ${escapeHtml(
+                        statusLabel(status)
+                    )}
+                </span>
             </td>
 
             <td>
@@ -504,17 +378,18 @@ function renderRow(
             </td>
 
             <td>
-                ${actions}
+                <div class="actions">
+                    ${actions}
+                </div>
             </td>
 
         </tr>
-
     `;
 }
 
 
 /* =====================================================
-   ACTION
+   ACTIONS
 ===================================================== */
 
 async function handleAction(
@@ -522,138 +397,102 @@ async function handleAction(
     id
 ) {
 
+    if (!id) {
+        showMessage(
+            "ID artikel tidak ditemukan.",
+            "error"
+        );
+        return;
+    }
+
+
     try {
 
-        if (!id) {
+        if (action === "delete") {
 
-            throw new Error(
-                "ID artikel tidak ditemukan."
-            );
-        }
-
-
-        /* -----------------------------------------
-           DELETE
-        ----------------------------------------- */
-
-        if (
-            action === "delete"
-        ) {
-
-            const confirmed =
-                window.confirm(
-                    "Hapus artikel ini?"
-                );
-
-
-            if (!confirmed) {
+            if (
+                !window.confirm(
+                    "Yakin ingin menghapus artikel ini?"
+                )
+            ) {
                 return;
             }
 
 
-            await deleteArticle(
-                id
-            );
-
+            await CMS.deleteArticle(id);
 
             showMessage(
-                "Artikel berhasil dihapus."
+                "Artikel berhasil dihapus.",
+                "success"
             );
 
-
             await loadArticles();
-
 
             return;
         }
 
 
-        /* -----------------------------------------
-           PUBLISH
-        ----------------------------------------- */
-
-        if (
-            action === "publish"
-        ) {
+        if (action === "publish") {
 
             if (
                 profile?.role !== "admin"
             ) {
-
                 throw new Error(
                     "Hanya Admin yang dapat publish artikel."
                 );
             }
 
 
-            await changeStatus(
+            await CMS.changeStatus(
                 "articles",
                 id,
                 "published"
             );
 
-
             showMessage(
-                "Artikel berhasil dipublish."
+                "Artikel berhasil dipublish.",
+                "success"
             );
 
-
             await loadArticles();
-
 
             return;
         }
 
 
-        /* -----------------------------------------
-           REVIEW
-        ----------------------------------------- */
+        if (action === "review") {
 
-        if (
-            action === "review"
-        ) {
-
-            await changeStatus(
+            await CMS.changeStatus(
                 "articles",
                 id,
                 "review"
             );
 
-
             showMessage(
-                "Artikel dikirim ke status review."
+                "Artikel dikirim ke review.",
+                "success"
             );
 
-
             await loadArticles();
-
 
             return;
         }
 
 
-        /* -----------------------------------------
-           ARCHIVE
-        ----------------------------------------- */
+        if (action === "archive") {
 
-        if (
-            action === "archive"
-        ) {
-
-            await changeStatus(
+            await CMS.changeStatus(
                 "articles",
                 id,
                 "archived"
             );
 
-
             showMessage(
-                "Artikel berhasil diarsipkan."
+                "Artikel berhasil diarsipkan.",
+                "success"
             );
 
-
             await loadArticles();
-
 
             return;
         }
@@ -665,20 +504,17 @@ async function handleAction(
             error
         );
 
-
         showMessage(
-            error.message ||
-            "Operasi artikel gagal.",
+            error?.message ||
+            "Aksi gagal.",
             "error"
         );
-
     }
-
 }
 
 
 /* =====================================================
-   CLICK HANDLER
+   EVENTS
 ===================================================== */
 
 container?.addEventListener(
@@ -690,23 +526,16 @@ container?.addEventListener(
                 "[data-action]"
             );
 
-
-        if (!button) {
-            return;
-        }
-
+        if (!button) return;
 
         const action =
             button.dataset.action;
-
 
         const id =
             button.dataset.id;
 
 
-        if (
-            action === "create"
-        ) {
+        if (action === "create") {
 
             window.location.href =
                 "article-edit.html";
@@ -719,14 +548,9 @@ container?.addEventListener(
             action,
             id
         );
-
     }
 );
 
-
-/* =====================================================
-   NEW ARTICLE
-===================================================== */
 
 newButton?.addEventListener(
     "click",
@@ -739,17 +563,13 @@ newButton?.addEventListener(
 );
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
-
 logoutButton?.addEventListener(
     "click",
     async () => {
 
         try {
 
-            await logout();
+            await CMS.logout();
 
         } catch (error) {
 
@@ -758,8 +578,12 @@ logoutButton?.addEventListener(
                 error
             );
 
+            showMessage(
+                error?.message ||
+                "Gagal logout.",
+                "error"
+            );
         }
-
     }
 );
 
@@ -773,13 +597,11 @@ async function init() {
     try {
 
         profile =
-            await requireStaff();
-
+            await CMS.requireStaff();
 
         if (!profile) {
             return;
         }
-
 
         await loadArticles();
 
@@ -790,8 +612,12 @@ async function init() {
             error
         );
 
+        showMessage(
+            error?.message ||
+            "Gagal membuka halaman artikel.",
+            "error"
+        );
     }
-
 }
 
 
