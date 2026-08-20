@@ -487,10 +487,14 @@
     </section>
 
 </main>
-<script src="../js/supabase-client.js"></script>
-
-<script type="module">
-    import "./js/video-edit.js";
+<script>
+window.MANDALA_CONFIG = {
+    SUPABASE_URL: "https://roeckoabffhyctfkvbhw.supabase.co",
+    SUPABASE_PUBLISHABLE_KEY: "sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr"
+};
 </script>
+
+<script src="../js/supabase-client.js"></script>
+<script type="module" src="./js/video-edit.js"></script>
 </body>
 </html>
