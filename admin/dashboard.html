@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Dashboard Admin — Mandala Channel</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,38 +20,29 @@
         }
 
         :root {
-            --bg: #f5f6f8;
+            --bg: #f5f5f5;
             --card: #ffffff;
             --text: #171717;
             --muted: #737373;
-            --border: #e5e7eb;
+            --border: #e5e5e5;
             --dark: #151515;
-            --danger: #dc2626;
-            --success: #15803d;
-            --warning: #b45309;
+            --dark-soft: #242424;
+            --green: #15803d;
+            --orange: #b45309;
+            --red: #b91c1c;
         }
 
         body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
             font-family:
                 Inter,
-                ui-sans-serif,
                 system-ui,
                 -apple-system,
                 BlinkMacSystemFont,
                 "Segoe UI",
                 sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        button,
-        a {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
         }
 
         a {
@@ -53,54 +50,65 @@
             text-decoration: none;
         }
 
-        /* =========================
-           LAYOUT
-        ========================= */
+        button {
+            font: inherit;
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           APP
+        ===================================================== */
 
         .app {
-            display: flex;
             min-height: 100vh;
+            display: flex;
         }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
 
         .sidebar {
             width: 250px;
+            min-height: 100vh;
             flex-shrink: 0;
             background: var(--dark);
             color: white;
-            padding: 24px 16px;
+            padding: 24px 15px;
             display: flex;
             flex-direction: column;
         }
 
         .brand {
-            padding: 4px 12px 28px;
+            padding: 2px 12px 28px;
         }
 
         .brand-title {
             font-size: 20px;
             font-weight: 800;
-            letter-spacing: -0.4px;
+            letter-spacing: -.5px;
         }
 
         .brand-subtitle {
             margin-top: 4px;
-            font-size: 12px;
             color: #a3a3a3;
+            font-size: 11px;
+        }
+
+        .nav-title {
+            margin: 14px 12px 7px;
+            color: #737373;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .nav {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-        }
-
-        .nav-title {
-            margin: 14px 12px 7px;
-            font-size: 10px;
-            font-weight: 700;
-            color: #737373;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            gap: 4px;
         }
 
         .nav-link {
@@ -108,14 +116,14 @@
             align-items: center;
             gap: 11px;
             padding: 11px 12px;
-            border-radius: 9px;
+            border-radius: 8px;
             color: #d4d4d4;
-            font-size: 14px;
+            font-size: 13px;
             transition: .15s ease;
         }
 
         .nav-link:hover {
-            background: #262626;
+            background: var(--dark-soft);
             color: white;
         }
 
@@ -128,81 +136,81 @@
         .nav-icon {
             width: 20px;
             text-align: center;
-            font-size: 15px;
         }
 
         .sidebar-bottom {
             margin-top: auto;
-            padding-top: 20px;
-            border-top: 1px solid #292929;
+            padding-top: 18px;
+            border-top: 1px solid #303030;
         }
 
-        .user-mini {
-            padding: 10px 12px 14px;
+        .sidebar-user {
+            padding: 8px 12px 13px;
         }
 
-        .user-mini-name {
-            font-size: 13px;
+        .sidebar-user-name {
+            font-size: 12px;
             font-weight: 700;
-            color: white;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .user-mini-role {
+        .sidebar-user-role {
             margin-top: 3px;
-            font-size: 11px;
             color: #a3a3a3;
+            font-size: 10px;
+            text-transform: capitalize;
         }
 
-        .logout {
+        .logout-button {
             width: 100%;
-            border: 1px solid #333;
+            padding: 10px 12px;
+            border: 1px solid #363636;
+            border-radius: 8px;
             background: transparent;
             color: #d4d4d4;
-            padding: 10px 12px;
-            border-radius: 8px;
             text-align: left;
         }
 
-        .logout:hover {
-            background: #262626;
+        .logout-button:hover {
+            background: var(--dark-soft);
             color: white;
         }
 
-        /* =========================
+
+        /* =====================================================
            MAIN
-        ========================= */
+        ===================================================== */
 
         .main {
-            flex: 1;
             min-width: 0;
+            flex: 1;
         }
 
         .topbar {
             height: 72px;
+            padding: 0 32px;
             background: white;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 32px;
         }
 
-        .page-title {
+        .title {
             font-size: 20px;
             font-weight: 800;
             letter-spacing: -.4px;
         }
 
-        .page-subtitle {
+        .subtitle {
             margin-top: 3px;
-            font-size: 12px;
             color: var(--muted);
+            font-size: 11px;
         }
 
-        .top-user {
+        .user-box {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -212,54 +220,264 @@
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: #e5e7eb;
+            background: #e5e5e5;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
         }
 
-        .top-user-info {
-            line-height: 1.2;
-        }
-
-        .top-user-name {
-            font-size: 13px;
+        .user-name {
+            font-size: 12px;
             font-weight: 700;
         }
 
-        .top-user-role {
+        .user-role {
             margin-top: 3px;
-            font-size: 11px;
             color: var(--muted);
+            font-size: 10px;
             text-transform: capitalize;
         }
 
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
         .content {
-            padding: 32px;
-            max-width: 1500px;
+            max-width: 1450px;
+            padding: 30px 32px;
             margin: 0 auto;
         }
 
-        /* =========================
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .welcome p {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            margin-top: 9px;
+            font-size: 29px;
+            line-height: 1;
+            font-weight: 800;
+        }
+
+        .stat-note {
+            margin-top: 9px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           GRID
+        ===================================================== */
+
+        .grid {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(280px, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 17px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+
+        /* =====================================================
+           RECENT
+        ===================================================== */
+
+        .recent-item {
+            min-height: 64px;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .recent-item:last-child {
+            border-bottom: 0;
+        }
+
+        .recent-image {
+            width: 54px;
+            height: 42px;
+            flex-shrink: 0;
+            border-radius: 6px;
+            background: #eeeeee;
+            object-fit: cover;
+        }
+
+        .recent-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .recent-title {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recent-date {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .status {
+            padding: 4px 7px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .draft {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .review {
+            background: #fff7ed;
+            color: var(--orange);
+        }
+
+        .published {
+            background: #f0fdf4;
+            color: var(--green);
+        }
+
+        .archived {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .empty {
+            padding: 35px 20px;
+            color: var(--muted);
+            font-size: 11px;
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           QUICK ACTION
+        ===================================================== */
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+        }
+
+        .action {
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: .15s ease;
+        }
+
+        .action:hover {
+            background: #fafafa;
+            border-color: #a3a3a3;
+        }
+
+        .action-title {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .action-text {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+
+        /* =====================================================
            LOADING
-        ========================= */
+        ===================================================== */
 
         .loading {
             padding: 80px 20px;
-            text-align: center;
             color: var(--muted);
+            text-align: center;
+            font-size: 12px;
         }
 
-        .loading-spinner {
-            width: 34px;
-            height: 34px;
-            border: 3px solid #e5e7eb;
-            border-top-color: #111;
+        .spinner {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto 12px;
+            border: 3px solid #e5e5e5;
+            border-top-color: #171717;
             border-radius: 50%;
-            margin: 0 auto 14px;
-            animation: spin .8s linear infinite;
+            animation: spin .7s linear infinite;
         }
 
         @keyframes spin {
@@ -268,246 +486,45 @@
             }
         }
 
-        /* =========================
-           ERROR
-        ========================= */
-
-        .error-box {
+        .error {
             display: none;
-            padding: 18px;
+            margin-bottom: 20px;
+            padding: 14px 16px;
             background: #fef2f2;
             border: 1px solid #fecaca;
-            color: #991b1b;
-            border-radius: 10px;
-            margin-bottom: 24px;
-        }
-
-        /* =========================
-           STATS
-        ========================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-            gap: 18px;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 21px;
-        }
-
-        .stat-label {
-            color: var(--muted);
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .stat-number {
-            margin-top: 8px;
-            font-size: 30px;
-            line-height: 1;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .stat-note {
-            margin-top: 10px;
-            font-size: 11px;
-            color: var(--muted);
-        }
-
-        /* =========================
-           GRID
-        ========================= */
-
-        .grid {
-            display: grid;
-            grid-template-columns:
-                minmax(0, 2fr)
-                minmax(300px, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 19px 21px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .card-title {
-            font-size: 15px;
-            font-weight: 800;
-        }
-
-        .card-action {
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        /* =========================
-           QUICK ACTION
-        ========================= */
-
-        .actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .action {
-            display: block;
-            padding: 15px;
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            transition: .15s ease;
-        }
-
-        .action:hover {
-            border-color: #a3a3a3;
-            background: #fafafa;
-        }
-
-        .action-title {
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .action-description {
-            margin-top: 5px;
-            font-size: 11px;
-            color: var(--muted);
-            line-height: 1.4;
-        }
-
-        /* =========================
-           CONTENT LIST
-        ========================= */
-
-        .content-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content-item {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .content-item:last-child {
-            border-bottom: 0;
-        }
-
-        .content-thumb {
-            width: 52px;
-            height: 42px;
-            flex-shrink: 0;
-            border-radius: 7px;
-            background: #f1f1f1;
-            object-fit: cover;
-        }
-
-        .content-info {
-            min-width: 0;
-            flex: 1;
-        }
-
-        .content-name {
-            font-size: 13px;
-            font-weight: 700;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .content-meta {
-            margin-top: 4px;
-            color: var(--muted);
+            border-radius: 8px;
+            color: var(--red);
             font-size: 11px;
         }
 
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 7px;
-            border-radius: 5px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: capitalize;
-            white-space: nowrap;
-        }
 
-        .badge-draft {
-            background: #f3f4f6;
-            color: #4b5563;
-        }
-
-        .badge-review {
-            background: #fff7ed;
-            color: var(--warning);
-        }
-
-        .badge-published {
-            background: #f0fdf4;
-            color: var(--success);
-        }
-
-        .badge-archived {
-            background: #f3f4f6;
-            color: #6b7280;
-        }
-
-        .empty {
-            padding: 35px 20px;
-            text-align: center;
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        /* =========================
+        /* =====================================================
            RESPONSIVE
-        ========================= */
+        ===================================================== */
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1000px) {
+
             .stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
             }
 
             .grid {
                 grid-template-columns: 1fr;
             }
+
         }
 
-        @media (max-width: 760px) {
+
+        @media (max-width: 700px) {
+
             .sidebar {
-                width: 70px;
-                padding: 18px 9px;
+                width: 68px;
+                padding: 18px 8px;
             }
 
             .brand {
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 7px;
+                padding-right: 7px;
             }
 
             .brand-title {
@@ -521,35 +538,33 @@
 
             .brand-subtitle,
             .nav-title,
-            .nav-link span:not(.nav-icon),
-            .user-mini,
-            .logout {
+            .nav-link span:last-child,
+            .sidebar-user,
+            .logout-button {
                 display: none;
             }
 
             .nav-link {
                 justify-content: center;
-                padding: 12px 6px;
-            }
-
-            .nav-icon {
-                width: auto;
             }
 
             .topbar {
                 padding: 0 18px;
             }
 
-            .top-user-info {
+            .user-box > div:last-child {
                 display: none;
             }
 
             .content {
-                padding: 20px 15px;
+                padding: 22px 15px;
             }
+
         }
 
+
         @media (max-width: 500px) {
+
             .stats {
                 grid-template-columns: 1fr;
             }
@@ -558,101 +573,152 @@
                 grid-template-columns: 1fr;
             }
 
-            .page-title {
-                font-size: 17px;
-            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
 <div class="app">
 
-    <!-- SIDEBAR -->
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-title">Mandala Channel</div>
-            <div class="brand-subtitle">Content Management System</div>
+
+            <div class="brand-title">
+                Mandala Channel
+            </div>
+
+            <div class="brand-subtitle">
+                Content Management System
+            </div>
+
+        </div>
+
+
+        <div class="nav-title">
+            Utama
         </div>
 
         <nav class="nav">
 
-            <div class="nav-title">Utama</div>
-
-            <a class="nav-link active" href="dashboard.html">
+            <a
+                class="nav-link active"
+                href="dashboard.html"
+            >
                 <span class="nav-icon">⌂</span>
                 <span>Dashboard</span>
             </a>
 
-            <div class="nav-title">Konten</div>
+        </nav>
 
-            <a class="nav-link" href="articles.html">
+
+        <div class="nav-title">
+            Konten
+        </div>
+
+        <nav class="nav">
+
+            <a
+                class="nav-link"
+                href="articles.html"
+            >
                 <span class="nav-icon">▤</span>
                 <span>Artikel</span>
             </a>
 
-            <a class="nav-link" href="videos.html">
+            <a
+                class="nav-link"
+                href="videos.html"
+            >
                 <span class="nav-icon">▶</span>
                 <span>Video</span>
             </a>
 
-            <a class="nav-link" href="playlists.html">
+            <a
+                class="nav-link"
+                href="playlists.html"
+            >
                 <span class="nav-icon">☷</span>
                 <span>Playlist</span>
             </a>
 
-            <a class="nav-link" href="podcasts.html">
+            <a
+                class="nav-link"
+                href="podcasts.html"
+            >
                 <span class="nav-icon">◉</span>
                 <span>Podcast</span>
             </a>
 
-            <div class="nav-title">Pengelolaan</div>
+        </nav>
 
-            <a class="nav-link" href="categories.html">
+
+        <div class="nav-title">
+            Pengelolaan
+        </div>
+
+        <nav class="nav">
+
+            <a
+                class="nav-link"
+                href="categories.html"
+            >
                 <span class="nav-icon">#</span>
                 <span>Topics</span>
             </a>
 
-            <a class="nav-link" href="media.html">
+            <a
+                class="nav-link"
+                href="media.html"
+            >
                 <span class="nav-icon">▧</span>
                 <span>Media</span>
             </a>
 
             <a
-                class="nav-link admin-only"
-                href="users.html"
-                id="usersNav"
+                class="nav-link"
+                href="settings.html"
             >
-                <span class="nav-icon">♙</span>
-                <span>Users</span>
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
             </a>
 
         </nav>
 
+
         <div class="sidebar-bottom">
 
-            <div class="user-mini">
+            <div class="sidebar-user">
+
                 <div
-                    class="user-mini-name"
-                    id="sidebarUserName"
+                    class="sidebar-user-name"
+                    id="sidebar-user-name"
                 >
                     Memuat...
                 </div>
 
                 <div
-                    class="user-mini-role"
-                    id="sidebarUserRole"
+                    class="sidebar-user-role"
+                    id="sidebar-user-role"
                 >
                     -
                 </div>
+
             </div>
 
             <button
                 type="button"
-                class="logout"
-                id="logoutButton"
+                class="logout-button"
+                id="logout-button"
             >
                 Keluar
             </button>
@@ -662,42 +728,48 @@
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
     <main class="main">
 
         <header class="topbar">
 
             <div>
-                <div class="page-title">
+
+                <div class="title">
                     Dashboard
                 </div>
 
-                <div class="page-subtitle">
-                    Selamat datang kembali di Mandala Channel CMS
+                <div class="subtitle">
+                    Mandala Channel CMS
                 </div>
+
             </div>
 
-            <div class="top-user">
+
+            <div class="user-box">
 
                 <div
                     class="avatar"
-                    id="userAvatar"
+                    id="user-avatar"
                 >
                     ?
                 </div>
 
-                <div class="top-user-info">
+                <div>
 
                     <div
-                        class="top-user-name"
-                        id="topUserName"
+                        class="user-name"
+                        id="user-name"
                     >
                         Memuat...
                     </div>
 
                     <div
-                        class="top-user-role"
-                        id="topUserRole"
+                        class="user-role"
+                        id="user-role"
                     >
                         -
                     </div>
@@ -712,32 +784,55 @@
         <section class="content">
 
             <div
-                class="error-box"
-                id="errorBox"
+                class="error"
+                id="error-box"
             ></div>
+
 
             <div
                 class="loading"
                 id="loading"
             >
-                <div class="loading-spinner"></div>
+
+                <div class="spinner"></div>
+
                 Memuat dashboard...
+
             </div>
 
 
-            <div id="dashboardContent" style="display:none;">
+            <div
+                id="dashboard"
+                style="display:none;"
+            >
+
+
+                <div class="welcome">
+
+                    <h2 id="welcome-title">
+                        Selamat datang
+                    </h2>
+
+                    <p>
+                        Kelola seluruh konten Mandala Channel dari sini.
+                    </p>
+
+                </div>
+
 
                 <!-- STATS -->
+
                 <div class="stats">
 
-                    <div class="stat-card">
+                    <div class="stat">
+
                         <div class="stat-label">
                             Artikel
                         </div>
 
                         <div
-                            class="stat-number"
-                            id="articleCount"
+                            class="stat-value"
+                            id="article-count"
                         >
                             0
                         </div>
@@ -745,16 +840,19 @@
                         <div class="stat-note">
                             Total artikel
                         </div>
+
                     </div>
 
-                    <div class="stat-card">
+
+                    <div class="stat">
+
                         <div class="stat-label">
                             Video
                         </div>
 
                         <div
-                            class="stat-number"
-                            id="videoCount"
+                            class="stat-value"
+                            id="video-count"
                         >
                             0
                         </div>
@@ -762,16 +860,19 @@
                         <div class="stat-note">
                             Total video
                         </div>
+
                     </div>
 
-                    <div class="stat-card">
+
+                    <div class="stat">
+
                         <div class="stat-label">
                             Playlist
                         </div>
 
                         <div
-                            class="stat-number"
-                            id="playlistCount"
+                            class="stat-value"
+                            id="playlist-count"
                         >
                             0
                         </div>
@@ -779,16 +880,19 @@
                         <div class="stat-note">
                             Total playlist
                         </div>
+
                     </div>
 
-                    <div class="stat-card">
+
+                    <div class="stat">
+
                         <div class="stat-label">
                             Podcast
                         </div>
 
                         <div
-                            class="stat-number"
-                            id="podcastCount"
+                            class="stat-value"
+                            id="podcast-count"
                         >
                             0
                         </div>
@@ -796,46 +900,41 @@
                         <div class="stat-note">
                             Total podcast
                         </div>
+
                     </div>
 
                 </div>
 
 
-                <!-- LOWER GRID -->
                 <div class="grid">
 
+
                     <!-- RECENT -->
-                    <div class="card">
+
+                    <section class="card">
 
                         <div class="card-header">
 
                             <div class="card-title">
-                                Konten Terbaru
+                                Artikel Terbaru
                             </div>
-
-                            <span
-                                class="card-action"
-                                id="recentLabel"
-                            >
-                                -
-                            </span>
 
                         </div>
 
-                        <div
-                            class="content-list"
-                            id="recentContent"
-                        >
+                        <div id="recent-articles">
+
                             <div class="empty">
-                                Belum ada konten.
+                                Memuat...
                             </div>
+
                         </div>
 
-                    </div>
+                    </section>
 
 
                     <!-- QUICK ACTION -->
-                    <div class="card">
+
+                    <section class="card">
 
                         <div class="card-header">
 
@@ -849,65 +948,79 @@
 
                             <div class="actions">
 
+
                                 <a
                                     class="action"
-                                    href="article-editor.html"
+                                    href="article-edit.html"
                                 >
+
                                     <div class="action-title">
                                         + Artikel
                                     </div>
 
-                                    <div class="action-description">
+                                    <div class="action-text">
                                         Buat artikel baru.
                                     </div>
+
                                 </a>
+
 
                                 <a
                                     class="action"
-                                    href="video-editor.html"
+                                    href="video-edit.html"
                                 >
+
                                     <div class="action-title">
                                         + Video
                                     </div>
 
-                                    <div class="action-description">
-                                        Tambahkan video baru.
+                                    <div class="action-text">
+                                        Tambahkan video.
                                     </div>
+
                                 </a>
+
 
                                 <a
                                     class="action"
-                                    href="playlist-editor.html"
+                                    href="playlist-edit.html"
                                 >
+
                                     <div class="action-title">
                                         + Playlist
                                     </div>
 
-                                    <div class="action-description">
+                                    <div class="action-text">
                                         Buat playlist baru.
                                     </div>
+
                                 </a>
+
 
                                 <a
                                     class="action"
-                                    href="podcast-editor.html"
+                                    href="podcasts.html"
                                 >
+
                                     <div class="action-title">
-                                        + Podcast
+                                        Podcast
                                     </div>
 
-                                    <div class="action-description">
-                                        Tambahkan podcast.
+                                    <div class="action-text">
+                                        Kelola podcast.
                                     </div>
+
                                 </a>
+
 
                             </div>
 
                         </div>
 
-                    </div>
+                    </section>
 
                 </div>
+
 
             </div>
 
@@ -920,137 +1033,132 @@
 
 <script type="module">
 
-    /*
-     * =====================================================
-     * SUPABASE
-     * =====================================================
-     *
-     * Pastikan path ini sesuai struktur folder project.
-     */
-
     import {
         supabase
     } from "../js/supabase-client.js";
 
 
-    /*
-     * =====================================================
-     * ELEMENTS
-     * =====================================================
-     */
+    /* =====================================================
+       ELEMENT
+    ===================================================== */
 
     const loading =
-        document.getElementById("loading");
+        document.getElementById(
+            "loading"
+        );
 
-    const dashboardContent =
-        document.getElementById("dashboardContent");
+    const dashboard =
+        document.getElementById(
+            "dashboard"
+        );
 
     const errorBox =
-        document.getElementById("errorBox");
+        document.getElementById(
+            "error-box"
+        );
 
-    const articleCount =
-        document.getElementById("articleCount");
+    const userName =
+        document.getElementById(
+            "user-name"
+        );
 
-    const videoCount =
-        document.getElementById("videoCount");
-
-    const playlistCount =
-        document.getElementById("playlistCount");
-
-    const podcastCount =
-        document.getElementById("podcastCount");
-
-    const recentContent =
-        document.getElementById("recentContent");
-
-    const topUserName =
-        document.getElementById("topUserName");
-
-    const topUserRole =
-        document.getElementById("topUserRole");
+    const userRole =
+        document.getElementById(
+            "user-role"
+        );
 
     const sidebarUserName =
-        document.getElementById("sidebarUserName");
+        document.getElementById(
+            "sidebar-user-name"
+        );
 
     const sidebarUserRole =
-        document.getElementById("sidebarUserRole");
+        document.getElementById(
+            "sidebar-user-role"
+        );
 
     const userAvatar =
-        document.getElementById("userAvatar");
+        document.getElementById(
+            "user-avatar"
+        );
+
+    const welcomeTitle =
+        document.getElementById(
+            "welcome-title"
+        );
+
+    const recentArticles =
+        document.getElementById(
+            "recent-articles"
+        );
 
     const logoutButton =
-        document.getElementById("logoutButton");
-
-    const usersNav =
-        document.getElementById("usersNav");
-
-
-    /*
-     * =====================================================
-     * HELPERS
-     * =====================================================
-     */
-
-    function showError(message) {
-
-        errorBox.textContent =
-            message ||
-            "Terjadi kesalahan.";
-
-        errorBox.style.display =
-            "block";
-    }
+        document.getElementById(
+            "logout-button"
+        );
 
 
-    function hideLoading() {
+    /* =====================================================
+       HELPERS
+    ===================================================== */
 
-        loading.style.display =
-            "none";
+    function escapeHtml(value) {
 
-        dashboardContent.style.display =
-            "block";
+        return String(
+            value ?? ""
+        )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
     }
 
 
     function initials(name) {
 
-        const value =
-            String(name || "")
-                .trim();
-
-        if (!value) {
-            return "?";
-        }
-
         const parts =
-            value
+            String(name || "")
+                .trim()
                 .split(/\s+/)
                 .slice(0, 2);
 
+        if (!parts.length) {
+            return "?";
+        }
+
         return parts
-            .map(item =>
-                item.charAt(0)
-                    .toUpperCase()
+            .map(
+                part =>
+                    part
+                        .charAt(0)
+                        .toUpperCase()
             )
             .join("");
-    }
 
-
-    function escapeHtml(value) {
-
-        return String(value || "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
     }
 
 
     function formatDate(value) {
 
         if (!value) {
-            return "";
+            return "-";
         }
 
         const date =
@@ -1061,7 +1169,7 @@
                 date.getTime()
             )
         ) {
-            return "";
+            return "-";
         }
 
         return date.toLocaleDateString(
@@ -1072,58 +1180,46 @@
                 year: "numeric"
             }
         );
+
     }
 
 
     function statusClass(status) {
 
         const value =
-            String(status || "")
-                .toLowerCase();
+            String(
+                status || "draft"
+            ).toLowerCase();
 
-        if (value === "published") {
-            return "badge-published";
+        if (
+            [
+                "published",
+                "review",
+                "archived"
+            ].includes(value)
+        ) {
+            return value;
         }
 
-        if (value === "review") {
-            return "badge-review";
-        }
-
-        if (value === "archived") {
-            return "badge-archived";
-        }
-
-        return "badge-draft";
+        return "draft";
     }
 
 
-    /*
-     * =====================================================
-     * AUTH
-     * =====================================================
-     */
+    function showError(message) {
 
-    async function getCurrentUser() {
+        errorBox.textContent =
+            message ||
+            "Terjadi kesalahan.";
 
-        const {
-            data,
-            error
-        } =
-            await supabase.auth.getUser();
+        errorBox.style.display =
+            "block";
 
-        if (error) {
-            throw error;
-        }
-
-        return data?.user || null;
     }
 
 
-    /*
-     * =====================================================
-     * PROFILE
-     * =====================================================
-     */
+    /* =====================================================
+       PROFILE
+    ===================================================== */
 
     async function getProfile(userId) {
 
@@ -1134,9 +1230,17 @@
             await supabase
                 .from("profiles")
                 .select(
-                    "id, full_name, role, avatar_url"
+                    `
+                    id,
+                    full_name,
+                    role,
+                    avatar_url
+                    `
                 )
-                .eq("id", userId)
+                .eq(
+                    "id",
+                    userId
+                )
                 .maybeSingle();
 
         if (error) {
@@ -1144,14 +1248,13 @@
         }
 
         return data || null;
+
     }
 
 
-    /*
-     * =====================================================
-     * COUNT
-     * =====================================================
-     */
+    /* =====================================================
+       COUNT
+    ===================================================== */
 
     async function getCount(table) {
 
@@ -1170,8 +1273,9 @@
                 );
 
         if (error) {
+
             console.warn(
-                `Gagal mengambil count ${table}:`,
+                `Count ${table}:`,
                 error
             );
 
@@ -1179,14 +1283,13 @@
         }
 
         return count || 0;
+
     }
 
 
-    /*
-     * =====================================================
-     * RECENT ARTICLES
-     * =====================================================
-     */
+    /* =====================================================
+       RECENT ARTICLES
+    ===================================================== */
 
     async function getRecentArticles() {
 
@@ -1214,30 +1317,25 @@
                 .limit(5);
 
         if (error) {
-
-            console.warn(
-                "Gagal mengambil artikel:",
-                error
-            );
-
-            return [];
+            throw error;
         }
 
         return data || [];
+
     }
 
 
-    /*
-     * =====================================================
-     * RENDER RECENT
-     * =====================================================
-     */
+    /* =====================================================
+       RENDER ARTICLES
+    ===================================================== */
 
-    function renderRecent(items) {
+    function renderArticles(
+        articles
+    ) {
 
-        if (!items.length) {
+        if (!articles.length) {
 
-            recentContent.innerHTML = `
+            recentArticles.innerHTML = `
                 <div class="empty">
                     Belum ada artikel.
                 </div>
@@ -1246,66 +1344,107 @@
             return;
         }
 
-        recentContent.innerHTML =
-            items.map(item => {
 
-                const image =
-                    item.cover_image_url
-                        ? `
-                            <img
-                                class="content-thumb"
-                                src="${escapeHtml(item.cover_image_url)}"
-                                alt=""
+        recentArticles.innerHTML =
+            articles
+                .map(
+                    article => {
+
+                        const title =
+                            escapeHtml(
+                                article.title ||
+                                "Tanpa judul"
+                            );
+
+                        const status =
+                            String(
+                                article.status ||
+                                "draft"
+                            ).toLowerCase();
+
+                        const image =
+                            article.cover_image_url
+                                ? `
+                                    <img
+                                        class="recent-image"
+                                        src="${escapeHtml(
+                                            article.cover_image_url
+                                        )}"
+                                        alt=""
+                                    >
+                                `
+                                : `
+                                    <div class="recent-image"></div>
+                                `;
+
+
+                        return `
+                            <a
+                                class="recent-item"
+                                href="article-edit.html?id=${encodeURIComponent(
+                                    article.id
+                                )}"
                             >
-                        `
-                        : `
-                            <div class="content-thumb"></div>
+
+                                ${image}
+
+                                <div class="recent-info">
+
+                                    <div class="recent-title">
+                                        ${title}
+                                    </div>
+
+                                    <div class="recent-date">
+                                        ${formatDate(
+                                            article.created_at
+                                        )}
+                                    </div>
+
+                                </div>
+
+                                <span
+                                    class="status ${statusClass(
+                                        status
+                                    )}"
+                                >
+                                    ${escapeHtml(
+                                        status
+                                    )}
+                                </span>
+
+                            </a>
                         `;
 
-                return `
-                    <div class="content-item">
+                    }
+                )
+                .join("");
 
-                        ${image}
-
-                        <div class="content-info">
-
-                            <div class="content-name">
-                                ${escapeHtml(item.title)}
-                            </div>
-
-                            <div class="content-meta">
-                                ${formatDate(item.created_at)}
-                            </div>
-
-                        </div>
-
-                        <span class="badge ${statusClass(item.status)}">
-                            ${escapeHtml(item.status || "draft")}
-                        </span>
-
-                    </div>
-                `;
-
-            }).join("");
     }
 
 
-    /*
-     * =====================================================
-     * LOAD DASHBOARD
-     * =====================================================
-     */
+    /* =====================================================
+       INIT
+    ===================================================== */
 
-    async function loadDashboard() {
+    async function init() {
 
         try {
 
-            const user =
-                await getCurrentUser();
+            const {
+                data,
+                error
+            } =
+                await supabase.auth.getUser();
 
-            /*
-             * BELUM LOGIN
-             */
+
+            if (error) {
+                throw error;
+            }
+
+
+            const user =
+                data?.user;
+
 
             if (!user) {
 
@@ -1316,33 +1455,28 @@
             }
 
 
-            /*
-             * PROFILE
-             */
-
             const profile =
-                await getProfile(user.id);
+                await getProfile(
+                    user.id
+                );
 
 
-            /*
-             * Jika profile belum ada,
-             * jangan crash.
-             */
+            if (!profile) {
 
-            const name =
-                profile?.full_name ||
-                user.user_metadata?.full_name ||
-                user.email ||
-                "Admin";
+                showError(
+                    "Profil pengguna tidak ditemukan."
+                );
+
+                loading.style.display =
+                    "none";
+
+                return;
+            }
+
 
             const role =
-                profile?.role ||
-                "user";
+                profile.role;
 
-
-            /*
-             * Role selain admin/editor
-             */
 
             if (
                 role !== "admin" &&
@@ -1356,18 +1490,20 @@
             }
 
 
-            /*
-             * USER UI
-             */
+            const name =
+                profile.full_name ||
+                user.email ||
+                "Pengguna";
 
-            topUserName.textContent =
+
+            userName.textContent =
                 name;
+
+            userRole.textContent =
+                role;
 
             sidebarUserName.textContent =
                 name;
-
-            topUserRole.textContent =
-                role;
 
             sidebarUserRole.textContent =
                 role;
@@ -1375,27 +1511,19 @@
             userAvatar.textContent =
                 initials(name);
 
-
-            /*
-             * USER MANAGEMENT
-             * hanya admin
-             */
-
-            if (role !== "admin") {
-                usersNav.style.display =
-                    "none";
-            }
+            welcomeTitle.textContent =
+                `Selamat datang, ${name}`;
 
 
             /*
-             * LOAD DATA
+             * LOAD SEMUA DATA
              */
 
             const [
-                articles,
-                videos,
-                playlists,
-                podcasts,
+                articlesCount,
+                videosCount,
+                playlistsCount,
+                podcastsCount,
                 recent
             ] =
                 await Promise.all([
@@ -1407,23 +1535,41 @@
                 ]);
 
 
-            articleCount.textContent =
-                articles;
-
-            videoCount.textContent =
-                videos;
-
-            playlistCount.textContent =
-                playlists;
-
-            podcastCount.textContent =
-                podcasts;
+            document.getElementById(
+                "article-count"
+            ).textContent =
+                articlesCount;
 
 
-            renderRecent(recent);
+            document.getElementById(
+                "video-count"
+            ).textContent =
+                videosCount;
 
 
-            hideLoading();
+            document.getElementById(
+                "playlist-count"
+            ).textContent =
+                playlistsCount;
+
+
+            document.getElementById(
+                "podcast-count"
+            ).textContent =
+                podcastsCount;
+
+
+            renderArticles(
+                recent
+            );
+
+
+            loading.style.display =
+                "none";
+
+            dashboard.style.display =
+                "block";
+
 
         } catch (error) {
 
@@ -1445,35 +1591,37 @@
     }
 
 
-    /*
-     * =====================================================
-     * LOGOUT
-     * =====================================================
-     */
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
 
     logoutButton.addEventListener(
         "click",
         async () => {
 
-            logoutButton.disabled =
-                true;
-
-            logoutButton.textContent =
-                "Keluar...";
-
             try {
+
+                logoutButton.disabled =
+                    true;
+
+                logoutButton.textContent =
+                    "Keluar...";
+
 
                 const {
                     error
                 } =
                     await supabase.auth.signOut();
 
+
                 if (error) {
                     throw error;
                 }
 
+
                 window.location.href =
                     "index.html";
+
 
             } catch (error) {
 
@@ -1490,7 +1638,7 @@
 
                 showError(
                     error?.message ||
-                    "Gagal keluar."
+                    "Gagal logout."
                 );
 
             }
@@ -1499,13 +1647,11 @@
     );
 
 
-    /*
-     * =====================================================
-     * START
-     * =====================================================
-     */
+    /* =====================================================
+       START
+    ===================================================== */
 
-    loadDashboard();
+    init();
 
 </script>
 
