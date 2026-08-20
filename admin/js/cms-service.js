@@ -3,7 +3,16 @@
    CMS SERVICE
 ===================================================== */
 
-import { supabase } from "../../js/supabase-client.js";
+const API = window.MandalaSupabase;
+
+if (!API) {
+    throw new Error(
+        "MandalaSupabase belum dimuat."
+    );
+}
+
+const supabase =
+    await API.getClient();
 
 
 /* =====================================================
