@@ -3,344 +3,516 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Video — Mandala Channel CMS</title>
+<title>Video Baru — Mandala Channel</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f4f2;
+    color: #202020;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+}
+
+.page {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.back {
+    color: #555;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.back:hover {
+    color: #111;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: 5px;
+    color: #888;
+    font-size: 12px;
+}
+
+.logout {
+    border: 1px solid #ddd;
+    background: white;
+    color: #555;
+    border-radius: 6px;
+    padding: 9px 13px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 28px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    border: 1px solid #d7d7d7;
+    border-radius: 7px;
+    background: white;
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    color: #222;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #888;
+}
+
+textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.help {
+    color: #999;
+    font-size: 10px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 40px;
+}
+
+.checkbox input {
+    width: auto;
+}
+
+.checkbox label {
+    margin: 0;
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #eee;
+}
+
+.actions button {
+    border: 0;
+    border-radius: 7px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    background: #202020;
+    color: white;
+}
+
+.actions button.secondary {
+    background: #666;
+}
+
+.actions button.review {
+    background: #b36b00;
+}
+
+.actions button.publish {
+    background: #22733b;
+}
+
+.actions button.archive {
+    background: #777;
+}
+
+.form-message {
+    margin-top: 15px;
+    font-size: 11px;
+}
+
+.form-message.error {
+    color: #b42318;
+}
+
+.form-message.success {
+    color: #207a3b;
+}
+
+.form-message.warning {
+    color: #a15c00;
+}
+
+@media (max-width: 700px) {
+
+    .page {
+        padding: 18px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+}
+
+</style>
 
 </head>
 
 
 <body>
 
-    <header>
+<main class="page">
+
+
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <a
+            class="back"
+            href="videos.html"
+        >
+            ← Kembali ke Video
+        </a>
 
         <div>
 
-            <h1 id="page-title">
+            <h1>
                 Video Baru
             </h1>
 
-            <p>
+            <div class="subtitle">
                 Kelola konten video
-            </p>
+            </div>
 
         </div>
 
+    </div>
 
-        <nav>
 
-            <a href="videos.html">
-                ← Kembali ke Video
-            </a>
+    <button
+        id="logout"
+        class="logout"
+        type="button"
+    >
+        Keluar
+    </button>
 
-            <button
-                id="logout-button"
-                type="button"
-            >
-                Keluar
-            </button>
+</div>
 
-        </nav>
 
-    </header>
+<section class="card">
 
+<form id="video-form">
 
-    <main>
+<div class="grid">
 
-        <form id="video-form">
 
-            <input
-                type="hidden"
-                id="video-id"
-            >
+<div class="field full">
 
+    <label for="judul_video">
+        Judul Video
+    </label>
 
-            <!-- =====================================
-                 TITLE
-            ====================================== -->
+    <input
+        id="judul_video"
+        type="text"
+        autocomplete="off"
+        required
+    >
 
-            <section>
+</div>
 
-                <label for="title">
-                    Judul Video
-                </label>
 
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    required
-                    autocomplete="off"
-                >
+<div class="field">
 
-            </section>
+    <label for="slug">
+        Slug
+    </label>
 
+    <input
+        id="slug"
+        type="text"
+        autocomplete="off"
+        required
+    >
 
-            <!-- =====================================
-                 SLUG
-            ====================================== -->
+</div>
 
-            <section>
 
-                <label for="slug">
-                    Slug
-                </label>
+<div class="field">
 
-                <input
-                    type="text"
-                    id="slug"
-                    name="slug"
-                    autocomplete="off"
-                >
+    <label for="kategori">
+        Kategori
+    </label>
 
-            </section>
+    <select id="kategori">
 
+        <option value="">
+            -- Pilih Kategori --
+        </option>
 
-            <!-- =====================================
-                 YOUTUBE URL
-            ====================================== -->
+    </select>
 
-            <section>
+</div>
 
-                <label for="youtube_url">
-                    YouTube URL
-                </label>
 
-                <input
-                    type="url"
-                    id="youtube_url"
-                    name="youtube_url"
-                    required
-                    placeholder="https://www.youtube.com/watch?v=..."
-                >
+<div class="field full">
 
-                <small>
-                    Masukkan URL video YouTube.
-                </small>
+    <label for="youtube_url">
+        YouTube URL
+    </label>
 
-            </section>
+    <input
+        id="youtube_url"
+        type="url"
+        placeholder="https://www.youtube.com/watch?v=..."
+    >
 
+    <div class="help">
+        Masukkan URL video YouTube. ID video akan terisi otomatis.
+    </div>
 
-            <!-- =====================================
-                 VIDEO ID
-            ====================================== -->
+</div>
 
-            <section>
 
-                <label for="youtube_video_id">
-                    YouTube Video ID
-                </label>
+<div class="field">
 
-                <input
-                    type="text"
-                    id="youtube_video_id"
-                    name="youtube_video_id"
-                    required
-                    autocomplete="off"
-                >
+    <label for="youtube_video_id">
+        YouTube Video ID
+    </label>
 
-            </section>
+    <input
+        id="youtube_video_id"
+        type="text"
+        readonly
+    >
 
+</div>
 
-            <!-- =====================================
-                 THUMBNAIL
-            ====================================== -->
 
-            <section>
+<div class="field">
 
-                <label for="thumbnail_url">
-                    Thumbnail URL
-                </label>
+    <label for="thumbnail_url">
+        Thumbnail URL
+    </label>
 
-                <input
-                    type="url"
-                    id="thumbnail_url"
-                    name="thumbnail_url"
-                    placeholder="https://..."
-                >
+    <input
+        id="thumbnail_url"
+        type="url"
+        placeholder="https://..."
+    >
 
-                <div id="thumbnail-preview"></div>
+</div>
 
-            </section>
 
+<div class="field full">
 
-            <!-- =====================================
-                 DESCRIPTION
-            ====================================== -->
+    <label for="deskripsi">
+        Deskripsi
+    </label>
 
-            <section>
+    <textarea
+        id="deskripsi"
+        placeholder="Tulis deskripsi video..."
+    ></textarea>
 
-                <label for="description">
-                    Deskripsi
-                </label>
+</div>
 
-                <textarea
-                    id="description"
-                    name="description"
-                    rows="8"
-                ></textarea>
 
-            </section>
+<div class="field">
 
+    <label>
+        Status
+    </label>
 
-            <!-- =====================================
-                 CATEGORY
-            ====================================== -->
+    <select id="status">
 
-            <section>
+        <option value="draft">
+            Draft
+        </option>
 
-                <label for="category_id">
-                    Kategori
-                </label>
+        <option value="review">
+            Review
+        </option>
 
-                <select
-                    id="category_id"
-                    name="category_id"
-                >
+        <option value="published">
+            Published
+        </option>
 
-                    <option value="">
-                        -- Pilih Kategori --
-                    </option>
+        <option value="archived">
+            Archived
+        </option>
 
-                </select>
+    </select>
 
-            </section>
+</div>
 
 
-            <!-- =====================================
-                 FEATURED
-            ====================================== -->
+<div class="field">
 
-            <section>
+    <label>
+        Unggulan
+    </label>
 
-                <label>
+    <div class="checkbox">
 
-                    <input
-                        type="checkbox"
-                        id="featured"
-                    >
+        <input
+            id="is_featured"
+            type="checkbox"
+        >
 
-                    Jadikan video unggulan
+        <label for="is_featured">
+            Jadikan video unggulan
+        </label>
 
-                </label>
+    </div>
 
-            </section>
+</div>
 
 
-            <!-- =====================================
-                 STATUS
-            ====================================== -->
+</div>
 
-            <section>
 
-                <label for="status">
-                    Status
-                </label>
+<div class="actions">
 
-                <select
-                    id="status"
-                    name="status"
-                >
+    <button
+        id="simpan"
+        type="submit"
+    >
+        Simpan
+    </button>
 
-                    <option value="draft">
-                        Draft
-                    </option>
+    <button
+        id="simpan_draft"
+        type="button"
+        class="secondary"
+    >
+        Simpan Draft
+    </button>
 
-                    <option value="review">
-                        Review
-                    </option>
+    <button
+        id="kirim_review"
+        type="button"
+        class="review"
+    >
+        Kirim Review
+    </button>
 
-                    <option value="archived">
-                        Archived
-                    </option>
+    <button
+        id="publish"
+        type="button"
+        class="publish"
+    >
+        Publish
+    </button>
 
-                    <option
-                        value="published"
-                        id="published-option"
-                    >
-                        Published
-                    </option>
+    <button
+        id="arsipkan"
+        type="button"
+        class="archive"
+    >
+        Arsipkan
+    </button>
 
-                </select>
+</div>
 
 
-                <small id="status-help"></small>
+<div
+    id="form-message"
+    class="form-message"
+></div>
 
-            </section>
 
+</form>
 
-            <!-- =====================================
-                 MESSAGE
-            ====================================== -->
+</section>
 
-            <section>
+</main>
 
-                <div id="form-message"></div>
 
-            </section>
-
-
-            <!-- =====================================
-                 ACTIONS
-            ====================================== -->
-
-            <section>
-
-                <button
-                    type="submit"
-                    id="save-button"
-                >
-                    Simpan
-                </button>
-
-
-                <button
-                    type="button"
-                    id="save-draft-button"
-                >
-                    Simpan Draft
-                </button>
-
-
-                <button
-                    type="button"
-                    id="submit-review-button"
-                >
-                    Kirim Review
-                </button>
-
-
-                <button
-                    type="button"
-                    id="publish-button"
-                >
-                    Publish
-                </button>
-
-
-                <button
-                    type="button"
-                    id="archive-button"
-                >
-                    Arsipkan
-                </button>
-
-            </section>
-
-        </form>
-
-    </main>
-
-
-    <script
-        type="module"
-        src="./js/video-edit.js"
-    ></script>
+<script
+    type="module"
+    src="./js/video-edit.js"
+></script>
 
 </body>
 
