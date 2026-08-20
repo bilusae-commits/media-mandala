@@ -1,15 +1,17 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Dashboard Admin — Mandala Channel</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -22,7 +24,11 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
             background: #f5f7fa;
             color: #172033;
         }
@@ -36,56 +42,86 @@
             font-family: inherit;
         }
 
+
+        /* =========================================
+           LAYOUT
+        ========================================= */
+
         .admin-layout {
             min-height: 100vh;
         }
 
-        /* SIDEBAR */
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
 
         .sidebar {
             position: fixed;
-            left: 0;
             top: 0;
+            left: 0;
             bottom: 0;
+
             width: 250px;
+
             background: #0b1d35;
             color: white;
+
             display: flex;
             flex-direction: column;
+
             z-index: 100;
         }
 
         .sidebar-logo {
             padding: 28px 24px;
-            border-bottom: 1px solid rgba(255,255,255,.08);
+
+            border-bottom:
+                1px solid rgba(255,255,255,.08);
         }
 
         .sidebar-logo h2 {
             margin: 0;
+
             font-size: 20px;
-            line-height: 1.3;
         }
 
         .sidebar-logo span {
             display: block;
+
             margin-top: 6px;
+
             color: #aebbd0;
+
             font-size: 12px;
         }
 
         .sidebar-menu {
             flex: 1;
+
             padding: 22px 14px;
+
             overflow-y: auto;
         }
 
         .menu-label {
-            padding: 0 12px;
-            margin: 0 0 10px;
+            margin:
+                0
+                0
+                10px;
+
+            padding:
+                0
+                12px;
+
             color: #7f90a9;
+
             font-size: 10px;
+
             font-weight: 700;
+
             text-transform: uppercase;
+
             letter-spacing: 1.2px;
         }
 
@@ -96,94 +132,142 @@
         .menu-item {
             display: flex;
             align-items: center;
+
             gap: 12px;
+
+            width: 100%;
+
             padding: 12px 13px;
+
             margin-bottom: 5px;
+
             border-radius: 8px;
+
             color: #c6d0df;
+
             font-size: 14px;
-            transition: .2s ease;
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                color .2s ease;
         }
 
         .menu-item:hover {
-            background: rgba(255,255,255,.07);
+            background:
+                rgba(255,255,255,.08);
+
             color: white;
         }
 
         .menu-item.active {
             background: white;
             color: #0b1d35;
-            font-weight: 600;
+
+            font-weight: 700;
         }
 
         .menu-icon {
             width: 20px;
+
             text-align: center;
+
             font-size: 15px;
         }
 
         .sidebar-bottom {
             padding: 16px;
-            border-top: 1px solid rgba(255,255,255,.08);
+
+            border-top:
+                1px solid rgba(255,255,255,.08);
         }
 
         .logout-btn {
             width: 100%;
+
             border: 0;
-            background: rgba(255,255,255,.06);
+
+            background:
+                rgba(255,255,255,.07);
+
             color: #c6d0df;
-            padding: 11px 13px;
+
+            padding: 12px 13px;
+
             border-radius: 8px;
+
             text-align: left;
+
             cursor: pointer;
+
             font-size: 14px;
         }
 
         .logout-btn:hover {
-            background: rgba(255,255,255,.12);
+            background:
+                rgba(255,255,255,.14);
+
             color: white;
         }
 
-        /* MAIN */
+        .logout-btn:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
 
         .main-content {
-            margin-left: 250px;
             min-height: 100vh;
+
+            margin-left: 250px;
         }
 
         .topbar {
             height: 72px;
+
+            padding: 0 34px;
+
             background: white;
-            border-bottom: 1px solid #e7eaf0;
+
+            border-bottom:
+                1px solid #e7eaf0;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 34px;
-            position: sticky;
-            top: 0;
-            z-index: 50;
         }
 
         .topbar-title {
             color: #687386;
+
             font-size: 14px;
         }
 
         .user-area {
             display: flex;
             align-items: center;
+
             gap: 12px;
         }
 
         .avatar {
             width: 38px;
             height: 38px;
+
             border-radius: 50%;
+
             background: #0b1d35;
             color: white;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-size: 14px;
             font-weight: 700;
         }
@@ -194,139 +278,238 @@
 
         .user-name {
             color: #172033;
+
             font-size: 13px;
+
             font-weight: 700;
         }
 
         .user-role {
             margin-top: 3px;
+
             color: #7b8798;
+
             font-size: 11px;
-            text-transform: capitalize;
         }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
 
         .content {
             width: 100%;
+
             max-width: 1500px;
+
             padding: 36px;
         }
 
         .error-box {
             display: none;
+
             margin-bottom: 24px;
+
             padding: 16px 18px;
+
             background: #fff1f1;
-            border: 1px solid #f0caca;
+
+            border:
+                1px solid #f0caca;
+
             border-radius: 10px;
+
             color: #a52b2b;
+
             font-size: 13px;
+
             line-height: 1.6;
         }
 
         .welcome {
-            background: white;
-            border: 1px solid #e8ebf0;
-            border-radius: 14px;
-            padding: 30px 32px;
             margin-bottom: 28px;
+
+            padding: 30px 32px;
+
+            background: white;
+
+            border:
+                1px solid #e8ebf0;
+
+            border-radius: 14px;
         }
 
         .welcome small {
             display: block;
+
             margin-bottom: 8px;
+
             color: #7a8798;
+
             font-size: 13px;
         }
 
         .welcome h1 {
             margin: 0;
+
             color: #10213b;
+
             font-size: 30px;
-            line-height: 1.25;
         }
 
         .welcome p {
             margin: 10px 0 0;
+
             color: #6c7788;
+
             font-size: 14px;
+
             line-height: 1.7;
         }
 
+
+        /* =========================================
+           STATISTICS
+        ========================================= */
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
             gap: 18px;
+
             margin-bottom: 30px;
         }
 
         .stat-card {
-            background: white;
-            border: 1px solid #e8ebf0;
-            border-radius: 12px;
             padding: 23px;
+
+            background: white;
+
+            border:
+                1px solid #e8ebf0;
+
+            border-radius: 12px;
         }
 
         .stat-label {
             margin-bottom: 12px;
+
             color: #7a8798;
+
             font-size: 12px;
         }
 
         .stat-number {
             color: #10213b;
+
             font-size: 27px;
+
             font-weight: 700;
         }
 
+
+        /* =========================================
+           QUICK ACCESS
+        ========================================= */
+
         .section-title {
-            margin: 0 0 15px;
+            margin:
+                0
+                0
+                15px;
+
             color: #172033;
+
             font-size: 17px;
         }
 
         .quick-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
             gap: 18px;
         }
 
         .quick-card {
-            background: white;
-            border: 1px solid #e8ebf0;
-            border-radius: 12px;
+            display: block;
+
+            min-height: 150px;
+
             padding: 23px;
-            transition: .2s ease;
+
+            background: white;
+
+            border:
+                1px solid #e8ebf0;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
         }
 
         .quick-card:hover {
+            transform:
+                translateY(-2px);
+
             border-color: #cdd4df;
-            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,.05);
         }
 
         .quick-card h3 {
-            margin: 0 0 8px;
+            margin:
+                0
+                0
+                8px;
+
             color: #172033;
+
             font-size: 15px;
         }
 
         .quick-card p {
             margin: 0;
+
             color: #7a8798;
+
             font-size: 13px;
+
             line-height: 1.6;
         }
 
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
         @media (max-width: 1000px) {
+
             .stats-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
             }
 
             .quick-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
             }
+
         }
 
+
         @media (max-width: 760px) {
+
             .sidebar {
                 width: 220px;
             }
@@ -342,34 +525,33 @@
             .topbar {
                 padding: 0 24px;
             }
+
         }
 
+
         @media (max-width: 600px) {
+
             .sidebar {
                 position: relative;
+
                 width: 100%;
                 height: auto;
+            }
+
+            .sidebar-menu {
+                display: none;
+            }
+
+            .sidebar-bottom {
+                display: none;
             }
 
             .main-content {
                 margin-left: 0;
             }
 
-            .sidebar-menu,
-            .sidebar-bottom {
-                display: none;
-            }
-
             .content {
                 padding: 20px;
-            }
-
-            .welcome {
-                padding: 24px;
-            }
-
-            .welcome h1 {
-                font-size: 25px;
             }
 
             .stats-grid,
@@ -378,24 +560,41 @@
             }
 
             .topbar {
-                min-height: 65px;
                 height: auto;
+
+                min-height: 65px;
+
                 padding: 14px 20px;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
 <div class="admin-layout">
 
+
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
 
         <div class="sidebar-logo">
-            <h2>Mandala Channel</h2>
-            <span>Administration Panel</span>
+
+            <h2>
+                Mandala Channel
+            </h2>
+
+            <span>
+                Administration Panel
+            </span>
+
         </div>
+
 
         <nav class="sidebar-menu">
 
@@ -403,61 +602,117 @@
                 Dashboard
             </div>
 
-            <a href="./index.html" class="menu-item active">
-                <span class="menu-icon">⌂</span>
-                <span>Dashboard</span>
+
+            <a
+                href="./index.html"
+                class="menu-item active"
+            >
+                <span class="menu-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
             </a>
+
 
             <div class="menu-label system">
                 Content
             </div>
 
-            <a href="./articles.html" class="menu-item">
-                <span class="menu-icon">▤</span>
-                <span>Artikel</span>
+
+            <a
+                href="./articles.html"
+                class="menu-item"
+            >
+                <span class="menu-icon">
+                    ▤
+                </span>
+
+                <span>
+                    Artikel
+                </span>
             </a>
 
-            <a href="./videos.html" class="menu-item">
-                <span class="menu-icon">▶</span>
-                <span>Video</span>
+
+            <a
+                href="./videos.html"
+                class="menu-item"
+            >
+                <span class="menu-icon">
+                    ▶
+                </span>
+
+                <span>
+                    Video
+                </span>
             </a>
 
-            <a href="./topics.html" class="menu-item">
-                <span class="menu-icon">◫</span>
-                <span>Topik</span>
+
+            <a
+                href="./topics.html"
+                class="menu-item"
+            >
+                <span class="menu-icon">
+                    ◫
+                </span>
+
+                <span>
+                    Topik
+                </span>
             </a>
+
 
             <div class="menu-label system">
                 System
             </div>
 
-            <a href="./profile.html" class="menu-item">
-                <span class="menu-icon">○</span>
-                <span>Profil</span>
+
+            <a
+                href="./profile.html"
+                class="menu-item"
+            >
+                <span class="menu-icon">
+                    ○
+                </span>
+
+                <span>
+                    Profil
+                </span>
             </a>
 
         </nav>
 
+
         <div class="sidebar-bottom">
+
             <button
                 type="button"
-                class="logout-btn"
                 id="logoutBtn"
+                class="logout-btn"
             >
                 Keluar
             </button>
+
         </div>
 
     </aside>
 
 
+    <!-- MAIN -->
+
     <main class="main-content">
+
+
+        <!-- TOPBAR -->
 
         <header class="topbar">
 
             <div class="topbar-title">
                 Dashboard
             </div>
+
 
             <div class="user-area">
 
@@ -468,14 +723,16 @@
                     A
                 </div>
 
+
                 <div class="user-info">
 
                     <div
                         class="user-name"
                         id="topUserName"
                     >
-                        Memuat...
+                        Admin
                     </div>
+
 
                     <div
                         class="user-role"
@@ -491,11 +748,14 @@
         </header>
 
 
+        <!-- CONTENT -->
+
         <section class="content">
 
+
             <div
-                class="error-box"
                 id="errorBox"
+                class="error-box"
             ></div>
 
 
@@ -505,9 +765,11 @@
                     Dashboard Admin
                 </small>
 
+
                 <h1 id="welcomeText">
-                    Memuat dashboard...
+                    Selamat datang
                 </h1>
+
 
                 <p>
                     Kelola konten Mandala Channel
@@ -519,7 +781,9 @@
 
             <div class="stats-grid">
 
+
                 <div class="stat-card">
+
                     <div class="stat-label">
                         Total Artikel
                     </div>
@@ -528,12 +792,14 @@
                         class="stat-number"
                         id="totalArticles"
                     >
-                        ...
+                        -
                     </div>
+
                 </div>
 
 
                 <div class="stat-card">
+
                     <div class="stat-label">
                         Total Video
                     </div>
@@ -542,12 +808,14 @@
                         class="stat-number"
                         id="totalVideos"
                     >
-                        ...
+                        -
                     </div>
+
                 </div>
 
 
                 <div class="stat-card">
+
                     <div class="stat-label">
                         Total Kategori
                     </div>
@@ -556,12 +824,14 @@
                         class="stat-number"
                         id="totalCategories"
                     >
-                        ...
+                        -
                     </div>
+
                 </div>
 
 
                 <div class="stat-card">
+
                     <div class="stat-label">
                         Status Akun
                     </div>
@@ -572,7 +842,9 @@
                     >
                         Aktif
                     </div>
+
                 </div>
+
 
             </div>
 
@@ -584,17 +856,22 @@
 
             <div class="quick-grid">
 
+
                 <a
                     href="./articles.html"
                     class="quick-card"
                 >
-                    <h3>Kelola Artikel</h3>
+
+                    <h3>
+                        Kelola Artikel
+                    </h3>
 
                     <p>
                         Tambah, edit, hapus,
                         dan kelola artikel
                         Mandala Channel.
                     </p>
+
                 </a>
 
 
@@ -602,13 +879,17 @@
                     href="./videos.html"
                     class="quick-card"
                 >
-                    <h3>Kelola Video</h3>
+
+                    <h3>
+                        Kelola Video
+                    </h3>
 
                     <p>
                         Kelola video dan konten
-                        YouTube yang ditampilkan
+                        yang ditampilkan
                         di website.
                     </p>
+
                 </a>
 
 
@@ -616,15 +897,21 @@
                     href="./topics.html"
                     class="quick-card"
                 >
-                    <h3>Kelola Topik</h3>
+
+                    <h3>
+                        Kelola Topik
+                    </h3>
 
                     <p>
                         Atur kategori dan topik
                         konten Mandala Channel.
                     </p>
+
                 </a>
 
+
             </div>
+
 
         </section>
 
@@ -635,142 +922,138 @@
 
 <script type="module">
 
-    import { supabase } from "../js/supabase-client.js";
+    /*
+    =========================================
+    SUPABASE
+    =========================================
+    */
 
+    import {
+        supabase
+    } from "../js/supabase-client.js";
+
+
+    /*
+    =========================================
+    ELEMENTS
+    =========================================
+    */
 
     const welcomeText =
-        document.getElementById("welcomeText");
+        document.getElementById(
+            "welcomeText"
+        );
 
     const topUserName =
-        document.getElementById("topUserName");
+        document.getElementById(
+            "topUserName"
+        );
 
     const topUserRole =
-        document.getElementById("topUserRole");
+        document.getElementById(
+            "topUserRole"
+        );
 
     const userAvatar =
-        document.getElementById("userAvatar");
+        document.getElementById(
+            "userAvatar"
+        );
 
     const totalArticles =
-        document.getElementById("totalArticles");
+        document.getElementById(
+            "totalArticles"
+        );
 
     const totalVideos =
-        document.getElementById("totalVideos");
+        document.getElementById(
+            "totalVideos"
+        );
 
     const totalCategories =
-        document.getElementById("totalCategories");
+        document.getElementById(
+            "totalCategories"
+        );
 
     const errorBox =
-        document.getElementById("errorBox");
+        document.getElementById(
+            "errorBox"
+        );
 
     const logoutBtn =
-        document.getElementById("logoutBtn");
+        document.getElementById(
+            "logoutBtn"
+        );
 
+
+    /*
+    =========================================
+    ERROR
+    =========================================
+    */
 
     function showError(message) {
 
-        errorBox.style.display = "block";
-        errorBox.textContent = message;
-
-    }
-
-
-    async function getCurrentUser() {
-
-        const {
-            data,
-            error
-        } = await supabase.auth.getUser();
-
-
-        if (error) {
-
-            console.error(
-                "Supabase getUser error:",
-                error
-            );
-
-            throw error;
-
+        if (!errorBox) {
+            return;
         }
 
+        errorBox.textContent =
+            message;
 
-        return data?.user || null;
+        errorBox.style.display =
+            "block";
 
     }
 
 
-    async function getCount(table) {
+    /*
+    =========================================
+    USER
+    =========================================
+    */
+
+    async function loadUser() {
 
         try {
 
             const {
-                count,
+                data,
                 error
-            } = await supabase
-                .from(table)
-                .select("*", {
-                    count: "exact",
-                    head: true
-                });
+            } =
+                await supabase.auth.getUser();
 
 
             if (error) {
 
                 console.warn(
-                    `Gagal mengambil jumlah ${table}:`,
+                    "Auth error:",
                     error
                 );
-
-                return "-";
-
-            }
-
-
-            return count ?? 0;
-
-        } catch (error) {
-
-            console.warn(
-                `Count ${table} gagal:`,
-                error
-            );
-
-            return "-";
-
-        }
-
-    }
-
-
-    async function loadDashboard() {
-
-        try {
-
-            /*
-             * 1. CEK LOGIN
-             */
-
-            const user =
-                await getCurrentUser();
-
-
-            if (!user) {
-
-                window.location.href =
-                    "../login.html";
 
                 return;
 
             }
 
 
+            const user =
+                data?.user;
+
+
             /*
-             * 2. DATA USER
-             *
-             * Ambil nama dari metadata
-             * terlebih dahulu supaya dashboard
-             * tidak bergantung pada tabel profile.
+             * Tidak redirect otomatis.
+             * Dashboard tetap bisa dirender
+             * walaupun auth sedang bermasalah.
              */
+
+            if (!user) {
+
+                welcomeText.textContent =
+                    "Selamat datang";
+
+                return;
+
+            }
+
 
             const metadata =
                 user.user_metadata || {};
@@ -791,35 +1074,96 @@
             welcomeText.textContent =
                 `Selamat datang, ${name}`;
 
-
             topUserName.textContent =
                 name;
 
-
             topUserRole.textContent =
                 role;
-
 
             userAvatar.textContent =
                 name
                     .trim()
                     .charAt(0)
-                    .toUpperCase() || "A";
+                    .toUpperCase();
+
+        } catch (error) {
+
+            console.error(
+                "Load user error:",
+                error
+            );
+
+        }
+
+    }
 
 
-            /*
-             * 3. LOAD STATISTICS
-             *
-             * Masing-masing query berdiri sendiri.
-             * Kalau salah satu tabel bermasalah,
-             * dashboard tidak ikut crash.
-             */
+    /*
+    =========================================
+    COUNT
+    =========================================
+    */
 
-            const [
-                articles,
-                videos,
-                categories
-            ] = await Promise.all([
+    async function getCount(
+        tableName
+    ) {
+
+        try {
+
+            const {
+                count,
+                error
+            } =
+                await supabase
+                    .from(tableName)
+                    .select(
+                        "*",
+                        {
+                            count: "exact",
+                            head: true
+                        }
+                    );
+
+
+            if (error) {
+
+                console.warn(
+                    `Count ${tableName} error:`,
+                    error
+                );
+
+                return "-";
+
+            }
+
+
+            return
+                count ?? 0;
+
+        } catch (error) {
+
+            console.warn(
+                `Count ${tableName} gagal:`,
+                error
+            );
+
+            return "-";
+
+        }
+
+    }
+
+
+    /*
+    =========================================
+    STATISTICS
+    =========================================
+    */
+
+    async function loadStatistics() {
+
+        const results =
+            await Promise.allSettled([
 
                 getCount("articles"),
 
@@ -830,38 +1174,75 @@
             ]);
 
 
-            totalArticles.textContent =
-                articles;
+        totalArticles.textContent =
+            results[0].status === "fulfilled"
+                ? results[0].value
+                : "-";
 
 
-            totalVideos.textContent =
-                videos;
+        totalVideos.textContent =
+            results[1].status === "fulfilled"
+                ? results[1].value
+                : "-";
 
 
-            totalCategories.textContent =
-                categories;
+        totalCategories.textContent =
+            results[2].status === "fulfilled"
+                ? results[2].value
+                : "-";
 
+    }
+
+
+    /*
+    =========================================
+    LOGOUT
+    =========================================
+    */
+
+    async function handleLogout() {
+
+        logoutBtn.disabled = true;
+
+        logoutBtn.textContent =
+            "Keluar...";
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabase.auth.signOut();
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            window.location.href =
+                "../login.html";
 
         } catch (error) {
 
             console.error(
-                "Dashboard error:",
+                "Logout error:",
                 error
             );
 
 
-            welcomeText.textContent =
-                "Dashboard Admin";
+            logoutBtn.disabled =
+                false;
 
-
-            topUserName.textContent =
-                "Admin";
+            logoutBtn.textContent =
+                "Keluar";
 
 
             showError(
-                "Terjadi masalah saat memuat akun. " +
-                "Silakan buka Console browser (F12) " +
-                "untuk melihat error."
+                "Gagal keluar. Silakan coba lagi."
             );
 
         }
@@ -869,66 +1250,45 @@
     }
 
 
+    /*
+    =========================================
+    EVENTS
+    =========================================
+    */
+
     logoutBtn.addEventListener(
         "click",
-        async () => {
-
-            logoutBtn.disabled = true;
-
-            logoutBtn.textContent =
-                "Keluar...";
-
-
-            try {
-
-                const {
-                    error
-                } = await supabase.auth.signOut();
-
-
-                if (error) {
-
-                    throw error;
-
-                }
-
-
-                window.location.href =
-                    "../login.html";
-
-
-            } catch (error) {
-
-                console.error(
-                    "Logout error:",
-                    error
-                );
-
-
-                logoutBtn.disabled = false;
-
-                logoutBtn.textContent =
-                    "Keluar";
-
-
-                showError(
-                    "Gagal keluar. Silakan coba lagi."
-                );
-
-            }
-
-        }
+        handleLogout
     );
 
 
     /*
-     * JALANKAN
-     */
+    =========================================
+    INIT
+    =========================================
+    */
 
-    loadDashboard();
+    async function initDashboard() {
+
+        /*
+         * UI sudah tampil sebelum
+         * request Supabase selesai.
+         */
+
+        await Promise.allSettled([
+
+            loadUser(),
+
+            loadStatistics()
+
+        ]);
+
+    }
+
+
+    initDashboard();
 
 </script>
 
 </body>
 </html>
-```
