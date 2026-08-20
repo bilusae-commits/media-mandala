@@ -1,528 +1,479 @@
-<!DOCTYPE html>
-<html lang="id">
+<script type="module">
 
-<head>
+import { supabase } from "../js/supabase-client.js";
 
-<meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+/* =====================================================
+   ELEMENT
+===================================================== */
 
-<title>Video Baru — Mandala Channel</title>
+const form =
+    document.getElementById("video-form");
 
-<style>
+const title =
+    document.getElementById("judul_video");
 
-* {
-    box-sizing: border-box;
+const slug =
+    document.getElementById("slug");
+
+const youtube =
+    document.getElementById("youtube_url");
+
+const youtubeId =
+    document.getElementById("youtube_video_id");
+
+const thumbnail =
+    document.getElementById("thumbnail_url");
+
+const description =
+    document.getElementById("deskripsi");
+
+const category =
+    document.getElementById("kategori");
+
+const featured =
+    document.getElementById("is_featured");
+
+const status =
+    document.getElementById("status");
+
+const save =
+    document.getElementById("simpan");
+
+const draft =
+    document.getElementById("simpan_draft");
+
+const review =
+    document.getElementById("kirim_review");
+
+const publish =
+    document.getElementById("publish");
+
+const archive =
+    document.getElementById("arsipkan");
+
+const logout =
+    document.getElementById("logout");
+
+const message =
+    document.getElementById("form-message");
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function msg(text, type = "") {
+
+    if (!message) return;
+
+    message.textContent = text;
+    message.className =
+        `form-message ${type}`;
 }
 
-body {
-    margin: 0;
-    background: #f4f4f2;
-    color: #202020;
-    font-family:
-        Inter,
-        Arial,
-        sans-serif;
+
+/* =====================================================
+   SLUG
+===================================================== */
+
+function makeSlug(text) {
+
+    return String(text || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
 }
 
-.page {
-    max-width: 1050px;
-    margin: 0 auto;
-    padding: 32px;
-}
 
-.topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 25px;
-}
+title.addEventListener(
+    "input",
+    () => {
 
-.topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+        if (!slug.dataset.manual) {
 
-.back {
-    color: #555;
-    text-decoration: none;
-    font-size: 12px;
-}
-
-.back:hover {
-    color: #111;
-}
-
-h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.subtitle {
-    margin-top: 5px;
-    color: #888;
-    font-size: 12px;
-}
-
-.logout {
-    border: 1px solid #ddd;
-    background: white;
-    color: #555;
-    border-radius: 6px;
-    padding: 9px 13px;
-    cursor: pointer;
-    font-size: 11px;
-}
-
-.card {
-    background: white;
-    border: 1px solid #e3e3e3;
-    border-radius: 12px;
-    padding: 28px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.full {
-    grid-column: 1 / -1;
-}
-
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-
-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: #444;
-}
-
-input,
-textarea,
-select {
-    width: 100%;
-    border: 1px solid #d7d7d7;
-    border-radius: 7px;
-    background: white;
-    padding: 11px 12px;
-    font-family: inherit;
-    font-size: 12px;
-    color: #222;
-    outline: none;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: #888;
-}
-
-textarea {
-    min-height: 180px;
-    resize: vertical;
-}
-
-.help {
-    color: #999;
-    font-size: 10px;
-}
-
-.checkbox {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    min-height: 40px;
-}
-
-.checkbox input {
-    width: auto;
-}
-
-.checkbox label {
-    margin: 0;
-    font-weight: 500;
-}
-
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 28px;
-    padding-top: 22px;
-    border-top: 1px solid #eee;
-}
-
-.actions button {
-    border: 0;
-    border-radius: 7px;
-    padding: 10px 16px;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 700;
-    background: #202020;
-    color: white;
-}
-
-.actions button.secondary {
-    background: #666;
-}
-
-.actions button.review {
-    background: #b36b00;
-}
-
-.actions button.publish {
-    background: #22733b;
-}
-
-.actions button.archive {
-    background: #777;
-}
-
-.form-message {
-    margin-top: 15px;
-    font-size: 11px;
-}
-
-.form-message.error {
-    color: #b42318;
-}
-
-.form-message.success {
-    color: #207a3b;
-}
-
-.form-message.warning {
-    color: #a15c00;
-}
-
-@media (max-width: 700px) {
-
-    .page {
-        padding: 18px;
+            slug.value =
+                makeSlug(title.value);
+        }
     }
+);
 
-    .topbar {
-        align-items: flex-start;
-        gap: 15px;
+
+slug.addEventListener(
+    "input",
+    () => {
+
+        slug.dataset.manual = "1";
     }
+);
 
-    .grid {
-        grid-template-columns: 1fr;
-    }
 
-    .full {
-        grid-column: auto;
-    }
+/* =====================================================
+   YOUTUBE ID
+===================================================== */
 
-    .card {
-        padding: 20px;
-    }
+function getYoutubeId(url) {
 
+    const value =
+        String(url || "").trim();
+
+    let match;
+
+    match =
+        value.match(
+            /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([A-Za-z0-9_-]{11})/
+        );
+
+    return match
+        ? match[1]
+        : "";
 }
 
-</style>
 
-</head>
+youtube.addEventListener(
+    "input",
+    () => {
 
+        const id =
+            getYoutubeId(
+                youtube.value
+            );
 
-<body>
+        youtubeId.value =
+            id;
 
-<main class="page">
+        if (
+            id &&
+            !thumbnail.value.trim()
+        ) {
 
+            thumbnail.value =
+                `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+        }
+    }
+);
 
-<div class="topbar">
 
-    <div class="topbar-left">
+/* =====================================================
+   CATEGORY
+===================================================== */
 
-        <a
-            class="back"
-            href="videos.html"
-        >
-            ← Kembali ke Video
-        </a>
+async function loadCategories() {
 
-        <div>
+    try {
 
-            <h1>
-                Video Baru
-            </h1>
+        const {
+            data,
+            error
+        } = await supabase
+            .from("categories")
+            .select("*")
+            .order("name");
 
-            <div class="subtitle">
-                Kelola konten video
-            </div>
 
-        </div>
+        if (error) {
+            throw error;
+        }
 
-    </div>
 
+        category.innerHTML = `
+            <option value="">
+                -- Pilih Kategori --
+            </option>
+        `;
 
-    <button
-        id="logout"
-        class="logout"
-        type="button"
-    >
-        Keluar
-    </button>
 
-</div>
+        for (
+            const item of data || []
+        ) {
 
+            const option =
+                document.createElement("option");
 
-<section class="card">
+            option.value =
+                item.id;
 
-<form id="video-form">
+            option.textContent =
+                item.name;
 
-<div class="grid">
+            category.appendChild(
+                option
+            );
+        }
 
 
-<div class="field full">
+    } catch (error) {
 
-    <label for="judul_video">
-        Judul Video
-    </label>
+        console.error(
+            "CATEGORY ERROR:",
+            error
+        );
 
-    <input
-        id="judul_video"
-        type="text"
-        autocomplete="off"
-        required
-    >
+        category.innerHTML = `
+            <option value="">
+                -- Kategori gagal dimuat --
+            </option>
+        `;
 
-</div>
+        msg(
+            "Kategori gagal dimuat: " +
+            error.message,
+            "error"
+        );
+    }
+}
 
 
-<div class="field">
+/* =====================================================
+   SAVE
+===================================================== */
 
-    <label for="slug">
-        Slug
-    </label>
+async function saveVideo(
+    targetStatus = "draft"
+) {
 
-    <input
-        id="slug"
-        type="text"
-        autocomplete="off"
-        required
-    >
+    try {
 
-</div>
+        const userResult =
+            await supabase.auth.getUser();
 
 
-<div class="field">
+        if (
+            userResult.error ||
+            !userResult.data.user
+        ) {
 
-    <label for="kategori">
-        Kategori
-    </label>
+            throw new Error(
+                "Sesi login tidak ditemukan."
+            );
+        }
 
-    <select id="kategori">
 
-        <option value="">
-            -- Pilih Kategori --
-        </option>
+        const user =
+            userResult.data.user;
 
-    </select>
 
-</div>
+        const titleValue =
+            title.value.trim();
 
 
-<div class="field full">
+        if (!titleValue) {
 
-    <label for="youtube_url">
-        YouTube URL
-    </label>
+            throw new Error(
+                "Judul video wajib diisi."
+            );
+        }
 
-    <input
-        id="youtube_url"
-        type="url"
-        placeholder="https://www.youtube.com/watch?v=..."
-    >
 
-    <div class="help">
-        Masukkan URL video YouTube. ID video akan terisi otomatis.
-    </div>
+        const ytId =
+            getYoutubeId(
+                youtube.value
+            );
 
-</div>
 
+        if (!ytId) {
 
-<div class="field">
+            throw new Error(
+                "Masukkan URL YouTube yang valid."
+            );
+        }
 
-    <label for="youtube_video_id">
-        YouTube Video ID
-    </label>
 
-    <input
-        id="youtube_video_id"
-        type="text"
-        readonly
-    >
+        msg(
+            "Menyimpan..."
+        );
 
-</div>
 
+        const payload = {
 
-<div class="field">
+            title:
+                titleValue,
 
-    <label for="thumbnail_url">
-        Thumbnail URL
-    </label>
+            slug:
+                slug.value.trim() ||
+                makeSlug(titleValue),
 
-    <input
-        id="thumbnail_url"
-        type="url"
-        placeholder="https://..."
-    >
+            youtube_url:
+                youtube.value.trim(),
 
-</div>
+            youtube_video_id:
+                ytId,
 
+            thumbnail_url:
+                thumbnail.value.trim() ||
+                `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`,
 
-<div class="field full">
+            description:
+                description.value.trim() ||
+                null,
 
-    <label for="deskripsi">
-        Deskripsi
-    </label>
+            category_id:
+                category.value ||
+                null,
 
-    <textarea
-        id="deskripsi"
-        placeholder="Tulis deskripsi video..."
-    ></textarea>
+            featured:
+                featured.checked,
 
-</div>
+            status:
+                targetStatus,
 
+            author_id:
+                user.id
+        };
 
-<div class="field">
 
-    <label>
-        Status
-    </label>
+        const {
+            data,
+            error
+        } = await supabase
+            .from("videos")
+            .insert(payload)
+            .select()
+            .single();
 
-    <select id="status">
 
-        <option value="draft">
-            Draft
-        </option>
+        if (error) {
+            throw error;
+        }
 
-        <option value="review">
-            Review
-        </option>
 
-        <option value="published">
-            Published
-        </option>
+        msg(
+            "Video berhasil disimpan.",
+            "success"
+        );
 
-        <option value="archived">
-            Archived
-        </option>
 
-    </select>
+        if (data?.id) {
 
-</div>
+            const url =
+                new URL(
+                    window.location.href
+                );
 
+            url.searchParams.set(
+                "id",
+                data.id
+            );
 
-<div class="field">
+            window.history.replaceState(
+                {},
+                "",
+                url
+            );
+        }
 
-    <label>
-        Unggulan
-    </label>
 
-    <div class="checkbox">
+    } catch (error) {
 
-        <input
-            id="is_featured"
-            type="checkbox"
-        >
+        console.error(
+            "SAVE VIDEO ERROR:",
+            error
+        );
 
-        <label for="is_featured">
-            Jadikan video unggulan
-        </label>
+        msg(
+            error.message ||
+            "Gagal menyimpan video.",
+            "error"
+        );
+    }
+}
 
-    </div>
 
-</div>
+/* =====================================================
+   BUTTONS
+===================================================== */
 
+form.addEventListener(
+    "submit",
+    event => {
 
-</div>
+        event.preventDefault();
 
+        saveVideo("draft");
+    }
+);
 
-<div class="actions">
 
-    <button
-        id="simpan"
-        type="submit"
-    >
-        Simpan
-    </button>
+draft.addEventListener(
+    "click",
+    () => {
 
-    <button
-        id="simpan_draft"
-        type="button"
-        class="secondary"
-    >
-        Simpan Draft
-    </button>
+        saveVideo("draft");
+    }
+);
 
-    <button
-        id="kirim_review"
-        type="button"
-        class="review"
-    >
-        Kirim Review
-    </button>
 
-    <button
-        id="publish"
-        type="button"
-        class="publish"
-    >
-        Publish
-    </button>
+review.addEventListener(
+    "click",
+    () => {
 
-    <button
-        id="arsipkan"
-        type="button"
-        class="archive"
-    >
-        Arsipkan
-    </button>
+        saveVideo("review");
+    }
+);
 
-</div>
 
+publish.addEventListener(
+    "click",
+    () => {
 
-<div
-    id="form-message"
-    class="form-message"
-></div>
+        saveVideo("published");
+    }
+);
 
 
-</form>
+archive.addEventListener(
+    "click",
+    () => {
 
-</section>
+        saveVideo("archived");
+    }
+);
 
-</main>
 
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-<script
-    type="module"
-    src="../js/supabase-client.js"
-></script>
+logout.addEventListener(
+    "click",
+    async () => {
 
-<script
-    src="./js/cms-service-final.js"
-></script>
+        const {
+            error
+        } =
+            await supabase.auth.signOut();
 
-<script
-    type="module"
-    src="./js/video-edit.js"
-></script>
 
+        if (error) {
+
+            msg(
+                error.message,
+                "error"
+            );
+
+            return;
+        }
+
+
+        window.location.href =
+            "index.html";
+    }
+);
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+await loadCategories();
+
+msg(
+    "Editor video siap."
+);
+
+</script>
 </body>
 
 </html>
