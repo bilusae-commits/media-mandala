@@ -1,479 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Video Baru — Mandala Channel</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f3;
+            color: #202020;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back {
+            color: #555;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .back:hover {
+            color: #000;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            margin-top: 5px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .logout {
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #555;
+            border-radius: 6px;
+            padding: 9px 14px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e2e2e2;
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #444;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid #d7d7d7;
+            border-radius: 7px;
+            background: #fff;
+            padding: 11px 12px;
+            color: #222;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #888;
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .help {
+            color: #999;
+            font-size: 10px;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-height: 40px;
+        }
+
+        .checkbox-row input {
+            width: auto;
+        }
+
+        .checkbox-row label {
+            font-weight: 500;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid #eee;
+        }
+
+        .actions button {
+            border: 0;
+            border-radius: 7px;
+            padding: 11px 17px;
+            cursor: pointer;
+            color: #fff;
+            background: #222;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        #simpan_draft {
+            background: #555;
+        }
+
+        #kirim_review {
+            background: #b36b00;
+        }
+
+        #publish {
+            background: #23763c;
+        }
+
+        #arsipkan {
+            background: #777;
+        }
+
+        .form-message {
+            margin-top: 15px;
+            font-size: 11px;
+            min-height: 16px;
+        }
+
+        .form-message.success {
+            color: #18743a;
+        }
+
+        .form-message.error {
+            color: #b42318;
+        }
+
+        .form-message.warning {
+            color: #a15c00;
+        }
+
+        @media (max-width: 700px) {
+            .page {
+                padding: 18px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .topbar-left {
+                gap: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="page">
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <a
+                class="back"
+                href="videos.html"
+            >
+                ← Kembali ke Video
+            </a>
+
+            <div>
+                <h1 id="page-title">
+                    Video Baru
+                </h1>
+
+                <div class="subtitle">
+                    Kelola konten video
+                </div>
+            </div>
+
+        </div>
+
+        <button
+            id="logout"
+            class="logout"
+            type="button"
+        >
+            Keluar
+        </button>
+
+    </header>
+
+
+    <section class="card">
+
+        <form id="video-form">
+
+            <div class="grid">
+
+                <div class="field full">
+
+                    <label for="judul_video">
+                        Judul Video
+                    </label>
+
+                    <input
+                        id="judul_video"
+                        type="text"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="slug">
+                        Slug
+                    </label>
+
+                    <input
+                        id="slug"
+                        type="text"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="kategori">
+                        Kategori
+                    </label>
+
+                    <select id="kategori">
+
+                        <option value="">
+                            Memuat kategori...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="youtube_url">
+                        YouTube URL
+                    </label>
+
+                    <input
+                        id="youtube_url"
+                        type="url"
+                        placeholder="https://www.youtube.com/watch?v=..."
+                    >
+
+                    <div class="help">
+                        Masukkan URL video YouTube.
+                        YouTube Video ID akan terisi otomatis.
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="youtube_video_id">
+                        YouTube Video ID
+                    </label>
+
+                    <input
+                        id="youtube_video_id"
+                        type="text"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="thumbnail_url">
+                        Thumbnail URL
+                    </label>
+
+                    <input
+                        id="thumbnail_url"
+                        type="url"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="deskripsi">
+                        Deskripsi
+                    </label>
+
+                    <textarea
+                        id="deskripsi"
+                        placeholder="Tulis deskripsi video..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="status">
+                        Status
+                    </label>
+
+                    <select id="status">
+
+                        <option value="draft">
+                            Draft
+                        </option>
+
+                        <option value="review">
+                            Review
+                        </option>
+
+                        <option value="published">
+                            Published
+                        </option>
+
+                        <option value="archived">
+                            Archived
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Video Unggulan
+                    </label>
+
+                    <div class="checkbox-row">
+
+                        <input
+                            id="is_featured"
+                            type="checkbox"
+                        >
+
+                        <label for="is_featured">
+                            Jadikan video unggulan
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    id="simpan"
+                    type="submit"
+                >
+                    Simpan
+                </button>
+
+                <button
+                    id="simpan_draft"
+                    type="button"
+                >
+                    Simpan Draft
+                </button>
+
+                <button
+                    id="kirim_review"
+                    type="button"
+                >
+                    Kirim Review
+                </button>
+
+                <button
+                    id="publish"
+                    type="button"
+                >
+                    Publish
+                </button>
+
+                <button
+                    id="arsipkan"
+                    type="button"
+                >
+                    Arsipkan
+                </button>
+
+            </div>
+
+
+            <div
+                id="form-message"
+                class="form-message"
+            ></div>
+
+        </form>
+
+    </section>
+
+</main>
+
+
 <script type="module">
+    import { supabase } from "../js/supabase-client.js";
 
-import { supabase } from "../js/supabase-client.js";
-
-
-/* =====================================================
-   ELEMENT
-===================================================== */
-
-const form =
-    document.getElementById("video-form");
-
-const title =
-    document.getElementById("judul_video");
-
-const slug =
-    document.getElementById("slug");
-
-const youtube =
-    document.getElementById("youtube_url");
-
-const youtubeId =
-    document.getElementById("youtube_video_id");
-
-const thumbnail =
-    document.getElementById("thumbnail_url");
-
-const description =
-    document.getElementById("deskripsi");
-
-const category =
-    document.getElementById("kategori");
-
-const featured =
-    document.getElementById("is_featured");
-
-const status =
-    document.getElementById("status");
-
-const save =
-    document.getElementById("simpan");
-
-const draft =
-    document.getElementById("simpan_draft");
-
-const review =
-    document.getElementById("kirim_review");
-
-const publish =
-    document.getElementById("publish");
-
-const archive =
-    document.getElementById("arsipkan");
-
-const logout =
-    document.getElementById("logout");
-
-const message =
-    document.getElementById("form-message");
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function msg(text, type = "") {
-
-    if (!message) return;
-
-    message.textContent = text;
-    message.className =
-        `form-message ${type}`;
-}
-
-
-/* =====================================================
-   SLUG
-===================================================== */
-
-function makeSlug(text) {
-
-    return String(text || "")
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-");
-}
-
-
-title.addEventListener(
-    "input",
-    () => {
-
-        if (!slug.dataset.manual) {
-
-            slug.value =
-                makeSlug(title.value);
-        }
-    }
-);
-
-
-slug.addEventListener(
-    "input",
-    () => {
-
-        slug.dataset.manual = "1";
-    }
-);
-
-
-/* =====================================================
-   YOUTUBE ID
-===================================================== */
-
-function getYoutubeId(url) {
-
-    const value =
-        String(url || "").trim();
-
-    let match;
-
-    match =
-        value.match(
-            /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([A-Za-z0-9_-]{11})/
-        );
-
-    return match
-        ? match[1]
-        : "";
-}
-
-
-youtube.addEventListener(
-    "input",
-    () => {
-
-        const id =
-            getYoutubeId(
-                youtube.value
-            );
-
-        youtubeId.value =
-            id;
-
-        if (
-            id &&
-            !thumbnail.value.trim()
-        ) {
-
-            thumbnail.value =
-                `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-        }
-    }
-);
-
-
-/* =====================================================
-   CATEGORY
-===================================================== */
-
-async function loadCategories() {
-
-    try {
-
-        const {
-            data,
-            error
-        } = await supabase
-            .from("categories")
-            .select("*")
-            .order("name");
-
-
-        if (error) {
-            throw error;
-        }
-
-
-        category.innerHTML = `
-            <option value="">
-                -- Pilih Kategori --
-            </option>
-        `;
-
-
-        for (
-            const item of data || []
-        ) {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                item.id;
-
-            option.textContent =
-                item.name;
-
-            category.appendChild(
-                option
-            );
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            "CATEGORY ERROR:",
-            error
-        );
-
-        category.innerHTML = `
-            <option value="">
-                -- Kategori gagal dimuat --
-            </option>
-        `;
-
-        msg(
-            "Kategori gagal dimuat: " +
-            error.message,
-            "error"
-        );
-    }
-}
-
-
-/* =====================================================
-   SAVE
-===================================================== */
-
-async function saveVideo(
-    targetStatus = "draft"
-) {
-
-    try {
-
-        const userResult =
-            await supabase.auth.getUser();
-
-
-        if (
-            userResult.error ||
-            !userResult.data.user
-        ) {
-
-            throw new Error(
-                "Sesi login tidak ditemukan."
-            );
-        }
-
-
-        const user =
-            userResult.data.user;
-
-
-        const titleValue =
-            title.value.trim();
-
-
-        if (!titleValue) {
-
-            throw new Error(
-                "Judul video wajib diisi."
-            );
-        }
-
-
-        const ytId =
-            getYoutubeId(
-                youtube.value
-            );
-
-
-        if (!ytId) {
-
-            throw new Error(
-                "Masukkan URL YouTube yang valid."
-            );
-        }
-
-
-        msg(
-            "Menyimpan..."
-        );
-
-
-        const payload = {
-
-            title:
-                titleValue,
-
-            slug:
-                slug.value.trim() ||
-                makeSlug(titleValue),
-
-            youtube_url:
-                youtube.value.trim(),
-
-            youtube_video_id:
-                ytId,
-
-            thumbnail_url:
-                thumbnail.value.trim() ||
-                `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`,
-
-            description:
-                description.value.trim() ||
-                null,
-
-            category_id:
-                category.value ||
-                null,
-
-            featured:
-                featured.checked,
-
-            status:
-                targetStatus,
-
-            author_id:
-                user.id
-        };
-
-
-        const {
-            data,
-            error
-        } = await supabase
-            .from("videos")
-            .insert(payload)
-            .select()
-            .single();
-
-
-        if (error) {
-            throw error;
-        }
-
-
-        msg(
-            "Video berhasil disimpan.",
-            "success"
-        );
-
-
-        if (data?.id) {
-
-            const url =
-                new URL(
-                    window.location.href
-                );
-
-            url.searchParams.set(
-                "id",
-                data.id
-            );
-
-            window.history.replaceState(
-                {},
-                "",
-                url
-            );
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            "SAVE VIDEO ERROR:",
-            error
-        );
-
-        msg(
-            error.message ||
-            "Gagal menyimpan video.",
-            "error"
-        );
-    }
-}
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-form.addEventListener(
-    "submit",
-    event => {
-
-        event.preventDefault();
-
-        saveVideo("draft");
-    }
-);
-
-
-draft.addEventListener(
-    "click",
-    () => {
-
-        saveVideo("draft");
-    }
-);
-
-
-review.addEventListener(
-    "click",
-    () => {
-
-        saveVideo("review");
-    }
-);
-
-
-publish.addEventListener(
-    "click",
-    () => {
-
-        saveVideo("published");
-    }
-);
-
-
-archive.addEventListener(
-    "click",
-    () => {
-
-        saveVideo("archived");
-    }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-logout.addEventListener(
-    "click",
-    async () => {
-
-        const {
-            error
-        } =
-            await supabase.auth.signOut();
-
-
-        if (error) {
-
-            msg(
-                error.message,
-                "error"
-            );
-
-            return;
-        }
-
-
-        window.location.href =
-            "index.html";
-    }
-);
-
-
-/* =====================================================
-   INIT
-===================================================== */
-
-await loadCategories();
-
-msg(
-    "Editor video siap."
-);
-
+    window.supabaseClient = supabase;
 </script>
-</body>
 
+<script src="./js/cms-service-final.js"></script>
+
+<script type="module" src="./js/video-edit.js"></script>
+
+</body>
 </html>
