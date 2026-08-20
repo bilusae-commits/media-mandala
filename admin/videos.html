@@ -10,83 +10,118 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Video — Mandala Channel CMS</title>
+    <title>
+        Video — Mandala Channel
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="./css/admin.css"
+    >
 
 </head>
 
 
 <body>
 
-    <header>
+
+<div class="main">
+
+
+    <header class="topbar">
 
         <div>
 
-            <h1>Video</h1>
-
-            <p>
-                Kelola video Mandala Channel
-            </p>
+            <h2>
+                Video
+            </h2>
 
         </div>
 
 
-        <nav>
+        <div class="user">
 
-            <a href="dashboard.html">
+            <a
+                href="./index.html"
+                class="btn ghost"
+            >
                 Dashboard
             </a>
 
             <button
                 id="logout-button"
                 type="button"
+                class="btn primary"
             >
                 Keluar
             </button>
 
-        </nav>
+        </div>
 
     </header>
 
 
-    <main>
+    <main class="content">
 
-        <section>
+
+        <div class="space">
 
             <div>
 
-                <h2>Daftar Video</h2>
+                <h2>
+                    Daftar Video
+                </h2>
 
-                <button
-                    id="new-video-button"
-                    type="button"
+                <p
+                    id="page-message"
+                    class="hint"
                 >
-                    + Video Baru
-                </button>
-
-            </div>
-
-
-            <div id="page-message"></div>
-
-
-            <div id="videos-container">
-
-                <p>
                     Memuat video...
                 </p>
 
             </div>
 
+
+            <button
+                id="new-video-button"
+                type="button"
+                class="btn primary"
+            >
+                + Video Baru
+            </button>
+
+        </div>
+
+
+        <section class="panel">
+
+            <div class="panelBody">
+
+                <div
+                    id="videos-container"
+                >
+
+                    <p class="hint">
+                        Memuat video...
+                    </p>
+
+                </div>
+
+            </div>
+
         </section>
+
 
     </main>
 
+</div>
 
-    <script
-        type="module"
-        src="./js/videos.js"
-    ></script>
+
+<script
+    type="module"
+    src="./js/videos.js"
+></script>
+
 
 </body>
-
 </html>
