@@ -1,4 +1,8 @@
-import "./cms-service.js";
+const CMS = window.MandalaCMS;
+
+const form = document.getElementById("video-form");
+
+const titleInput = document.getElementById("judul_video");
 
 const CMS = window.MandalaCMS;
 
