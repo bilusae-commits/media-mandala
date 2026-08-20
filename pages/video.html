@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="../css/main.css">
 
 <style>
-
 :root{
   --navy:#082d56;
   --navy-deep:#061f3c;
@@ -63,7 +62,6 @@ a{
   background:var(--navy-deep);
   color:#dbe5ef;
   font-size:clamp(11px,.72vw,13px);
-  letter-spacing:.01em;
 }
 
 .top .w{
@@ -79,9 +77,9 @@ a{
 ========================================================= */
 
 header#siteHeader{
-  position:sticky!important;
-  top:0!important;
-  z-index:1000!important;
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000 !important;
   height:78px;
   background:rgba(255,255,255,.97);
   backdrop-filter:blur(14px);
@@ -154,7 +152,6 @@ header#siteHeader.scrolled{
   font-size:clamp(11px,.78vw,14px);
   white-space:nowrap;
   text-decoration:none;
-  transition:color .2s ease;
 }
 
 .links a:after{
@@ -166,7 +163,6 @@ header#siteHeader.scrolled{
   height:2px;
   background:var(--bronze);
   transform:scaleX(0);
-  transform-origin:center;
   transition:transform .22s ease;
 }
 
@@ -196,9 +192,7 @@ header.scrolled .links a:after{
   padding:11px 16px;
   font-size:clamp(10px,.68vw,12px);
   text-decoration:none;
-  transition:
-    background .2s ease,
-    transform .2s ease;
+  transition:.2s ease;
 }
 
 .yt:hover{
@@ -483,11 +477,20 @@ header.scrolled .links a:after{
   font:500 20px Georgia,serif;
 }
 
+.videoError{
+  padding:30px;
+}
+
+.videoError strong{
+  color:#8c3028;
+}
+
 /* =========================================================
    LOAD MORE
 ========================================================= */
 
 .loadMoreWrap{
+  display:flex;
   justify-content:center;
   margin-top:34px;
 }
@@ -776,11 +779,9 @@ footer{
 ========================================================= */
 
 @media(max-width:1100px){
-
   .videoGrid{
     grid-template-columns:repeat(3,minmax(0,1fr));
   }
-
 }
 
 @media(max-width:820px){
@@ -827,7 +828,6 @@ footer{
   .foot{
     grid-template-columns:1fr 1fr;
   }
-
 }
 
 @media(max-width:560px){
@@ -884,7 +884,6 @@ footer{
   .modal{
     padding:10px;
   }
-
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -901,9 +900,7 @@ footer{
     opacity:1;
     transform:none;
   }
-
 }
-
 </style>
 </head>
 
@@ -917,12 +914,10 @@ footer{
 </div>
 
 <header id="siteHeader">
-
   <div class="w nav">
 
     <a class="logo" href="../index.html">
       <div class="mark">✺</div>
-
       <div>
         <b>MANDALA</b>
         <small>CHANNEL</small>
@@ -930,14 +925,12 @@ footer{
     </a>
 
     <nav class="links" aria-label="Navigasi utama">
-
       <a href="../index.html">Beranda</a>
       <a href="artikel.html">Artikel</a>
       <a href="video.html" aria-current="page">Video</a>
       <a href="playlist.html">Playlist</a>
       <a href="podcast.html">Podcast</a>
       <a href="tentang-kami.html">Tentang</a>
-
     </nav>
 
     <a
@@ -949,7 +942,6 @@ footer{
     </a>
 
   </div>
-
 </header>
 
 
@@ -987,15 +979,11 @@ footer{
     <div class="sectionHead reveal">
 
       <div>
-
-        <div class="k">
-          Mandala Video
-        </div>
+        <div class="k">Mandala Video</div>
 
         <h2 class="sectionTitle">
           Semua video
         </h2>
-
       </div>
 
       <p class="sectionIntro">
@@ -1042,7 +1030,9 @@ footer{
 
         <div>
 
-          <strong>Memuat video...</strong>
+          <strong>
+            Memuat video...
+          </strong>
 
           Mengambil koleksi video Mandala Channel.
 
@@ -1062,9 +1052,7 @@ footer{
         class="loadMore"
         id="loadMore"
         type="button">
-
         MUAT LEBIH BANYAK
-
       </button>
 
     </div>
@@ -1093,7 +1081,7 @@ footer{
       </div>
 
       <p class="sectionIntro">
-        Video unggulan yang ditentukan dari sistem konten.
+        Video unggulan Mandala Channel.
       </p>
 
     </div>
@@ -1128,12 +1116,11 @@ footer{
         </div>
 
         <h2 id="featureVideoTitle">
-          Bersama Sang Tokoh
+          Video Mandala Channel
         </h2>
 
         <p id="featureVideoDescription">
-          Temukan cerita, pengalaman dan pemikiran tokoh
-          Hindu Nusantara dalam percakapan yang lebih dekat.
+          Video pilihan akan tampil di bagian ini.
         </p>
 
         <div
@@ -1176,7 +1163,7 @@ footer{
 
       <form
         class="email"
-        onsubmit="event.preventDefault();alert('Form siap dihubungkan ke layanan email.');">
+        id="newsletterForm">
 
         <input
           type="email"
@@ -1245,11 +1232,10 @@ footer{
 
       <div>
 
-        <b
-          style="
-            color:#fff;
-            font:500 18px Georgia,serif;
-          ">
+        <b style="
+          color:#fff;
+          font:500 18px Georgia,serif;
+        ">
           MANDALA
         </b>
 
@@ -1267,8 +1253,10 @@ footer{
 
         <a href="artikel.html">Artikel</a>
         <br>
+
         <a href="video.html">Video</a>
         <br>
+
         <a href="playlist.html">Playlist</a>
 
       </div>
@@ -1326,30 +1314,62 @@ footer{
 
 
 <!-- =========================================================
-     SUPABASE CLIENT
-========================================================= -->
+     SUPABASE JS
+     ========================================================= -->
 
-<script src="../js/supabase-client.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
+"use strict";
 
-'use strict';
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const SUPABASE_URL =
+  "https://roeckoabffhyctfkvbhw.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr";
+
+
+/* =========================================================
+   SUPABASE CLIENT
+========================================================= */
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
 
 /* =========================================================
    STATE
 ========================================================= */
 
-const VIDEOS = [];
+let VIDEOS = [];
 
-let allVideos = [];
-let filteredVideos = [];
+let FILTERED_VIDEOS = [];
 
-let currentCategory = 'all';
-let currentSearch = '';
-let visibleCount = 12;
+let CURRENT_CATEGORY = "all";
 
-const VIDEO_PER_PAGE = 12;
+let CURRENT_SEARCH = "";
+
+let VISIBLE_COUNT = 12;
+
+const PER_PAGE = 12;
+
+
+/* =========================================================
+   FALLBACK IMAGE
+========================================================= */
+
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/" +
+  "photo-1529156069898-49953e39b3ac" +
+  "?auto=format&fit=crop&w=1200&q=85";
 
 
 /* =========================================================
@@ -1359,27 +1379,31 @@ const VIDEO_PER_PAGE = 12;
 (function(){
 
   const header =
-    document.getElementById('siteHeader');
+    document.getElementById(
+      "siteHeader"
+    );
 
   if(!header){
     return;
   }
 
-  function updateHeader(){
+  function update(){
 
     header.classList.toggle(
-      'scrolled',
+      "scrolled",
       window.scrollY > 20
     );
 
   }
 
-  updateHeader();
+  update();
 
   window.addEventListener(
-    'scroll',
-    updateHeader,
-    { passive:true }
+    "scroll",
+    update,
+    {
+      passive:true
+    }
   );
 
 })();
@@ -1392,13 +1416,19 @@ const VIDEO_PER_PAGE = 12;
 (function(){
 
   const elements =
-    document.querySelectorAll('.reveal');
+    document.querySelectorAll(
+      ".reveal"
+    );
 
-  if(!('IntersectionObserver' in window)){
+  if(
+    !("IntersectionObserver" in window)
+  ){
 
     elements.forEach(
       element =>
-        element.classList.add('is-visible')
+        element.classList.add(
+          "is-visible"
+        )
     );
 
     return;
@@ -1411,10 +1441,12 @@ const VIDEO_PER_PAGE = 12;
         entries.forEach(
           entry => {
 
-            if(entry.isIntersecting){
+            if(
+              entry.isIntersecting
+            ){
 
               entry.target.classList.add(
-                'is-visible'
+                "is-visible"
               );
 
               observer.unobserve(
@@ -1429,30 +1461,49 @@ const VIDEO_PER_PAGE = 12;
       },
       {
         threshold:.08,
-        rootMargin:'0px 0px -40px 0px'
+        rootMargin:"0px 0px -40px 0px"
       }
     );
 
   elements.forEach(
     element =>
-      observer.observe(element)
+      observer.observe(
+        element
+      )
   );
 
 })();
 
 
 /* =========================================================
-   ESCAPE HTML
+   SAFE HTML
 ========================================================= */
 
 function escapeHTML(value){
 
-  return String(value ?? '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+  return String(
+    value ?? ""
+  )
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
 
 }
 
@@ -1461,44 +1512,19 @@ function escapeHTML(value){
    YOUTUBE ID
 ========================================================= */
 
-function getYoutubeId(video){
-
-  if(!video){
-    return '';
-  }
-
-  const directId =
-    video.youtube_video_id ||
-    video.youtube_id ||
-    video.video_id ||
-    '';
-
-  if(
-    /^[A-Za-z0-9_-]{11}$/.test(
-      String(directId)
-    )
-  ){
-
-    return String(directId);
-
-  }
-
-  const value =
-    video.youtube_url ||
-    video.youtube ||
-    video.url ||
-    directId ||
-    '';
+function getYoutubeId(value){
 
   if(!value){
-    return '';
+    return "";
   }
 
   const text =
     String(value).trim();
 
   if(
-    /^[A-Za-z0-9_-]{11}$/.test(text)
+    /^[A-Za-z0-9_-]{11}$/.test(
+      text
+    )
   ){
 
     return text;
@@ -1511,56 +1537,75 @@ function getYoutubeId(video){
       new URL(text);
 
     const host =
-      url.hostname.toLowerCase();
+      url.hostname
+        .toLowerCase()
+        .replace(
+          "www.",
+          ""
+        );
 
     if(
-      host === 'youtu.be' ||
-      host.endsWith('.youtu.be')
-    ){
-
-      return url.pathname
-        .split('/')
-        .filter(Boolean)[0] || '';
-
-    }
-
-    if(
-      host.includes('youtube.com')
+      host === "youtube.com" ||
+      host === "m.youtube.com"
     ){
 
       const queryId =
-        url.searchParams.get('v');
+        url.searchParams.get(
+          "v"
+        );
 
       if(queryId){
         return queryId;
       }
 
-      const parts =
-        url.pathname
-          .split('/')
-          .filter(Boolean);
-
-      const index =
-        parts.findIndex(
-          part =>
-            part === 'embed' ||
-            part === 'shorts' ||
-            part === 'live'
+      const embed =
+        url.pathname.match(
+          /\/embed\/([A-Za-z0-9_-]{11})/
         );
 
-      if(index !== -1 && parts[index + 1]){
-        return parts[index + 1];
+      if(embed){
+        return embed[1];
+      }
+
+      const shorts =
+        url.pathname.match(
+          /\/shorts\/([A-Za-z0-9_-]{11})/
+        );
+
+      if(shorts){
+        return shorts[1];
+      }
+
+    }
+
+    if(
+      host === "youtu.be"
+    ){
+
+      const id =
+        url.pathname
+          .replace(/^\/+/,"")
+          .split("/")[0];
+
+      if(
+        /^[A-Za-z0-9_-]{11}$/.test(
+          id
+        )
+      ){
+
+        return id;
+
       }
 
     }
 
   }catch(error){
 
-    /* Bukan URL */
+    /* bukan URL */
 
   }
 
-  return '';
+  return "";
 
 }
 
@@ -1571,36 +1616,31 @@ function getYoutubeId(video){
 
 function getThumbnail(video){
 
-  if(video.thumbnail_url){
+  if(
+    video.thumbnail_url
+  ){
 
     return video.thumbnail_url;
 
   }
 
-  if(video.thumbnail){
-
-    return video.thumbnail;
-
-  }
-
   const id =
-    getYoutubeId(video);
+    video.youtube_video_id ||
+    getYoutubeId(
+      video.youtube_url
+    );
 
   if(id){
 
     return (
-      'https://img.youtube.com/vi/' +
+      "https://i.ytimg.com/vi/" +
       encodeURIComponent(id) +
-      '/hqdefault.jpg'
+      "/hqdefault.jpg"
     );
 
   }
 
-  return (
-    'https://images.unsplash.com/' +
-    'photo-1529156069898-49953e39b3ac' +
-    '?auto=format&fit=crop&w=1200&q=85'
-  );
+  return FALLBACK_IMAGE;
 
 }
 
@@ -1609,19 +1649,22 @@ function getThumbnail(video){
    EMBED
 ========================================================= */
 
-function getYoutubeEmbed(video){
+function getEmbedUrl(video){
 
   const id =
-    getYoutubeId(video);
+    video.youtube_video_id ||
+    getYoutubeId(
+      video.youtube_url
+    );
 
   if(!id){
-    return '';
+    return "";
   }
 
   return (
-    'https://www.youtube-nocookie.com/embed/' +
+    "https://www.youtube-nocookie.com/embed/" +
     encodeURIComponent(id) +
-    '?autoplay=1&rel=0'
+    "?autoplay=1&rel=0"
   );
 
 }
@@ -1634,22 +1677,28 @@ function getYoutubeEmbed(video){
 function formatDate(value){
 
   if(!value){
-    return '';
+    return "";
   }
 
   const date =
     new Date(value);
 
-  if(Number.isNaN(date.getTime())){
-    return '';
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return "";
+
   }
 
   return new Intl.DateTimeFormat(
-    'id-ID',
+    "id-ID",
     {
-      day:'numeric',
-      month:'long',
-      year:'numeric'
+      day:"numeric",
+      month:"long",
+      year:"numeric"
     }
   ).format(date);
 
@@ -1657,251 +1706,70 @@ function formatDate(value){
 
 
 /* =========================================================
-   NORMALIZE DATABASE RECORD
+   NORMALIZE
 ========================================================= */
 
-function normalizeVideo(item){
+function normalizeVideo(row){
 
   return {
 
     id:
-      item.id || '',
+      row.id || "",
 
     title:
-      item.title ||
-      'Video Mandala',
+      row.title ||
+      "Video Mandala",
 
     youtube_url:
-      item.youtube_url ||
-      '',
+      row.youtube_url ||
+      "",
 
     youtube_video_id:
-      item.youtube_video_id ||
-      '',
+      row.youtube_video_id ||
+      getYoutubeId(
+        row.youtube_url
+      ),
 
     thumbnail_url:
-      item.thumbnail_url ||
-      '',
+      row.thumbnail_url ||
+      "",
 
     description:
-      item.description ||
-      '',
+      row.description ||
+      "",
 
     category_id:
-      item.category_id ||
-      '',
+      row.category_id ||
+      null,
 
     status:
-      String(
-        item.status || ''
-      ).toLowerCase(),
+      row.status ||
+      "",
 
     featured:
-      item.featured === true,
+      row.featured === true,
 
     published_at:
-      item.published_at ||
+      row.published_at ||
       null,
 
     created_at:
-      item.created_at ||
+      row.created_at ||
       null,
 
     updated_at:
-      item.updated_at ||
+      row.updated_at ||
       null,
 
     slug:
-      item.slug ||
-      '',
+      row.slug ||
+      "",
 
     author_id:
-      item.author_id ||
-      ''
+      row.author_id ||
+      null
 
   };
-
-}
-
-
-/* =========================================================
-   SUPABASE
-========================================================= */
-
-async function getSupabaseClient(){
-
-  if(
-    !window.MandalaSupabase ||
-    typeof window.MandalaSupabase.getClient !==
-      'function'
-  ){
-
-    throw new Error(
-      'supabase-client.js tidak menyediakan MandalaSupabase.getClient().'
-    );
-
-  }
-
-  return await window.MandalaSupabase.getClient();
-
-}
-
-
-/* =========================================================
-   LOAD VIDEOS
-========================================================= */
-
-async function loadVideosFromSupabase(){
-
-  const db =
-    await getSupabaseClient();
-
-
-  /*
-   * STRUKTUR TABEL VIDEOS:
-   *
-   * id
-   * title
-   * youtube_url
-   * youtube_video_id
-   * thumbnail_url
-   * description
-   * category_id
-   * status
-   * featured
-   * published_at
-   * created_at
-   * updated_at
-   * slug
-   * author_id
-   *
-   * Jadi TIDAK menggunakan:
-   * published
-   * category
-   * youtube_id
-   */
-
-
-  const result =
-    await db
-      .from('videos')
-      .select(
-        [
-          'id',
-          'title',
-          'youtube_url',
-          'youtube_video_id',
-          'thumbnail_url',
-          'description',
-          'category_id',
-          'status',
-          'featured',
-          'published_at',
-          'created_at',
-          'updated_at',
-          'slug',
-          'author_id'
-        ].join(',')
-      )
-      .eq(
-        'status',
-        'published'
-      )
-      .not(
-        'published_at',
-        'is',
-        null
-      )
-      .order(
-        'published_at',
-        {
-          ascending:false
-        }
-      );
-
-
-  if(result.error){
-
-    throw result.error;
-
-  }
-
-
-  if(!Array.isArray(result.data)){
-
-    return [];
-
-  }
-
-
-  return result.data
-    .map(normalizeVideo)
-    .filter(
-      video =>
-        video.status === 'published' &&
-        !!video.published_at
-    );
-
-}
-
-
-/* =========================================================
-   LOAD
-========================================================= */
-
-async function loadVideos(){
-
-  showStatus(
-    'Memuat video...',
-    'Mengambil koleksi video Mandala Channel.'
-  );
-
-
-  try{
-
-    allVideos =
-      await loadVideosFromSupabase();
-
-
-    allVideos.sort(
-      (a,b) =>
-        new Date(
-          b.published_at || b.created_at || 0
-        ) -
-        new Date(
-          a.published_at || a.created_at || 0
-        )
-    );
-
-
-    filteredVideos =
-      [...allVideos];
-
-
-    renderFilters();
-    applyFilters();
-    renderFeatured();
-
-
-  }catch(error){
-
-    console.error(
-      'SUPABASE VIDEO ERROR:',
-      error
-    );
-
-
-    allVideos = [];
-    filteredVideos = [];
-
-
-    showStatus(
-      'Video gagal dimuat',
-      error?.message ||
-      'Terjadi kesalahan saat mengambil data video.'
-    );
-
-  }
 
 }
 
@@ -1912,22 +1780,26 @@ async function loadVideos(){
 
 function showStatus(
   title,
-  description
+  description,
+  isError = false
 ){
 
   const grid =
     document.getElementById(
-      'videoGrid'
+      "videoGrid"
     );
 
   if(!grid){
     return;
   }
 
-
   grid.innerHTML = `
 
-    <div class="videoStatus">
+    <div class="videoStatus ${
+      isError
+        ? "videoError"
+        : ""
+    }">
 
       <div>
 
@@ -1947,79 +1819,164 @@ function showStatus(
 
 
 /* =========================================================
-   CATEGORY
+   SUPABASE LOAD
 ========================================================= */
 
-/*
- * Karena videos hanya menyimpan category_id,
- * kita tampilkan category_id sebagai fallback.
- *
- * Ini sengaja tidak melakukan JOIN ke categories
- * supaya halaman video tidak rusak hanya karena
- * nama foreign-key relationship Supabase berbeda.
- */
+async function loadVideosFromSupabase(){
 
-function getCategoryLabel(video){
+  /*
+    STRUKTUR DATABASE:
+    videos
+      id
+      title
+      youtube_url
+      youtube_video_id
+      thumbnail_url
+      description
+      category_id
+      status
+      featured
+      published_at
+      created_at
+      updated_at
+      slug
+      author_id
+  */
 
-  if(!video){
-    return 'MANDALA VIDEO';
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("videos")
+      .select(`
+        id,
+        title,
+        youtube_url,
+        youtube_video_id,
+        thumbnail_url,
+        description,
+        category_id,
+        status,
+        featured,
+        published_at,
+        created_at,
+        updated_at,
+        slug,
+        author_id
+      `)
+      .eq(
+        "status",
+        "published"
+      )
+      .not(
+        "published_at",
+        "is",
+        null
+      )
+      .order(
+        "published_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+
+    throw error;
+
   }
 
-  if(video.category_name){
-    return video.category_name;
-  }
 
-  if(video.category){
-    return video.category;
-  }
-
-  if(video.category_id){
-
-    return 'Kategori';
-
-  }
-
-  return 'MANDALA VIDEO';
+  return (
+    data || []
+  )
+  .map(
+    normalizeVideo
+  )
+  .filter(
+    video =>
+      video.youtube_video_id ||
+      video.youtube_url
+  );
 
 }
 
 
-function getCategories(){
+/* =========================================================
+   LOAD ALL
+========================================================= */
 
-  const categories = [];
+async function loadVideos(){
 
-  allVideos.forEach(
-    video => {
-
-      if(video.category_id){
-
-        const exists =
-          categories.some(
-            item =>
-              item.id ===
-              video.category_id
-          );
-
-        if(!exists){
-
-          categories.push({
-
-            id:
-              video.category_id,
-
-            label:
-              'Kategori'
-
-          });
-
-        }
-
-      }
-
-    }
+  showStatus(
+    "Memuat video...",
+    "Mengambil koleksi video Mandala Channel."
   );
 
-  return categories;
+  try{
+
+    const rows =
+      await loadVideosFromSupabase();
+
+    VIDEOS =
+      rows;
+
+    FILTERED_VIDEOS =
+      [...VIDEOS];
+
+    VISIBLE_COUNT =
+      PER_PAGE;
+
+    renderFilters();
+
+    applyFilters();
+
+    renderFeatured();
+
+  }catch(error){
+
+    console.error(
+      "SUPABASE VIDEO ERROR:",
+      error
+    );
+
+    VIDEOS = [];
+
+    FILTERED_VIDEOS = [];
+
+    showStatus(
+      "Video gagal dimuat",
+      error?.message ||
+      "Tidak dapat mengambil data video dari Supabase.",
+      true
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+function getCategories(){
+
+  const categories =
+    VIDEOS
+      .map(
+        video =>
+          video.category_id
+      )
+      .filter(Boolean);
+
+  return [
+    ...new Set(
+      categories
+    )
+  ];
 
 }
 
@@ -2032,24 +1989,18 @@ function renderFilters(){
 
   const container =
     document.getElementById(
-      'filterList'
+      "filterList"
     );
 
   if(!container){
     return;
   }
 
-
   const categories =
     getCategories();
 
 
-  /*
-   * Kalau category_id tersedia,
-   * filter tetap bekerja berdasarkan ID.
-   */
-
-  container.innerHTML = `
+  let html = `
 
     <button
       class="filterBtn active"
@@ -2058,63 +2009,62 @@ function renderFilters(){
       Semua
     </button>
 
-    ${
-      categories
-        .map(
-          category => `
-
-            <button
-              class="filterBtn"
-              type="button"
-              data-filter="${escapeHTML(category.id)}">
-
-              ${escapeHTML(category.label)}
-
-            </button>
-
-          `
-        )
-        .join('')
-    }
-
   `;
+
+
+  categories.forEach(
+    category => {
+
+      html += `
+
+        <button
+          class="filterBtn"
+          type="button"
+          data-filter="${escapeHTML(category)}">
+
+          ${escapeHTML(category)}
+
+        </button>
+
+      `;
+
+    }
+  );
+
+
+  container.innerHTML =
+    html;
 
 
   container
     .querySelectorAll(
-      '.filterBtn'
+      ".filterBtn"
     )
     .forEach(
       button => {
 
         button.addEventListener(
-          'click',
-          () => {
+          "click",
+          function(){
 
-            currentCategory =
-              button.dataset.filter ||
-              'all';
+            CURRENT_CATEGORY =
+              this.dataset.filter ||
+              "all";
 
+            VISIBLE_COUNT =
+              PER_PAGE;
 
             container
               .querySelectorAll(
-                '.filterBtn'
+                ".filterBtn"
               )
               .forEach(
-                btn => {
-
-                  btn.classList.toggle(
-                    'active',
-                    btn === button
-                  );
-
-                }
+                item =>
+                  item.classList.toggle(
+                    "active",
+                    item === this
+                  )
               );
-
-
-            visibleCount =
-              VIDEO_PER_PAGE;
-
 
             applyFilters();
 
@@ -2128,32 +2078,32 @@ function renderFilters(){
 
 
 /* =========================================================
-   APPLY FILTER
+   FILTER
 ========================================================= */
 
 function applyFilters(){
 
   const query =
-    currentSearch
+    CURRENT_SEARCH
       .trim()
       .toLowerCase();
 
 
-  filteredVideos =
-    allVideos.filter(
+  FILTERED_VIDEOS =
+    VIDEOS.filter(
       video => {
 
         const categoryMatch =
-          currentCategory === 'all' ||
+          CURRENT_CATEGORY === "all" ||
           String(
-            video.category_id || ''
+            video.category_id || ""
           ) ===
           String(
-            currentCategory
+            CURRENT_CATEGORY
           );
 
 
-        const searchText = [
+        const text = [
 
           video.title,
 
@@ -2161,19 +2111,17 @@ function applyFilters(){
 
           video.youtube_url,
 
-          video.slug,
-
-          video.category_id
+          video.slug
 
         ]
           .filter(Boolean)
-          .join(' ')
+          .join(" ")
           .toLowerCase();
 
 
         const searchMatch =
           !query ||
-          searchText.includes(
+          text.includes(
             query
           );
 
@@ -2200,31 +2148,31 @@ function renderVideos(){
 
   const grid =
     document.getElementById(
-      'videoGrid'
+      "videoGrid"
     );
 
-  const loadMoreWrap =
+  const loadMore =
     document.getElementById(
-      'loadMoreWrap'
+      "loadMoreWrap"
     );
-
 
   if(!grid){
     return;
   }
 
 
-  if(!filteredVideos.length){
+  if(
+    !FILTERED_VIDEOS.length
+  ){
 
     showStatus(
-      'Belum ada video',
-      'Belum ada video published yang tersedia.'
+      "Belum ada video",
+      "Belum ada video published yang tersedia."
     );
 
-
-    if(loadMoreWrap){
-      loadMoreWrap.style.display =
-        'none';
+    if(loadMore){
+      loadMore.style.display =
+        "none";
     }
 
     return;
@@ -2233,43 +2181,50 @@ function renderVideos(){
 
 
   const visible =
-    filteredVideos.slice(
+    FILTERED_VIDEOS.slice(
       0,
-      visibleCount
+      VISIBLE_COUNT
     );
 
 
   grid.innerHTML =
     visible
       .map(
-        renderVideoCard
+        (
+          video,
+          index
+        ) =>
+          renderCard(
+            video,
+            index
+          )
       )
-      .join('');
+      .join("");
 
 
   grid
     .querySelectorAll(
-      '[data-video-index]'
+      "[data-video-index]"
     )
     .forEach(
       card => {
 
         card.addEventListener(
-          'click',
-          () => {
+          "click",
+          function(){
 
             const index =
               Number(
-                card.dataset.videoIndex
+                this.dataset.videoIndex
               );
-
 
             const video =
               visible[index];
 
-
             if(video){
-              openVideo(video);
+              openVideo(
+                video
+              );
             }
 
           }
@@ -2279,13 +2234,13 @@ function renderVideos(){
     );
 
 
-  if(loadMoreWrap){
+  if(loadMore){
 
-    loadMoreWrap.style.display =
+    loadMore.style.display =
       visible.length <
-      filteredVideos.length
-        ? 'flex'
-        : 'none';
+      FILTERED_VIDEOS.length
+        ? "flex"
+        : "none";
 
   }
 
@@ -2296,33 +2251,28 @@ function renderVideos(){
    CARD
 ========================================================= */
 
-function renderVideoCard(
+function renderCard(
   video,
   index
 ){
-
-  const thumbnail =
-    getThumbnail(video);
-
 
   const title =
     escapeHTML(
       video.title
     );
 
-
-  const category =
-    escapeHTML(
-      getCategoryLabel(video)
-    );
-
-
   const description =
     escapeHTML(
       video.description ||
-      'Video Mandala Channel.'
+      "Video Mandala Channel."
     );
 
+  const image =
+    escapeHTML(
+      getThumbnail(
+        video
+      )
+    );
 
   const date =
     formatDate(
@@ -2344,14 +2294,13 @@ function renderVideoCard(
         aria-label="Putar ${title}">
 
         <img
-          src="${escapeHTML(thumbnail)}"
+          src="${image}"
           alt="${title}"
           loading="lazy"
           onerror="
             this.onerror=null;
-            this.src='https://img.youtube.com/vi/${escapeHTML(getYoutubeId(video))}/hqdefault.jpg';
+            this.src='${FALLBACK_IMAGE}';
           ">
-
 
         <div class="videoOverlay">
 
@@ -2361,9 +2310,8 @@ function renderVideoCard(
 
         </div>
 
-
         <span class="videoBadge">
-          ${category}
+          MANDALA VIDEO
         </span>
 
       </div>
@@ -2372,19 +2320,16 @@ function renderVideoCard(
       <div class="videoInfo">
 
         <div class="videoMeta">
-          ${category}
+          MANDALA VIDEO
         </div>
-
 
         <h3 class="videoTitle">
           ${title}
         </h3>
 
-
         <p class="videoDescription">
           ${description}
         </p>
-
 
         ${
           date
@@ -2393,7 +2338,7 @@ function renderVideoCard(
                 ${escapeHTML(date)}
               </small>
             `
-            : ''
+            : ""
         }
 
       </div>
@@ -2411,107 +2356,104 @@ function renderVideoCard(
 
 function renderFeatured(){
 
-  const feature =
-    allVideos.find(
-      video =>
-        video.featured === true
+  const video =
+    VIDEOS.find(
+      item =>
+        item.featured === true
     ) ||
-    allVideos[0];
+    VIDEOS[0];
 
 
-  if(!feature){
+  if(!video){
+
     return;
+
   }
 
 
   const image =
-    getThumbnail(feature);
-
-
-  const imageElement =
     document.getElementById(
-      'featureVideoImage'
+      "featureVideoImage"
     );
 
-  const categoryElement =
+  const category =
     document.getElementById(
-      'featureVideoCategory'
+      "featureVideoCategory"
     );
 
-  const titleElement =
+  const title =
     document.getElementById(
-      'featureVideoTitle'
+      "featureVideoTitle"
     );
 
-  const descriptionElement =
+  const description =
     document.getElementById(
-      'featureVideoDescription'
+      "featureVideoDescription"
     );
 
-  const metaElement =
+  const meta =
     document.getElementById(
-      'featureVideoMeta'
+      "featureVideoMeta"
     );
 
   const thumb =
     document.getElementById(
-      'featureVideoThumb'
+      "featureVideoThumb"
     );
 
 
-  if(imageElement){
+  if(image){
 
-    imageElement.src =
-      image;
-
-    imageElement.alt =
-      feature.title;
-
-  }
-
-
-  if(categoryElement){
-
-    categoryElement.textContent =
-      getCategoryLabel(
-        feature
+    image.src =
+      getThumbnail(
+        video
       );
 
-  }
-
-
-  if(titleElement){
-
-    titleElement.textContent =
-      feature.title;
+    image.alt =
+      video.title;
 
   }
 
 
-  if(descriptionElement){
+  if(category){
 
-    descriptionElement.textContent =
-      feature.description ||
-      '';
+    category.textContent =
+      "Mandala Video";
 
   }
 
 
-  if(metaElement){
+  if(title){
+
+    title.textContent =
+      video.title;
+
+  }
+
+
+  if(description){
+
+    description.textContent =
+      video.description ||
+      "Video Mandala Channel.";
+
+  }
+
+
+  if(meta){
 
     const date =
       formatDate(
-        feature.published_at ||
-        feature.created_at
+        video.published_at ||
+        video.created_at
       );
 
-
-    metaElement.textContent =
-      'Mandala Channel' +
+    meta.textContent =
+      "Mandala Channel" +
       (
         date
-          ? ' · ' + date
-          : ' · Video Pilihan'
+          ? " · " + date
+          : " · Video Pilihan"
       );
 
   }
@@ -2520,8 +2462,13 @@ function renderFeatured(){
   if(thumb){
 
     thumb.onclick =
-      () =>
-        openVideo(feature);
+      function(){
+
+        openVideo(
+          video
+        );
+
+      };
 
   }
 
@@ -2536,26 +2483,22 @@ function renderFeatured(){
 
   const input =
     document.getElementById(
-      'videoSearch'
+      "videoSearch"
     );
-
 
   if(!input){
     return;
   }
 
-
   input.addEventListener(
-    'input',
-    () => {
+    "input",
+    function(){
 
-      currentSearch =
-        input.value || '';
+      CURRENT_SEARCH =
+        this.value || "";
 
-
-      visibleCount =
-        VIDEO_PER_PAGE;
-
+      VISIBLE_COUNT =
+        PER_PAGE;
 
       applyFilters();
 
@@ -2573,22 +2516,19 @@ function renderFeatured(){
 
   const button =
     document.getElementById(
-      'loadMore'
+      "loadMore"
     );
-
 
   if(!button){
     return;
   }
 
-
   button.addEventListener(
-    'click',
-    () => {
+    "click",
+    function(){
 
-      visibleCount +=
-        VIDEO_PER_PAGE;
-
+      VISIBLE_COUNT +=
+        PER_PAGE;
 
       renderVideos();
 
@@ -2604,19 +2544,28 @@ function renderFeatured(){
 
 function openVideo(video){
 
-  if(!video){
-    return;
-  }
-
-
   const embed =
-    getYoutubeEmbed(video);
+    getEmbedUrl(
+      video
+    );
 
 
   if(!embed){
 
+    if(video.youtube_url){
+
+      window.open(
+        video.youtube_url,
+        "_blank",
+        "noopener"
+      );
+
+      return;
+
+    }
+
     alert(
-      'Video YouTube belum memiliki youtube_video_id atau youtube_url yang valid.'
+      "Video YouTube belum tersedia."
     );
 
     return;
@@ -2626,17 +2575,17 @@ function openVideo(video){
 
   const modal =
     document.getElementById(
-      'modal'
+      "modal"
     );
 
   const frame =
     document.getElementById(
-      'videoFrame'
+      "videoFrame"
     );
 
   const title =
     document.getElementById(
-      'modalTitle'
+      "modalTitle"
     );
 
 
@@ -2644,7 +2593,7 @@ function openVideo(video){
 
     title.textContent =
       video.title ||
-      'Mandala Channel';
+      "Mandala Channel";
 
   }
 
@@ -2660,19 +2609,19 @@ function openVideo(video){
   if(modal){
 
     modal.classList.add(
-      'open'
+      "open"
     );
 
     modal.setAttribute(
-      'aria-hidden',
-      'false'
+      "aria-hidden",
+      "false"
     );
 
   }
 
 
   document.body.style.overflow =
-    'hidden';
+    "hidden";
 
 }
 
@@ -2685,36 +2634,39 @@ function closeVideo(){
 
   const modal =
     document.getElementById(
-      'modal'
+      "modal"
     );
 
   const frame =
     document.getElementById(
-      'videoFrame'
+      "videoFrame"
     );
 
 
   if(frame){
-    frame.src = '';
+
+    frame.src =
+      "";
+
   }
 
 
   if(modal){
 
     modal.classList.remove(
-      'open'
+      "open"
     );
 
     modal.setAttribute(
-      'aria-hidden',
-      'true'
+      "aria-hidden",
+      "true"
     );
 
   }
 
 
   document.body.style.overflow =
-    '';
+    "";
 
 }
 
@@ -2727,19 +2679,19 @@ function closeVideo(){
 
   const modal =
     document.getElementById(
-      'modal'
+      "modal"
     );
 
   const close =
     document.getElementById(
-      'closeModal'
+      "closeModal"
     );
 
 
   if(close){
 
     close.addEventListener(
-      'click',
+      "click",
       closeVideo
     );
 
@@ -2749,8 +2701,8 @@ function closeVideo(){
   if(modal){
 
     modal.addEventListener(
-      'click',
-      event => {
+      "click",
+      function(event){
 
         if(
           event.target === modal
@@ -2767,11 +2719,11 @@ function closeVideo(){
 
 
   document.addEventListener(
-    'keydown',
-    event => {
+    "keydown",
+    function(event){
 
       if(
-        event.key === 'Escape'
+        event.key === "Escape"
       ){
 
         closeVideo();
@@ -2785,41 +2737,75 @@ function closeVideo(){
 
 
 /* =========================================================
-   KEYBOARD
+   KEYBOARD CARD
 ========================================================= */
 
 document.addEventListener(
-  'keydown',
-  event => {
+  "keydown",
+  function(event){
 
-    const target =
-      event.target.closest?.(
-        '.videoThumb'
+    if(
+      event.key !== "Enter" &&
+      event.key !== " "
+    ){
+
+      return;
+
+    }
+
+
+    const thumb =
+      event.target.closest(
+        ".videoThumb"
       );
 
 
-    if(!target){
+    if(!thumb){
       return;
     }
 
 
-    if(
-      event.key === 'Enter' ||
-      event.key === ' '
-    ){
+    event.preventDefault();
 
-      event.preventDefault();
-
-      target
-        .closest(
-          '.videoCard'
-        )
-        ?.click();
-
-    }
+    thumb
+      .closest(
+        ".videoCard"
+      )
+      ?.click();
 
   }
 );
+
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+(function(){
+
+  const form =
+    document.getElementById(
+      "newsletterForm"
+    );
+
+  if(!form){
+    return;
+  }
+
+  form.addEventListener(
+    "submit",
+    function(event){
+
+      event.preventDefault();
+
+      alert(
+        "Form newsletter siap dihubungkan ke layanan email."
+      );
+
+    }
+  );
+
+})();
 
 
 /* =========================================================
