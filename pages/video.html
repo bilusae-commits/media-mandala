@@ -10,11 +10,6 @@
 
 <style>
 
-/* =========================================================
-   MANDALA CHANNEL — VIDEO
-   CMS / SUPABASE READY
-   ========================================================= */
-
 :root{
   --navy:#082d56;
   --navy-deep:#061f3c;
@@ -59,9 +54,7 @@ a{
   margin-inline:auto;
 }
 
-/* =========================================================
-   TOP
-   ========================================================= */
+/* TOP */
 
 .top{
   height:34px;
@@ -79,9 +72,7 @@ a{
   padding-inline:clamp(2px,1vw,18px);
 }
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* HEADER */
 
 header#siteHeader{
   position:sticky !important;
@@ -211,9 +202,7 @@ header.scrolled .links a:after{
   transform:translateY(-1px);
 }
 
-/* =========================================================
-   PAGE HERO
-   ========================================================= */
+/* HERO */
 
 .pageHero{
   position:relative;
@@ -221,7 +210,6 @@ header.scrolled .links a:after{
   display:flex;
   align-items:center;
   overflow:hidden;
-
   background:
     linear-gradient(
       90deg,
@@ -265,9 +253,7 @@ header.scrolled .links a:after{
   line-height:1.7;
 }
 
-/* =========================================================
-   VIDEO SECTION
-   ========================================================= */
+/* VIDEO SECTION */
 
 .videoSection{
   padding:clamp(56px,5.4vw,82px) 0;
@@ -296,9 +282,7 @@ header.scrolled .links a:after{
   line-height:1.65;
 }
 
-/* =========================================================
-   TOOLS
-   ========================================================= */
+/* TOOLS */
 
 .videoTools{
   display:flex;
@@ -349,9 +333,7 @@ header.scrolled .links a:after{
   border-color:var(--bronze);
 }
 
-/* =========================================================
-   GRID
-   ========================================================= */
+/* GRID */
 
 .videoGrid{
   display:grid;
@@ -464,9 +446,7 @@ header.scrolled .links a:after{
   font-size:10px;
 }
 
-/* =========================================================
-   STATUS
-   ========================================================= */
+/* STATUS */
 
 .videoStatus{
   grid-column:1/-1;
@@ -488,9 +468,7 @@ header.scrolled .links a:after{
   font:500 20px Georgia,serif;
 }
 
-/* =========================================================
-   LOAD MORE
-   ========================================================= */
+/* LOAD MORE */
 
 .loadMoreWrap{
   justify-content:center;
@@ -512,9 +490,7 @@ header.scrolled .links a:after{
   color:#fff;
 }
 
-/* =========================================================
-   FEATURE
-   ========================================================= */
+/* FEATURE */
 
 .videoFeature{
   padding:clamp(56px,5.4vw,82px) 0;
@@ -590,9 +566,7 @@ header.scrolled .links a:after{
   font-size:10px;
 }
 
-/* =========================================================
-   NEWS
-   ========================================================= */
+/* NEWS */
 
 .newsSection{
   padding:56px 0;
@@ -650,9 +624,7 @@ header.scrolled .links a:after{
   font-weight:700;
 }
 
-/* =========================================================
-   MODAL
-   ========================================================= */
+/* MODAL */
 
 .modal{
   position:fixed;
@@ -710,9 +682,7 @@ header.scrolled .links a:after{
   border:0;
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
+/* FOOTER */
 
 footer{
   padding:55px 0 25px;
@@ -759,9 +729,7 @@ footer{
   font-size:10px;
 }
 
-/* =========================================================
-   REVEAL
-   ========================================================= */
+/* REVEAL */
 
 .reveal{
   opacity:0;
@@ -776,9 +744,7 @@ footer{
   transform:none;
 }
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
+/* RESPONSIVE */
 
 @media(max-width:1100px){
 
@@ -938,29 +904,17 @@ footer{
 
     <nav class="links" aria-label="Navigasi utama">
 
-      <a href="../index.html">
-        Beranda
-      </a>
+      <a href="../index.html">Beranda</a>
 
-      <a href="artikel.html">
-        Artikel
-      </a>
+      <a href="artikel.html">Artikel</a>
 
-      <a href="video.html" aria-current="page">
-        Video
-      </a>
+      <a href="video.html" aria-current="page">Video</a>
 
-      <a href="playlist.html">
-        Playlist
-      </a>
+      <a href="playlist.html">Playlist</a>
 
-      <a href="podcast.html">
-        Podcast
-      </a>
+      <a href="podcast.html">Podcast</a>
 
-      <a href="tentang-kami.html">
-        Tentang
-      </a>
+      <a href="tentang-kami.html">Tentang</a>
 
     </nav>
 
@@ -1067,9 +1021,7 @@ footer{
 
         <div>
 
-          <strong>
-            Memuat video...
-          </strong>
+          <strong>Memuat video...</strong>
 
           Mengambil koleksi video Mandala Channel.
 
@@ -1204,9 +1156,10 @@ footer{
 
       <form
         class="email"
-        onsubmit="event.preventDefault();alert('Form siap dihubungkan ke layanan email.');">
+        id="newsletterForm">
 
         <input
+          id="newsletterEmail"
           type="email"
           required
           placeholder="Email Anda">
@@ -1292,45 +1245,29 @@ footer{
 
       <div>
 
-        <h3>
-          JELAJAH
-        </h3>
+        <h3>JELAJAH</h3>
 
-        <a href="artikel.html">
-          Artikel
-        </a>
-
+        <a href="artikel.html">Artikel</a>
         <br>
-
-        <a href="video.html">
-          Video
-        </a>
-
+        <a href="video.html">Video</a>
         <br>
-
-        <a href="playlist.html">
-          Playlist
-        </a>
+        <a href="playlist.html">Playlist</a>
 
       </div>
 
 
       <div>
 
-        <h3>
-          TOPIK
-        </h3>
+        <h3>TOPIK</h3>
 
         <a href="../topics/jelajah-nusantara.html">
           Jelajah
         </a>
-
         <br>
 
         <a href="../topics/tokoh-hindu.html">
           Tokoh
         </a>
-
         <br>
 
         <a href="../topics/tradisi-budaya.html">
@@ -1342,14 +1279,11 @@ footer{
 
       <div>
 
-        <h3>
-          MANDALA
-        </h3>
+        <h3>MANDALA</h3>
 
         <a href="tentang-kami.html">
           Tentang
         </a>
-
         <br>
 
         <a href="kontak.html">
@@ -1370,10 +1304,6 @@ footer{
 </footer>
 
 
-<!-- =========================================================
-     MANDALA CONFIG
-     ========================================================= -->
-
 <script>
 
 window.MANDALA_CONFIG = {
@@ -1389,25 +1319,14 @@ window.MANDALA_CONFIG = {
 </script>
 
 
-<!-- =========================================================
-     SUPABASE CLIENT
-     Tidak menggunakan:
-     import { supabase }
-     ========================================================= -->
-
 <script src="../js/supabase-client.js"></script>
 
 
 <script>
 
 /* =========================================================
-   MANDALA VIDEO
-   DATA LAYER
-   ========================================================= */
-
-const BASE =
-  document.body.dataset.base || '../';
-
+   STATE
+========================================================= */
 
 let VIDEOS = [];
 
@@ -1424,14 +1343,12 @@ const VIDEO_PER_PAGE = 12;
 
 /* =========================================================
    HEADER
-   ========================================================= */
+========================================================= */
 
 (function(){
 
   const header =
-    document.getElementById(
-      'siteHeader'
-    );
+    document.getElementById('siteHeader');
 
   if(!header){
     return;
@@ -1461,25 +1378,18 @@ const VIDEO_PER_PAGE = 12;
 
 /* =========================================================
    REVEAL
-   ========================================================= */
+========================================================= */
 
 (function(){
 
   const elements =
-    document.querySelectorAll(
-      '.reveal'
-    );
+    document.querySelectorAll('.reveal');
 
-  if(
-    !('IntersectionObserver' in window)
-  ){
+  if(!('IntersectionObserver' in window)){
 
     elements.forEach(
-      element=>{
-        element.classList.add(
-          'is-visible'
-        );
-      }
+      element =>
+        element.classList.add('is-visible')
     );
 
     return;
@@ -1487,14 +1397,12 @@ const VIDEO_PER_PAGE = 12;
 
   const observer =
     new IntersectionObserver(
-      entries=>{
+      entries => {
 
         entries.forEach(
-          entry=>{
+          entry => {
 
-            if(
-              entry.isIntersecting
-            ){
+            if(entry.isIntersecting){
 
               entry.target.classList.add(
                 'is-visible'
@@ -1512,17 +1420,13 @@ const VIDEO_PER_PAGE = 12;
       },
       {
         threshold:.08,
-        rootMargin:
-          '0px 0px -40px 0px'
+        rootMargin:'0px 0px -40px 0px'
       }
     );
 
   elements.forEach(
-    element=>{
-      observer.observe(
-        element
-      );
-    }
+    element =>
+      observer.observe(element)
   );
 
 })();
@@ -1530,40 +1434,23 @@ const VIDEO_PER_PAGE = 12;
 
 /* =========================================================
    SAFE HTML
-   ========================================================= */
+========================================================= */
 
 function escapeHTML(value){
 
-  return String(
-    value ?? ''
-  )
-  .replace(
-    /&/g,
-    '&amp;'
-  )
-  .replace(
-    /</g,
-    '&lt;'
-  )
-  .replace(
-    />/g,
-    '&gt;'
-  )
-  .replace(
-    /"/g,
-    '&quot;'
-  )
-  .replace(
-    /'/g,
-    '&#039;'
-  );
+  return String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
 
 }
 
 
 /* =========================================================
    YOUTUBE ID
-   ========================================================= */
+========================================================= */
 
 function getYoutubeId(value){
 
@@ -1575,13 +1462,9 @@ function getYoutubeId(value){
     String(value).trim();
 
   if(
-    /^[a-zA-Z0-9_-]{11}$/.test(
-      text
-    )
+    /^[a-zA-Z0-9_-]{11}$/.test(text)
   ){
-
     return text;
-
   }
 
   try{
@@ -1590,25 +1473,20 @@ function getYoutubeId(value){
       new URL(text);
 
     if(
-      url.hostname.includes(
-        'youtube.com'
-      ) &&
+      url.hostname.includes('youtube.com') &&
       url.searchParams.get('v')
     ){
 
-      return url.searchParams.get(
-        'v'
-      );
+      return url.searchParams.get('v');
 
     }
 
     if(
-      url.hostname ===
-      'youtu.be'
+      url.hostname === 'youtu.be'
     ){
 
       return url.pathname
-        .replace('/','')
+        .replace(/^\/+/,'')
         .split('/')[0];
 
     }
@@ -1619,9 +1497,7 @@ function getYoutubeId(value){
       );
 
     if(embedMatch){
-
       return embedMatch[1];
-
     }
 
     const shortsMatch =
@@ -1630,14 +1506,12 @@ function getYoutubeId(value){
       );
 
     if(shortsMatch){
-
       return shortsMatch[1];
-
     }
 
   }catch(error){
 
-    /* bukan URL valid */
+    return '';
 
   }
 
@@ -1648,16 +1522,12 @@ function getYoutubeId(value){
 
 /* =========================================================
    THUMBNAIL
-   ========================================================= */
+========================================================= */
 
 function getThumbnail(video){
 
-  if(
-    video.thumbnail
-  ){
-
+  if(video.thumbnail){
     return video.thumbnail;
-
   }
 
   const id =
@@ -1687,7 +1557,7 @@ function getThumbnail(video){
 
 /* =========================================================
    YOUTUBE EMBED
-   ========================================================= */
+========================================================= */
 
 function getYoutubeEmbed(video){
 
@@ -1698,9 +1568,7 @@ function getYoutubeEmbed(video){
     );
 
   if(!id){
-
     return '';
-
   }
 
   return (
@@ -1714,27 +1582,19 @@ function getYoutubeEmbed(video){
 
 /* =========================================================
    DATE
-   ========================================================= */
+========================================================= */
 
 function formatDate(value){
 
   if(!value){
-
     return '';
-
   }
 
   const date =
     new Date(value);
 
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
-
+  if(Number.isNaN(date.getTime())){
     return String(value);
-
   }
 
   return new Intl.DateTimeFormat(
@@ -1751,18 +1611,24 @@ function formatDate(value){
 
 /* =========================================================
    NORMALIZE
-   ========================================================= */
+========================================================= */
 
 function normalizeVideo(item){
+
+  const publishedAt =
+    item.published_at ??
+    item.publishedAt ??
+    null;
 
   return {
 
     id:
       item.id ??
       (
-        crypto.randomUUID
-          ? crypto.randomUUID()
-          : Math.random()
+        window.crypto &&
+        typeof window.crypto.randomUUID === 'function'
+          ? window.crypto.randomUUID()
+          : Math.random().toString(36).slice(2)
       ),
 
     title:
@@ -1773,7 +1639,7 @@ function normalizeVideo(item){
     description:
       item.description ||
       item.excerpt ||
-      'Video Mandala Channel.',
+      '',
 
     category:
       item.category ||
@@ -1800,8 +1666,8 @@ function normalizeVideo(item){
       '',
 
     date:
+      publishedAt ||
       item.date ||
-      item.published_at ||
       item.created_at ||
       '',
 
@@ -1810,8 +1676,8 @@ function normalizeVideo(item){
       '',
 
     published:
-      item.published !== false &&
-      item.status !== 'draft',
+      publishedAt !== null &&
+      publishedAt !== '',
 
     featured:
       item.featured === true ||
@@ -1824,25 +1690,17 @@ function normalizeVideo(item){
 
 /* =========================================================
    SUPABASE
-   =========================================================
-   PENTING:
-   Tidak menggunakan:
-     import { supabase }
-
-   Menggunakan:
-     window.MandalaSupabase.getClient()
-
-   karena itulah API yang disediakan
-   oleh js/supabase-client.js.
-   ========================================================= */
+   IMPORTANT:
+   Tidak import { supabase }.
+   Mengikuti API MandalaSupabase dari
+   js/supabase-client.js.
+========================================================= */
 
 async function loadVideosFromSupabase(){
 
   if(
     !window.MandalaSupabase ||
-    typeof
-      window.MandalaSupabase.getClient !==
-      'function'
+    typeof window.MandalaSupabase.getClient !== 'function'
   ){
 
     throw new Error(
@@ -1852,16 +1710,24 @@ async function loadVideosFromSupabase(){
   }
 
   const db =
-    await window.MandalaSupabase
-      .getClient();
+    await window.MandalaSupabase.getClient();
 
+  /*
+   * JANGAN filter dengan:
+   * .eq('published', true)
+   *
+   * Karena tabel videos menggunakan:
+   * published_at
+   *
+   * Query hanya mengambil semua data,
+   * kemudian JS menentukan video published
+   * berdasarkan published_at.
+   */
 
   const result =
     await db
       .from('videos')
       .select('*')
-    .eq('published_at', 'not.is', null)
-      )
       .order(
         'created_at',
         {
@@ -1869,32 +1735,22 @@ async function loadVideosFromSupabase(){
         }
       );
 
-
   if(result.error){
 
     throw result.error;
 
   }
 
-
-  if(
-    !Array.isArray(
-      result.data
-    )
-  ){
+  if(!Array.isArray(result.data)){
 
     return [];
 
   }
 
-
   return result.data
-    .map(
-      normalizeVideo
-    )
+    .map(normalizeVideo)
     .filter(
-      video =>
-        video.published
+      video => video.published
     );
 
 }
@@ -1902,7 +1758,7 @@ async function loadVideosFromSupabase(){
 
 /* =========================================================
    LOAD
-   ========================================================= */
+========================================================= */
 
 async function loadVideos(){
 
@@ -1911,40 +1767,30 @@ async function loadVideos(){
     'Mengambil koleksi video Mandala Channel.'
   );
 
-
   try{
 
     const data =
       await loadVideosFromSupabase();
-
 
     VIDEOS =
       Array.isArray(data)
         ? data
         : [];
 
-
     VIDEOS.sort(
-      (a,b)=>
-        new Date(
-          b.date || 0
-        ) -
-        new Date(
-          a.date || 0
-        )
+      (a,b) =>
+        new Date(b.date || 0) -
+        new Date(a.date || 0)
     );
-
 
     filteredVideos =
       [...VIDEOS];
-
 
     renderFilters();
 
     applyFilters();
 
     renderFeatured();
-
 
   }catch(error){
 
@@ -1953,15 +1799,13 @@ async function loadVideos(){
       error
     );
 
-
     VIDEOS = [];
 
     filteredVideos = [];
 
-
     showStatus(
       'Video gagal dimuat',
-      error.message ||
+      error?.message ||
       'Terjadi kesalahan saat mengambil data video.'
     );
 
@@ -1972,7 +1816,7 @@ async function loadVideos(){
 
 /* =========================================================
    STATUS
-   ========================================================= */
+========================================================= */
 
 function showStatus(
   title,
@@ -1980,16 +1824,11 @@ function showStatus(
 ){
 
   const grid =
-    document.getElementById(
-      'videoGrid'
-    );
+    document.getElementById('videoGrid');
 
   if(!grid){
-
     return;
-
   }
-
 
   grid.innerHTML = `
 
@@ -2014,22 +1853,15 @@ function showStatus(
 
 /* =========================================================
    CATEGORIES
-   ========================================================= */
+========================================================= */
 
 function getCategories(){
 
-  const categories =
-    VIDEOS
-      .map(
-        video =>
-          video.category
-      )
-      .filter(Boolean);
-
-
   return [
     ...new Set(
-      categories
+      VIDEOS
+        .map(video => video.category)
+        .filter(Boolean)
     )
   ];
 
@@ -2038,25 +1870,19 @@ function getCategories(){
 
 /* =========================================================
    FILTERS
-   ========================================================= */
+========================================================= */
 
 function renderFilters(){
 
   const container =
-    document.getElementById(
-      'filterList'
-    );
+    document.getElementById('filterList');
 
   if(!container){
-
     return;
-
   }
-
 
   const categories =
     getCategories();
-
 
   container.innerHTML = `
 
@@ -2088,56 +1914,44 @@ function renderFilters(){
 
   `;
 
-
   container
-    .querySelectorAll(
-      '.filterBtn'
-    )
-    .forEach(
-      button => {
+    .querySelectorAll('.filterBtn')
+    .forEach(button => {
 
-        button.addEventListener(
-          'click',
-          ()=>{
+      button.addEventListener(
+        'click',
+        () => {
 
-            currentCategory =
-              button.dataset.filter;
+          currentCategory =
+            button.dataset.filter || 'all';
 
+          container
+            .querySelectorAll('.filterBtn')
+            .forEach(btn => {
 
-            container
-              .querySelectorAll(
-                '.filterBtn'
-              )
-              .forEach(
-                btn => {
-
-                  btn.classList.toggle(
-                    'active',
-                    btn === button
-                  );
-
-                }
+              btn.classList.toggle(
+                'active',
+                btn === button
               );
 
+            });
 
-            visibleCount =
-              VIDEO_PER_PAGE;
+          visibleCount =
+            VIDEO_PER_PAGE;
 
+          applyFilters();
 
-            applyFilters();
+        }
+      );
 
-          }
-        );
-
-      }
-    );
+    });
 
 }
 
 
 /* =========================================================
    APPLY FILTER
-   ========================================================= */
+========================================================= */
 
 function applyFilters(){
 
@@ -2146,49 +1960,39 @@ function applyFilters(){
       .trim()
       .toLowerCase();
 
-
   filteredVideos =
-    VIDEOS.filter(
-      video => {
+    VIDEOS.filter(video => {
 
-        const categoryMatch =
-          currentCategory === 'all' ||
-          String(
-            video.category
-          )
-            .toLowerCase() ===
-          currentCategory
-            .toLowerCase();
+      const category =
+        String(
+          video.category || ''
+        ).toLowerCase();
 
+      const categoryMatch =
+        currentCategory === 'all' ||
+        category ===
+        currentCategory.toLowerCase();
 
-        const searchText = [
+      const searchText = [
 
-          video.title,
+        video.title,
+        video.description,
+        video.category
 
-          video.description,
+      ]
+        .join(' ')
+        .toLowerCase();
 
-          video.category
+      const searchMatch =
+        !query ||
+        searchText.includes(query);
 
-        ]
-          .join(' ')
-          .toLowerCase();
+      return (
+        categoryMatch &&
+        searchMatch
+      );
 
-
-        const searchMatch =
-          !query ||
-          searchText.includes(
-            query
-          );
-
-
-        return (
-          categoryMatch &&
-          searchMatch
-        );
-
-      }
-    );
-
+    });
 
   renderVideos();
 
@@ -2196,51 +2000,35 @@ function applyFilters(){
 
 
 /* =========================================================
-   RENDER VIDEO
-   ========================================================= */
+   RENDER VIDEOS
+========================================================= */
 
 function renderVideos(){
 
   const grid =
-    document.getElementById(
-      'videoGrid'
-    );
-
+    document.getElementById('videoGrid');
 
   const loadMoreWrap =
-    document.getElementById(
-      'loadMoreWrap'
-    );
-
+    document.getElementById('loadMoreWrap');
 
   if(!grid){
-
     return;
-
   }
 
-
-  if(
-    !filteredVideos.length
-  ){
+  if(!filteredVideos.length){
 
     showStatus(
       'Belum ada video',
       'Belum ada video published yang tersedia.'
     );
 
-
     if(loadMoreWrap){
-
-      loadMoreWrap.style.display =
-        'none';
-
+      loadMoreWrap.style.display = 'none';
     }
 
     return;
 
   }
-
 
   const visible =
     filteredVideos.slice(
@@ -2248,50 +2036,35 @@ function renderVideos(){
       visibleCount
     );
 
-
   grid.innerHTML =
     visible
-      .map(
-        renderVideoCard
-      )
+      .map(renderVideoCard)
       .join('');
 
-
   grid
-    .querySelectorAll(
-      '[data-video-index]'
-    )
-    .forEach(
-      card => {
+    .querySelectorAll('[data-video-index]')
+    .forEach(card => {
 
-        card.addEventListener(
-          'click',
-          ()=>{
+      card.addEventListener(
+        'click',
+        () => {
 
-            const index =
-              Number(
-                card.dataset.videoIndex
-              );
+          const index =
+            Number(
+              card.dataset.videoIndex
+            );
 
+          const video =
+            visible[index];
 
-            const video =
-              visible[index];
-
-
-            if(video){
-
-              openVideo(
-                video
-              );
-
-            }
-
+          if(video){
+            openVideo(video);
           }
-        );
 
-      }
-    );
+        }
+      );
 
+    });
 
   if(loadMoreWrap){
 
@@ -2308,7 +2081,7 @@ function renderVideos(){
 
 /* =========================================================
    VIDEO CARD
-   ========================================================= */
+========================================================= */
 
 function renderVideoCard(
   video,
@@ -2318,12 +2091,8 @@ function renderVideoCard(
   const thumbnail =
     getThumbnail(video);
 
-
   const title =
-    escapeHTML(
-      video.title
-    );
-
+    escapeHTML(video.title);
 
   const category =
     escapeHTML(
@@ -2331,34 +2100,22 @@ function renderVideoCard(
       'MANDALA VIDEO'
     );
 
-
   const description =
     escapeHTML(
       video.description
     );
 
-
   const date =
-    formatDate(
-      video.date
-    );
-
+    formatDate(video.date);
 
   const duration =
     video.duration
       ? `
-
         <span class="videoDuration">
-
-          ${escapeHTML(
-            video.duration
-          )}
-
+          ${escapeHTML(video.duration)}
         </span>
-
       `
       : '';
-
 
   return `
 
@@ -2381,7 +2138,6 @@ function renderVideoCard(
             this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85';
           ">
 
-
         <div class="videoOverlay">
 
           <span class="playIcon">
@@ -2390,16 +2146,13 @@ function renderVideoCard(
 
         </div>
 
-
         <span class="videoBadge">
           ${category}
         </span>
 
-
         ${duration}
 
       </div>
-
 
       <div class="videoInfo">
 
@@ -2407,25 +2160,20 @@ function renderVideoCard(
           ${category}
         </div>
 
-
         <h3 class="videoTitle">
           ${title}
         </h3>
-
 
         <p class="videoDescription">
           ${description}
         </p>
 
-
         ${
           date
             ? `
-
               <small class="videoDate">
                 ${escapeHTML(date)}
               </small>
-
             `
             : ''
         }
@@ -2441,66 +2189,52 @@ function renderVideoCard(
 
 /* =========================================================
    FEATURED
-   ========================================================= */
+========================================================= */
 
 function renderFeatured(){
 
   const feature =
     VIDEOS.find(
-      video =>
-        video.featured
+      video => video.featured
     ) ||
     VIDEOS[0];
 
-
   if(!feature){
-
     return;
-
   }
 
-
   const image =
-    getThumbnail(
-      feature
-    );
-
+    getThumbnail(feature);
 
   const imageElement =
     document.getElementById(
       'featureVideoImage'
     );
 
-
   const categoryElement =
     document.getElementById(
       'featureVideoCategory'
     );
-
 
   const titleElement =
     document.getElementById(
       'featureVideoTitle'
     );
 
-
   const descriptionElement =
     document.getElementById(
       'featureVideoDescription'
     );
-
 
   const metaElement =
     document.getElementById(
       'featureVideoMeta'
     );
 
-
   const thumb =
     document.getElementById(
       'featureVideoThumb'
     );
-
 
   if(imageElement){
 
@@ -2512,7 +2246,6 @@ function renderFeatured(){
 
   }
 
-
   if(categoryElement){
 
     categoryElement.textContent =
@@ -2521,7 +2254,6 @@ function renderFeatured(){
 
   }
 
-
   if(titleElement){
 
     titleElement.textContent =
@@ -2529,22 +2261,18 @@ function renderFeatured(){
 
   }
 
-
   if(descriptionElement){
 
     descriptionElement.textContent =
-      feature.description;
+      feature.description ||
+      '';
 
   }
-
 
   if(metaElement){
 
     const date =
-      formatDate(
-        feature.date
-      );
-
+      formatDate(feature.date);
 
     metaElement.textContent =
       'Mandala Channel' +
@@ -2556,13 +2284,10 @@ function renderFeatured(){
 
   }
 
-
   if(thumb){
 
     thumb.onclick =
-      ()=>openVideo(
-        feature
-      );
+      () => openVideo(feature);
 
   }
 
@@ -2571,7 +2296,7 @@ function renderFeatured(){
 
 /* =========================================================
    SEARCH
-   ========================================================= */
+========================================================= */
 
 (function(){
 
@@ -2580,25 +2305,19 @@ function renderFeatured(){
       'videoSearch'
     );
 
-
   if(!input){
-
     return;
-
   }
-
 
   input.addEventListener(
     'input',
-    ()=>{
+    () => {
 
       currentSearch =
         input.value;
 
-
       visibleCount =
         VIDEO_PER_PAGE;
-
 
       applyFilters();
 
@@ -2610,7 +2329,7 @@ function renderFeatured(){
 
 /* =========================================================
    LOAD MORE
-   ========================================================= */
+========================================================= */
 
 (function(){
 
@@ -2619,21 +2338,16 @@ function renderFeatured(){
       'loadMore'
     );
 
-
   if(!button){
-
     return;
-
   }
-
 
   button.addEventListener(
     'click',
-    ()=>{
+    () => {
 
       visibleCount +=
         VIDEO_PER_PAGE;
-
 
       renderVideos();
 
@@ -2645,22 +2359,16 @@ function renderFeatured(){
 
 /* =========================================================
    OPEN VIDEO
-   ========================================================= */
+========================================================= */
 
 function openVideo(video){
 
   if(!video){
-
     return;
-
   }
 
-
   const embed =
-    getYoutubeEmbed(
-      video
-    );
-
+    getYoutubeEmbed(video);
 
   if(!embed){
 
@@ -2672,24 +2380,14 @@ function openVideo(video){
 
   }
 
-
   const modal =
-    document.getElementById(
-      'modal'
-    );
-
+    document.getElementById('modal');
 
   const frame =
-    document.getElementById(
-      'videoFrame'
-    );
-
+    document.getElementById('videoFrame');
 
   const title =
-    document.getElementById(
-      'modalTitle'
-    );
-
+    document.getElementById('modalTitle');
 
   if(title){
 
@@ -2699,7 +2397,6 @@ function openVideo(video){
 
   }
 
-
   if(frame){
 
     frame.src =
@@ -2707,12 +2404,9 @@ function openVideo(video){
 
   }
 
-
   if(modal){
 
-    modal.classList.add(
-      'open'
-    );
+    modal.classList.add('open');
 
     modal.setAttribute(
       'aria-hidden',
@@ -2720,7 +2414,6 @@ function openVideo(video){
     );
 
   }
-
 
   document.body.style.overflow =
     'hidden';
@@ -2730,34 +2423,23 @@ function openVideo(video){
 
 /* =========================================================
    CLOSE VIDEO
-   ========================================================= */
+========================================================= */
 
 function closeVideo(){
 
   const modal =
-    document.getElementById(
-      'modal'
-    );
-
+    document.getElementById('modal');
 
   const frame =
-    document.getElementById(
-      'videoFrame'
-    );
-
+    document.getElementById('videoFrame');
 
   if(frame){
-
     frame.src = '';
-
   }
-
 
   if(modal){
 
-    modal.classList.remove(
-      'open'
-    );
+    modal.classList.remove('open');
 
     modal.setAttribute(
       'aria-hidden',
@@ -2766,7 +2448,6 @@ function closeVideo(){
 
   }
 
-
   document.body.style.overflow =
     '';
 
@@ -2774,22 +2455,16 @@ function closeVideo(){
 
 
 /* =========================================================
-   MODAL EVENTS
-   ========================================================= */
+   MODAL
+========================================================= */
 
 (function(){
 
   const modal =
-    document.getElementById(
-      'modal'
-    );
-
+    document.getElementById('modal');
 
   const close =
-    document.getElementById(
-      'closeModal'
-    );
-
+    document.getElementById('closeModal');
 
   if(close){
 
@@ -2800,16 +2475,13 @@ function closeVideo(){
 
   }
 
-
   if(modal){
 
     modal.addEventListener(
       'click',
       event => {
 
-        if(
-          event.target === modal
-        ){
+        if(event.target === modal){
 
           closeVideo();
 
@@ -2820,14 +2492,11 @@ function closeVideo(){
 
   }
 
-
   document.addEventListener(
     'keydown',
     event => {
 
-      if(
-        event.key === 'Escape'
-      ){
+      if(event.key === 'Escape'){
 
         closeVideo();
 
@@ -2841,7 +2510,7 @@ function closeVideo(){
 
 /* =========================================================
    KEYBOARD
-   ========================================================= */
+========================================================= */
 
 document.addEventListener(
   'keydown',
@@ -2852,13 +2521,9 @@ document.addEventListener(
         '.videoThumb'
       );
 
-
     if(!target){
-
       return;
-
     }
-
 
     if(
       event.key === 'Enter' ||
@@ -2868,9 +2533,7 @@ document.addEventListener(
       event.preventDefault();
 
       target
-        .closest(
-          '.videoCard'
-        )
+        .closest('.videoCard')
         ?.click();
 
     }
@@ -2880,10 +2543,48 @@ document.addEventListener(
 
 
 /* =========================================================
-   START
-   ========================================================= */
+   NEWSLETTER
+========================================================= */
 
-loadVideos();
+(function(){
+
+  const form =
+    document.getElementById(
+      'newsletterForm'
+    );
+
+  if(!form){
+    return;
+  }
+
+  form.addEventListener(
+    'submit',
+    event => {
+
+      event.preventDefault();
+
+      alert(
+        'Form newsletter siap dihubungkan ke layanan email.'
+      );
+
+    }
+  );
+
+})();
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+
+    loadVideos();
+
+  }
+);
 
 </script>
 
