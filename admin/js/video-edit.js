@@ -1,10 +1,17 @@
-import { supabase } from "../../js/supabase-client.js";
+const API = window.MandalaSupabase;
 
+
+/* =====================================================
+   ELEMENT
+===================================================== */
 
 const form = document.getElementById("video-form");
 
-const titleInput = document.getElementById("judul_video");
-const slugInput = document.getElementById("slug");
+const titleInput =
+    document.getElementById("judul_video");
+
+const slugInput =
+    document.getElementById("slug");
 
 const youtubeUrlInput =
     document.getElementById("youtube_url");
@@ -58,11 +65,15 @@ let slugManual = false;
    MESSAGE
 ===================================================== */
 
-function messageShow(text, type = "") {
+function showMessage(
+    text,
+    type = ""
+) {
 
     if (!message) return;
 
     message.textContent = text;
+
     message.className =
         `form-message ${type}`;
 }
@@ -78,11 +89,26 @@ function makeSlug(text) {
         .toLowerCase()
         .trim()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-")
-        .replace(/^-|-$/g, "");
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .replace(
+            /[^a-z0-9\s-]/g,
+            ""
+        )
+        .replace(
+            /\s+/g,
+            "-"
+        )
+        .replace(
+            /-+/g,
+            "-"
+        )
+        .replace(
+            /^-|-$/g,
+            ""
+        );
 }
 
 
@@ -111,22 +137,24 @@ slugInput?.addEventListener(
 
 
 /* =====================================================
-   YOUTUBE ID
+   YOUTUBE
 ===================================================== */
 
-function youtubeId(url) {
+function getYoutubeId(value) {
 
-    const value =
-        String(url || "").trim();
+    const url =
+        String(value || "").trim();
 
-    if (!value) return "";
+    if (!url) {
+        return "";
+    }
 
 
     if (
-        /^[A-Za-z0-9_-]{11}$/.test(value)
+        /^[A-Za-z0-9_-]{11}$/.test(url)
     ) {
 
-        return value;
+        return url;
     }
 
 
@@ -138,14 +166,19 @@ function youtubeId(url) {
 
         /youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/i,
 
-        /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/i
+        /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/i,
+
+        /youtube-nocookie\.com\/embed\/([A-Za-z0-9_-]{11})/i
+
     ];
 
 
-    for (const pattern of patterns) {
+    for (
+        const pattern of patterns
+    ) {
 
         const match =
-            value.match(pattern);
+            url.match(pattern);
 
         if (match) {
 
@@ -161,7 +194,7 @@ function youtubeId(url) {
 function updateYoutube() {
 
     const id =
-        youtubeId(
+        getYoutubeId(
             youtubeUrlInput.value
         );
 
@@ -193,24 +226,29 @@ youtubeUrlInput?.addEventListener(
 
 
 /* =====================================================
-   CURRENT USER
+   GET DATABASE
 ===================================================== */
 
-async function getCurrentUser() {
+async function db() {
 
-    const {
-        data,
-        error
-    } =
-        await supabase.auth.getUser();
+    return await API.getClient();
+}
 
 
-    if (error) {
-        throw error;
-    }
+/* =====================================================
+   CURRENT AUTH
+===================================================== */
+
+async function loadAuth() {
+
+    const auth =
+        await API.auth.getCurrent();
 
 
-    if (!data?.user) {
+    if (
+        !auth ||
+        !auth.authenticated
+    ) {
 
         throw new Error(
             "Sesi login tidak ditemukan."
@@ -218,33 +256,27 @@ async function getCurrentUser() {
     }
 
 
-    return data.user;
-}
+    profile =
+        auth.profile;
 
 
-/* =====================================================
-   PROFILE
-===================================================== */
+    if (!profile) {
 
-async function getProfile(userId) {
-
-    const {
-        data,
-        error
-    } =
-        await supabase
-            .from("profiles")
-            .select("*")
-            .eq("id", userId)
-            .maybeSingle();
-
-
-    if (error) {
-        throw error;
+        throw new Error(
+            "Profile pengguna tidak ditemukan."
+        );
     }
 
 
-    return data;
+    if (
+        profile.role !== "admin" &&
+        profile.role !== "editor"
+    ) {
+
+        throw new Error(
+            "Anda tidak memiliki akses ke editor video."
+        );
+    }
 }
 
 
@@ -261,6 +293,10 @@ async function loadCategories() {
     `;
 
 
+    const supabase =
+        await db();
+
+
     const {
         data,
         error
@@ -268,9 +304,12 @@ async function loadCategories() {
         await supabase
             .from("categories")
             .select("*")
-            .order("name", {
-                ascending: true
-            });
+            .order(
+                "name",
+                {
+                    ascending: true
+                }
+            );
 
 
     if (error) {
@@ -280,14 +319,17 @@ async function loadCategories() {
             error
         );
 
+
         categoryInput.innerHTML = `
             <option value="">
-                Kategori gagal dimuat
+                Gagal memuat kategori
             </option>
         `;
 
-        messageShow(
-            `Kategori gagal dimuat: ${error.message}`,
+
+        showMessage(
+            "Kategori gagal dimuat: " +
+            error.message,
             "error"
         );
 
@@ -311,11 +353,14 @@ async function loadCategories() {
                 "option"
             );
 
+
         option.value =
             item.id;
 
+
         option.textContent =
             item.name;
+
 
         categoryInput.appendChild(
             option
@@ -339,6 +384,10 @@ async function loadCategories() {
 
 async function loadVideo(id) {
 
+    const supabase =
+        await db();
+
+
     const {
         data,
         error
@@ -346,7 +395,10 @@ async function loadVideo(id) {
         await supabase
             .from("videos")
             .select("*")
-            .eq("id", id)
+            .eq(
+                "id",
+                id
+            )
             .maybeSingle();
 
 
@@ -378,7 +430,7 @@ async function loadVideo(id) {
 
     youtubeIdInput.value =
         data.youtube_video_id ||
-        youtubeId(
+        getYoutubeId(
             data.youtube_url
         );
 
@@ -393,6 +445,7 @@ async function loadVideo(id) {
 
     statusInput.value =
         data.status || "draft";
+
 
     slugManual = true;
 
@@ -409,7 +462,7 @@ async function loadVideo(id) {
         "Edit Video";
 
 
-    messageShow(
+    showMessage(
         "Video berhasil dimuat.",
         "success"
     );
@@ -420,7 +473,7 @@ async function loadVideo(id) {
    PAYLOAD
 ===================================================== */
 
-function payload(status) {
+function getPayload(status) {
 
     const title =
         titleInput.value.trim();
@@ -434,15 +487,17 @@ function payload(status) {
     }
 
 
-    const url =
+    const youtubeUrl =
         youtubeUrlInput.value.trim();
 
 
-    const id =
-        youtubeId(url);
+    const youtubeVideoId =
+        getYoutubeId(
+            youtubeUrl
+        );
 
 
-    if (!id) {
+    if (!youtubeVideoId) {
 
         throw new Error(
             "Masukkan URL YouTube yang valid."
@@ -459,14 +514,14 @@ function payload(status) {
             makeSlug(title),
 
         youtube_url:
-            url,
+            youtubeUrl,
 
         youtube_video_id:
-            id,
+            youtubeVideoId,
 
         thumbnail_url:
             thumbnailInput.value.trim() ||
-            `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+            `https://i.ytimg.com/vi/${youtubeVideoId}/hqdefault.jpg`,
 
         description:
             descriptionInput.value.trim() ||
@@ -495,24 +550,40 @@ async function saveVideo(status) {
 
     try {
 
-        messageShow(
+        saveButton.disabled = true;
+        draftButton.disabled = true;
+        reviewButton.disabled = true;
+        publishButton.disabled = true;
+        archiveButton.disabled = true;
+
+
+        showMessage(
             "Menyimpan..."
         );
 
 
-        const data =
-            payload(status);
+        const payload =
+            getPayload(status);
+
+
+        const supabase =
+            await db();
 
 
         let result;
 
 
-        if (currentVideo?.id) {
+        if (
+            currentVideo &&
+            currentVideo.id
+        ) {
 
             const response =
                 await supabase
                     .from("videos")
-                    .update(data)
+                    .update(
+                        payload
+                    )
                     .eq(
                         "id",
                         currentVideo.id
@@ -534,7 +605,9 @@ async function saveVideo(status) {
             const response =
                 await supabase
                     .from("videos")
-                    .insert(data)
+                    .insert(
+                        payload
+                    )
                     .select()
                     .single();
 
@@ -553,6 +626,10 @@ async function saveVideo(status) {
             result;
 
 
+        /*
+         * Update URL
+         */
+
         if (result?.id) {
 
             const url =
@@ -560,10 +637,12 @@ async function saveVideo(status) {
                     window.location.href
                 );
 
+
             url.searchParams.set(
                 "id",
                 result.id
             );
+
 
             window.history.replaceState(
                 {},
@@ -578,7 +657,7 @@ async function saveVideo(status) {
             status;
 
 
-        messageShow(
+        showMessage(
             "Video berhasil disimpan.",
             "success"
         );
@@ -587,16 +666,25 @@ async function saveVideo(status) {
     } catch (error) {
 
         console.error(
-            "SAVE ERROR:",
+            "SAVE VIDEO ERROR:",
             error
         );
 
 
-        messageShow(
+        showMessage(
             error?.message ||
             "Gagal menyimpan video.",
             "error"
         );
+
+
+    } finally {
+
+        saveButton.disabled = false;
+        draftButton.disabled = false;
+        reviewButton.disabled = false;
+        publishButton.disabled = false;
+        archiveButton.disabled = false;
     }
 }
 
@@ -607,42 +695,48 @@ async function saveVideo(status) {
 
 form?.addEventListener(
     "submit",
-    event => {
+    function (event) {
 
         event.preventDefault();
 
-        saveVideo("draft");
+        saveVideo(
+            "draft"
+        );
     }
 );
 
 
 draftButton?.addEventListener(
     "click",
-    () => {
+    function () {
 
-        saveVideo("draft");
+        saveVideo(
+            "draft"
+        );
     }
 );
 
 
 reviewButton?.addEventListener(
     "click",
-    () => {
+    function () {
 
-        saveVideo("review");
+        saveVideo(
+            "review"
+        );
     }
 );
 
 
 publishButton?.addEventListener(
     "click",
-    () => {
+    function () {
 
         if (
             profile?.role !== "admin"
         ) {
 
-            messageShow(
+            showMessage(
                 "Hanya Admin yang dapat publish.",
                 "error"
             );
@@ -651,16 +745,20 @@ publishButton?.addEventListener(
         }
 
 
-        saveVideo("published");
+        saveVideo(
+            "published"
+        );
     }
 );
 
 
 archiveButton?.addEventListener(
     "click",
-    () => {
+    function () {
 
-        saveVideo("archived");
+        saveVideo(
+            "archived"
+        );
     }
 );
 
@@ -671,19 +769,11 @@ archiveButton?.addEventListener(
 
 logoutButton?.addEventListener(
     "click",
-    async () => {
+    async function () {
 
         try {
 
-            const {
-                error
-            } =
-                await supabase.auth.signOut();
-
-
-            if (error) {
-                throw error;
-            }
+            await API.auth.signOut();
 
 
             window.location.href =
@@ -698,7 +788,7 @@ logoutButton?.addEventListener(
             );
 
 
-            messageShow(
+            showMessage(
                 error?.message ||
                 "Gagal keluar.",
                 "error"
@@ -716,27 +806,26 @@ async function init() {
 
     try {
 
-        messageShow(
+        showMessage(
             "Memuat..."
         );
 
 
-        const user =
-            await getCurrentUser();
+        /*
+         * Pastikan MandalaSupabase tersedia
+         */
 
-
-        profile =
-            await getProfile(
-                user.id
-            );
-
-
-        if (!profile) {
+        if (
+            !window.MandalaSupabase
+        ) {
 
             throw new Error(
-                "Profile tidak ditemukan."
+                "Supabase client Mandala belum dimuat."
             );
         }
+
+
+        await loadAuth();
 
 
         await loadCategories();
@@ -754,7 +843,9 @@ async function init() {
 
         if (id) {
 
-            await loadVideo(id);
+            await loadVideo(
+                id
+            );
 
         } else {
 
@@ -762,7 +853,7 @@ async function init() {
                 "draft";
 
 
-            messageShow(
+            showMessage(
                 "Siap membuat video."
             );
         }
@@ -771,14 +862,14 @@ async function init() {
     } catch (error) {
 
         console.error(
-            "INIT ERROR:",
+            "VIDEO INIT ERROR:",
             error
         );
 
 
-        messageShow(
+        showMessage(
             error?.message ||
-            "Gagal memuat editor.",
+            "Gagal memuat editor video.",
             "error"
         );
     }
