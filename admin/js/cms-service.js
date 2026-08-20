@@ -1,13 +1,10 @@
 const API = window.MandalaSupabase;
 
 if (!API) {
-    throw new Error(
-        "MandalaSupabase belum dimuat."
-    );
+    throw new Error("MandalaSupabase belum dimuat.");
 }
 
-const supabase =
-    await API.getClient();
+const supabase = await API.getClient();
 
 
 /* =====================================================
@@ -15,37 +12,18 @@ const supabase =
 ===================================================== */
 
 export async function getCurrentUser() {
-
     return await API.auth.getUser();
 }
 
 
 export async function getCurrentAuth() {
-
     return await API.auth.getCurrent();
 }
 
 
 export async function logout() {
-
     await API.auth.signOut();
-
-    window.location.href =
-        "../index.html";
-}
-
-
-/* =====================================================
-   TABLE
-===================================================== */
-
-export async function getTable(
-    tableName
-) {
-
-    return await API.db.table(
-        tableName
-    );
+    window.location.href = "index.html";
 }
 
 
@@ -58,77 +36,94 @@ export async function getVideos() {
     const {
         data,
         error
-    } =
-        await supabase
-            .from("videos")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
+    } = await supabase
+        .from("videos")
+        .select(`
+            id,
+            title,
+            slug,
+            youtube_url,
+            youtube_video_id,
+            thumbnail_url,
+            description,
+            category_id,
+            status,
+            featured,
+            published_at,
+            created_at,
+            updated_at,
+            author_id
+        `)
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        );
 
     if (error) {
+        console.error(
+            "GET VIDEOS ERROR:",
+            error
+        );
+
         throw error;
     }
-
 
     return data || [];
 }
 
 
-export async function getVideo(
-    id
-) {
+export async function getVideo(id) {
 
     const {
         data,
         error
-    } =
-        await supabase
-            .from("videos")
-            .select("*")
-            .eq(
-                "id",
-                id
-            )
-            .maybeSingle();
-
+    } = await supabase
+        .from("videos")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
 
     if (error) {
         throw error;
     }
 
-
     return data;
 }
 
 
-export async function createVideo(
-    payload
-) {
+/* =====================================================
+   CREATE
+===================================================== */
+
+export async function createVideo(payload) {
 
     const {
         data,
         error
-    } =
-        await supabase
-            .from("videos")
-            .insert(payload)
-            .select()
-            .single();
-
+    } = await supabase
+        .from("videos")
+        .insert(payload)
+        .select()
+        .single();
 
     if (error) {
+        console.error(
+            "CREATE VIDEO ERROR:",
+            error
+        );
+
         throw error;
     }
-
 
     return data;
 }
 
+
+/* =====================================================
+   UPDATE
+===================================================== */
 
 export async function updateVideo(
     id,
@@ -138,47 +133,43 @@ export async function updateVideo(
     const {
         data,
         error
-    } =
-        await supabase
-            .from("videos")
-            .update(payload)
-            .eq(
-                "id",
-                id
-            )
-            .select()
-            .single();
-
+    } = await supabase
+        .from("videos")
+        .update(payload)
+        .eq(
+            "id",
+            id
+        )
+        .select()
+        .single();
 
     if (error) {
         throw error;
     }
-
 
     return data;
 }
 
 
-export async function deleteVideo(
-    id
-) {
+/* =====================================================
+   DELETE
+===================================================== */
+
+export async function deleteVideo(id) {
 
     const {
         error
-    } =
-        await supabase
-            .from("videos")
-            .delete()
-            .eq(
-                "id",
-                id
-            );
-
+    } = await supabase
+        .from("videos")
+        .delete()
+        .eq(
+            "id",
+            id
+        );
 
     if (error) {
         throw error;
     }
-
 
     return true;
 }
@@ -193,22 +184,19 @@ export async function getCategories() {
     const {
         data,
         error
-    } =
-        await supabase
-            .from("categories")
-            .select("*")
-            .order(
-                "name",
-                {
-                    ascending: true
-                }
-            );
-
+    } = await supabase
+        .from("categories")
+        .select("*")
+        .order(
+            "name",
+            {
+                ascending: true
+            }
+        );
 
     if (error) {
         throw error;
     }
-
 
     return data || [];
 }
@@ -226,16 +214,13 @@ export async function select(
     const {
         data,
         error
-    } =
-        await supabase
-            .from(tableName)
-            .select(columns);
-
+    } = await supabase
+        .from(tableName)
+        .select(columns);
 
     if (error) {
         throw error;
     }
-
 
     return data || [];
 }
@@ -249,17 +234,14 @@ export async function insert(
     const {
         data,
         error
-    } =
-        await supabase
-            .from(tableName)
-            .insert(payload)
-            .select();
-
+    } = await supabase
+        .from(tableName)
+        .insert(payload)
+        .select();
 
     if (error) {
         throw error;
     }
-
 
     return data;
 }
@@ -274,21 +256,18 @@ export async function update(
     const {
         data,
         error
-    } =
-        await supabase
-            .from(tableName)
-            .update(payload)
-            .eq(
-                "id",
-                id
-            )
-            .select();
-
+    } = await supabase
+        .from(tableName)
+        .update(payload)
+        .eq(
+            "id",
+            id
+        )
+        .select();
 
     if (error) {
         throw error;
     }
-
 
     return data;
 }
@@ -301,20 +280,17 @@ export async function remove(
 
     const {
         error
-    } =
-        await supabase
-            .from(tableName)
-            .delete()
-            .eq(
-                "id",
-                id
-            );
-
+    } = await supabase
+        .from(tableName)
+        .delete()
+        .eq(
+            "id",
+            id
+        );
 
     if (error) {
         throw error;
     }
-
 
     return true;
 }
