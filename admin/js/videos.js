@@ -7,34 +7,33 @@ import {
 } from "./cms-service.js";
 
 
-const tableBody =
-    document.getElementById("video-table-body");
+const container =
+    document.getElementById(
+        "videos-container"
+    );
 
-const emptyState =
-    document.getElementById("empty-state");
+const message =
+    document.getElementById(
+        "page-message"
+    );
 
-const loading =
-    document.getElementById("loading");
-
-const categoryFilter =
-    document.getElementById("category-filter");
-
-const statusFilter =
-    document.getElementById("status-filter");
-
-const searchInput =
-    document.getElementById("search");
 
 let videos = [];
 let categories = [];
 
 
+/* =====================================================
+   INIT
+===================================================== */
+
 async function init() {
 
     try {
 
-        if (loading) {
-            loading.style.display = "block";
+        if (!container) {
+            throw new Error(
+                "Container video tidak ditemukan."
+            );
         }
 
 
@@ -59,164 +58,137 @@ async function init() {
             await getCategories();
 
 
-        renderCategories();
-
         render();
 
 
     } catch (error) {
 
         console.error(
-            "VIDEOS ERROR:",
+            "VIDEOS INIT ERROR:",
             error
         );
 
 
-        if (tableBody) {
+        if (message) {
 
-            tableBody.innerHTML = `
-                <tr>
-                    <td colspan="7">
-                        Gagal memuat video:
-                        ${escapeHtml(
-                            error.message
-                        )}
-                    </td>
-                </tr>
-            `;
+            message.textContent =
+                error.message ||
+                "Gagal memuat video.";
         }
 
 
-    } finally {
+        if (container) {
 
-        if (loading) {
-            loading.style.display = "none";
+            container.innerHTML = `
+                <div class="empty">
+                    Gagal memuat video.
+                    <br>
+                    <small>
+                        ${escapeHtml(
+                            error.message
+                        )}
+                    </small>
+                </div>
+            `;
         }
     }
 }
 
 
-function renderCategories() {
-
-    if (!categoryFilter) return;
-
-
-    categoryFilter.innerHTML = `
-        <option value="">
-            Semua Kategori
-        </option>
-    `;
-
-
-    categories.forEach(
-        category => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                category.id;
-
-            option.textContent =
-                category.name;
-
-            categoryFilter.appendChild(
-                option
-            );
-        }
-    );
-}
-
+/* =====================================================
+   RENDER
+===================================================== */
 
 function render() {
 
-    if (!tableBody) return;
+    if (!container) {
+        return;
+    }
 
 
-    const search =
-        (
-            searchInput?.value ||
-            ""
-        )
-            .toLowerCase()
-            .trim();
+    if (!videos.length) {
 
+        container.innerHTML = `
+            <div class="empty">
+                Belum ada video.
+                <br><br>
 
-    const status =
-        statusFilter?.value ||
-        "";
-
-
-    const category =
-        categoryFilter?.value ||
-        "";
-
-
-    const filtered =
-        videos.filter(
-            video => {
-
-                return (
-
-                    (
-                        !search ||
-                        String(
-                            video.title || ""
-                        )
-                            .toLowerCase()
-                            .includes(search)
-                    )
-
-                    &&
-
-                    (
-                        !status ||
-                        video.status === status
-                    )
-
-                    &&
-
-                    (
-                        !category ||
-                        video.category_id === category
-                    )
-
-                );
-            }
-        );
-
-
-    tableBody.innerHTML = "";
-
-
-    if (!filtered.length) {
-
-        if (emptyState) {
-            emptyState.style.display =
-                "block";
-        }
+                <a
+                    href="video-edit.html"
+                    class="btn"
+                >
+                    + Buat Video
+                </a>
+            </div>
+        `;
 
         return;
     }
 
 
-    if (emptyState) {
-        emptyState.style.display =
-            "none";
-    }
+    container.innerHTML = `
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Thumbnail
+                        </th>
+
+                        <th>
+                            Judul
+                        </th>
+
+                        <th>
+                            Kategori
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Dibuat
+                        </th>
+
+                        <th>
+                            Aksi
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="video-table-body">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
 
 
-    filtered.forEach(
+    const tbody =
+        document.getElementById(
+            "video-table-body"
+        );
+
+
+    videos.forEach(
         video => {
 
-            const categoryName =
+            const category =
                 categories.find(
-                    category =>
-                        category.id ===
+                    item =>
+                        item.id ===
                         video.category_id
-                )?.name || "-";
+                );
 
 
             const row =
@@ -229,50 +201,91 @@ function render() {
 
                 <td>
 
-                    <img
-                        src="${
-                            escapeHtml(
-                                video.thumbnail_url || ""
-                            )
-                        }"
-                        alt=""
-                        style="
-                            width:100px;
-                            height:60px;
-                            object-fit:cover;
-                            border-radius:6px;
-                        "
-                    >
+                    ${
+                        video.thumbnail_url
+                            ? `
+                            <img
+                                src="${escapeAttribute(
+                                    video.thumbnail_url
+                                )}"
+                                alt=""
+                                style="
+                                    width:110px;
+                                    height:65px;
+                                    object-fit:cover;
+                                    border-radius:6px;
+                                    display:block;
+                                "
+                            >
+                            `
+                            : `
+                            <div
+                                style="
+                                    width:110px;
+                                    height:65px;
+                                    background:#eee;
+                                    display:flex;
+                                    align-items:center;
+                                    justify-content:center;
+                                    border-radius:6px;
+                                    font-size:10px;
+                                    color:#777;
+                                "
+                            >
+                                No thumbnail
+                            </div>
+                            `
+                    }
 
                 </td>
 
 
                 <td>
-                    <strong>
+
+                    <div class="video-title">
                         ${escapeHtml(
                             video.title
                         )}
-                    </strong>
+                    </div>
 
                     ${
                         video.featured
-                            ? " ⭐"
+                            ? `
+                            <div
+                                style="
+                                    margin-top:5px;
+                                    font-size:10px;
+                                "
+                            >
+                                ⭐ Unggulan
+                            </div>
+                            `
                             : ""
                     }
+
                 </td>
 
 
                 <td>
                     ${escapeHtml(
-                        categoryName
+                        category?.name ||
+                        "-"
                     )}
                 </td>
 
 
                 <td>
-                    ${escapeHtml(
-                        video.status
-                    )}
+
+                    <span
+                        class="status status-${escapeAttribute(
+                            video.status
+                        )}"
+                    >
+                        ${escapeHtml(
+                            video.status
+                        )}
+                    </span>
+
                 </td>
 
 
@@ -285,33 +298,36 @@ function render() {
 
                 <td>
 
-                    <a
-                        href="./video-edit.html?id=${
-                            encodeURIComponent(
-                                video.id
-                            )
-                        }"
-                    >
-                        Edit
-                    </a>
+                    <div class="actions">
 
-                    <button
-                        type="button"
-                        data-delete="${
-                            escapeHtml(
+                        <a
+                            class="action-link"
+                            href="video-edit.html?id=${encodeURIComponent(
                                 video.id
-                            )
-                        }"
-                    >
-                        Hapus
-                    </button>
+                            )}"
+                        >
+                            Edit
+                        </a>
+
+
+                        <button
+                            class="action-button danger"
+                            type="button"
+                            data-delete="${escapeAttribute(
+                                video.id
+                            )}"
+                        >
+                            Hapus
+                        </button>
+
+                    </div>
 
                 </td>
 
             `;
 
 
-            tableBody.appendChild(
+            tbody.appendChild(
                 row
             );
         }
@@ -321,6 +337,10 @@ function render() {
     bindDelete();
 }
 
+
+/* =====================================================
+   DELETE
+===================================================== */
 
 function bindDelete() {
 
@@ -341,7 +361,7 @@ function bindDelete() {
 
                         if (
                             !confirm(
-                                "Hapus video ini?"
+                                "Yakin ingin menghapus video ini?"
                             )
                         ) {
                             return;
@@ -373,12 +393,14 @@ function bindDelete() {
                         } catch (error) {
 
                             console.error(
+                                "DELETE VIDEO ERROR:",
                                 error
                             );
 
 
                             alert(
-                                error.message
+                                error.message ||
+                                "Gagal menghapus video."
                             );
 
 
@@ -392,29 +414,33 @@ function bindDelete() {
 }
 
 
-searchInput?.addEventListener(
-    "input",
-    render
-);
-
-statusFilter?.addEventListener(
-    "change",
-    render
-);
-
-categoryFilter?.addEventListener(
-    "change",
-    render
-);
-
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 document
     .getElementById("logout")
     ?.addEventListener(
         "click",
-        logout
+        async () => {
+
+            try {
+
+                await logout();
+
+            } catch (error) {
+
+                console.error(
+                    error
+                );
+            }
+        }
     );
 
+
+/* =====================================================
+   HELPERS
+===================================================== */
 
 function escapeHtml(value) {
 
@@ -444,14 +470,35 @@ function escapeHtml(value) {
 }
 
 
+function escapeAttribute(value) {
+
+    return escapeHtml(
+        value
+    );
+}
+
+
 function formatDate(value) {
 
-    if (!value) return "-";
+    if (!value) {
+        return "-";
+    }
 
 
-    return new Date(
-        value
-    ).toLocaleDateString(
+    const date =
+        new Date(value);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "-";
+    }
+
+
+    return date.toLocaleDateString(
         "id-ID",
         {
             day: "2-digit",
@@ -461,5 +508,9 @@ function formatDate(value) {
     );
 }
 
+
+/* =====================================================
+   START
+===================================================== */
 
 init();
