@@ -1,144 +1,1513 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Dashboard Admin — Mandala Channel</title>
 
-    <title>Dashboard CMS — Mandala Channel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <link
-        rel="stylesheet"
-        href="../css/style.css"
-    >
+        :root {
+            --bg: #f5f6f8;
+            --card: #ffffff;
+            --text: #171717;
+            --muted: #737373;
+            --border: #e5e7eb;
+            --dark: #151515;
+            --danger: #dc2626;
+            --success: #15803d;
+            --warning: #b45309;
+        }
 
+        body {
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        a {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            background: var(--dark);
+            color: white;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand {
+            padding: 4px 12px 28px;
+        }
+
+        .brand-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+        }
+
+        .brand-subtitle {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #a3a3a3;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav-title {
+            margin: 14px 12px 7px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #737373;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 11px 12px;
+            border-radius: 9px;
+            color: #d4d4d4;
+            font-size: 14px;
+            transition: .15s ease;
+        }
+
+        .nav-link:hover {
+            background: #262626;
+            color: white;
+        }
+
+        .nav-link.active {
+            background: white;
+            color: #111;
+            font-weight: 700;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #292929;
+        }
+
+        .user-mini {
+            padding: 10px 12px 14px;
+        }
+
+        .user-mini-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-mini-role {
+            margin-top: 3px;
+            font-size: 11px;
+            color: #a3a3a3;
+        }
+
+        .logout {
+            width: 100%;
+            border: 1px solid #333;
+            background: transparent;
+            color: #d4d4d4;
+            padding: 10px 12px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .logout:hover {
+            background: #262626;
+            color: white;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -.4px;
+        }
+
+        .page-subtitle {
+            margin-top: 3px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .top-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .top-user-info {
+            line-height: 1.2;
+        }
+
+        .top-user-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .top-user-role {
+            margin-top: 3px;
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: capitalize;
+        }
+
+        .content {
+            padding: 32px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .loading-spinner {
+            width: 34px;
+            height: 34px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #111;
+            border-radius: 50%;
+            margin: 0 auto 14px;
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-box {
+            display: none;
+            padding: 18px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 21px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .stat-number {
+            margin-top: 8px;
+            font-size: 30px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .stat-note {
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(300px, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 19px 21px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .card-action {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* =========================
+           QUICK ACTION
+        ========================= */
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .action {
+            display: block;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            transition: .15s ease;
+        }
+
+        .action:hover {
+            border-color: #a3a3a3;
+            background: #fafafa;
+        }
+
+        .action-title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .action-description {
+            margin-top: 5px;
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        /* =========================
+           CONTENT LIST
+        ========================= */
+
+        .content-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-item:last-child {
+            border-bottom: 0;
+        }
+
+        .content-thumb {
+            width: 52px;
+            height: 42px;
+            flex-shrink: 0;
+            border-radius: 7px;
+            background: #f1f1f1;
+            object-fit: cover;
+        }
+
+        .content-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .content-name {
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .content-meta {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 7px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: capitalize;
+            white-space: nowrap;
+        }
+
+        .badge-draft {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .badge-review {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .badge-published {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .badge-archived {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .empty {
+            padding: 35px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .sidebar {
+                width: 70px;
+                padding: 18px 9px;
+            }
+
+            .brand {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .brand-title {
+                font-size: 0;
+            }
+
+            .brand-title::after {
+                content: "M";
+                font-size: 20px;
+            }
+
+            .brand-subtitle,
+            .nav-title,
+            .nav-link span:not(.nav-icon),
+            .user-mini,
+            .logout {
+                display: none;
+            }
+
+            .nav-link {
+                justify-content: center;
+                padding: 12px 6px;
+            }
+
+            .nav-icon {
+                width: auto;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .top-user-info {
+                display: none;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 17px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-    <div id="cms-app">
+<div class="app">
 
-        <header class="cms-header">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-            <div>
+        <div class="brand">
+            <div class="brand-title">Mandala Channel</div>
+            <div class="brand-subtitle">Content Management System</div>
+        </div>
 
-                <h1>Mandala Channel</h1>
+        <nav class="nav">
 
-                <p>Content Management System</p>
+            <div class="nav-title">Utama</div>
 
+            <a class="nav-link active" href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <div class="nav-title">Konten</div>
+
+            <a class="nav-link" href="articles.html">
+                <span class="nav-icon">▤</span>
+                <span>Artikel</span>
+            </a>
+
+            <a class="nav-link" href="videos.html">
+                <span class="nav-icon">▶</span>
+                <span>Video</span>
+            </a>
+
+            <a class="nav-link" href="playlists.html">
+                <span class="nav-icon">☷</span>
+                <span>Playlist</span>
+            </a>
+
+            <a class="nav-link" href="podcasts.html">
+                <span class="nav-icon">◉</span>
+                <span>Podcast</span>
+            </a>
+
+            <div class="nav-title">Pengelolaan</div>
+
+            <a class="nav-link" href="categories.html">
+                <span class="nav-icon">#</span>
+                <span>Topics</span>
+            </a>
+
+            <a class="nav-link" href="media.html">
+                <span class="nav-icon">▧</span>
+                <span>Media</span>
+            </a>
+
+            <a
+                class="nav-link admin-only"
+                href="users.html"
+                id="usersNav"
+            >
+                <span class="nav-icon">♙</span>
+                <span>Users</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="user-mini">
+                <div
+                    class="user-mini-name"
+                    id="sidebarUserName"
+                >
+                    Memuat...
+                </div>
+
+                <div
+                    class="user-mini-role"
+                    id="sidebarUserRole"
+                >
+                    -
+                </div>
             </div>
 
+            <button
+                type="button"
+                class="logout"
+                id="logoutButton"
+            >
+                Keluar
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <header class="topbar">
 
             <div>
+                <div class="page-title">
+                    Dashboard
+                </div>
 
-                <span id="user-name">
-                    Memuat...
-                </span>
+                <div class="page-subtitle">
+                    Selamat datang kembali di Mandala Channel CMS
+                </div>
+            </div>
 
-                <span id="user-role">
-                    -
-                </span>
+            <div class="top-user">
 
-                <button
-                    id="logout-button"
-                    type="button"
+                <div
+                    class="avatar"
+                    id="userAvatar"
                 >
-                    Keluar
-                </button>
+                    ?
+                </div>
+
+                <div class="top-user-info">
+
+                    <div
+                        class="top-user-name"
+                        id="topUserName"
+                    >
+                        Memuat...
+                    </div>
+
+                    <div
+                        class="top-user-role"
+                        id="topUserRole"
+                    >
+                        -
+                    </div>
+
+                </div>
 
             </div>
 
         </header>
 
 
-        <main>
+        <section class="content">
 
-            <section>
+            <div
+                class="error-box"
+                id="errorBox"
+            ></div>
 
-                <h2>Dashboard</h2>
-
-                <p id="welcome-message">
-                    Memuat profil...
-                </p>
-
-            </section>
-
-
-            <section id="admin-menu">
-
-                <h3>Administrasi</h3>
-
-                <nav>
-
-                    <a href="categories.html">
-                        Kategori
-                    </a>
-
-                    <a href="users.html">
-                        Pengguna
-                    </a>
-
-                </nav>
-
-            </section>
+            <div
+                class="loading"
+                id="loading"
+            >
+                <div class="loading-spinner"></div>
+                Memuat dashboard...
+            </div>
 
 
-            <section>
+            <div id="dashboardContent" style="display:none;">
 
-                <h3>Konten</h3>
+                <!-- STATS -->
+                <div class="stats">
 
-                <nav>
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            Artikel
+                        </div>
 
-                    <a href="articles.html">
-                        Artikel
-                    </a>
+                        <div
+                            class="stat-number"
+                            id="articleCount"
+                        >
+                            0
+                        </div>
 
-                    <a href="videos.html">
-                        Video
-                    </a>
+                        <div class="stat-note">
+                            Total artikel
+                        </div>
+                    </div>
 
-                    <a href="playlists.html">
-                        Playlist
-                    </a>
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            Video
+                        </div>
 
-                    <a href="podcasts.html">
-                        Podcast
-                    </a>
+                        <div
+                            class="stat-number"
+                            id="videoCount"
+                        >
+                            0
+                        </div>
 
-                </nav>
+                        <div class="stat-note">
+                            Total video
+                        </div>
+                    </div>
 
-            </section>
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            Playlist
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="playlistCount"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-note">
+                            Total playlist
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            Podcast
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="podcastCount"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-note">
+                            Total podcast
+                        </div>
+                    </div>
+
+                </div>
 
 
-            <section>
+                <!-- LOWER GRID -->
+                <div class="grid">
 
-                <h3>Status Akses</h3>
+                    <!-- RECENT -->
+                    <div class="card">
 
-                <p>
-                    Role:
-                    <strong id="access-role">
-                        -
-                    </strong>
-                </p>
+                        <div class="card-header">
 
-            </section>
+                            <div class="card-title">
+                                Konten Terbaru
+                            </div>
 
-        </main>
+                            <span
+                                class="card-action"
+                                id="recentLabel"
+                            >
+                                -
+                            </span>
 
-    </div>
+                        </div>
+
+                        <div
+                            class="content-list"
+                            id="recentContent"
+                        >
+                            <div class="empty">
+                                Belum ada konten.
+                            </div>
+                        </div>
+
+                    </div>
 
 
-    <script
-        type="module"
-        src="./js/dashboard.js"
-    ></script>
+                    <!-- QUICK ACTION -->
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <div class="card-title">
+                                Aksi Cepat
+                            </div>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="actions">
+
+                                <a
+                                    class="action"
+                                    href="article-editor.html"
+                                >
+                                    <div class="action-title">
+                                        + Artikel
+                                    </div>
+
+                                    <div class="action-description">
+                                        Buat artikel baru.
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="action"
+                                    href="video-editor.html"
+                                >
+                                    <div class="action-title">
+                                        + Video
+                                    </div>
+
+                                    <div class="action-description">
+                                        Tambahkan video baru.
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="action"
+                                    href="playlist-editor.html"
+                                >
+                                    <div class="action-title">
+                                        + Playlist
+                                    </div>
+
+                                    <div class="action-description">
+                                        Buat playlist baru.
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="action"
+                                    href="podcast-editor.html"
+                                >
+                                    <div class="action-title">
+                                        + Podcast
+                                    </div>
+
+                                    <div class="action-description">
+                                        Tambahkan podcast.
+                                    </div>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script type="module">
+
+    /*
+     * =====================================================
+     * SUPABASE
+     * =====================================================
+     *
+     * Pastikan path ini sesuai struktur folder project.
+     */
+
+    import {
+        supabase
+    } from "../js/supabase-client.js";
+
+
+    /*
+     * =====================================================
+     * ELEMENTS
+     * =====================================================
+     */
+
+    const loading =
+        document.getElementById("loading");
+
+    const dashboardContent =
+        document.getElementById("dashboardContent");
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+    const articleCount =
+        document.getElementById("articleCount");
+
+    const videoCount =
+        document.getElementById("videoCount");
+
+    const playlistCount =
+        document.getElementById("playlistCount");
+
+    const podcastCount =
+        document.getElementById("podcastCount");
+
+    const recentContent =
+        document.getElementById("recentContent");
+
+    const topUserName =
+        document.getElementById("topUserName");
+
+    const topUserRole =
+        document.getElementById("topUserRole");
+
+    const sidebarUserName =
+        document.getElementById("sidebarUserName");
+
+    const sidebarUserRole =
+        document.getElementById("sidebarUserRole");
+
+    const userAvatar =
+        document.getElementById("userAvatar");
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+    const usersNav =
+        document.getElementById("usersNav");
+
+
+    /*
+     * =====================================================
+     * HELPERS
+     * =====================================================
+     */
+
+    function showError(message) {
+
+        errorBox.textContent =
+            message ||
+            "Terjadi kesalahan.";
+
+        errorBox.style.display =
+            "block";
+    }
+
+
+    function hideLoading() {
+
+        loading.style.display =
+            "none";
+
+        dashboardContent.style.display =
+            "block";
+    }
+
+
+    function initials(name) {
+
+        const value =
+            String(name || "")
+                .trim();
+
+        if (!value) {
+            return "?";
+        }
+
+        const parts =
+            value
+                .split(/\s+/)
+                .slice(0, 2);
+
+        return parts
+            .map(item =>
+                item.charAt(0)
+                    .toUpperCase()
+            )
+            .join("");
+    }
+
+
+    function escapeHtml(value) {
+
+        return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    function formatDate(value) {
+
+        if (!value) {
+            return "";
+        }
+
+        const date =
+            new Date(value);
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+            return "";
+        }
+
+        return date.toLocaleDateString(
+            "id-ID",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+    }
+
+
+    function statusClass(status) {
+
+        const value =
+            String(status || "")
+                .toLowerCase();
+
+        if (value === "published") {
+            return "badge-published";
+        }
+
+        if (value === "review") {
+            return "badge-review";
+        }
+
+        if (value === "archived") {
+            return "badge-archived";
+        }
+
+        return "badge-draft";
+    }
+
+
+    /*
+     * =====================================================
+     * AUTH
+     * =====================================================
+     */
+
+    async function getCurrentUser() {
+
+        const {
+            data,
+            error
+        } =
+            await supabase.auth.getUser();
+
+        if (error) {
+            throw error;
+        }
+
+        return data?.user || null;
+    }
+
+
+    /*
+     * =====================================================
+     * PROFILE
+     * =====================================================
+     */
+
+    async function getProfile(userId) {
+
+        const {
+            data,
+            error
+        } =
+            await supabase
+                .from("profiles")
+                .select(
+                    "id, full_name, role, avatar_url"
+                )
+                .eq("id", userId)
+                .maybeSingle();
+
+        if (error) {
+            throw error;
+        }
+
+        return data || null;
+    }
+
+
+    /*
+     * =====================================================
+     * COUNT
+     * =====================================================
+     */
+
+    async function getCount(table) {
+
+        const {
+            count,
+            error
+        } =
+            await supabase
+                .from(table)
+                .select(
+                    "*",
+                    {
+                        count: "exact",
+                        head: true
+                    }
+                );
+
+        if (error) {
+            console.warn(
+                `Gagal mengambil count ${table}:`,
+                error
+            );
+
+            return 0;
+        }
+
+        return count || 0;
+    }
+
+
+    /*
+     * =====================================================
+     * RECENT ARTICLES
+     * =====================================================
+     */
+
+    async function getRecentArticles() {
+
+        const {
+            data,
+            error
+        } =
+            await supabase
+                .from("articles")
+                .select(
+                    `
+                    id,
+                    title,
+                    status,
+                    cover_image_url,
+                    created_at
+                    `
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(5);
+
+        if (error) {
+
+            console.warn(
+                "Gagal mengambil artikel:",
+                error
+            );
+
+            return [];
+        }
+
+        return data || [];
+    }
+
+
+    /*
+     * =====================================================
+     * RENDER RECENT
+     * =====================================================
+     */
+
+    function renderRecent(items) {
+
+        if (!items.length) {
+
+            recentContent.innerHTML = `
+                <div class="empty">
+                    Belum ada artikel.
+                </div>
+            `;
+
+            return;
+        }
+
+        recentContent.innerHTML =
+            items.map(item => {
+
+                const image =
+                    item.cover_image_url
+                        ? `
+                            <img
+                                class="content-thumb"
+                                src="${escapeHtml(item.cover_image_url)}"
+                                alt=""
+                            >
+                        `
+                        : `
+                            <div class="content-thumb"></div>
+                        `;
+
+                return `
+                    <div class="content-item">
+
+                        ${image}
+
+                        <div class="content-info">
+
+                            <div class="content-name">
+                                ${escapeHtml(item.title)}
+                            </div>
+
+                            <div class="content-meta">
+                                ${formatDate(item.created_at)}
+                            </div>
+
+                        </div>
+
+                        <span class="badge ${statusClass(item.status)}">
+                            ${escapeHtml(item.status || "draft")}
+                        </span>
+
+                    </div>
+                `;
+
+            }).join("");
+    }
+
+
+    /*
+     * =====================================================
+     * LOAD DASHBOARD
+     * =====================================================
+     */
+
+    async function loadDashboard() {
+
+        try {
+
+            const user =
+                await getCurrentUser();
+
+            /*
+             * BELUM LOGIN
+             */
+
+            if (!user) {
+
+                window.location.href =
+                    "index.html";
+
+                return;
+            }
+
+
+            /*
+             * PROFILE
+             */
+
+            const profile =
+                await getProfile(user.id);
+
+
+            /*
+             * Jika profile belum ada,
+             * jangan crash.
+             */
+
+            const name =
+                profile?.full_name ||
+                user.user_metadata?.full_name ||
+                user.email ||
+                "Admin";
+
+            const role =
+                profile?.role ||
+                "user";
+
+
+            /*
+             * Role selain admin/editor
+             */
+
+            if (
+                role !== "admin" &&
+                role !== "editor"
+            ) {
+
+                window.location.href =
+                    "index.html";
+
+                return;
+            }
+
+
+            /*
+             * USER UI
+             */
+
+            topUserName.textContent =
+                name;
+
+            sidebarUserName.textContent =
+                name;
+
+            topUserRole.textContent =
+                role;
+
+            sidebarUserRole.textContent =
+                role;
+
+            userAvatar.textContent =
+                initials(name);
+
+
+            /*
+             * USER MANAGEMENT
+             * hanya admin
+             */
+
+            if (role !== "admin") {
+                usersNav.style.display =
+                    "none";
+            }
+
+
+            /*
+             * LOAD DATA
+             */
+
+            const [
+                articles,
+                videos,
+                playlists,
+                podcasts,
+                recent
+            ] =
+                await Promise.all([
+                    getCount("articles"),
+                    getCount("videos"),
+                    getCount("playlists"),
+                    getCount("podcasts"),
+                    getRecentArticles()
+                ]);
+
+
+            articleCount.textContent =
+                articles;
+
+            videoCount.textContent =
+                videos;
+
+            playlistCount.textContent =
+                playlists;
+
+            podcastCount.textContent =
+                podcasts;
+
+
+            renderRecent(recent);
+
+
+            hideLoading();
+
+        } catch (error) {
+
+            console.error(
+                "Dashboard error:",
+                error
+            );
+
+            loading.style.display =
+                "none";
+
+            showError(
+                error?.message ||
+                "Dashboard gagal dimuat."
+            );
+
+        }
+
+    }
+
+
+    /*
+     * =====================================================
+     * LOGOUT
+     * =====================================================
+     */
+
+    logoutButton.addEventListener(
+        "click",
+        async () => {
+
+            logoutButton.disabled =
+                true;
+
+            logoutButton.textContent =
+                "Keluar...";
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabase.auth.signOut();
+
+                if (error) {
+                    throw error;
+                }
+
+                window.location.href =
+                    "index.html";
+
+            } catch (error) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+                logoutButton.disabled =
+                    false;
+
+                logoutButton.textContent =
+                    "Keluar";
+
+                showError(
+                    error?.message ||
+                    "Gagal keluar."
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * =====================================================
+     * START
+     * =====================================================
+     */
+
+    loadDashboard();
+
+</script>
 
 </body>
-
 </html>
