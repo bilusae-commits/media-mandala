@@ -1860,9 +1860,7 @@ async function loadVideosFromSupabase(){
     await db
       .from('videos')
       .select('*')
-      .eq(
-        'published',
-        true
+    .eq('published_at', 'not.is', null)
       )
       .order(
         'created_at',
