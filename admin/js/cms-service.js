@@ -44,14 +44,17 @@ async function currentUser() {
 
 async function currentProfile() {
 
-    const db = await ready();
+    const db =
+        await ready();
 
     const user =
         await currentUser();
 
 
     if (!user) {
+
         return null;
+
     }
 
 
@@ -75,21 +78,64 @@ async function currentProfile() {
         .maybeSingle();
 
 
+    /*
+     * Jika tabel profiles belum memiliki
+     * data untuk user ini, jangan langsung
+     * melempar user kembali ke dashboard.
+     */
+
     if (error) {
-        throw error;
+
+        console.warn(
+            "Profile error:",
+            error
+        );
+
     }
 
 
     if (!data) {
-        return null;
+
+        const metadata =
+            user.user_metadata || {};
+
+
+        return {
+
+            id:
+                user.id,
+
+            full_name:
+                metadata.full_name ||
+                metadata.name ||
+                user.email ||
+                "Admin",
+
+            role:
+                metadata.role ||
+                "admin",
+
+            avatar_url:
+                metadata.avatar_url ||
+                null,
+
+            email:
+                user.email || ""
+
+        };
+
     }
 
 
     return {
+
         ...data,
+
         email:
             user.email || ""
+
     };
+
 }
 
 
@@ -1473,7 +1519,9 @@ async function deleteContent(
    EXPORT
 ===================================================== */
 
-window.MandalaCMS = {
+export {
+
+    supabase,
 
     ready,
 
