@@ -1,17 +1,6 @@
-import {
-    requireStaff,
-    currentUser,
-    currentProfile,
-    article,
-    createArticle,
-    updateArticle,
-    changeStatus,
-    logout
-} from "./cms-service.js";
+import "./cms-service.js";
 
-import {
-    supabase
-} from "./cms-service.js";
+const CMS = window.MandalaCMS;
 
 
 /* =====================================================
@@ -19,123 +8,64 @@ import {
 ===================================================== */
 
 const form =
-    document.getElementById(
-        "article-form"
-    );
-
+    document.getElementById("article-form");
 
 const pageTitle =
-    document.getElementById(
-        "page-title"
-    );
-
+    document.getElementById("page-title");
 
 const articleId =
-    document.getElementById(
-        "article-id"
-    );
-
+    document.getElementById("article-id");
 
 const titleInput =
-    document.getElementById(
-        "title"
-    );
-
+    document.getElementById("title");
 
 const slugInput =
-    document.getElementById(
-        "slug"
-    );
-
+    document.getElementById("slug");
 
 const excerptInput =
-    document.getElementById(
-        "excerpt"
-    );
-
+    document.getElementById("excerpt");
 
 const contentInput =
-    document.getElementById(
-        "content"
-    );
-
+    document.getElementById("content");
 
 const coverInput =
-    document.getElementById(
-        "cover_image_url"
-    );
-
+    document.getElementById("cover_image_url");
 
 const categoryInput =
-    document.getElementById(
-        "category_id"
-    );
-
+    document.getElementById("category_id");
 
 const featuredInput =
-    document.getElementById(
-        "featured"
-    );
-
+    document.getElementById("featured");
 
 const statusInput =
-    document.getElementById(
-        "status"
-    );
-
+    document.getElementById("status");
 
 const statusHelp =
-    document.getElementById(
-        "status-help"
-    );
-
+    document.getElementById("status-help");
 
 const formMessage =
-    document.getElementById(
-        "form-message"
-    );
-
+    document.getElementById("form-message");
 
 const saveButton =
-    document.getElementById(
-        "save-button"
-    );
-
+    document.getElementById("save-button");
 
 const saveDraftButton =
-    document.getElementById(
-        "save-draft-button"
-    );
-
+    document.getElementById("save-draft-button");
 
 const submitReviewButton =
-    document.getElementById(
-        "submit-review-button"
-    );
-
+    document.getElementById("submit-review-button");
 
 const publishButton =
-    document.getElementById(
-        "publish-button"
-    );
-
+    document.getElementById("publish-button");
 
 const archiveButton =
-    document.getElementById(
-        "archive-button"
-    );
-
+    document.getElementById("archive-button");
 
 const logoutButton =
-    document.getElementById(
-        "logout-button"
-    );
-
+    document.getElementById("logout-button");
 
 const publishedOption =
-    document.getElementById(
-        "published-option"
-    );
+    document.getElementById("published-option");
 
 
 /* =====================================================
@@ -145,6 +75,8 @@ const publishedOption =
 let profile = null;
 
 let currentArticle = null;
+
+let slugManuallyEdited = false;
 
 
 /* =====================================================
@@ -156,14 +88,10 @@ function showMessage(
     type = "info"
 ) {
 
-    if (!formMessage) {
-        return;
-    }
-
+    if (!formMessage) return;
 
     formMessage.textContent =
         text;
-
 
     formMessage.dataset.type =
         type;
@@ -171,7 +99,22 @@ function showMessage(
 
 
 /* =====================================================
-   SLUGIFY
+   ESCAPE
+===================================================== */
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+/* =====================================================
+   SLUG
 ===================================================== */
 
 function slugify(text) {
@@ -198,28 +141,13 @@ function slugify(text) {
         )
         .replace(
             /^-|-$/g,
-            ""
-        );
+            "");
 }
 
 
 /* =====================================================
    AUTO SLUG
 ===================================================== */
-
-let slugManuallyEdited = false;
-
-
-slugInput?.addEventListener(
-    "input",
-    () => {
-
-        slugManuallyEdited =
-            true;
-
-    }
-);
-
 
 titleInput?.addEventListener(
     "input",
@@ -233,163 +161,30 @@ titleInput?.addEventListener(
                 slugify(
                     titleInput.value
                 );
-
         }
+    }
+);
 
+
+slugInput?.addEventListener(
+    "input",
+    () => {
+
+        slugManuallyEdited =
+            true;
     }
 );
 
 
 /* =====================================================
-   FORMAT STATUS
+   ARTICLE ID
 ===================================================== */
 
-function updateStatusUI() {
+function getArticleId() {
 
-    const role =
-        profile?.role;
-
-
-    const status =
-        statusInput?.value;
-
-
-    /*
-     * Editor tidak boleh publish.
-     */
-
-    if (
-        role === "editor"
-    ) {
-
-        publishedOption.disabled =
-            true;
-
-
-        if (
-            status === "published"
-        ) {
-
-            statusInput.value =
-                "draft";
-
-        }
-
-
-        publishButton.style.display =
-            "none";
-
-
-        statusHelp.textContent =
-            "Editor tidak memiliki hak untuk publish artikel.";
-
-    } else {
-
-        publishedOption.disabled =
-            false;
-
-
-        publishButton.style.display =
-            "";
-
-
-        statusHelp.textContent =
-            "Admin dapat mempublish artikel.";
-
-    }
-
-
-    /*
-     * Published article
-     */
-
-    if (
-        currentArticle?.status ===
-        "published"
-    ) {
-
-        if (
-            role === "editor"
-        ) {
-
-            disableEditorForPublished();
-
-        }
-
-    }
-
-}
-
-
-/* =====================================================
-   DISABLE EDITOR PUBLISHED
-===================================================== */
-
-function disableEditorForPublished() {
-
-    if (
-        profile?.role !== "editor"
-    ) {
-        return;
-    }
-
-
-    const fields = [
-
-        titleInput,
-
-        slugInput,
-
-        excerptInput,
-
-        contentInput,
-
-        coverInput,
-
-        categoryInput,
-
-        featuredInput
-
-    ];
-
-
-    fields.forEach(
-        field => {
-
-            if (field) {
-                field.disabled =
-                    true;
-            }
-
-        }
-    );
-
-
-    saveButton.disabled =
-        true;
-
-
-    saveDraftButton.disabled =
-        true;
-
-
-    submitReviewButton.disabled =
-        true;
-
-
-    archiveButton.disabled =
-        true;
-
-
-    statusInput.disabled =
-        true;
-
-
-    showMessage(
-        "Artikel sudah published. Editor tidak dapat mengubahnya.",
-        "warning"
-    );
-
+    return new URLSearchParams(
+        window.location.search
+    ).get("id");
 }
 
 
@@ -399,110 +194,25 @@ function disableEditorForPublished() {
 
 async function loadCategories() {
 
-    const {
-        data,
-        error
-    } = await supabase
-        .from("categories")
-        .select(
-            "id,name,is_active"
-        )
-        .eq(
-            "is_active",
-            true
-        )
-        .order(
-            "name",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (error) {
-        throw error;
-    }
+    const data =
+        await CMS.categories();
 
 
     categoryInput.innerHTML = `
-
         <option value="">
             -- Pilih Kategori --
         </option>
 
-        ${
-            (data || [])
-                .map(
-                    category => `
-                        <option
-                            value="${category.id}"
-                        >
-                            ${escapeHtml(
-                                category.name
-                            )}
-                        </option>
-                    `
-                )
-                .join("")
-        }
-
+        ${(data || [])
+            .map(
+                category => `
+                    <option value="${escapeHtml(category.id)}">
+                        ${escapeHtml(category.name)}
+                    </option>
+                `
+            )
+            .join("")}
     `;
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHtml(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-}
-
-
-/* =====================================================
-   GET ARTICLE ID
-===================================================== */
-
-function getArticleId() {
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    return params.get(
-        "id"
-    );
 }
 
 
@@ -510,14 +220,7 @@ function getArticleId() {
    LOAD ARTICLE
 ===================================================== */
 
-async function loadArticle(
-    id
-) {
-
-    if (!id) {
-        return;
-    }
-
+async function loadArticle(id) {
 
     showMessage(
         "Memuat artikel..."
@@ -525,7 +228,7 @@ async function loadArticle(
 
 
     const data =
-        await article(id);
+        await CMS.article(id);
 
 
     currentArticle =
@@ -533,7 +236,7 @@ async function loadArticle(
 
 
     articleId.value =
-        data.id;
+        data.id || "";
 
 
     titleInput.value =
@@ -557,45 +260,37 @@ async function loadArticle(
 
 
     coverInput.value =
-        data.cover_image_url ||
-        "";
+        data.cover_image_url || "";
 
 
     categoryInput.value =
-        data.category_id ||
-        "";
+        data.category_id || "";
 
 
     featuredInput.checked =
-        Boolean(
-            data.featured
-        );
+        Boolean(data.featured);
 
 
     statusInput.value =
-        data.status ||
-        "draft";
+        data.status || "draft";
 
 
     pageTitle.textContent =
         "Edit Artikel";
 
 
-    updateActionButtons();
-
-
-    updateStatusUI();
+    updateUI();
 
 
     showMessage(
-        "Artikel berhasil dimuat."
+        "Artikel berhasil dimuat.",
+        "success"
     );
-
 }
 
 
 /* =====================================================
-   GET FORM DATA
+   FORM DATA
 ===================================================== */
 
 function getFormData() {
@@ -603,13 +298,11 @@ function getFormData() {
     const title =
         titleInput.value.trim();
 
-
     const slug =
         slugInput.value.trim();
 
 
     if (!title) {
-
         throw new Error(
             "Judul wajib diisi."
         );
@@ -617,7 +310,6 @@ function getFormData() {
 
 
     if (!slug) {
-
         throw new Error(
             "Slug wajib diisi."
         );
@@ -650,9 +342,7 @@ function getFormData() {
             Boolean(
                 featuredInput.checked
             )
-
     };
-
 }
 
 
@@ -664,221 +354,295 @@ async function save(
     targetStatus = null
 ) {
 
-    try {
-
-        const payload =
-            getFormData();
+    const payload =
+        getFormData();
 
 
-        /*
-         * Editor tidak boleh menentukan
-         * published.
-         */
+    /*
+     * STATUS
+     */
 
-        if (
-            targetStatus ===
-            "published" &&
-            profile?.role !== "admin"
-        ) {
+    if (targetStatus) {
+
+        payload.status =
+            targetStatus;
+
+    } else if (currentArticle) {
+
+        payload.status =
+            currentArticle.status;
+
+    } else {
+
+        payload.status =
+            "draft";
+    }
+
+
+    /*
+     * EDITOR
+     */
+
+    if (
+        profile.role === "editor" &&
+        payload.status === "published"
+    ) {
+
+        throw new Error(
+            "Editor tidak dapat publish artikel."
+        );
+    }
+
+
+    /*
+     * AUTHOR
+     */
+
+    if (!currentArticle) {
+
+        const user =
+            await CMS.currentUser();
+
+
+        if (!user) {
 
             throw new Error(
-                "Editor tidak dapat publish artikel."
+                "User tidak ditemukan."
             );
         }
 
 
-        /*
-         * Author selalu user login
-         * saat membuat artikel.
-         */
-
-        if (
-            !currentArticle
-        ) {
-
-            const user =
-                await currentUser();
-
-
-            if (!user) {
-
-                throw new Error(
-                    "User tidak ditemukan."
-                );
-            }
-
-
-            payload.author_id =
-                user.id;
-
-        }
-
-
-        /*
-         * Status
-         */
-
-        if (
-            targetStatus
-        ) {
-
-            payload.status =
-                targetStatus;
-
-        } else if (
-            currentArticle
-        ) {
-
-            /*
-             * Saat edit biasa,
-             * pertahankan status.
-             */
-
-            payload.status =
-                currentArticle.status;
-
-        } else {
-
-            payload.status =
-                "draft";
-
-        }
-
-
-        /*
-         * published_at
-         */
-
-        if (
-            payload.status ===
-            "published"
-        ) {
-
-            /*
-             * Jangan menimpa tanggal
-             * publish yang sudah ada.
-             */
-
-            if (
-                !currentArticle?.published_at
-            ) {
-
-                payload.published_at =
-                    new Date().toISOString();
-
-            }
-
-        } else {
-
-            /*
-             * Konten belum published.
-             */
-
-            payload.published_at =
-                null;
-
-        }
-
-
-        showMessage(
-            "Menyimpan..."
-        );
-
-
-        let result;
-
-
-        if (
-            currentArticle
-        ) {
-
-            result =
-                await updateArticle(
-                    currentArticle.id,
-                    payload
-                );
-
-        } else {
-
-            result =
-                await createArticle(
-                    payload
-                );
-
-        }
-
-
-        /*
-         * Simpan hasil sebagai
-         * current article.
-         */
-
-        currentArticle =
-            result;
-
-
-        articleId.value =
-            result.id;
-
-
-        pageTitle.textContent =
-            "Edit Artikel";
-
-
-        /*
-         * Update URL supaya refresh
-         * tidak membuat artikel baru.
-         */
-
-        const newUrl =
-            `article-edit.html?id=${encodeURIComponent(result.id)}`;
-
-
-        window.history.replaceState(
-            {},
-            "",
-            newUrl
-        );
-
-
-        updateActionButtons();
-
-
-        updateStatusUI();
-
-
-        showMessage(
-            "Artikel berhasil disimpan.",
-            "success"
-        );
-
-
-        return result;
-
-
-    } catch (error) {
-
-        console.error(
-            "Save article error:",
-            error
-        );
-
-
-        showMessage(
-            error.message ||
-            "Gagal menyimpan artikel.",
-            "error"
-        );
-
-
-        throw error;
+        payload.author_id =
+            user.id;
     }
 
+
+    /*
+     * PUBLISHED AT
+     */
+
+    if (
+        payload.status === "published"
+    ) {
+
+        payload.published_at =
+            currentArticle?.published_at ||
+            new Date().toISOString();
+
+    } else {
+
+        payload.published_at =
+            null;
+    }
+
+
+    showMessage(
+        "Menyimpan..."
+    );
+
+
+    let result;
+
+
+    if (currentArticle) {
+
+        result =
+            await CMS.updateArticle(
+                currentArticle.id,
+                payload
+            );
+
+    } else {
+
+        result =
+            await CMS.createArticle(
+                payload
+            );
+    }
+
+
+    currentArticle =
+        result;
+
+
+    articleId.value =
+        result.id;
+
+
+    pageTitle.textContent =
+        "Edit Artikel";
+
+
+    window.history.replaceState(
+        {},
+        "",
+        `article-edit.html?id=${encodeURIComponent(
+            result.id
+        )}`
+    );
+
+
+    updateUI();
+
+
+    showMessage(
+        "Artikel berhasil disimpan.",
+        "success"
+    );
+
+
+    return result;
 }
 
 
 /* =====================================================
-   SAVE BUTTON
+   BUTTON STATE
+===================================================== */
+
+function updateUI() {
+
+    const role =
+        profile?.role;
+
+    const status =
+        currentArticle?.status ||
+        statusInput?.value ||
+        "draft";
+
+
+    /*
+     * Published option
+     */
+
+    if (publishedOption) {
+
+        publishedOption.disabled =
+            role !== "admin";
+    }
+
+
+    /*
+     * STATUS HELP
+     */
+
+    if (statusHelp) {
+
+        statusHelp.textContent =
+            role === "admin"
+                ? "Admin dapat mempublish artikel."
+                : "Editor dapat membuat Draft/Review, tetapi tidak dapat publish.";
+    }
+
+
+    /*
+     * DEFAULT
+     */
+
+    saveButton.style.display =
+        "";
+
+    saveDraftButton.style.display =
+        "";
+
+    submitReviewButton.style.display =
+        "";
+
+    archiveButton.style.display =
+        "";
+
+    publishButton.style.display =
+        role === "admin"
+            ? ""
+            : "none";
+
+
+    /*
+     * PUBLISHED
+     */
+
+    if (
+        status === "published"
+    ) {
+
+        if (
+            role === "editor"
+        ) {
+
+            [
+                titleInput,
+                slugInput,
+                excerptInput,
+                contentInput,
+                coverInput,
+                categoryInput,
+                featuredInput,
+                statusInput
+            ].forEach(
+                field => {
+
+                    if (field) {
+                        field.disabled = true;
+                    }
+                }
+            );
+
+
+            saveButton.style.display =
+                "none";
+
+            saveDraftButton.style.display =
+                "none";
+
+            submitReviewButton.style.display =
+                "none";
+
+            archiveButton.style.display =
+                "none";
+
+            publishButton.style.display =
+                "none";
+
+        } else {
+
+            /*
+             * Admin boleh edit
+             */
+
+            submitReviewButton.style.display =
+                "none";
+        }
+    }
+
+
+    /*
+     * REVIEW
+     */
+
+    if (
+        status === "review"
+    ) {
+
+        submitReviewButton.style.display =
+            "none";
+    }
+
+
+    /*
+     * EDITOR PUBLISH
+     */
+
+    if (
+        role === "editor"
+    ) {
+
+        publishButton.style.display =
+            "none";
+    }
+}
+
+
+/* =====================================================
+   SUBMIT
 ===================================================== */
 
 form?.addEventListener(
@@ -887,15 +651,22 @@ form?.addEventListener(
 
         event.preventDefault();
 
-
         try {
 
             await save();
 
-        } catch {
-            // Error sudah ditampilkan.
-        }
+        } catch (error) {
 
+            console.error(
+                error
+            );
+
+            showMessage(
+                error?.message ||
+                "Gagal menyimpan artikel.",
+                "error"
+            );
+        }
     }
 );
 
@@ -914,16 +685,20 @@ saveDraftButton?.addEventListener(
                 "draft"
             );
 
-        } catch {
-            // Error sudah ditampilkan.
-        }
+        } catch (error) {
 
+            showMessage(
+                error?.message ||
+                "Gagal menyimpan draft.",
+                "error"
+            );
+        }
     }
 );
 
 
 /* =====================================================
-   SUBMIT REVIEW
+   REVIEW
 ===================================================== */
 
 submitReviewButton?.addEventListener(
@@ -936,10 +711,14 @@ submitReviewButton?.addEventListener(
                 "review"
             );
 
-        } catch {
-            // Error sudah ditampilkan.
-        }
+        } catch (error) {
 
+            showMessage(
+                error?.message ||
+                "Gagal mengirim review.",
+                "error"
+            );
+        }
     }
 );
 
@@ -955,8 +734,7 @@ publishButton?.addEventListener(
         try {
 
             if (
-                profile?.role !==
-                "admin"
+                profile?.role !== "admin"
             ) {
 
                 throw new Error(
@@ -969,10 +747,14 @@ publishButton?.addEventListener(
                 "published"
             );
 
-        } catch {
-            // Error sudah ditampilkan.
-        }
+        } catch (error) {
 
+            showMessage(
+                error?.message ||
+                "Gagal publish artikel.",
+                "error"
+            );
+        }
     }
 );
 
@@ -991,132 +773,20 @@ archiveButton?.addEventListener(
                 "archived"
             );
 
-        } catch {
-            // Error sudah ditampilkan.
-        }
+        } catch (error) {
 
+            showMessage(
+                error?.message ||
+                "Gagal mengarsipkan artikel.",
+                "error"
+            );
+        }
     }
 );
 
 
 /* =====================================================
-   UPDATE BUTTONS
-===================================================== */
-
-function updateActionButtons() {
-
-    const role =
-        profile?.role;
-
-
-    const status =
-        currentArticle?.status ||
-        "draft";
-
-
-    /*
-     * Default
-     */
-
-    saveButton.style.display =
-        "";
-
-
-    saveDraftButton.style.display =
-        "";
-
-
-    submitReviewButton.style.display =
-        "";
-
-
-    archiveButton.style.display =
-        "";
-
-
-    publishButton.style.display =
-        role === "admin"
-            ? ""
-            : "none";
-
-
-    /*
-     * Published
-     */
-
-    if (
-        status === "published"
-    ) {
-
-        if (
-            role === "editor"
-        ) {
-
-            saveButton.style.display =
-                "none";
-
-            saveDraftButton.style.display =
-                "none";
-
-            submitReviewButton.style.display =
-                "none";
-
-            archiveButton.style.display =
-                "none";
-
-        } else {
-
-            /*
-             * Admin masih bisa
-             * mengelola artikel.
-             */
-
-            submitReviewButton.style.display =
-                "none";
-
-        }
-
-    }
-
-
-    /*
-     * Draft
-     */
-
-    if (
-        status === "draft"
-    ) {
-
-        if (
-            role === "editor"
-        ) {
-
-            publishButton.style.display =
-                "none";
-
-        }
-
-    }
-
-
-    /*
-     * Review
-     */
-
-    if (
-        status === "review"
-    ) {
-
-        submitReviewButton.style.display =
-            "none";
-
-    }
-
-}
-
-
-/* =====================================================
-   STATUS CHANGE
+   STATUS SELECT
 ===================================================== */
 
 statusInput?.addEventListener(
@@ -1124,10 +794,8 @@ statusInput?.addEventListener(
     () => {
 
         if (
-            profile?.role ===
-            "editor" &&
-            statusInput.value ===
-            "published"
+            profile?.role === "editor" &&
+            statusInput.value === "published"
         ) {
 
             statusInput.value =
@@ -1136,12 +804,10 @@ statusInput?.addEventListener(
 
 
             showMessage(
-                "Editor tidak dapat memilih status Published.",
+                "Editor tidak dapat memilih Published.",
                 "warning"
             );
-
         }
-
     }
 );
 
@@ -1156,7 +822,7 @@ logoutButton?.addEventListener(
 
         try {
 
-            await logout();
+            await CMS.logout();
 
         } catch (error) {
 
@@ -1165,8 +831,12 @@ logoutButton?.addEventListener(
                 error
             );
 
+            showMessage(
+                error?.message ||
+                "Gagal logout.",
+                "error"
+            );
         }
-
     }
 );
 
@@ -1179,12 +849,8 @@ async function init() {
 
     try {
 
-        /*
-         * Auth + role
-         */
-
         profile =
-            await requireStaff();
+            await CMS.requireStaff();
 
 
         if (!profile) {
@@ -1192,16 +858,8 @@ async function init() {
         }
 
 
-        /*
-         * Categories
-         */
-
         await loadCategories();
 
-
-        /*
-         * Existing article
-         */
 
         const id =
             getArticleId();
@@ -1209,24 +867,21 @@ async function init() {
 
         if (id) {
 
-            await loadArticle(
-                id
-            );
+            await loadArticle(id);
 
         } else {
 
             pageTitle.textContent =
                 "Artikel Baru";
 
-
             statusInput.value =
                 "draft";
 
+            updateUI();
 
-            updateActionButtons();
-
-            updateStatusUI();
-
+            showMessage(
+                "Siap membuat artikel baru."
+            );
         }
 
 
@@ -1237,15 +892,12 @@ async function init() {
             error
         );
 
-
         showMessage(
-            error.message ||
-            "Gagal memuat editor artikel.",
+            error?.message ||
+            "Gagal membuka editor artikel.",
             "error"
         );
-
     }
-
 }
 
 
