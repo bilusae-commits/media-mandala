@@ -1,18 +1,10 @@
 import { supabase } from "../../js/supabase-client.js";
 
 
-/* =====================================================
-   ELEMENT
-===================================================== */
+const form = document.getElementById("video-form");
 
-const form =
-    document.getElementById("video-form");
-
-const titleInput =
-    document.getElementById("judul_video");
-
-const slugInput =
-    document.getElementById("slug");
+const titleInput = document.getElementById("judul_video");
+const slugInput = document.getElementById("slug");
 
 const youtubeUrlInput =
     document.getElementById("youtube_url");
@@ -57,8 +49,8 @@ const message =
     document.getElementById("form-message");
 
 
-let profile = null;
 let currentVideo = null;
+let profile = null;
 let slugManual = false;
 
 
@@ -66,12 +58,11 @@ let slugManual = false;
    MESSAGE
 ===================================================== */
 
-function showMessage(text, type = "") {
+function messageShow(text, type = "") {
 
     if (!message) return;
 
     message.textContent = text;
-
     message.className =
         `form-message ${type}`;
 }
@@ -81,7 +72,7 @@ function showMessage(text, type = "") {
    SLUG
 ===================================================== */
 
-function createSlug(text) {
+function makeSlug(text) {
 
     return String(text || "")
         .toLowerCase()
@@ -95,14 +86,14 @@ function createSlug(text) {
 }
 
 
-titleInput.addEventListener(
+titleInput?.addEventListener(
     "input",
     () => {
 
         if (!slugManual) {
 
             slugInput.value =
-                createSlug(
+                makeSlug(
                     titleInput.value
                 );
         }
@@ -110,7 +101,7 @@ titleInput.addEventListener(
 );
 
 
-slugInput.addEventListener(
+slugInput?.addEventListener(
     "input",
     () => {
 
@@ -120,22 +111,21 @@ slugInput.addEventListener(
 
 
 /* =====================================================
-   YOUTUBE
+   YOUTUBE ID
 ===================================================== */
 
-function extractYoutubeId(url) {
+function youtubeId(url) {
 
     const value =
         String(url || "").trim();
 
-    if (!value) {
-        return "";
-    }
+    if (!value) return "";
 
 
     if (
         /^[A-Za-z0-9_-]{11}$/.test(value)
     ) {
+
         return value;
     }
 
@@ -149,7 +139,6 @@ function extractYoutubeId(url) {
         /youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/i,
 
         /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/i
-
     ];
 
 
@@ -172,7 +161,7 @@ function extractYoutubeId(url) {
 function updateYoutube() {
 
     const id =
-        extractYoutubeId(
+        youtubeId(
             youtubeUrlInput.value
         );
 
@@ -192,112 +181,22 @@ function updateYoutube() {
 }
 
 
-youtubeUrlInput.addEventListener(
+youtubeUrlInput?.addEventListener(
     "input",
     updateYoutube
 );
 
-youtubeUrlInput.addEventListener(
+youtubeUrlInput?.addEventListener(
     "change",
     updateYoutube
 );
 
-youtubeUrlInput.addEventListener(
-    "paste",
-    () => {
-
-        setTimeout(
-            updateYoutube,
-            50
-        );
-    }
-);
-
 
 /* =====================================================
-   CATEGORIES
+   CURRENT USER
 ===================================================== */
 
-async function loadCategories() {
-
-    categoryInput.innerHTML = `
-        <option value="">
-            Memuat kategori...
-        </option>
-    `;
-
-
-    const {
-        data,
-        error
-    } = await supabase
-        .from("categories")
-        .select("*")
-        .order("name", {
-            ascending: true
-        });
-
-
-    if (error) {
-
-        console.error(
-            "CATEGORY ERROR:",
-            error
-        );
-
-        categoryInput.innerHTML = `
-            <option value="">
-                Gagal memuat kategori
-            </option>
-        `;
-
-        return;
-    }
-
-
-    categoryInput.innerHTML = `
-        <option value="">
-            -- Pilih Kategori --
-        </option>
-    `;
-
-
-    for (
-        const category of data || []
-    ) {
-
-        const option =
-            document.createElement(
-                "option"
-            );
-
-        option.value =
-            category.id;
-
-        option.textContent =
-            category.name;
-
-        categoryInput.appendChild(
-            option
-        );
-    }
-
-
-    if (
-        currentVideo?.category_id
-    ) {
-
-        categoryInput.value =
-            currentVideo.category_id;
-    }
-}
-
-
-/* =====================================================
-   LOAD CURRENT USER
-===================================================== */
-
-async function getUser() {
+async function getCurrentUser() {
 
     const {
         data,
@@ -314,7 +213,7 @@ async function getUser() {
     if (!data?.user) {
 
         throw new Error(
-            "Anda belum login."
+            "Sesi login tidak ditemukan."
         );
     }
 
@@ -324,10 +223,10 @@ async function getUser() {
 
 
 /* =====================================================
-   LOAD PROFILE
+   PROFILE
 ===================================================== */
 
-async function loadProfile(userId) {
+async function getProfile(userId) {
 
     const {
         data,
@@ -346,6 +245,91 @@ async function loadProfile(userId) {
 
 
     return data;
+}
+
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+async function loadCategories() {
+
+    categoryInput.innerHTML = `
+        <option value="">
+            Memuat kategori...
+        </option>
+    `;
+
+
+    const {
+        data,
+        error
+    } =
+        await supabase
+            .from("categories")
+            .select("*")
+            .order("name", {
+                ascending: true
+            });
+
+
+    if (error) {
+
+        console.error(
+            "CATEGORY ERROR:",
+            error
+        );
+
+        categoryInput.innerHTML = `
+            <option value="">
+                Kategori gagal dimuat
+            </option>
+        `;
+
+        messageShow(
+            `Kategori gagal dimuat: ${error.message}`,
+            "error"
+        );
+
+        return;
+    }
+
+
+    categoryInput.innerHTML = `
+        <option value="">
+            -- Pilih Kategori --
+        </option>
+    `;
+
+
+    for (
+        const item of data || []
+    ) {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            item.id;
+
+        option.textContent =
+            item.name;
+
+        categoryInput.appendChild(
+            option
+        );
+    }
+
+
+    if (
+        currentVideo?.category_id
+    ) {
+
+        categoryInput.value =
+            currentVideo.category_id;
+    }
 }
 
 
@@ -394,7 +378,7 @@ async function loadVideo(id) {
 
     youtubeIdInput.value =
         data.youtube_video_id ||
-        extractYoutubeId(
+        youtubeId(
             data.youtube_url
         );
 
@@ -415,10 +399,17 @@ async function loadVideo(id) {
 
     updateYoutube();
 
+
     await loadCategories();
 
 
-    showMessage(
+    document.getElementById(
+        "page-title"
+    ).textContent =
+        "Edit Video";
+
+
+    messageShow(
         "Video berhasil dimuat.",
         "success"
     );
@@ -429,7 +420,7 @@ async function loadVideo(id) {
    PAYLOAD
 ===================================================== */
 
-function getPayload(status) {
+function payload(status) {
 
     const title =
         titleInput.value.trim();
@@ -443,17 +434,15 @@ function getPayload(status) {
     }
 
 
-    const youtubeUrl =
+    const url =
         youtubeUrlInput.value.trim();
 
 
-    const youtubeId =
-        extractYoutubeId(
-            youtubeUrl
-        );
+    const id =
+        youtubeId(url);
 
 
-    if (!youtubeId) {
+    if (!id) {
 
         throw new Error(
             "Masukkan URL YouTube yang valid."
@@ -467,17 +456,17 @@ function getPayload(status) {
 
         slug:
             slugInput.value.trim() ||
-            createSlug(title),
+            makeSlug(title),
 
         youtube_url:
-            youtubeUrl,
+            url,
 
         youtube_video_id:
-            youtubeId,
+            id,
 
         thumbnail_url:
             thumbnailInput.value.trim() ||
-            `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
+            `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
 
         description:
             descriptionInput.value.trim() ||
@@ -493,7 +482,7 @@ function getPayload(status) {
         status,
 
         author_id:
-            profile?.id
+            profile.id
     };
 }
 
@@ -506,20 +495,13 @@ async function saveVideo(status) {
 
     try {
 
-        saveButton.disabled = true;
-        draftButton.disabled = true;
-        reviewButton.disabled = true;
-        publishButton.disabled = true;
-        archiveButton.disabled = true;
-
-
-        showMessage(
+        messageShow(
             "Menyimpan..."
         );
 
 
-        const payload =
-            getPayload(status);
+        const data =
+            payload(status);
 
 
         let result;
@@ -527,54 +509,49 @@ async function saveVideo(status) {
 
         if (currentVideo?.id) {
 
-            const {
-                data,
-                error
-            } =
+            const response =
                 await supabase
                     .from("videos")
-                    .update(payload)
-                    .eq("id", currentVideo.id)
+                    .update(data)
+                    .eq(
+                        "id",
+                        currentVideo.id
+                    )
                     .select()
                     .single();
 
 
-            if (error) {
-                throw error;
+            if (response.error) {
+                throw response.error;
             }
 
 
-            result = data;
+            result =
+                response.data;
 
         } else {
 
-            const {
-                data,
-                error
-            } =
+            const response =
                 await supabase
                     .from("videos")
-                    .insert(payload)
+                    .insert(data)
                     .select()
                     .single();
 
 
-            if (error) {
-                throw error;
+            if (response.error) {
+                throw response.error;
             }
 
 
-            result = data;
+            result =
+                response.data;
         }
 
 
         currentVideo =
             result;
 
-
-        /*
-         * Masukkan ID ke URL
-         */
 
         if (result?.id) {
 
@@ -601,7 +578,7 @@ async function saveVideo(status) {
             status;
 
 
-        showMessage(
+        messageShow(
             "Video berhasil disimpan.",
             "success"
         );
@@ -610,34 +587,25 @@ async function saveVideo(status) {
     } catch (error) {
 
         console.error(
-            "SAVE VIDEO ERROR:",
+            "SAVE ERROR:",
             error
         );
 
 
-        showMessage(
+        messageShow(
             error?.message ||
             "Gagal menyimpan video.",
             "error"
         );
-
-
-    } finally {
-
-        saveButton.disabled = false;
-        draftButton.disabled = false;
-        reviewButton.disabled = false;
-        publishButton.disabled = false;
-        archiveButton.disabled = false;
     }
 }
 
 
 /* =====================================================
-   BUTTON
+   BUTTONS
 ===================================================== */
 
-form.addEventListener(
+form?.addEventListener(
     "submit",
     event => {
 
@@ -648,7 +616,7 @@ form.addEventListener(
 );
 
 
-draftButton.addEventListener(
+draftButton?.addEventListener(
     "click",
     () => {
 
@@ -657,7 +625,7 @@ draftButton.addEventListener(
 );
 
 
-reviewButton.addEventListener(
+reviewButton?.addEventListener(
     "click",
     () => {
 
@@ -666,7 +634,7 @@ reviewButton.addEventListener(
 );
 
 
-publishButton.addEventListener(
+publishButton?.addEventListener(
     "click",
     () => {
 
@@ -674,7 +642,7 @@ publishButton.addEventListener(
             profile?.role !== "admin"
         ) {
 
-            showMessage(
+            messageShow(
                 "Hanya Admin yang dapat publish.",
                 "error"
             );
@@ -688,7 +656,7 @@ publishButton.addEventListener(
 );
 
 
-archiveButton.addEventListener(
+archiveButton?.addEventListener(
     "click",
     () => {
 
@@ -701,7 +669,7 @@ archiveButton.addEventListener(
    LOGOUT
 ===================================================== */
 
-logoutButton.addEventListener(
+logoutButton?.addEventListener(
     "click",
     async () => {
 
@@ -729,7 +697,8 @@ logoutButton.addEventListener(
                 error
             );
 
-            showMessage(
+
+            messageShow(
                 error?.message ||
                 "Gagal keluar.",
                 "error"
@@ -747,17 +716,17 @@ async function init() {
 
     try {
 
-        showMessage(
+        messageShow(
             "Memuat..."
         );
 
 
         const user =
-            await getUser();
+            await getCurrentUser();
 
 
         profile =
-            await loadProfile(
+            await getProfile(
                 user.id
             );
 
@@ -765,21 +734,13 @@ async function init() {
         if (!profile) {
 
             throw new Error(
-                "Profile admin tidak ditemukan."
+                "Profile tidak ditemukan."
             );
         }
 
 
-        /*
-         * Kategori
-         */
-
         await loadCategories();
 
-
-        /*
-         * Edit mode
-         */
 
         const params =
             new URLSearchParams(
@@ -793,12 +754,6 @@ async function init() {
 
         if (id) {
 
-            document.getElementById(
-                "page-title"
-            ).textContent =
-                "Edit Video";
-
-
             await loadVideo(id);
 
         } else {
@@ -807,7 +762,7 @@ async function init() {
                 "draft";
 
 
-            showMessage(
+            messageShow(
                 "Siap membuat video."
             );
         }
@@ -816,14 +771,14 @@ async function init() {
     } catch (error) {
 
         console.error(
-            "VIDEO INIT ERROR:",
+            "INIT ERROR:",
             error
         );
 
 
-        showMessage(
+        messageShow(
             error?.message ||
-            "Gagal memuat editor video.",
+            "Gagal memuat editor.",
             "error"
         );
     }
