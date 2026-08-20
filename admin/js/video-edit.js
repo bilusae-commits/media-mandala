@@ -241,20 +241,31 @@ async function db() {
 
 async function loadAuth() {
 
+    const session =
+        await API.auth.getSession();
+
+    if (!session) {
+
+        showMessage(
+            "Session login tidak ditemukan. Silakan login kembali.",
+            "error"
+        );
+
+        return false;
+    }
+
     const auth =
         await API.auth.getCurrent();
 
+    if (!auth?.authenticated) {
 
-    if (
-        !auth ||
-        !auth.authenticated
-    ) {
-
-        throw new Error(
-            "Sesi login tidak ditemukan."
+        showMessage(
+            "Session login tidak ditemukan. Silakan login kembali.",
+            "error"
         );
-    }
 
+        return false;
+    }
 
     profile =
         auth.profile;
@@ -277,8 +288,10 @@ async function loadAuth() {
             "Anda tidak memiliki akses ke editor video."
         );
     }
-}
 
+
+    return true;
+}
 
 /* =====================================================
    CATEGORIES
@@ -825,10 +838,14 @@ async function init() {
         }
 
 
-        await loadAuth();
+  const authenticated =
+    await loadAuth();
 
+if (!authenticated) {
+    return;
+}
 
-        await loadCategories();
+await loadCategories();
 
 
         const params =
