@@ -10,81 +10,118 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Artikel — Mandala Channel CMS</title>
+    <title>
+        Artikel — Mandala Channel
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="./css/admin.css"
+    >
 
 </head>
 
 
 <body>
 
-    <header>
+
+<div class="main">
+
+
+    <header class="topbar">
 
         <div>
-            <h1>Artikel</h1>
 
-            <p>
-                Kelola artikel Mandala Channel
-            </p>
+            <h2>
+                Artikel
+            </h2>
+
         </div>
 
 
-        <nav>
+        <div class="user">
 
-            <a href="dashboard.html">
+            <a
+                href="./index.html"
+                class="btn ghost"
+            >
                 Dashboard
             </a>
 
             <button
                 id="logout-button"
                 type="button"
+                class="btn primary"
             >
                 Keluar
             </button>
 
-        </nav>
+        </div>
 
     </header>
 
 
-    <main>
+    <main class="content">
 
-        <section>
+
+        <div class="space">
 
             <div>
 
-                <h2>Daftar Artikel</h2>
+                <h2>
+                    Daftar Artikel
+                </h2>
 
-                <button
-                    id="new-article-button"
-                    type="button"
+                <p
+                    id="page-message"
+                    class="hint"
                 >
-                    + Artikel Baru
-                </button>
-
-            </div>
-
-
-            <div id="page-message"></div>
-
-
-            <div id="articles-container">
-
-                <p>
                     Memuat artikel...
                 </p>
 
             </div>
 
+
+            <button
+                id="new-article-button"
+                type="button"
+                class="btn primary"
+            >
+                + Artikel Baru
+            </button>
+
+        </div>
+
+
+        <section class="panel">
+
+            <div class="panelBody">
+
+                <div
+                    id="articles-container"
+                >
+
+                    <p class="hint">
+                        Memuat artikel...
+                    </p>
+
+                </div>
+
+            </div>
+
         </section>
+
 
     </main>
 
+</div>
 
-    <script
-        type="module"
-        src="./js/articles.js"
-    ></script>
+
+<script
+    type="module"
+    src="./js/articles.js"
+></script>
+
 
 </body>
-
 </html>
