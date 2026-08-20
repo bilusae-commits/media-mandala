@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="id">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,11 +10,6 @@
 <link rel="stylesheet" href="../css/main.css">
 
 <style>
-/* =========================================================
-   MANDALA CHANNEL — VIDEO
-   CMS / SUPABASE READY
-   ========================================================= */
-
 :root{
   --navy:#082d56;
   --navy-deep:#061f3c;
@@ -23,14 +19,7 @@
   --white:#fff;
   --line:#e4e8ec;
   --bronze:#9b7837;
-  --bronze-soft:#b79a61;
-
-  --max-fluid:94vw;
 }
-
-/* =========================================================
-   RESET / BASE
-   ========================================================= */
 
 *{
   box-sizing:border-box;
@@ -38,45 +27,28 @@
 
 html{
   scroll-behavior:smooth;
-  scroll-padding-top:115px;
 }
 
 body{
   margin:0;
-  overflow-x:hidden;
-  color:var(--ink);
   background:#fff;
+  color:var(--ink);
 }
-
-img{
-  max-width:100%;
-}
-
-button,
-a{
-  touch-action:manipulation;
-}
-
-/* =========================================================
-   FLUID CONTAINER
-   ========================================================= */
 
 .w{
-  width:var(--max-fluid);
-  max-width:none;
+  width:94vw;
   margin-inline:auto;
 }
 
-/* =========================================================
-   TOP UTILITY BAR
-   ========================================================= */
+/* =====================================================
+   TOP
+===================================================== */
 
 .top{
   height:34px;
   background:var(--navy-deep);
   color:#dbe5ef;
-  font-size:clamp(11px,.72vw,13px);
-  letter-spacing:.01em;
+  font-size:11px;
 }
 
 .top .w{
@@ -84,138 +56,93 @@ a{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding-inline:clamp(2px,1vw,18px);
 }
 
-/* =========================================================
-   HEADER / NAVIGATION
-   ========================================================= */
+/* =====================================================
+   HEADER
+===================================================== */
 
-header#siteHeader{
-  position:sticky !important;
-  top:0 !important;
-  z-index:1000 !important;
-
+#siteHeader{
+  position:sticky;
+  top:0;
+  z-index:1000;
   height:78px;
-
   background:rgba(255,255,255,.97);
-
   backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-
   border-bottom:1px solid rgba(8,45,86,.08);
-
-  transition:
-    height .28s ease,
-    box-shadow .28s ease,
-    background .28s ease;
+  transition:.25s ease;
 }
 
-header#siteHeader.scrolled{
+#siteHeader.scrolled{
   height:62px;
-
-  background:rgba(255,255,255,.94);
-
-  box-shadow:
-    0 7px 24px rgba(6,31,60,.10);
+  box-shadow:0 7px 24px rgba(6,31,60,.10);
 }
 
 .nav{
   height:100%;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  gap:clamp(16px,2vw,36px);
+  gap:30px;
 }
 
 .logo{
-  flex:0 0 auto;
-
   display:flex;
   align-items:center;
   gap:9px;
-
-  color:var(--navy);
   text-decoration:none;
+  color:var(--navy);
+  flex-shrink:0;
 }
 
 .logo .mark{
-  width:34px;
-  height:34px;
-
+  width:32px;
+  height:32px;
   display:grid;
   place-items:center;
-
-  color:var(--bronze);
-
-  font-size:24px;
-  line-height:1;
+  font-size:23px;
 }
 
 .logo b{
   display:block;
-
-  font:
-    600 clamp(15px,1vw,19px)/1
-    Georgia,serif;
-
+  font:600 16px Georgia,serif;
   letter-spacing:.08em;
 }
 
 .logo small{
   display:block;
-
-  margin-top:3px;
-
-  color:#7b8794;
-
+  margin-top:2px;
   font-size:8px;
-  letter-spacing:.22em;
+  letter-spacing:.24em;
+  color:var(--bronze);
 }
 
 .links{
   display:flex;
   align-items:center;
-
   gap:clamp(16px,1.9vw,32px);
-
   margin-left:auto;
 }
 
 .links a{
   position:relative;
-
   padding:29px 0;
-
   color:#526170;
-
-  font-size:clamp(11px,.78vw,14px);
-
-  white-space:nowrap;
   text-decoration:none;
-
-  transition:color .2s ease;
+  font-size:12px;
+  white-space:nowrap;
 }
 
 .links a:after{
   content:"";
-
   position:absolute;
-
   left:0;
   right:0;
   bottom:15px;
-
   height:2px;
-
   background:var(--bronze);
-
   transform:scaleX(0);
-  transform-origin:center;
-
-  transition:transform .22s ease;
+  transition:.2s ease;
 }
 
 .links a:hover,
@@ -228,662 +155,257 @@ header#siteHeader.scrolled{
   transform:scaleX(1);
 }
 
-header.scrolled .links a{
-  padding:22px 0;
-}
-
-header.scrolled .links a:after{
-  bottom:11px;
-}
-
 .yt{
-  flex:0 0 auto;
-
-  color:#fff;
-  background:var(--navy);
-
-  border:0;
-
+  flex-shrink:0;
   padding:11px 16px;
-
-  font-size:clamp(10px,.68vw,12px);
-
+  background:var(--navy);
+  color:#fff;
   text-decoration:none;
-
-  transition:
-    background .2s ease,
-    transform .2s ease;
+  font-size:10px;
+  letter-spacing:.04em;
 }
 
-.yt:hover{
-  background:var(--navy-deep);
-  transform:translateY(-1px);
-}
-
-/* =========================================================
-   PAGE HERO
-   ========================================================= */
+/* =====================================================
+   PAGE HEADER
+===================================================== */
 
 .pageHero{
-  position:relative;
-
-  min-height:clamp(330px,34vw,500px);
-
-  display:flex;
-  align-items:center;
-
-  overflow:hidden;
-
+  padding:72px 0 48px;
   background:
     linear-gradient(
-      90deg,
-      rgba(248,250,252,.98) 0%,
-      rgba(248,250,252,.91) 38%,
-      rgba(248,250,252,.65) 68%,
-      rgba(248,250,252,.36) 100%
-    ),
-    url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2200&q=88")
-    center/cover no-repeat;
-}
-
-.pageHero:after{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.08),
-      rgba(255,255,255,.18)
+      120deg,
+      #f7f9fb 0%,
+      #fff 60%,
+      #f1f4f7 100%
     );
-
-  pointer-events:none;
-}
-
-.pageHero .w{
-  position:relative;
-  z-index:2;
-}
-
-.pageHeroCopy{
-  max-width:850px;
+  border-bottom:1px solid var(--line);
 }
 
 .k{
   color:var(--bronze);
-
-  font-size:clamp(11px,.72vw,13px);
-
-  letter-spacing:.15em;
-
+  font-size:11px;
+  letter-spacing:.16em;
   text-transform:uppercase;
 }
 
 .pageHero h1{
-  max-width:800px;
-
-  margin:15px 0 20px;
-
+  margin:12px 0 15px;
   color:var(--navy);
-
-  font:
-    500 clamp(42px,5vw,76px)/.98
-    Georgia,serif;
-
-  letter-spacing:-.035em;
-}
-
-.pageHero p{
-  max-width:720px;
-
-  margin:0;
-
-  color:#5f6e7d;
-
-  font-size:clamp(13px,.86vw,16px);
-
-  line-height:1.75;
-}
-
-/* =========================================================
-   VIDEO SECTION
-   ========================================================= */
-
-.videoSection{
-  padding:clamp(56px,5.4vw,82px) 0;
-}
-
-.sectionHead{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-
-  gap:24px;
-
-  margin-bottom:clamp(24px,2.4vw,36px);
-}
-
-.sectionTitle{
-  margin:5px 0 0;
-
-  color:var(--navy);
-
-  font:
-    500 clamp(31px,2.65vw,44px)/1.05
-    Georgia,serif;
-
+  font:500 clamp(40px,4vw,64px)/1 Georgia,serif;
   letter-spacing:-.025em;
 }
 
-.sectionIntro{
-  max-width:650px;
-
+.pageHero p{
+  max-width:700px;
   margin:0;
-
-  color:#718091;
-
-  font-size:clamp(12px,.76vw,14px);
-
-  line-height:1.7;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.75;
 }
 
-/* =========================================================
-   FILTER BAR
-   ========================================================= */
+/* =====================================================
+   CONTENT
+===================================================== */
 
-.videoTools{
+.content{
+  padding:48px 0 90px;
+}
+
+.toolbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   gap:20px;
-
-  margin-bottom:clamp(26px,2.8vw,42px);
-
-  padding-bottom:18px;
-
-  border-bottom:1px solid var(--line);
+  margin-bottom:30px;
 }
 
-.filterList{
+.filters{
   display:flex;
   flex-wrap:wrap;
-
   gap:8px;
 }
 
-.filterBtn{
-  appearance:none;
-
-  border:1px solid #dfe4e8;
-
+.filter{
+  padding:9px 14px;
+  border:1px solid var(--line);
   background:#fff;
-
-  color:#687686;
-
-  padding:9px 15px;
-
+  color:#667382;
+  border-radius:3px;
   cursor:pointer;
-
-  font:
-    500 11px/1
-    Arial,sans-serif;
-
-  letter-spacing:.04em;
-
-  transition:
-    color .2s ease,
-    background .2s ease,
-    border-color .2s ease;
+  font-size:11px;
 }
 
-.filterBtn:hover,
-.filterBtn.active{
-  color:#fff;
+.filter:hover,
+.filter.active{
   background:var(--navy);
   border-color:var(--navy);
+  color:#fff;
 }
 
-.videoSearch{
-  width:min(280px,100%);
-
-  position:relative;
-}
-
-.videoSearch input{
-  width:100%;
-
-  height:38px;
-
-  padding:0 14px;
-
-  border:1px solid #dfe4e8;
-
+.search{
+  width:240px;
+  max-width:100%;
+  padding:10px 13px;
+  border:1px solid var(--line);
   outline:none;
-
-  background:#fff;
-
-  color:var(--ink);
-
-  font-size:12px;
-
-  transition:border-color .2s ease;
+  font:inherit;
+  font-size:11px;
 }
 
-.videoSearch input:focus{
+.search:focus{
   border-color:var(--navy);
 }
 
-/* =========================================================
+/* =====================================================
    VIDEO GRID
-   ========================================================= */
+===================================================== */
 
 .videoGrid{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
-  gap:clamp(18px,1.8vw,30px);
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:28px 22px;
 }
-
-/* =========================================================
-   VIDEO CARD
-   ========================================================= */
 
 .videoCard{
   min-width:0;
-
-  opacity:1;
-
-  transform:none;
-
-  transition:
-    opacity .35s ease,
-    transform .35s ease;
-}
-
-.videoCard.hidden{
-  display:none;
 }
 
 .videoThumb{
   position:relative;
-
   aspect-ratio:16/9;
-
   overflow:hidden;
-
   background:#e9edf0;
-
-  cursor:pointer;
 }
 
 .videoThumb img{
   width:100%;
   height:100%;
-
   display:block;
-
   object-fit:cover;
-
-  transition:
-    transform .55s cubic-bezier(.22,.61,.36,1),
-    filter .4s ease;
+  transition:transform .45s ease;
 }
 
 .videoCard:hover .videoThumb img{
-  transform:scale(1.045);
-
-  filter:saturate(.94);
+  transform:scale(1.035);
 }
 
 .videoOverlay{
   position:absolute;
   inset:0;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
-  background:rgba(6,31,60,.05);
-
-  transition:background .25s ease;
+  background:rgba(6,31,60,.08);
+  opacity:0;
+  transition:.25s ease;
 }
 
 .videoCard:hover .videoOverlay{
-  background:rgba(6,31,60,.16);
+  opacity:1;
 }
 
-.playIcon{
-  width:54px;
-  height:54px;
-
+.playButton{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:0;
+  background:#fff;
+  color:var(--navy);
   display:grid;
   place-items:center;
-
-  border-radius:50%;
-
-  background:rgba(255,255,255,.94);
-
-  color:var(--navy);
-
-  font-size:19px;
-
-  padding-left:3px;
-
-  box-shadow:
-    0 8px 24px rgba(0,0,0,.18);
-
-  transform:scale(.92);
-
-  transition:
-    transform .25s ease,
-    background .25s ease;
-}
-
-.videoCard:hover .playIcon{
-  transform:scale(1);
-  background:#fff;
+  font-size:18px;
+  box-shadow:0 7px 25px rgba(0,0,0,.18);
 }
 
 .videoBadge{
   position:absolute;
-
-  top:12px;
   left:12px;
-
-  padding:6px 9px;
-
+  top:12px;
+  padding:5px 8px;
   background:rgba(255,255,255,.94);
-
   color:var(--navy);
-
-  font:
-    600 9px/1
-    Arial,sans-serif;
-
+  font-size:9px;
+  font-weight:700;
   letter-spacing:.08em;
 }
 
-.videoDuration{
-  position:absolute;
-
-  right:10px;
-  bottom:10px;
-
-  padding:5px 7px;
-
-  background:rgba(0,0,0,.72);
-
-  color:#fff;
-
-  font:
-    500 9px/1
-    Arial,sans-serif;
-
-  letter-spacing:.04em;
-}
-
 .videoInfo{
-  padding:15px 1px 0;
+  padding-top:14px;
 }
 
-.videoMeta{
-  margin-bottom:7px;
-
+.videoCategory{
   color:var(--bronze);
-
-  font-size:10px;
-
-  letter-spacing:.10em;
-
+  font-size:9px;
+  letter-spacing:.14em;
   text-transform:uppercase;
 }
 
 .videoTitle{
-  margin:0;
-
+  margin:6px 0 7px;
   color:var(--navy);
-
-  font:
-    500 clamp(17px,1.12vw,21px)/1.2
-    Georgia,serif;
+  font:500 21px/1.18 Georgia,serif;
 }
 
 .videoDescription{
-  margin:8px 0 0;
-
+  margin:0;
   color:#718091;
-
-  font-size:clamp(11px,.72vw,13px);
-
+  font-size:12px;
   line-height:1.6;
 }
 
-.videoDate{
-  display:block;
-
-  margin-top:10px;
-
-  color:#9aa3ab;
-
+.videoMeta{
+  margin-top:9px;
+  color:#929ba5;
   font-size:10px;
 }
 
-/* =========================================================
-   EMPTY / LOADING
-   ========================================================= */
+/* =====================================================
+   EMPTY / ERROR / LOADING
+===================================================== */
 
-.videoStatus{
+.state{
   grid-column:1/-1;
-
-  min-height:180px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
+  padding:70px 20px;
   text-align:center;
-
-  color:#7b8794;
-
   border:1px solid var(--line);
-
   background:#fafafa;
-
-  font-size:13px;
 }
 
-.videoStatus strong{
-  display:block;
-
-  margin-bottom:6px;
-
+.stateTitle{
   color:var(--navy);
-
-  font-family:Georgia,serif;
-
-  font-size:18px;
+  font:500 22px Georgia,serif;
 }
 
-/* =========================================================
-   LOAD MORE
-   ========================================================= */
-
-.loadMoreWrap{
-  display:flex;
-  justify-content:center;
-
-  margin-top:clamp(36px,4vw,56px);
+.stateText{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
 }
 
-.loadMore{
-  border:1px solid var(--navy);
-
-  background:#fff;
-
-  color:var(--navy);
-
-  padding:12px 22px;
-
+.retry{
+  margin-top:18px;
+  padding:9px 15px;
+  border:0;
+  background:var(--navy);
+  color:#fff;
   cursor:pointer;
-
   font-size:11px;
-
-  letter-spacing:.08em;
-
-  transition:
-    color .2s ease,
-    background .2s ease;
 }
 
-.loadMore:hover{
-  color:#fff;
-  background:var(--navy);
-}
-
-/* =========================================================
-   DARK FEATURE
-   ========================================================= */
-
-.videoFeature{
-  padding:clamp(58px,5.5vw,86px) 0;
-
-  background:var(--navy);
-}
-
-.videoFeature .sectionTitle{
-  color:#fff;
-}
-
-.videoFeature .sectionIntro{
-  color:#b8c5d2;
-}
-
-.featureVideo{
-  display:grid;
-
-  grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);
-
-  gap:clamp(24px,4vw,60px);
-
-  align-items:center;
-}
-
-.featureVideoThumb{
-  position:relative;
-
-  aspect-ratio:16/9;
-
-  overflow:hidden;
-
-  cursor:pointer;
-
-  background:#061f3c;
-}
-
-.featureVideoThumb img{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  display:block;
-
-  transition:transform .6s ease;
-}
-
-.featureVideoThumb:hover img{
-  transform:scale(1.035);
-}
-
-.featureVideoPlay{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  width:68px;
-  height:68px;
-
-  display:grid;
-  place-items:center;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  color:var(--navy);
-
-  font-size:24px;
-
-  padding-left:4px;
-
-  box-shadow:0 12px 34px rgba(0,0,0,.25);
-}
-
-.featureVideoCopy .k{
-  color:var(--bronze-soft);
-}
-
-.featureVideoCopy h2{
-  margin:12px 0 16px;
-
-  color:#fff;
-
-  font:
-    500 clamp(28px,2.8vw,46px)/1.05
-    Georgia,serif;
-
-  letter-spacing:-.025em;
-}
-
-.featureVideoCopy p{
-  margin:0 0 22px;
-
-  color:#c0ccd7;
-
-  font-size:clamp(12px,.78vw,14px);
-
-  line-height:1.75;
-}
-
-.featureMeta{
-  color:#94a5b5;
-
-  font-size:10px;
-
-  letter-spacing:.08em;
-
-  text-transform:uppercase;
-}
-
-/* =========================================================
+/* =====================================================
    MODAL
-   ========================================================= */
+===================================================== */
 
 .modal{
   position:fixed;
-
   inset:0;
-
   z-index:3000;
-
   display:none;
-
   align-items:center;
   justify-content:center;
-
-  padding:24px;
-
-  background:rgba(3,16,30,.84);
-
-  backdrop-filter:blur(8px);
+  padding:20px;
+  background:rgba(3,15,28,.86);
 }
 
 .modal.open{
@@ -891,197 +413,84 @@ header.scrolled .links a:after{
 }
 
 .modalBox{
-  width:min(1100px,100%);
-
-  background:#071c32;
-
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.40);
+  width:min(1000px,96vw);
+  background:#071b31;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
 }
 
 .modalBar{
-  min-height:54px;
-
+  height:52px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   padding:0 16px;
-
   color:#fff;
-
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-
-.modalTitle{
-  font:
-    500 16px/1
-    Georgia,serif;
+  font-size:12px;
 }
 
 .close{
-  width:36px;
-  height:36px;
-
+  width:34px;
+  height:34px;
   border:0;
-
   background:transparent;
-
   color:#fff;
-
-  font-size:28px;
-
+  font-size:27px;
   cursor:pointer;
 }
 
 .frame{
-  width:100%;
-
   aspect-ratio:16/9;
-
   background:#000;
 }
 
 .frame iframe{
   width:100%;
   height:100%;
-
   display:block;
-
   border:0;
 }
 
-/* =========================================================
-   NEWSLETTER
-   ========================================================= */
-
-.newsSection{
-  padding:clamp(52px,5vw,78px) 0;
-}
-
-.news{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  gap:30px;
-
-  padding:clamp(28px,3vw,48px);
-
-  background:var(--paper);
-}
-
-.news h2{
-  margin:6px 0 8px;
-
-  color:var(--navy);
-
-  font:
-    500 clamp(28px,2.3vw,38px)/1.05
-    Georgia,serif;
-}
-
-.news p{
-  margin:0;
-
-  color:#718091;
-
-  font-size:clamp(12px,.76vw,14px);
-}
-
-.email{
-  display:flex;
-
-  width:min(420px,100%);
-
-  flex-shrink:0;
-}
-
-.email input{
-  min-width:0;
-  flex:1;
-
-  height:44px;
-
-  padding:0 14px;
-
-  border:1px solid #d7dde2;
-
-  outline:none;
-
-  font-size:12px;
-}
-
-.email button{
-  height:44px;
-
-  padding:0 18px;
-
-  border:0;
-
-  background:var(--navy);
-
-  color:#fff;
-
-  cursor:pointer;
-
-  font-size:10px;
-
-  letter-spacing:.08em;
-}
-
-/* =========================================================
+/* =====================================================
    FOOTER
-   ========================================================= */
+===================================================== */
 
 footer{
-  background:var(--navy-deep);
-
-  color:#b7c4d0;
-
-  padding:clamp(46px,4.5vw,70px) 0 20px;
+  padding:55px 0 25px;
+  background:#061f3c;
+  color:#cbd6e0;
 }
 
 .foot{
   display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:35px;
+}
 
-  grid-template-columns:
-    minmax(220px,1.6fr)
-    repeat(3,minmax(120px,.7fr));
-
-  gap:40px;
+.foot b{
+  color:#fff;
+  font:500 18px Georgia,serif;
 }
 
 .foot p{
-  max-width:330px;
-
-  margin:12px 0 0;
-
-  color:#9eacba;
-
-  font-size:clamp(11px,.68vw,13px);
-
+  max-width:360px;
+  margin:10px 0 0;
+  color:#9eacb9;
+  font-size:11px;
   line-height:1.7;
 }
 
 .foot h3{
   margin:0 0 12px;
-
   color:#fff;
-
   font-size:10px;
-
   letter-spacing:.12em;
 }
 
 .foot a{
-  color:#9eacba;
-
-  font-size:clamp(11px,.68vw,13px);
-
-  line-height:2;
-
+  color:#9eacb9;
   text-decoration:none;
+  font-size:11px;
+  line-height:2;
 }
 
 .foot a:hover{
@@ -1089,294 +498,109 @@ footer{
 }
 
 .copy{
-  margin-top:42px;
-  padding-top:16px;
-
-  border-top:1px solid rgba(255,255,255,.08);
-
-  color:#748493;
-
+  margin-top:45px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.1);
+  color:#748494;
   font-size:10px;
 }
 
-/* =========================================================
-   SCROLL REVEAL
-   ========================================================= */
-
-.reveal{
-  opacity:0;
-
-  transform:translateY(24px);
-
-  transition:
-    opacity .7s ease,
-    transform .7s cubic-bezier(.22,.61,.36,1);
-}
-
-.reveal.is-visible{
-  opacity:1;
-
-  transform:none;
-}
-
-/* =========================================================
+/* =====================================================
    RESPONSIVE
-   ========================================================= */
-
-@media(max-width:1100px){
-
-  .links{
-    gap:13px;
-  }
-
-  .videoGrid{
-    grid-template-columns:
-      repeat(3,minmax(0,1fr));
-  }
-
-  .featureVideo{
-    grid-template-columns:
-      minmax(0,1.2fr)
-      minmax(260px,.8fr);
-  }
-}
+===================================================== */
 
 @media(max-width:900px){
-
-  .videoTools{
-    align-items:stretch;
-
-    flex-direction:column;
-  }
-
-  .videoSearch{
-    width:100%;
-  }
-
-  .videoGrid{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-
-  .featureVideo{
-    grid-template-columns:1fr;
-  }
-
-  .featureVideoCopy{
-    max-width:760px;
-  }
-
-  .news{
-    align-items:stretch;
-
-    flex-direction:column;
-  }
-
-  .email{
-    width:100%;
-  }
-
-  .foot{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-}
-
-@media(max-width:820px){
 
   .links{
     display:none;
   }
 
-  .pageHero{
-    min-height:390px;
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(248,250,252,.96),
-        rgba(248,250,252,.72)
-      ),
-      url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=88")
-      center/cover no-repeat;
+  .videoGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
-  .pageHero h1{
-    font-size:clamp(40px,8vw,62px);
+  .toolbar{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .search{
+    width:100%;
+  }
+
+  .foot{
+    grid-template-columns:1fr 1fr;
   }
 }
 
 @media(max-width:560px){
 
-  :root{
-    --max-fluid:calc(100% - 28px);
+  .w{
+    width:calc(100% - 28px);
   }
 
   .top{
     display:none;
   }
 
-  header#siteHeader{
-    height:66px;
-  }
-
-  header#siteHeader.scrolled{
-    height:58px;
-  }
-
-  .logo .mark{
-    width:30px;
-    height:30px;
-  }
-
-  .logo b{
-    font-size:15px;
+  #siteHeader,
+  #siteHeader.scrolled{
+    height:64px;
   }
 
   .yt{
-    padding:9px 11px;
-    font-size:9px;
+    display:none;
   }
 
   .pageHero{
-    min-height:350px;
+    padding:52px 0 38px;
   }
 
-  .pageHero h1{
-    margin-top:12px;
-
-    font-size:clamp(37px,11vw,54px);
-  }
-
-  .pageHero p{
-    font-size:13px;
-  }
-
-  .sectionHead{
-    align-items:flex-start;
-
-    flex-direction:column;
+  .content{
+    padding:35px 0 65px;
   }
 
   .videoGrid{
     grid-template-columns:1fr;
-
-    gap:30px;
-  }
-
-  .filterList{
-    overflow-x:auto;
-
-    flex-wrap:nowrap;
-
-    width:100%;
-
-    padding-bottom:3px;
-  }
-
-  .filterBtn{
-    flex:0 0 auto;
+    gap:35px;
   }
 
   .videoTitle{
     font-size:20px;
   }
 
-  .featureVideoCopy h2{
-    font-size:32px;
-  }
-
-  .news{
-    padding:26px 20px;
-  }
-
-  .email{
-    flex-direction:column;
-  }
-
-  .email input,
-  .email button{
-    width:100%;
-  }
-
   .foot{
     grid-template-columns:1fr;
-    gap:28px;
   }
 
   .modal{
-    padding:12px;
-  }
-
-  .modalBar{
-    min-height:48px;
-  }
-}
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *:before,
-  *:after{
-    scroll-behavior:auto!important;
-
-    transition:none!important;
-
-    animation:none!important;
-  }
-
-  .reveal{
-    opacity:1;
-    transform:none;
+    padding:8px;
   }
 }
 </style>
 </head>
 
-<body data-base="../">
-
-<!-- ======================================================
-     TOP BAR
-     ====================================================== -->
+<body>
 
 <div class="top">
   <div class="w">
-
-    <span>
-      MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA
-    </span>
-
-    <span>
-      Instagram · YouTube · Kontak
-    </span>
-
+    <span>MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA</span>
+    <span>Instagram · YouTube · Kontak</span>
   </div>
 </div>
-
-
-<!-- ======================================================
-     HEADER
-     ====================================================== -->
 
 <header id="siteHeader">
 
   <div class="w nav">
 
     <a class="logo" href="../index.html">
-
       <div class="mark">✺</div>
 
       <div>
         <b>MANDALA</b>
         <small>CHANNEL</small>
       </div>
-
     </a>
-
 
     <nav class="links" aria-label="Navigasi utama">
 
@@ -1390,7 +614,8 @@ footer{
 
       <a
         href="video.html"
-        aria-current="page">
+        aria-current="page"
+      >
         Video
       </a>
 
@@ -1408,15 +633,13 @@ footer{
 
     </nav>
 
-
     <a
       class="yt"
       href="https://www.youtube.com/"
       target="_blank"
-      rel="noopener">
-
+      rel="noopener"
+    >
       YOUTUBE ↗
-
     </a>
 
   </div>
@@ -1424,217 +647,74 @@ footer{
 </header>
 
 
-<!-- ======================================================
-     PAGE HERO
-     ====================================================== -->
+<main>
 
 <section class="pageHero">
 
   <div class="w">
 
-    <div class="pageHeroCopy reveal">
-
-      <div class="k">
-        Mandala Video
-      </div>
-
-      <h1>
-        Cerita yang<br>
-        lebih hidup dalam gambar.
-      </h1>
-
-      <p>
-        Saksikan perjalanan, percakapan, tokoh, tradisi dan
-        berbagai cerita Hindu Nusantara melalui video Mandala Channel.
-      </p>
-
+    <div class="k">
+      Mandala Video
     </div>
+
+    <h1>
+      Cerita dalam gambar.
+    </h1>
+
+    <p>
+      Jelajahi video Mandala Channel tentang tokoh,
+      tradisi, perjalanan, budaya dan kehidupan Hindu
+      Nusantara.
+    </p>
 
   </div>
 
 </section>
 
 
-<!-- ======================================================
-     VIDEO CONTENT
-     ====================================================== -->
-
-<section class="videoSection">
+<section class="content">
 
   <div class="w">
 
-    <div class="sectionHead reveal">
-
-      <div>
-
-        <div class="k">
-          Koleksi Video
-        </div>
-
-        <h2 class="sectionTitle">
-          Dari ruang Mandala
-        </h2>
-
-      </div>
-
-      <p class="sectionIntro">
-        Koleksi video Mandala Channel yang dikelola melalui
-        sistem konten. Perubahan data dari admin akan
-        langsung tercermin di halaman ini.
-      </p>
-
-    </div>
-
-
-    <!-- FILTER + SEARCH -->
-
-    <div class="videoTools reveal">
+    <div class="toolbar">
 
       <div
-        class="filterList"
-        id="filterList">
-
+        class="filters"
+        id="filters"
+      >
         <button
-          class="filterBtn active"
+          class="filter active"
           type="button"
-          data-filter="all">
-
+          data-category="all"
+        >
           Semua
-
         </button>
-
       </div>
 
-
-      <div class="videoSearch">
-
-        <input
-          id="videoSearch"
-          type="search"
-          placeholder="Cari video..."
-          autocomplete="off">
-
-      </div>
-
-    </div>
-
-
-    <!-- VIDEO GRID -->
-
-    <div
-      class="videoGrid reveal"
-      id="videoGrid">
-
-      <div class="videoStatus">
-
-        <div>
-
-          <strong>
-            Memuat video...
-          </strong>
-
-          Mengambil koleksi video Mandala Channel.
-
-        </div>
-
-      </div>
+      <input
+        id="searchInput"
+        class="search"
+        type="search"
+        placeholder="Cari video..."
+        autocomplete="off"
+      >
 
     </div>
 
 
     <div
-      class="loadMoreWrap"
-      id="loadMoreWrap"
-      style="display:none">
+      id="videoGrid"
+      class="videoGrid"
+    >
 
-      <button
-        class="loadMore"
-        id="loadMore"
-        type="button">
+      <div class="state">
 
-        MUAT LEBIH BANYAK
-
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ======================================================
-     FEATURE VIDEO
-     Data dapat diganti oleh admin.
-     ====================================================== -->
-
-<section class="videoFeature">
-
-  <div class="w">
-
-    <div class="sectionHead reveal">
-
-      <div>
-
-        <div class="k">
-          Pilihan Mandala
+        <div class="stateTitle">
+          Memuat video...
         </div>
 
-        <h2 class="sectionTitle">
-          Video pilihan
-        </h2>
-
-      </div>
-
-      <p class="sectionIntro">
-        Video unggulan yang dapat ditentukan melalui sistem
-        konten tanpa harus mengubah halaman secara manual.
-      </p>
-
-    </div>
-
-
-    <div
-      class="featureVideo reveal"
-      id="featureVideo">
-
-      <div
-        class="featureVideoThumb"
-        id="featureVideoThumb">
-
-        <img
-          id="featureVideoImage"
-          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=88"
-          alt="Video pilihan Mandala">
-
-        <div class="featureVideoPlay">
-          ▶
-        </div>
-
-      </div>
-
-
-      <div class="featureVideoCopy">
-
-        <div class="k" id="featureVideoCategory">
-          Mandala Video
-        </div>
-
-        <h2 id="featureVideoTitle">
-          Bersama Sang Tokoh
-        </h2>
-
-        <p id="featureVideoDescription">
-          Temukan cerita, pengalaman dan pemikiran tokoh
-          Hindu Nusantara dalam percakapan yang lebih dekat.
-        </p>
-
-        <div
-          class="featureMeta"
-          id="featureVideoMeta">
-
-          Mandala Channel · Video Pilihan
-
+        <div class="stateText">
+          Mengambil video dari Mandala Channel.
         </div>
 
       </div>
@@ -1645,109 +725,8 @@ footer{
 
 </section>
 
+</main>
 
-<!-- ======================================================
-     NEWSLETTER
-     ====================================================== -->
-
-<section class="newsSection">
-
-  <div class="w">
-
-    <div class="news reveal">
-
-      <div>
-
-        <div class="k">
-          Mandala Letter
-        </div>
-
-        <h2>
-          Ikuti cerita terbaru.
-        </h2>
-
-        <p>
-          Berita, artikel dan pilihan video langsung ke email.
-        </p>
-
-      </div>
-
-
-      <form
-        class="email"
-        onsubmit="event.preventDefault();alert('Form siap dihubungkan ke layanan email.');">
-
-        <input
-          type="email"
-          required
-          placeholder="Email Anda">
-
-        <button type="submit">
-          DAFTAR
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ======================================================
-     VIDEO MODAL
-     ====================================================== -->
-
-<div
-  class="modal"
-  id="modal"
-  aria-hidden="true">
-
-  <div class="modalBox">
-
-    <div class="modalBar">
-
-      <span
-        class="modalTitle"
-        id="modalTitle">
-
-        Mandala Channel
-
-      </span>
-
-      <button
-        class="close"
-        id="closeModal"
-        type="button"
-        aria-label="Tutup">
-
-        ×
-
-      </button>
-
-    </div>
-
-
-    <div class="frame">
-
-      <iframe
-        id="videoFrame"
-        title="Mandala Channel Video"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ======================================================
-     FOOTER
-     ====================================================== -->
 
 <footer>
 
@@ -1757,29 +736,18 @@ footer{
 
       <div>
 
-        <b
-          style="
-            color:#fff;
-            font:500 18px Georgia,serif;
-          ">
-
-          MANDALA
-
-        </b>
+        <b>MANDALA</b>
 
         <p>
-          Media digital tentang Hindu, dharma, tokoh,
-          budaya dan kearifan Nusantara.
+          Media digital tentang Hindu, dharma,
+          tokoh, budaya dan kearifan Nusantara.
         </p>
 
       </div>
 
-
       <div>
 
-        <h3>
-          JELAJAH
-        </h3>
+        <h3>JELAJAH</h3>
 
         <a href="artikel.html">
           Artikel
@@ -1797,12 +765,9 @@ footer{
 
       </div>
 
-
       <div>
 
-        <h3>
-          TOPIK
-        </h3>
+        <h3>TOPIK</h3>
 
         <a href="../topics/jelajah-nusantara.html">
           Jelajah
@@ -1820,12 +785,9 @@ footer{
 
       </div>
 
-
       <div>
 
-        <h3>
-          MANDALA
-        </h3>
+        <h3>MANDALA</h3>
 
         <a href="tentang-kami.html">
           Tentang
@@ -1840,7 +802,6 @@ footer{
 
     </div>
 
-
     <div class="copy">
       © 2026 Mandala Channel
     </div>
@@ -1850,678 +811,706 @@ footer{
 </footer>
 
 
-<script>
-/* =========================================================
-   MANDALA VIDEO
-   DATA LAYER
-   =========================================================
+<!-- =====================================================
+     VIDEO MODAL
+===================================================== -->
 
-   PRIORITAS DATA:
+<div
+  class="modal"
+  id="videoModal"
+  aria-hidden="true"
+>
 
-   1. Supabase
-   2. data/videos.json
+  <div class="modalBox">
 
-   Struktur data yang didukung:
+    <div class="modalBar">
 
-   {
-     id,
-     title,
-     description,
-     category,
-     thumbnail,
-     youtube_id,
-     youtube_url,
-     date,
-     duration,
-     published,
-     featured
-   }
+      <span id="modalTitle">
+        Mandala Channel
+      </span>
 
-   ========================================================= */
+      <button
+        class="close"
+        id="modalClose"
+        type="button"
+        aria-label="Tutup"
+      >
+        ×
+      </button>
 
+    </div>
 
-/* =========================================================
-   BASE
-   ========================================================= */
+    <div class="frame">
 
-const BASE =
-  document.body.dataset.base || '../';
+      <iframe
+        id="videoFrame"
+        title="Mandala Video"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+      ></iframe>
 
+    </div>
 
-/* =========================================================
-   SUPABASE CONFIG
-   =========================================================
+  </div>
 
-   Isi konfigurasi ini ketika Supabase sudah digunakan.
-
-   Jangan masukkan service_role key.
-
-   Hanya gunakan publishable / anon key.
-
-   ========================================================= */
-
-const SUPABASE_URL =
-  window.MANDALA_SUPABASE_URL || '';
-
-const SUPABASE_KEY =
-  window.MANDALA_SUPABASE_KEY || '';
+</div>
 
 
-/* =========================================================
-   PUBLIC DATA
-   ========================================================= */
+<!-- =====================================================
+     SUPABASE CONFIG
+===================================================== -->
 
-let VIDEOS = [];
-
-let filteredVideos = [];
-
-let currentCategory = 'all';
-
-let currentSearch = '';
-
-let visibleCount = 12;
-
-const VIDEO_PER_PAGE = 12;
+<script src="../js/config.js"></script>
 
 
-/* =========================================================
-   HEADER STICKY
-   ========================================================= */
+<script type="module">
 
-(function(){
+/* =====================================================
+   IMPORT SUPABASE CLIENT
+===================================================== */
 
-  const header =
-    document.getElementById('siteHeader');
-
-  if(!header) return;
-
-  function updateHeader(){
-
-    header.classList.toggle(
-      'scrolled',
-      window.scrollY > 20
-    );
-
-  }
-
-  updateHeader();
-
-  window.addEventListener(
-    'scroll',
-    updateHeader,
-    {passive:true}
-  );
-
-})();
+import {
+  supabase
+} from "../js/supabase-client.js";
 
 
-/* =========================================================
-   SCROLL REVEAL
-   ========================================================= */
+/* =====================================================
+   DOM
+===================================================== */
 
-(function(){
+const grid =
+  document.getElementById("videoGrid");
 
-  const elements =
-    document.querySelectorAll('.reveal');
+const filters =
+  document.getElementById("filters");
 
-  if(!('IntersectionObserver' in window)){
+const searchInput =
+  document.getElementById("searchInput");
 
-    elements.forEach(el=>{
-      el.classList.add('is-visible');
-    });
+const modal =
+  document.getElementById("videoModal");
 
-    return;
-  }
+const modalTitle =
+  document.getElementById("modalTitle");
 
-  const observer =
-    new IntersectionObserver(
-      entries => {
+const videoFrame =
+  document.getElementById("videoFrame");
 
-        entries.forEach(entry => {
-
-          if(entry.isIntersecting){
-
-            entry.target.classList.add(
-              'is-visible'
-            );
-
-            observer.unobserve(
-              entry.target
-            );
-
-          }
-
-        });
-
-      },
-      {
-        threshold:.08,
-        rootMargin:'0px 0px -40px 0px'
-      }
-    );
-
-  elements.forEach(el=>{
-    observer.observe(el);
-  });
-
-})();
+const modalClose =
+  document.getElementById("modalClose");
 
 
-/* =========================================================
-   SAFE TEXT
-   ========================================================= */
+/* =====================================================
+   STATE
+===================================================== */
 
-function escapeHTML(value){
+let videos = [];
 
-  return String(value ?? '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+let activeCategory = "all";
+
+let searchTerm = "";
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
-
-/* =========================================================
-   YOUTUBE ID PARSER
-   ========================================================= */
-
-function getYoutubeId(value){
-
-  if(!value) return '';
-
-  const text =
-    String(value).trim();
-
-  /*
-   Direct ID
-  */
-
-  if(
-    /^[a-zA-Z0-9_-]{11}$/.test(text)
-  ){
-
-    return text;
-
-  }
-
-
-  try{
-
-    const url =
-      new URL(text);
-
-
-    /*
-      youtube.com/watch?v=
-    */
-
-    if(
-      url.hostname.includes('youtube.com')
-      &&
-      url.searchParams.get('v')
-    ){
-
-      return url.searchParams.get('v');
-
-    }
-
-
-    /*
-      youtu.be/
-    */
-
-    if(
-      url.hostname === 'youtu.be'
-    ){
-
-      return url.pathname
-        .replace('/','')
-        .split('/')[0];
-
-    }
-
-
-    /*
-      youtube.com/embed/
-    */
-
-    const embedMatch =
-      url.pathname.match(
-        /\/embed\/([a-zA-Z0-9_-]{11})/
-      );
-
-    if(embedMatch){
-
-      return embedMatch[1];
-
-    }
-
-
-    /*
-      youtube.com/shorts/
-    */
-
-    const shortsMatch =
-      url.pathname.match(
-        /\/shorts\/([a-zA-Z0-9_-]{11})/
-      );
-
-    if(shortsMatch){
-
-      return shortsMatch[1];
-
-    }
-
-  }catch(e){
-
-    /*
-      Bukan URL valid.
-    */
-
-  }
-
-  return '';
-
-}
-
-
-/* =========================================================
-   THUMBNAIL FALLBACK
-   ========================================================= */
-
-function getThumbnail(video){
-
-  if(video.thumbnail){
-
-    return video.thumbnail;
-
-  }
-
-  const id =
-    getYoutubeId(
-      video.youtube_id ||
-      video.youtube_url
-    );
-
-  if(id){
-
-    return
-      'https://img.youtube.com/vi/' +
-      id +
-      '/maxresdefault.jpg';
-
-  }
-
-  return
-    'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85';
-
-}
-
-
-/* =========================================================
-   YOUTUBE EMBED
-   ========================================================= */
-
-function getYoutubeEmbed(video){
-
-  const id =
-    getYoutubeId(
-      video.youtube_id ||
-      video.youtube_url
-    );
-
-  if(!id) return '';
-
-  return
-    'https://www.youtube-nocookie.com/embed/' +
-    id +
-    '?autoplay=1&rel=0';
-
-}
-
-
-/* =========================================================
-   DATE FORMAT
-   ========================================================= */
 
 function formatDate(value){
 
-  if(!value) return '';
+  if(!value){
+    return "";
+  }
 
   const date =
     new Date(value);
 
-  if(Number.isNaN(date.getTime())){
-
-    return String(value);
-
-  }
-
-  return new Intl.DateTimeFormat(
-    'id-ID',
-    {
-      day:'numeric',
-      month:'long',
-      year:'numeric'
-    }
-  ).format(date);
-
-}
-
-
-/* =========================================================
-   NORMALIZE VIDEO DATA
-   ========================================================= */
-
-function normalizeVideo(item){
-
-  return {
-
-    id:
-      item.id ??
-      crypto.randomUUID?.() ??
-      Math.random(),
-
-    title:
-      item.title ||
-      item.name ||
-      'Video Mandala',
-
-    description:
-      item.description ||
-      item.excerpt ||
-      'Video Mandala Channel.',
-
-    category:
-      item.category ||
-      item.topic ||
-      'Mandala Video',
-
-    thumbnail:
-      item.thumbnail ||
-      item.image ||
-      item.image_url ||
-      '',
-
-    youtube_id:
-      item.youtube_id ||
-      item.video_id ||
-      item.youtubeId ||
-      '',
-
-    youtube_url:
-      item.youtube_url ||
-      item.youtube ||
-      item.url ||
-      '',
-
-    date:
-      item.date ||
-      item.published_at ||
-      item.created_at ||
-      '',
-
-    duration:
-      item.duration ||
-      '',
-
-    published:
-      item.published !== false &&
-      item.status !== 'draft',
-
-    featured:
-      item.featured === true ||
-      item.is_featured === true
-
-  };
-
-}
-
-
-/* =========================================================
-   SUPABASE LOAD
-   ========================================================= */
-
-async function loadVideosFromSupabase(){
-
   if(
-    !SUPABASE_URL ||
-    !SUPABASE_KEY
+    Number.isNaN(
+      date.getTime()
+    )
   ){
-
-    return null;
-
+    return "";
   }
 
-
-  const endpoint =
-    SUPABASE_URL.replace(/\/$/,'') +
-    '/rest/v1/videos' +
-    '?select=*' +
-    '&published=eq.true' +
-    '&order=created_at.desc';
-
-
-  const response =
-    await fetch(
-      endpoint,
-      {
-        headers:{
-          apikey:SUPABASE_KEY,
-
-          Authorization:
-            'Bearer ' +
-            SUPABASE_KEY,
-
-          'Content-Type':
-            'application/json'
-        }
-      }
-    );
-
-
-  if(!response.ok){
-
-    throw new Error(
-      'Supabase videos request failed: ' +
-      response.status
-    );
-
-  }
-
-
-  const data =
-    await response.json();
-
-
-  if(!Array.isArray(data)){
-
-    return [];
-
-  }
-
-
-  return data
-    .map(normalizeVideo)
-    .filter(video=>video.published);
+  return date.toLocaleDateString(
+    "id-ID",
+    {
+      day:"2-digit",
+      month:"long",
+      year:"numeric"
+    }
+  );
 
 }
 
 
-/* =========================================================
-   JSON FALLBACK
-   ========================================================= */
+function youtubeEmbed(id){
 
-async function loadVideosFromJSON(){
-
-  const response =
-    await fetch(
-      BASE +
-      'data/videos.json' +
-      '?v=' +
-      Date.now(),
-      {
-        cache:'no-store'
-      }
-    );
-
-
-  if(!response.ok){
-
-    throw new Error(
-      'videos.json tidak ditemukan'
-    );
-
+  if(!id){
+    return "";
   }
 
-
-  const data =
-    await response.json();
-
-
-  if(Array.isArray(data)){
-
-    return data
-      .map(normalizeVideo)
-      .filter(video=>video.published);
-
-  }
-
-
-  if(Array.isArray(data.videos)){
-
-    return data.videos
-      .map(normalizeVideo)
-      .filter(video=>video.published);
-
-  }
-
-
-  return [];
+  return (
+    "https://www.youtube-nocookie.com/embed/" +
+    encodeURIComponent(id) +
+    "?autoplay=1&rel=0"
+  );
 
 }
 
 
-/* =========================================================
-   MAIN DATA LOADER
-   ========================================================= */
+function getThumbnail(video){
+
+  if(video.thumbnail_url){
+    return video.thumbnail_url;
+  }
+
+  if(video.youtube_video_id){
+
+    return (
+      "https://i.ytimg.com/vi/" +
+      encodeURIComponent(
+        video.youtube_video_id
+      ) +
+      "/hqdefault.jpg"
+    );
+
+  }
+
+  return (
+    "https://images.unsplash.com/" +
+    "photo-1537996194471-e657df975ab4" +
+    "?auto=format&fit=crop&w=1200&q=85"
+  );
+
+}
+
+
+/* =====================================================
+   LOAD VIDEOS FROM SUPABASE
+===================================================== */
 
 async function loadVideos(){
 
-  showStatus(
-    'Memuat video...',
-    'Mengambil koleksi video Mandala Channel.'
-  );
-
-
-  let data = null;
-
-
-  /*
-    SUPABASE
-  */
+  showLoading();
 
   try{
 
-    data =
-      await loadVideosFromSupabase();
+    const {
+      data,
+      error
+    } = await supabase
+
+      .from("videos")
+
+      .select(`
+        id,
+        title,
+        description,
+        youtube_video_id,
+        thumbnail_url,
+        category_id,
+        status,
+        featured,
+        created_at
+      `)
+
+      .eq(
+        "status",
+        "published"
+      )
+
+      .order(
+        "featured",
+        {
+          ascending:false
+        }
+      )
+
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+
+    if(error){
+
+      console.error(
+        "SUPABASE VIDEO ERROR:",
+        error
+      );
+
+      throw error;
+    }
+
+
+    videos =
+      Array.isArray(data)
+        ? data
+        : [];
+
+
+    await loadCategories();
+
+    buildFilters();
+
+    renderVideos();
+
+  }catch(error){
+
+    console.error(
+      "VIDEO LOAD ERROR:",
+      error
+    );
+
+    showError(
+      error?.message ||
+      "Gagal memuat video."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   LOAD CATEGORIES
+===================================================== */
+
+async function loadCategories(){
+
+  try{
+
+    const {
+      data,
+      error
+    } = await supabase
+
+      .from("categories")
+
+      .select(`
+        id,
+        name
+      `)
+
+      .order(
+        "name",
+        {
+          ascending:true
+        }
+      );
+
+
+    if(error){
+
+      console.warn(
+        "CATEGORY LOAD ERROR:",
+        error
+      );
+
+      return;
+    }
+
+
+    const categoryMap =
+      new Map(
+        (data || []).map(
+          category => [
+            String(category.id),
+            category.name
+          ]
+        )
+      );
+
+
+    videos =
+      videos.map(video => ({
+
+        ...video,
+
+        category_name:
+          categoryMap.get(
+            String(
+              video.category_id
+            )
+          ) || ""
+
+      }));
 
   }catch(error){
 
     console.warn(
-      'Supabase video gagal:',
+      "CATEGORY ERROR:",
       error
     );
 
   }
 
+}
 
-  /*
-    FALLBACK JSON
-  */
 
-  if(data === null){
+/* =====================================================
+   FILTER BUTTONS
+===================================================== */
 
-    try{
+function buildFilters(){
 
-      data =
-        await loadVideosFromJSON();
-
-    }catch(error){
-
-      console.warn(
-        'JSON video gagal:',
-        error
-      );
-
-      data = [];
-
-    }
-
+  if(!filters){
+    return;
   }
 
 
-  VIDEOS =
-    Array.isArray(data)
-      ? data
-      : [];
+  const names = [
+    ...new Set(
+      videos
+        .map(video =>
+          video.category_name
+        )
+        .filter(Boolean)
+    )
+  ];
 
 
-  /*
-    Sort terbaru
-  */
+  filters.innerHTML = `
 
-  VIDEOS.sort(
-    (a,b)=>
-      new Date(b.date || 0) -
-      new Date(a.date || 0)
-  );
+    <button
+      class="filter active"
+      type="button"
+      data-category="all"
+    >
+      Semua
+    </button>
+
+    ${
+      names.map(name => `
+
+        <button
+          class="filter"
+          type="button"
+          data-category="${escapeHtml(name)}"
+        >
+          ${escapeHtml(name)}
+        </button>
+
+      `).join("")
+    }
+
+  `;
 
 
-  filteredVideos =
-    [...VIDEOS];
+  filters
+    .querySelectorAll(
+      "[data-category]"
+    )
+    .forEach(button => {
 
+      button.addEventListener(
+        "click",
+        () => {
 
-  renderFilters();
+          activeCategory =
+            button.dataset.category;
 
-  applyFilters();
+          filters
+            .querySelectorAll(
+              ".filter"
+            )
+            .forEach(
+              item =>
+                item.classList.toggle(
+                  "active",
+                  item === button
+                )
+            );
 
-  renderFeatured();
+          renderVideos();
+
+        }
+      );
+
+    });
 
 }
 
 
-/* =========================================================
-   STATUS
-   ========================================================= */
+/* =====================================================
+   FILTER DATA
+===================================================== */
 
-function showStatus(
-  title,
-  description
-){
+function getFilteredVideos(){
 
-  const grid =
-    document.getElementById(
-      'videoGrid'
-    );
+  return videos.filter(
+    video => {
 
-  if(!grid) return;
+      const categoryMatch =
+        activeCategory === "all" ||
+        video.category_name ===
+          activeCategory;
+
+
+      const q =
+        searchTerm
+          .trim()
+          .toLowerCase();
+
+
+      if(!q){
+        return categoryMatch;
+      }
+
+
+      const text = [
+
+        video.title,
+
+        video.description,
+
+        video.category_name
+
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+
+      return (
+        categoryMatch &&
+        text.includes(q)
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderVideos(){
+
+  if(!grid){
+    return;
+  }
+
+
+  const items =
+    getFilteredVideos();
+
+
+  if(!items.length){
+
+    grid.innerHTML = `
+
+      <div class="state">
+
+        <div class="stateTitle">
+          ${
+            videos.length
+              ? "Video tidak ditemukan"
+              : "Belum ada video"
+          }
+        </div>
+
+        <div class="stateText">
+          ${
+            videos.length
+              ? "Coba gunakan kata kunci atau kategori lain."
+              : "Video yang berstatus published akan muncul di sini."
+          }
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  grid.innerHTML =
+    items.map(video => {
+
+      const id =
+        video.youtube_video_id;
+
+
+      const title =
+        escapeHtml(
+          video.title ||
+          "Mandala Video"
+        );
+
+
+      const category =
+        escapeHtml(
+          video.category_name ||
+          "MANDALA VIDEO"
+        );
+
+
+      const description =
+        escapeHtml(
+          video.description ||
+          ""
+        );
+
+
+      const thumbnail =
+        escapeHtml(
+          getThumbnail(video)
+        );
+
+
+      const date =
+        escapeHtml(
+          formatDate(
+            video.created_at
+          )
+        );
+
+
+      return `
+
+        <article
+          class="videoCard"
+        >
+
+          <button
+            type="button"
+            class="videoThumb"
+            data-video-id="${escapeHtml(id || "")}"
+            data-video-title="${title}"
+            style="
+              padding:0;
+              border:0;
+              width:100%;
+              cursor:pointer;
+            "
+            aria-label="Putar ${title}"
+          >
+
+            <img
+              src="${thumbnail}"
+              alt="${title}"
+              loading="lazy"
+              onerror="
+                this.onerror=null;
+                this.src='https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85';
+              "
+            >
+
+            <span class="videoBadge">
+              ${category}
+            </span>
+
+            <span class="videoOverlay">
+              <span class="playButton">
+                ▶
+              </span>
+            </span>
+
+          </button>
+
+
+          <div class="videoInfo">
+
+            <div class="videoCategory">
+              ${category}
+            </div>
+
+            <h2 class="videoTitle">
+              ${title}
+            </h2>
+
+            ${
+              description
+                ? `
+                  <p class="videoDescription">
+                    ${description}
+                  </p>
+                `
+                : ""
+            }
+
+            ${
+              date
+                ? `
+                  <div class="videoMeta">
+                    ${date}
+                  </div>
+                `
+                : ""
+            }
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+
+  grid
+    .querySelectorAll(
+      "[data-video-id]"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          openVideo(
+            button.dataset.videoId,
+            button.dataset.videoTitle
+          );
+
+        }
+      );
+
+    });
+
+}
+
+
+/* =====================================================
+   STATES
+===================================================== */
+
+function showLoading(){
+
+  if(!grid){
+    return;
+  }
 
 
   grid.innerHTML = `
 
-    <div class="videoStatus">
+    <div class="state">
 
-      <div>
+      <div class="stateTitle">
+        Memuat video...
+      </div>
 
-        <strong>
-          ${escapeHTML(title)}
-        </strong>
-
-        ${escapeHTML(description)}
-
+      <div class="stateText">
+        Mengambil video dari Mandala Channel.
       </div>
 
     </div>
@@ -2531,772 +1520,203 @@ function showStatus(
 }
 
 
-/* =========================================================
-   FILTER CATEGORIES
-   ========================================================= */
+function showError(message){
 
-function getCategories(){
-
-  const categories =
-    VIDEOS
-      .map(video=>video.category)
-      .filter(Boolean);
+  if(!grid){
+    return;
+  }
 
 
-  return [
-    ...new Set(categories)
-  ];
+  grid.innerHTML = `
 
-}
+    <div class="state">
 
+      <div class="stateTitle">
+        Gagal memuat video
+      </div>
 
-/* =========================================================
-   RENDER FILTERS
-   ========================================================= */
-
-function renderFilters(){
-
-  const container =
-    document.getElementById(
-      'filterList'
-    );
-
-  if(!container) return;
-
-
-  const categories =
-    getCategories();
-
-
-  container.innerHTML = `
-
-    <button
-      class="filterBtn active"
-      type="button"
-      data-filter="all">
-
-      Semua
-
-    </button>
-
-    ${categories.map(category=>`
+      <div class="stateText">
+        ${escapeHtml(message)}
+      </div>
 
       <button
-        class="filterBtn"
+        class="retry"
+        id="retryVideos"
         type="button"
-        data-filter="${escapeHTML(category)}">
-
-        ${escapeHTML(category)}
-
+      >
+        Coba lagi
       </button>
 
-    `).join('')}
+    </div>
 
   `;
 
 
-  container
-    .querySelectorAll(
-      '.filterBtn'
+  document
+    .getElementById(
+      "retryVideos"
     )
-    .forEach(button=>{
-
-      button.addEventListener(
-        'click',
-        ()=>{
-
-          currentCategory =
-            button.dataset.filter;
-
-          container
-            .querySelectorAll(
-              '.filterBtn'
-            )
-            .forEach(btn=>{
-              btn.classList.toggle(
-                'active',
-                btn === button
-              );
-            });
-
-          visibleCount =
-            VIDEO_PER_PAGE;
-
-          applyFilters();
-
-        }
-      );
-
-    });
+    ?.addEventListener(
+      "click",
+      loadVideos
+    );
 
 }
 
 
-/* =========================================================
-   APPLY FILTER
-   ========================================================= */
-
-function applyFilters(){
-
-  const query =
-    currentSearch
-      .trim()
-      .toLowerCase();
-
-
-  filteredVideos =
-    VIDEOS.filter(video=>{
-
-      const categoryMatch =
-        currentCategory === 'all' ||
-        String(video.category)
-          .toLowerCase() ===
-        currentCategory.toLowerCase();
-
-
-      const searchText = [
-
-        video.title,
-
-        video.description,
-
-        video.category
-
-      ]
-        .join(' ')
-        .toLowerCase();
-
-
-      const searchMatch =
-        !query ||
-        searchText.includes(query);
-
-
-      return (
-        categoryMatch &&
-        searchMatch
-      );
-
-    });
-
-
-  renderVideos();
-
-}
-
-
-/* =========================================================
-   RENDER VIDEO CARDS
-   ========================================================= */
-
-function renderVideos(){
-
-  const grid =
-    document.getElementById(
-      'videoGrid'
-    );
-
-  const loadMoreWrap =
-    document.getElementById(
-      'loadMoreWrap'
-    );
-
-
-  if(!grid) return;
-
-
-  if(!filteredVideos.length){
-
-    showStatus(
-      'Video tidak ditemukan',
-      'Belum ada video yang sesuai dengan pencarian Anda.'
-    );
-
-    if(loadMoreWrap){
-
-      loadMoreWrap.style.display =
-        'none';
-
-    }
-
-    return;
-
-  }
-
-
-  const visible =
-    filteredVideos.slice(
-      0,
-      visibleCount
-    );
-
-
-  grid.innerHTML =
-    visible
-      .map(renderVideoCard)
-      .join('');
-
-
-  /*
-    Click handler
-  */
-
-  grid
-    .querySelectorAll(
-      '[data-video-index]'
-    )
-    .forEach(card=>{
-
-      card.addEventListener(
-        'click',
-        ()=>{
-
-          const index =
-            Number(
-              card.dataset.videoIndex
-            );
-
-          const video =
-            visible[index];
-
-          if(video){
-
-            openVideo(
-              video
-            );
-
-          }
-
-        }
-      );
-
-    });
-
-
-  /*
-    Load more
-  */
-
-  if(loadMoreWrap){
-
-    loadMoreWrap.style.display =
-      visible.length <
-      filteredVideos.length
-        ? 'flex'
-        : 'none';
-
-  }
-
-}
-
-
-/* =========================================================
-   VIDEO CARD HTML
-   ========================================================= */
-
-function renderVideoCard(
-  video,
-  index
-){
-
-  const thumbnail =
-    getThumbnail(video);
-
-
-  const title =
-    escapeHTML(video.title);
-
-
-  const category =
-    escapeHTML(
-      video.category ||
-      'MANDALA VIDEO'
-    );
-
-
-  const description =
-    escapeHTML(
-      video.description
-    );
-
-
-  const date =
-    formatDate(video.date);
-
-
-  const duration =
-    video.duration
-      ? `
-        <span class="videoDuration">
-          ${escapeHTML(video.duration)}
-        </span>
-      `
-      : '';
-
-
-  return `
-
-    <article
-      class="videoCard"
-      data-video-index="${index}">
-
-      <div
-        class="videoThumb"
-        role="button"
-        tabindex="0"
-        aria-label="Putar ${title}">
-
-        <img
-          src="${escapeHTML(thumbnail)}"
-          alt="${title}"
-          loading="lazy"
-          onerror="
-            this.onerror=null;
-            this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85';
-          ">
-
-        <div class="videoOverlay">
-
-          <span class="playIcon">
-            ▶
-          </span>
-
-        </div>
-
-        <span class="videoBadge">
-          ${category}
-        </span>
-
-        ${duration}
-
-      </div>
-
-
-      <div class="videoInfo">
-
-        <div class="videoMeta">
-          ${category}
-        </div>
-
-        <h3 class="videoTitle">
-          ${title}
-        </h3>
-
-        <p class="videoDescription">
-          ${description}
-        </p>
-
-        ${
-          date
-          ? `
-            <small class="videoDate">
-              ${escapeHTML(date)}
-            </small>
-          `
-          : ''
-        }
-
-      </div>
-
-    </article>
-
-  `;
-
-}
-
-
-/* =========================================================
-   FEATURED VIDEO
-   ========================================================= */
-
-function renderFeatured(){
-
-  const feature =
-    VIDEOS.find(
-      video=>video.featured
-    ) ||
-    VIDEOS[0];
-
-
-  if(!feature) return;
-
-
-  const image =
-    getThumbnail(feature);
-
-
-  const imageElement =
-    document.getElementById(
-      'featureVideoImage'
-    );
-
-  const categoryElement =
-    document.getElementById(
-      'featureVideoCategory'
-    );
-
-  const titleElement =
-    document.getElementById(
-      'featureVideoTitle'
-    );
-
-  const descriptionElement =
-    document.getElementById(
-      'featureVideoDescription'
-    );
-
-  const metaElement =
-    document.getElementById(
-      'featureVideoMeta'
-    );
-
-  const thumb =
-    document.getElementById(
-      'featureVideoThumb'
-    );
-
-
-  if(imageElement){
-
-    imageElement.src =
-      image;
-
-    imageElement.alt =
-      feature.title;
-
-  }
-
-
-  if(categoryElement){
-
-    categoryElement.textContent =
-      feature.category ||
-      'Mandala Video';
-
-  }
-
-
-  if(titleElement){
-
-    titleElement.textContent =
-      feature.title;
-
-  }
-
-
-  if(descriptionElement){
-
-    descriptionElement.textContent =
-      feature.description;
-
-  }
-
-
-  if(metaElement){
-
-    const date =
-      formatDate(feature.date);
-
-    metaElement.textContent =
-      'Mandala Channel' +
-      (
-        date
-          ? ' · ' + date
-          : ' · Video Pilihan'
-      );
-
-  }
-
-
-  if(thumb){
-
-    thumb.onclick =
-      ()=>openVideo(feature);
-
-  }
-
-}
-
-
-/* =========================================================
+/* =====================================================
    SEARCH
-   ========================================================= */
+===================================================== */
 
-(function(){
+searchInput?.addEventListener(
+  "input",
+  event => {
 
-  const input =
-    document.getElementById(
-      'videoSearch'
-    );
+    searchTerm =
+      event.target.value || "";
 
-  if(!input) return;
+    renderVideos();
 
-
-  input.addEventListener(
-    'input',
-    ()=>{
-      currentSearch =
-        input.value;
-
-      visibleCount =
-        VIDEO_PER_PAGE;
-
-      applyFilters();
-    }
-  );
-
-})();
+  }
+);
 
 
-/* =========================================================
-   LOAD MORE
-   ========================================================= */
+/* =====================================================
+   VIDEO MODAL
+===================================================== */
 
-(function(){
+function openVideo(id,title){
 
-  const button =
-    document.getElementById(
-      'loadMore'
-    );
-
-  if(!button) return;
-
-
-  button.addEventListener(
-    'click',
-    ()=>{
-
-      visibleCount +=
-        VIDEO_PER_PAGE;
-
-      renderVideos();
-
-    }
-  );
-
-})();
-
-
-/* =========================================================
-   OPEN VIDEO
-   ========================================================= */
-
-function openVideo(video){
-
-  if(!video) return;
-
-
-  const embed =
-    getYoutubeEmbed(video);
-
-
-  if(!embed){
+  if(!id){
 
     alert(
-      'Video YouTube belum tersedia.'
+      "Video ini belum memiliki YouTube Video ID."
     );
 
     return;
-
   }
 
 
-  const modal =
-    document.getElementById(
-      'modal'
-    );
-
-  const frame =
-    document.getElementById(
-      'videoFrame'
-    );
-
-  const title =
-    document.getElementById(
-      'modalTitle'
-    );
+  modalTitle.textContent =
+    title ||
+    "Mandala Channel";
 
 
-  if(title){
-
-    title.textContent =
-      video.title ||
-      'Mandala Channel';
-
-  }
+  videoFrame.src =
+    youtubeEmbed(id);
 
 
-  if(frame){
+  modal.classList.add(
+    "open"
+  );
 
-    frame.src =
-      embed;
-
-  }
-
-
-  if(modal){
-
-    modal.classList.add('open');
-
-    modal.setAttribute(
-      'aria-hidden',
-      'false'
-    );
-
-  }
-
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
 
   document.body.style.overflow =
-    'hidden';
+    "hidden";
 
 }
 
-
-/* =========================================================
-   CLOSE VIDEO
-   ========================================================= */
 
 function closeVideo(){
 
-  const modal =
-    document.getElementById(
-      'modal'
-    );
+  modal.classList.remove(
+    "open"
+  );
 
-  const frame =
-    document.getElementById(
-      'videoFrame'
-    );
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
 
-
-  if(frame){
-
-    frame.src = '';
-
-  }
-
-
-  if(modal){
-
-    modal.classList.remove(
-      'open'
-    );
-
-    modal.setAttribute(
-      'aria-hidden',
-      'true'
-    );
-
-  }
-
+  videoFrame.src = "";
 
   document.body.style.overflow =
-    '';
+    "";
 
 }
 
 
-/* =========================================================
-   MODAL EVENTS
-   ========================================================= */
-
-(function(){
-
-  const modal =
-    document.getElementById(
-      'modal'
-    );
-
-  const close =
-    document.getElementById(
-      'closeModal'
-    );
+modalClose?.addEventListener(
+  "click",
+  closeVideo
+);
 
 
-  if(close){
-
-    close.addEventListener(
-      'click',
-      closeVideo
-    );
-
-  }
-
-
-  if(modal){
-
-    modal.addEventListener(
-      'click',
-      event=>{
-
-        if(
-          event.target === modal
-        ){
-
-          closeVideo();
-
-        }
-
-      }
-    );
-
-  }
-
-
-  document.addEventListener(
-    'keydown',
-    event=>{
-
-      if(
-        event.key === 'Escape'
-      ){
-
-        closeVideo();
-
-      }
-
-    }
-  );
-
-})();
-
-
-/* =========================================================
-   KEYBOARD SUPPORT
-   ========================================================= */
-
-document.addEventListener(
-  'keydown',
-  event=>{
-
-    const target =
-      event.target.closest?.(
-        '.videoThumb'
-      );
-
-    if(!target) return;
-
+modal?.addEventListener(
+  "click",
+  event => {
 
     if(
-      event.key === 'Enter' ||
-      event.key === ' '
+      event.target === modal
     ){
-
-      event.preventDefault();
-
-      target
-        .closest('.videoCard')
-        ?.click();
-
+      closeVideo();
     }
 
   }
 );
 
 
-/* =========================================================
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+      closeVideo();
+    }
+
+  }
+);
+
+
+/* =====================================================
+   STICKY HEADER
+===================================================== */
+
+(function(){
+
+  const header =
+    document.getElementById(
+      "siteHeader"
+    );
+
+
+  if(!header){
+    return;
+  }
+
+
+  function update(){
+
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 20
+    );
+
+  }
+
+
+  update();
+
+  window.addEventListener(
+    "scroll",
+    update,
+    {
+      passive:true
+    }
+  );
+
+})();
+
+
+/* =====================================================
    START
-   ========================================================= */
+===================================================== */
 
 loadVideos();
 
