@@ -412,6 +412,16 @@ header.scrolled .links a:after{
   text-transform:uppercase;
 }
 
+.videoDuration{
+  position:absolute;
+  right:9px;
+  bottom:9px;
+  padding:4px 6px;
+  background:rgba(0,0,0,.72);
+  color:#fff;
+  font-size:9px;
+}
+
 .videoInfo{
   padding:13px 1px 0;
 }
@@ -465,6 +475,10 @@ header.scrolled .links a:after{
   margin-bottom:4px;
   color:var(--navy);
   font:500 20px Georgia,serif;
+}
+
+.videoError{
+  padding:30px;
 }
 
 .videoError strong{
@@ -669,6 +683,10 @@ header.scrolled .links a:after{
 }
 
 .modalTitle{
+  max-width:calc(100% - 55px);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
   font-size:12px;
 }
 
@@ -765,11 +783,9 @@ footer{
 ========================================================= */
 
 @media(max-width:1100px){
-
   .videoGrid{
     grid-template-columns:repeat(3,minmax(0,1fr));
   }
-
 }
 
 @media(max-width:820px){
@@ -816,7 +832,6 @@ footer{
   .foot{
     grid-template-columns:1fr 1fr;
   }
-
 }
 
 @media(max-width:560px){
@@ -873,7 +888,6 @@ footer{
   .modal{
     padding:10px;
   }
-
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -890,7 +904,6 @@ footer{
     opacity:1;
     transform:none;
   }
-
 }
 </style>
 </head>
@@ -905,46 +918,23 @@ footer{
 </div>
 
 <header id="siteHeader">
-
   <div class="w nav">
 
     <a class="logo" href="../index.html">
-
       <div class="mark">✺</div>
-
       <div>
         <b>MANDALA</b>
         <small>CHANNEL</small>
       </div>
-
     </a>
 
     <nav class="links" aria-label="Navigasi utama">
-
-      <a href="../index.html">
-        Beranda
-      </a>
-
-      <a href="artikel.html">
-        Artikel
-      </a>
-
-      <a href="video.html" aria-current="page">
-        Video
-      </a>
-
-      <a href="playlist.html">
-        Playlist
-      </a>
-
-      <a href="podcast.html">
-        Podcast
-      </a>
-
-      <a href="tentang-kami.html">
-        Tentang
-      </a>
-
+      <a href="../index.html">Beranda</a>
+      <a href="artikel.html">Artikel</a>
+      <a href="video.html" aria-current="page">Video</a>
+      <a href="playlist.html">Playlist</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="tentang-kami.html">Tentang</a>
     </nav>
 
     <a
@@ -956,14 +946,11 @@ footer{
     </a>
 
   </div>
-
 </header>
 
 
 <section class="pageHero">
-
   <div class="w">
-
     <div class="pageHeroCopy">
 
       <div class="k">
@@ -981,9 +968,7 @@ footer{
       </p>
 
     </div>
-
   </div>
-
 </section>
 
 
@@ -994,15 +979,11 @@ footer{
     <div class="sectionHead reveal">
 
       <div>
-
-        <div class="k">
-          Mandala Video
-        </div>
+        <div class="k">Mandala Video</div>
 
         <h2 class="sectionTitle">
           Semua video
         </h2>
-
       </div>
 
       <p class="sectionIntro">
@@ -1027,7 +1008,6 @@ footer{
         </button>
 
       </div>
-
 
       <div class="videoSearch">
 
@@ -1072,9 +1052,7 @@ footer{
         class="loadMore"
         id="loadMore"
         type="button">
-
         MUAT LEBIH BANYAK
-
       </button>
 
     </div>
@@ -1273,19 +1251,13 @@ footer{
 
         <h3>JELAJAH</h3>
 
-        <a href="artikel.html">
-          Artikel
-        </a>
+        <a href="artikel.html">Artikel</a>
         <br>
 
-        <a href="video.html">
-          Video
-        </a>
+        <a href="video.html">Video</a>
         <br>
 
-        <a href="playlist.html">
-          Playlist
-        </a>
+        <a href="playlist.html">Playlist</a>
 
       </div>
 
@@ -1368,13 +1340,10 @@ const supabaseClient =
 ========================================================= */
 
 let VIDEOS = [];
-
+let CATEGORIES = [];
 let FILTERED_VIDEOS = [];
 
-let CATEGORIES = [];
-
 let CURRENT_CATEGORY = "all";
-
 let CURRENT_SEARCH = "";
 
 let VISIBLE_COUNT = 12;
@@ -1401,9 +1370,7 @@ const FALLBACK_IMAGE =
   const header =
     document.getElementById("siteHeader");
 
-  if(!header){
-    return;
-  }
+  if(!header) return;
 
   function updateHeader(){
 
@@ -1419,7 +1386,9 @@ const FALLBACK_IMAGE =
   window.addEventListener(
     "scroll",
     updateHeader,
-    {passive:true}
+    {
+      passive:true
+    }
   );
 
 })();
@@ -1453,7 +1422,9 @@ const FALLBACK_IMAGE =
         entries.forEach(
           entry => {
 
-            if(entry.isIntersecting){
+            if(
+              entry.isIntersecting
+            ){
 
               entry.target.classList.add(
                 "is-visible"
@@ -1484,7 +1455,7 @@ const FALLBACK_IMAGE =
 
 
 /* =========================================================
-   ESCAPE
+   ESCAPE HTML
 ========================================================= */
 
 function escapeHTML(value){
@@ -1528,7 +1499,7 @@ function getYoutubeId(value){
     const host =
       url.hostname
         .toLowerCase()
-        .replace(/^www\./,"");
+        .replace("www.","");
 
     if(
       host === "youtube.com" ||
@@ -1538,13 +1509,8 @@ function getYoutubeId(value){
       const queryId =
         url.searchParams.get("v");
 
-      if(
-        queryId &&
-        /^[A-Za-z0-9_-]{11}$/.test(queryId)
-      ){
-
+      if(queryId){
         return queryId;
-
       }
 
       const embed =
@@ -1586,7 +1552,10 @@ function getYoutubeId(value){
 
   }catch(error){
 
-    /* bukan URL */
+    console.warn(
+      "YouTube URL tidak valid:",
+      value
+    );
 
   }
 
@@ -1627,7 +1596,7 @@ function getThumbnail(video){
 
 
 /* =========================================================
-   EMBED
+   EMBED URL
 ========================================================= */
 
 function getEmbedUrl(video){
@@ -1683,26 +1652,152 @@ function formatDate(value){
 
 
 /* =========================================================
+   NORMALIZE CATEGORY
+========================================================= */
+
+function normalizeCategory(row){
+
+  return {
+
+    id:
+      row.id || "",
+
+    name:
+      row.name || "Tanpa kategori",
+
+    slug:
+      row.slug || "",
+
+    description:
+      row.description || "",
+
+    image_url:
+      row.image_url || "",
+
+    sort_order:
+      Number.isFinite(row.sort_order)
+        ? row.sort_order
+        : 999999,
+
+    is_active:
+      row.is_active !== false
+
+  };
+
+}
+
+
+/* =========================================================
+   CATEGORY MAP
+========================================================= */
+
+function getCategoryName(categoryId){
+
+  if(!categoryId){
+    return "Tanpa kategori";
+  }
+
+  const category =
+    CATEGORIES.find(
+      item =>
+        String(item.id) ===
+        String(categoryId)
+    );
+
+  return category?.name ||
+    "Tanpa kategori";
+
+}
+
+
+/* =========================================================
+   NORMALIZE VIDEO
+========================================================= */
+
+function normalizeVideo(row){
+
+  return {
+
+    id:
+      row.id || "",
+
+    title:
+      row.title ||
+      "Video Mandala",
+
+    youtube_url:
+      row.youtube_url ||
+      "",
+
+    youtube_video_id:
+      row.youtube_video_id ||
+      getYoutubeId(row.youtube_url),
+
+    thumbnail_url:
+      row.thumbnail_url ||
+      "",
+
+    description:
+      row.description ||
+      "",
+
+    category_id:
+      row.category_id ||
+      null,
+
+    status:
+      row.status ||
+      "",
+
+    featured:
+      row.featured === true,
+
+    published_at:
+      row.published_at ||
+      null,
+
+    created_at:
+      row.created_at ||
+      null,
+
+    updated_at:
+      row.updated_at ||
+      null,
+
+    slug:
+      row.slug ||
+      "",
+
+    author_id:
+      row.author_id ||
+      null
+
+  };
+
+}
+
+
+/* =========================================================
    STATUS
 ========================================================= */
 
 function showStatus(
   title,
   description,
-  isError=false
+  isError = false
 ){
 
   const grid =
     document.getElementById("videoGrid");
 
-  if(!grid){
-    return;
-  }
+  if(!grid) return;
 
   grid.innerHTML = `
 
     <div class="videoStatus ${
-      isError ? "videoError" : ""
+      isError
+        ? "videoError"
+        : ""
     }">
 
       <div>
@@ -1738,27 +1833,36 @@ async function loadCategories(){
         id,
         name,
         slug,
+        description,
+        image_url,
         sort_order,
         is_active
       `)
-      .eq("is_active",true)
-      .order("sort_order",{ascending:true});
+      .eq(
+        "is_active",
+        true
+      )
+      .order(
+        "sort_order",
+        {
+          ascending:true
+        }
+      );
+
 
   if(error){
 
-    console.warn(
-      "Kategori tidak dapat dimuat:",
-      error
+    throw new Error(
+      "Gagal mengambil kategori: " +
+      error.message
     );
-
-    CATEGORIES = [];
-
-    return;
 
   }
 
+
   CATEGORIES =
-    data || [];
+    (data || [])
+      .map(normalizeCategory);
 
 }
 
@@ -1768,20 +1872,6 @@ async function loadCategories(){
 ========================================================= */
 
 async function loadVideosFromSupabase(){
-
-  /*
-    PENTING:
-
-    Video diambil berdasarkan status published.
-
-    published_at TIDAK lagi diwajibkan
-    agar video yang sudah dipublish dari
-    dashboard tetap dapat muncul walaupun
-    tanggal publish kosong.
-
-    Jika published_at ada, tetap digunakan
-    untuk urutan.
-  */
 
   const {
     data,
@@ -1805,103 +1895,35 @@ async function loadVideosFromSupabase(){
         slug,
         author_id
       `)
-      .eq("status","published")
-      .order(
+      .eq(
+        "status",
+        "published"
+      )
+      .not(
         "published_at",
-        {
-          ascending:false,
-          nullsFirst:false
-        }
+        "is",
+        null
       )
       .order(
-        "created_at",
+        "published_at",
         {
           ascending:false
         }
       );
 
+
   if(error){
 
-    throw error;
+    throw new Error(
+      "Gagal mengambil video: " +
+      error.message
+    );
 
   }
 
+
   return (data || [])
-    .map(row => {
-
-      const category =
-        CATEGORIES.find(
-          item =>
-            String(item.id) ===
-            String(row.category_id)
-        );
-
-      return {
-
-        id:
-          row.id,
-
-        title:
-          row.title ||
-          "Video Mandala",
-
-        youtube_url:
-          row.youtube_url ||
-          "",
-
-        youtube_video_id:
-          row.youtube_video_id ||
-          getYoutubeId(row.youtube_url),
-
-        thumbnail_url:
-          row.thumbnail_url ||
-          "",
-
-        description:
-          row.description ||
-          "",
-
-        category_id:
-          row.category_id ||
-          null,
-
-        category_name:
-          category?.name ||
-          "Mandala Video",
-
-        category_slug:
-          category?.slug ||
-          "",
-
-        status:
-          row.status,
-
-        featured:
-          row.featured === true,
-
-        published_at:
-          row.published_at ||
-          null,
-
-        created_at:
-          row.created_at ||
-          null,
-
-        updated_at:
-          row.updated_at ||
-          null,
-
-        slug:
-          row.slug ||
-          "",
-
-        author_id:
-          row.author_id ||
-          null
-
-      };
-
-    })
+    .map(normalizeVideo)
     .filter(
       video =>
         video.youtube_video_id ||
@@ -1912,7 +1934,7 @@ async function loadVideosFromSupabase(){
 
 
 /* =========================================================
-   INITIAL LOAD
+   LOAD DATA
 ========================================================= */
 
 async function loadVideos(){
@@ -1923,6 +1945,14 @@ async function loadVideos(){
   );
 
   try{
+
+    /*
+      Kategori dan video diambil terpisah.
+
+      videos.category_id
+             ↓
+      categories.id
+    */
 
     await loadCategories();
 
@@ -1941,26 +1971,32 @@ async function loadVideos(){
 
     renderFeatured();
 
-    console.log(
+    console.info(
       "Mandala Video:",
-      VIDEOS
+      VIDEOS.length,
+      "video"
+    );
+
+    console.info(
+      "Mandala Categories:",
+      CATEGORIES.length,
+      "kategori"
     );
 
   }catch(error){
 
     console.error(
-      "SUPABASE VIDEO ERROR:",
+      "MANDALA VIDEO ERROR:",
       error
     );
 
     VIDEOS = [];
-
     FILTERED_VIDEOS = [];
 
     showStatus(
       "Video gagal dimuat",
       error?.message ||
-      "Tidak dapat mengambil data video dari Supabase.",
+      "Tidak dapat mengambil data video.",
       true
     );
 
@@ -1970,38 +2006,50 @@ async function loadVideos(){
 
 
 /* =========================================================
-   FILTERS
+   FILTER CATEGORIES
+========================================================= */
+
+function getCategoriesForFilter(){
+
+  const usedIds =
+    new Set(
+      VIDEOS
+        .map(
+          video =>
+            video.category_id
+        )
+        .filter(Boolean)
+        .map(String)
+    );
+
+  return CATEGORIES
+    .filter(
+      category =>
+        usedIds.has(
+          String(category.id)
+        )
+    );
+
+}
+
+
+/* =========================================================
+   RENDER FILTERS
 ========================================================= */
 
 function renderFilters(){
 
   const container =
-    document.getElementById("filterList");
+    document.getElementById(
+      "filterList"
+    );
 
   if(!container){
     return;
   }
 
-  const usedCategoryIds =
-    [
-      ...new Set(
-        VIDEOS
-          .map(video => video.category_id)
-          .filter(Boolean)
-      )
-    ];
-
   const categories =
-    usedCategoryIds
-      .map(
-        id =>
-          CATEGORIES.find(
-            category =>
-              String(category.id) ===
-              String(id)
-          )
-      )
-      .filter(Boolean);
+    getCategoriesForFilter();
 
 
   let html = `
@@ -2010,9 +2058,7 @@ function renderFilters(){
       class="filterBtn active"
       type="button"
       data-filter="all">
-
       Semua
-
     </button>
 
   `;
@@ -2044,41 +2090,43 @@ function renderFilters(){
 
   container
     .querySelectorAll(".filterBtn")
-    .forEach(button => {
+    .forEach(
+      button => {
 
-      button.addEventListener(
-        "click",
-        function(){
+        button.addEventListener(
+          "click",
+          function(){
 
-          CURRENT_CATEGORY =
-            this.dataset.filter ||
-            "all";
+            CURRENT_CATEGORY =
+              this.dataset.filter ||
+              "all";
 
-          VISIBLE_COUNT =
-            PER_PAGE;
+            VISIBLE_COUNT =
+              PER_PAGE;
 
-          container
-            .querySelectorAll(".filterBtn")
-            .forEach(
-              item =>
-                item.classList.toggle(
-                  "active",
-                  item === this
-                )
-            );
+            container
+              .querySelectorAll(".filterBtn")
+              .forEach(
+                item =>
+                  item.classList.toggle(
+                    "active",
+                    item === this
+                  )
+              );
 
-          applyFilters();
+            applyFilters();
 
-        }
-      );
+          }
+        );
 
-    });
+      }
+    );
 
 }
 
 
 /* =========================================================
-   APPLY FILTER
+   APPLY FILTERS
 ========================================================= */
 
 function applyFilters(){
@@ -2090,43 +2138,55 @@ function applyFilters(){
 
 
   FILTERED_VIDEOS =
-    VIDEOS.filter(video => {
+    VIDEOS.filter(
+      video => {
 
-      const categoryMatch =
-        CURRENT_CATEGORY === "all" ||
-        String(video.category_id || "") ===
-        String(CURRENT_CATEGORY);
-
-
-      const text = [
-
-        video.title,
-
-        video.description,
-
-        video.category_name,
-
-        video.youtube_url,
-
-        video.slug
-
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
+        const categoryMatch =
+          CURRENT_CATEGORY === "all" ||
+          String(
+            video.category_id || ""
+          ) ===
+          String(
+            CURRENT_CATEGORY
+          );
 
 
-      const searchMatch =
-        !query ||
-        text.includes(query);
+        const categoryName =
+          getCategoryName(
+            video.category_id
+          );
 
 
-      return (
-        categoryMatch &&
-        searchMatch
-      );
+        const text = [
 
-    });
+          video.title,
+
+          video.description,
+
+          video.youtube_url,
+
+          video.slug,
+
+          categoryName
+
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+
+        const searchMatch =
+          !query ||
+          text.includes(query);
+
+
+        return (
+          categoryMatch &&
+          searchMatch
+        );
+
+      }
+    );
 
 
   renderVideos();
@@ -2141,10 +2201,14 @@ function applyFilters(){
 function renderVideos(){
 
   const grid =
-    document.getElementById("videoGrid");
+    document.getElementById(
+      "videoGrid"
+    );
 
   const loadMore =
-    document.getElementById("loadMoreWrap");
+    document.getElementById(
+      "loadMoreWrap"
+    );
 
   if(!grid){
     return;
@@ -2155,12 +2219,17 @@ function renderVideos(){
 
     showStatus(
       "Belum ada video",
-      "Belum ada video published yang tersedia."
+      CURRENT_SEARCH ||
+      CURRENT_CATEGORY !== "all"
+        ? "Tidak ada video yang sesuai dengan pencarian atau kategori."
+        : "Belum ada video published yang tersedia."
     );
 
     if(loadMore){
+
       loadMore.style.display =
         "none";
+
     }
 
     return;
@@ -2178,7 +2247,10 @@ function renderVideos(){
   grid.innerHTML =
     visible
       .map(
-        (video,index) =>
+        (
+          video,
+          index
+        ) =>
           renderCard(
             video,
             index
@@ -2188,29 +2260,37 @@ function renderVideos(){
 
 
   grid
-    .querySelectorAll("[data-video-index]")
-    .forEach(card => {
+    .querySelectorAll(
+      "[data-video-index]"
+    )
+    .forEach(
+      card => {
 
-      card.addEventListener(
-        "click",
-        function(){
+        card.addEventListener(
+          "click",
+          function(){
 
-          const index =
-            Number(
-              this.dataset.videoIndex
-            );
+            const index =
+              Number(
+                this.dataset.videoIndex
+              );
 
-          const video =
-            visible[index];
+            const video =
+              visible[index];
 
-          if(video){
-            openVideo(video);
+            if(video){
+
+              openVideo(
+                video
+              );
+
+            }
+
           }
+        );
 
-        }
-      );
-
-    });
+      }
+    );
 
 
   if(loadMore){
@@ -2227,7 +2307,7 @@ function renderVideos(){
 
 
 /* =========================================================
-   CARD
+   RENDER CARD
 ========================================================= */
 
 function renderCard(
@@ -2236,7 +2316,9 @@ function renderCard(
 ){
 
   const title =
-    escapeHTML(video.title);
+    escapeHTML(
+      video.title
+    );
 
   const description =
     escapeHTML(
@@ -2251,8 +2333,9 @@ function renderCard(
 
   const category =
     escapeHTML(
-      video.category_name ||
-      "Mandala Video"
+      getCategoryName(
+        video.category_id
+      )
     );
 
   const date =
@@ -2346,7 +2429,9 @@ function renderFeatured(){
 
 
   if(!video){
+
     return;
+
   }
 
 
@@ -2389,24 +2474,15 @@ function renderFeatured(){
     image.alt =
       video.title;
 
-    image.onerror =
-      function(){
-
-        this.onerror = null;
-
-        this.src =
-          FALLBACK_IMAGE;
-
-      };
-
   }
 
 
   if(category){
 
     category.textContent =
-      video.category_name ||
-      "Mandala Video";
+      getCategoryName(
+        video.category_id
+      );
 
   }
 
@@ -2436,12 +2512,19 @@ function renderFeatured(){
         video.created_at
       );
 
+    const categoryName =
+      getCategoryName(
+        video.category_id
+      );
+
     meta.textContent =
       "Mandala Channel" +
+      " · " +
+      categoryName +
       (
         date
           ? " · " + date
-          : " · Video Pilihan"
+          : ""
       );
 
   }
@@ -2558,13 +2641,19 @@ function openVideo(video){
 
 
   const modal =
-    document.getElementById("modal");
+    document.getElementById(
+      "modal"
+    );
 
   const frame =
-    document.getElementById("videoFrame");
+    document.getElementById(
+      "videoFrame"
+    );
 
   const title =
-    document.getElementById("modalTitle");
+    document.getElementById(
+      "modalTitle"
+    );
 
 
   if(title){
@@ -2586,7 +2675,9 @@ function openVideo(video){
 
   if(modal){
 
-    modal.classList.add("open");
+    modal.classList.add(
+      "open"
+    );
 
     modal.setAttribute(
       "aria-hidden",
@@ -2609,10 +2700,14 @@ function openVideo(video){
 function closeVideo(){
 
   const modal =
-    document.getElementById("modal");
+    document.getElementById(
+      "modal"
+    );
 
   const frame =
-    document.getElementById("videoFrame");
+    document.getElementById(
+      "videoFrame"
+    );
 
 
   if(frame){
@@ -2624,7 +2719,9 @@ function closeVideo(){
 
   if(modal){
 
-    modal.classList.remove("open");
+    modal.classList.remove(
+      "open"
+    );
 
     modal.setAttribute(
       "aria-hidden",
@@ -2641,16 +2738,20 @@ function closeVideo(){
 
 
 /* =========================================================
-   MODAL EVENTS
+   MODAL
 ========================================================= */
 
 (function(){
 
   const modal =
-    document.getElementById("modal");
+    document.getElementById(
+      "modal"
+    );
 
   const close =
-    document.getElementById("closeModal");
+    document.getElementById(
+      "closeModal"
+    );
 
 
   if(close){
@@ -2702,7 +2803,7 @@ function closeVideo(){
 
 
 /* =========================================================
-   KEYBOARD VIDEO CARD
+   KEYBOARD
 ========================================================= */
 
 document.addEventListener(
@@ -2723,6 +2824,7 @@ document.addEventListener(
       event.target.closest(
         ".videoThumb"
       );
+
 
     if(!thumb){
       return;
