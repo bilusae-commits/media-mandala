@@ -12,19 +12,17 @@
 
   function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
   function youtubeId(v){
-    if(!v)return""; const s=String(v).trim();
-    if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;
+    if(!v)return"";const s=String(v).trim();if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;
     try{const u=new URL(s),h=u.hostname.replace(/^www\./,"").toLowerCase();
       if(h==="youtu.be")return u.pathname.split("/").filter(Boolean)[0]||"";
       if(h==="youtube.com"||h==="m.youtube.com")return u.searchParams.get("v")||(u.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||"";
-    }catch(e){} return"";
+    }catch(e){}return"";
   }
   function videoImage(v){return v.thumbnail_url||(v.youtube_video_id?`https://i.ytimg.com/vi/${encodeURIComponent(v.youtube_video_id)}/hqdefault.jpg`:FALLBACK);}
   function dateText(v){if(!v)return"";const d=new Date(v);return Number.isNaN(d.getTime())?"":new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"long",year:"numeric"}).format(d);}
 
   async function client(){
-    if(db)return db;
-    if(!URL||!KEY)throw new Error("Konfigurasi Supabase publik belum tersedia.");
+    if(db)return db;if(!URL||!KEY)throw new Error("Konfigurasi Supabase publik belum tersedia.");
     if(!window.supabase||typeof window.supabase.createClient!=="function"){
       await new Promise((resolve,reject)=>{
         const old=document.querySelector('script[data-mandala-supabase-public]');
@@ -36,16 +34,15 @@
   }
 
   async function loadTable(name,select,order){
-    let q=(await client()).from(name).select(select);
-    if(order)q=q.order(order,{ascending:true,nullsFirst:false});
+    let q=(await client()).from(name).select(select);if(order)q=q.order(order,{ascending:true,nullsFirst:false});
     const r=await q;if(r.error)throw r.error;return r.data||[];
   }
 
   async function loadHomeData(){
     const [articles,videos,playlists,categories]=await Promise.all([
-      loadTable("articles","id,title,slug,excerpt,featured_image_url,cover_image_url,thumbnail_url,category_id,published_at,created_at,status","published_at"),
+      loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),
       loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),
-      loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,created_at","sort_order"),
+      loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),
       loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")
     ]);
     const active=categories.filter(c=>c.is_active!==false),map={};active.forEach(c=>map[c.id]=c);
@@ -57,7 +54,7 @@
 
   function renderArticles(items,map){
     const el=document.getElementById("articlesContainer");if(!el||!items.length)return;
-    el.innerHTML=items.slice(0,4).map(a=>{const image=a.featured_image_url||a.cover_image_url||a.thumbnail_url||FALLBACK,cat=map[a.category_id]?.name||"ARTIKEL";return `<article class="card"><a href="pages/artikel-detail.html${a.slug?`?slug=${encodeURIComponent(a.slug)}`:""}"><div class="thumb"><img src="${esc(image)}" alt="${esc(a.title)}" loading="lazy"><span class="badge">${esc(cat)}</span></div><div class="meta">${esc(dateText(a.published_at||a.created_at))}</div><h3>${esc(a.title||"Artikel")}</h3><p>${esc(a.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");
+    el.innerHTML=items.slice(0,4).map(a=>{const image=a.cover_image_url||FALLBACK,cat=map[a.category_id]?.name||"ARTIKEL";return `<article class="card"><a href="pages/artikel-detail.html${a.slug?`?slug=${encodeURIComponent(a.slug)}`:""}"><div class="thumb"><img src="${esc(image)}" alt="${esc(a.title)}" loading="lazy"><span class="badge">${esc(cat)}</span></div><div class="meta">${esc(dateText(a.published_at||a.created_at))}</div><h3>${esc(a.title||"Artikel")}</h3><p>${esc(a.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");
   }
 
   function renderVideos(items,map){
