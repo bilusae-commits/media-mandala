@@ -1,0 +1,57 @@
+name: Activate Mandala Topic Sync
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Inject Supabase topic scripts
+        shell: bash
+        run: |
+          set -e
+          files=(
+            topics/candika-nusantara.html
+            topics/dharma-ajaran.html
+            topics/dharmika.html
+            topics/ekonomi-hindu.html
+            topics/jelajah-nusantara.html
+            topics/kabar-umat.html
+            topics/spiritual.html
+            topics/tokoh-hindu.html
+            topics/tradisi-budaya.html
+          )
+
+          for file in "${files[@]}"; do
+            [ -f "$file" ] || continue
+
+            if ! grep -q 'cdn.jsdelivr.net/npm/@supabase/supabase-js@2' "$file"; then
+              sed -i 's#</head>#<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>\n</head>#' "$file"
+            fi
+
+            if ! grep -q 'js/topic-sync.js' "$file"; then
+              sed -i 's#</body>#<script src="../js/topic-sync.js"></script>\n</body>#' "$file"
+            fi
+          done
+
+      - name: Commit topic synchronization
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "Topic sync already active."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add topics/*.html
+          git commit -m "Activate Supabase synchronization for topic pages"
+          git push
