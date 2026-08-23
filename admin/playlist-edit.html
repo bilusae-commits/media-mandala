@@ -1,3 +1,56 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Playlist Baru — Mandala CMS</title><link rel="stylesheet" href="css/admin.css"><script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script><script src="js/shell.js"></script></head><body><script>initShell("Playlist Baru","playlists")</script><div id="page" style="margin-left:245px;padding-top:70px"></div><script>
-document.getElementById("page").innerHTML="<div class=\"space\"><h3 style=\"font:500 23px Georgia,serif;color:#082d56\">Tambah playlist YouTube</h3><button id=\"pub\" class=\"btn primary\">PUBLISH</button></div><div class=\"formGrid\"><div class=\"panel\"><div class=\"panelBody\"><div class=\"field\"><label>NAMA PLAYLIST</label><input id=\"name\"></div><div class=\"field\"><label>URL PLAYLIST YOUTUBE</label><input id=\"youtube_url\" placeholder=\"https://www.youtube.com/playlist?list=...\"></div><div class=\"field\"><label>DESKRIPSI</label><textarea id=\"description\"></textarea></div></div></div><div class=\"panel\"><div class=\"panelBody\"><div class=\"field\"><label>KATEGORI</label><select id=\"category\"></select></div><div class=\"field\"><label>URUTAN</label><input id=\"sort_order\" type=\"number\" value=\"1\"></div><div class=\"upload\">\ud83d\udcfa<br><br>Playlist akan ditampilkan di website.</div></div></div></div>";
-</script><script>document.addEventListener("DOMContentLoaded",async()=>{category.innerHTML=(await MandalaCMS.categories()).map(c=>`<option value="${c.id}">${c.name}</option>`).join("");pub.onclick=async()=>{try{await MandalaCMS.savePlaylist({name:name.value,youtube_url:youtube_url.value,description:description.value,category_id:category.value,sort_order:+sort_order.value},true);toast("Playlist dipublish.");setTimeout(()=>location.href="playlists.html",600)}catch(e){alert(e.message)}}})</script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Playlist — Mandala Channel CMS</title>
+<link rel="stylesheet" href="css/cms.css">
+<style>
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}.hint{color:#7b8792;font-size:10px;line-height:1.6}.required{color:#a33}.check{display:flex;align-items:center;gap:8px;font-size:11px}.check input{width:16px;height:16px}.preview{margin-top:12px;border:1px solid var(--border);background:#fafafa;padding:12px}.preview a{font-size:10px;color:var(--blue);word-break:break-all}.message{margin-bottom:12px}.message:empty{display:none}.message.error{color:#9b3028}.message.success{color:#27723e}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<a class="brand" href="dashboard.html"><div class="brand-title">MANDALA</div><div class="brand-subtitle">CHANNEL · CMS</div></a>
+<div class="nav-title">Konten</div><nav class="nav"><a class="nav-link" href="dashboard.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a><a class="nav-link" href="articles.html"><span class="nav-icon">▤</span><span>Artikel</span></a><a class="nav-link" href="videos.html"><span class="nav-icon">▶</span><span>Video</span></a><a class="nav-link active" href="playlists.html"><span class="nav-icon">☷</span><span>Playlist</span></a><a class="nav-link" href="podcasts.html"><span class="nav-icon">◉</span><span>Podcast</span></a><a class="nav-link" href="categories.html"><span class="nav-icon">#</span><span>Kategori</span></a></nav>
+<div class="nav-title">Sistem</div><nav class="nav"><a class="nav-link" href="settings.html"><span class="nav-icon">⚙</span><span>Pengaturan</span></a></nav>
+<div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name" id="side-name">Mandala CMS</div><div class="sidebar-user-role" id="side-role">Memuat...</div></div><button class="logout-button" id="logout" type="button">Keluar ↪</button></div>
+</aside>
+<main class="main"><header class="topbar"><div><div class="title">Playlist</div><div class="subtitle">Tambah atau ubah playlist YouTube</div></div><div class="user-mini" id="top-user"></div></header>
+<section class="content">
+<div class="page-head"><div><h1 id="page-title">Playlist Baru</h1><p>Playlist mengambil isi video langsung dari YouTube menggunakan Playlist ID.</p></div><a class="btn btn-light" href="playlists.html">← Kembali</a></div>
+<div id="page-message" class="message"></div>
+<div class="formGrid">
+<section class="panel"><div class="panel-head"><div class="panel-title">Informasi Playlist</div></div><div class="panel-body panelBody">
+<div class="field"><label>NAMA PLAYLIST <span class="required">*</span></label><input class="input" id="title" required placeholder="Contoh: Jelajah Nusantara"></div>
+<div class="field"><label>URL / ID PLAYLIST YOUTUBE <span class="required">*</span></label><input class="input" id="youtube" required placeholder="https://www.youtube.com/playlist?list=PL..."><div class="hint">Boleh masukkan URL playlist YouTube atau langsung Playlist ID.</div></div>
+<div class="field"><label>DESKRIPSI</label><textarea class="input" id="description" rows="6" placeholder="Deskripsi singkat playlist..."></textarea></div>
+<div class="field"><label>SLUG</label><input class="input" id="slug" placeholder="jelajah-nusantara"><div class="hint">Kosongkan untuk dibuat otomatis dari nama playlist.</div></div>
+</div></section>
+<section class="panel"><div class="panel-head"><div class="panel-title">Pengaturan</div></div><div class="panel-body panelBody">
+<div class="field"><label>KATEGORI</label><select class="select" id="category"><option value="">Tanpa kategori</option></select></div>
+<div class="field"><label>STATUS</label><select class="select" id="status"><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Archived</option></select><div class="hint" id="status-hint"></div></div>
+<div class="field"><label>URUTAN</label><input class="input" id="sort_order" type="number" min="0" value="0"></div>
+<label class="check"><input id="featured" type="checkbox"> Jadikan playlist unggulan</label>
+<div class="preview"><strong style="font-size:10px">LINK YOUTUBE</strong><div><a id="preview-link" href="#" target="_blank" rel="noopener">Belum ada URL</a></div></div>
+<div class="form-actions"><button class="btn btn-light" id="cancel" type="button">Batal</button><button class="btn btn-primary" id="save" type="button">Simpan Playlist</button></div>
+</div></section>
+</div></section></main></div>
+<script>window.MANDALA_CONFIG={SUPABASE_URL:"https://roeckoabffhyctfkvbhw.supabase.co",SUPABASE_PUBLISHABLE_KEY:"sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr"};</script>
+<script src="../js/supabase-client.js"></script>
+<script>
+"use strict";
+const API=window.MandalaSupabase;let db=null,id=new URLSearchParams(location.search).get("id");
+const $=s=>document.querySelector(s);const esc=v=>String(v??"").replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+function msg(t,type=""){const e=$("#page-message");e.className=`message ${type}`;e.textContent=t||""}
+function slugify(v){return String(v||"").toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,100)}
+function pid(v){const t=String(v||"").trim();if(/^[A-Za-z0-9_-]{10,}$/.test(t))return t;try{return new URL(t).searchParams.get("list")||""}catch{return ""}}
+function url(v){const x=pid(v);return x?`https://www.youtube.com/playlist?list=${encodeURIComponent(x)}`:""}
+function updatePreview(){const u=url($("#youtube").value);const a=$("#preview-link");a.href=u||"#";a.textContent=u||"Belum ada URL playlist yang valid"}
+async function init(){try{const auth=await API.auth.requireStaff();if(!auth)return;db=await API.getClient();$("#top-user").textContent=auth.user?.email||"";$("#side-name").textContent=auth.profile?.full_name||auth.user?.email||"Mandala CMS";$("#side-role").textContent=auth.role||"staff";$("#logout").onclick=async()=>{await API.auth.signOut();location.href="index.html"};const c=await db.from("categories").select("id,name").order("name");if(c.error)throw c.error;$("#category").innerHTML='<option value="">Tanpa kategori</option>'+(c.data||[]).map(x=>`<option value="${esc(x.id)}">${esc(x.name)}</option>`).join("");if(id)await loadOne();else applyRole(auth.role);$("#youtube").oninput=updatePreview;$("#title").oninput=()=>{if(!id&&!$("#slug").dataset.manual)$("#slug").value=slugify($("#title").value)};$("#slug").oninput=()=>$("#slug").dataset.manual="1";$("#save").onclick=save;$("#cancel").onclick=()=>location.href="playlists.html";updatePreview()}catch(e){console.error(e);msg(e.message||"Gagal memuat halaman.","error")}}
+function applyRole(role){if(role!=="admin"){$("#status").querySelector('option[value="published"]').disabled=true;$("#status-hint").textContent="Editor dapat menyimpan Draft/Review/Archived. Published membutuhkan izin admin."}}
+async function loadOne(){const r=await db.from("playlists").select("*").eq("id",id).maybeSingle();if(r.error)throw r.error;if(!r.data)throw new Error("Playlist tidak ditemukan.");const x=r.data;$("#page-title").textContent="Edit Playlist";$("#title").value=x.title||"";$("#youtube").value=x.youtube_playlist_id||"";$("#description").value=x.description||"";$("#slug").value=x.slug||"";$("#category").value=x.category_id||"";$("#status").value=x.status||"draft";$("#sort_order").value=Number(x.sort_order)||0;$("#featured").checked=!!x.featured;updatePreview();applyRole((await API.auth.getCurrent()).role)}
+async function save(){const title=$("#title").value.trim(),playlistId=pid($("#youtube").value),status=$("#status").value;if(!title) return msg("Nama playlist wajib diisi.","error");if(!playlistId)return msg("URL atau ID playlist YouTube tidak valid.","error");const payload={title,youtube_playlist_id:playlistId,description:$("#description").value.trim()||null,slug:$("#slug").value.trim()||slugify(title),category_id:$("#category").value||null,status,featured:$("#featured").checked,sort_order:Number($("#sort_order").value)||0,published_at:status==="published"?new Date().toISOString():null,updated_at:new Date().toISOString()};$("#save").disabled=true;msg("Menyimpan...");try{let r;if(id)r=await db.from("playlists").update(payload).eq("id",id).select().single();else{payload.author_id=(await API.auth.getUser())?.id||null;r=await db.from("playlists").insert(payload).select().single()}if(r.error)throw r.error;msg("Playlist berhasil disimpan.","success");setTimeout(()=>location.href="playlists.html",500)}catch(e){console.error(e);msg(e.message||"Playlist gagal disimpan.","error");$("#save").disabled=false}}
+init();
+</script>
+</body></html>
