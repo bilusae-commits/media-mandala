@@ -1,3 +1,53 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Playlist — Mandala CMS</title><link rel="stylesheet" href="css/admin.css"><script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script><script src="js/shell.js"></script></head><body><script>initShell("Playlist","playlists")</script><div id="page" style="margin-left:245px;padding-top:70px"></div><script>
-document.getElementById("page").innerHTML="<div class=\"space\"><span class=\"hint\">Kelola Playlist YouTube.</span><a class=\"btn primary\" href=\"playlist-edit.html\">+ TAMBAH</a></div><div class=\"panel\"><div class=\"panelBody\"><div class=\"empty\">Daftar Playlist YouTube akan tampil dari database.</div></div></div>";
-</script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Playlist — Mandala Channel CMS</title>
+<link rel="stylesheet" href="css/cms.css">
+<style>
+.playlist-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.status-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--border);background:#fafafa}
+.status-tab{border:1px solid var(--border);background:#fff;color:#555;border-radius:6px;padding:7px 10px;font-size:9px;font-weight:700;cursor:pointer}.status-tab.active{background:var(--dark);border-color:var(--dark);color:#fff}
+.playlist-cell{display:flex;align-items:center;gap:11px;min-width:300px}.playlist-cover{width:96px;height:55px;border-radius:6px;overflow:hidden;background:#edf1f5;color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:18px}.playlist-cover img{width:100%;height:100%;object-fit:cover}.playlist-cell strong{display:block;max-width:430px}.sub{margin-top:4px;color:#8a949e;font-size:9px;max-width:430px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.actions{display:flex;gap:6px;flex-wrap:wrap}.btn-small{padding:7px 9px;font-size:9px}.badge{display:inline-block;padding:5px 7px;border-radius:5px;font-size:8px;font-weight:800;text-transform:uppercase}.badge-draft{background:#f1f3f5;color:#667}.badge-review{background:#fff3cd;color:#8a6500}.badge-published{background:#e7f6ec;color:#24733c}.badge-archived{background:#e9edf1;color:#64707c}.message{margin-bottom:12px}.message:empty{display:none}.message.error{color:#9b3028}.message.success{color:#27723e}
+@media(max-width:800px){.playlist-cell{min-width:250px}.playlist-cell strong,.sub{max-width:300px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<a class="brand" href="dashboard.html"><div class="brand-title">MANDALA</div><div class="brand-subtitle">CHANNEL · CMS</div></a>
+<div class="nav-title">Konten</div><nav class="nav" aria-label="Navigasi konten">
+<a class="nav-link" href="dashboard.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+<a class="nav-link" href="articles.html"><span class="nav-icon">▤</span><span>Artikel</span></a>
+<a class="nav-link" href="videos.html"><span class="nav-icon">▶</span><span>Video</span></a>
+<a class="nav-link active" href="playlists.html" aria-current="page"><span class="nav-icon">☷</span><span>Playlist</span></a>
+<a class="nav-link" href="podcasts.html"><span class="nav-icon">◉</span><span>Podcast</span></a>
+<a class="nav-link" href="categories.html"><span class="nav-icon">#</span><span>Kategori</span></a></nav>
+<div class="nav-title">Sistem</div><nav class="nav"><a class="nav-link" href="settings.html"><span class="nav-icon">⚙</span><span>Pengaturan</span></a></nav>
+<div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name" id="side-name">Mandala CMS</div><div class="sidebar-user-role" id="side-role">Memuat...</div></div><button class="logout-button" id="logout" type="button">Keluar ↪</button></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="title">Playlist</div><div class="subtitle">Kelola koleksi playlist YouTube Mandala Channel</div></div><div class="user-mini" id="top-user"></div></header>
+<section class="content">
+<div class="page-head"><div><h1>Playlist</h1><p>Kelola playlist YouTube yang akan tampil di website utama.</p></div><a class="btn btn-primary" href="playlist-edit.html">+ Playlist Baru</a></div>
+<div id="page-message" class="message" role="status"></div>
+<div class="stats">
+<div class="stat stat-click" data-status-card="all"><div class="stat-label">Total</div><div class="stat-value" id="stat-all">—</div></div>
+<div class="stat stat-click" data-status-card="draft"><div class="stat-label">Draft</div><div class="stat-value" id="stat-draft">—</div></div>
+<div class="stat stat-click" data-status-card="review"><div class="stat-label">Review</div><div class="stat-value" id="stat-review">—</div></div>
+<div class="stat stat-click" data-status-card="published"><div class="stat-label">Published</div><div class="stat-value" id="stat-published">—</div></div>
+<div class="stat stat-click" data-status-card="archived"><div class="stat-label">Arsip</div><div class="stat-value" id="stat-archived">—</div></div>
+<div class="stat stat-click" data-status-card="featured"><div class="stat-label">Unggulan</div><div class="stat-value" id="stat-featured">—</div></div></div>
+<section class="panel"><div class="panel-head"><div class="playlist-toolbar" style="width:100%"><div><div class="panel-title">Daftar Playlist</div><div class="panel-meta" id="result-count">Memuat...</div></div><button class="btn btn-light" id="refresh" type="button">↻ Refresh</button></div></div>
+<div class="status-tabs"><button class="status-tab active" data-status="all" type="button">Semua</button><button class="status-tab" data-status="draft" type="button">Draft</button><button class="status-tab" data-status="review" type="button">Review</button><button class="status-tab" data-status="published" type="button">Published</button><button class="status-tab" data-status="archived" type="button">Arsip</button><button class="status-tab" data-status="featured" type="button">★ Unggulan</button></div>
+<div class="toolbar"><input class="input" id="search" type="search" placeholder="Cari playlist, slug, ID YouTube..." autocomplete="off"><select class="select" id="status-filter"><option value="all">Semua status</option><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Arsip</option></select><button class="btn btn-light" id="clear-filters" type="button">Reset</button></div>
+<div class="table-wrap" id="playlists-container"><div class="empty"><strong>Memuat playlist...</strong>Menyiapkan data dari Supabase.</div></div>
+</section></section></main></div>
+<script>window.MANDALA_CONFIG={SUPABASE_URL:"https://roeckoabffhyctfkvbhw.supabase.co",SUPABASE_PUBLISHABLE_KEY:"sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr"};</script>
+<script src="../js/supabase-client.js"></script>
+<script type="module" src="js/playlists.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",async()=>{try{const a=await MandalaSupabase.auth.requireStaff();if(!a)return;document.getElementById("top-user").textContent=a.user?.email||"";document.getElementById("side-name").textContent=a.profile?.full_name||a.user?.email||"Mandala CMS";document.getElementById("side-role").textContent=a.role||"staff";document.getElementById("logout").onclick=async()=>{await MandalaSupabase.auth.signOut();location.href="index.html"}}catch(e){console.error(e)}});
+</script>
+</body></html>
