@@ -20,33 +20,55 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 "use strict";
-const SUPABASE_URL='https://roeckoabffhyctfkvbhw.supabase.co';
-const SUPABASE_KEY='sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr';
-const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const rail=document.getElementById('rail'),state=document.getElementById('state');
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-const fallback='https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85';
-function imageFor(p){return p.cover_image_url||fallback}
-function showState(title,text,error=false){state.hidden=false;state.classList.toggle('error',error);state.innerHTML='<div><strong>'+esc(title)+'</strong>'+esc(text)+'</div>';rail.hidden=true}
-function render(rows){
-  rail.innerHTML=rows.map(p=>{const target=p.slug?'slug='+encodeURIComponent(p.slug):'id='+encodeURIComponent(p.id);return '<article class="card"><a href="playlist-detail.html?'+target+'"><div class="thumb"><img src="'+esc(imageFor(p))+'" alt="'+esc(p.title)+'" loading="lazy" onerror="this.onerror=null;this.src=\''+fallback+'\'"><div class="play"><span>▶</span></div></div><div class="content"><div class="meta">Mandala Collection</div><h3>'+esc(p.title)+'</h3><p>'+esc(p.description||'Koleksi video Mandala Channel.')+'</p><div class="bottom"><span>'+(p.featured?'Pilihan':'Playlist')+'</span><span class="open">BUKA →</span></div></div></a></article>'}).join('');
+const SUPABASE_URL="https://roeckoabffhyctfkvbhw.supabase.co";
+const SUPABASE_KEY="sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const rail=document.getElementById("rail");
+const state=document.getElementById("state");
+const fallback="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85";
+function esc(value){return String(value??"").replace(/[&<>\"']/g,function(char){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[char]});}
+function setState(title,text,isError){state.hidden=false;state.classList.toggle("error",!!isError);state.innerHTML="<div><strong>"+esc(title)+"</strong>"+esc(text)+"</div>";rail.hidden=true;}
+function renderPlaylists(rows){
+  rail.innerHTML="";
+  rows.forEach(function(p){
+    const card=document.createElement("article");
+    card.className="card";
+    const link=document.createElement("a");
+    link.href="playlist-detail.html?"+(p.slug?"slug="+encodeURIComponent(p.slug):"id="+encodeURIComponent(p.id));
+    const thumb=document.createElement("div");thumb.className="thumb";
+    const img=document.createElement("img");img.src=p.cover_image_url||fallback;img.alt=p.title||"Playlist Mandala";img.loading="lazy";img.onerror=function(){this.onerror=null;this.src=fallback};
+    const play=document.createElement("div");play.className="play";play.innerHTML="<span>▶</span>";
+    thumb.append(img,play);
+    const content=document.createElement("div");content.className="content";
+    const meta=document.createElement("div");meta.className="meta";meta.textContent="Mandala Collection";
+    const title=document.createElement("h3");title.textContent=p.title||"Playlist Mandala";
+    const desc=document.createElement("p");desc.textContent=p.description||"Koleksi video Mandala Channel.";
+    const bottom=document.createElement("div");bottom.className="bottom";bottom.innerHTML="<span>"+(p.featured?"Pilihan":"Playlist")+"</span><span class=\"open\">BUKA →</span>";
+    content.append(meta,title,desc,bottom);link.append(thumb,content);card.append(link);rail.append(card);
+  });
   state.hidden=true;rail.hidden=false;
-  const f=rows.find(x=>x.featured)||rows[0];
-  if(f){document.getElementById('featureImg').src=imageFor(f);document.getElementById('featureTitle').textContent=f.title;document.getElementById('featureDesc').textContent=f.description||'Koleksi video Mandala Channel.';document.getElementById('featureLink').href='playlist-detail.html?'+(f.slug?'slug='+encodeURIComponent(f.slug):'id='+encodeURIComponent(f.id))}
+  const featured=rows.find(function(p){return p.featured===true})||rows[0];
+  if(featured){
+    document.getElementById("featureImg").src=featured.cover_image_url||fallback;
+    document.getElementById("featureTitle").textContent=featured.title||"Playlist pilihan";
+    document.getElementById("featureDesc").textContent=featured.description||"Koleksi video Mandala Channel.";
+    document.getElementById("featureLink").href="playlist-detail.html?"+(featured.slug?"slug="+encodeURIComponent(featured.slug):"id="+encodeURIComponent(featured.id));
+  }
 }
-async function load(){
-  showState('Memuat playlist...','Mengambil koleksi Mandala Channel.');
+async function loadPlaylists(){
+  setState("Memuat playlist...","Mengambil koleksi Mandala Channel.");
   try{
-    const {data,error}=await client.from('playlists').select('id,title,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,slug').eq('status','published').order('sort_order',{ascending:true}).order('published_at',{ascending:false,nullsFirst:false});
-    if(error){console.error('PLAYLIST SUPABASE ERROR',error);showState('Playlist gagal dimuat',error.message||'Supabase tidak dapat mengembalikan data playlist.',true);return}
-    if(!Array.isArray(data)||data.length===0){showState('Belum ada playlist','Belum ada playlist dengan status published di Supabase. Tambahkan satu playlist dari Admin untuk mulai menampilkannya.');return}
-    render(data);
-  }catch(error){console.error('PLAYLIST LOAD ERROR',error);showState('Playlist gagal dimuat','Koneksi ke sistem konten gagal. Silakan refresh halaman.',true)}
+    const result=await db.from("playlists").select("id,title,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,slug").eq("status","published").order("sort_order",{ascending:true});
+    if(result.error){console.error(result.error);setState("Playlist gagal dimuat",result.error.message||"Supabase gagal mengambil data playlist.",true);return;}
+    const rows=Array.isArray(result.data)?result.data:[];
+    if(rows.length===0){setState("Belum ada playlist","Belum ada playlist published di Supabase. Silakan tambahkan playlist dari Admin.",false);return;}
+    renderPlaylists(rows);
+  }catch(error){console.error(error);setState("Playlist gagal dimuat","Terjadi kesalahan saat menghubungkan ke Supabase.",true);}
 }
-document.getElementById('prev').addEventListener('click',()=>rail.scrollBy({left:-Math.min(rail.clientWidth*.82,720),behavior:'smooth'}));
-document.getElementById('next').addEventListener('click',()=>rail.scrollBy({left:Math.min(rail.clientWidth*.82,720),behavior:'smooth'}));
-const header=document.getElementById('siteHeader');const updateHeader=()=>header.classList.toggle('scrolled',window.scrollY>20);updateHeader();window.addEventListener('scroll',updateHeader,{passive:true});
-load();
+document.getElementById("prev").addEventListener("click",function(){rail.scrollBy({left:-Math.max(rail.clientWidth*.8,320),behavior:"smooth"});});
+document.getElementById("next").addEventListener("click",function(){rail.scrollBy({left:Math.max(rail.clientWidth*.8,320),behavior:"smooth"});});
+const header=document.getElementById("siteHeader");function updateHeader(){header.classList.toggle("scrolled",window.scrollY>20)}updateHeader();window.addEventListener("scroll",updateHeader,{passive:true});
+loadPlaylists();
 </script>
 </body>
 </html>
