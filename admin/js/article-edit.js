@@ -1,5 +1,5 @@
 import "./cms-service.js";
-const CMS=window.MandalaCMS,db=window.MandalaSupabase,MEDIA_BUCKET="article-media",MAX_MEDIA=4,MAX_IMAGE_EDGE=1800,WEBP_QUALITY=.86;
+const CMS=window.MandalaCMS,API=window.MandalaSupabase,db=await API.getClient(),MEDIA_BUCKET="article-media",MAX_MEDIA=4,MAX_IMAGE_EDGE=1800,WEBP_QUALITY=.86;
 const $=id=>document.getElementById(id);
 const form=$("article-form"),pageTitle=$("page-title"),articleId=$("article-id"),titleInput=$("title"),slugInput=$("slug"),excerptInput=$("excerpt"),contentInput=$("content"),coverInput=$("cover_image_url"),categoryInput=$("category_id"),featuredInput=$("featured"),statusInput=$("status"),statusHelp=$("status-help"),statusPill=$("current-status-pill"),formMessage=$("form-message"),saveDraftButton=$("save-draft-button"),submitReviewButton=$("submit-review-button"),publishButton=$("publish-button"),archiveButton=$("archive-button"),logoutButton=$("logout-button"),publishedOption=$("published-option"),mediaFile=$("media-file"),uploadMediaButton=$("upload-media-button"),mediaList=$("media-list"),mediaCount=$("media-count");
 let profile=null,currentArticle=null,slugManuallyEdited=false,mediaRows=[],pendingFiles=[];
