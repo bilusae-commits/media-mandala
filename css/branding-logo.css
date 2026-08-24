@@ -1,53 +1,30 @@
 /* =========================================================
-   MANDALA CHANNEL — GLOBAL BRANDING OVERRIDE
-   Uses the official logo asset without changing page layout.
+   MANDALA CHANNEL — GLOBAL BRANDING
+   Official logo + footer + favicon support.
    ========================================================= */
+:root { --mandala-brand-logo: url('../assets/brand/Asset 5@4x.png'); }
 
-:root {
-    --mandala-brand-logo: url('../assets/brand/Asset 5@4x.png');
-}
-
-/* Public header logo: hide the legacy mark and render the official asset. */
 .logo .mark {
-    position: relative;
-    border: 0 !important;
-    border-radius: 0 !important;
-    width: 42px !important;
-    height: 42px !important;
-    flex: 0 0 42px !important;
+    position: relative; border: 0 !important; border-radius: 0 !important;
+    width: 42px !important; height: 42px !important; flex: 0 0 42px !important;
     color: transparent !important;
     background: transparent var(--mandala-brand-logo) center / contain no-repeat !important;
     font-size: 0 !important;
 }
+.logo .mark::before,.logo .mark::after { display:none !important; content:none !important; }
+.logo small { display:none !important; }
 
-.logo .mark::before,
-.logo .mark::after {
-    display: none !important;
-    content: none !important;
+footer .foot > div:first-child > b {
+    display:block !important; width:150px !important; height:46px !important;
+    margin-bottom:12px !important;
+    background:transparent var(--mandala-brand-logo) left center / contain no-repeat !important;
+    color:transparent !important; font-size:0 !important; line-height:0 !important;
 }
 
-/* Keep the existing wordmark typography, but remove legacy secondary label. */
-.logo small {
-    display: none !important;
-}
+.brand-logo,.site-logo { background:transparent var(--mandala-brand-logo) center / contain no-repeat; color:transparent; font-size:0; }
+.brand-logo img,.site-logo img { opacity:0; }
 
-/* Footer / alternate logo blocks can opt into the same official asset. */
-.brand-logo,
-.site-logo {
-    background: transparent var(--mandala-brand-logo) center / contain no-repeat;
-    color: transparent;
-    font-size: 0;
-}
-
-.brand-logo img,
-.site-logo img {
-    opacity: 0;
-}
-
-@media (max-width: 700px) {
-    .logo .mark {
-        width: 36px !important;
-        height: 36px !important;
-        flex-basis: 36px !important;
-    }
+@media (max-width:700px) {
+    .logo .mark { width:36px !important; height:36px !important; flex-basis:36px !important; }
+    footer .foot > div:first-child > b { width:130px !important; height:40px !important; }
 }
