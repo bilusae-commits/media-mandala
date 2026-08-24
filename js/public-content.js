@@ -5,14 +5,18 @@
 (function(){
     "use strict";
 
+    /* IMPORTANT: do not name a local variable URL; it shadows window.URL. */
+    const SUPABASE_URL = (window.MANDALA_CONFIG || {}).SUPABASE_URL || "";
+    const SUPABASE_KEY = (window.MANDALA_CONFIG || {}).SUPABASE_PUBLISHABLE_KEY || (window.MANDALA_CONFIG || {}).SUPABASE_ANON_KEY || "";
+
     /* Global branding: official logo stylesheet + favicon. */
+    const scriptSrc = document.currentScript?.src || "";
+    const resolveAsset = (path) => scriptSrc ? new window.URL(path, scriptSrc).href : path;
+
     if (!document.querySelector('link[data-mandala-branding]')) {
         const branding = document.createElement('link');
         branding.rel = 'stylesheet';
-        const scriptSrc = document.currentScript?.src;
-        branding.href = scriptSrc
-            ? new URL('../css/branding-logo.css', scriptSrc).href
-            : 'css/branding-logo.css';
+        branding.href = resolveAsset('../css/branding-logo.css');
         branding.dataset.mandalaBranding = 'true';
         document.head.appendChild(branding);
     }
@@ -20,35 +24,20 @@
         const favicon = document.createElement('link');
         favicon.rel = 'icon';
         favicon.type = 'image/svg+xml';
-        favicon.href = (() => {
-            const scriptSrc = document.currentScript?.src;
-            return scriptSrc ? new URL('../assets/brand/favicon.svg', scriptSrc).href : 'assets/brand/favicon.svg';
-        })();
+        favicon.href = resolveAsset('../assets/brand/favicon.svg');
         favicon.dataset.mandalaFavicon = 'true';
         document.head.appendChild(favicon);
     }
 
-    const C = window.MANDALA_CONFIG || {};
-    const URL = C.SUPABASE_URL || "";
-    const KEY = C.SUPABASE_PUBLISHABLE_KEY || C.SUPABASE_ANON_KEY || "";
     const FALLBACK = "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85";
-
     let db = null;
     let publicData = { articles: [], videos: [], playlists: [], topics: [], categories: [] };
 
-    function esc(value){
-        return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");
-    }
-    function youtubeId(value){
-        if(!value) return "";
-        const text=String(value).trim();
-        if(/^[A-Za-z0-9_-]{11}$/.test(text)) return text;
-        try{const url=new URL(text),host=url.hostname.replace(/^www\./,"").toLowerCase();if(host==="youtu.be")return url.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com")return url.searchParams.get("v")||(url.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||"";}catch(error){}
-        return "";
-    }
+    function esc(value){return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
+    function youtubeId(value){if(!value)return "";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const url=new window.URL(text),host=url.hostname.replace(/^www\./,"").toLowerCase();if(host==="youtu.be")return url.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com")return url.searchParams.get("v")||(url.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||"";}catch(error){}return "";}
     function videoImage(video){const id=video.youtube_video_id||youtubeId(video.youtube_url);return video.thumbnail_url||(id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:FALLBACK);}
     function dateText(value){if(!value)return "";const date=new Date(value);if(Number.isNaN(date.getTime()))return "";return new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"long",year:"numeric"}).format(date);}
-    async function client(){if(db)return db;if(!URL||!KEY)throw new Error("Konfigurasi Supabase publik belum tersedia.");if(!window.supabase||typeof window.supabase.createClient!=="function"){await new Promise((resolve,reject)=>{const existing=document.querySelector("script[data-mandala-supabase-public]");if(existing){existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return;}const script=document.createElement("script");script.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";script.dataset.mandalaSupabasePublic="true";script.onload=resolve;script.onerror=()=>reject(new Error("Supabase library gagal dimuat."));document.head.appendChild(script);});}db=window.supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false}});return db;}
+    async function client(){if(db)return db;if(!SUPABASE_URL||!SUPABASE_KEY)throw new Error("Konfigurasi Supabase publik belum tersedia.");if(!window.supabase||typeof window.supabase.createClient!=="function"){await new Promise((resolve,reject)=>{const existing=document.querySelector("script[data-mandala-supabase-public]");if(existing){existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return;}const script=document.createElement("script");script.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";script.dataset.mandalaSupabasePublic="true";script.onload=resolve;script.onerror=()=>reject(new Error("Supabase library gagal dimuat."));document.head.appendChild(script);});}db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});return db;}
     async function loadTable(name,select,order){let query=(await client()).from(name).select(select);if(order)query=query.order(order,{ascending:true,nullsFirst:false});const result=await query;if(result.error)throw result.error;return result.data||[];}
     function normalizePlaylist(row,categoryMap,index){const category=categoryMap[row.category_id];return{id:row.id||String(index+1),title:row.title||"Playlist Mandala",slug:row.slug||"",youtube_playlist_id:row.youtube_playlist_id||"",description:row.description||"",image:row.cover_image_url||category?.image_url||FALLBACK,category:category?.name||"Mandala",category_id:row.category_id||null,videoCount:0,status:row.status||"",featured:row.featured===true,sort_order:Number.isFinite(Number(row.sort_order))?Number(row.sort_order):9999,published_at:row.published_at||null,created_at:row.created_at||null};}
     async function loadHomeData(){const[articles,videos,playlists,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};activeCategories.forEach(category=>{categoryMap[category.id]=category;});const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published").map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,topics:activeCategories,categories:activeCategories};window.DATA=publicData;window.MandalaPublicData=publicData;renderArticles(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);return publicData;}
