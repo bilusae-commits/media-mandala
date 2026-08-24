@@ -1,6 +1,10 @@
-
 async function initShell(title, active){
- const user=await MandalaCMS.requireUser(); if(!user)return;
+ const user=await MandalaCMS.requireStaff();
+ if(!user)return;
+
+ const isAdmin=user.role === "admin";
+ const adminOnlyPages=new Set(["categories","settings"]);
+
  document.body.insertAdjacentHTML("afterbegin",`<aside class="sidebar">
  <div class="sideBrand"><b>MANDALA</b><small>CHANNEL CMS</small></div>
  <div class="navTitle">UTAMA</div><nav class="sideNav">
@@ -11,11 +15,32 @@ async function initShell(title, active){
  <a data-page="podcasts" href="podcasts.html"><span>◉</span>Podcast</a>
  <div class="navTitle">KONTEN</div>
  <a data-page="media" href="media.html"><span>▧</span>Media</a>
- <a data-page="categories" href="categories.html"><span>◇</span>Kategori</a>
- <a data-page="settings" href="settings.html"><span>⚙</span>Pengaturan</a>
+ <a data-page="categories" data-admin-only="true" href="categories.html"><span>◇</span>Kategori</a>
+ <a data-page="settings" data-admin-only="true" href="settings.html"><span>⚙</span>Pengaturan</a>
  </nav><button class="logout" id="logoutBtn">Keluar</button></aside>
- <main class="main"><div class="topbar"><h2>${title}</h2><div class="user">${user.email}</div></div><div class="content">`);
- document.querySelectorAll(".sideNav a").forEach(a=>{if(a.dataset.page===active)a.classList.add("active")});
- document.getElementById("logoutBtn").onclick=async()=>{const db=await MandalaCMS.ready();await db.auth.signOut();location.href="index.html"};
+ <main class="main"><div class="topbar"><h2>${title}</h2><div class="user"><strong>${isAdmin ? "ADMIN" : "EDITOR"}</strong> · ${user.email || ""}</div></div><div class="content">`);
+
+ document.querySelectorAll('.sideNav [data-admin-only="true"]').forEach(a=>{
+   if(!isAdmin)a.remove();
+ });
+
+ document.querySelectorAll(".sideNav a").forEach(a=>{
+   if(a.dataset.page===active)a.classList.add("active");
+ });
+
+ document.getElementById("logoutBtn").onclick=async()=>{
+   try{
+     await MandalaCMS.logout();
+   }catch(error){
+     console.error(error);
+   }
+ };
 }
-function toast(t){const x=document.getElementById("toast");x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",2200)}
+
+function toast(t){
+ const x=document.getElementById("toast");
+ if(!x)return;
+ x.textContent=t;
+ x.style.display="block";
+ setTimeout(()=>x.style.display="none",2200);
+}
