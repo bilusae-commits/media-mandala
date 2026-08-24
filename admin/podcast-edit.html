@@ -1,1 +1,40 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Podcast Editor — Mandala CMS</title><link rel="stylesheet" href="css/admin.css"><script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script><script src="js/shell.js"></script></head><body><script>initShell('Podcast Editor','podcasts')</script><main class="editor-page" style="margin-left:245px;padding:90px 32px 40px;max-width:1100px"><div class="space"><div><h1 style="margin:0">Podcast</h1><span class="hint">Tambah atau edit episode podcast.</span></div><span class="badge" id="role">—</span></div><section class="panel"><div class="panelBody"><div class="form-grid"><label>Judul<input id="title" type="text" required></label><label>Slug<input id="slug" type="text"></label><label>Kategori<select id="category_id"></select></label><label>Status<select id="status"><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Archived</option></select></label><label>YouTube URL<input id="youtube_url" type="url" placeholder="https://youtube.com/watch?v=..."></label><label>YouTube Video ID<input id="youtube_video_id" type="text"></label><label style="grid-column:1/-1">Cover Image URL<input id="cover_image_url" type="url"></label><label style="grid-column:1/-1">Deskripsi<textarea id="description" rows="8"></textarea></label><label class="check"><input id="featured" type="checkbox"> Tampilkan sebagai featured</label></div><div class="space" style="margin-top:24px"><button id="cancel" class="btn">Batal</button><button id="save" class="btn primary">Simpan Podcast</button></div></div></section></main><div id="toast" class="toast" hidden></div><script src="js/podcast-edit.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Podcast Editor — Mandala CMS</title>
+<link rel="stylesheet" href="css/admin.css">
+<script src="../js/config.js"></script>
+<script src="../js/supabase-client.js"></script>
+<script src="js/cms-service.js"></script>
+<script src="js/shell.js"></script>
+<style>
+.podcast-type{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:22px}.type-card{position:relative}.type-card input{position:absolute;opacity:0}.type-card label{display:block;padding:18px 20px;border:1px solid #dfe5ea;background:#fff;cursor:pointer;transition:.2s}.type-card label strong{display:block;color:#082d56;font:600 15px Georgia,serif;margin-bottom:5px}.type-card label span{color:#718091;font:12px/1.5 Arial}.type-card input:checked+label{border-color:#9b7837;box-shadow:0 0 0 2px rgba(155,120,55,.12);background:#fbfaf7}.conditional{display:none}.conditional.show{display:block}.audio-upload{padding:18px;border:1px dashed #cfd8e0;background:#fafbfc}.audio-upload input{display:block;width:100%;padding:12px;border:1px solid #dce2e7;background:#fff}.audio-info{margin-top:10px;color:#718091;font:12px/1.6 Arial}.audio-current{margin-top:12px;padding:12px;background:#f4f6f8;word-break:break-all}.audio-current a{color:#082d56}.progress{display:none;margin-top:10px;height:5px;background:#e5e9ed;overflow:hidden}.progress i{display:block;width:0;height:100%;background:#9b7837;transition:.2s}.hint{color:#718091;font-size:12px}
+@media(max-width:700px){.podcast-type{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<script>initShell('Podcast Editor','podcasts')</script>
+<main class="editor-page" style="margin-left:245px;padding:90px 32px 40px;max-width:1100px">
+<div class="space"><div><h1 style="margin:0">Podcast</h1><span class="hint">Kelola podcast video dan audio dalam satu tempat.</span></div><span class="badge" id="role">—</span></div>
+<section class="panel"><div class="panelBody">
+<div class="podcast-type">
+<div class="type-card"><input id="type_video" name="content_type" type="radio" value="video" checked><label for="type_video"><strong>🎥 Video Podcast</strong><span>Podcast berbasis YouTube yang dapat diputar langsung dari website.</span></label></div>
+<div class="type-card"><input id="type_audio" name="content_type" type="radio" value="audio"><label for="type_audio"><strong>🎧 Audio Podcast</strong><span>Upload MP3/M4A/WAV/OGG dan tampilkan pemutar audio.</span></label></div>
+</div>
+<div class="form-grid">
+<label>Judul<input id="title" type="text" required></label>
+<label>Slug<input id="slug" type="text"></label>
+<label>Kategori<select id="category_id"></select></label>
+<label>Status<select id="status"><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Archived</option></select></label>
+<div id="videoFields" class="conditional show" style="grid-column:1/-1"><div class="form-grid"><label>YouTube URL<input id="youtube_url" type="url" placeholder="https://youtube.com/watch?v=..."></label><label>YouTube Video ID<input id="youtube_video_id" type="text" placeholder="Opsional — otomatis dibaca dari URL"></label></div></div>
+<div id="audioFields" class="conditional" style="grid-column:1/-1"><div class="audio-upload"><strong>File Audio</strong><p class="hint">Maksimal 50 MB. Format: MP3, M4A, WAV, OGG, atau WebM.</p><input id="audio_file" type="file" accept="audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/ogg,audio/webm"><div id="audioInfo" class="audio-info"></div><div class="progress" id="uploadProgress"><i></i></div><div id="currentAudio" class="audio-current" hidden></div></div></div>
+<label style="grid-column:1/-1">Cover Image URL<input id="cover_image_url" type="url" placeholder="https://..."></label>
+<label style="grid-column:1/-1">Deskripsi<textarea id="description" rows="8"></textarea></label>
+<label class="check"><input id="featured" type="checkbox"> Tampilkan sebagai featured</label>
+</div>
+<div class="space" style="margin-top:24px"><button id="cancel" class="btn">Batal</button><button id="save" class="btn primary">Simpan Podcast</button></div>
+</div></section></main><div id="toast" class="toast" hidden></div>
+<script src="js/podcast-edit.js"></script>
+</body></html>
