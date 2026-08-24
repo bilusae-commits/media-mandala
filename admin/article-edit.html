@@ -1,325 +1,210 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Artikel — Mandala Channel CMS</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Editor Artikel — Mandala Channel</title>
+<link rel="stylesheet" href="./css/admin.css">
+<style>
+:root{
+  --navy:#082d56;
+  --deep:#061f3c;
+  --gold:#b79a61;
+  --ink:#172536;
+  --muted:#718091;
+  --line:#e4e8ed;
+  --bg:#f5f7f9;
+  --white:#fff;
+  --danger:#b42318;
+  --success:#18794e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px Inter,Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+.editor-page{min-height:100vh}
+.editor-top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.editor-top-inner{max-width:1450px;margin:auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brandline{min-width:0}
+.eyebrow{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.page-title{margin:5px 0 2px;color:var(--navy);font:500 26px/1.1 Georgia,serif}
+.page-subtitle{margin:0;color:var(--muted);font-size:11px}
+.top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);cursor:pointer;font-size:11px;font-weight:700;transition:.15s ease}
+.btn:hover{border-color:#b7c0c9;background:#f8fafb}
+.btn-primary{background:var(--navy);border-color:var(--navy);color:#fff}.btn-primary:hover{background:var(--deep);border-color:var(--deep)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:#fff}.btn-gold:hover{opacity:.92}
+.btn-danger{color:var(--danger)}
+.editor-main{max-width:1450px;margin:auto;padding:28px 32px 50px}
+.form-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,.82fr);gap:20px;align-items:start}
+.card{background:var(--white);border:1px solid var(--line);border-radius:9px;box-shadow:0 4px 18px rgba(6,31,60,.035);overflow:hidden}
+.card-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px}
+.card-head h2{margin:0;color:var(--navy);font-size:13px;font-weight:800}.card-head p{margin:4px 0 0;color:var(--muted);font-size:10px}
+.card-body{padding:20px}
+.field{margin-bottom:19px}.field:last-child{margin-bottom:0}
+.field label{display:block;margin-bottom:7px;color:#334155;font-size:10px;font-weight:800;letter-spacing:.03em}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);outline:none;padding:11px 12px;font-size:12px;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(183,154,97,.10)}
+.field textarea{resize:vertical;line-height:1.7}.title-input{font-size:17px!important;font-weight:600}.slug-input{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px!important}
+.hint{display:block;margin-top:6px;color:#8a96a3;font-size:9px;line-height:1.5}
+.content-input{min-height:470px;font-size:13px;line-height:1.8}
+.cover-preview{display:none;margin-top:10px;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:#f2f4f6}.cover-preview.show{display:block}.cover-preview img{display:block;width:100%;height:180px;object-fit:cover}.cover-preview span{display:block;padding:7px 9px;color:var(--muted);font-size:9px}
+.check{display:flex;align-items:flex-start;gap:9px;padding:12px;border:1px solid var(--line);border-radius:6px;background:#fafbfc;cursor:pointer}.check input{width:16px;height:16px;margin:0;accent-color:var(--navy)}.check strong{display:block;font-size:11px}.check small{display:block;margin-top:3px;color:var(--muted);font-size:9px;line-height:1.4}
+.status-box{padding:13px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.status-box label{margin-bottom:7px}.status-help{display:block;margin-top:7px;color:var(--muted);font-size:9px;line-height:1.5}
+.status-pill{display:inline-flex;margin-bottom:9px;padding:4px 8px;border-radius:4px;background:#eef2f5;color:#526170;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.status-pill.published{background:#e9f7ef;color:#18794e}.status-pill.review{background:#fff4df;color:#9a5b00}.status-pill.archived{background:#eef0f2;color:#6d7782}
+.message{margin-bottom:18px;padding:11px 13px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--muted);font-size:10px;display:none}.message:not(:empty){display:block}.message[data-type=success]{border-color:#b8dfcc;background:#f1faf5;color:var(--success)}.message[data-type=error]{border-color:#efc4c0;background:#fff5f4;color:var(--danger)}.message[data-type=warning]{border-color:#ead6a7;background:#fffaf0;color:#8b6100}
+.action-stack{display:grid;gap:8px}.action-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.action-stack .btn{width:100%}
+.back-link{color:var(--muted);font-size:10px}.back-link:hover{color:var(--navy)}
+.loading-screen{padding:50px;text-align:center;color:var(--muted);font-size:11px}
+@media(max-width:980px){.form-layout{grid-template-columns:1fr}.content-input{min-height:350px}}
+@media(max-width:650px){.editor-top-inner{padding:15px}.editor-main{padding:18px 14px 35px}.top-actions .logout-label{display:none}.top-actions .btn{min-width:40px;padding:0 10px}.page-title{font-size:22px}.card-body{padding:16px}.action-row{grid-template-columns:1fr}.content-input{min-height:300px}}
+</style>
 </head>
-
-
 <body>
-
-    <header>
-
-        <div>
-
-            <h1 id="page-title">
-                Artikel Baru
-            </h1>
-
-            <p>
-                Kelola konten artikel
-            </p>
-
-        </div>
-
-
-        <nav>
-
-            <a href="articles.html">
-                ← Kembali ke Artikel
-            </a>
-
-            <button
-                id="logout-button"
-                type="button"
-            >
-                Keluar
-            </button>
-
-        </nav>
-
-    </header>
-
-
-    <main>
-
-        <form id="article-form">
-
-            <input
-                type="hidden"
-                id="article-id"
-            >
-
-
-            <!-- =====================================
-                 TITLE
-            ====================================== -->
-
-            <section>
-
-                <label for="title">
-                    Judul
-                </label>
-
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    required
-                    autocomplete="off"
-                >
-
-            </section>
-
-
-            <!-- =====================================
-                 SLUG
-            ====================================== -->
-
-            <section>
-
-                <label for="slug">
-                    Slug
-                </label>
-
-                <input
-                    type="text"
-                    id="slug"
-                    name="slug"
-                    required
-                    autocomplete="off"
-                >
-
-                <small>
-                    Contoh:
-                    sejarah-candi-prambanan
-                </small>
-
-            </section>
-
-
-            <!-- =====================================
-                 EXCERPT
-            ====================================== -->
-
-            <section>
-
-                <label for="excerpt">
-                    Ringkasan
-                </label>
-
-                <textarea
-                    id="excerpt"
-                    name="excerpt"
-                    rows="4"
-                ></textarea>
-
-            </section>
-
-
-            <!-- =====================================
-                 CONTENT
-            ====================================== -->
-
-            <section>
-
-                <label for="content">
-                    Isi Artikel
-                </label>
-
-                <textarea
-                    id="content"
-                    name="content"
-                    rows="18"
-                ></textarea>
-
-            </section>
-
-
-            <!-- =====================================
-                 COVER
-            ====================================== -->
-
-            <section>
-
-                <label for="cover_image_url">
-                    URL Cover Image
-                </label>
-
-                <input
-                    type="url"
-                    id="cover_image_url"
-                    name="cover_image_url"
-                    placeholder="https://..."
-                >
-
-            </section>
-
-
-            <!-- =====================================
-                 CATEGORY
-            ====================================== -->
-
-            <section>
-
-                <label for="category_id">
-                    Kategori
-                </label>
-
-                <select
-                    id="category_id"
-                    name="category_id"
-                >
-
-                    <option value="">
-                        -- Pilih Kategori --
-                    </option>
-
-                </select>
-
-            </section>
-
-
-            <!-- =====================================
-                 FEATURED
-            ====================================== -->
-
-            <section>
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        id="featured"
-                        name="featured"
-                    >
-
-                    Jadikan artikel unggulan
-
-                </label>
-
-            </section>
-
-
-            <!-- =====================================
-                 STATUS
-            ====================================== -->
-
-            <section>
-
-                <label for="status">
-                    Status
-                </label>
-
-                <select
-                    id="status"
-                    name="status"
-                >
-
-                    <option value="draft">
-                        Draft
-                    </option>
-
-                    <option value="review">
-                        Review
-                    </option>
-
-                    <option value="archived">
-                        Archived
-                    </option>
-
-                    <option
-                        value="published"
-                        id="published-option"
-                    >
-                        Published
-                    </option>
-
-                </select>
-
-
-                <small id="status-help"></small>
-
-            </section>
-
-
-            <!-- =====================================
-                 MESSAGE
-            ====================================== -->
-
-            <section>
-
-                <div id="form-message"></div>
-
-            </section>
-
-
-            <!-- =====================================
-                 ACTIONS
-            ====================================== -->
-
-            <section>
-
-                <button
-                    type="submit"
-                    id="save-button"
-                >
-                    Simpan
-                </button>
-
-
-                <button
-                    type="button"
-                    id="save-draft-button"
-                >
-                    Simpan Draft
-                </button>
-
-
-                <button
-                    type="button"
-                    id="submit-review-button"
-                >
-                    Kirim Review
-                </button>
-
-
-                <button
-                    type="button"
-                    id="publish-button"
-                >
-                    Publish
-                </button>
-
-
-                <button
-                    type="button"
-                    id="archive-button"
-                >
-                    Arsipkan
-                </button>
-
-            </section>
-
-        </form>
-
-    </main>
-
-
-    <script
-        type="module"
-        src="./js/article-edit.js"
-    ></script>
-
+<div class="editor-page">
+<header class="editor-top">
+  <div class="editor-top-inner">
+    <div class="brandline">
+      <div class="eyebrow">Mandala Channel · CMS</div>
+      <h1 class="page-title" id="page-title">Artikel Baru</h1>
+      <p class="page-subtitle">Buat dan kelola artikel Mandala Channel.</p>
+    </div>
+    <div class="top-actions">
+      <a class="btn" href="articles.html">← <span style="margin-left:5px">Kembali</span></a>
+      <button class="btn" id="logout-button" type="button"><span class="logout-label">Keluar</span> ↪</button>
+    </div>
+  </div>
+</header>
+
+<main class="editor-main">
+  <div id="form-message" class="message" aria-live="polite"></div>
+
+  <form id="article-form" novalidate>
+    <input type="hidden" id="article-id">
+
+    <div class="form-layout">
+      <div>
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <h2>Isi Artikel</h2>
+              <p>Judul, ringkasan, dan isi utama artikel.</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label for="title">JUDUL ARTIKEL</label>
+              <input class="title-input" type="text" id="title" name="title" required autocomplete="off" placeholder="Tulis judul artikel...">
+            </div>
+
+            <div class="field">
+              <label for="slug">SLUG</label>
+              <input class="slug-input" type="text" id="slug" name="slug" required autocomplete="off" placeholder="judul-artikel">
+              <small class="hint">Slug dibuat otomatis dari judul. Anda tetap bisa mengubahnya secara manual.</small>
+            </div>
+
+            <div class="field">
+              <label for="excerpt">RINGKASAN</label>
+              <textarea id="excerpt" name="excerpt" rows="4" placeholder="Ringkasan singkat yang akan digunakan pada kartu artikel..."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="content">ISI ARTIKEL</label>
+              <textarea class="content-input" id="content" name="content" placeholder="Tulis isi artikel di sini..."></textarea>
+              <small class="hint">Gunakan paragraf yang jelas. Struktur editor lanjutan dapat ditambahkan tanpa mengubah database artikel.</small>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside>
+        <section class="card" style="margin-bottom:20px">
+          <div class="card-head">
+            <div><h2>Publikasi</h2><p>Atur kategori dan status artikel.</p></div>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label for="category_id">KATEGORI</label>
+              <select id="category_id" name="category_id">
+                <option value="">-- Pilih Kategori --</option>
+              </select>
+            </div>
+
+            <div class="field status-box">
+              <span class="status-pill" id="current-status-pill">DRAFT</span>
+              <label for="status">STATUS</label>
+              <select id="status" name="status">
+                <option value="draft">Draft</option>
+                <option value="review">Review</option>
+                <option value="archived">Archived</option>
+                <option value="published" id="published-option">Published</option>
+              </select>
+              <small class="status-help" id="status-help"></small>
+            </div>
+
+            <label class="check" for="featured">
+              <input type="checkbox" id="featured" name="featured">
+              <span><strong>Artikel unggulan</strong><small>Tampilkan sebagai konten pilihan ketika modul publik mendukungnya.</small></span>
+            </label>
+          </div>
+        </section>
+
+        <section class="card" style="margin-bottom:20px">
+          <div class="card-head">
+            <div><h2>Cover</h2><p>Gambar utama artikel.</p></div>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label for="cover_image_url">URL COVER IMAGE</label>
+              <input type="url" id="cover_image_url" name="cover_image_url" placeholder="https://...">
+              <small class="hint">Opsional. Gunakan URL gambar yang dapat diakses publik.</small>
+              <div class="cover-preview" id="cover-preview">
+                <img id="cover-preview-image" alt="Preview cover">
+                <span>Preview cover artikel</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <div><h2>Aksi</h2><p>Simpan sesuai tahap editorial.</p></div>
+          </div>
+          <div class="card-body">
+            <div class="action-stack">
+              <button class="btn btn-primary" type="submit" id="save-button">Simpan</button>
+              <div class="action-row">
+                <button class="btn" type="button" id="save-draft-button">Simpan Draft</button>
+                <button class="btn" type="button" id="submit-review-button">Kirim Review</button>
+              </div>
+              <button class="btn btn-gold" type="button" id="publish-button">Publish</button>
+              <button class="btn btn-danger" type="button" id="archive-button">Arsipkan</button>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </form>
+</main>
+</div>
+
+<script type="module" src="./js/article-edit.js"></script>
+<script>
+(function(){
+  const input=document.getElementById('cover_image_url');
+  const box=document.getElementById('cover-preview');
+  const img=document.getElementById('cover-preview-image');
+  function preview(){
+    const url=(input?.value||'').trim();
+    if(!url){box?.classList.remove('show');return;}
+    img.src=url;
+    box.classList.add('show');
+    img.onerror=function(){box.classList.remove('show');};
+  }
+  input?.addEventListener('input',preview);
+  input?.addEventListener('change',preview);
+  window.addEventListener('load',preview);
+})();
+</script>
 </body>
-
 </html>
