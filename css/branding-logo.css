@@ -5,9 +5,7 @@
    ========================================================= */
 :root{--mandala-brand-logo:url('../assets/brand/Asset 5@4x.png')}
 
-/* =========================================================
-   HEADER — one complete official logo
-   ========================================================= */
+/* HEADER — one complete official logo */
 .logo{
     width:150px!important;
     height:46px!important;
@@ -16,17 +14,10 @@
     margin-right:auto!important;
     background:transparent var(--mandala-brand-logo) left center/contain no-repeat!important;
 }
-
-/* The asset itself contains the complete branding, so the old mark
-   and the separate MANDALA / CHANNEL text must not remain visible. */
-.logo .mark,.logo b,.logo small,.logo .symbol,.logo .icon,.logo [data-logo-symbol]{
-    display:none!important;
-}
+.logo .mark,.logo b,.logo small,.logo .symbol,.logo .icon,.logo [data-logo-symbol]{display:none!important}
 .logo .mark::before,.logo .mark::after{display:none!important;content:none!important}
 
-/* =========================================================
-   FOOTER — use the same complete official logo
-   ========================================================= */
+/* FOOTER — same official logo, including pages that use an <img>. */
 footer .foot>div:first-child>b{
     display:block!important;
     width:150px!important;height:46px!important;
@@ -35,12 +26,22 @@ footer .foot>div:first-child>b{
     color:transparent!important;font-size:0!important;line-height:0!important;
 }
 
-/* Covers footer implementations where the legacy logo is an image. */
-footer .foot>div:first-child img{
+/* IMPORTANT: site-brand is a real image. Keep it visible.
+   The previous generic img opacity rule was hiding the footer logo. */
+footer .foot>div:first-child img.site-brand{
+    display:block!important;
     width:150px!important;height:46px!important;
     object-fit:contain!important;object-position:left center!important;
-    opacity:0!important;
-    background:transparent var(--mandala-brand-logo) left center/contain no-repeat!important;
+    opacity:1!important;
+    visibility:visible!important;
+    background:none!important;
+}
+
+/* Other legacy footer images may still use the generic logo hooks. */
+footer .foot>div:first-child img:not(.site-brand){
+    width:150px!important;height:46px!important;
+    object-fit:contain!important;object-position:left center!important;
+    opacity:1!important;
 }
 
 /* Replace the old footer description with the requested message. */
@@ -64,7 +65,7 @@ footer .foot>div:first-child p:first-of-type::after{
 
 @media(max-width:700px){
     .logo{width:140px!important;height:42px!important;flex-basis:140px!important}
-    footer .foot>div:first-child>b,footer .foot>div:first-child img{
+    footer .foot>div:first-child>b,footer .foot>div:first-child img.site-brand,footer .foot>div:first-child img:not(.site-brand){
         width:140px!important;height:42px!important;
     }
 }
