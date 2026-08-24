@@ -1,30 +1,47 @@
 /* =========================================================
    MANDALA CHANNEL — GLOBAL BRANDING
-   Official logo + footer + favicon support.
+   Official logo + footer + legacy logo cleanup.
+   This file changes branding only; it does not alter page layout.
    ========================================================= */
-:root { --mandala-brand-logo: url('../assets/brand/Asset 5@4x.png'); }
+:root{--mandala-brand-logo:url('../assets/brand/Asset 5@4x.png')}
 
-.logo .mark {
-    position: relative; border: 0 !important; border-radius: 0 !important;
-    width: 42px !important; height: 42px !important; flex: 0 0 42px !important;
-    color: transparent !important;
-    background: transparent var(--mandala-brand-logo) center / contain no-repeat !important;
-    font-size: 0 !important;
+/* Official header logo */
+.logo .mark,.mark{
+    position:relative!important;
+    display:block!important;
+    width:42px!important;height:42px!important;flex:0 0 42px!important;
+    border:0!important;border-radius:0!important;
+    color:transparent!important;font-size:0!important;
+    background:transparent var(--mandala-brand-logo) center/contain no-repeat!important;
+    box-shadow:none!important;
 }
-.logo .mark::before,.logo .mark::after { display:none !important; content:none !important; }
-.logo small { display:none !important; }
+.logo .mark::before,.logo .mark::after,.mark::before,.mark::after{display:none!important;content:none!important}
 
-footer .foot > div:first-child > b {
-    display:block !important; width:150px !important; height:46px !important;
-    margin-bottom:12px !important;
-    background:transparent var(--mandala-brand-logo) left center / contain no-repeat !important;
-    color:transparent !important; font-size:0 !important; line-height:0 !important;
+/* Legacy text CHANNEL below/next to the logo is not part of the official mark. */
+.logo small{display:none!important}
+
+/* Keep the existing MANDALA wordmark when present; the graphic mark above is now official. */
+.logo b{color:var(--mandala-navy,#082d56)!important}
+
+/* Footer: replace legacy text-only brand without changing footer grid. */
+footer .foot>div:first-child>b{
+    display:block!important;width:150px!important;height:46px!important;
+    margin-bottom:12px!important;
+    background:transparent var(--mandala-brand-logo) left center/contain no-repeat!important;
+    color:transparent!important;font-size:0!important;line-height:0!important;
 }
 
-.brand-logo,.site-logo { background:transparent var(--mandala-brand-logo) center / contain no-repeat; color:transparent; font-size:0; }
-.brand-logo img,.site-logo img { opacity:0; }
+/* Generic logo hooks */
+.brand-logo,.site-logo{
+    background:transparent var(--mandala-brand-logo) center/contain no-repeat!important;
+    color:transparent!important;font-size:0!important;
+}
+.brand-logo img,.site-logo img{opacity:0!important}
 
-@media (max-width:700px) {
-    .logo .mark { width:36px !important; height:36px !important; flex-basis:36px !important; }
-    footer .foot > div:first-child > b { width:130px !important; height:40px !important; }
+/* Prevent old decorative logo glyphs from appearing inside known logo containers. */
+.logo .symbol,.logo .icon,.logo [data-logo-symbol]{display:none!important}
+
+@media(max-width:700px){
+    .logo .mark,.mark{width:36px!important;height:36px!important;flex-basis:36px!important}
+    footer .foot>div:first-child>b{width:130px!important;height:40px!important}
 }
