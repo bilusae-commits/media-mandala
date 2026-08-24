@@ -1,0 +1,53 @@
+/* =========================================================
+   MANDALA CHANNEL — GLOBAL BRANDING OVERRIDE
+   Uses the official logo asset without changing page layout.
+   ========================================================= */
+
+:root {
+    --mandala-brand-logo: url('../assets/brand/Asset 5@4x.png');
+}
+
+/* Public header logo: hide the legacy mark and render the official asset. */
+.logo .mark {
+    position: relative;
+    border: 0 !important;
+    border-radius: 0 !important;
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    color: transparent !important;
+    background: transparent var(--mandala-brand-logo) center / contain no-repeat !important;
+    font-size: 0 !important;
+}
+
+.logo .mark::before,
+.logo .mark::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Keep the existing wordmark typography, but remove legacy secondary label. */
+.logo small {
+    display: none !important;
+}
+
+/* Footer / alternate logo blocks can opt into the same official asset. */
+.brand-logo,
+.site-logo {
+    background: transparent var(--mandala-brand-logo) center / contain no-repeat;
+    color: transparent;
+    font-size: 0;
+}
+
+.brand-logo img,
+.site-logo img {
+    opacity: 0;
+}
+
+@media (max-width: 700px) {
+    .logo .mark {
+        width: 36px !important;
+        height: 36px !important;
+        flex-basis: 36px !important;
+    }
+}
