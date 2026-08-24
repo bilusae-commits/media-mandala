@@ -1,1 +1,54 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Podcast — Mandala CMS</title><link rel="stylesheet" href="css/admin.css"><style>.table-wrap{overflow:auto}.cms-table{width:100%;border-collapse:collapse}.cms-table th,.cms-table td{text-align:left;padding:14px;border-bottom:1px solid #e5e7eb;vertical-align:middle}.cms-table small{display:block;color:#6b7280;margin-top:4px}.btn.danger{color:#b91c1c}.toast{position:fixed;right:24px;bottom:24px;padding:13px 17px;background:#111827;color:#fff;border-radius:10px;z-index:9999}.toast.error{background:#991b1b}.type-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:600;white-space:nowrap}.type-video{background:#eaf1f8;color:#082d56}.type-audio{background:#f5efe3;color:#806126}.status-badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;text-transform:capitalize}.status-published{background:#e8f5ed;color:#176b3a}.status-draft{background:#f1f3f5;color:#5f6b76}.status-review{background:#fff5df;color:#8a641d}.status-archived{background:#f1f1f1;color:#777}.podcast-title{min-width:250px}.podcast-title strong{color:#172536}.featured-star{color:#9b7837;font-size:15px}.empty{text-align:center;color:#718091;padding:30px!important}@media(max-width:700px){main{margin-left:0!important;padding:80px 15px 30px!important}.cms-table th:nth-child(5),.cms-table td:nth-child(5){min-width:150px}.cms-table th,.cms-table td{padding:11px 9px;font-size:12px}}</style><script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="js/cms-service.js"></script><script src="js/shell.js"></script></head><body><script>initShell('Podcast','podcasts')</script><main style="margin-left:245px;padding:90px 32px 40px"><div class="space"><div><h1 style="margin:0">Podcast</h1><span class="hint">Kelola podcast video dan audio Mandala.</span></div><div><span class="badge" id="role">—</span> <a class="btn primary" href="podcast-edit.html">+ TAMBAH PODCAST</a></div></div><section class="panel"><div class="panelBody table-wrap"><table class="cms-table"><thead><tr><th>Podcast</th><th>Jenis</th><th>Status</th><th>Featured</th><th>Aksi</th></tr></thead><tbody id="list"><tr><td colspan="5">Memuat...</td></tr></tbody></table></div></section></main><div id="toast" class="toast" hidden></div><script src="js/podcasts.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Podcast — Mandala Channel CMS</title>
+<link rel="stylesheet" href="css/cms.css">
+<style>
+.podcast-cell{display:flex;align-items:center;gap:11px;min-width:320px}.podcast-thumb{width:96px;height:55px;object-fit:cover;border-radius:6px;background:#edf1f5;flex:0 0 auto}.podcast-fallback{display:grid;place-items:center;width:96px;height:55px;border-radius:6px;background:#edf1f5;color:var(--navy);font-size:9px;font-weight:800}.podcast-name{max-width:430px;font-weight:700;line-height:1.35}.podcast-sub{max-width:430px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:9px}.type-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:4px;font-size:8px;font-weight:700}.type-video{background:#edf3f8;color:var(--navy)}.type-audio{background:#f5efe3;color:#806126}.featured-mark{margin-left:5px;color:#a16207;font-weight:800}.stat-click{cursor:pointer;transition:.15s ease}.stat-click:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(0,0,0,.06)}@media(max-width:800px){.podcast-cell{min-width:260px}.podcast-name,.podcast-sub{max-width:300px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<a class="brand" href="dashboard.html"><div class="brand-title">MANDALA</div><div class="brand-subtitle">CHANNEL · CMS</div></a>
+<div class="nav-title">Konten</div>
+<nav class="nav">
+<a class="nav-link" href="dashboard.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+<a class="nav-link" href="articles.html"><span class="nav-icon">▤</span><span>Artikel</span></a>
+<a class="nav-link" href="videos.html"><span class="nav-icon">▶</span><span>Video</span></a>
+<a class="nav-link" href="playlists.html"><span class="nav-icon">☷</span><span>Playlist</span></a>
+<a class="nav-link active" href="podcasts.html" aria-current="page"><span class="nav-icon">◉</span><span>Podcast</span></a>
+<a class="nav-link" href="categories.html"><span class="nav-icon">#</span><span>Kategori</span></a>
+</nav>
+<div class="nav-title">Sistem</div>
+<nav class="nav"><a class="nav-link" href="settings.html"><span class="nav-icon">⚙</span><span>Pengaturan</span></a></nav>
+<div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name" id="side-name">Memuat...</div><div class="sidebar-user-role" id="side-role">-</div></div><button class="logout-button" id="logout-button" type="button"><span>Keluar</span> ↪</button></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="title">Podcast</div><div class="subtitle">Kelola podcast audio dan video Mandala Channel</div></div><div class="user-mini" id="top-user"></div></header>
+<section class="content">
+<div class="page-head"><div><h1>Podcast</h1><p>Kelola podcast audio dan video dalam satu tempat.</p></div><a class="btn btn-primary" href="podcast-edit.html">+ Podcast Baru</a></div>
+<div id="page-message" class="message"></div>
+<div class="stats">
+<div class="stat stat-click" data-type-card="all"><div class="stat-label">Total</div><div class="stat-value" id="stat-total">—</div></div>
+<div class="stat stat-click" data-type-card="video"><div class="stat-label">Video</div><div class="stat-value" id="stat-video">—</div></div>
+<div class="stat stat-click" data-type-card="audio"><div class="stat-label">Audio</div><div class="stat-value" id="stat-audio">—</div></div>
+<div class="stat stat-click" data-type-card="published"><div class="stat-label">Published</div><div class="stat-value" id="stat-published">—</div></div>
+<div class="stat stat-click" data-type-card="featured"><div class="stat-label">Unggulan</div><div class="stat-value" id="stat-featured">—</div></div>
+</div>
+<section class="panel">
+<div class="panel-head"><div style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><div class="panel-title">Daftar Podcast</div><div class="panel-meta" id="result-count">Memuat...</div></div><button class="btn btn-light" id="refresh" type="button">↻ Refresh</button></div></div>
+<div class="status-tabs" id="status-tabs"><button class="status-tab active" data-status="all" type="button">Semua</button><button class="status-tab" data-status="draft" type="button">Draft</button><button class="status-tab" data-status="review" type="button">Review</button><button class="status-tab" data-status="published" type="button">Published</button><button class="status-tab" data-status="archived" type="button">Arsip</button></div>
+<div class="toolbar"><input class="input" id="search" type="search" placeholder="Cari judul, slug, atau deskripsi..." autocomplete="off"><select class="select" id="type-filter"><option value="all">Semua jenis</option><option value="video">Video</option><option value="audio">Audio</option></select><select class="select" id="status-filter"><option value="all">Semua status</option><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Arsip</option></select><button class="btn btn-light" id="clear-filters" type="button">Reset</button></div>
+<div class="table-wrap" id="podcasts-container"><div class="empty"><strong>Memuat podcast...</strong>Menyiapkan data dari Supabase.</div></div>
+</section>
+</section>
+</main>
+</div>
+<script src="../js/config.js?v=20260824.3"></script>
+<script src="../js/supabase-client.js?v=20260824.3"></script>
+<script type="module" src="./js/podcasts.js?v=20260824.3"></script>
+</body>
+</html>
