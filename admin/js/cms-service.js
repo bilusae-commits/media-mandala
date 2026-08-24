@@ -1,4 +1,5 @@
 import "../../js/supabase-client.js?v=20260824.2";
+import "./cover-upload.js?v=20260824.1";
 
 const API = window.MandalaSupabase;
 
