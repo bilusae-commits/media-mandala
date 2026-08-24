@@ -4,6 +4,8 @@ const CMS = window.MandalaCMS;
 const db = window.MandalaSupabase;
 const MEDIA_BUCKET = "article-media";
 const MAX_MEDIA = 4;
+const MAX_IMAGE_EDGE = 1800;
+const WEBP_QUALITY = 0.86;
 
 const $ = (id) => document.getElementById(id);
 const form = $("article-form"), pageTitle = $("page-title"), articleId = $("article-id");
@@ -30,8 +32,7 @@ async function loadMedia(id) {
   if (!id || !db) { mediaRows = []; renderMedia(); return; }
   const { data, error } = await db.from("article_media").select("id,article_id,file_url,storage_path,caption,alt_text,sort_order,created_at").eq("article_id", id).order("sort_order", { ascending: true }).order("created_at", { ascending: true });
   if (error) throw error;
-  mediaRows = data || [];
-  if (mediaRows.length > MAX_MEDIA) mediaRows = mediaRows.slice(0, MAX_MEDIA);
+  mediaRows = (data || []).slice(0, MAX_MEDIA);
   renderMedia();
 }
 
@@ -52,7 +53,7 @@ function renderMedia() {
 
 async function saveMediaMeta(item, row) {
   const position = Math.min(MAX_MEDIA, Math.max(1, Number(item.querySelector(".media-order")?.value || 1)));
-  const { data, error } = await db.from("article_media").update({ caption: item.querySelector(".media-caption")?.value.trim() || null, alt_text: item.querySelector(".media-alt")?.value.trim() || null, sort_order: position - 1, updated_at: new Date().toISOString() }).eq("id", row.id).select().single();
+  const { error } = await db.from("article_media").update({ caption: item.querySelector(".media-caption")?.value.trim() || null, alt_text: item.querySelector(".media-alt")?.value.trim() || null, sort_order: position - 1, updated_at: new Date().toISOString() }).eq("id", row.id);
   if (error) throw error;
   await loadMedia(currentArticle.id);
   showMessage("Data foto berhasil disimpan.", "success");
@@ -61,7 +62,7 @@ async function saveMediaMeta(item, row) {
 function insertMedia(row) {
   const url = row.file_url || publicUrl(row.storage_path); if (!url) throw new Error("URL foto tidak tersedia.");
   const alt = escapeHtml(row.alt_text || row.caption || "Foto pendukung artikel"), caption = row.caption ? `<figcaption>${escapeHtml(row.caption)}</figcaption>` : "";
-  const block = `\n<figure class="article-media"><img src="${escapeHtml(url)}" alt="${alt}" loading="lazy">${caption}</figure>\n`;
+  const block = `\n<figure class="article-media"><img src="${escapeHtml(url)}" alt="${alt}" loading="lazy" decoding="async">${caption}</figure>\n`;
   const start = contentInput.selectionStart ?? contentInput.value.length, end = contentInput.selectionEnd ?? start;
   contentInput.value = contentInput.value.slice(0, start) + block + contentInput.value.slice(end); contentInput.focus(); contentInput.setSelectionRange(start + block.length, start + block.length); showMessage("Foto disisipkan ke posisi cursor.", "success");
 }
@@ -73,7 +74,18 @@ async function deleteMedia(row) {
   await loadMedia(currentArticle.id); showMessage("Foto berhasil dihapus.", "success");
 }
 
-function ext(file) { const n = file.name.toLowerCase(); return n.endsWith(".png") ? "png" : n.endsWith(".webp") ? "webp" : n.endsWith(".gif") ? "gif" : "jpg"; }
+async function prepareImage(file) {
+  if (!file.type.startsWith("image/")) throw new Error(`${file.name} bukan file gambar.`);
+  if (file.size > 8 * 1024 * 1024) throw new Error(`${file.name} terlalu besar. Maksimal 8 MB sebelum kompresi.`);
+  const bitmap = await createImageBitmap(file);
+  const scale = Math.min(1, MAX_IMAGE_EDGE / Math.max(bitmap.width, bitmap.height));
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+  const canvas = document.createElement("canvas"); canvas.width = width; canvas.height = height;
+  const ctx = canvas.getContext("2d", { alpha: false }); ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, width, height); ctx.drawImage(bitmap, 0, 0, width, height); bitmap.close();
+  const blob = await new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error("Browser gagal mengoptimalkan gambar.")), "image/webp", WEBP_QUALITY));
+  return { blob, width, height };
+}
 
 async function uploadMedia() {
   if (!currentArticle?.id) await save("draft");
@@ -82,18 +94,18 @@ async function uploadMedia() {
   uploadMediaButton.disabled = true;
   try {
     for (const file of files) {
-      if (!file.type.startsWith("image/")) throw new Error(`${file.name} bukan file gambar.`);
-      if (file.size > 8 * 1024 * 1024) throw new Error(`${file.name} terlalu besar. Maksimal 8 MB.`);
-      const path = `${currentArticle.id}/${crypto.randomUUID()}.${ext(file)}`;
-      showMessage(`Mengunggah ${file.name}...`);
-      const up = await db.storage.from(MEDIA_BUCKET).upload(path, file, { cacheControl: "31536000", upsert: false, contentType: file.type });
+      showMessage(`Mengoptimalkan ${file.name}...`);
+      const optimized = await prepareImage(file);
+      const path = `${currentArticle.id}/${crypto.randomUUID()}.webp`;
+      const up = await db.storage.from(MEDIA_BUCKET).upload(path, optimized.blob, { cacheControl: "31536000", upsert: false, contentType: "image/webp" });
       if (up.error) throw up.error;
       const url = publicUrl(path), order = mediaRows.length;
-      const ins = await db.from("article_media").insert({ article_id: currentArticle.id, file_url: url, storage_path: path, caption: file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "), alt_text: "", sort_order: order });
+      const baseName = file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ");
+      const ins = await db.from("article_media").insert({ article_id: currentArticle.id, file_url: url, storage_path: path, caption: baseName, alt_text: baseName, sort_order: order });
       if (ins.error) { await db.storage.from(MEDIA_BUCKET).remove([path]); throw ins.error; }
-      mediaRows.push({ article_id: currentArticle.id, file_url: url, storage_path: path, sort_order: order });
+      mediaRows.push({ article_id: currentArticle.id, file_url: url, storage_path: path, caption: baseName, alt_text: baseName, sort_order: order });
     }
-    mediaFile.value = ""; await loadMedia(currentArticle.id); showMessage("Foto berhasil diupload.", "success");
+    mediaFile.value = ""; await loadMedia(currentArticle.id); showMessage("Foto berhasil dioptimalkan dan diupload.", "success");
   } finally { uploadMediaButton.disabled = false; updateUI(); }
 }
 
