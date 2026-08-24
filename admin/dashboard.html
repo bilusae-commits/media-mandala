@@ -1,27 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dashboard — Mandala Channel CMS</title>
-<link rel="stylesheet" href="./css/cms.css">
-<style>.cms-brand-logo{display:block;width:150px;max-width:100%;height:auto;object-fit:contain;margin:0 auto}.cms-brand{display:flex!important;align-items:center;justify-content:center;min-height:82px}.cms-brand span{display:none!important}</style>
+<link rel="stylesheet" href="./css/cms.css?v=20260824.4">
+<style>
+.dashboard-stats{grid-template-columns:repeat(4,minmax(0,1fr))}.dashboard-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.dashboard-card{display:block;background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px;transition:.15s ease}.dashboard-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.dashboard-card h3{margin:0 0 7px;font-size:13px}.dashboard-card p{margin:0;color:var(--muted);font-size:10px;line-height:1.55}.recent-list{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}.recent-item{display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid var(--border)}.recent-item:last-child{border-bottom:0}.recent-thumb{width:82px;height:48px;flex:0 0 auto;border-radius:6px;background:#eee;object-fit:cover}.recent-info{min-width:0;flex:1}.recent-info strong{display:block;font-size:11px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recent-info small{display:block;margin-top:4px;color:var(--muted);font-size:9px}.dashboard-brand{display:block;padding:2px 12px 28px}.dashboard-brand img{display:block;width:150px;max-width:100%;height:auto;object-fit:contain}.dashboard-brand-text{display:none!important}@media(max-width:1100px){.dashboard-stats{grid-template-columns:repeat(2,1fr)}.dashboard-card-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.dashboard-card-grid{grid-template-columns:1fr}.recent-thumb{width:65px;height:40px}}
+</style>
 </head>
 <body>
-<div class="cms-shell">
-<aside class="cms-sidebar">
-<a class="cms-brand" href="dashboard.html" aria-label="Dashboard"><img class="cms-brand-logo" src="../assets/brand/Asset%205@4x.png" alt="Mandala"></a>
-<nav class="cms-nav"><div class="cms-nav-label">Dashboard</div><a class="cms-nav-item active" href="dashboard.html">⌂ <span>Dashboard</span></a><div class="cms-nav-label">Content</div><a class="cms-nav-item" href="articles.html">▤ <span>Artikel</span></a><a class="cms-nav-item" href="videos.html">▶ <span>Video</span></a><a class="cms-nav-item" href="categories.html">◫ <span>Topik</span></a><div class="cms-nav-label">System</div><a class="cms-nav-item" href="settings.html">○ <span>Profil</span></a></nav>
-<div class="cms-sidebar-bottom"><button id="logoutBtn" class="cms-logout" type="button">Keluar</button></div></aside>
-<main class="cms-main"><header class="cms-topbar"><div><strong>Dashboard</strong><span>Mandala Channel CMS</span></div><div class="cms-user"><div id="avatar" class="cms-avatar">A</div><div><strong id="userName">Admin</strong><small id="userRole">admin</small></div></div></header>
-<section class="cms-content"><div id="errorBox" class="cms-alert cms-alert-error" hidden></div><div id="loading" class="cms-loading">Memuat dashboard…</div><div id="dashboard" hidden>
-<div class="cms-page-head"><div><span class="cms-eyebrow">Dashboard Admin</span><h1 id="welcome">Selamat datang</h1><p>Kelola seluruh konten Mandala Channel dari satu panel.</p></div></div>
-<div class="cms-stats-grid"><a class="cms-stat-card" href="articles.html"><span>Total Artikel</span><strong id="articleCount">0</strong></a><a class="cms-stat-card" href="videos.html"><span>Total Video</span><strong id="videoCount">0</strong></a><a class="cms-stat-card" href="categories.html"><span>Total Topik</span><strong id="categoryCount">0</strong></a><div class="cms-stat-card"><span>Status Akun</span><strong>Aktif</strong></div></div>
-<div class="cms-section-head"><div><span class="cms-eyebrow">Quick Access</span><h2>Kelola Konten</h2></div></div><div class="cms-card-grid"><a class="cms-card" href="articles.html"><h3>Artikel</h3><p>Kelola, edit, review, publish, dan arsipkan artikel.</p></a><a class="cms-card" href="videos.html"><h3>Video</h3><p>Kelola video dan konten YouTube Mandala Channel.</p></a><a class="cms-card" href="categories.html"><h3>Topik</h3><p>Kelola kategori dan pengelompokan konten.</p></a></div>
-<div class="cms-section-head"><div><span class="cms-eyebrow">Terbaru</span><h2>Artikel Terbaru</h2></div><a class="cms-link" href="articles.html">Lihat semua →</a></div><div id="recentArticles" class="cms-list-card"><div class="cms-empty">Memuat artikel…</div></div>
-</div></section></main></div>
-<script src="../js/config.js?v=20260824.3"></script><script src="../js/supabase-client.js?v=20260824.3"></script>
+<div class="app">
+<aside class="sidebar">
+<a class="dashboard-brand" href="dashboard.html" aria-label="Dashboard"><img src="../assets/brand/Asset%205@4x.png" alt="Mandala"></a>
+<div class="nav-title">Konten</div>
+<nav class="nav">
+<a class="nav-link active" href="dashboard.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+<a class="nav-link" href="articles.html"><span class="nav-icon">▤</span><span>Artikel</span></a>
+<a class="nav-link" href="videos.html"><span class="nav-icon">▶</span><span>Video</span></a>
+<a class="nav-link" href="playlists.html"><span class="nav-icon">☷</span><span>Playlist</span></a>
+<a class="nav-link" href="podcasts.html"><span class="nav-icon">◉</span><span>Podcast</span></a>
+<a class="nav-link" href="categories.html"><span class="nav-icon">#</span><span>Kategori</span></a>
+</nav>
+<div class="nav-title">Sistem</div>
+<nav class="nav"><a class="nav-link" href="settings.html"><span class="nav-icon">⚙</span><span>Pengaturan</span></a></nav>
+<div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name" id="side-name">Memuat...</div><div class="sidebar-user-role" id="side-role">-</div></div><button class="logout-button" id="logout-button" type="button"><span>Keluar</span> ↪</button></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="title">Dashboard</div><div class="subtitle">Kelola seluruh konten Mandala Channel</div></div><div class="user-mini" id="top-user"></div></header>
+<section class="content">
+<div id="page-message" class="message"></div>
+<div class="page-head"><div><h1 id="welcome-title">Selamat datang</h1><p>Ringkasan aktivitas dan akses cepat CMS.</p></div></div>
+<div class="stats dashboard-stats">
+<div class="stat"><div class="stat-label">Total Artikel</div><div class="stat-value" id="article-count">—</div></div>
+<div class="stat"><div class="stat-label">Total Video</div><div class="stat-value" id="video-count">—</div></div>
+<div class="stat"><div class="stat-label">Total Kategori</div><div class="stat-value" id="category-count">—</div></div>
+<div class="stat"><div class="stat-label">Status Akun</div><div class="stat-value" style="font-size:18px">Aktif</div></div>
+</div>
+<section class="panel" style="margin-bottom:18px"><div class="panel-head"><div><div class="panel-title">Kelola Konten</div><div class="panel-meta">Akses cepat ke bagian CMS</div></div></div><div style="padding:18px"><div class="dashboard-card-grid">
+<a class="dashboard-card" href="articles.html"><h3>Artikel</h3><p>Kelola, edit, review, publish, dan arsipkan artikel.</p></a>
+<a class="dashboard-card" href="videos.html"><h3>Video</h3><p>Kelola video dan konten YouTube Mandala.</p></a>
+<a class="dashboard-card" href="categories.html"><h3>Kategori</h3><p>Kelola kategori dan pengelompokan konten.</p></a>
+</div></div></section>
+<section class="panel"><div class="panel-head"><div><div class="panel-title">Artikel Terbaru</div><div class="panel-meta" id="recent-count">Memuat...</div></div><a class="btn btn-light" href="articles.html">Lihat Semua</a></div><div id="recent-articles" class="recent-list"><div class="empty"><strong>Memuat artikel...</strong>Menyiapkan data dari Supabase.</div></div></section>
+</section>
+</main>
+</div>
+<script src="../js/config.js?v=20260824.4"></script>
+<script src="../js/supabase-client.js?v=20260824.4"></script>
 <script type="module">
-const API=window.MandalaSupabase;const errorBox=document.getElementById('errorBox'),loading=document.getElementById('loading'),dashboard=document.getElementById('dashboard');const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));const initials=n=>String(n||'A').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'A';
-async function init(){try{if(!API)throw new Error('MandalaSupabase belum dimuat.');const client=await API.getClient();const {data:{user}}=await client.auth.getUser();if(!user){location.href='login.html';return}const {data:profile,error:profileError}=await client.from('profiles').select('full_name,role,avatar_url').eq('id',user.id).maybeSingle();if(profileError)throw profileError;const name=profile?.full_name||user.email||'Pengguna',role=profile?.role||'editor';if(!['admin','editor'].includes(role)){location.href='login.html';return}document.getElementById('userName').textContent=name;document.getElementById('userRole').textContent=role;document.getElementById('avatar').textContent=initials(name);document.getElementById('welcome').textContent=`Selamat datang, ${name}`;const count=async table=>{const {count,error}=await client.from(table).select('*',{count:'exact',head:true});if(error)throw error;return count||0};const [articles,videos,categories]=await Promise.all([count('articles'),count('videos'),count('categories')]);document.getElementById('articleCount').textContent=articles;document.getElementById('videoCount').textContent=videos;document.getElementById('categoryCount').textContent=categories;const {data:recent,error:recentError}=await client.from('articles').select('id,title,status,cover_image_url,created_at').order('created_at',{ascending:false}).limit(6);if(recentError)throw recentError;const list=document.getElementById('recentArticles');list.innerHTML=recent?.length?recent.map(a=>`<a class="cms-list-item" href="article-edit.html?id=${encodeURIComponent(a.id)}"><div class="cms-list-thumb">${a.cover_image_url?`<img src="${esc(a.cover_image_url)}" alt="">`:''}</div><div class="cms-list-info"><strong>${esc(a.title||'Tanpa judul')}</strong><small>${esc(a.status||'draft')}</small></div></a>`).join(''):'<div class="cms-empty">Belum ada artikel.</div>';loading.hidden=true;dashboard.hidden=false}catch(e){console.error('Dashboard error:',e);loading.hidden=true;errorBox.textContent=e?.message||'Dashboard gagal dimuat.';errorBox.hidden=false}}document.getElementById('logoutBtn').addEventListener('click',async()=>{try{await API.auth.signOut()}finally{location.href='login.html'}});init();
-</script></body></html>
+const API=window.MandalaSupabase;
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const initials=n=>String(n||'A').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'A';
+async function init(){
+ try{
+  if(!API)throw new Error('MandalaSupabase belum dimuat.');
+  const client=await API.getClient();
+  const session=await API.auth.getSession();
+  if(!session?.user){location.href='login.html';return;}
+  const user=session.user;
+  const {data:profile,error:profileError}=await client.from('profiles').select('full_name,role,avatar_url').eq('id',user.id).maybeSingle();
+  if(profileError)throw profileError;
+  const name=profile?.full_name||user.email||'Pengguna';
+  const role=profile?.role||'editor';
+  if(!['admin','editor'].includes(role)){location.href='login.html';return;}
+  document.getElementById('side-name').textContent=name;
+  document.getElementById('side-role').textContent=role;
+  document.getElementById('top-user').textContent=name;
+  document.getElementById('welcome-title').textContent=`Selamat datang, ${name}`;
+  const count=async table=>{const {count,error}=await client.from(table).select('*',{count:'exact',head:true});if(error)throw error;return count||0};
+  const [articles,videos,categories]=await Promise.all([count('articles'),count('videos'),count('categories')]);
+  document.getElementById('article-count').textContent=articles;
+  document.getElementById('video-count').textContent=videos;
+  document.getElementById('category-count').textContent=categories;
+  const {data:recent,error:recentError}=await client.from('articles').select('id,title,status,cover_image_url,created_at').order('created_at',{ascending:false}).limit(6);
+  if(recentError)throw recentError;
+  document.getElementById('recent-count').textContent=`${recent?.length||0} artikel terbaru`;
+  const list=document.getElementById('recent-articles');
+  list.innerHTML=recent?.length?recent.map(a=>`<a class="recent-item" href="article-edit.html?id=${encodeURIComponent(a.id)}">${a.cover_image_url?`<img class="recent-thumb" src="${esc(a.cover_image_url)}" alt="">`:`<div class="recent-thumb"></div>`}<div class="recent-info"><strong>${esc(a.title||'Tanpa judul')}</strong><small>${esc(a.status||'draft')}</small></div></a>`).join(''):'<div class="empty"><strong>Belum ada artikel.</strong>Artikel terbaru akan muncul di sini.</div>';
+ }catch(e){console.error('Dashboard error:',e);const m=document.getElementById('page-message');m.className='message error';m.textContent=e?.message||'Dashboard gagal dimuat.';document.getElementById('recent-articles').innerHTML='<div class="empty"><strong>Data belum dapat dimuat.</strong>Periksa koneksi Supabase.</div>';}
+}
+document.getElementById('logout-button').addEventListener('click',async()=>{try{await API.auth.signOut()}finally{location.href='login.html'}});
+init();
+</script>
+</body>
+</html>
