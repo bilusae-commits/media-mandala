@@ -1,0 +1,10 @@
+(() => {
+  const $=id=>document.getElementById(id); let auth=null, rows=[];
+  function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function toast(m,e=false){const t=$('toast');t.textContent=m;t.className='toast '+(e?'error':'');t.hidden=false;setTimeout(()=>t.hidden=true,3000);}
+  async function load(){const db=await MandalaSupabase.getClient();const {data,error}=await db.from('podcasts').select('id,title,slug,status,featured,published_at,created_at,categories(name)').order('created_at',{ascending:false});if(error)throw error;rows=data||[];render();}
+  function render(){ $('list').innerHTML=rows.length?rows.map(x=>`<tr><td><strong>${esc(x.title)}</strong><small>${esc(x.categories?.name||'Tanpa kategori')}</small></td><td><span class="badge">${esc(x.status)}</span></td><td>${x.featured?'Ya':'—'}</td><td><a class="btn small" href="podcast-edit.html?id=${encodeURIComponent(x.id)}">Edit</a>${auth?.role==='admin'?` <button class="btn small danger" data-del="${esc(x.id)}">Hapus</button>`:''}</td></tr>`).join(''):'<tr><td colspan="4" class="empty">Belum ada episode podcast.</td></tr>';document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>remove(b.dataset.del)); }
+  async function remove(id){if(!confirm('Hapus podcast ini?'))return;const db=await MandalaSupabase.getClient();const {error}=await db.from('podcasts').delete().eq('id',id);if(error)toast(error.message,true);else{toast('Podcast dihapus.');load();}}
+  async function init(){auth=await MandalaSupabase.auth.requireStaff({loginPage:'index.html',deniedPage:'dashboard.html'});if(!auth)return;$('role').textContent=auth.role==='admin'?'ADMIN':'EDITOR';$('logout').onclick=async()=>{await MandalaSupabase.auth.signOut();location.href='index.html';};await load();}
+  init().catch(e=>toast(e.message||'Gagal memuat podcast.',true));
+})();
