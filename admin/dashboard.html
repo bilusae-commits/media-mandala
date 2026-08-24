@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dashboard — Mandala Channel CMS</title>
-<link rel="stylesheet" href="./css/cms.css?v=20260824.4">
+<link rel="stylesheet" href="./css/cms.css?v=20260824.5">
 <style>
-.dashboard-stats{grid-template-columns:repeat(4,minmax(0,1fr))}.dashboard-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.dashboard-card{display:block;background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px;transition:.15s ease}.dashboard-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.dashboard-card h3{margin:0 0 7px;font-size:13px}.dashboard-card p{margin:0;color:var(--muted);font-size:10px;line-height:1.55}.recent-list{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}.recent-item{display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid var(--border)}.recent-item:last-child{border-bottom:0}.recent-thumb{width:82px;height:48px;flex:0 0 auto;border-radius:6px;background:#eee;object-fit:cover}.recent-info{min-width:0;flex:1}.recent-info strong{display:block;font-size:11px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recent-info small{display:block;margin-top:4px;color:var(--muted);font-size:9px}.dashboard-brand{display:block;padding:2px 12px 28px}.dashboard-brand img{display:block;width:150px;max-width:100%;height:auto;object-fit:contain}.dashboard-brand-text{display:none!important}@media(max-width:1100px){.dashboard-stats{grid-template-columns:repeat(2,1fr)}.dashboard-card-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.dashboard-card-grid{grid-template-columns:1fr}.recent-thumb{width:65px;height:40px}}
+.dashboard-brand{display:block;padding:2px 12px 28px}.dashboard-brand img{display:block;width:150px;max-width:100%;height:auto;object-fit:contain}.dashboard-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.dashboard-card{display:block;background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px;transition:.15s ease}.dashboard-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.dashboard-card h3{margin:0 0 7px;font-size:13px}.dashboard-card p{margin:0;color:var(--muted);font-size:10px;line-height:1.55}.recent-list{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden}.recent-item{display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid var(--border)}.recent-item:last-child{border-bottom:0}.recent-thumb{width:82px;height:48px;flex:0 0 auto;border-radius:6px;background:#eee;object-fit:cover}.recent-info{min-width:0;flex:1}.recent-info strong{display:block;font-size:11px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recent-info small{display:block;margin-top:4px;color:var(--muted);font-size:9px}.dashboard-stats{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:1100px){.dashboard-stats{grid-template-columns:repeat(2,1fr)}.dashboard-card-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.dashboard-card-grid{grid-template-columns:1fr}.recent-thumb{width:65px;height:40px}}
 </style>
 </head>
 <body>
@@ -32,9 +32,9 @@
 <div id="page-message" class="message"></div>
 <div class="page-head"><div><h1 id="welcome-title">Selamat datang</h1><p>Ringkasan aktivitas dan akses cepat CMS.</p></div></div>
 <div class="stats dashboard-stats">
-<div class="stat"><div class="stat-label">Total Artikel</div><div class="stat-value" id="article-count">—</div></div>
-<div class="stat"><div class="stat-label">Total Video</div><div class="stat-value" id="video-count">—</div></div>
-<div class="stat"><div class="stat-label">Total Kategori</div><div class="stat-value" id="category-count">—</div></div>
+<a class="stat" href="articles.html"><div class="stat-label">Total Artikel</div><div class="stat-value" id="article-count">—</div></a>
+<a class="stat" href="videos.html"><div class="stat-label">Total Video</div><div class="stat-value" id="video-count">—</div></a>
+<a class="stat" href="categories.html"><div class="stat-label">Total Kategori</div><div class="stat-value" id="category-count">—</div></a>
 <div class="stat"><div class="stat-label">Status Akun</div><div class="stat-value" style="font-size:18px">Aktif</div></div>
 </div>
 <section class="panel" style="margin-bottom:18px"><div class="panel-head"><div><div class="panel-title">Kelola Konten</div><div class="panel-meta">Akses cepat ke bagian CMS</div></div></div><div style="padding:18px"><div class="dashboard-card-grid">
@@ -46,42 +46,13 @@
 </section>
 </main>
 </div>
-<script src="../js/config.js?v=20260824.4"></script>
-<script src="../js/supabase-client.js?v=20260824.4"></script>
+<script src="../js/config.js?v=20260824.5"></script>
+<script src="../js/supabase-client.js?v=20260824.5"></script>
 <script type="module">
 const API=window.MandalaSupabase;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-const initials=n=>String(n||'A').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'A';
-async function init(){
- try{
-  if(!API)throw new Error('MandalaSupabase belum dimuat.');
-  const client=await API.getClient();
-  const session=await API.auth.getSession();
-  if(!session?.user){location.href='login.html';return;}
-  const user=session.user;
-  const {data:profile,error:profileError}=await client.from('profiles').select('full_name,role,avatar_url').eq('id',user.id).maybeSingle();
-  if(profileError)throw profileError;
-  const name=profile?.full_name||user.email||'Pengguna';
-  const role=profile?.role||'editor';
-  if(!['admin','editor'].includes(role)){location.href='login.html';return;}
-  document.getElementById('side-name').textContent=name;
-  document.getElementById('side-role').textContent=role;
-  document.getElementById('top-user').textContent=name;
-  document.getElementById('welcome-title').textContent=`Selamat datang, ${name}`;
-  const count=async table=>{const {count,error}=await client.from(table).select('*',{count:'exact',head:true});if(error)throw error;return count||0};
-  const [articles,videos,categories]=await Promise.all([count('articles'),count('videos'),count('categories')]);
-  document.getElementById('article-count').textContent=articles;
-  document.getElementById('video-count').textContent=videos;
-  document.getElementById('category-count').textContent=categories;
-  const {data:recent,error:recentError}=await client.from('articles').select('id,title,status,cover_image_url,created_at').order('created_at',{ascending:false}).limit(6);
-  if(recentError)throw recentError;
-  document.getElementById('recent-count').textContent=`${recent?.length||0} artikel terbaru`;
-  const list=document.getElementById('recent-articles');
-  list.innerHTML=recent?.length?recent.map(a=>`<a class="recent-item" href="article-edit.html?id=${encodeURIComponent(a.id)}">${a.cover_image_url?`<img class="recent-thumb" src="${esc(a.cover_image_url)}" alt="">`:`<div class="recent-thumb"></div>`}<div class="recent-info"><strong>${esc(a.title||'Tanpa judul')}</strong><small>${esc(a.status||'draft')}</small></div></a>`).join(''):'<div class="empty"><strong>Belum ada artikel.</strong>Artikel terbaru akan muncul di sini.</div>';
- }catch(e){console.error('Dashboard error:',e);const m=document.getElementById('page-message');m.className='message error';m.textContent=e?.message||'Dashboard gagal dimuat.';document.getElementById('recent-articles').innerHTML='<div class="empty"><strong>Data belum dapat dimuat.</strong>Periksa koneksi Supabase.</div>';}
-}
-document.getElementById('logout-button').addEventListener('click',async()=>{try{await API.auth.signOut()}finally{location.href='login.html'}});
-init();
+async function init(){try{if(!API)throw new Error('MandalaSupabase belum dimuat.');const client=await API.getClient();const session=await API.auth.getSession();if(!session?.user){location.replace('login.html');return}const user=session.user;const {data:profile,error:pe}=await client.from('profiles').select('full_name,role').eq('id',user.id).maybeSingle();if(pe)throw pe;const name=profile?.full_name||user.email||'Pengguna',role=profile?.role||'editor';if(!['admin','editor'].includes(role)){await API.auth.signOut();location.replace('login.html');return}document.getElementById('side-name').textContent=name;document.getElementById('side-role').textContent=role;document.getElementById('top-user').textContent=name;document.getElementById('welcome-title').textContent=`Selamat datang, ${name}`;const count=async table=>{const {count,error}=await client.from(table).select('*',{count:'exact',head:true});if(error)throw error;return count||0};const [articles,videos,categories]=await Promise.all([count('articles'),count('videos'),count('categories')]);document.getElementById('article-count').textContent=articles;document.getElementById('video-count').textContent=videos;document.getElementById('category-count').textContent=categories;const {data:recent,error:re}=await client.from('articles').select('id,title,status,cover_image_url,created_at').order('created_at',{ascending:false}).limit(6);if(re)throw re;document.getElementById('recent-count').textContent=`${recent?.length||0} artikel terbaru`;const list=document.getElementById('recent-articles');list.innerHTML=recent?.length?recent.map(a=>`<a class="recent-item" href="article-edit.html?id=${encodeURIComponent(a.id)}">${a.cover_image_url?`<img class="recent-thumb" src="${esc(a.cover_image_url)}" alt="">`:`<div class="recent-thumb"></div>`}<div class="recent-info"><strong>${esc(a.title||'Tanpa judul')}</strong><small>${esc(a.status||'draft')}</small></div></a>`).join(''):'<div class="empty"><strong>Belum ada artikel.</strong>Artikel terbaru akan muncul di sini.</div>'}catch(e){console.error('Dashboard error:',e);const m=document.getElementById('page-message');m.className='message error';m.textContent=e?.message||'Dashboard gagal dimuat.'}}
+document.getElementById('logout-button').addEventListener('click',async()=>{try{await API.auth.signOut()}finally{location.replace('login.html')}});init();
 </script>
 </body>
 </html>
