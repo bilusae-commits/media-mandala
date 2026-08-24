@@ -4,91 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Mandala Channel CMS</title>
-<link rel="stylesheet" href="./css/admin.css">
+<link rel="stylesheet" href="./css/cms.css">
 </head>
 <body>
+<div class="cms-shell">
+  <aside class="cms-sidebar">
+    <div class="cms-brand"><strong>Mandala Channel</strong><span>Administration Panel</span></div>
+    <nav class="cms-nav">
+      <div class="cms-nav-label">Dashboard</div>
+      <a class="cms-nav-item active" href="dashboard.html">⌂ <span>Dashboard</span></a>
+      <div class="cms-nav-label">Content</div>
+      <a class="cms-nav-item" href="articles.html">▤ <span>Artikel</span></a>
+      <a class="cms-nav-item" href="videos.html">▶ <span>Video</span></a>
+      <a class="cms-nav-item" href="categories.html">◫ <span>Topik</span></a>
+      <div class="cms-nav-label">System</div>
+      <a class="cms-nav-item" href="settings.html">○ <span>Profil</span></a>
+    </nav>
+    <div class="cms-sidebar-bottom"><button id="logoutBtn" class="cms-logout" type="button">Keluar</button></div>
+  </aside>
 
-<!-- existing dashboard markup -->
-
+  <main class="cms-main">
+    <header class="cms-topbar">
+      <div><strong>Dashboard</strong><span>Mandala Channel CMS</span></div>
+      <div class="cms-user"><div id="avatar" class="cms-avatar">A</div><div><strong id="userName">Admin</strong><small id="userRole">admin</small></div></div>
+    </header>
+    <section class="cms-content">
+      <div id="errorBox" class="cms-alert cms-alert-error" hidden></div>
+      <div id="loading" class="cms-loading">Memuat dashboard…</div>
+      <div id="dashboard" hidden>
+        <div class="cms-page-head"><div><span class="cms-eyebrow">Dashboard Admin</span><h1 id="welcome">Selamat datang</h1><p>Kelola seluruh konten Mandala Channel dari satu panel.</p></div></div>
+        <div class="cms-stats-grid">
+          <a class="cms-stat-card" href="articles.html"><span>Total Artikel</span><strong id="articleCount">0</strong></a>
+          <a class="cms-stat-card" href="videos.html"><span>Total Video</span><strong id="videoCount">0</strong></a>
+          <a class="cms-stat-card" href="categories.html"><span>Total Topik</span><strong id="categoryCount">0</strong></a>
+          <div class="cms-stat-card"><span>Status Akun</span><strong>Aktif</strong></div>
+        </div>
+        <div class="cms-section-head"><div><span class="cms-eyebrow">Quick Access</span><h2>Kelola Konten</h2></div></div>
+        <div class="cms-card-grid">
+          <a class="cms-card" href="articles.html"><h3>Artikel</h3><p>Kelola, edit, review, publish, dan arsipkan artikel.</p></a>
+          <a class="cms-card" href="videos.html"><h3>Video</h3><p>Kelola video dan konten YouTube Mandala Channel.</p></a>
+          <a class="cms-card" href="categories.html"><h3>Topik</h3><p>Kelola kategori dan pengelompokan konten.</p></a>
+        </div>
+        <div class="cms-section-head"><div><span class="cms-eyebrow">Terbaru</span><h2>Artikel Terbaru</h2></div><a class="cms-link" href="articles.html">Lihat semua →</a></div>
+        <div id="recentArticles" class="cms-list-card"><div class="cms-empty">Memuat artikel…</div></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="../js/config.js"></script>
 <script type="module">
-    import "../js/supabase-client.js";
-
-    const API = window.MandalaSupabase;
-    if (!API) throw new Error("MandalaSupabase belum dimuat.");
-    const supabase = await API.getClient();
-
-    /* =====================================================
-       ELEMENT
-    ===================================================== */
-
-    const loading=document.getElementById("loading");
-    const dashboard=document.getElementById("dashboard");
-    const errorBox=document.getElementById("error-box");
-    const userName=document.getElementById("user-name");
-    const userRole=document.getElementById("user-role");
-    const sidebarUserName=document.getElementById("sidebar-user-name");
-    const sidebarUserRole=document.getElementById("sidebar-user-role");
-    const userAvatar=document.getElementById("user-avatar");
-    const welcomeTitle=document.getElementById("welcome-title");
-    const recentArticles=document.getElementById("recent-articles");
-    const logoutButton=document.getElementById("logout-button");
-
-    function escapeHtml(value){return String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
-    function initials(name){const parts=String(name||"").trim().split(/\s+/).slice(0,2);if(!parts.length)return "?";return parts.map(part=>part.charAt(0).toUpperCase()).join("")}
-    function formatDate(value){if(!value)return "-";const date=new Date(value);if(Number.isNaN(date.getTime()))return "-";return date.toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"})}
-    function statusClass(status){const value=String(status||"draft").toLowerCase();return ["published","review","archived"].includes(value)?value:"draft"}
-    function showError(message){errorBox.textContent=message||"Terjadi kesalahan.";errorBox.style.display="block"}
-
-    async function getProfile(userId){
-        const {data,error}=await supabase.from("profiles").select("id,full_name,role,avatar_url").eq("id",userId).maybeSingle();
-        if(error)throw error;
-        return data||null;
-    }
-
-    async function getCount(table){
-        const {count,error}=await supabase.from(table).select("*",{count:"exact",head:true});
-        if(error){console.warn(`Count ${table}:`,error);return 0}
-        return count||0;
-    }
-
-    async function getRecentArticles(){
-        const {data,error}=await supabase.from("articles").select("id,title,status,cover_image_url,created_at").order("created_at",{ascending:false}).limit(5);
-        if(error)throw error;
-        return data||[];
-    }
-
-    function renderArticles(articles){
-        if(!articles.length){recentArticles.innerHTML='<div class="empty">Belum ada artikel.</div>';return;}
-        recentArticles.innerHTML=articles.map(article=>{
-            const title=escapeHtml(article.title||"Tanpa judul");
-            const status=String(article.status||"draft").toLowerCase();
-            const image=article.cover_image_url?`<img class="recent-image" src="${escapeHtml(article.cover_image_url)}" alt="">`:`<div class="recent-image"></div>`;
-            return `<a class="recent-item" href="article-edit.html?id=${encodeURIComponent(article.id)}">${image}<div class="recent-info"><div class="recent-title">${title}</div><div class="recent-date">${formatDate(article.created_at)}</div></div><span class="status ${statusClass(status)}">${escapeHtml(status)}</span></a>`;
-        }).join("");
-    }
-
-    async function init(){
-        try{
-            const user=await API.auth.getUser();
-            if(!user){window.location.href="index.html";return;}
-            const profile=await getProfile(user.id);
-            if(!profile){showError("Profil pengguna tidak ditemukan.");loading.style.display="none";return;}
-            const role=profile.role;
-            if(role!=="admin"&&role!=="editor"){window.location.href="index.html";return;}
-            const name=profile.full_name||user.email||"Pengguna";
-            userName.textContent=name;userRole.textContent=role;sidebarUserName.textContent=name;sidebarUserRole.textContent=role;userAvatar.textContent=initials(name);welcomeTitle.textContent=`Selamat datang, ${name}`;
-            const [articlesCount,videosCount,playlistsCount,podcastsCount,recent]=await Promise.all([getCount("articles"),getCount("videos"),getCount("playlists"),getCount("podcasts"),getRecentArticles()]);
-            document.getElementById("article-count").textContent=articlesCount;
-            document.getElementById("video-count").textContent=videosCount;
-            document.getElementById("playlist-count").textContent=playlistsCount;
-            document.getElementById("podcast-count").textContent=podcastsCount;
-            renderArticles(recent);
-            loading.style.display="none";dashboard.style.display="block";
-        }catch(error){console.error("Dashboard error:",error);loading.style.display="none";showError(error?.message||"Dashboard gagal dimuat.")}
-    }
-
-    logoutButton?.addEventListener("click",async()=>{try{await API.auth.signOut()}finally{location.href="login.html"}});
-    init();
+import "../js/supabase-client.js";
+const API=window.MandalaSupabase;
+const errorBox=document.getElementById('errorBox'),loading=document.getElementById('loading'),dashboard=document.getElementById('dashboard');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const initials=n=>String(n||'A').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'A';
+async function init(){try{
+  if(!API)throw new Error('MandalaSupabase belum dimuat.');
+  const client=await API.getClient();
+  const {data:{user}}=await client.auth.getUser();
+  if(!user){location.href='login.html';return;}
+  const {data:profile,error:profileError}=await client.from('profiles').select('full_name,role,avatar_url').eq('id',user.id).maybeSingle();
+  if(profileError)throw profileError;
+  const name=profile?.full_name||user.email||'Pengguna',role=profile?.role||'editor';
+  if(!['admin','editor'].includes(role)){location.href='login.html';return;}
+  document.getElementById('userName').textContent=name;document.getElementById('userRole').textContent=role;document.getElementById('avatar').textContent=initials(name);document.getElementById('welcome').textContent=`Selamat datang, ${name}`;
+  const count=async table=>{const {count,error}=await client.from(table).select('*',{count:'exact',head:true});if(error)throw error;return count||0};
+  const [articles,videos,categories]=await Promise.all([count('articles'),count('videos'),count('categories')]);
+  document.getElementById('articleCount').textContent=articles;document.getElementById('videoCount').textContent=videos;document.getElementById('categoryCount').textContent=categories;
+  const {data:recent,error:recentError}=await client.from('articles').select('id,title,status,cover_image_url,created_at').order('created_at',{ascending:false}).limit(6);if(recentError)throw recentError;
+  const list=document.getElementById('recentArticles');
+  list.innerHTML=recent?.length?recent.map(a=>`<a class="cms-list-item" href="article-edit.html?id=${encodeURIComponent(a.id)}"><div class="cms-list-thumb">${a.cover_image_url?`<img src="${esc(a.cover_image_url)}" alt="">`:''}</div><div class="cms-list-info"><strong>${esc(a.title||'Tanpa judul')}</strong><small>${esc(a.status||'draft')}</small></div></a>`).join(''):'<div class="cms-empty">Belum ada artikel.</div>';
+  loading.hidden=true;dashboard.hidden=false;
+}catch(e){console.error('Dashboard error:',e);loading.hidden=true;errorBox.textContent=e?.message||'Dashboard gagal dimuat.';errorBox.hidden=false}}
+document.getElementById('logoutBtn').addEventListener('click',async()=>{try{await API.auth.signOut()}finally{location.href='login.html'}});init();
 </script>
 </body>
 </html>
