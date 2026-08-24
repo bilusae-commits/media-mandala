@@ -1,47 +1,70 @@
 /* =========================================================
    MANDALA CHANNEL — GLOBAL BRANDING
-   Official logo + footer + legacy logo cleanup.
-   This file changes branding only; it does not alter page layout.
+   Official logo replaces the complete legacy logo + wordmark.
+   Branding only; page layout is preserved.
    ========================================================= */
 :root{--mandala-brand-logo:url('../assets/brand/Asset 5@4x.png')}
 
-/* Official header logo */
-.logo .mark,.mark{
-    position:relative!important;
+/* =========================================================
+   HEADER — one complete official logo
+   ========================================================= */
+.logo{
+    width:150px!important;
+    height:46px!important;
+    flex:0 0 150px!important;
     display:block!important;
-    width:42px!important;height:42px!important;flex:0 0 42px!important;
-    border:0!important;border-radius:0!important;
-    color:transparent!important;font-size:0!important;
-    background:transparent var(--mandala-brand-logo) center/contain no-repeat!important;
-    box-shadow:none!important;
+    margin-right:auto!important;
+    background:transparent var(--mandala-brand-logo) left center/contain no-repeat!important;
 }
-.logo .mark::before,.logo .mark::after,.mark::before,.mark::after{display:none!important;content:none!important}
 
-/* Legacy text CHANNEL below/next to the logo is not part of the official mark. */
-.logo small{display:none!important}
+/* The asset itself contains the complete branding, so the old mark
+   and the separate MANDALA / CHANNEL text must not remain visible. */
+.logo .mark,.logo b,.logo small,.logo .symbol,.logo .icon,.logo [data-logo-symbol]{
+    display:none!important;
+}
+.logo .mark::before,.logo .mark::after{display:none!important;content:none!important}
 
-/* Keep the existing MANDALA wordmark when present; the graphic mark above is now official. */
-.logo b{color:var(--mandala-navy,#082d56)!important}
-
-/* Footer: replace legacy text-only brand without changing footer grid. */
+/* =========================================================
+   FOOTER — use the same complete official logo
+   ========================================================= */
 footer .foot>div:first-child>b{
-    display:block!important;width:150px!important;height:46px!important;
-    margin-bottom:12px!important;
+    display:block!important;
+    width:150px!important;height:46px!important;
+    margin:0 0 12px!important;
     background:transparent var(--mandala-brand-logo) left center/contain no-repeat!important;
     color:transparent!important;font-size:0!important;line-height:0!important;
 }
 
-/* Generic logo hooks */
+/* Covers footer implementations where the legacy logo is an image. */
+footer .foot>div:first-child img{
+    width:150px!important;height:46px!important;
+    object-fit:contain!important;object-position:left center!important;
+    opacity:0!important;
+    background:transparent var(--mandala-brand-logo) left center/contain no-repeat!important;
+}
+
+/* Replace the old footer description with the requested message. */
+footer .foot>div:first-child p:first-of-type{
+    font-size:0!important;
+    line-height:1.7!important;
+}
+footer .foot>div:first-child p:first-of-type::after{
+    content:'Belajar Menjadi Pembawa Pesan yang Baik';
+    font-size:9px;
+    line-height:1.7;
+    color:#9fb0bf;
+}
+
+/* Generic logo hooks used by alternate/public components. */
 .brand-logo,.site-logo{
     background:transparent var(--mandala-brand-logo) center/contain no-repeat!important;
     color:transparent!important;font-size:0!important;
 }
 .brand-logo img,.site-logo img{opacity:0!important}
 
-/* Prevent old decorative logo glyphs from appearing inside known logo containers. */
-.logo .symbol,.logo .icon,.logo [data-logo-symbol]{display:none!important}
-
 @media(max-width:700px){
-    .logo .mark,.mark{width:36px!important;height:36px!important;flex-basis:36px!important}
-    footer .foot>div:first-child>b{width:130px!important;height:40px!important}
+    .logo{width:140px!important;height:42px!important;flex-basis:140px!important}
+    footer .foot>div:first-child>b,footer .foot>div:first-child img{
+        width:140px!important;height:42px!important;
+    }
 }
