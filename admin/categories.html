@@ -1,146 +1,37 @@
 <!doctype html>
 <html lang="id">
-
 <head>
-
-    <meta charset="utf-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1"
-    >
-
-    <title>Kategori — Mandala CMS</title>
-
-    <link
-        rel="stylesheet"
-        href="css/admin.css"
-    >
-
-    <script src="../js/config.js"></script>
-    <script src="../js/supabase-client.js"></script>
-    <script src="js/cms-service.js"></script>
-    <script src="js/shell.js"></script>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kategori — Mandala CMS</title>
+<link rel="stylesheet" href="css/admin.css">
+<script src="../js/config.js"></script>
+<script src="../js/supabase-client.js"></script>
+<script src="js/cms-service.js"></script>
+<script src="js/shell.js"></script>
+<style>
+.categoryToolbar{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:18px}.categoryForm{display:grid;grid-template-columns:minmax(180px,1fr) minmax(180px,1fr) 110px 110px auto;gap:10px;align-items:end}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:11px;color:#687789}.field input,.field textarea{width:100%;border:1px solid #d9e0e7;border-radius:6px;padding:10px 11px;background:#fff;color:#18324f}.field textarea{min-height:40px;resize:vertical}.check{display:flex;align-items:center;gap:7px;height:40px;font-size:12px;color:#526170}.actions{display:flex;gap:7px;flex-wrap:wrap}.btn{border:1px solid #d5dde5;background:#fff;color:#163657;border-radius:5px;padding:9px 12px;cursor:pointer;font-size:11px}.btn.primary{background:#082d56;color:#fff;border-color:#082d56}.btn.danger{color:#a33b3b}.catTable{width:100%;border-collapse:collapse}.catTable th,.catTable td{text-align:left;padding:13px 10px;border-bottom:1px solid #e7ebef;font-size:12px;vertical-align:middle}.catTable th{font-size:10px;color:#7a8793;text-transform:uppercase;letter-spacing:.08em}.status{display:inline-flex;padding:4px 8px;border-radius:20px;font-size:10px}.status.on{background:#e9f6ed;color:#267443}.status.off{background:#f2f3f5;color:#777}.muted{color:#81909d}.empty{text-align:center;padding:35px;color:#778594}.message{margin:0 0 14px;padding:10px 12px;border-radius:5px;background:#f4f7fa;color:#526170;font-size:12px;display:none}.message.error{background:#fff0f0;color:#9b3d3d}.count{font-size:11px;color:#7b8995}@media(max-width:900px){.categoryForm{grid-template-columns:1fr 1fr}.categoryForm .actions{grid-column:1/-1}}@media(max-width:600px){.categoryForm{grid-template-columns:1fr}.catTable{display:block;overflow-x:auto;white-space:nowrap}}
+</style>
 </head>
-
-
 <body>
-
+<div id="page" style="margin-left:245px;padding-top:70px"></div>
 <script>
-
-async function initCategoryPage() {
-
-    const allowed =
-        await MandalaCMS.requireAdmin();
-
-    if (!allowed) {
-        return;
-    }
-
-
-    await initShell(
-        "Kategori",
-        "categories"
-    );
-
-
-    document.getElementById(
-        "page"
-    ).innerHTML = `
-
-        <div class="panel">
-
-            <div class="panelHead">
-
-                <h3>
-                    Kategori Mandala
-                </h3>
-
-            </div>
-
-
-            <div class="panelBody">
-
-                <div
-                    id="cat"
-                    class="empty"
-                >
-                    Memuat...
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    try {
-
-        const data =
-            await MandalaCMS.categories();
-
-
-        document.getElementById(
-            "cat"
-        ).innerHTML =
-
-            data.length
-
-                ? data.map(
-                    function (item) {
-
-                        return `
-                            <p>
-                                <b>
-                                    ${escapeHtml(item.name)}
-                                </b>
-
-                                <span class="hint">
-                                    ${escapeHtml(item.slug)}
-                                </span>
-                            </p>
-                        `;
-
-                    }
-                ).join("")
-
-                : "Belum ada kategori.";
-
-
-    } catch (error) {
-
-        console.error(
-            "Category loading error:",
-            error
-        );
-
-
-        document.getElementById(
-            "cat"
-        ).textContent =
-            error.message ||
-            "Gagal memuat kategori.";
-    }
-
-}
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    initCategoryPage
-);
-
+'use strict';
+let categories=[];
+const page=document.getElementById('page');
+const slugify=v=>String(v||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const escapeHtml=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+function formHtml(){return `<div class="panel"><div class="panelHead"><h3 id="formTitle">Tambah Kategori</h3></div><div class="panelBody"><div id="message" class="message"></div><form id="categoryForm" class="categoryForm"><input type="hidden" id="categoryId"><div class="field"><label>Nama kategori</label><input id="name" required maxlength="100" placeholder="Contoh: Tokoh Hindu"></div><div class="field"><label>Slug</label><input id="slug" required maxlength="120" placeholder="tokoh-hindu"></div><div class="field"><label>Urutan</label><input id="sortOrder" type="number" min="0" value="0"></div><label class="check"><input id="active" type="checkbox" checked> Aktif</label><div class="actions"><button class="btn primary" type="submit" id="saveBtn">Simpan</button><button class="btn" type="button" id="cancelBtn" style="display:none">Batal</button></div></form></div></div>`}
+function listHtml(){return `<div class="panel"><div class="panelHead"><h3>Daftar Kategori</h3><span class="count">${categories.length} kategori</span></div><div class="panelBody"><div id="tableWrap">${categories.length?`<table class="catTable"><thead><tr><th>Nama</th><th>Slug</th><th>Urutan</th><th>Status</th><th>Aksi</th></tr></thead><tbody>${categories.map(c=>`<tr><td><b>${escapeHtml(c.name)}</b>${c.description?`<div class="muted">${escapeHtml(c.description)}</div>`:''}</td><td class="muted">${escapeHtml(c.slug)}</td><td>${Number(c.sort_order||0)}</td><td><span class="status ${c.is_active?'on':'off'}">${c.is_active?'Aktif':'Nonaktif'}</span></td><td><div class="actions"><button class="btn" data-edit="${c.id}">Edit</button><button class="btn" data-toggle="${c.id}">${c.is_active?'Nonaktifkan':'Aktifkan'}</button><button class="btn danger" data-delete="${c.id}">Hapus</button></div></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Belum ada kategori.</div>'}</div></div></div>`}
+function showMessage(text,error=false){const el=document.getElementById('message');if(!el)return;el.textContent=text;el.className='message'+(error?' error':'');el.style.display='block'}
+function resetForm(){document.getElementById('categoryForm').reset();document.getElementById('categoryId').value='';document.getElementById('sortOrder').value='0';document.getElementById('active').checked=true;document.getElementById('formTitle').textContent='Tambah Kategori';document.getElementById('saveBtn').textContent='Simpan';document.getElementById('cancelBtn').style.display='none';}
+function editCategory(id){const c=categories.find(x=>x.id===id);if(!c)return;document.getElementById('categoryId').value=c.id;document.getElementById('name').value=c.name||'';document.getElementById('slug').value=c.slug||'';document.getElementById('sortOrder').value=c.sort_order||0;document.getElementById('active').checked=c.is_active!==false;document.getElementById('formTitle').textContent='Edit Kategori';document.getElementById('saveBtn').textContent='Simpan Perubahan';document.getElementById('cancelBtn').style.display='inline-block';window.scrollTo({top:0,behavior:'smooth'});}
+async function refresh(){categories=await MandalaCMS.categories();document.getElementById('tableWrap').outerHTML=listHtml().match(/<div id="tableWrap">[\s\S]*<\/div><\/div><\/div>$/)?.[0]||'<div id="tableWrap"></div>';renderList();}
+function renderList(){const wrap=document.getElementById('tableWrap');if(wrap)wrap.outerHTML=listHtml().match(/<div id="tableWrap">[\s\S]*<\/div>$/)?.[0]||'<div id="tableWrap"></div>';bindList();}
+function bindList(){document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editCategory(b.dataset.edit));document.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=async()=>{const c=categories.find(x=>x.id===b.dataset.toggle);if(!c)return;try{await MandalaCMS.update('categories',c.id,{is_active:!c.is_active,updated_at:new Date().toISOString()});await refresh();}catch(e){alert(e.message||'Gagal mengubah status kategori.')}});document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=async()=>{const c=categories.find(x=>x.id===b.dataset.delete);if(!c)return;if(!confirm(`Hapus kategori "${c.name}"?`))return;try{const used=await MandalaCMS.select('articles','id').then(rows=>rows.filter(a=>a.category_id===c.id));if(used.length){alert(`Kategori masih digunakan oleh ${used.length} artikel. Nonaktifkan saja kategori ini agar artikel tetap aman.`);return;}await MandalaCMS.remove('categories',c.id);await refresh();}catch(e){alert(e.message||'Gagal menghapus kategori.')}})}
+async function save(e){e.preventDefault();const id=document.getElementById('categoryId').value;const name=document.getElementById('name').value.trim();const slug=slugify(document.getElementById('slug').value||name);const sort_order=Math.max(0,Number(document.getElementById('sortOrder').value||0));const is_active=document.getElementById('active').checked;if(!name||!slug){showMessage('Nama dan slug wajib diisi.',true);return}const duplicate=categories.find(c=>c.slug===slug&&c.id!==id);if(duplicate){showMessage('Slug sudah digunakan kategori lain.',true);return}const payload={name,slug,sort_order,is_active,updated_at:new Date().toISOString()};try{document.getElementById('saveBtn').disabled=true;if(id){await MandalaCMS.update('categories',id,payload);showMessage('Kategori berhasil diperbarui.')}else{await MandalaCMS.insert('categories',{...payload});showMessage('Kategori berhasil ditambahkan.')}await refresh();resetForm();}catch(error){console.error(error);showMessage(error.message||'Gagal menyimpan kategori.',true)}finally{document.getElementById('saveBtn').disabled=false}}
+async function init(){const auth=await MandalaCMS.requireStaff();if(!auth)return;if(auth.role!=='admin'){window.location.replace('index.html');return}await initShell('Kategori','categories');document.querySelector('.content').innerHTML=formHtml()+listHtml();document.getElementById('categoryForm').addEventListener('submit',save);document.getElementById('cancelBtn').onclick=resetForm;try{categories=await MandalaCMS.categories();renderList();}catch(error){console.error(error);document.getElementById('tableWrap').innerHTML=`<div class="empty">Gagal memuat kategori: ${escapeHtml(error.message||'Unknown error')}</div>`}}
+document.addEventListener('DOMContentLoaded',init);
 </script>
-
-
-<div
-    id="page"
-    style="margin-left:245px;padding-top:70px"
-></div>
-
-
 </body>
-
 </html>
