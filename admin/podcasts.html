@@ -6,15 +6,18 @@
 <title>Podcast — Mandala Channel CMS</title>
 <link rel="stylesheet" href="css/cms.css">
 <style>
-.podcast-cell{display:flex;align-items:center;gap:11px;min-width:320px}.podcast-thumb{width:96px;height:55px;object-fit:cover;border-radius:6px;background:#edf1f5;flex:0 0 auto}.podcast-fallback{display:grid;place-items:center;width:96px;height:55px;border-radius:6px;background:#edf1f5;color:var(--navy);font-size:9px;font-weight:800}.podcast-name{max-width:430px;font-weight:700;line-height:1.35}.podcast-sub{max-width:430px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:9px}.type-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:4px;font-size:8px;font-weight:700}.type-video{background:#edf3f8;color:var(--navy)}.type-audio{background:#f5efe3;color:#806126}.featured-mark{margin-left:5px;color:#a16207;font-weight:800}.stat-click{cursor:pointer;transition:.15s ease}.stat-click:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(0,0,0,.06)}@media(max-width:800px){.podcast-cell{min-width:260px}.podcast-name,.podcast-sub{max-width:300px}}
+.status-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--border);background:#fafafa}
+.status-tab{border:1px solid var(--border);background:#fff;color:#555;border-radius:6px;padding:7px 10px;font-size:9px;font-weight:700;cursor:pointer}.status-tab:hover{background:#f5f5f5}.status-tab.active{background:var(--dark);border-color:var(--dark);color:#fff}
+.podcast-cell{display:flex;align-items:center;gap:11px;min-width:320px}.podcast-thumb{width:96px;height:55px;object-fit:cover;border-radius:6px;background:#edf1f5;display:block;flex:0 0 auto}.podcast-fallback{display:grid;place-items:center;width:96px;height:55px;border-radius:6px;background:#edf1f5;color:var(--navy);font-size:18px;font-weight:800;flex:0 0 auto}.podcast-name{max-width:430px;font-weight:700;line-height:1.35}.podcast-sub{max-width:430px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:9px}.type-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:4px;font-size:8px;font-weight:700}.type-video{background:#edf3f8;color:var(--navy)}.type-audio{background:#f5efe3;color:#806126}.featured-mark{margin-left:5px;color:#a16207;font-weight:800}.stat-click{cursor:pointer;transition:.15s ease}.stat-click:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(0,0,0,.06)}
+@media(max-width:800px){.podcast-cell{min-width:260px}.podcast-name,.podcast-sub{max-width:300px}}
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="sidebar">
-<a class="brand" href="dashboard.html"><div class="brand-title">MANDALA</div><div class="brand-subtitle">CHANNEL · CMS</div></a>
+<a class="brand" href="dashboard.html"></a>
 <div class="nav-title">Konten</div>
-<nav class="nav">
+<nav class="nav" aria-label="Navigasi konten">
 <a class="nav-link" href="dashboard.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
 <a class="nav-link" href="articles.html"><span class="nav-icon">▤</span><span>Artikel</span></a>
 <a class="nav-link" href="videos.html"><span class="nav-icon">▶</span><span>Video</span></a>
@@ -27,9 +30,9 @@
 <div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name" id="side-name">Memuat...</div><div class="sidebar-user-role" id="side-role">-</div></div><button class="logout-button" id="logout-button" type="button"><span>Keluar</span> ↪</button></div>
 </aside>
 <main class="main">
-<header class="topbar"><div><div class="title">Podcast</div><div class="subtitle">Kelola podcast audio dan video Mandala Channel</div></div><div class="user-mini" id="top-user"></div></header>
+<header class="topbar"><div><div class="title">Podcast</div><div class="subtitle">Kelola seluruh podcast Mandala Channel</div></div><div class="user-mini" id="top-user"></div></header>
 <section class="content">
-<div class="page-head"><div><h1>Podcast</h1><p>Kelola podcast audio dan video dalam satu tempat.</p></div><a class="btn btn-primary" href="podcast-edit.html">+ Podcast Baru</a></div>
+<div class="page-head"><div><h1>Podcast</h1><p>Kelola podcast audio dan video, dari draft hingga published.</p></div><a class="btn btn-primary" href="podcast-edit.html">+ Podcast Baru</a></div>
 <div id="page-message" class="message"></div>
 <div class="stats">
 <div class="stat stat-click" data-type-card="all"><div class="stat-label">Total</div><div class="stat-value" id="stat-total">—</div></div>
@@ -40,15 +43,15 @@
 </div>
 <section class="panel">
 <div class="panel-head"><div style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><div class="panel-title">Daftar Podcast</div><div class="panel-meta" id="result-count">Memuat...</div></div><button class="btn btn-light" id="refresh" type="button">↻ Refresh</button></div></div>
-<div class="status-tabs" id="status-tabs"><button class="status-tab active" data-status="all" type="button">Semua</button><button class="status-tab" data-status="draft" type="button">Draft</button><button class="status-tab" data-status="review" type="button">Review</button><button class="status-tab" data-status="published" type="button">Published</button><button class="status-tab" data-status="archived" type="button">Arsip</button></div>
+<div class="status-tabs" id="status-tabs" aria-label="Filter status"><button class="status-tab active" data-status="all" type="button">Semua</button><button class="status-tab" data-status="draft" type="button">Draft</button><button class="status-tab" data-status="review" type="button">Review</button><button class="status-tab" data-status="published" type="button">Published</button><button class="status-tab" data-status="archived" type="button">Arsip</button></div>
 <div class="toolbar"><input class="input" id="search" type="search" placeholder="Cari judul, slug, atau deskripsi..." autocomplete="off"><select class="select" id="type-filter"><option value="all">Semua jenis</option><option value="video">Video</option><option value="audio">Audio</option></select><select class="select" id="status-filter"><option value="all">Semua status</option><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Arsip</option></select><button class="btn btn-light" id="clear-filters" type="button">Reset</button></div>
 <div class="table-wrap" id="podcasts-container"><div class="empty"><strong>Memuat podcast...</strong>Menyiapkan data dari Supabase.</div></div>
 </section>
 </section>
 </main>
 </div>
-<script src="../js/config.js?v=20260824.3"></script>
-<script src="../js/supabase-client.js?v=20260824.3"></script>
-<script type="module" src="./js/podcasts.js?v=20260824.3"></script>
+<script src="../js/config.js?v=20260829.1"></script>
+<script src="../js/supabase-client.js?v=20260829.1"></script>
+<script src="./js/podcasts.js?v=20260829.1"></script>
 </body>
 </html>
