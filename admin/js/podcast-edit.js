@@ -25,7 +25,11 @@
     $('uploadProgress').style.display='block';
     $('uploadProgress').querySelector('i').style.width='20%';
     const{data,error}=await db.functions.invoke('podcast-storage',{body:form});
-    if(error)throw error;
+    if(error){
+      let detail='';
+      try{if(error.context instanceof Response){const body=await error.context.clone().json();detail=body?.error||'';}}catch(_e){}
+      throw new Error(detail||error.message||'Upload ke Backblaze gagal.');
+    }
     if(!data?.ok||!data?.key)throw new Error(data?.error||'Upload ke Backblaze gagal.');
     $('uploadProgress').querySelector('i').style.width='100%';
     return data.key;
