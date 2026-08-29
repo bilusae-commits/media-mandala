@@ -1,11 +1,12 @@
 /* Podcast final UX override */
 .podcast-page{overflow-x:hidden!important}
 .podcast-page .w{width:var(--home-max,94vw);max-width:none;margin-inline:auto}
+/* Use the real Mandala brand asset instead of the placeholder mark. */
+.podcast-page header .logo .mark,.podcast-page footer .logo .mark{font-size:0;background:url('../assets/brand/Asset 5@4x.png') center/contain no-repeat;width:48px;height:48px;flex:0 0 48px}
 .podcast-page .podcast-toolbar{align-items:flex-end}
 .podcast-page .podcast-search{width:min(390px,100%);flex:0 1 390px}
 .podcast-page .podcast-video-rail{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 .podcast-page .podcast-video-rail .podcast-card{flex:0 0 clamp(280px,28vw,400px);width:clamp(280px,28vw,400px)}
-/* Audio is a normal responsive list; no horizontal scrolling. */
 .podcast-page .podcast-audio-rail{width:100%;overflow:visible!important;touch-action:auto}
 .podcast-page .podcast-audio-table{width:100%;min-width:0!important;border-top:1px solid #e5e9ed}
 .podcast-page .podcast-audio-row{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(230px,310px);gap:20px;align-items:center;min-width:0!important;width:100%;padding:18px 0;border-bottom:1px solid #e5e9ed}
@@ -32,6 +33,7 @@
  .podcast-page .podcast-player-track{grid-column:2;grid-row:1}
  .podcast-page .podcast-player-time{grid-column:2;grid-row:2}
  .podcast-page .podcast-video-link{grid-column:1 / -1;grid-row:3;justify-self:start}
+ .podcast-page header .logo .mark,.podcast-page footer .logo .mark{width:40px;height:40px;flex-basis:40px}
 }
 @media(max-width:620px){
  .podcast-page .w{width:calc(100% - 32px)}
