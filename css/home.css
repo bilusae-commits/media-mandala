@@ -20,3 +20,18 @@ html,body{min-width:0;overflow-x:hidden}
 @media(max-width:520px){:root{--home-gutter:14px}.logo img{height:30px;max-width:150px}.heroCopy h1{font-size:clamp(2rem,10.5vw,3rem)}.heroButtons{display:grid;grid-template-columns:1fr}.heroButtons .btn{width:100%}.cards{grid-template-columns:1fr}.topicGrid{grid-template-columns:1fr}.story{grid-template-columns:minmax(88px,38%) minmax(0,1fr)}.podcast{grid-template-columns:1fr}.podcast img{aspect-ratio:16/9}.foot{grid-template-columns:1fr}.foot>div{grid-column:auto!important}.email{flex-direction:column;gap:8px}.email input,.email button{width:100%}}
 @media(max-width:360px){:root{--home-gutter:12px}.visual{height:240px}.story{grid-template-columns:1fr}.story img{aspect-ratio:16/9}.pcard{flex-basis:82vw}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* FLUID FOUNDATION — keeps the homepage using the available viewport at every zoom level. */
+.w,.nav,.heroGrid{width:auto;max-width:none;margin-left:var(--home-gutter);margin-right:var(--home-gutter)}
+section>.w,footer>.w{width:auto}
+main,section,footer,header,.top{max-width:none}
+.heroGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.featureGrid,.cards,.topicGrid,.podcasts,.foot{width:100%;max-width:none}
+.featureGrid,.cards,.topicGrid,.podcasts{min-width:0}
+.cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+.topicGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.podcasts{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:980px){.heroGrid{grid-template-columns:minmax(0,1fr)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.podcasts{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:720px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.topicGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.cards{grid-template-columns:minmax(0,1fr)}.topicGrid{grid-template-columns:minmax(0,1fr)}.podcasts{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:360px){.cards,.topicGrid,.podcasts{grid-template-columns:minmax(0,1fr)}.w,.nav,.heroGrid{margin-left:12px;margin-right:12px}}
