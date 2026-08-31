@@ -4,21 +4,18 @@
    ========================================================= */
 (function(){
     "use strict";
-
-    /* IMPORTANT: do not name a local variable URL; it shadows window.URL. */
     const SUPABASE_URL = (window.MANDALA_CONFIG || {}).SUPABASE_URL || "";
     const SUPABASE_KEY = (window.MANDALA_CONFIG || {}).SUPABASE_PUBLISHABLE_KEY || (window.MANDALA_CONFIG || {}).SUPABASE_ANON_KEY || "";
-
-    /* Global branding: official logo stylesheet + favicon. */
     const scriptSrc = document.currentScript?.src || "";
     const resolveAsset = (path) => scriptSrc ? new window.URL(path, scriptSrc).href : path;
 
-    if (!document.querySelector('link[data-mandala-branding]')) {
-        const branding = document.createElement('link');
-        branding.rel = 'stylesheet';
-        branding.href = resolveAsset('../css/branding-logo.css');
-        branding.dataset.mandalaBranding = 'true';
-        document.head.appendChild(branding);
+    /* Public visual system is loaded last so legacy inline page CSS cannot split the design. */
+    if (!document.querySelector('link[data-mandala-public-ui]')) {
+        const ui = document.createElement('link');
+        ui.rel = 'stylesheet';
+        ui.href = resolveAsset('../css/public-unified.css');
+        ui.dataset.mandalaPublicUi = 'true';
+        document.head.appendChild(ui);
     }
     if (!document.querySelector('link[data-mandala-favicon]')) {
         const favicon = document.createElement('link');
@@ -29,10 +26,36 @@
         document.head.appendChild(favicon);
     }
 
+    /* Normalize legacy public header logos to the official asset. */
+    function normalizeBranding(){
+        const logo = document.querySelector('header .logo, #siteHeader .logo');
+        if (logo && !logo.querySelector('img')) {
+            logo.replaceChildren();
+            const img = document.createElement('img');
+            img.src = resolveAsset('../assets/brand/Asset 5@4x.png');
+            img.alt = 'Mandala Channel';
+            logo.appendChild(img);
+        }
+        const footerLogo = document.querySelector('footer .footLogo, footer .footer-brand img');
+        if (footerLogo) {
+            footerLogo.src = resolveAsset('../assets/brand/Asset 5@4x.png');
+            footerLogo.alt = 'Mandala Channel';
+        }
+        const footerBrand = document.querySelector('footer .foot > div:first-child');
+        if (footerBrand && !footerBrand.querySelector('img')) {
+            const img = document.createElement('img');
+            img.className = 'footLogo';
+            img.src = resolveAsset('../assets/brand/Asset 5@4x.png');
+            img.alt = 'Mandala Channel';
+            footerBrand.prepend(img);
+        }
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalizeBranding, {once:true});
+    else normalizeBranding();
+
     const FALLBACK = "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85";
     let db = null;
     let publicData = { articles: [], videos: [], playlists: [], topics: [], categories: [] };
-
     function esc(value){return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
     function youtubeId(value){if(!value)return "";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const url=new window.URL(text),host=url.hostname.replace(/^www\./,"").toLowerCase();if(host==="youtu.be")return url.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com")return url.searchParams.get("v")||(url.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||"";}catch(error){}return "";}
     function videoImage(video){const id=video.youtube_video_id||youtubeId(video.youtube_url);return video.thumbnail_url||(id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:FALLBACK);}
