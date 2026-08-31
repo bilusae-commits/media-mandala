@@ -1,0 +1,51 @@
+/* MANDALA CHANNEL — INDEX FLUID FIX
+   Scoped to the homepage only. Loaded after the existing homepage CSS.
+   Goal: keep the page width fluid at browser zoom-out and allow clean reflow at zoom-in. */
+body[data-base="./"]{min-width:0;overflow-x:hidden}
+body[data-base="./"] .w,
+body[data-base="./"] .heroGrid{width:100%!important;max-width:none!important;margin-inline:0!important;padding-inline:clamp(16px,3.2vw,52px)!important}
+body[data-base="./"] .heroGrid{box-sizing:border-box}
+body[data-base="./"] .nav{min-width:0;width:100%}
+body[data-base="./"] .heroCopy,
+body[data-base="./"] .feature,
+body[data-base="./"] .story,
+body[data-base="./"] .story .copy,
+body[data-base="./"] .card,
+body[data-base="./"] .topic,
+body[data-base="./"] .podcast,
+body[data-base="./"] .podcast .copy{min-width:0}
+body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr)}
+body[data-base="./"] .featureGrid{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+body[data-base="./"] .story{grid-template-columns:minmax(0,39%) minmax(0,1fr)}
+body[data-base="./"] .cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+body[data-base="./"] .topicGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+body[data-base="./"] .podcasts{grid-template-columns:repeat(2,minmax(0,1fr))}
+body[data-base="./"] .podcast{grid-template-columns:minmax(0,42%) minmax(0,1fr)}
+body[data-base="./"] .news{grid-template-columns:minmax(0,1fr) minmax(0,480px)}
+
+/* Zoom-in / narrow CSS viewports: reflow instead of forcing desktop columns. */
+@media (max-width:1100px){
+  body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+  body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body[data-base="./"] .topicGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body[data-base="./"] .podcasts{grid-template-columns:1fr}
+  body[data-base="./"] .news{grid-template-columns:1fr;gap:24px}
+}
+@media (max-width:760px){
+  body[data-base="./"] .heroGrid{grid-template-columns:1fr}
+  body[data-base="./"] .visual{height:clamp(260px,70vw,380px)}
+  body[data-base="./"] .featureGrid{grid-template-columns:1fr}
+  body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body[data-base="./"] .topicGrid{grid-template-columns:1fr}
+  body[data-base="./"] .podcast{grid-template-columns:1fr}
+  body[data-base="./"] .podcast img{height:clamp(190px,48vw,320px)}
+  body[data-base="./"] .head{align-items:flex-start;flex-wrap:wrap}
+}
+@media (max-width:520px){
+  body[data-base="./"] .cards{grid-template-columns:1fr}
+  body[data-base="./"] .story{grid-template-columns:1fr}
+  body[data-base="./"] .story img{height:190px;min-height:0}
+  body[data-base="./"] .heroButtons{width:100%}
+  body[data-base="./"] .btn{max-width:100%}
+  body[data-base="./"] .play-arrow{width:34px;height:34px}
+}
