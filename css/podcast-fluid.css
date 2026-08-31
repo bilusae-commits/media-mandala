@@ -1,9 +1,10 @@
-/* Podcast fluid layout only. Global header/footer remain in main.css. */
+/* Podcast: fluid layout only. Global header/footer are intentionally untouched. */
 .podcast-page .podcast-hero h1{font-size:clamp(42px,5.5vw,76px)}
 .podcast-page .podcast-hero p{font-size:clamp(12px,.86vw,14px)}
-.podcast-page .podcast-video-rail{grid-template-columns:repeat(4,minmax(0,1fr))}
-.podcast-page .podcast-audio-row{grid-template-columns:minmax(0,1fr) minmax(300px,34%)}
+.podcast-page .podcast-video-rail{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.podcast-page .podcast-audio-row{grid-template-columns:minmax(0,1fr) minmax(0,34%)}
 .podcast-page .podcast-card h4,.podcast-page .podcast-audio-row h4{font-size:clamp(15px,1.02vw,20px)}
 .podcast-page .podcast-card p,.podcast-page .podcast-audio-row p{font-size:clamp(10px,.65vw,12px);line-height:1.5}
-@media(max-width:1050px){.podcast-page .podcast-video-rail{grid-template-columns:repeat(3,minmax(0,1fr))}.podcast-page .podcast-audio-row{grid-template-columns:minmax(0,1fr) minmax(260px,36%)}}
-@media(max-width:760px){.podcast-page .podcast-video-rail{display:flex;overflow-x:auto}.podcast-page .podcast-audio-row{grid-template-columns:1fr}.podcast-page .podcast-feature-grid{grid-template-columns:1fr}}
+.podcast-page .podcast-feature-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+@media(max-width:900px){.podcast-page .podcast-audio-row{grid-template-columns:minmax(0,1fr) minmax(0,40%)}}
+@media(max-width:760px){.podcast-page .podcast-video-rail{display:flex;overflow-x:auto;scroll-snap-type:x proximity}.podcast-page .podcast-video-rail>.podcast-card{flex:0 0 min(82vw,340px);scroll-snap-align:start}.podcast-page .podcast-audio-row,.podcast-page .podcast-feature-grid{grid-template-columns:1fr}}
