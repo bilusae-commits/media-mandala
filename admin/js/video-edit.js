@@ -1,4 +1,5 @@
-import { getCurrentAuth, getCategories, getVideo, createVideo, updateVideo, deleteVideo, logout } from "./cms-service.js";
+import "./cms-service.js";
+const { getCurrentAuth, getCategories, getVideo, createVideo, updateVideo, deleteVideo, logout } = window.MandalaCMS;
 
 const $=s=>document.querySelector(s);
 const form=$("#video-form"), titleInput=$("#judul_video"), slugInput=$("#slug"), youtubeUrlInput=$("#youtube_url"), youtubeIdInput=$("#youtube_video_id"), thumbnailInput=$("#thumbnail_url"), descriptionInput=$("#deskripsi"), categoryInput=$("#kategori"), featuredInput=$("#is_featured"), statusInput=$("#status"), message=$("#form-message"), logoutButton=$("#logout");
