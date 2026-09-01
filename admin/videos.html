@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Video — Mandala Channel CMS</title>
-<link rel="stylesheet" href="css/cms.css">
+<link rel="stylesheet" href="css/cms.css?v=20260901-2">
 <style>
 .video-toolbar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .status-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--border);background:#fafafa}
@@ -37,25 +37,12 @@
     <button class="logout-button" id="logout" type="button"><span>Keluar</span> ↪</button>
   </div>
 </aside>
-
 <main class="main">
-  <header class="topbar">
-    <div><div class="title">Video</div><div class="subtitle">Kelola seluruh video Mandala Channel</div></div>
-    <div class="user-mini" id="top-user"></div>
-  </header>
-
+  <header class="topbar"><div><div class="title">Video</div><div class="subtitle">Kelola seluruh video Mandala Channel</div></div><div class="user-mini" id="top-user"></div></header>
   <section class="content">
-    <div class="page-head">
-      <div>
-        <h1>Video</h1>
-        <p>Satu tempat untuk mengelola draft, review, published, unggulan, dan arsip.</p>
-      </div>
-      <a class="btn btn-primary" href="video-edit.html">+ Video Baru</a>
-    </div>
-
+    <div class="page-head"><div><h1>Video</h1><p>Satu tempat untuk mengelola draft, review, published, unggulan, dan arsip.</p></div><a class="btn btn-primary" href="video-edit.html">+ Video Baru</a></div>
     <div id="page-message" class="message" role="status" aria-live="polite"></div>
     <div id="permission-note" class="permission-note" style="display:none"></div>
-
     <div class="stats">
       <div class="stat stat-click" data-status-card="all"><div class="stat-label">Total</div><div class="stat-value" id="stat-total">—</div></div>
       <div class="stat stat-click" data-status-card="draft"><div class="stat-label">Draft</div><div class="stat-value" id="stat-draft">—</div></div>
@@ -64,47 +51,19 @@
       <div class="stat stat-click" data-status-card="archived"><div class="stat-label">Arsip</div><div class="stat-value" id="stat-archived">—</div></div>
       <div class="stat stat-click" data-status-card="featured"><div class="stat-label">Unggulan</div><div class="stat-value" id="stat-featured">—</div></div>
     </div>
-
     <section class="panel">
-      <div class="panel-head">
-        <div class="video-toolbar-head" style="width:100%">
-          <div><div class="panel-title">Daftar Video</div><div class="panel-meta" id="result-count">Memuat...</div></div>
-          <button class="btn btn-light" id="refresh" type="button">↻ Refresh</button>
-        </div>
-      </div>
-
+      <div class="panel-head"><div class="video-toolbar-head" style="width:100%"><div><div class="panel-title">Daftar Video</div><div class="panel-meta" id="result-count">Memuat...</div></div><button class="btn btn-light" id="refresh" type="button">↻ Refresh</button></div></div>
       <div class="status-tabs" id="status-tabs" aria-label="Filter status">
-        <button class="status-tab active" type="button" data-status="all">Semua</button>
-        <button class="status-tab" type="button" data-status="draft">Draft</button>
-        <button class="status-tab" type="button" data-status="review">Review</button>
-        <button class="status-tab" type="button" data-status="published">Published</button>
-        <button class="status-tab" type="button" data-status="archived">Arsip</button>
-        <button class="status-tab" type="button" data-status="featured">★ Unggulan</button>
+        <button class="status-tab active" type="button" data-status="all">Semua</button><button class="status-tab" type="button" data-status="draft">Draft</button><button class="status-tab" type="button" data-status="review">Review</button><button class="status-tab" type="button" data-status="published">Published</button><button class="status-tab" type="button" data-status="archived">Arsip</button><button class="status-tab" type="button" data-status="featured">★ Unggulan</button>
       </div>
-
-      <div class="toolbar">
-        <input class="input" id="search" type="search" placeholder="Cari judul, slug, YouTube ID, atau deskripsi..." autocomplete="off">
-        <select class="select" id="status-filter">
-          <option value="all">Semua status</option>
-          <option value="draft">Draft</option>
-          <option value="review">Review</option>
-          <option value="published">Published</option>
-          <option value="archived">Arsip</option>
-        </select>
-        <select class="select" id="category-filter"><option value="all">Semua kategori</option></select>
-        <button class="btn btn-light" id="clear-filters" type="button">Reset</button>
-      </div>
-
-      <div class="table-wrap" id="videos-container">
-        <div class="empty"><strong>Memuat video...</strong>Menyiapkan data dari Supabase.</div>
-      </div>
+      <div class="toolbar"><input class="input" id="search" type="search" placeholder="Cari judul, slug, YouTube ID, atau deskripsi..." autocomplete="off"><select class="select" id="status-filter"><option value="all">Semua status</option><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Arsip</option></select><select class="select" id="category-filter"><option value="all">Semua kategori</option></select><button class="btn btn-light" id="clear-filters" type="button">Reset</button></div>
+      <div class="table-wrap" id="videos-container"><div class="empty"><strong>Memuat video...</strong>Menyiapkan data dari Supabase.</div></div>
     </section>
   </section>
 </main>
 </div>
-
 <script>window.MANDALA_CONFIG={SUPABASE_URL:"https://roeckoabffhyctfkvbhw.supabase.co",SUPABASE_PUBLISHABLE_KEY:"sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr"};</script>
-<script src="../js/supabase-client.js"></script>
-<script type="module" src="./js/videos.js"></script>
+<script src="../js/supabase-client.js?v=20260901-2"></script>
+<script type="module" src="./js/videos.js?v=20260901-2"></script>
 </body>
 </html>
