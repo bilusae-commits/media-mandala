@@ -4,7 +4,12 @@
   const API=(window.SUPABASE_URL||'https://roeckoabffhyctfkvbhw.supabase.co').replace(/\/$/,'');
   const slots=[['hero_image_main','hero_image_main_key','main','Hero utama'],['hero_image_secondary','hero_image_secondary_key','secondary','Hero pendukung'],['hero_image_tertiary','hero_image_tertiary_key','tertiary','Hero ketiga'],['hero_overlay_image','hero_overlay_image_key','overlay','Background / overlay']];
   const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
-  const imageUrl=(url,key)=>url||'';
+  // Homepage images are stored in the same private B2 bucket as playlist covers.
+  // Use the signed/authenticated proxy for display instead of exposing a private B2 URL directly.
+  const imageUrl=(url,key)=>{
+    if(!url) return '';
+    return `${API}/functions/v1/homepage-cover-image?url=${encodeURIComponent(url)}&v=${Date.now()}`;
+  };
   async function getAccessToken(){const db=await window.MandalaSupabase.getClient();const result=await db.auth.getSession();if(result?.error)throw result.error;const token=result?.data?.session?.access_token;if(!token)throw new Error('Sesi admin tidak ditemukan. Silakan login kembali.');return token}
   async function call(fd){const auth=await MandalaCMS.getCurrentAuth();if(!auth?.authenticated)throw new Error('Sesi admin tidak ditemukan. Silakan login kembali.');if(auth.role!=='admin')throw new Error('Akses upload gambar hanya untuk admin.');const token=await getAccessToken();const response=await fetch(`${API}/functions/v1/${FN}`,{method:'POST',headers:{Authorization:`Bearer ${token}`},body:fd});const data=await response.json().catch(()=>({}));if(!response.ok||!data.ok)throw new Error(data.error||`Permintaan upload gagal (${response.status})`);return data}
   function card(url,key,slot,label){const src=imageUrl(url,key);const id=`img-${slot}-${Math.random().toString(36).slice(2)}`;const preview=src?`<img id="${id}" src="${esc(src)}" alt="${esc(label)}" loading="eager">`:'<span>Belum ada gambar</span>';return `<div class="media-edit-card" data-slot="${slot}"><div class="media-preview">${preview}</div><div class="media-edit-body"><div class="media-edit-title">${esc(label)}</div><div class="media-edit-actions"><label class="btn btn-secondary media-upload-btn">Ganti gambar<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden></label>${key?'<button type="button" class="btn btn-ghost media-remove">Hapus</button>':''}</div><div class="media-edit-status">${key?'Tersimpan di Backblaze':'Belum menggunakan file Backblaze'}</div></div></div>`}
