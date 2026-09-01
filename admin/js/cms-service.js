@@ -1,6 +1,5 @@
 /* Mandala CMS Service — classic script
-   Jangan gunakan import/export di file ini karena seluruh halaman CMS
-   memuatnya sebagai script biasa sebelum shell.js. */
+   API publik sengaja menyediakan alias camelCase dan nama lama agar halaman CMS kompatibel. */
 (function(window){
   'use strict';
 
@@ -53,5 +52,31 @@
   async function update(tableName,id,payload){const db=await getDb();const {data,error}=await db.from(tableName).update(payload).eq('id',id).select();if(error)throw error;return data;}
   async function remove(tableName,id){const db=await getDb();const {error}=await db.from(tableName).delete().eq('id',id);if(error)throw error;return true;}
 
-  window.MandalaCMS={currentUser:getCurrentUser,currentAuth:getCurrentAuth,requireStaff,logout,videos:getVideos,video:getVideo,createVideo,updateVideo,deleteVideo,articles,article,createArticle,updateArticle,deleteArticle,categories:getCategories,changeStatus,select,insert,update,remove};
+  window.MandalaCMS={
+    currentUser:getCurrentUser,
+    currentAuth:getCurrentAuth,
+    getCurrentUser,
+    getCurrentAuth,
+    requireStaff,
+    logout,
+    videos:getVideos,
+    getVideos,
+    video:getVideo,
+    getVideo,
+    createVideo,
+    updateVideo,
+    deleteVideo,
+    articles,
+    article,
+    createArticle,
+    updateArticle,
+    deleteArticle,
+    categories:getCategories,
+    getCategories,
+    changeStatus,
+    select,
+    insert,
+    update,
+    remove
+  };
 })(window);
