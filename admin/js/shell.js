@@ -6,34 +6,34 @@ async function initShell(title, active){
  const adminOnlyPages=new Set(["categories","settings"]);
 
  document.body.insertAdjacentHTML("afterbegin",`<aside class="sidebar">
- <div class="sideBrand"><b>MANDALA</b><small>CHANNEL CMS</small></div>
- <div class="navTitle">UTAMA</div><nav class="sideNav">
- <a data-page="dashboard" href="dashboard.html"><span>⌂</span>Dashboard</a>
- <a data-page="articles" href="articles.html"><span>▤</span>Artikel</a>
- <a data-page="videos" href="videos.html"><span>▶</span>Video</a>
- <a data-page="playlists" href="playlists.html"><span>☷</span>Playlist</a>
- <a data-page="podcasts" href="podcasts.html"><span>◉</span>Podcast</a>
- <div class="navTitle">KONTEN</div>
- <a data-page="media" href="media.html"><span>▧</span>Media</a>
- <a data-page="categories" data-admin-only="true" href="categories.html"><span>◇</span>Kategori</a>
- <a data-page="settings" data-admin-only="true" href="settings.html"><span>⚙</span>Pengaturan</a>
- </nav><button class="logout" id="logoutBtn">Keluar</button></aside>
- <main class="main"><div class="topbar"><h2>${title}</h2><div class="user"><strong>${isAdmin ? "ADMIN" : "EDITOR"}</strong> · ${user.email || ""}</div></div><div class="content">`);
+ <div class="brand" aria-label="Mandala Channel CMS"><div class="brand-title">MANDALA</div><div class="brand-subtitle">CHANNEL CMS</div></div>
+ <div class="nav-title">Utama</div><nav class="nav" aria-label="Navigasi utama">
+ <a class="nav-link" data-page="dashboard" href="dashboard.html"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+ <a class="nav-link" data-page="articles" href="articles.html"><span class="nav-icon">▤</span><span>Artikel</span></a>
+ <a class="nav-link" data-page="videos" href="videos.html"><span class="nav-icon">▶</span><span>Video</span></a>
+ <a class="nav-link" data-page="playlists" href="playlists.html"><span class="nav-icon">☷</span><span>Playlist</span></a>
+ <a class="nav-link" data-page="podcasts" href="podcasts.html"><span class="nav-icon">◉</span><span>Podcast</span></a>
+ <div class="nav-title">Konten</div>
+ <a class="nav-link" data-page="media" href="media.html"><span class="nav-icon">▧</span><span>Media</span></a>
+ <a class="nav-link" data-page="categories" data-admin-only="true" href="categories.html"><span class="nav-icon">◇</span><span>Kategori</span></a>
+ <a class="nav-link" data-page="settings" data-admin-only="true" href="settings.html"><span class="nav-icon">⚙</span><span>Pengaturan</span></a>
+ </nav>
+ <div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name">${user.email || "Pengguna"}</div><div class="sidebar-user-role">${isAdmin ? "Admin" : "Editor"}</div></div><button class="logout-button" id="logoutBtn" type="button"><span>Keluar</span> ↪</button></div>
+ </aside>
+ <main class="main"><div class="topbar"><div><div class="title">${title}</div><div class="subtitle">Mandala Channel CMS</div></div><div class="user-mini">${isAdmin ? "ADMIN" : "EDITOR"} · ${user.email || ""}</div></div><div class="content">`);
 
- document.querySelectorAll('.sideNav [data-admin-only="true"]').forEach(a=>{
+ document.querySelectorAll('.nav [data-admin-only="true"]').forEach(a=>{
    if(!isAdmin)a.remove();
  });
 
- document.querySelectorAll(".sideNav a").forEach(a=>{
+ document.querySelectorAll(".nav-link").forEach(a=>{
    if(a.dataset.page===active)a.classList.add("active");
  });
 
- document.getElementById("logoutBtn").onclick=async()=>{
-   try{
-     await MandalaCMS.logout();
-   }catch(error){
-     console.error(error);
-   }
+ const logout=document.getElementById("logoutBtn");
+ if(logout)logout.onclick=async()=>{
+   try{ await MandalaCMS.logout(); }
+   catch(error){ console.error(error); }
  };
 }
 
