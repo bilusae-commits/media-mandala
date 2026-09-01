@@ -1,4 +1,5 @@
-import { getVideos,getCategories,deleteVideo,getCurrentAuth,logout } from "./cms-service.js";
+import "./cms-service.js";
+const { getVideos, getCategories, deleteVideo, getCurrentAuth, logout } = window.MandalaCMS;
 const $=(s,r=document)=>r.querySelector(s),container=$("#videos-container"),message=$("#page-message"),permissionNote=$("#permission-note");let videos=[],categories=[],auth=null,currentStatus="all",loading=false;
 const FALLBACK_THUMBNAIL="data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="#edf1f5"/><text x="320" y="170" text-anchor="middle" font-family="Arial" font-size="30" font-weight="700" fill="#082d56">MANDALA</text><text x="320" y="205" text-anchor="middle" font-family="Arial" font-size="16" fill="#718091">CHANNEL · VIDEO</text></svg>');
 const esc=v=>String(v??"").replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
