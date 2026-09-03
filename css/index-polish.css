@@ -7,15 +7,16 @@ body[data-base="./"] .head{margin-bottom:clamp(20px,2.1vw,30px)}
 body[data-base="./"] .head > div{min-width:0}
 body[data-base="./"] .title{max-width:760px}
 
-/* HERO: guaranteed blue overlay + white typography */
+/* HERO — final layer order: image -> blue wash -> copy */
 body[data-base="./"] .hero{position:relative!important;isolation:isolate!important;background:#082d56!important}
-body[data-base="./"] .hero::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background:linear-gradient(90deg,rgba(4,27,54,.97) 0%,rgba(6,38,76,.94) 28%,rgba(8,45,86,.84) 55%,rgba(8,45,86,.62) 78%,rgba(8,45,86,.34) 100%),url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=88") center/cover no-repeat!important;pointer-events:none!important}
-body[data-base="./"] .hero::after{content:""!important;position:absolute!important;inset:0!important;z-index:1!important;background:linear-gradient(90deg,rgba(2,20,42,.28),rgba(8,45,86,.08) 65%,rgba(8,45,86,.16))!important;pointer-events:none!important}
-body[data-base="./"] .heroGrid{position:relative!important;z-index:2!important}
-body[data-base="./"] .hero .heroCopy{color:#fff!important}
+body[data-base="./"] .hero::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background:#082d56!important;pointer-events:none!important}
+body[data-base="./"] .hero::after{content:""!important;position:absolute!important;inset:0!important;z-index:2!important;background:linear-gradient(90deg,rgba(3,27,57,.96) 0%,rgba(5,43,82,.91) 30%,rgba(8,56,105,.78) 55%,rgba(8,65,119,.58) 78%,rgba(8,65,119,.38) 100%)!important;pointer-events:none!important}
+body[data-base="./"] .heroGrid{position:relative!important;z-index:3!important}
+body[data-base="./"] .hero .visual{position:relative!important;z-index:1!important}
+body[data-base="./"] .hero .heroCopy{position:relative!important;z-index:4!important;color:#fff!important}
 body[data-base="./"] .hero .k{color:#e2bd68!important}
-body[data-base="./"] .hero h1{color:#fff!important;text-shadow:0 2px 18px rgba(0,0,0,.18)}
-body[data-base="./"] .hero p{color:rgba(255,255,255,.92)!important}
+body[data-base="./"] .hero h1{color:#fff!important;text-shadow:0 2px 20px rgba(0,0,0,.28)!important}
+body[data-base="./"] .hero p{color:rgba(255,255,255,.94)!important}
 body[data-base="./"] .hero .btn,body[data-base="./"] .hero .btn.primary{background:#fff!important;border-color:#fff!important;color:#082d56!important}
 body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
 
