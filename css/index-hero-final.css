@@ -1,5 +1,5 @@
 /* MANDALA CHANNEL — HOMEPAGE HERO
-   Admin Backblaze background + SOLID blue left panel fading to clear right. */
+   FINAL LAYERING: Backblaze image -> solid blue left gradient -> white copy. */
 
 body[data-base="./"] .hero{
   position:relative!important;
@@ -8,7 +8,8 @@ body[data-base="./"] .hero{
   overflow:hidden!important;
 }
 
-/* Always show the actual image selected in Admin/Backblaze at full strength. */
+/* 1) REAL ADMIN/BACKBLAZE IMAGE — full opacity, always underneath. */
+body[data-base="./"] .hero.has-hero-overlay::before,
 body[data-base="./"] .hero::before{
   content:""!important;
   position:absolute!important;
@@ -18,14 +19,13 @@ body[data-base="./"] .hero::before{
   background-position:center!important;
   background-size:cover!important;
   background-repeat:no-repeat!important;
+  background-color:#082d56!important;
   opacity:1!important;
   pointer-events:none!important;
 }
 
-/*
-   LEFT = completely solid navy behind the headline.
-   RIGHT = progressively transparent until the photo is completely clear.
-*/
+/* 2) BLUE GRADIENT — SOLID behind text, transparent toward the right. */
+body[data-base="./"] .hero.has-hero-overlay::after,
 body[data-base="./"] .hero::after{
   content:""!important;
   position:absolute!important;
@@ -33,37 +33,47 @@ body[data-base="./"] .hero::after{
   width:82%!important;
   z-index:2!important;
   pointer-events:none!important;
+  background-image:none!important;
+  background-color:transparent!important;
   background:linear-gradient(90deg,
-    rgb(8,45,86) 0%,
-    rgb(8,45,86) 30%,
-    rgba(8,45,86,.96) 40%,
-    rgba(8,45,86,.78) 50%,
-    rgba(8,45,86,.52) 60%,
-    rgba(8,45,86,.27) 70%,
-    rgba(8,45,86,.08) 84%,
+    #082d56 0%,
+    #082d56 30%,
+    rgba(8,45,86,.98) 40%,
+    rgba(8,45,86,.84) 50%,
+    rgba(8,45,86,.62) 60%,
+    rgba(8,45,86,.38) 70%,
+    rgba(8,45,86,.14) 82%,
     rgba(8,45,86,0) 100%)!important;
+  opacity:1!important;
 }
 
-/* Do not create a stacking context here. */
+/* CRITICAL: cancel the old index-polish z-index:3 stacking layer.
+   Without this, the whole heroGrid sits above the gradient and the gradient
+   can never cover the visual image. */
 body[data-base="./"] .heroGrid{
   position:relative!important;
+  z-index:auto!important;
 }
 
-/* Visual remains underneath the blue gradient. */
+/* 3) Visual image stays below the blue gradient. */
 body[data-base="./"] .hero .visual{
   position:relative!important;
   z-index:1!important;
 }
 
-/* Headline/content stays above the gradient and remains fully opaque. */
+/* 4) Text stays above the gradient and remains completely opaque. */
 body[data-base="./"] .hero .heroCopy{
   position:relative!important;
   z-index:3!important;
   color:#fff!important;
 }
 body[data-base="./"] .hero .k{color:#e2bd68!important}
-body[data-base="./"] .hero h1{color:#fff!important;text-shadow:0 2px 20px rgba(0,0,0,.30)!important}
-body[data-base="./"] .hero p{color:#fff!important}
+body[data-base="./"] .hero h1{
+  color:#fff!important;
+  opacity:1!important;
+  text-shadow:0 2px 20px rgba(0,0,0,.30)!important;
+}
+body[data-base="./"] .hero p{color:#fff!important;opacity:1!important}
 body[data-base="./"] .hero .btn,
 body[data-base="./"] .hero .btn.primary{
   background:#fff!important;
@@ -73,16 +83,18 @@ body[data-base="./"] .hero .btn.primary{
 body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
 
 @media(max-width:760px){
+  body[data-base="./"] .hero.has-hero-overlay::after,
   body[data-base="./"] .hero::after{
     inset:0!important;
     width:100%!important;
     height:100%!important;
+    background-image:none!important;
     background:linear-gradient(90deg,
-      rgb(8,45,86) 0%,
-      rgb(8,45,86) 34%,
-      rgba(8,45,86,.88) 52%,
-      rgba(8,45,86,.55) 68%,
-      rgba(8,45,86,.18) 84%,
+      #082d56 0%,
+      #082d56 34%,
+      rgba(8,45,86,.90) 52%,
+      rgba(8,45,86,.58) 68%,
+      rgba(8,45,86,.20) 84%,
       rgba(8,45,86,0) 100%)!important;
   }
 }
