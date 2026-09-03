@@ -1,76 +1,67 @@
 /* MANDALA CHANNEL — HOMEPAGE HERO
-   Gradient is confined to the headline column only.
-   The main hero image and supporting image cards are never covered. */
+   The gradient is a BACKGROUND layer, never an overlay element.
+   Therefore the hero/supporting image cards can never be tinted by it. */
 body[data-base="./"] .hero{
   position:relative!important;
   isolation:isolate!important;
   min-width:0!important;
   overflow:hidden!important;
   background-color:#082d56!important;
-  background-image:var(--hero-overlay-image,none)!important;
-  background-position:center!important;
-  background-size:cover!important;
-  background-repeat:no-repeat!important;
+  background-image:
+    linear-gradient(90deg,
+      #082d56 0%,
+      #082d56 30%,
+      rgba(8,45,86,.985) 40%,
+      rgba(8,45,86,.92) 48%,
+      rgba(8,45,86,.78) 56%,
+      rgba(8,45,86,.58) 64%,
+      rgba(8,45,86,.36) 71%,
+      rgba(8,45,86,.16) 77%,
+      rgba(8,45,86,0) 83%),
+    var(--hero-overlay-image,none)!important;
+  background-position:center,center!important;
+  background-size:cover,cover!important;
+  background-repeat:no-repeat,no-repeat!important;
 }
 
-/* Kill every previous hero-wide pseudo layer. */
+/* Absolutely no pseudo-element is allowed to sit over the hero. */
 body[data-base="./"] .hero::before,
 body[data-base="./"] .hero::after,
 body[data-base="./"] .hero.has-hero-overlay::before,
-body[data-base="./"] .hero.has-hero-overlay::after{
+body[data-base="./"] .hero.has-hero-overlay::after,
+body[data-base="./"] .heroGrid::before,
+body[data-base="./"] .heroCopy::before{
   content:none!important;
   display:none!important;
 }
 
-/* The grid is the boundary: gradient can never cross into the visual column. */
+/* Foreground DOM images are above the hero background by definition. */
 body[data-base="./"] .heroGrid{
   position:relative!important;
   z-index:1!important;
   isolation:isolate!important;
 }
-
-/* Gradient occupies ONLY the first grid column / headline zone. */
-body[data-base="./"] .heroGrid::before{
-  content:""!important;
-  position:absolute!important;
-  z-index:0!important;
-  left:clamp(-52px,-3.2vw,-16px)!important;
-  top:clamp(-70px,-6vw,-40px)!important;
-  bottom:clamp(-70px,-6vw,-40px)!important;
-  width:calc((100% - clamp(28px,5vw,80px)) * .515)!important;
-  pointer-events:none!important;
-  background:linear-gradient(90deg,
-    #082d56 0%,
-    #082d56 58%,
-    rgba(8,45,86,.99) 68%,
-    rgba(8,45,86,.90) 77%,
-    rgba(8,45,86,.68) 85%,
-    rgba(8,45,86,.38) 92%,
-    rgba(8,45,86,.12) 97%,
-    rgba(8,45,86,0) 100%)!important;
-}
-
-/* Text sits above its local gradient. */
 body[data-base="./"] .hero .heroCopy{
   position:relative!important;
   z-index:2!important;
   min-width:0!important;
   color:#fff!important;
 }
-
-/* Visual column is independently above the gradient and stays untouched. */
 body[data-base="./"] .hero .visual{
   position:relative!important;
-  z-index:3!important;
+  z-index:5!important;
   isolation:isolate!important;
+}
+body[data-base="./"] .hero .visual>div{
+  z-index:6!important;
 }
 body[data-base="./"] .hero .v1,
 body[data-base="./"] .hero .v2,
 body[data-base="./"] .hero .v3{
   position:absolute!important;
-  z-index:4!important;
 }
 
+/* Typography remains fully opaque. */
 body[data-base="./"] .hero .k{color:#e2bd68!important}
 body[data-base="./"] .hero h1{
   color:#fff!important;
@@ -86,25 +77,17 @@ body[data-base="./"] .hero .btn.primary{
 }
 body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
 
-@media(max-width:1100px){
-  body[data-base="./"] .heroGrid::before{
-    width:54%!important;
-  }
-}
-
 @media(max-width:760px){
-  body[data-base="./"] .heroGrid::before{
-    left:-24px!important;
-    top:-45px!important;
-    bottom:-45px!important;
-    width:76%!important;
-    background:linear-gradient(90deg,
-      #082d56 0%,
-      #082d56 58%,
-      rgba(8,45,86,.97) 70%,
-      rgba(8,45,86,.78) 80%,
-      rgba(8,45,86,.48) 89%,
-      rgba(8,45,86,.16) 97%,
-      rgba(8,45,86,0) 100%)!important;
+  body[data-base="./"] .hero{
+    background-image:
+      linear-gradient(90deg,
+        #082d56 0%,
+        #082d56 38%,
+        rgba(8,45,86,.96) 50%,
+        rgba(8,45,86,.78) 60%,
+        rgba(8,45,86,.48) 70%,
+        rgba(8,45,86,.18) 80%,
+        rgba(8,45,86,0) 90%),
+      var(--hero-overlay-image,none)!important;
   }
 }
