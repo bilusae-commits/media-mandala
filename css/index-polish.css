@@ -14,6 +14,25 @@ body[data-base="./"] .heroGrid{padding-inline:clamp(18px,3.4vw,54px)!important}
 body[data-base="./"] .head{margin-bottom:clamp(20px,2.1vw,30px)}
 body[data-base="./"] .head > div{min-width:0}
 body[data-base="./"] .title{max-width:760px}
+
+/* HERO OVERLAY — dominant Mandala blue with white editorial typography. */
+body[data-base="./"] .hero::before{
+  background:
+    linear-gradient(90deg,
+      rgba(6,31,60,.88) 0%,
+      rgba(8,45,86,.82) 34%,
+      rgba(8,45,86,.68) 63%,
+      rgba(8,45,86,.38) 100%),
+    url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=88") center/cover no-repeat!important;
+}
+body[data-base="./"] .hero .heroCopy{color:#fff}
+body[data-base="./"] .hero .k{color:#d7b66a}
+body[data-base="./"] .hero h1{color:#fff}
+body[data-base="./"] .hero p{color:rgba(255,255,255,.86)}
+body[data-base="./"] .hero .btn{background:rgba(255,255,255,.96);border-color:rgba(255,255,255,.9);color:var(--navy)}
+body[data-base="./"] .hero .btn.primary{background:#fff;border-color:#fff;color:var(--navy)}
+body[data-base="./"] .hero .btn:hover{background:#fff;color:var(--navy);border-color:#fff}
+
 body[data-base="./"] .featureGrid{gap:clamp(16px,2vw,28px)}
 body[data-base="./"] .feature{min-height:clamp(340px,36vw,510px);border-radius:var(--home-card-radius)}
 body[data-base="./"] .stories{gap:clamp(16px,2vw,28px)}
