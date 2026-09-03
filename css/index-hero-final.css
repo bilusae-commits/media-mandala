@@ -1,100 +1,36 @@
 /* MANDALA CHANNEL — HOMEPAGE HERO
-   FINAL LAYERING: Backblaze image -> solid blue left gradient -> white copy. */
+   Backblaze image with a long, seamless blue fade from left to right. */
+body[data-base="./"] .hero{position:relative!important;isolation:isolate!important;background:#082d56!important;overflow:hidden!important}
 
-body[data-base="./"] .hero{
-  position:relative!important;
-  isolation:isolate!important;
-  background:#082d56!important;
-  overflow:hidden!important;
-}
-
-/* 1) REAL ADMIN/BACKBLAZE IMAGE — full opacity, always underneath. */
 body[data-base="./"] .hero.has-hero-overlay::before,
-body[data-base="./"] .hero::before{
-  content:""!important;
-  position:absolute!important;
-  inset:0!important;
-  z-index:0!important;
-  background-image:var(--hero-overlay-image,none)!important;
-  background-position:center!important;
-  background-size:cover!important;
-  background-repeat:no-repeat!important;
-  background-color:#082d56!important;
-  opacity:1!important;
-  pointer-events:none!important;
-}
+body[data-base="./"] .hero::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background-image:var(--hero-overlay-image,none)!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;background-color:#082d56!important;opacity:1!important;pointer-events:none!important}
 
-/* 2) BLUE GRADIENT — SOLID behind text, transparent toward the right. */
+/* Continuous fade: solid navy on the left, progressively lighter across the entire hero, completely clear at the far right. */
 body[data-base="./"] .hero.has-hero-overlay::after,
-body[data-base="./"] .hero::after{
-  content:""!important;
-  position:absolute!important;
-  inset:0 auto 0 0!important;
-  width:82%!important;
-  z-index:2!important;
-  pointer-events:none!important;
-  background-image:none!important;
-  background-color:transparent!important;
-  background:linear-gradient(90deg,
-    #082d56 0%,
-    #082d56 30%,
-    rgba(8,45,86,.98) 40%,
-    rgba(8,45,86,.84) 50%,
-    rgba(8,45,86,.62) 60%,
-    rgba(8,45,86,.38) 70%,
-    rgba(8,45,86,.14) 82%,
-    rgba(8,45,86,0) 100%)!important;
-  opacity:1!important;
-}
+body[data-base="./"] .hero::after{content:""!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:2!important;pointer-events:none!important;background:linear-gradient(90deg,
+#082d56 0%,
+#082d56 18%,
+rgba(8,45,86,.99) 27%,
+rgba(8,45,86,.96) 35%,
+rgba(8,45,86,.91) 43%,
+rgba(8,45,86,.84) 51%,
+rgba(8,45,86,.75) 59%,
+rgba(8,45,86,.64) 67%,
+rgba(8,45,86,.51) 75%,
+rgba(8,45,86,.38) 82%,
+rgba(8,45,86,.25) 89%,
+rgba(8,45,86,.12) 95%,
+rgba(8,45,86,0) 100%)!important;opacity:1!important}
 
-/* CRITICAL: cancel the old index-polish z-index:3 stacking layer.
-   Without this, the whole heroGrid sits above the gradient and the gradient
-   can never cover the visual image. */
-body[data-base="./"] .heroGrid{
-  position:relative!important;
-  z-index:auto!important;
-}
-
-/* 3) Visual image stays below the blue gradient. */
-body[data-base="./"] .hero .visual{
-  position:relative!important;
-  z-index:1!important;
-}
-
-/* 4) Text stays above the gradient and remains completely opaque. */
-body[data-base="./"] .hero .heroCopy{
-  position:relative!important;
-  z-index:3!important;
-  color:#fff!important;
-}
+body[data-base="./"] .heroGrid{position:relative!important;z-index:auto!important}
+body[data-base="./"] .hero .visual{position:relative!important;z-index:1!important}
+body[data-base="./"] .hero .heroCopy{position:relative!important;z-index:3!important;color:#fff!important}
 body[data-base="./"] .hero .k{color:#e2bd68!important}
-body[data-base="./"] .hero h1{
-  color:#fff!important;
-  opacity:1!important;
-  text-shadow:0 2px 20px rgba(0,0,0,.30)!important;
-}
+body[data-base="./"] .hero h1{color:#fff!important;opacity:1!important;text-shadow:0 2px 20px rgba(0,0,0,.30)!important}
 body[data-base="./"] .hero p{color:#fff!important;opacity:1!important}
-body[data-base="./"] .hero .btn,
-body[data-base="./"] .hero .btn.primary{
-  background:#fff!important;
-  border-color:#fff!important;
-  color:#082d56!important;
-}
+body[data-base="./"] .hero .btn,body[data-base="./"] .hero .btn.primary{background:#fff!important;border-color:#fff!important;color:#082d56!important}
 body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
 
 @media(max-width:760px){
-  body[data-base="./"] .hero.has-hero-overlay::after,
-  body[data-base="./"] .hero::after{
-    inset:0!important;
-    width:100%!important;
-    height:100%!important;
-    background-image:none!important;
-    background:linear-gradient(90deg,
-      #082d56 0%,
-      #082d56 34%,
-      rgba(8,45,86,.90) 52%,
-      rgba(8,45,86,.58) 68%,
-      rgba(8,45,86,.20) 84%,
-      rgba(8,45,86,0) 100%)!important;
-  }
+body[data-base="./"] .hero.has-hero-overlay::after,body[data-base="./"] .hero::after{inset:0!important;width:100%!important;height:100%!important;background:linear-gradient(90deg,#082d56 0%,#082d56 25%,rgba(8,45,86,.98) 34%,rgba(8,45,86,.92) 43%,rgba(8,45,86,.82) 52%,rgba(8,45,86,.68) 61%,rgba(8,45,86,.52) 70%,rgba(8,45,86,.35) 79%,rgba(8,45,86,.18) 89%,rgba(8,45,86,0) 100%)!important}
 }
