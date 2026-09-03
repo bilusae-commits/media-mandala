@@ -1,37 +1,23 @@
-/* MANDALA CHANNEL — INDEX POLISH
-   Final homepage layout refinement. Loaded after index-fluid-fix.css.
-   Focus: cleaner editorial rhythm, consistent card geometry, better density,
-   stronger responsive reflow and no horizontal overflow. */
-
-body[data-base="./"]{
-  --home-section-gap:clamp(58px,6.5vw,92px);
-  --home-card-radius:5px;
-}
+/* MANDALA CHANNEL — INDEX POLISH */
+body[data-base="./"]{--home-section-gap:clamp(58px,6.5vw,92px);--home-card-radius:5px}
 body[data-base="./"] main > section{padding-block:var(--home-section-gap)}
 body[data-base="./"] main > section:first-child{padding-block:clamp(48px,5.5vw,82px)}
-body[data-base="./"] .w,
-body[data-base="./"] .heroGrid{padding-inline:clamp(18px,3.4vw,54px)!important}
+body[data-base="./"] .w,body[data-base="./"] .heroGrid{padding-inline:clamp(18px,3.4vw,54px)!important}
 body[data-base="./"] .head{margin-bottom:clamp(20px,2.1vw,30px)}
 body[data-base="./"] .head > div{min-width:0}
 body[data-base="./"] .title{max-width:760px}
 
-/* HERO OVERLAY — dominant Mandala blue with white editorial typography. */
-body[data-base="./"] .hero::before{
-  background:
-    linear-gradient(90deg,
-      rgba(6,31,60,.88) 0%,
-      rgba(8,45,86,.82) 34%,
-      rgba(8,45,86,.68) 63%,
-      rgba(8,45,86,.38) 100%),
-    url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=88") center/cover no-repeat!important;
-}
-body[data-base="./"] .hero .heroCopy{color:#fff}
-body[data-base="./"] .hero .k{color:#d7b66a}
-body[data-base="./"] .hero h1{color:#fff}
-body[data-base="./"] .hero p{color:rgba(255,255,255,.86)}
-body[data-base="./"] .hero .btn{background:rgba(255,255,255,.96);border-color:rgba(255,255,255,.9);color:var(--navy)}
-body[data-base="./"] .hero .btn.primary{background:#fff;border-color:#fff;color:var(--navy)}
-body[data-base="./"] .hero .btn:hover{background:#fff;color:var(--navy);border-color:#fff}
+/* HERO: guaranteed blue overlay + white typography */
+body[data-base="./"] .hero{position:relative!important;isolation:isolate!important;background:#082d56!important}
+body[data-base="./"] .hero::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background:linear-gradient(90deg,rgba(4,27,54,.97) 0%,rgba(6,38,76,.94) 28%,rgba(8,45,86,.84) 55%,rgba(8,45,86,.62) 78%,rgba(8,45,86,.34) 100%),url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2200&q=88") center/cover no-repeat!important;pointer-events:none!important}
+body[data-base="./"] .hero::after{content:""!important;position:absolute!important;inset:0!important;z-index:1!important;background:linear-gradient(90deg,rgba(2,20,42,.28),rgba(8,45,86,.08) 65%,rgba(8,45,86,.16))!important;pointer-events:none!important}
+body[data-base="./"] .heroGrid{position:relative!important;z-index:2!important}
+body[data-base="./"] .hero .heroCopy{color:#fff!important}
+body[data-base="./"] .hero .k{color:#e2bd68!important}
+body[data-base="./"] .hero h1{color:#fff!important;text-shadow:0 2px 18px rgba(0,0,0,.18)}
+body[data-base="./"] .hero p{color:rgba(255,255,255,.92)!important}
+body[data-base="./"] .hero .btn,body[data-base="./"] .hero .btn.primary{background:#fff!important;border-color:#fff!important;color:#082d56!important}
+body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
 
 body[data-base="./"] .featureGrid{gap:clamp(16px,2vw,28px)}
 body[data-base="./"] .feature{min-height:clamp(340px,36vw,510px);border-radius:var(--home-card-radius)}
@@ -45,7 +31,6 @@ body[data-base="./"] .card h3{min-height:2.56em;margin-bottom:7px}
 body[data-base="./"] .card p{min-height:1.55em}
 body[data-base="./"] .dark .cards{align-items:start}
 body[data-base="./"] .dark .card .meta{margin-top:11px}
-/* Topic navigation: remove the heavy table-like border and use clean cells. */
 body[data-base="./"] .topicGrid{gap:1px;border:0;background:var(--line);border-radius:var(--home-card-radius)}
 body[data-base="./"] .topic{min-height:158px;border:0;padding:clamp(22px,2.3vw,34px);border-radius:0}
 body[data-base="./"] .topic:first-child{border-radius:var(--home-card-radius) 0 0 var(--home-card-radius)}
@@ -63,45 +48,7 @@ body[data-base="./"] .playlist-track{max-width:1080px;overflow:visible}
 body[data-base="./"] .play-arrow.prev{left:clamp(4px,1vw,14px)}
 body[data-base="./"] .play-arrow.next{right:clamp(4px,1vw,14px)}
 body[data-base="./"] .playlist-stage{overflow:hidden}
-
-@media (max-width:900px){
-  body[data-base="./"] main > section{padding-block:58px}
-  body[data-base="./"] .featureGrid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
-  body[data-base="./"] .story{grid-template-columns:110px minmax(0,1fr)}
-  body[data-base="./"] .topic{min-height:145px}
-}
-@media (max-width:760px){
-  body[data-base="./"] main > section{padding-block:52px}
-  body[data-base="./"] .head{align-items:flex-end}
-  body[data-base="./"] .featureGrid{grid-template-columns:1fr}
-  body[data-base="./"] .feature{min-height:clamp(320px,72vw,460px)}
-  body[data-base="./"] .stories{grid-template-rows:auto}
-  body[data-base="./"] .story{grid-template-columns:minmax(110px,34%) minmax(0,1fr)}
-  body[data-base="./"] .topicGrid{grid-template-columns:1fr}
-  body[data-base="./"] .topic:first-child,
-  body[data-base="./"] .topic:last-child{border-radius:0}
-  body[data-base="./"] .topic:first-child{border-radius:var(--home-card-radius) var(--home-card-radius) 0 0}
-  body[data-base="./"] .topic:last-child{border-radius:0 0 var(--home-card-radius) var(--home-card-radius)}
-  body[data-base="./"] .podcasts{grid-template-columns:1fr}
-  body[data-base="./"] .news{padding:clamp(22px,5vw,32px)}
-}
-@media (max-width:520px){
-  body[data-base="./"] .w,
-  body[data-base="./"] .heroGrid{padding-inline:16px!important}
-  body[data-base="./"] .head{gap:10px}
-  body[data-base="./"] .view{font-size:8px}
-  body[data-base="./"] .story{grid-template-columns:96px minmax(0,1fr);gap:12px}
-  body[data-base="./"] .story img{min-height:96px;height:96px}
-  body[data-base="./"] .card h3{min-height:0}
-  body[data-base="./"] .playlist-stage{padding-inline:34px;min-height:300px}
-  body[data-base="./"] .playlist-track{height:255px}
-  body[data-base="./"] .play-card{width:clamp(170px,48vw,220px)}
-  body[data-base="./"] .podcast img{min-height:180px;height:180px}
-  body[data-base="./"] .email{flex-direction:column;gap:8px}
-  body[data-base="./"] .email input,
-  body[data-base="./"] .email button{width:100%}
-  body[data-base="./"] .email button{height:42px}
-}
-@media (prefers-reduced-motion:reduce){
-  body[data-base="./"] *,body[data-base="./"] *::before,body[data-base="./"] *::after{scroll-behavior:auto!important;transition-duration:0.01ms!important;animation-duration:0.01ms!important}
-}
+@media (max-width:900px){body[data-base="./"] main > section{padding-block:58px}body[data-base="./"] .featureGrid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}body[data-base="./"] .story{grid-template-columns:110px minmax(0,1fr)}body[data-base="./"] .topic{min-height:145px}}
+@media (max-width:760px){body[data-base="./"] main > section{padding-block:52px}body[data-base="./"] .head{align-items:flex-end}body[data-base="./"] .featureGrid{grid-template-columns:1fr}body[data-base="./"] .feature{min-height:clamp(320px,72vw,460px)}body[data-base="./"] .stories{grid-template-rows:auto}body[data-base="./"] .story{grid-template-columns:minmax(110px,34%) minmax(0,1fr)}body[data-base="./"] .topicGrid{grid-template-columns:1fr}body[data-base="./"] .topic:first-child,body[data-base="./"] .topic:last-child{border-radius:0}body[data-base="./"] .topic:first-child{border-radius:var(--home-card-radius) var(--home-card-radius) 0 0}body[data-base="./"] .topic:last-child{border-radius:0 0 var(--home-card-radius) var(--home-card-radius)}body[data-base="./"] .podcasts{grid-template-columns:1fr}body[data-base="./"] .news{padding:clamp(22px,5vw,32px)}}
+@media (max-width:520px){body[data-base="./"] .w,body[data-base="./"] .heroGrid{padding-inline:16px!important}body[data-base="./"] .head{gap:10px}body[data-base="./"] .view{font-size:8px}body[data-base="./"] .story{grid-template-columns:96px minmax(0,1fr);gap:12px}body[data-base="./"] .story img{min-height:96px;height:96px}body[data-base="./"] .card h3{min-height:0}body[data-base="./"] .playlist-stage{padding-inline:34px;min-height:300px}body[data-base="./"] .playlist-track{height:255px}body[data-base="./"] .play-card{width:clamp(170px,48vw,220px)}body[data-base="./"] .podcast img{min-height:180px;height:180px}body[data-base="./"] .email{flex-direction:column;gap:8px}body[data-base="./"] .email input,body[data-base="./"] .email button{width:100%}body[data-base="./"] .email button{height:42px}}
+@media (prefers-reduced-motion:reduce){body[data-base="./"] *,body[data-base="./"] *::before,body[data-base="./"] *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
