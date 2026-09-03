@@ -8,7 +8,7 @@
   async function get(table,select,params=""){const r=await fetch(url+"/rest/v1/"+table+"?select="+encodeURIComponent(select)+params,{headers});if(!r.ok)throw new Error(table+" HTTP "+r.status);return r.json()}
   function publicImage(value){const source=String(value||"").trim();if(!source)return "";try{if(new URL(source).hostname.toLowerCase().endsWith(".backblazeb2.com"))return PROXY+"?url="+encodeURIComponent(source)}catch(e){}return source}
   function setText(id,value){const x=document.getElementById(id);if(x&&value!=null&&value!=="")x.textContent=value}
-  function setImage(id,value,alt){const x=document.getElementById(id),source=publicImage(value);if(x&&source){x.src=source;x.alt=alt||x.alt}}
+  function setImage(id,value,alt){const x=document.getElementById(id),source=publicImage(value);if(!x||!source)return;const reveal=()=>x.classList.add("is-live");x.alt=alt||x.alt;if(x.src!==source){x.addEventListener("load",reveal,{once:true});x.addEventListener("error",reveal,{once:true});x.src=source}else reveal()}
   function setLink(id,label,href){const x=document.getElementById(id);if(!x)return;if(label)x.textContent=label;if(href)x.href=href}
   function applySettings(s){
     setText("heroEyebrow",s.hero_label);setText("heroTitle",s.hero_title);setText("heroDescription",s.hero_description);
