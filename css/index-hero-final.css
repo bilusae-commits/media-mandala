@@ -1,0 +1,14 @@
+/* MANDALA CHANNEL — HOMEPAGE HERO FINAL LAYER
+   Loaded from config.js after the static homepage CSS. */
+body[data-base="./"] .hero{position:relative!important;isolation:isolate!important;background:#082d56!important}
+body[data-base="./"] .hero::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background:#082d56!important;pointer-events:none!important}
+body[data-base="./"] .hero::after{content:""!important;position:absolute!important;inset:0!important;z-index:2!important;background:linear-gradient(90deg,rgba(3,27,57,.97) 0%,rgba(5,43,82,.92) 30%,rgba(8,56,105,.80) 55%,rgba(8,65,119,.62) 78%,rgba(8,65,119,.42) 100%)!important;pointer-events:none!important}
+body[data-base="./"] .heroGrid{position:relative!important;z-index:3!important}
+body[data-base="./"] .hero .visual{position:relative!important;z-index:1!important}
+body[data-base="./"] .hero .heroCopy{position:relative!important;z-index:4!important;color:#fff!important}
+body[data-base="./"] .hero .k{color:#e2bd68!important}
+body[data-base="./"] .hero h1{color:#fff!important;text-shadow:0 2px 20px rgba(0,0,0,.30)!important}
+body[data-base="./"] .hero p{color:rgba(255,255,255,.95)!important}
+body[data-base="./"] .hero .btn,body[data-base="./"] .hero .btn.primary{background:#fff!important;border-color:#fff!important;color:#082d56!important}
+body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
+@media(max-width:760px){body[data-base="./"] .hero::after{background:linear-gradient(180deg,rgba(3,27,57,.90) 0%,rgba(5,43,82,.78) 52%,rgba(8,56,105,.64) 100%)!important}}
