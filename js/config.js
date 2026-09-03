@@ -9,6 +9,6 @@ window.MANDALA_CONFIG={
 /* Homepage settings are loaded once by the public page. CSS is declared by index.html
    in its intended order; the final hero layer is injected here after all static CSS. */
 if(location.pathname.endsWith("/index.html")||location.pathname.endsWith("/")){
-  const heroFix=document.createElement("link");heroFix.rel="stylesheet";heroFix.href="css/index-hero-final.css?v=20260903-04";document.head.appendChild(heroFix);
+  const heroFix=document.createElement("link");heroFix.rel="stylesheet";heroFix.href="css/index-hero-final.css?v=20260903-05";document.head.appendChild(heroFix);
   const loader=document.createElement("script");loader.src="js/homepage-settings.js?v=20260903-07";document.head.appendChild(loader);
 }
