@@ -1,12 +1,110 @@
 /* MANDALA CHANNEL — HOMEPAGE HERO
-   FINAL: gradient only in headline zone. Visual cards stay untouched. */
-body[data-base="./"] .hero{position:relative!important;isolation:isolate!important;overflow:hidden!important;background-color:#082d56!important;background-image:var(--hero-overlay-image,none)!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}
-body[data-base="./"] .hero::before,body[data-base="./"] .hero::after,body[data-base="./"] .hero.has-hero-overlay::before,body[data-base="./"] .hero.has-hero-overlay::after{content:none!important;display:none!important}
-body[data-base="./"] .heroGrid{position:relative!important;z-index:1!important}
-body[data-base="./"] .heroCopy{position:relative!important;z-index:5!important;isolation:isolate!important;min-width:0!important;padding:clamp(22px,3vw,46px)!important;margin-left:clamp(-46px,-3vw,-22px)!important}
-body[data-base="./"] .heroCopy::before{content:""!important;position:absolute!important;z-index:-1!important;left:clamp(-120px,-8vw,-60px)!important;top:clamp(-55px,-5vw,-28px)!important;bottom:clamp(-55px,-5vw,-28px)!important;width:calc(100% + clamp(60px,8vw,120px))!important;pointer-events:none!important;background:linear-gradient(90deg,#082d56 0%,#082d56 48%,rgba(8,45,86,.96) 62%,rgba(8,45,86,.78) 74%,rgba(8,45,86,.48) 86%,rgba(8,45,86,.16) 96%,rgba(8,45,86,0) 100%)!important}
-body[data-base="./"] .hero .visual{position:relative!important;z-index:10!important;isolation:isolate!important}
-body[data-base="./"] .hero .v1,body[data-base="./"] .hero .v2,body[data-base="./"] .hero .v3{position:absolute!important;z-index:11!important}
-body[data-base="./"] .hero .k{color:#e2bd68!important}body[data-base="./"] .hero h1{color:#fff!important;opacity:1!important;text-shadow:0 2px 20px rgba(0,0,0,.30)!important}body[data-base="./"] .hero p{color:#fff!important;opacity:1!important}
-body[data-base="./"] .hero .btn,body[data-base="./"] .hero .btn.primary{background:#fff!important;border-color:#fff!important;color:#082d56!important}body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
-@media(max-width:760px){body[data-base="./"] .heroCopy{padding:clamp(18px,5vw,28px)!important;margin-left:0!important}body[data-base="./"] .heroCopy::before{left:-45px!important;top:-28px!important;bottom:-28px!important;width:calc(100% + 45px)!important;background:linear-gradient(90deg,#082d56 0%,#082d56 54%,rgba(8,45,86,.90) 70%,rgba(8,45,86,.55) 84%,rgba(8,45,86,0) 100%)!important}}
+   Gradient is confined to the headline column only.
+   The main hero image and supporting image cards are never covered. */
+body[data-base="./"] .hero{
+  position:relative!important;
+  isolation:isolate!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  background-color:#082d56!important;
+  background-image:var(--hero-overlay-image,none)!important;
+  background-position:center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+
+/* Kill every previous hero-wide pseudo layer. */
+body[data-base="./"] .hero::before,
+body[data-base="./"] .hero::after,
+body[data-base="./"] .hero.has-hero-overlay::before,
+body[data-base="./"] .hero.has-hero-overlay::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* The grid is the boundary: gradient can never cross into the visual column. */
+body[data-base="./"] .heroGrid{
+  position:relative!important;
+  z-index:1!important;
+  isolation:isolate!important;
+}
+
+/* Gradient occupies ONLY the first grid column / headline zone. */
+body[data-base="./"] .heroGrid::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  left:clamp(-52px,-3.2vw,-16px)!important;
+  top:clamp(-70px,-6vw,-40px)!important;
+  bottom:clamp(-70px,-6vw,-40px)!important;
+  width:calc((100% - clamp(28px,5vw,80px)) * .515)!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,
+    #082d56 0%,
+    #082d56 58%,
+    rgba(8,45,86,.99) 68%,
+    rgba(8,45,86,.90) 77%,
+    rgba(8,45,86,.68) 85%,
+    rgba(8,45,86,.38) 92%,
+    rgba(8,45,86,.12) 97%,
+    rgba(8,45,86,0) 100%)!important;
+}
+
+/* Text sits above its local gradient. */
+body[data-base="./"] .hero .heroCopy{
+  position:relative!important;
+  z-index:2!important;
+  min-width:0!important;
+  color:#fff!important;
+}
+
+/* Visual column is independently above the gradient and stays untouched. */
+body[data-base="./"] .hero .visual{
+  position:relative!important;
+  z-index:3!important;
+  isolation:isolate!important;
+}
+body[data-base="./"] .hero .v1,
+body[data-base="./"] .hero .v2,
+body[data-base="./"] .hero .v3{
+  position:absolute!important;
+  z-index:4!important;
+}
+
+body[data-base="./"] .hero .k{color:#e2bd68!important}
+body[data-base="./"] .hero h1{
+  color:#fff!important;
+  opacity:1!important;
+  text-shadow:0 2px 20px rgba(0,0,0,.30)!important;
+}
+body[data-base="./"] .hero p{color:#fff!important;opacity:1!important}
+body[data-base="./"] .hero .btn,
+body[data-base="./"] .hero .btn.primary{
+  background:#fff!important;
+  border-color:#fff!important;
+  color:#082d56!important;
+}
+body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
+
+@media(max-width:1100px){
+  body[data-base="./"] .heroGrid::before{
+    width:54%!important;
+  }
+}
+
+@media(max-width:760px){
+  body[data-base="./"] .heroGrid::before{
+    left:-24px!important;
+    top:-45px!important;
+    bottom:-45px!important;
+    width:76%!important;
+    background:linear-gradient(90deg,
+      #082d56 0%,
+      #082d56 58%,
+      rgba(8,45,86,.97) 70%,
+      rgba(8,45,86,.78) 80%,
+      rgba(8,45,86,.48) 89%,
+      rgba(8,45,86,.16) 97%,
+      rgba(8,45,86,0) 100%)!important;
+  }
+}
