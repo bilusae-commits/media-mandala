@@ -23,6 +23,15 @@ body[data-base="./"] .podcasts{grid-template-columns:repeat(2,minmax(0,1fr))}
 body[data-base="./"] .podcast{grid-template-columns:minmax(0,42%) minmax(0,1fr)}
 body[data-base="./"] .news{grid-template-columns:minmax(0,1fr) minmax(0,480px)}
 
+/* Hero images are supplied by Supabase/Backblaze at runtime. Hide the HTML fallback
+   immediately so the previous image can never flash before the live image arrives. */
+body[data-base="./"] #heroImageMain,
+body[data-base="./"] #heroImageSecondary,
+body[data-base="./"] #heroImageTertiary{visibility:hidden}
+body[data-base="./"] #heroImageMain.is-live,
+body[data-base="./"] #heroImageSecondary.is-live,
+body[data-base="./"] #heroImageTertiary.is-live{visibility:visible}
+
 /* Zoom-in / narrow CSS viewports: reflow instead of forcing desktop columns. */
 @media (max-width:1100px){
   body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
