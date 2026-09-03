@@ -5,16 +5,18 @@
   if(!url||!key)return;
   const headers={apikey:key,Authorization:"Bearer "+key};
   const PROXY=url+"/functions/v1/homepage-cover-image";
+  const B2_BASE="https://f005.backblazeb2.com/file/Mandala-Podcast/";
   async function get(table,select,params=""){const r=await fetch(url+"/rest/v1/"+table+"?select="+encodeURIComponent(select)+params,{headers});if(!r.ok)throw new Error(table+" HTTP "+r.status);return r.json()}
   function publicImage(value){const source=String(value||"").trim();if(!source)return "";try{if(new URL(source).hostname.toLowerCase().endsWith(".backblazeb2.com"))return PROXY+"?url="+encodeURIComponent(source)}catch(e){}return source}
+  function imageFromKey(key){const k=String(key||"").trim();return k?publicImage(B2_BASE+k):""}
   function setText(id,value){const x=document.getElementById(id);if(x&&value!=null&&value!=="")x.textContent=value}
   function setImage(id,value,alt){const x=document.getElementById(id),source=publicImage(value);if(!x||!source)return;const reveal=()=>x.classList.add("is-live");x.alt=alt||x.alt;if(x.src!==source){x.addEventListener("load",reveal,{once:true});x.addEventListener("error",reveal,{once:true});x.src=source}else reveal()}
   function setLink(id,label,href){const x=document.getElementById(id);if(!x)return;if(label)x.textContent=label;if(href)x.href=href}
   function applySettings(s){
     setText("heroEyebrow",s.hero_label);setText("heroTitle",s.hero_title);setText("heroDescription",s.hero_description);
     setLink("heroPrimary",s.hero_primary_label,s.hero_primary_url);setLink("heroSecondary",s.hero_secondary_label,s.hero_secondary_url);
-    setImage("heroImageMain",s.hero_image_main,"Mandala Channel");setImage("heroImageSecondary",s.hero_image_secondary,"Mandala Channel");setImage("heroImageTertiary",s.hero_image_tertiary,"Mandala Channel");
-    const hero=document.getElementById("heroSection");if(hero){if(s.hero_background_color)hero.style.backgroundColor=s.hero_background_color;if(s.hero_overlay_image){const overlay=publicImage(s.hero_overlay_image),opacity=Math.max(0,Math.min(1,Number(s.hero_overlay_opacity??.18)));hero.style.backgroundImage="linear-gradient(rgba(255,255,255,"+opacity+"),rgba(255,255,255,"+opacity+")),url(\""+overlay.replace(/\"/g,"%22")+"\")";hero.style.backgroundSize="cover";hero.style.backgroundPosition="center"}}
+    setImage("heroImageMain",s.hero_image_main||imageFromKey(s.hero_image_main_key),"Mandala Channel");setImage("heroImageSecondary",s.hero_image_secondary||imageFromKey(s.hero_image_secondary_key),"Mandala Channel");setImage("heroImageTertiary",s.hero_image_tertiary||imageFromKey(s.hero_image_tertiary_key),"Mandala Channel");
+    const hero=document.getElementById("heroSection");if(hero){if(s.hero_background_color)hero.style.backgroundColor=s.hero_background_color;const overlaySource=s.hero_overlay_image||imageFromKey(s.hero_overlay_image_key);if(overlaySource){const overlay=publicImage(overlaySource),opacity=Math.max(0,Math.min(1,Number(s.hero_overlay_opacity??.18)));hero.style.backgroundImage="linear-gradient(rgba(255,255,255,"+opacity+"),rgba(255,255,255,"+opacity+")),url(\""+overlay.replace(/\"/g,"%22")+"\")";hero.style.backgroundSize="cover";hero.style.backgroundPosition="center"}}
   }
   function applyLatest(article){
     if(!article)return;
