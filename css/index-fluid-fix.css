@@ -23,6 +23,13 @@ body[data-base="./"] .podcasts{grid-template-columns:repeat(2,minmax(0,1fr))}
 body[data-base="./"] .podcast{grid-template-columns:minmax(0,42%) minmax(0,1fr)}
 body[data-base="./"] .news{grid-template-columns:minmax(0,1fr) minmax(0,480px)}
 
+/* IMPORTANT: the old static hero background in home.css was still being painted
+   before Supabase delivered the current hero images. Keep the hero background
+   neutral; the three runtime images are the only hero photography. */
+body[data-base="./"] .hero::before{
+  background:linear-gradient(90deg,rgba(248,250,252,.985) 0%,rgba(248,250,252,.92) 38%,rgba(248,250,252,.62) 68%,rgba(248,250,252,.2) 100%)!important;
+}
+
 /* Hero images are supplied by Supabase/Backblaze at runtime. Hide the HTML fallback
    immediately so the previous image can never flash before the live image arrives. */
 body[data-base="./"] #heroImageMain,
