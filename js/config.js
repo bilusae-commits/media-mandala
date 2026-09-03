@@ -9,5 +9,5 @@ window.MANDALA_CONFIG={
 /* Homepage-only responsive layer. */
 if(location.pathname.endsWith("/index.html")||location.pathname.endsWith("/")){
   const fix=document.createElement("link");fix.rel="stylesheet";fix.href="css/index-fluid-fix.css?v=20260903-04";document.head.appendChild(fix);
-  const loader=document.createElement("script");loader.src="js/homepage-settings.js?v=20260903-04";document.head.appendChild(loader);
+  const loader=document.createElement("script");loader.src="js/homepage-settings.js?v=20260903-05";document.head.appendChild(loader);
 }
