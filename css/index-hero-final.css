@@ -1,6 +1,6 @@
-/* MANDALA CHANNEL — HOMEPAGE HERO
-   The gradient is a BACKGROUND layer, never an overlay element.
-   Therefore the hero/supporting image cards can never be tinted by it. */
+/* MANDALA CHANNEL — HERO FINAL
+   Background gradient is painted inside the HERO BACKGROUND only.
+   It can never cover the main/supporting image cards because those are DOM elements. */
 body[data-base="./"] .hero{
   position:relative!important;
   isolation:isolate!important;
@@ -10,14 +10,14 @@ body[data-base="./"] .hero{
   background-image:
     linear-gradient(90deg,
       #082d56 0%,
-      #082d56 30%,
-      rgba(8,45,86,.985) 40%,
+      #082d56 28%,
+      rgba(8,45,86,.985) 39%,
       rgba(8,45,86,.92) 48%,
-      rgba(8,45,86,.78) 56%,
-      rgba(8,45,86,.58) 64%,
-      rgba(8,45,86,.36) 71%,
-      rgba(8,45,86,.16) 77%,
-      rgba(8,45,86,0) 83%),
+      rgba(8,45,86,.76) 57%,
+      rgba(8,45,86,.55) 65%,
+      rgba(8,45,86,.32) 72%,
+      rgba(8,45,86,.12) 78%,
+      rgba(8,45,86,0) 84%),
     var(--hero-overlay-image,none)!important;
   background-position:center,center!important;
   background-size:cover,cover!important;
@@ -35,11 +35,10 @@ body[data-base="./"] .heroCopy::before{
   display:none!important;
 }
 
-/* Foreground DOM images are above the hero background by definition. */
+/* Content is above the hero background. */
 body[data-base="./"] .heroGrid{
   position:relative!important;
   z-index:1!important;
-  isolation:isolate!important;
 }
 body[data-base="./"] .hero .heroCopy{
   position:relative!important;
@@ -47,21 +46,24 @@ body[data-base="./"] .hero .heroCopy{
   min-width:0!important;
   color:#fff!important;
 }
+
+/* These are real image elements, therefore the background gradient cannot touch them. */
 body[data-base="./"] .hero .visual{
   position:relative!important;
-  z-index:5!important;
+  z-index:3!important;
   isolation:isolate!important;
-}
-body[data-base="./"] .hero .visual>div{
-  z-index:6!important;
 }
 body[data-base="./"] .hero .v1,
 body[data-base="./"] .hero .v2,
 body[data-base="./"] .hero .v3{
   position:absolute!important;
+  z-index:4!important;
+}
+body[data-base="./"] .hero .visual img{
+  opacity:1!important;
+  filter:none!important;
 }
 
-/* Typography remains fully opaque. */
 body[data-base="./"] .hero .k{color:#e2bd68!important}
 body[data-base="./"] .hero h1{
   color:#fff!important;
@@ -77,17 +79,32 @@ body[data-base="./"] .hero .btn.primary{
 }
 body[data-base="./"] .hero .btn:hover{background:#f4f7fa!important;color:#082d56!important}
 
-@media(max-width:760px){
+@media(max-width:1100px){
   body[data-base="./"] .hero{
     background-image:
       linear-gradient(90deg,
         #082d56 0%,
-        #082d56 38%,
-        rgba(8,45,86,.96) 50%,
-        rgba(8,45,86,.78) 60%,
-        rgba(8,45,86,.48) 70%,
-        rgba(8,45,86,.18) 80%,
-        rgba(8,45,86,0) 90%),
+        #082d56 30%,
+        rgba(8,45,86,.98) 42%,
+        rgba(8,45,86,.84) 53%,
+        rgba(8,45,86,.58) 63%,
+        rgba(8,45,86,.30) 72%,
+        rgba(8,45,86,.08) 80%,
+        rgba(8,45,86,0) 87%),
+      var(--hero-overlay-image,none)!important;
+  }
+}
+
+@media(max-width:760px){
+  body[data-base="./"] .hero{
+    background-image:
+      linear-gradient(180deg,
+        #082d56 0%,
+        #082d56 34%,
+        rgba(8,45,86,.96) 46%,
+        rgba(8,45,86,.70) 58%,
+        rgba(8,45,86,.30) 70%,
+        rgba(8,45,86,0) 80%),
       var(--hero-overlay-image,none)!important;
   }
 }
