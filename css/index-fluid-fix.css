@@ -23,11 +23,18 @@ body[data-base="./"] .podcasts{grid-template-columns:repeat(2,minmax(0,1fr))}
 body[data-base="./"] .podcast{grid-template-columns:minmax(0,42%) minmax(0,1fr)}
 body[data-base="./"] .news{grid-template-columns:minmax(0,1fr) minmax(0,480px)}
 
-/* IMPORTANT: the old static hero background in home.css was still being painted
-   before Supabase delivered the current hero images. Keep the hero background
-   neutral; the three runtime images are the only hero photography. */
+/* Homepage hero background/overlay is supplied by the admin at runtime.
+   The overlay belongs on the existing ::before layer because the hero element
+   itself uses isolation and its pseudo-element is the visual background layer. */
 body[data-base="./"] .hero::before{
-  background:linear-gradient(90deg,rgba(248,250,252,.985) 0%,rgba(248,250,252,.92) 38%,rgba(248,250,252,.62) 68%,rgba(248,250,252,.2) 100%)!important;
+  background:
+    linear-gradient(90deg,rgba(248,250,252,.985) 0%,rgba(248,250,252,.92) 38%,rgba(248,250,252,.62) 68%,rgba(248,250,252,.2) 100%),
+    var(--hero-overlay-image,none) center/cover no-repeat!important;
+}
+body[data-base="./"] .hero.has-hero-overlay::before{
+  background:
+    linear-gradient(90deg,rgba(248,250,252,.985) 0%,rgba(248,250,252,.92) 38%,rgba(248,250,252,.62) 68%,rgba(248,250,252,.2) 100%),
+    var(--hero-overlay-image) center/cover no-repeat!important;
 }
 
 /* Hero images are supplied by Supabase/Backblaze at runtime. Hide the HTML fallback
