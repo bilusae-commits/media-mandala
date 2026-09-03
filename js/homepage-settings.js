@@ -6,9 +6,13 @@
   const headers={apikey:key,Authorization:"Bearer "+key};
   const PROXY=url+"/functions/v1/homepage-cover-image";
   const B2_BASE="https://f005.backblazeb2.com/file/Mandala-Podcast/";
+  const FAVICON="assets/brand/WhatsApp%20Image%202026-02-19%20at%2011.46.52%20AM.jpeg";
   async function get(table,select,params=""){const r=await fetch(url+"/rest/v1/"+table+"?select="+encodeURIComponent(select)+params,{headers});if(!r.ok)throw new Error(table+" HTTP "+r.status);return r.json()}
   function publicImage(value){const source=String(value||"").trim();if(!source)return "";try{if(new URL(source).hostname.toLowerCase().endsWith(".backblazeb2.com"))return PROXY+"?url="+encodeURIComponent(source)}catch(e){}return source}
   function imageFromKey(key){const k=String(key||"").trim();return k?publicImage(B2_BASE+k):""}
+  function setHomepageFavicon(){const icon=document.querySelector('link[rel~="icon"]');if(icon)icon.href=FAVICON;else{const x=document.createElement("link");x.rel="icon";x.type="image/jpeg";x.href=FAVICON;document.head.appendChild(x)}}
+  function fixPlaylistImages(root=document){root.querySelectorAll?.("#playlistTrack .play-card img").forEach(img=>{const source=img.getAttribute("src")||"";if(source.includes(PROXY+"?url="))return;if(/\.backblazeb2\.com\//i.test(source))img.src=publicImage(source)})}
+  function watchPlaylistImages(){const track=document.getElementById("playlistTrack");if(!track)return;fixPlaylistImages(track);if(window.MandalaHomepagePlaylistObserver)window.MandalaHomepagePlaylistObserver.disconnect();const observer=new MutationObserver(()=>fixPlaylistImages(track));observer.observe(track,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]});window.MandalaHomepagePlaylistObserver=observer}
   function setText(id,value){const x=document.getElementById(id);if(x&&value!=null&&value!=="")x.textContent=value}
   function setImage(id,value,alt){const x=document.getElementById(id),source=publicImage(value);if(!x||!source)return;const reveal=()=>x.classList.add("is-live");x.alt=alt||x.alt;if(x.src!==source){x.addEventListener("load",reveal,{once:true});x.addEventListener("error",reveal,{once:true});x.src=source}else reveal()}
   function setLink(id,label,href){const x=document.getElementById(id);if(!x)return;if(label)x.textContent=label;if(href)x.href=href}
@@ -23,6 +27,7 @@
     const feature=document.querySelector(".feature");
     if(feature){const a=feature.querySelector("a")||feature;const img=feature.querySelector("img"),title=feature.querySelector("h2"),meta=feature.querySelector(".k"),small=feature.querySelector("small");if(img&&article.cover_image_url)img.src=publicImage(article.cover_image_url);if(title)title.textContent=article.title||"";if(meta)meta.textContent="Berita terbaru";if(small)small.textContent="Mandala Channel · Terbaru";if(a&&a.tagName==="A")a.href="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"")}
     const cards=document.querySelectorAll("#articlesContainer .card");if(cards.length){const card=cards[0],img=card.querySelector("img"),title=card.querySelector("h3"),meta=card.querySelector(".meta"),link=card.querySelector("a");if(img&&article.cover_image_url)img.src=publicImage(article.cover_image_url);if(title)title.textContent=article.title||"Artikel terbaru";if(meta)meta.textContent="Artikel terbaru";if(link)link.href="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"")}}
-  async function init(){try{const settings=await get("homepage_settings","*");if(settings[0])applySettings(settings[0]);const articles=await get("articles","id,title,slug,cover_image_url,published_at,created_at,status","&status=eq.published&order=published_at.desc.nullslast&limit=1");applyLatest(articles[0])}catch(e){console.warn("Homepage settings fallback aktif:",e.message)}}
+  function initHomepageExtras(){setHomepageFavicon();watchPlaylistImages()}
+  async function init(){try{const settings=await get("homepage_settings","*");if(settings[0])applySettings(settings[0]);const articles=await get("articles","id,title,slug,cover_image_url,published_at,created_at,status","&status=eq.published&order=published_at.desc.nullslast&limit=1");applyLatest(articles[0])}catch(e){console.warn("Homepage settings fallback aktif:",e.message)}finally{initHomepageExtras()}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
