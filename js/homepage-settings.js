@@ -21,7 +21,7 @@
     setText("heroEyebrow",s.hero_label);setText("heroTitle",s.hero_title);setText("heroDescription",s.hero_description);
     setLink("heroPrimary",s.hero_primary_label,s.hero_primary_url);setLink("heroSecondary",s.hero_secondary_label,s.hero_secondary_url);
     setImage("heroImageMain",s.hero_image_main||imageFromKey(s.hero_image_main_key),"Mandala Channel");setImage("heroImageSecondary",s.hero_image_secondary||imageFromKey(s.hero_image_secondary_key),"Mandala Channel");setImage("heroImageTertiary",s.hero_image_tertiary||imageFromKey(s.hero_image_tertiary_key),"Mandala Channel");
-    const hero=document.getElementById("heroSection");if(hero){if(s.hero_background_color)hero.style.backgroundColor=s.hero_background_color;const overlaySource=s.hero_overlay_image||imageFromKey(s.hero_overlay_image_key);if(overlaySource){const overlay=publicImage(overlaySource),opacity=Math.max(0,Math.min(1,Number(s.hero_overlay_opacity??.18)));hero.style.setProperty("--hero-overlay-image","url(\""+overlay.replace(/\"/g,"%22")+"\")");hero.style.setProperty("--hero-overlay-opacity",String(opacity));hero.classList.add("has-hero-overlay")}else{hero.style.removeProperty("--hero-overlay-image");hero.classList.remove("has-hero-overlay")}}
+    const hero=document.getElementById("heroSection");if(hero){if(s.hero_background_color)hero.style.backgroundColor=s.hero_background_color;const overlaySource=s.hero_overlay_image||imageFromKey(s.hero_overlay_image_key);if(overlaySource){const overlay=publicImage(overlaySource),opacity=Math.max(0,Math.min(1,Number(s.hero_overlay_opacity??.18)));hero.style.setProperty("--hero-overlay-image","url(\""+overlay.replace(/\"/g,"%22")+"\")");hero.style.setProperty("--hero-overlay-opacity",String(opacity));hero.classList.add("has-hero-overlay")}else{hero.style.removeProperty("--hero-overlay-image");hero.style.removeProperty("--hero-overlay-opacity");hero.classList.remove("has-hero-overlay")}}
   }
   function applyLatest(article){
     if(!article)return;
@@ -29,6 +29,14 @@
     if(feature){const img=feature.querySelector("img"),title=feature.querySelector("h2"),meta=feature.querySelector(".k"),small=feature.querySelector("small");if(img&&article.cover_image_url)img.src=publicImage(article.cover_image_url);if(title)title.textContent=article.title||"";if(meta)meta.textContent="Berita terbaru";if(small)small.textContent="Mandala Channel · Terbaru";feature.classList.add("is-live-content");feature.setAttribute("role","link");feature.setAttribute("tabindex","0");const target="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"");feature.onclick=()=>{location.href=target};feature.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();location.href=target}}}
     const cards=document.querySelectorAll("#articlesContainer .card");if(cards.length){const card=cards[0],img=card.querySelector("img"),title=card.querySelector("h3"),meta=card.querySelector(".meta"),link=card.querySelector("a");if(img&&article.cover_image_url)img.src=publicImage(article.cover_image_url);if(title)title.textContent=article.title||"Artikel terbaru";if(meta)meta.textContent="Artikel terbaru";if(link)link.href="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"")}}
   function initHomepageExtras(){setHomepageFavicon();watchPlaylistImages()}
-  async function init(){try{const settings=await get("homepage_settings","*");if(settings[0])applySettings(settings[0]);const articles=await get("articles","id,title,slug,cover_image_url,published_at,created_at,status","&status=eq.published&order=published_at.desc.nullslast&limit=1");applyLatest(articles[0])}catch(e){console.warn("Homepage settings fallback aktif:",e.message)}finally{initHomepageExtras()}}
+  async function init(){try{
+    const publicLoader=window.MandalaPublic?.loadHomeData;
+    if(typeof publicLoader==="function")await publicLoader();
+    const settings=await get("homepage_settings","*");
+    if(settings[0])applySettings(settings[0]);
+    const articles=(window.MandalaPublicData?.articles||window.DATA?.articles||[]);
+    applyLatest(articles[0]);
+    if(typeof window.renderPlaylists==="function")window.renderPlaylists();
+  }catch(e){console.warn("Homepage live data fallback aktif:",e.message)}finally{initHomepageExtras()}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
