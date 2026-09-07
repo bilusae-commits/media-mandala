@@ -1,15 +1,15 @@
 /* Mandala Channel — homepage anti-flicker layer */
-/* Keep legacy HTML placeholders invisible until live Supabase content is hydrated. */
-body.homepage-hydrating #heroImageMain,
-body.homepage-hydrating #heroImageSecondary,
-body.homepage-hydrating #heroImageTertiary,
-body.homepage-hydrating .feature > img,
-body.homepage-hydrating #articlesContainer .thumb img,
-body.homepage-hydrating #videosContainer .thumb img{
+/* The selector works without an extra body class, so it applies from first paint. */
+body:not(.homepage-ready) #heroImageMain,
+body:not(.homepage-ready) #heroImageSecondary,
+body:not(.homepage-ready) #heroImageTertiary,
+body:not(.homepage-ready) .feature > img,
+body:not(.homepage-ready) #articlesContainer .thumb img,
+body:not(.homepage-ready) #videosContainer .thumb img{
   opacity:0!important;
 }
 
-body.homepage-hydrating .hero::before{
+body:not(.homepage-ready) .hero::before{
   background:#f5f7f8!important;
 }
 
