@@ -1,0 +1,32 @@
+/* Mandala Channel — homepage anti-flicker layer */
+/* Keep legacy HTML placeholders invisible until live Supabase content is hydrated. */
+body.homepage-hydrating #heroImageMain,
+body.homepage-hydrating #heroImageSecondary,
+body.homepage-hydrating #heroImageTertiary,
+body.homepage-hydrating .feature > img,
+body.homepage-hydrating #articlesContainer .thumb img,
+body.homepage-hydrating #videosContainer .thumb img{
+  opacity:0!important;
+}
+
+body.homepage-hydrating .hero::before{
+  background:#f5f7f8!important;
+}
+
+#heroImageMain,
+#heroImageSecondary,
+#heroImageTertiary,
+.feature > img,
+#articlesContainer .thumb img,
+#videosContainer .thumb img{
+  transition:opacity .28s ease,transform .45s ease;
+}
+
+#heroImageMain.is-live,
+#heroImageSecondary.is-live,
+#heroImageTertiary.is-live,
+.feature > img.is-live,
+#articlesContainer .thumb img.is-live,
+#videosContainer .thumb img.is-live{
+  opacity:1;
+}
