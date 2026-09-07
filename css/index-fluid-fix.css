@@ -1,6 +1,12 @@
 /* MANDALA CHANNEL — INDEX FLUID FIX
    Scoped to the homepage only. Loaded after the existing homepage CSS.
    Goal: keep the page width fluid at browser zoom-out and allow clean reflow at zoom-in. */
+
+/* Critical first-paint gate. This stylesheet is loaded in <head>, so the
+   static fallback DOM cannot paint before Supabase hydration finishes. */
+body[data-base="./"] main{opacity:0!important;visibility:hidden!important}
+body[data-base="./"].homepage-ready main{opacity:1!important;visibility:visible!important}
+
 body[data-base="./"]{min-width:0;overflow-x:hidden}
 body[data-base="./"] .w,
 body[data-base="./"] .heroGrid{width:100%!important;max-width:none!important;margin-inline:0!important;padding-inline:clamp(16px,3.2vw,52px)!important}
