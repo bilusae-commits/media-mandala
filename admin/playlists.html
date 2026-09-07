@@ -6,11 +6,24 @@
 <title>Playlist — Mandala Channel CMS</title>
 <link rel="stylesheet" href="css/cms.css">
 <style>
+:root{--playlist-gap:16px}
 .playlist-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.status-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--border);background:#fafafa}
-.status-tab{border:1px solid var(--border);background:#fff;color:#555;border-radius:6px;padding:7px 10px;font-size:9px;font-weight:700;cursor:pointer}.status-tab.active{background:var(--dark);border-color:var(--dark);color:#fff}
-.playlist-cell{display:flex;align-items:center;gap:11px;min-width:300px}.playlist-cover{width:96px;height:55px;border-radius:6px;overflow:hidden;background:#edf1f5;color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:18px}.playlist-cover img{width:100%;height:100%;object-fit:cover}.playlist-cell strong{display:block;max-width:430px}.sub{margin-top:4px;color:#8a949e;font-size:9px;max-width:430px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.actions{display:flex;gap:6px;flex-wrap:wrap}.btn-small{padding:7px 9px;font-size:9px}.badge{display:inline-block;padding:5px 7px;border-radius:5px;font-size:8px;font-weight:800;text-transform:uppercase}.badge-draft{background:#f1f3f5;color:#667}.badge-review{background:#fff3cd;color:#8a6500}.badge-published{background:#e7f6ec;color:#24733c}.badge-archived{background:#e9edf1;color:#64707c}.message{margin-bottom:12px}.message:empty{display:none}.message.error{color:#9b3028}.message.success{color:#27723e}
-@media(max-width:800px){.playlist-cell{min-width:250px}.playlist-cell strong,.sub{max-width:300px}}
+.status-tabs{display:flex;gap:7px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--border);background:#fbfcfd}
+.status-tab{border:1px solid var(--border);background:#fff;color:#56616b;border-radius:999px;padding:8px 12px;font-size:9px;font-weight:800;letter-spacing:.02em;cursor:pointer;transition:.18s ease}.status-tab:hover{border-color:#aeb8c1;background:#f5f7f9}.status-tab.active{background:var(--dark);border-color:var(--dark);color:#fff}
+.toolbar{display:grid;grid-template-columns:minmax(240px,1fr) 190px auto;gap:10px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);background:#fff}
+.playlist-table{width:100%;min-width:920px;border-collapse:collapse}
+.playlist-table th{padding:11px 14px;text-align:left;font-size:8px;letter-spacing:.08em;color:#7a858f;background:#f8fafb;border-bottom:1px solid var(--border);white-space:nowrap}
+.playlist-table td{padding:13px 14px;border-bottom:1px solid #edf0f2;vertical-align:middle;font-size:11px;color:#3f4850}
+.playlist-table tbody tr{transition:background .15s ease}.playlist-table tbody tr:hover{background:#fafcfd}.playlist-table tbody tr:last-child td{border-bottom:0}
+.playlist-table th:nth-child(2){width:170px}.playlist-table th:nth-child(3){width:105px}.playlist-table th:nth-child(4){width:82px;text-align:center}.playlist-table th:nth-child(5){width:76px;text-align:center}.playlist-table th:nth-child(6){width:210px}
+.playlist-table td:nth-child(4),.playlist-table td:nth-child(5){text-align:center}
+.playlist-cell{display:flex;align-items:center;gap:13px;min-width:330px}.playlist-cover{position:relative;flex:0 0 108px;width:108px;height:62px;border-radius:8px;overflow:hidden;background:#edf1f5;color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:18px;border:1px solid #e3e8ec}.playlist-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.12));pointer-events:none}.playlist-cover img{width:100%;height:100%;object-fit:cover;display:block}.playlist-cover.cover-missing{background:#eef2f5}.playlist-cell strong{display:block;max-width:430px;font-size:11px;line-height:1.45;color:#202830}.sub{margin-top:5px;color:#89939c;font-size:9px;max-width:430px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.category-text{font-size:10px;color:#58636d}.featured-star{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#f5f7f9;color:#9aa3aa;font-size:14px}.featured-star.is-featured{background:#fff5d6;color:#a87800}
+.actions{display:flex;gap:6px;flex-wrap:wrap}.actions .btn{min-width:48px;justify-content:center}.btn-small{padding:7px 10px;font-size:9px}.badge{display:inline-block;padding:5px 8px;border-radius:999px;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}.badge-draft{background:#f1f3f5;color:#66727d}.badge-review{background:#fff3cd;color:#8a6500}.badge-published{background:#e7f6ec;color:#24733c}.badge-archived{background:#e9edf1;color:#64707c}
+.message{margin-bottom:12px}.message:empty{display:none}.message.error{color:#9b3028}.message.success{color:#27723e}
+.empty{padding:38px 24px;text-align:center}.empty strong{display:block;margin-bottom:5px}
+@media(max-width:900px){.toolbar{grid-template-columns:1fr 170px auto}.playlist-table{min-width:900px}}
+@media(max-width:640px){.toolbar{grid-template-columns:1fr;gap:8px}.toolbar .input,.toolbar .select,.toolbar .btn{width:100%}.status-tabs{padding:10px 12px}.status-tab{padding:7px 10px}.playlist-cell{min-width:300px}.playlist-cell strong,.sub{max-width:260px}.playlist-cover{flex-basis:92px;width:92px;height:54px}.actions{max-width:190px}}
 </style>
 </head>
 <body>
@@ -41,12 +54,12 @@
 <div class="stat stat-click" data-status-card="featured"><div class="stat-label">Unggulan</div><div class="stat-value" id="stat-featured">—</div></div></div>
 <section class="panel"><div class="panel-head"><div class="playlist-toolbar" style="width:100%"><div><div class="panel-title">Daftar Playlist</div><div class="panel-meta" id="result-count">Memuat...</div></div><button class="btn btn-light" id="refresh" type="button">↻ Refresh</button></div></div>
 <div class="status-tabs"><button class="status-tab active" data-status="all" type="button">Semua</button><button class="status-tab" data-status="draft" type="button">Draft</button><button class="status-tab" data-status="review" type="button">Review</button><button class="status-tab" data-status="published" type="button">Published</button><button class="status-tab" data-status="archived" type="button">Arsip</button><button class="status-tab" data-status="featured" type="button">★ Unggulan</button></div>
-<div class="toolbar"><input class="input" id="search" type="search" placeholder="Cari playlist, slug, ID YouTube..." autocomplete="off"><select class="select" id="status-filter"><option value="all">Semua status</option><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Arsip</option></select><button class="btn btn-light" id="clear-filters" type="button">Reset</button></div>
+<div class="toolbar"><input class="input" id="search" type="search" placeholder="Cari playlist, slug, ID YouTube..." autocomplete="off"><select class="select" id="status-filter"><option value="all">Semua status</option><option value="draft">Draft</option><option value="review">Review</option><option value="published">Published</option><option value="archived">Arsip</option></select><select class="select" id="category-filter"><option value="all">Semua kategori</option></select><button class="btn btn-light" id="clear-filters" type="button">Reset</button></div>
 <div class="table-wrap" id="playlists-container"><div class="empty"><strong>Memuat playlist...</strong>Menyiapkan data dari Supabase.</div></div>
 </section></section></main></div>
 <script>window.MANDALA_CONFIG={SUPABASE_URL:"https://roeckoabffhyctfkvbhw.supabase.co",SUPABASE_PUBLISHABLE_KEY:"sb_publishable_rtbdvp4WdU4xMjn9Hyz4SQ_zIWkzWAr"};</script>
 <script src="../js/supabase-client.js"></script>
-<script type="module" src="js/playlists.js"></script>
+<script type="module" src="js/playlists.js?v=20260907.1"></script>
 <script>
 document.addEventListener("DOMContentLoaded",async()=>{try{const a=await MandalaSupabase.auth.requireStaff();if(!a)return;document.getElementById("top-user").textContent=a.user?.email||"";document.getElementById("side-name").textContent=a.profile?.full_name||a.user?.email||"Mandala CMS";document.getElementById("side-role").textContent=a.role||"staff";document.getElementById("logout").onclick=async()=>{await MandalaSupabase.auth.signOut();location.href="index.html"}}catch(e){console.error(e)}});
 </script>
