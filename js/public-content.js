@@ -9,8 +9,11 @@
     const scriptSrc = document.currentScript?.src || "";
     const resolveAsset = (path) => scriptSrc ? new window.URL(path, scriptSrc).href : path;
 
-    /* Public visual system is loaded last so legacy inline page CSS cannot split the design. */
-    if (!document.querySelector('link[data-mandala-public-ui]')) {
+    /* Homepage already owns its complete layout through main/home/index CSS.
+       Inject the shared visual token sheet only on the other public pages so
+       it cannot arrive asynchronously and trigger a homepage reflow. */
+    const isHomepage=document.body?.matches?.('body[data-base="./"]');
+    if (!isHomepage && !document.querySelector('link[data-mandala-public-ui]')) {
         const ui = document.createElement('link');
         ui.rel = 'stylesheet';
         ui.href = resolveAsset('../css/public-unified.css');
@@ -26,7 +29,6 @@
         document.head.appendChild(favicon);
     }
 
-    /* Normalize legacy public header logos to the official asset. */
     function normalizeBranding(){
         const logo = document.querySelector('header .logo, #siteHeader .logo');
         if (logo && !logo.querySelector('img')) {
