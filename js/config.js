@@ -11,6 +11,7 @@ if(location.pathname.endsWith("/index.html")||location.pathname.endsWith("/")){
   const bootstrap=document.createElement("style");
   bootstrap.id="mandala-home-bootstrap";
   bootstrap.textContent=`
+    body[data-base="./"] .hero{background:#082d56!important}
     body[data-base="./"] .heroCopy,
     body[data-base="./"] .hero .visual,
     body[data-base="./"] .feature .copy,
@@ -28,7 +29,7 @@ if(location.pathname.endsWith("/index.html")||location.pathname.endsWith("/")){
     body[data-base="./"].homepage-ready #videosContainer,
     body[data-base="./"].homepage-ready #topicsContainer,
     body[data-base="./"].homepage-ready #playlistTrack,
-    body[data-base="./"].homepage-ready .podcasts{opacity:1!important;transition:opacity .16s ease}
+    body[data-base="./"].homepage-ready .podcasts{opacity:1!important;transition:opacity .12s ease}
     body[data-base="./"] .hero .visual img{visibility:hidden!important;opacity:0!important}
     body[data-base="./"].homepage-ready .hero .visual img{visibility:visible!important;opacity:1!important}
     body[data-base="./"] .feature>img{visibility:hidden!important}
@@ -36,8 +37,6 @@ if(location.pathname.endsWith("/index.html")||location.pathname.endsWith("/")){
   `;
   document.head.appendChild(bootstrap);
 
-  /* Homepage hero is deliberately defined here as one controlled layer:
-     background overlay + left-to-right blue gradient. */
   const style=document.createElement("style");
   style.id="mandala-home-hero-layer";
   style.textContent=`
