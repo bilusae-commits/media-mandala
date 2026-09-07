@@ -34,7 +34,7 @@
     if(typeof publicLoader==="function")await publicLoader();
     const settings=await get("homepage_settings","*");
     if(settings[0])applySettings(settings[0]);
-    const articles=(window.MandalaPublicData?.articles||window.DATA?.articles||[]);
+    const articles=(window.MandalaPublicData?.articles||window.DATA?.articles||[]).slice().sort((a,b)=>new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
     applyLatest(articles[0]);
     if(typeof window.renderPlaylists==="function")window.renderPlaylists();
   }catch(e){console.warn("Homepage live data fallback aktif:",e.message)}finally{initHomepageExtras()}}
