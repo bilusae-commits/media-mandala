@@ -11,8 +11,8 @@
     const auth=await getCurrentAuth();
     if(!auth?.authenticated){ window.location.replace(options.loginPage||'index.html'); return null; }
     if(auth.role!=='admin'&&auth.role!=='editor'){ window.location.replace(options.deniedPage||'dashboard.html'); return null; }
-    /* Legacy CMS pages historically used role==='admin' for content actions.
-       Keep those pages compatible while preserving the real role separately. */
+    /* Admin dan Editor memakai konteks aksi CMS yang sama.
+       Role asli tetap disimpan pada actual_role untuk kebutuhan audit. */
     return {...(auth.profile||{}),role:'admin',actual_role:auth.role,user:auth.user,authenticated:true};
   }
   async function logout(){ await API.auth.signOut(); window.location.href='index.html'; }
@@ -34,11 +34,14 @@
   async function update(tableName,id,payload){const db=await getDb();const {data,error}=await db.from(tableName).update(payload).eq('id',id).select();if(error)throw error;return data;}
   async function remove(tableName,id){const db=await getDb();const {error}=await db.from(tableName).delete().eq('id',id);if(error)throw error;return true;}
   window.MandalaCMS={currentUser:getCurrentUser,currentAuth:getCurrentAuth,getCurrentUser,getCurrentAuth,requireStaff,logout,videos:getVideos,getVideos,video:getVideo,getVideo,createVideo,updateVideo,deleteVideo,articles,article,createArticle,updateArticle,deleteArticle,categories:getCategories,getCategories,changeStatus,select,insert,update,remove};
+  /* Admin dan Editor yang membuka Article Editor memakai helper Cover YouTube yang sama. */
   if(document.getElementById('cover_image_url')){
     const loadCoverHelper=()=>{
       if(document.getElementById('youtube-cover-helper'))return;
+      if(document.getElementById('mandala-youtube-cover-script'))return;
       const script=document.createElement('script');
-      script.src='./js/youtube-cover.js?v=20260907.1';
+      script.id='mandala-youtube-cover-script';
+      script.src='./js/youtube-cover.js?v=20260907.2';
       script.defer=true;
       document.head.appendChild(script);
     };
