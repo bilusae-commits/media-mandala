@@ -34,18 +34,21 @@
   async function update(tableName,id,payload){const db=await getDb();const {data,error}=await db.from(tableName).update(payload).eq('id',id).select();if(error)throw error;return data;}
   async function remove(tableName,id){const db=await getDb();const {error}=await db.from(tableName).delete().eq('id',id);if(error)throw error;return true;}
   window.MandalaCMS={currentUser:getCurrentUser,currentAuth:getCurrentAuth,getCurrentUser,getCurrentAuth,requireStaff,logout,videos:getVideos,getVideos,video:getVideo,getVideo,createVideo,updateVideo,deleteVideo,articles,article,createArticle,updateArticle,deleteArticle,categories:getCategories,getCategories,changeStatus,select,insert,update,remove};
-  /* Admin dan Editor yang membuka Article Editor memakai helper Cover YouTube yang sama. */
+  /* Admin dan Editor yang membuka Article Editor memakai helper Cover yang sama. */
   if(document.getElementById('cover_image_url')){
-    const loadCoverHelper=()=>{
-      if(document.getElementById('youtube-cover-helper'))return;
-      if(document.getElementById('mandala-youtube-cover-script'))return;
-      const script=document.createElement('script');
-      script.id='mandala-youtube-cover-script';
-      script.src='./js/youtube-cover.js?v=20260907.2';
-      script.defer=true;
-      document.head.appendChild(script);
+    const loadCoverHelpers=()=>{
+      const load=(id,src)=>{
+        if(document.getElementById(id))return;
+        const script=document.createElement('script');
+        script.id=id;
+        script.src=src;
+        script.defer=true;
+        document.head.appendChild(script);
+      };
+      load('mandala-youtube-cover-script','./js/youtube-cover.js?v=20260907.3');
+      load('mandala-cover-upload-script','./js/cover-upload.js?v=20260907.3');
     };
-    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadCoverHelper,{once:true});
-    else loadCoverHelper();
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadCoverHelpers,{once:true});
+    else loadCoverHelpers();
   }
 })(window);
