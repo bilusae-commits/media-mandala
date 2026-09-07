@@ -40,6 +40,37 @@ body[data-base="./"] .card h3{min-height:2.56em;margin-bottom:7px}
 body[data-base="./"] .card p{min-height:1.55em}
 body[data-base="./"] .dark .cards{align-items:start}
 body[data-base="./"] .dark .card .meta{margin-top:11px}
+
+/* CATEGORY BADGE — hard reset against inherited/global rules that can stretch it vertically. */
+body[data-base="./"] .thumb .badge{
+  position:absolute!important;
+  top:10px!important;
+  left:10px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:max-content!important;
+  max-width:calc(100% - 20px)!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  display:inline-block!important;
+  box-sizing:border-box!important;
+  padding:5px 8px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:3px!important;
+  background:rgba(255,255,255,.94)!important;
+  color:var(--navy)!important;
+  font:700 8px/1.2 Arial,Helvetica,sans-serif!important;
+  letter-spacing:.02em!important;
+  white-space:nowrap!important;
+  writing-mode:horizontal-tb!important;
+  text-orientation:mixed!important;
+  transform:none!important;
+  overflow:hidden!important;
+  z-index:8!important;
+}
+
 body[data-base="./"] .topicGrid{gap:1px;border:0;background:var(--line);border-radius:var(--home-card-radius)}
 body[data-base="./"] .topic{min-height:158px;border:0;padding:clamp(22px,2.3vw,34px);border-radius:0}
 body[data-base="./"] .topic:first-child{border-radius:var(--home-card-radius) 0 0 var(--home-card-radius)}
@@ -62,6 +93,6 @@ body[data-base="./"] .playlist-stage{overflow:hidden}
 body[data-base="./"] .home-empty-state{grid-column:1/-1;padding:28px 10px;color:var(--muted);font-size:11px;text-align:center;border:1px dashed var(--line);border-radius:var(--home-card-radius);background:#fafbfc}
 
 @media (max-width:900px){body[data-base="./"] main > section{padding-block:58px}body[data-base="./"] .featureGrid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}body[data-base="./"] .story{grid-template-columns:110px minmax(0,1fr)}body[data-base="./"] .topic{min-height:145px}}
-@media (max-width:760px){body[data-base="./"] main > section{padding-block:52px}body[data-base="./"] .head{align-items:flex-end}body[data-base="./"] .featureGrid{grid-template-columns:1fr}body[data-base="./"] .feature{min-height:clamp(320px,72vw,460px)}body[data-base="./"] .stories{grid-template-rows:auto}body[data-base="./"] .story{grid-template-columns:minmax(110px,34%) minmax(0,1fr)}body[data-base="./"] .topicGrid{grid-template-columns:1fr}body[data-base="./"] .topic:first-child,body[data-base="./"] .topic:last-child{border-radius:0}body[data-base="./"] .topic:first-child{border-radius:var(--home-card-radius) var(--home-card-radius) 0 0}body[data-base="./"] .topic:last-child{border-radius:0 0 var(--home-card-radius) var(--home-card-radius)}body[data-base="./"] .podcasts{grid-template-columns:1fr}body[data-base="./"] .news{padding:clamp(22px,5vw,32px)}body[data-base="./"] header#siteHeader,body[data-base="./"] header#siteHeader.scrolled{height:68px;min-height:68px}body[data-base="./"] header#siteHeader .nav,body[data-base="./"] header#siteHeader.scrolled .nav{height:68px}}
+@media (max-width:760px){body[data-base="./"] main > section{padding-block:52px}body[data-base="./"] .head{align-items:flex-start;flex-wrap:wrap}body[data-base="./"] .head > div{width:100%;min-width:0}body[data-base="./"] .title{max-width:100%;font-size:clamp(26px,7vw,36px);line-height:1.08;overflow-wrap:anywhere;word-break:normal;white-space:normal}body[data-base="./"] .featureGrid{grid-template-columns:1fr}body[data-base="./"] .feature{min-height:clamp(320px,72vw,460px)}body[data-base="./"] .stories{grid-template-rows:auto}body[data-base="./"] .story{grid-template-columns:minmax(110px,34%) minmax(0,1fr)}body[data-base="./"] .topicGrid{grid-template-columns:1fr}body[data-base="./"] .topic:first-child,body[data-base="./"] .topic:last-child{border-radius:0}body[data-base="./"] .topic:first-child{border-radius:var(--home-card-radius) var(--home-card-radius) 0 0}body[data-base="./"] .topic:last-child{border-radius:0 0 var(--home-card-radius) var(--home-card-radius)}body[data-base="./"] .podcasts{grid-template-columns:1fr}body[data-base="./"] .news{padding:clamp(22px,5vw,32px)}body[data-base="./"] header#siteHeader,body[data-base="./"] header#siteHeader.scrolled{height:68px;min-height:68px}body[data-base="./"] header#siteHeader .nav,body[data-base="./"] header#siteHeader.scrolled .nav{height:68px}}
 @media (max-width:520px){body[data-base="./"] .w,body[data-base="./"] .heroGrid{padding-inline:16px!important}body[data-base="./"] .head{gap:10px}body[data-base="./"] .view{font-size:8px}body[data-base="./"] .story{grid-template-columns:96px minmax(0,1fr);gap:12px}body[data-base="./"] .story img{min-height:96px;height:96px}body[data-base="./"] .card h3{min-height:0}body[data-base="./"] .playlist-stage{padding-inline:34px;min-height:300px}body[data-base="./"] .playlist-track{height:255px}body[data-base="./"] .play-card{width:clamp(170px,48vw,220px)}body[data-base="./"] .podcast img{min-height:180px;height:180px}body[data-base="./"] .email{flex-direction:column;gap:8px}body[data-base="./"] .email input,body[data-base="./"] .email button{width:100%}body[data-base="./"] .email button{height:42px}body[data-base="./"] header#siteHeader .logo img{max-width:135px;max-height:36px}}
 @media (prefers-reduced-motion:reduce){body[data-base="./"] *,body[data-base="./"] *::before,body[data-base="./"] *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
