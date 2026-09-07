@@ -1,7 +1,8 @@
 async function initShell(title, active){
  const user=await MandalaCMS.requireStaff();
  if(!user)return;
- const isAdmin=user.role === "admin";
+ const actualRole=user.actual_role||user.role;
+ const isAdmin=actualRole === "admin";
  document.body.insertAdjacentHTML("afterbegin",`<aside class="sidebar">
  <div class="brand" aria-label="Mandala Channel CMS"><div class="brand-title">MANDALA</div><div class="brand-subtitle">CHANNEL CMS</div></div>
  <div class="nav-title">Konten</div><nav class="nav" aria-label="Navigasi utama">
