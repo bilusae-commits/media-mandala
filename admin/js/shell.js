@@ -22,5 +22,6 @@ async function initShell(title, active){
  document.querySelectorAll(".nav-link").forEach(a=>{if(a.dataset.page===active)a.classList.add("active");});
  const logout=document.getElementById("logoutBtn");
  if(logout)logout.onclick=async()=>{try{await MandalaCMS.logout();}catch(error){console.error(error);}};
+ document.body.classList.add("cms-ready");
 }
 function toast(t){const x=document.getElementById("toast");if(!x)return;x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",2200);}
