@@ -13,6 +13,7 @@ async function initShell(title, active){
  <a class="nav-link" data-page="categories" data-admin-only="true" href="categories.html"><span class="nav-icon">◇</span><span>Kategori</span></a>
  <div class="nav-title">Sistem</div>
  <a class="nav-link" data-page="settings" data-admin-only="true" href="settings.html"><span class="nav-icon">⚙</span><span>Pengaturan</span></a>
+ <a class="nav-link" data-page="change-password" data-admin-only="true" href="change-password.html"><span class="nav-icon">🔒</span><span>Ubah Password</span></a>
  </nav>
  <div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name">${user.email || "Pengguna"}</div><div class="sidebar-user-role">${isAdmin ? "Admin" : "Editor"}</div></div><button class="logout-button" id="logoutBtn" type="button"><span>Keluar</span> ↪</button></div>
  </aside>
