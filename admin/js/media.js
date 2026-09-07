@@ -8,7 +8,7 @@
     if(error) throw error; files=data||[]; render();
   }
   function render(){
-    $('grid').innerHTML=files.length?files.map(x=>`<article class="media-card"><div class="media-thumb">${x.mime_type?.startsWith('image/')?`<img src="${esc(x.file_url)}" alt="${esc(x.alt_text||x.file_name)}">`:'<span>MEDIA</span>'}</div><div class="media-info"><strong>${esc(x.file_name)}</strong><small>${esc(x.mime_type||'')} · ${x.file_size?Math.round(x.file_size/1024)+' KB':''}</small><div class="media-actions"><button class="btn small" data-copy="${esc(x.file_url)}">Copy URL</button>${auth?.role==='admin'?`<button class="btn small danger" data-delete="${esc(x.id)}">Hapus</button>`:''}</div></div></article>`).join(''):'<div class="empty">Belum ada media.</div>';
+    $('grid').innerHTML=files.length?files.map(x=>`<article class="media-card"><div class="media-thumb">${x.mime_type?.startsWith('image/')?`<img src="${esc(x.file_url)}" alt="${esc(x.alt_text||x.file_name)}">`:'<span>MEDIA</span>'}</div><div class="media-info"><strong>${esc(x.file_name)}</strong><small>${esc(x.mime_type||'')} · ${x.file_size?Math.round(x.file_size/1024)+' KB':''}</small><div class="media-actions"><button class="btn small" data-copy="${esc(x.file_url)}">Copy URL</button><button class="btn small danger" data-delete="${esc(x.id)}">Hapus</button></div></div></article>`).join(''):'<div class="empty">Belum ada media.</div>';
     document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{await navigator.clipboard.writeText(b.dataset.copy);toast('URL berhasil disalin.');});
     document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>remove(b.dataset.delete));
   }
