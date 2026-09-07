@@ -2,7 +2,8 @@
 (function(){
   "use strict";
   const cfg=window.MANDALA_CONFIG||{},url=cfg.SUPABASE_URL,key=cfg.SUPABASE_PUBLISHABLE_KEY||cfg.SUPABASE_ANON_KEY;
-  if(!url||!key)return;
+  const finishHydration=()=>document.body?.classList.remove("homepage-hydrating");
+  if(!url||!key){finishHydration();return;}
   const headers={apikey:key,Authorization:"Bearer "+key};
   const PROXY=url+"/functions/v1/homepage-cover-image";
   const B2_BASE="https://f005.backblazeb2.com/file/Mandala-Podcast/";
@@ -15,7 +16,8 @@
   function fixPlaylistImages(root=document){root.querySelectorAll?.("#playlistTrack .play-card img").forEach(img=>{const source=img.getAttribute("src")||"";if(source.includes(PROXY+"?url="))return;if(/\.backblazeb2\.com\//i.test(source))img.src=publicImage(source)})}
   function watchPlaylistImages(){const track=document.getElementById("playlistTrack");if(!track)return;fixPlaylistImages(track);if(window.MandalaHomepagePlaylistObserver)window.MandalaHomepagePlaylistObserver.disconnect();const observer=new MutationObserver(()=>fixPlaylistImages(track));observer.observe(track,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]});window.MandalaHomepagePlaylistObserver=observer}
   function setText(id,value){const x=document.getElementById(id),text=cleanText(value);if(x&&text)x.textContent=text}
-  function setImage(id,value,alt){const x=document.getElementById(id),source=publicImage(value);if(!x||!source)return;const reveal=()=>x.classList.add("is-live");x.alt=alt||x.alt;if(x.src!==source){x.addEventListener("load",reveal,{once:true});x.addEventListener("error",reveal,{once:true});x.src=source}else reveal()}
+  function setImage(id,value,alt){const x=document.getElementById(id),source=publicImage(value);if(!x||!source)return;const reveal=()=>x.classList.add("is-live");x.alt=alt||x.alt;if(x.src!==source){const preload=new Image();preload.onload=()=>{x.src=source;reveal()};preload.onerror=()=>{x.src=source;reveal()};preload.src=source}else reveal()}
+  function swapImage(img,value){const source=publicImage(value);if(!img||!source)return;const reveal=()=>img.classList.add("is-live");if(img.src===source){reveal();return}const preload=new Image();preload.onload=()=>{img.src=source;reveal()};preload.onerror=()=>{img.src=source;reveal()};preload.src=source}
   function setLink(id,label,href){const x=document.getElementById(id);if(!x)return;const text=cleanText(label);if(text)x.textContent=text;if(href)x.href=href}
   function applySettings(s){
     setText("heroEyebrow",s.hero_label);setText("heroTitle",s.hero_title);setText("heroDescription",s.hero_description);
@@ -26,8 +28,8 @@
   function applyLatest(article){
     if(!article)return;
     const feature=document.querySelector(".feature");
-    if(feature){const img=feature.querySelector("img"),title=feature.querySelector("h2"),meta=feature.querySelector(".k"),small=feature.querySelector("small");if(img&&article.cover_image_url)img.src=publicImage(article.cover_image_url);if(title)title.textContent=article.title||"";if(meta)meta.textContent="Berita terbaru";if(small)small.textContent="Mandala Channel · Terbaru";feature.classList.add("is-live-content");feature.setAttribute("role","link");feature.setAttribute("tabindex","0");const target="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"");feature.onclick=()=>{location.href=target};feature.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();location.href=target}}}
-    const cards=document.querySelectorAll("#articlesContainer .card");if(cards.length){const card=cards[0],img=card.querySelector("img"),title=card.querySelector("h3"),meta=card.querySelector(".meta"),link=card.querySelector("a");if(img&&article.cover_image_url)img.src=publicImage(article.cover_image_url);if(title)title.textContent=article.title||"Artikel terbaru";if(meta)meta.textContent="Artikel terbaru";if(link)link.href="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"")}}
+    if(feature){const img=feature.querySelector("img"),title=feature.querySelector("h2"),meta=feature.querySelector(".k"),small=feature.querySelector("small");if(img&&article.cover_image_url)swapImage(img,article.cover_image_url);if(title)title.textContent=article.title||"";if(meta)meta.textContent="Berita terbaru";if(small)small.textContent="Mandala Channel · Terbaru";feature.classList.add("is-live-content");feature.setAttribute("role","link");feature.setAttribute("tabindex","0");const target="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"");feature.onclick=()=>{location.href=target};feature.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();location.href=target}}}
+    const cards=document.querySelectorAll("#articlesContainer .card");if(cards.length){const card=cards[0],img=card.querySelector("img"),title=card.querySelector("h3"),meta=card.querySelector(".meta"),link=card.querySelector("a");if(img&&article.cover_image_url)swapImage(img,article.cover_image_url);if(title)title.textContent=article.title||"Artikel terbaru";if(meta)meta.textContent="Artikel terbaru";if(link)link.href="pages/artikel-detail.html"+(article.slug?"?slug="+encodeURIComponent(article.slug):"")}}
   function initHomepageExtras(){setHomepageFavicon();watchPlaylistImages()}
   async function init(){try{
     const publicLoader=window.MandalaPublic?.loadHomeData;
@@ -37,6 +39,6 @@
     const articles=(window.MandalaPublicData?.articles||window.DATA?.articles||[]).slice().sort((a,b)=>new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
     applyLatest(articles[0]);
     if(typeof window.renderPlaylists==="function")window.renderPlaylists();
-  }catch(e){console.warn("Homepage live data fallback aktif:",e.message)}finally{initHomepageExtras()}}
+  }catch(e){console.warn("Homepage live data fallback aktif:",e.message)}finally{initHomepageExtras();finishHydration()}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
