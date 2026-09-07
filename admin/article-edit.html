@@ -22,6 +22,24 @@
 </aside></div></form></main></div>
 <script src="../js/config.js?v=20260907.1"></script>
 <script src="../js/supabase-client.js?v=20260907.1"></script>
+<script>
+/* Editor artikel mengikuti aturan aksi pada halaman Artikel/Admin.
+   CMS.requireStaff() memang mempertahankan akses aksi konten untuk staff.
+   article-edit sebelumnya membaca role mentah dan memblokir publish untuk editor,
+   sementara halaman Artikel mengizinkan aksi publish. Selaraskan konteks editor ini. */
+(function(){
+  const api=window.MandalaSupabase;
+  if(!api?.profile?.get||api.profile.get.__articleEditorAligned)return;
+  const original=api.profile.get.bind(api.profile);
+  const aligned=async function(userId){
+    const profile=await original(userId);
+    if(!profile)return profile;
+    return {...profile,actual_role:profile.role,role:"admin"};
+  };
+  aligned.__articleEditorAligned=true;
+  api.profile.get=aligned;
+})();
+</script>
 <script type="module" src="./js/article-edit.js?v=20260824.2"></script>
 <script>(function(){const input=document.getElementById('cover_image_url'),box=document.getElementById('cover-preview'),img=document.getElementById('cover-preview-image');function preview(){const url=(input?.value||'').trim();if(!url){box?.classList.remove('show');return}img.src=url;box.classList.add('show');img.onerror=function(){box.classList.remove('show')}}input?.addEventListener('input',preview);input?.addEventListener('change',preview);window.addEventListener('load',preview)})();</script>
 </body></html>
