@@ -9,9 +9,6 @@
     const scriptSrc = document.currentScript?.src || "";
     const resolveAsset = (path) => scriptSrc ? new window.URL(path, scriptSrc).href : path;
 
-    /* Homepage already owns its complete layout through main/home/index CSS.
-       Inject the shared visual token sheet only on the other public pages so
-       it cannot arrive asynchronously and trigger a homepage reflow. */
     const isHomepage=document.body?.matches?.('body[data-base="./"]');
     if (!isHomepage && !document.querySelector('link[data-mandala-public-ui]')) {
         const ui = document.createElement('link');
@@ -87,9 +84,53 @@
     }
     async function loadTable(name,select,order){let query=(await client()).from(name).select(select);if(order)query=query.order(order,{ascending:true,nullsFirst:false});const result=await query;if(result.error)throw result.error;return result.data||[];}
     function normalizePlaylist(row,categoryMap,index){const category=categoryMap[row.category_id];return{id:row.id||String(index+1),title:row.title||"Playlist Mandala",slug:row.slug||"",youtube_playlist_id:row.youtube_playlist_id||"",description:row.description||"",image:row.cover_image_url||category?.image_url||FALLBACK,category:category?.name||"Mandala",category_id:row.category_id||null,videoCount:0,status:row.status||"",featured:row.featured===true,sort_order:Number.isFinite(Number(row.sort_order))?Number(row.sort_order):9999,published_at:row.published_at||null,created_at:row.created_at||null};}
-    async function loadHomeData(){const[articles,videos,playlists,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};activeCategories.forEach(category=>{categoryMap[category.id]=category;});const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published").map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,topics:activeCategories,categories:activeCategories};window.DATA=publicData;window.MandalaPublicData=publicData;renderArticles(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);return publicData;}
+
+    function articleDate(article){return article.published_at||article.created_at||null;}
+    function articleUrl(article){return `pages/artikel-detail.html${article.slug?`?slug=${encodeURIComponent(article.slug)}`:""}`;}
+    function renderFeaturedArticles(items,categoryMap){
+        const grid=document.querySelector('body[data-base="./"] .featureGrid');
+        if(!grid||!items.length)return;
+        const featured=[...items].sort((a,b)=>new Date(articleDate(b)||0)-new Date(articleDate(a)||0)).slice(0,3);
+        if(!featured.length)return;
+        const main=featured[0],side=featured.slice(1,3);
+        const categoryName=article=>categoryMap[article.category_id]?.name||"ARTIKEL";
+        const image=article=>article.cover_image_url||FALLBACK;
+        grid.innerHTML=`
+          <article class="feature">
+            <a href="${articleUrl(main)}" aria-label="${esc(main.title||"Artikel")}">
+              <img src="${esc(image(main))}" alt="${esc(main.title||"Artikel")}" loading="eager">
+              <div class="copy">
+                <div class="k">${esc(categoryName(main))}</div>
+                <h2>${esc(main.title||"Artikel")}</h2>
+                <small>Mandala Channel · ${esc(dateText(articleDate(main)))}</small>
+              </div>
+            </a>
+          </article>
+          <div class="stories">
+            ${side.map(article=>`<a class="story" href="${articleUrl(article)}" aria-label="${esc(article.title||"Artikel")}">
+              <img src="${esc(image(article))}" alt="${esc(article.title||"Artikel")}" loading="lazy">
+              <div class="copy">
+                <div class="k">${esc(categoryName(article))}</div>
+                <h3>${esc(article.title||"Artikel")}</h3>
+                <p>${esc(article.excerpt||dateText(articleDate(article))||"Baca selengkapnya →")}</p>
+              </div>
+            </a>`).join("")}
+          </div>`;
+    }
+
+    async function loadHomeData(){
+        const[articles,videos,playlists,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
+        const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};
+        activeCategories.forEach(category=>{categoryMap[category.id]=category;});
+        const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published").map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
+        publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,topics:activeCategories,categories:activeCategories};
+        window.DATA=publicData;window.MandalaPublicData=publicData;
+        renderFeaturedArticles(publicData.articles,categoryMap);
+        renderArticles(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);
+        return publicData;
+    }
     function getPublicData(){return publicData;}
-    function renderArticles(items,categoryMap){const element=document.getElementById("articlesContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(article=>{const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=`pages/artikel-detail.html${article.slug?`?slug=${encodeURIComponent(article.slug)}`:""}`;return`<article class="card"><a href="${detailUrl}"><div class="thumb"><img src="${esc(image)}" alt="${esc(article.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">${esc(dateText(article.published_at||article.created_at))}</div><h3>${esc(article.title||"Artikel")}</h3><p>${esc(article.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");}
+    function renderArticles(items,categoryMap){const element=document.getElementById("articlesContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(article=>{const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=articleUrl(article);return`<article class="card"><a href="${detailUrl}"><div class="thumb"><img src="${esc(image)}" alt="${esc(article.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">${esc(dateText(article.published_at||article.created_at))}</div><h3>${esc(article.title||"Artikel")}</h3><p>${esc(article.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");}
     function renderVideos(items,categoryMap){const element=document.getElementById("videosContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(video=>{const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||"VIDEO";return`<article class="card video"><a href="#" data-public-video="${esc(id)}" data-public-title="${esc(video.title)}"><div class="thumb"><img src="${esc(videoImage({...video,youtube_video_id:id}))}" alt="${esc(video.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">VIDEO · ${esc(dateText(video.published_at||video.created_at))}</div><h3>${esc(video.title||"Video Mandala")}</h3><p>Putar video →</p></a></article>`;}).join("");element.querySelectorAll("[data-public-video]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle);}));}
     function renderTopics(items){const element=document.getElementById("topicsContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,6).map(topic=>`<a class="topic" href="topics/${encodeURIComponent(topic.slug||"")}.html"><h3>${esc(topic.name||"Topik")}</h3><p>${esc(topic.description||`Jelajahi cerita Mandala tentang ${String(topic.name||"").toLowerCase()}.`)}</p></a>`).join("");}
     function renderPlaylistState(items){const track=document.getElementById("playlistTrack"),dots=document.getElementById("playlistDots");if(!track)return;if(items.length)return;track.innerHTML=`<div class="playlist-empty-state">Playlist belum tersedia.</div>`;if(dots)dots.innerHTML="";}
