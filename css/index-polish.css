@@ -84,3 +84,13 @@ body[data-base="./"] .editorial-item:hover h3,.editorial-main:hover h2,.editoria
 @media(max-width:900px){body[data-base="./"] .featureGrid{grid-template-columns:minmax(240px,.8fr) minmax(0,1.2fr);gap:28px}body[data-base="./"] .editorial-item{grid-template-columns:92px minmax(0,1fr);gap:14px}body[data-base="./"] .editorial-item img{width:92px;height:92px}body[data-base="./"] .editorial-list{gap:24px}body[data-base="./"] .editorial-bottom{gap:22px}}
 @media(max-width:760px){body[data-base="./"] main > section:nth-of-type(2){padding-block:40px}body[data-base="./"] .featureGrid{grid-template-columns:1fr;gap:34px}body[data-base="./"] .editorial-heading{margin-bottom:30px}body[data-base="./"] .editorial-right{gap:30px}body[data-base="./"] .editorial-bottom{gap:16px}}
 @media(max-width:520px){body[data-base="./"] main > section:nth-of-type(2){padding-block:34px}body[data-base="./"] .editorial-heading{gap:14px;margin-bottom:26px}body[data-base="./"] .editorial-heading>span{width:4px;flex-basis:4px;height:60px}body[data-base="./"] .editorial-item{grid-template-columns:78px minmax(0,1fr);gap:12px}body[data-base="./"] .editorial-item img{width:78px;height:78px}body[data-base="./"] .editorial-item h3{font-size:15px}body[data-base="./"] .editorial-item small,.editorial-main-copy small,.editorial-card small{font-size:9px;margin-bottom:7px}body[data-base="./"] .editorial-main-copy{padding:18px}body[data-base="./"] .editorial-main-copy h2{font-size:25px}body[data-base="./"] .editorial-bottom{grid-template-columns:1fr;gap:18px}body[data-base="./"] .editorial-card>div{min-height:0;padding:18px 18px 24px}}
+
+/* LATEST STORIES — light background + full image coverage */
+body[data-base="./"] main > section:nth-of-type(2){background:#ffffff!important}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main,
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card,
+body[data-base="./"] main > section:nth-of-type(2) .editorial-item{overflow:hidden}
+body[data-base="./"] main > section:nth-of-type(2) img{display:block;max-width:none}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card img{display:block;width:100%!important;height:auto!important;aspect-ratio:16/10;object-fit:cover!important;max-width:none!important}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-item img{display:block;width:100%!important;height:100%!important;object-fit:cover!important;max-width:none!important}
