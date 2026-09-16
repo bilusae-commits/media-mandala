@@ -1,147 +1,102 @@
-/* MANDALA CHANNEL — IMAGE INTEGRITY SYSTEM
+/* MANDALA CHANNEL — IMAGE INTEGRITY + RESPONSIVE EDITORIAL SYSTEM
    Priority: never crop editorial covers.
-   Layout adapts to the natural image ratio instead of forcing every cover
-   into one fixed portrait/landscape box.
+   The image keeps its intrinsic ratio; the layout adapts around it.
 */
+body[data-base="./"] main,
+body[data-base="./"] main *{min-width:0}
+body[data-base="./"] main img{max-width:100%}
 
-body[data-base="./"] main img{
-  max-width:100%;
-}
+/* Article/video covers: natural height, never forced into 16:9. */
+body[data-base="./"] main .thumb{aspect-ratio:auto!important;height:auto!important;overflow:hidden!important;background:#f1f3f5}
+body[data-base="./"] main .thumb img{position:static!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;transform:none!important}
 
-/* Standard article/video cards: let the image establish its own height. */
-body[data-base="./"] main .thumb{
-  aspect-ratio:auto!important;
-  height:auto!important;
-  overflow:visible!important;
-  background:#f1f3f5;
-}
-body[data-base="./"] main .thumb img{
-  position:static!important;
-  display:block!important;
-  width:100%!important;
-  height:auto!important;
-  aspect-ratio:auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  transform:none!important;
-}
+/* Latest Stories covers. */
+body[data-base="./"] main .editorial-item{min-width:0!important}
+body[data-base="./"] main .editorial-item img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;align-self:start!important;background:#eef1f4!important}
+body[data-base="./"] main .editorial-main{height:auto!important;aspect-ratio:auto!important;overflow:hidden!important}
+body[data-base="./"] main .editorial-main img{position:static!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;background:#eef1f4!important}
+body[data-base="./"] main .editorial-main::after{z-index:1!important}
+body[data-base="./"] main .editorial-main-copy{z-index:2!important}
+body[data-base="./"] main .editorial-card{height:auto!important;overflow:hidden!important}
+body[data-base="./"] main .editorial-card img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;background:#eef1f4!important}
 
-/* Latest Stories list covers. */
-body[data-base="./"] main .editorial-item img{
-  width:100%!important;
-  height:auto!important;
-  aspect-ratio:auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  align-self:start!important;
-  background:#eef1f4!important;
-}
+/* Hero collage: preserve each supplied image inside its visual frame. */
+body[data-base="./"] main .visual img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;background:rgba(255,255,255,.06)!important}
 
-/* Main editorial story: image stays in normal flow, so the card height follows
-   the real image ratio. The text overlay remains anchored to the bottom. */
-body[data-base="./"] main .editorial-main{
-  aspect-ratio:auto!important;
-  height:auto!important;
-  overflow:hidden!important;
-}
-body[data-base="./"] main .editorial-main img{
-  position:static!important;
-  display:block!important;
-  width:100%!important;
-  height:auto!important;
-  aspect-ratio:auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  background:#eef1f4!important;
-}
-body[data-base="./"] main .editorial-main::after{
-  z-index:1!important;
-}
-body[data-base="./"] main .editorial-main-copy{
-  z-index:2!important;
+/* Playlist artwork: never crop the source cover. */
+body[data-base="./"] main .play-card{aspect-ratio:auto!important;height:auto!important;overflow:hidden!important}
+body[data-base="./"] main .play-card img{position:static!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;background:#172536!important}
+
+/* Flexible grids: columns collapse when their content needs the space. */
+body[data-base="./"] .cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));align-items:start}
+body[data-base="./"] .card{height:auto!important;align-self:start}
+body[data-base="./"] .featureGrid{grid-template-columns:minmax(260px,.72fr) minmax(0,1.55fr);align-items:start}
+body[data-base="./"] .editorial-item{grid-template-columns:clamp(82px,8vw,116px) minmax(0,1fr);align-items:start}
+body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr)}
+body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:min(100% - clamp(24px,6vw,96px),1480px);max-width:none}
+
+/* Spotify-inspired audio shelf. This is Mandala's own UI, not a Spotify embed. */
+body[data-base="./"] .podcasts{display:grid;grid-template-columns:1fr;gap:10px}
+body[data-base="./"] .podcast{display:grid;grid-template-columns:72px minmax(0,1fr) 42px;gap:16px;align-items:center;min-height:72px;padding:10px 12px;border-radius:8px;background:#0b3764;border:1px solid rgba(255,255,255,.08);overflow:hidden;transition:background .18s ease,transform .18s ease}
+body[data-base="./"] .podcast:hover{background:#104574;transform:translateY(-1px)}
+body[data-base="./"] .podcast img{width:72px!important;height:72px!important;min-height:72px!important;aspect-ratio:1!important;object-fit:contain!important;display:block!important;border-radius:6px}
+body[data-base="./"] .podcast .copy{padding:0!important;min-width:0;display:block!important}
+body[data-base="./"] .podcast .copy::after{content:"▶";position:absolute;right:12px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:#fff;color:#082d56;display:grid;place-items:center;font-size:14px;line-height:1}
+body[data-base="./"] .podcast{position:relative}
+body[data-base="./"] .podcast .k{font-size:7px!important;margin:0 0 4px!important}
+body[data-base="./"] .podcast h3{margin:0 52px 5px 0!important;color:#fff;font:700 15px/1.25 Arial,Helvetica,sans-serif!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-base="./"] .podcast p{margin:0 52px 8px 0!important;color:#b9c9d8!important;font-size:10px!important;line-height:1.35!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-base="./"] .podcast .copy::before{content:"";display:block;position:absolute;left:100px;right:70px;bottom:12px;height:3px;border-radius:99px;background:rgba(255,255,255,.18)}
+body[data-base="./"] .podcast .copy .k::after{content:"  ·  MANDALA AUDIO";color:#a9bac9;font-size:7px;letter-spacing:.08em}
+
+@media(max-width:1000px){
+  body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1fr) minmax(260px,.85fr);gap:28px}
+  body[data-base="./"] .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-/* Secondary editorial cards: natural cover height. */
-body[data-base="./"] main .editorial-card{
-  height:auto!important;
-  overflow:hidden!important;
-}
-body[data-base="./"] main .editorial-card img{
-  width:100%!important;
-  height:auto!important;
-  aspect-ratio:auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  background:#eef1f4!important;
-}
-
-/* Podcast covers: preserve the actual supplied cover ratio. */
-body[data-base="./"] main .podcast img{
-  width:100%!important;
-  height:auto!important;
-  min-height:0!important;
-  aspect-ratio:auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  align-self:start!important;
-  background:#0a345f!important;
-}
-
-/* Playlist covers: absolute cards may still have different ratios, so the
-   image determines card height instead of a forced 3:4 crop. */
-body[data-base="./"] main .play-card{
-  aspect-ratio:auto!important;
-  height:auto!important;
-  overflow:hidden!important;
-}
-body[data-base="./"] main .play-card img{
-  position:static!important;
-  display:block!important;
-  width:100%!important;
-  height:auto!important;
-  aspect-ratio:auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  background:#172536!important;
-}
-
-/* Decorative hero collage: keep every source image intact. */
-body[data-base="./"] main .visual img{
-  width:100%!important;
-  height:100%!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  background:rgba(255,255,255,.06)!important;
-}
-
-/* Never let a cover be clipped by a generic image wrapper. */
-body[data-base="./"] main .editorial-item,
-body[data-base="./"] main .podcast,
-body[data-base="./"] main .card,
-body[data-base="./"] main .thumb{
-  min-width:0!important;
-}
-
-/* On small screens, natural image heights are still used. The grid may change
-   columns, but it never changes the source image ratio. */
 @media(max-width:760px){
-  body[data-base="./"] main .editorial-item img,
-  body[data-base="./"] main .editorial-card img,
-  body[data-base="./"] main .thumb img,
-  body[data-base="./"] main .podcast img{
-    height:auto!important;
-    object-fit:contain!important;
-  }
-  body[data-base="./"] main .editorial-item img{
-    width:100%!important;
-  }
-  body[data-base="./"] main .podcast{
-    align-items:start!important;
-  }
+  body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 32px)}
+  body[data-base="./"] .hero{min-height:auto!important;padding:46px 0 38px!important}
+  body[data-base="./"] .heroGrid{grid-template-columns:1fr!important;gap:28px!important}
+  body[data-base="./"] .heroCopy{order:1;max-width:none}
+  body[data-base="./"] .visual{order:2;height:clamp(220px,68vw,340px)!important;max-height:none!important}
+  body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}
+  body[data-base="./"] .featureGrid{grid-template-columns:1fr;gap:30px}
+  body[data-base="./"] .editorial-right{gap:24px}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  body[data-base="./"] .editorial-item{grid-template-columns:76px minmax(0,1fr);gap:12px}
+  body[data-base="./"] .editorial-item img{width:76px!important}
+  body[data-base="./"] .editorial-main-copy{padding:16px}
+  body[data-base="./"] .editorial-main-copy h2{font-size:23px;line-height:1.16}
+  body[data-base="./"] .podcast{grid-template-columns:64px minmax(0,1fr) 38px;gap:12px;padding:9px 10px;min-height:64px}
+  body[data-base="./"] .podcast img{width:64px!important;height:64px!important;min-height:64px!important}
+  body[data-base="./"] .podcast .copy::after{width:38px;height:38px;right:10px;font-size:12px}
+  body[data-base="./"] .podcast .copy::before{left:86px;right:60px;bottom:10px}
+  body[data-base="./"] .podcast h3{font-size:13px!important;margin-right:46px!important}
+  body[data-base="./"] .podcast p{font-size:9px!important;margin-right:46px!important}
 }
 
-/* Fallback for any homepage image not explicitly covered above: contain is
-   intentionally preferred to crop. */
-body[data-base="./"] main img:not(.footLogo){
-  object-fit:contain;
+@media(max-width:520px){
+  body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 24px)}
+  body[data-base="./"] .cards{grid-template-columns:1fr}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:1fr}
+  body[data-base="./"] .editorial-item{grid-template-columns:68px minmax(0,1fr)}
+  body[data-base="./"] .editorial-item img{width:68px!important}
+  body[data-base="./"] .podcast{grid-template-columns:58px minmax(0,1fr) 36px;gap:10px}
+  body[data-base="./"] .podcast img{width:58px!important;height:58px!important;min-height:58px!important}
+  body[data-base="./"] .podcast .copy::after{width:36px;height:36px;right:8px}
+  body[data-base="./"] .podcast .copy::before{left:78px;right:54px;bottom:9px}
+  body[data-base="./"] .podcast h3{font-size:12.5px!important}
+  body[data-base="./"] .podcast p{font-size:8px!important}
 }
+
+@media(max-width:360px){
+  body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 20px)}
+  body[data-base="./"] .editorial-item{grid-template-columns:62px minmax(0,1fr)}
+  body[data-base="./"] .editorial-item img{width:62px!important}
+  body[data-base="./"] .podcast{grid-template-columns:54px minmax(0,1fr) 34px}
+  body[data-base="./"] .podcast img{width:54px!important;height:54px!important;min-height:54px!important}
+}
+
+@media(prefers-reduced-motion:reduce){body[data-base="./"] .podcast{transition:none!important}}
