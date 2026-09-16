@@ -1,0 +1,147 @@
+/* MANDALA CHANNEL — IMAGE INTEGRITY SYSTEM
+   Priority: never crop editorial covers.
+   Layout adapts to the natural image ratio instead of forcing every cover
+   into one fixed portrait/landscape box.
+*/
+
+body[data-base="./"] main img{
+  max-width:100%;
+}
+
+/* Standard article/video cards: let the image establish its own height. */
+body[data-base="./"] main .thumb{
+  aspect-ratio:auto!important;
+  height:auto!important;
+  overflow:visible!important;
+  background:#f1f3f5;
+}
+body[data-base="./"] main .thumb img{
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+}
+
+/* Latest Stories list covers. */
+body[data-base="./"] main .editorial-item img{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  align-self:start!important;
+  background:#eef1f4!important;
+}
+
+/* Main editorial story: image stays in normal flow, so the card height follows
+   the real image ratio. The text overlay remains anchored to the bottom. */
+body[data-base="./"] main .editorial-main{
+  aspect-ratio:auto!important;
+  height:auto!important;
+  overflow:hidden!important;
+}
+body[data-base="./"] main .editorial-main img{
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#eef1f4!important;
+}
+body[data-base="./"] main .editorial-main::after{
+  z-index:1!important;
+}
+body[data-base="./"] main .editorial-main-copy{
+  z-index:2!important;
+}
+
+/* Secondary editorial cards: natural cover height. */
+body[data-base="./"] main .editorial-card{
+  height:auto!important;
+  overflow:hidden!important;
+}
+body[data-base="./"] main .editorial-card img{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#eef1f4!important;
+}
+
+/* Podcast covers: preserve the actual supplied cover ratio. */
+body[data-base="./"] main .podcast img{
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  align-self:start!important;
+  background:#0a345f!important;
+}
+
+/* Playlist covers: absolute cards may still have different ratios, so the
+   image determines card height instead of a forced 3:4 crop. */
+body[data-base="./"] main .play-card{
+  aspect-ratio:auto!important;
+  height:auto!important;
+  overflow:hidden!important;
+}
+body[data-base="./"] main .play-card img{
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#172536!important;
+}
+
+/* Decorative hero collage: keep every source image intact. */
+body[data-base="./"] main .visual img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:rgba(255,255,255,.06)!important;
+}
+
+/* Never let a cover be clipped by a generic image wrapper. */
+body[data-base="./"] main .editorial-item,
+body[data-base="./"] main .podcast,
+body[data-base="./"] main .card,
+body[data-base="./"] main .thumb{
+  min-width:0!important;
+}
+
+/* On small screens, natural image heights are still used. The grid may change
+   columns, but it never changes the source image ratio. */
+@media(max-width:760px){
+  body[data-base="./"] main .editorial-item img,
+  body[data-base="./"] main .editorial-card img,
+  body[data-base="./"] main .thumb img,
+  body[data-base="./"] main .podcast img{
+    height:auto!important;
+    object-fit:contain!important;
+  }
+  body[data-base="./"] main .editorial-item img{
+    width:100%!important;
+  }
+  body[data-base="./"] main .podcast{
+    align-items:start!important;
+  }
+}
+
+/* Fallback for any homepage image not explicitly covered above: contain is
+   intentionally preferred to crop. */
+body[data-base="./"] main img:not(.footLogo){
+  object-fit:contain;
+}
