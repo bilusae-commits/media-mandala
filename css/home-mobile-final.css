@@ -1,0 +1,130 @@
+/* MANDALA CHANNEL — FINAL MOBILE EDITORIAL SYSTEM
+   Final mobile pass. Desktop is intentionally untouched.
+   Goal: clean hierarchy, no text collisions, controlled copy length,
+   restrained image dominance, and a visual relationship to desktop.
+*/
+
+@media (max-width: 760px){
+  body[data-base="./"] main,
+  body[data-base="./"] main *{min-width:0;}
+
+  /* Header: compact, readable and horizontally scrollable. */
+  body[data-base="./"] .top .w > span:last-child{display:none!important}
+  body[data-base="./"] .top .w{justify-content:flex-start!important}
+  body[data-base="./"] header#siteHeader,
+  body[data-base="./"] header#siteHeader.scrolled{height:62px!important;min-height:62px!important}
+  body[data-base="./"] header#siteHeader .nav,
+  body[data-base="./"] header#siteHeader.scrolled .nav{height:62px!important;min-height:62px!important;gap:10px!important}
+  body[data-base="./"] header#siteHeader .logo img{max-width:116px!important;max-height:31px!important}
+  body[data-base="./"] header#siteHeader .links{gap:13px!important;overflow-x:auto!important;flex:1 1 auto!important}
+  body[data-base="./"] header#siteHeader .links a,
+  body[data-base="./"] header#siteHeader.scrolled .links a{height:62px!important;font-size:8px!important}
+  body[data-base="./"] header#siteHeader .yt{display:none!important}
+
+  /* Global type safety. */
+  body[data-base="./"] main > section{padding-block:42px!important}
+  body[data-base="./"] .head{gap:8px!important;margin-bottom:18px!important;align-items:flex-end!important}
+  body[data-base="./"] .head > div{width:auto!important;flex:1 1 auto!important}
+  body[data-base="./"] .title{font-size:clamp(24px,7vw,31px)!important;line-height:1.08!important;max-width:100%!important;overflow-wrap:normal!important;word-break:normal!important}
+  body[data-base="./"] .view{font-size:8px!important;line-height:1.2!important;flex:0 0 auto!important}
+
+  /* Hero: editorial composition, not a wall of photography. */
+  body[data-base="./"] .hero{min-height:0!important;padding:30px 0 28px!important}
+  body[data-base="./"] .heroGrid{grid-template-columns:1fr!important;gap:20px!important}
+  body[data-base="./"] .hero h1{font-size:clamp(30px,8.3vw,38px)!important;line-height:1.04!important;margin:9px 0 14px!important;letter-spacing:-.02em!important}
+  body[data-base="./"] .hero p{font-size:11.5px!important;line-height:1.62!important;margin-bottom:17px!important;max-width:560px!important}
+  body[data-base="./"] .heroButtons{gap:8px!important}
+  body[data-base="./"] .heroButtons .btn{min-height:36px!important;padding:0 12px!important;font-size:8px!important}
+  body[data-base="./"] .visual{height:clamp(175px,48vw,220px)!important;max-height:220px!important}
+  body[data-base="./"] .v1{width:67%!important;height:83%!important;right:2%!important;top:0!important}
+  body[data-base="./"] .v2{width:40%!important;height:48%!important;left:0!important;bottom:3%!important}
+  body[data-base="./"] .v3{width:28%!important;height:34%!important;right:0!important;bottom:0!important}
+
+  /* Latest Stories: main story first, compact list second. */
+  body[data-base="./"] main > section:nth-of-type(2){padding-block:34px!important}
+  body[data-base="./"] .featureGrid{grid-template-columns:1fr!important;gap:28px!important}
+  body[data-base="./"] .editorial-right{display:grid!important;gap:16px!important;order:0!important}
+  body[data-base="./"] .editorial-left{order:1!important}
+  body[data-base="./"] .editorial-main{aspect-ratio:16/8.2!important}
+  body[data-base="./"] .editorial-main-copy{padding:15px!important}
+  body[data-base="./"] .editorial-main-copy small{font-size:7px!important;letter-spacing:.16em!important;margin-bottom:6px!important}
+  body[data-base="./"] .editorial-main-copy h2{font-size:clamp(18px,5.1vw,23px)!important;line-height:1.12!important;max-width:100%!important}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  body[data-base="./"] .editorial-card img{aspect-ratio:16/9!important}
+  body[data-base="./"] .editorial-card>div{padding:10px 11px 13px!important;min-height:0!important}
+  body[data-base="./"] .editorial-card small{font-size:7px!important;line-height:1.15!important;letter-spacing:.12em!important;margin:0 0 6px!important}
+  body[data-base="./"] .editorial-card h3{font-size:12px!important;line-height:1.25!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+
+  body[data-base="./"] .editorial-heading{gap:10px!important;margin:0 0 18px!important}
+  body[data-base="./"] .editorial-heading>span{width:4px!important;flex-basis:4px!important;height:48px!important}
+  body[data-base="./"] .editorial-heading h2{font-size:25px!important;line-height:1!important}
+  body[data-base="./"] .editorial-list{gap:13px!important}
+  body[data-base="./"] .editorial-item{grid-template-columns:58px minmax(0,1fr)!important;gap:10px!important;align-items:center!important}
+  body[data-base="./"] .editorial-item img{width:58px!important;height:58px!important}
+  body[data-base="./"] .editorial-item small{font-size:7px!important;line-height:1.15!important;letter-spacing:.12em!important;margin:0 0 4px!important}
+  body[data-base="./"] .editorial-item h3{font-size:12px!important;line-height:1.25!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+
+  /* General cards: fixed visual ratio + limited copy = no collision. */
+  body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px 11px!important}
+  body[data-base="./"] .thumb{aspect-ratio:16/9!important}
+  body[data-base="./"] .meta{font-size:7px!important;line-height:1.2!important;margin-top:7px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  body[data-base="./"] .card h3{font-size:12.5px!important;line-height:1.25!important;margin:5px 0!important;min-height:0!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+  body[data-base="./"] .card p{font-size:9px!important;line-height:1.35!important;min-height:0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+
+  /* Topics: simple editorial tiles, no oversized text blocks. */
+  body[data-base="./"] .topicGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1px!important}
+  body[data-base="./"] .topic{min-height:104px!important;padding:14px!important}
+  body[data-base="./"] .topic h3{font-size:13px!important;line-height:1.18!important;margin:0 0 6px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+  body[data-base="./"] .topic p{font-size:8px!important;line-height:1.4!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+
+  /* Podcast: horizontal editorial strips instead of tall image cards. */
+  body[data-base="./"] .podcasts{grid-template-columns:1fr!important;gap:10px!important}
+  body[data-base="./"] .podcast{grid-template-columns:92px minmax(0,1fr)!important;min-height:108px!important}
+  body[data-base="./"] .podcast img{height:100%!important;min-height:108px!important;width:92px!important;object-fit:cover!important}
+  body[data-base="./"] .podcast .copy{padding:12px!important;display:block!important}
+  body[data-base="./"] .podcast .k{font-size:7px!important;margin-bottom:4px!important}
+  body[data-base="./"] .podcast h3{font-size:14px!important;line-height:1.18!important;margin:4px 0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+  body[data-base="./"] .podcast p{font-size:8px!important;line-height:1.35!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+
+  /* Playlist: one clear focal card. */
+  body[data-base="./"] .playlist-stage{min-height:225px!important;padding-inline:30px!important}
+  body[data-base="./"] .playlist-track{height:190px!important;overflow:hidden!important}
+  body[data-base="./"] .play-card{width:150px!important}
+  body[data-base="./"] .play-card.pos-1,
+  body[data-base="./"] .play-card.pos--1{opacity:.35!important;transform:translate(-50%,-50%) scale(.72)!important}
+  body[data-base="./"] .play-card.pos-2,
+  body[data-base="./"] .play-card.pos--2,
+  body[data-base="./"] .play-card.pos-hidden{opacity:0!important}
+  body[data-base="./"] .pc-info{padding:10px!important}
+  body[data-base="./"] .pc-info strong{font-size:12px!important;line-height:1.1!important}
+  body[data-base="./"] .pc-info span{font-size:7px!important}
+  body[data-base="./"] .play-arrow{width:32px!important;height:32px!important;font-size:20px!important}
+
+  /* Newsletter: compact, clean stack. */
+  body[data-base="./"] .news{grid-template-columns:1fr!important;padding:20px!important;gap:14px!important}
+  body[data-base="./"] .news h2{font-size:24px!important;line-height:1.15!important}
+  body[data-base="./"] .news p{font-size:9px!important;line-height:1.45!important}
+  body[data-base="./"] .email{min-width:0!important;display:flex!important;flex-direction:column!important;gap:7px!important}
+  body[data-base="./"] .email input,body[data-base="./"] .email button{width:100%!important;height:40px!important}
+
+  /* Prevent long strings from ever breaking a card. */
+  body[data-base="./"] h1,
+  body[data-base="./"] h2,
+  body[data-base="./"] h3,
+  body[data-base="./"] p,
+  body[data-base="./"] a{overflow-wrap:break-word}
+}
+
+@media (max-width:380px){
+  body[data-base="./"] .hero h1{font-size:29px!important}
+  body[data-base="./"] .hero p{font-size:11px!important}
+  body[data-base="./"] .editorial-item{grid-template-columns:54px minmax(0,1fr)!important}
+  body[data-base="./"] .editorial-item img{width:54px!important;height:54px!important}
+  body[data-base="./"] .editorial-item h3{font-size:11.5px!important}
+  body[data-base="./"] .editorial-card h3{font-size:11.5px!important}
+  body[data-base="./"] .card h3{font-size:12px!important}
+  body[data-base="./"] .topic{padding:12px!important;min-height:98px!important}
+  body[data-base="./"] .topic h3{font-size:12px!important}
+  body[data-base="./"] .podcast{grid-template-columns:82px minmax(0,1fr)!important}
+  body[data-base="./"] .podcast img{width:82px!important;min-height:100px!important}
+}
