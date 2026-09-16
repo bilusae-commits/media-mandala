@@ -88,3 +88,166 @@
  .mandala-now-playing{grid-template-columns:auto minmax(0,1fr) auto;padding:8px 12px}.mandala-now-playing .now-controls{grid-column:1/-1;grid-row:2}body.has-now-playing{padding-bottom:104px}
 }
 @media(prefers-reduced-motion:reduce){#articlesContainer .card,#videosContainer .card,#topicsContainer .topic{animation:none!important}.mandala-now-playing,.mandala-audio button{transition:none!important}}
+
+/* =========================================================
+   FINAL RESPONSIVE AUDIT — 2026-09-16
+   This layer intentionally comes last so older homepage/mobile
+   styles cannot fight the final responsive rules.
+   ========================================================= */
+
+html{overflow-x:hidden}
+body[data-base="./"]{width:100%;max-width:100%;overflow-x:hidden}
+body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:100%;max-width:none;margin-inline:0;padding-inline:clamp(16px,3.2vw,52px)}
+body[data-base="./"] main>section{overflow:clip}
+
+/* CMS images: preserve the uploaded cover instead of silently cropping it. */
+body[data-base="./"] #articlesContainer .thumb,
+body[data-base="./"] #videosContainer .thumb{overflow:hidden;display:flex;align-items:center;justify-content:center;background:#eef1f3}
+body[data-base="./"] #articlesContainer .thumb img,
+body[data-base="./"] #videosContainer .thumb img{display:block;width:100%;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center}
+body[data-base="./"] .editorial-main img,
+body[data-base="./"] .editorial-card img,
+body[data-base="./"] .editorial-item img{object-fit:contain!important;background:#eef1f3}
+body[data-base="./"] .feature>a>img,body[data-base="./"] .story>img{object-fit:contain!important;background:#eef1f3}
+
+/* Stable section widths at every desktop size. */
+@media (min-width:1201px){
+  body[data-base="./"] #articlesContainer{grid-template-columns:minmax(0,1.65fr) minmax(220px,.82fr) minmax(220px,.82fr);gap:clamp(18px,1.8vw,28px)}
+  body[data-base="./"] #videosContainer{gap:clamp(18px,2vw,30px)}
+}
+
+/* Laptop/tablet: remove decorative offsets before they become cramped. */
+@media (min-width:761px) and (max-width:1100px){
+  body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);gap:28px}
+  body[data-base="./"] .hero h1{font-size:clamp(40px,5vw,58px)}
+  body[data-base="./"] .visual{height:clamp(300px,38vw,390px)}
+  body[data-base="./"] #articlesContainer{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+  body[data-base="./"] #articlesContainer .card:first-child{grid-column:1/-1;grid-row:auto}
+  body[data-base="./"] #articlesContainer .card:nth-child(2),body[data-base="./"] #articlesContainer .card:nth-child(3){transform:none}
+  body[data-base="./"] #articlesContainer .card:nth-child(4){grid-column:1/-1;margin-top:0;display:grid}
+  body[data-base="./"] #videosContainer{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+  body[data-base="./"] #videosContainer .card:nth-child(n){grid-column:auto;margin-top:0}
+  body[data-base="./"] #videosContainer .card:first-child{grid-column:1/-1}
+  body[data-base="./"] #topicsContainer .topic{grid-template-columns:minmax(130px,.55fr) minmax(0,1fr) 44px}
+}
+
+/* Tablet/phone: switch to a single predictable reading column where needed. */
+@media (max-width:760px){
+  body[data-base="./"] .w,body[data-base="./"] .heroGrid{padding-inline:16px}
+  body[data-base="./"] .hero{min-height:auto;padding:30px 0 28px}
+  body[data-base="./"] .heroGrid{grid-template-columns:1fr;gap:20px}
+  body[data-base="./"] .heroCopy{max-width:none}
+  body[data-base="./"] .hero h1{font-size:clamp(31px,8.5vw,42px);line-height:1.04}
+  body[data-base="./"] .hero p{font-size:12px;line-height:1.62}
+  body[data-base="./"] .visual{height:clamp(185px,52vw,245px);max-height:245px}
+  body[data-base="./"] .v1{width:67%;height:83%;right:2%;top:0}
+  body[data-base="./"] .v2{width:40%;height:48%;left:0;bottom:3%}
+  body[data-base="./"] .v3{width:28%;height:35%;right:0;bottom:0}
+
+  body[data-base="./"] main>section{padding-block:42px}
+  body[data-base="./"] .head{align-items:flex-end;gap:10px;margin-bottom:20px}
+  body[data-base="./"] .title{font-size:clamp(24px,6.7vw,32px);line-height:1.08}
+
+  /* Latest editorial: one focal story, then two compact cards, then list. */
+  body[data-base="./"] .featureGrid{grid-template-columns:1fr;gap:22px}
+  body[data-base="./"] .editorial-right{order:0;display:grid;gap:12px}
+  body[data-base="./"] .editorial-left{order:1}
+  body[data-base="./"] .editorial-main{aspect-ratio:16/10}
+  body[data-base="./"] .editorial-main-copy{padding:14px}
+  body[data-base="./"] .editorial-main-copy h2{font-size:clamp(18px,5.2vw,23px);line-height:1.12}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  body[data-base="./"] .editorial-card>div{padding:10px 11px 12px}
+  body[data-base="./"] .editorial-card h3{font-size:12px;line-height:1.25}
+  body[data-base="./"] .editorial-list{gap:13px}
+  body[data-base="./"] .editorial-item{grid-template-columns:58px minmax(0,1fr);gap:10px}
+  body[data-base="./"] .editorial-item img{width:58px;height:58px}
+  body[data-base="./"] .editorial-item h3{font-size:12px;line-height:1.25}
+
+  /* Article cards: single column on small screens so images and copy never compete. */
+  body[data-base="./"] #articlesContainer{grid-template-columns:1fr;gap:24px}
+  body[data-base="./"] #articlesContainer .card:first-child{grid-column:auto;grid-row:auto}
+  body[data-base="./"] #articlesContainer .card:nth-child(2),body[data-base="./"] #articlesContainer .card:nth-child(3){transform:none}
+  body[data-base="./"] #articlesContainer .card:nth-child(4){grid-column:auto;margin-top:0;display:block;padding-top:0;border-top:0}
+  body[data-base="./"] #articlesContainer .card .thumb{min-height:0;aspect-ratio:16/10}
+  body[data-base="./"] #articlesContainer .card:first-child .thumb{min-height:0}
+  body[data-base="./"] #articlesContainer .card .thumb img{width:100%;height:100%;object-fit:contain}
+  body[data-base="./"] #articlesContainer .card h3{font-size:18px;line-height:1.2}
+
+  /* Videos: one column, consistent 16:9 stage, no negative offsets. */
+  body[data-base="./"] #videosContainer{grid-template-columns:1fr;gap:24px}
+  body[data-base="./"] #videosContainer .card:nth-child(n){grid-column:auto;margin-top:0}
+  body[data-base="./"] #videosContainer .card .thumb{aspect-ratio:16/9;min-height:0}
+  body[data-base="./"] #videosContainer .card .thumb img{width:100%;height:100%;object-fit:contain}
+  body[data-base="./"] #videosContainer .card h3{font-size:17px}
+
+  /* Topics: readable editorial list, not tiny cards. */
+  body[data-base="./"] #topicsContainer .topic{grid-template-columns:minmax(0,1fr) 26px;gap:10px;padding:16px 6px}
+  body[data-base="./"] #topicsContainer .topic h3{font-size:16px;line-height:1.2}
+  body[data-base="./"] #topicsContainer .topic p{display:none}
+  body[data-base="./"] #topicsContainer .topic::after{font-size:18px}
+
+  /* Podcast: compact player card without forced cover crop. */
+  body[data-base="./"] .podcasts{grid-template-columns:1fr;gap:12px}
+  body[data-base="./"] .podcast{grid-template-columns:92px minmax(0,1fr);min-height:108px}
+  body[data-base="./"] .podcast img{width:92px;height:100%;min-height:108px;max-height:none;object-fit:contain;padding:7px}
+  body[data-base="./"] .podcast .copy{padding:12px;min-width:0}
+  body[data-base="./"] .podcast h3{font-size:14px;line-height:1.18;margin:5px 0}
+  body[data-base="./"] .podcast p{font-size:8px;line-height:1.35;margin:0 0 9px}
+  body[data-base="./"] .mandala-audio{gap:9px}
+  body[data-base="./"] .mandala-audio button{width:36px;height:36px;flex:0 0 36px}
+  body[data-base="./"] .mandala-audio .audio-volume{display:none}
+
+  /* Persistent player: two rows, large touch targets, never clips content. */
+  body[data-base="./"] .mandala-now-playing{grid-template-columns:46px minmax(0,1fr) 28px;gap:9px;padding:8px 12px}
+  body[data-base="./"] .mandala-now-playing .now-controls{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:10px}
+  body[data-base="./"] .mandala-now-playing .now-controls button{width:38px;height:38px}
+  body[data-base="./"] body.has-now-playing{padding-bottom:108px}
+  body.has-now-playing{padding-bottom:108px}
+
+  /* Newsletter and footer safety. */
+  body[data-base="./"] .news{grid-template-columns:1fr;gap:16px;padding:20px}
+  body[data-base="./"] .email{min-width:0}
+}
+
+@media (max-width:480px){
+  body[data-base="./"] .top{height:28px;font-size:8px}
+  body[data-base="./"] header#siteHeader,body[data-base="./"] header#siteHeader.scrolled{height:60px!important;min-height:60px!important}
+  body[data-base="./"] header#siteHeader .nav,body[data-base="./"] header#siteHeader.scrolled .nav{height:60px!important;gap:9px!important}
+  body[data-base="./"] header#siteHeader .logo img{max-width:104px!important;max-height:28px!important}
+  body[data-base="./"] header#siteHeader .links{gap:12px!important}
+  body[data-base="./"] header#siteHeader .links a{height:60px!important;font-size:8px!important}
+  body[data-base="./"] .hero h1{font-size:clamp(29px,8.7vw,36px)}
+  body[data-base="./"] .hero p{font-size:11px}
+  body[data-base="./"] .heroButtons{display:grid;grid-template-columns:1fr 1fr}
+  body[data-base="./"] .heroButtons .btn{width:100%;padding-inline:8px;font-size:8px}
+  body[data-base="./"] .visual{height:clamp(175px,51vw,220px)}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:1fr 1fr}
+  body[data-base="./"] .editorial-card h3{font-size:11.5px}
+  body[data-base="./"] .editorial-item{grid-template-columns:54px minmax(0,1fr)}
+  body[data-base="./"] .editorial-item img{width:54px;height:54px}
+  body[data-base="./"] .editorial-item h3{font-size:11.5px}
+  body[data-base="./"] #articlesContainer .card h3{font-size:17px}
+  body[data-base="./"] #topicsContainer .topic{padding:14px 5px}
+  body[data-base="./"] .podcast{grid-template-columns:78px minmax(0,1fr);min-height:102px}
+  body[data-base="./"] .podcast img{width:78px;min-height:102px}
+  body[data-base="./"] .podcast .copy{padding:10px}
+  body[data-base="./"] .podcast h3{font-size:13px}
+  body[data-base="./"] .podcast p{font-size:7.5px}
+}
+
+@media (max-width:360px){
+  body[data-base="./"] .w,body[data-base="./"] .heroGrid{padding-inline:13px}
+  body[data-base="./"] .heroButtons{grid-template-columns:1fr}
+  body[data-base="./"] .hero h1{font-size:28px}
+  body[data-base="./"] .title{font-size:23px}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:1fr}
+  body[data-base="./"] .podcast{grid-template-columns:70px minmax(0,1fr)}
+  body[data-base="./"] .podcast img{width:70px;min-height:96px}
+}
+
+/* Accessibility / motion safety. */
+@media(prefers-reduced-motion:reduce){
+  body[data-base="./"] *{scroll-behavior:auto!important}
+  body[data-base="./"] #articlesContainer .card,body[data-base="./"] #videosContainer .card,body[data-base="./"] #topicsContainer .topic{animation:none!important}
+  body[data-base="./"] .mandala-now-playing,body[data-base="./"] .mandala-audio button{transition:none!important}
+}
