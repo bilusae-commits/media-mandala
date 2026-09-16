@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Mandala Channel — media digital tentang Hindu, dharma, tokoh, budaya dan Nusantara.">
-<title>Mandala Channel — Media Dharma & Nusantara</title>
+<title>Mandala Channel</title>
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/home.css">
@@ -12,365 +12,33 @@
 <link rel="stylesheet" href="css/index-polish.css?v=20260910.1">
 <link rel="stylesheet" href="css/home-mobile-final.css?v=20260916.1">
 <link rel="stylesheet" href="css/home-image-integrity.css?v=20260916.2">
-<link rel="stylesheet" href="css/index-natgeo.css?v=20260916.2">
-<style>
-/* =========================================================
-   MANDALA CHANNEL — HOMEPAGE EDITORIAL SYSTEM
-   Inspired by the structural discipline of the reference site:
-   strong masthead, oversized photography, asymmetric stories,
-   clear editorial hierarchy and restrained motion.
-   ========================================================= */
-:root{
-  --mc-navy:#071b2b;
-  --mc-navy-2:#0d2a40;
-  --mc-gold:#e8b94d;
-  --mc-paper:#f5f3ee;
-  --mc-white:#fff;
-  --mc-ink:#101820;
-  --mc-muted:#6d747a;
-  --mc-line:rgba(16,24,32,.14);
-  --mc-max:1440px;
-  --mc-pad:clamp(20px,4vw,64px);
-}
-html{scroll-behavior:smooth}
-body{background:var(--mc-paper);color:var(--mc-ink)}
-.w{width:min(var(--mc-max),calc(100% - 2 * var(--mc-pad)));margin-inline:auto}
-.top{background:#020b12;color:rgba(255,255,255,.7);font-size:10px;letter-spacing:.18em;text-transform:uppercase}
-.top .w{min-height:30px;display:flex;align-items:center;justify-content:space-between}
-#siteHeader{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.97);border-bottom:1px solid var(--mc-line);backdrop-filter:blur(14px);transition:.25s ease}
-#siteHeader .nav{min-height:78px;display:flex;align-items:center;gap:30px}
-#siteHeader .logo{display:flex;align-items:center;flex:0 0 auto}
-#siteHeader .logo img{width:172px;height:auto;display:block}
-#siteHeader .links{display:flex;align-items:center;gap:clamp(16px,2.1vw,34px);margin-left:auto}
-#siteHeader .links a{color:var(--mc-ink);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;position:relative;padding:30px 0}
-#siteHeader .links a:after{content:"";position:absolute;left:0;right:100%;bottom:20px;height:2px;background:var(--mc-gold);transition:right .22s ease}
-#siteHeader .links a:hover:after,#siteHeader .links a[aria-current="page"]:after{right:0}
-#siteHeader .yt{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 16px;background:var(--mc-navy);color:#fff;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:.12em}
-#siteHeader.scrolled .nav{min-height:62px}
-#siteHeader.scrolled .links a{padding:22px 0}
-
-.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--mc-navy);color:#fff;min-height:min(780px,calc(100vh - 30px));display:flex;align-items:stretch}
-.hero:before{content:"";position:absolute;inset:0;background-image:var(--hero-overlay-image);background-position:center;background-size:cover;opacity:var(--hero-overlay-opacity,0);z-index:-1;pointer-events:none}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,13,21,.98) 0%,rgba(3,13,21,.86) 37%,rgba(3,13,21,.24) 67%,rgba(3,13,21,.12) 100%);z-index:-1}
-.heroGrid{width:min(var(--mc-max),calc(100% - 2 * var(--mc-pad)));margin:auto;display:grid;grid-template-columns:minmax(300px,.8fr) minmax(520px,1.55fr);gap:clamp(30px,5vw,90px);align-items:center;padding:clamp(54px,7vw,100px) 0}
-.heroCopy{max-width:610px;position:relative;z-index:2}
-.heroCopy .k{color:var(--mc-gold);font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px}
-.heroCopy h1{font-size:clamp(44px,5.8vw,88px);line-height:.92;letter-spacing:-.055em;margin:0 0 28px;font-weight:850;color:#fff}
-.heroCopy p{max-width:570px;color:rgba(255,255,255,.72);font-size:16px;line-height:1.75;margin:0 0 34px}
-.heroButtons{display:flex;flex-wrap:wrap;gap:10px}
-.heroButtons .btn{min-height:46px;display:inline-flex;align-items:center;padding:0 19px;border:1px solid rgba(255,255,255,.38);color:#fff;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:.15em}
-.heroButtons .btn.primary{background:var(--mc-gold);border-color:var(--mc-gold);color:#071b2b}
-.visual{height:min(620px,70vh);min-height:470px;position:relative}
-.visual>div{position:absolute;overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.28);background:#172b39}
-.visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.visual>div:hover img{transform:scale(1.045)}
-.v1{inset:0 7% 0 8%;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%)}
-.v2{width:31%;height:34%;right:0;bottom:4%;border:7px solid var(--mc-navy);z-index:2}
-.v3{width:26%;height:28%;left:0;top:7%;border:7px solid var(--mc-navy);z-index:2}
-
-main>section:not(.hero){padding:clamp(70px,9vw,130px) 0}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;border-top:1px solid var(--mc-line);padding-top:18px;margin-bottom:34px}
-.section-head .k{font-size:10px;letter-spacing:.2em;font-weight:900;color:#60717d;text-transform:uppercase;margin-bottom:8px}
-.section-head h2{font-size:clamp(30px,4vw,58px);letter-spacing:-.045em;line-height:.95;margin:0;font-weight:850}
-.section-head .view{font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--mc-ink);text-decoration:none;white-space:nowrap}
-
-/* featured editorial: asymmetric magazine spread */
-#featuredEditorial{display:grid;grid-template-columns:minmax(230px,.7fr) minmax(0,2fr);gap:clamp(24px,4vw,70px)}
-#featuredEditorial .editorial-heading{display:flex;gap:12px;align-items:flex-start;margin-bottom:28px}
-#featuredEditorial .editorial-heading span{width:9px;height:9px;background:var(--mc-gold);margin-top:5px;flex:none}
-#featuredEditorial .editorial-heading h2{font-size:13px;letter-spacing:.16em;line-height:1.15;margin:0;font-weight:900}
-#featuredEditorial .editorial-list{display:grid;gap:0;border-top:1px solid var(--mc-line)}
-#featuredEditorial .editorial-item{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--mc-line);text-decoration:none;color:inherit}
-#featuredEditorial .editorial-item img{width:110px;height:74px;object-fit:cover}
-#featuredEditorial small,#featuredEditorial .editorial-item small{display:block;font-size:9px;letter-spacing:.15em;font-weight:900;color:#77848c;text-transform:uppercase;margin-bottom:7px}
-#featuredEditorial .editorial-item h3{font-size:16px;line-height:1.18;margin:0;font-weight:800}
-#featuredEditorial .editorial-right{min-width:0}
-#featuredEditorial .editorial-main{display:block;position:relative;height:min(590px,58vw);min-height:410px;overflow:hidden;text-decoration:none;color:#fff;background:#142532}
-#featuredEditorial .editorial-main img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
-#featuredEditorial .editorial-main:hover img{transform:scale(1.035)}
-#featuredEditorial .editorial-main:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.86));}
-#featuredEditorial .editorial-main-copy{position:absolute;z-index:2;left:clamp(20px,3vw,46px);right:clamp(20px,3vw,46px);bottom:clamp(20px,3vw,42px)}
-#featuredEditorial .editorial-main-copy small{color:var(--mc-gold)}
-#featuredEditorial .editorial-main-copy h2{font-size:clamp(32px,4vw,64px);line-height:.96;letter-spacing:-.04em;margin:0;max-width:850px}
-#featuredEditorial .editorial-bottom{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
-#featuredEditorial .editorial-card{display:grid;grid-template-columns:150px 1fr;gap:16px;text-decoration:none;color:inherit;border-top:1px solid var(--mc-line);padding-top:16px}
-#featuredEditorial .editorial-card img{width:150px;height:105px;object-fit:cover}
-#featuredEditorial .editorial-card h3{font-size:17px;line-height:1.2;margin:0}
-
-/* article cards */
-#articlesContainer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
-#articlesContainer .card,#videosContainer .card{background:transparent;border:0;min-width:0}
-#articlesContainer .card a,#videosContainer .card a{color:inherit;text-decoration:none}
-#articlesContainer .thumb,#videosContainer .thumb{height:clamp(190px,22vw,330px);position:relative;overflow:hidden;background:#d9d8d2}
-#articlesContainer .thumb img,#videosContainer .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-#articlesContainer .card:hover img,#videosContainer .card:hover img{transform:scale(1.035)}
-#articlesContainer .meta,#videosContainer .meta{font-size:9px;font-weight:900;letter-spacing:.14em;color:#78838a;text-transform:uppercase;margin:15px 0 8px}
-#articlesContainer h3,#videosContainer h3{font-size:21px;line-height:1.08;letter-spacing:-.025em;margin:0 0 9px}
-#articlesContainer p,#videosContainer p{font-size:13px;color:var(--mc-muted);line-height:1.55;margin:0}
-.badge{position:absolute;left:12px;top:12px;background:var(--mc-gold);color:#071b2b;padding:6px 8px;font-size:8px;font-weight:900;letter-spacing:.12em}
-
-.dark{background:var(--mc-navy);color:#fff}
-.dark .section-head{border-color:rgba(255,255,255,.2)}
-.dark .section-head .k,.dark .section-head .view{color:rgba(255,255,255,.6)}
-#videosContainer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
-#videosContainer .thumb{height:clamp(200px,25vw,350px)}
-#videosContainer .meta{color:rgba(255,255,255,.5)}
-#videosContainer p{color:rgba(255,255,255,.62)}
-
-/* playlist */
-.playlist{background:#e6e1d5}
-.playlist-stage{position:relative;min-height:470px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:35px 0 70px}
-.playlist-track{position:relative;width:100%;height:410px}
-.play-card{position:absolute;top:0;left:50%;width:min(360px,70vw);height:410px;margin-left:-180px;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .45s ease,filter .45s ease;overflow:hidden;background:#172532;box-shadow:0 20px 55px rgba(0,0,0,.18)}
-.play-card img{width:100%;height:100%;object-fit:cover;display:block}
-.play-card:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.85))}
-.play-card .pc-info{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;color:#fff}
-.play-card .pc-info strong{display:block;font-size:24px;line-height:1.05;margin-bottom:8px}
-.play-card .pc-info span{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-.play-card.pos-0{transform:translateX(0) scale(1);opacity:1;z-index:5;filter:none}
-.play-card.pos-1{transform:translateX(63%) scale(.82);opacity:.52;z-index:3;filter:saturate(.7)}
-.play-card.pos--1{transform:translateX(-63%) scale(.82);opacity:.52;z-index:3;filter:saturate(.7)}
-.play-card.pos-2,.play-card.pos--2{opacity:0;z-index:1;transform:scale(.7)}
-.play-card.pos-hidden{opacity:0;pointer-events:none}
-.play-arrow{position:absolute;z-index:8;top:50%;width:46px;height:46px;border:1px solid rgba(7,27,43,.25);background:rgba(255,255,255,.75);font-size:30px;line-height:1;cursor:pointer}
-.play-arrow.prev{left:0}.play-arrow.next{right:0}
-.play-dots{position:absolute;bottom:35px;display:flex;gap:8px}
-.play-dot{width:7px;height:7px;border:0;background:#9ba3a4;border-radius:50%;padding:0;cursor:pointer}.play-dot.active{background:var(--mc-navy);transform:scale(1.3)}
-.play-hint{position:absolute;bottom:5px;right:0;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#70797c}
-.playlist-empty-state{display:grid;place-items:center;height:100%;color:#687177;font-size:13px}
-
-#topicsContainer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--mc-line);border-left:1px solid var(--mc-line)}
-#topicsContainer .topic{min-height:190px;padding:28px;border-right:1px solid var(--mc-line);border-bottom:1px solid var(--mc-line);color:inherit;text-decoration:none;position:relative;overflow:hidden}
-#topicsContainer .topic:after{content:"";position:absolute;left:0;bottom:0;width:0;height:4px;background:var(--mc-gold);transition:width .35s ease}
-#topicsContainer .topic:hover:after{width:100%}
-#topicsContainer .topic h3{font-size:25px;letter-spacing:-.025em;margin:0 0 10px}
-#topicsContainer .topic p{font-size:13px;line-height:1.6;color:var(--mc-muted);max-width:330px;margin:0}
-
-.podcasts{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.podcast{position:relative;min-height:440px;overflow:hidden;background:#162936}
-.podcast img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
-.podcast:hover img{transform:scale(1.04)}
-.podcast:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.9))}
-.podcast .copy{position:absolute;z-index:2;left:28px;right:28px;bottom:28px;color:#fff}
-.podcast .copy .k{color:var(--mc-gold);font-size:9px;font-weight:900;letter-spacing:.18em}
-.podcast h3{font-size:clamp(25px,3vw,42px);line-height:1;margin:9px 0}
-.podcast p{font-size:13px;color:rgba(255,255,255,.7);max-width:500px}
-
-.news{background:var(--mc-gold);padding:clamp(32px,5vw,65px);display:grid;grid-template-columns:1fr minmax(300px,520px);align-items:end;gap:30px}
-.news .k{font-size:9px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
-.news h2{font-size:clamp(34px,4vw,58px);letter-spacing:-.045em;line-height:.95;margin:9px 0}
-.news p{margin:0;color:#36434b;font-size:14px}
-.email{display:flex;border-bottom:2px solid var(--mc-navy);height:50px}
-.email input{flex:1;min-width:0;border:0;background:transparent;padding:0;font:inherit;outline:0;color:var(--mc-navy)}
-.email input::placeholder{color:#46545b}
-.email button{border:0;background:var(--mc-navy);color:#fff;padding:0 18px;font-size:9px;font-weight:900;letter-spacing:.14em;cursor:pointer}
-
-footer{background:#020b12;color:#fff;padding:65px 0 25px}
-footer .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:35px;padding-bottom:55px}
-footer .footLogo{width:180px;filter:brightness(0) invert(1);margin-bottom:18px}
-footer p{max-width:370px;color:rgba(255,255,255,.55);font-size:12px;line-height:1.7}
-footer h3{font-size:9px;letter-spacing:.18em;color:var(--mc-gold);margin:5px 0 15px}
-footer a{color:rgba(255,255,255,.68);font-size:12px;line-height:2.2;text-decoration:none}
-footer a:hover{color:#fff}
-footer .copy{border-top:1px solid rgba(255,255,255,.14);padding-top:20px;font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.4);text-transform:uppercase}
-
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.reveal.is-visible{opacity:1;transform:none}
-.homepage-ready .heroCopy,.homepage-ready #featuredEditorial{transition:opacity .35s ease}
-@media(max-width:1050px){
-  #siteHeader .links{gap:15px}.heroGrid{grid-template-columns:1fr 1.15fr}.heroCopy h1{font-size:clamp(42px,6.5vw,70px)}
-  #articlesContainer,#videosContainer{grid-template-columns:repeat(2,minmax(0,1fr))}
-  #featuredEditorial{grid-template-columns:1fr}.editorial-left{order:2}.editorial-right{order:1}
-}
-@media(max-width:760px){
-  .top .w span:last-child{display:none}.top .w{justify-content:flex-start}
-  #siteHeader .nav{min-height:62px;gap:12px}.links{overflow-x:auto;scrollbar-width:none}.links::-webkit-scrollbar{display:none}#siteHeader .links a{padding:22px 0!important;font-size:9px;white-space:nowrap}.yt{display:none!important}
-  .hero{min-height:auto}.heroGrid{grid-template-columns:1fr;padding:50px 0 35px}.visual{height:410px;min-height:0;margin-top:10px}.v1{inset:0 5% 0 5%}.v2{width:34%;height:34%;right:0}.v3{width:31%;height:28%;left:0}
-  main>section:not(.hero){padding:65px 0}.section-head{display:block}.section-head .view{display:inline-block;margin-top:16px}
-  #featuredEditorial .editorial-main{height:430px;min-height:0}.editorial-bottom{grid-template-columns:1fr!important}.editorial-card{grid-template-columns:120px 1fr!important}.editorial-card img{width:120px!important;height:88px!important}
-  #articlesContainer,#videosContainer{grid-template-columns:1fr 1fr;gap:15px}.thumb,#videosContainer .thumb{height:220px!important}#articlesContainer h3,#videosContainer h3{font-size:17px}
-  .playlist-stage{min-height:430px}.playlist-track{height:370px}.play-card{height:370px;width:min(300px,72vw);margin-left:-150px}.play-card.pos-1{transform:translateX(48%) scale(.78)}.play-card.pos--1{transform:translateX(-48%) scale(.78)}
-  #topicsContainer{grid-template-columns:1fr}.podcasts{grid-template-columns:1fr}.podcast{min-height:360px}.news{grid-template-columns:1fr}.email{margin-top:10px}footer .foot{grid-template-columns:1fr 1fr}
-}
-@media(max-width:480px){
-  .w{width:min(var(--mc-max),calc(100% - 30px))}.heroCopy h1{font-size:43px}.heroCopy p{font-size:14px}.visual{height:330px}.v2{border-width:5px}.v3{border-width:5px}
-  #articlesContainer,#videosContainer{grid-template-columns:1fr}.thumb,#videosContainer .thumb{height:260px!important}
-  #featuredEditorial .editorial-item{grid-template-columns:90px 1fr}.editorial-item img{width:90px!important;height:66px!important}.editorial-item h3{font-size:14px}.editorial-main-copy h2{font-size:31px}
-  footer .foot{grid-template-columns:1fr}.news{padding:28px}.email button{padding:0 12px}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.visual img,#featuredEditorial .editorial-main img,#articlesContainer .thumb img,#videosContainer .thumb img,.podcast img{transition:none}}
-</style>
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span>MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA</span><span>Instagram · YouTube · Kontak</span></div></div>
-<header id="siteHeader">
-  <div class="w nav">
-    <a class="logo" href="index.html" aria-label="Mandala Channel — Beranda"><img src="assets/brand/Asset 5@4x.png" alt="Mandala Channel"></a>
-    <nav class="links" aria-label="Navigasi utama">
-      <a href="index.html" aria-current="page">Beranda</a>
-      <a href="pages/artikel.html">Artikel</a>
-      <a href="pages/video.html">Video</a>
-      <a href="pages/playlist.html">Playlist</a>
-      <a href="pages/podcast.html">Podcast</a>
-      <a href="pages/tentang-kami.html">Tentang</a>
-    </nav>
-    <a class="yt" href="https://www.youtube.com/@MandalaChannelTV" target="_blank" rel="noopener noreferrer">YOUTUBE ↗</a>
-  </div>
-</header>
-
+<header id="siteHeader"><div class="w nav">
+<a class="logo" href="index.html" aria-label="Mandala Channel — Beranda"><img src="assets/brand/Asset 5@4x.png" alt="Mandala Channel"></a>
+<nav class="links" aria-label="Navigasi utama"><a href="index.html" aria-current="page">Beranda</a><a href="pages/artikel.html">Artikel</a><a href="pages/video.html">Video</a><a href="pages/playlist.html">Playlist</a><a href="pages/podcast.html">Podcast</a><a href="pages/tentang-kami.html">Tentang</a></nav>
+<a class="yt" href="https://www.youtube.com/@MandalaChannelTV" target="_blank" rel="noopener noreferrer">YOUTUBE ↗</a>
+</div></header>
 <main>
-  <section class="hero" id="heroSection">
-    <div class="heroGrid">
-      <div class="heroCopy">
-        <div class="k" id="heroEyebrow">Mandala Channel · Media Nusantara</div>
-        <h1 id="heroTitle">Merawat Dharma,<br>Melestarikan Peradaban<br>Hindu Nusantara.</h1>
-        <p id="heroDescription">Ruang editorial untuk mengenal tokoh, membaca gagasan, menjelajah tempat suci, merawat tradisi dan mengikuti kabar umat Hindu dari berbagai penjuru Nusantara.</p>
-        <div class="heroButtons">
-          <a class="btn primary" id="heroPrimary" href="pages/artikel.html">JELAJAHI CERITA</a>
-          <a class="btn" id="heroSecondary" href="pages/playlist.html">LIHAT PLAYLIST</a>
-        </div>
-      </div>
-      <div class="visual" aria-label="Visual utama Mandala Channel">
-        <div class="v1"><img id="heroImageMain" src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&amp;fit=crop&amp;w=1400&amp;q=90" alt="Budaya Nusantara"></div>
-        <div class="v2"><img id="heroImageSecondary" src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&amp;fit=crop&amp;w=900&amp;q=88" alt="Tempat suci Nusantara"></div>
-        <div class="v3"><img id="heroImageTertiary" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&amp;fit=crop&amp;w=800&amp;q=88" alt="Warisan Nusantara"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <div class="w">
-      <div class="section-head">
-        <div><div class="k">Pilihan Redaksi</div><h2>Cerita yang sedang<br>kami sorot.</h2></div>
-        <a class="view" href="pages/artikel.html">Semua artikel →</a>
-      </div>
-      <div id="featuredEditorial" class="featureGrid"></div>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <div class="w">
-      <div class="section-head">
-        <div><div class="k">Ruang Redaksi</div><h2>Artikel terbaru.</h2></div>
-        <a class="view" href="pages/artikel.html">Buka arsip →</a>
-      </div>
-      <div class="cards" id="articlesContainer">
-        <article class="card"><a href="pages/artikel.html"><div class="thumb"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Mandala Channel" loading="lazy"></div><div class="meta">Mandala Channel</div><h3>Menjelajah cerita Nusantara</h3><p>Baca selengkapnya →</p></a></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="dark reveal">
-    <div class="w">
-      <div class="section-head">
-        <div><div class="k">Mandala Video</div><h2>Cerita dalam<br>gambar bergerak.</h2></div>
-        <a class="view" href="pages/video.html">Semua video →</a>
-      </div>
-      <div class="cards" id="videosContainer">
-        <article class="card video"><a href="pages/video.html"><div class="thumb"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Mandala Video" loading="lazy"><span class="badge">VIDEO</span></div><div class="meta">MANDALA VIDEO</div><h3>Jelajah video Mandala Channel</h3><p>Lihat semua video →</p></a></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="playlist reveal" id="playlistSection">
-    <div class="w">
-      <div class="section-head">
-        <div><div class="k">Serial Mandala</div><h2>Playlist pilihan.</h2></div>
-        <a class="view" href="pages/playlist.html">Lihat semua →</a>
-      </div>
-      <div class="playlist-stage" id="playlistStage" aria-label="Playlist pilihan">
-        <button class="play-arrow prev" id="playlistPrev" type="button" aria-label="Playlist sebelumnya">‹</button>
-        <div class="playlist-track" id="playlistTrack"></div>
-        <button class="play-arrow next" id="playlistNext" type="button" aria-label="Playlist berikutnya">›</button>
-        <div class="play-dots" id="playlistDots" aria-label="Navigasi playlist"></div>
-        <div class="play-hint">Geser · klik · gunakan panah</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <div class="w">
-      <div class="section-head">
-        <div><div class="k">Eksplorasi</div><h2>Masuk lewat topik.</h2></div>
-      </div>
-      <div id="topicsContainer" class="topicGrid"></div>
-    </div>
-  </section>
-
-  <section class="dark reveal">
-    <div class="w">
-      <div class="section-head">
-        <div><div class="k">Mandala Podcast</div><h2>Percakapan yang<br>lebih panjang.</h2></div>
-        <a class="view" href="pages/podcast.html">Semua podcast →</a>
-      </div>
-      <div class="podcasts">
-        <article class="podcast"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&amp;fit=crop&amp;w=1000&amp;q=88" alt="Mandala Podcast" loading="lazy"><div class="copy"><div class="k">Mandala Podcast</div><h3>Tradisi dan Budaya Jawa</h3><p>Ruang percakapan untuk membedah tradisi, sejarah dan makna.</p></div></article>
-        <article class="podcast"><img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&amp;fit=crop&amp;w=1000&amp;q=88" alt="Mandala Podcast" loading="lazy"><div class="copy"><div class="k">Mandala Podcast</div><h3>Dharma dalam Kehidupan</h3><p>Percakapan dan refleksi yang dekat dengan keseharian.</p></div></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <div class="w">
-      <div class="news">
-        <div><div class="k">Mandala Letter</div><h2>Ikuti cerita terbaru.</h2><p>Berita, artikel dan pilihan video langsung ke email.</p></div>
-        <form class="email" id="newsletterForm"><input type="email" required placeholder="Email Anda" aria-label="Email Anda"><button type="submit">DAFTAR</button></form>
-      </div>
-    </div>
-  </section>
+<section class="hero" id="heroSection"><div class="heroGrid"><div class="heroCopy"><div class="k" id="heroEyebrow">Mandala Channel · Media Nusantara</div><h1 id="heroTitle">Merawat Dharma,<br>Melestarikan Peradaban<br>Hindu Nusantara.</h1><p id="heroDescription">Ruang editorial untuk mengenal tokoh, membaca gagasan, menjelajah tempat suci, merawat tradisi dan mengikuti kabar umat Hindu dari berbagai penjuru Nusantara.</p><div class="heroButtons"><a class="btn primary" id="heroPrimary" href="pages/artikel.html">JELAJAHI CERITA</a><a class="btn" id="heroSecondary" href="pages/playlist.html">LIHAT PLAYLIST</a></div></div><div class="visual" aria-label="Visual utama Mandala Channel"><div class="v1"><img id="heroImageMain" src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=90" alt="Budaya Nusantara"></div><div class="v2"><img id="heroImageSecondary" src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=85" alt="Tempat suci"></div><div class="v3"><img id="heroImageTertiary" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=85" alt="Warisan Nusantara"></div></div></div></section>
+<section class="reveal"><div class="w"><div class="head"><div><div class="k">Pilihan Redaksi</div><h2 class="title">Cerita yang sedang dibaca</h2></div><a class="view" href="pages/artikel.html">Semua artikel →</a></div><div class="featureGrid"><div class="editorial-left"><div class="editorial-heading"><span aria-hidden="true"></span><h2>LATEST<br>STORIES</h2></div><div class="editorial-list"><a class="editorial-item" href="pages/artikel-detail.html"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=500&q=90" alt="Kegiatan kesehatan"><div><small>DHARMA</small><h3>Menjaga Keseimbangan Tubuh, Pikiran dan Kehidupan</h3></div></a><a class="editorial-item" href="pages/artikel-detail.html"><img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=500&q=90" alt="Kehidupan masyarakat"><div><small>UMAT</small><h3>Kisah dan Gagasan yang Tumbuh di Tengah Masyarakat</h3></div></a><a class="editorial-item" href="topics/tradisi-budaya.html"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=500&q=90" alt="Budaya Nusantara"><div><small>TRADISI &amp; BUDAYA</small><h3>Warisan Leluhur yang Tetap Hidup di Nusantara</h3></div></a><a class="editorial-item" href="topics/jelajah-nusantara.html"><img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=500&q=90" alt="Jelajah Nusantara"><div><small>JELAJAH</small><h3>Menemukan Cerita di Balik Tempat Suci Nusantara</h3></div></a><a class="editorial-item" href="topics/tokoh-hindu.html"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=90" alt="Tokoh"><div><small>TOKOH HINDU</small><h3>Mengenal Tokoh yang Memberi Warna bagi Perjalanan Dharma</h3></div></a><a class="editorial-item" href="pages/artikel.html"><img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=500&q=90" alt="Renungan"><div><small>SPIRITUAL</small><h3>Renungan dan Perspektif untuk Menjalani Kehidupan</h3></div></a></div></div><div class="editorial-right"><a class="editorial-main" href="pages/artikel-detail.html"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=92" alt="Cerita utama Mandala Channel"><div class="editorial-main-copy"><small>JELAJAH NUSANTARA</small><h2>Mengungkap Cerita, Sejarah dan Makna di Balik Warisan Nusantara</h2></div></a><div class="editorial-bottom"><a class="editorial-card" href="pages/artikel-detail.html"><img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=92" alt="Warisan Nusantara"><div><small>DHARMA &amp; AJARAN</small><h3>Membaca Kembali Jejak Dharma dalam Kehidupan</h3></div></a><a class="editorial-card" href="topics/jelajah-nusantara.html"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=92" alt="Perjalanan Nusantara"><div><small>JELAJAH</small><h3>Perjalanan Menemukan Cerita dari Tanah Nusantara</h3></div></a></div></div></div></div></section>
+<section class="reveal"><div class="w"><div class="head"><div><div class="k">Artikel</div><h2 class="title">Dari ruang redaksi</h2></div><a class="view" href="pages/artikel.html">Semua artikel →</a></div><div class="cards" id="articlesContainer"><article class="card"><a href="pages/artikel.html"><div class="thumb"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=85" alt="Mandala Channel" loading="lazy"></div><div class="meta">Mandala Channel</div><h3>Menjelajah cerita Nusantara</h3><p>Baca selengkapnya →</p></a></article></div></div></section>
+<section class="dark reveal"><div class="w"><div class="head"><div><div class="k">Mandala Video</div><h2 class="title">Tonton tanpa meninggalkan Mandala</h2></div><a class="view" href="pages/video.html">Semua video →</a></div><div class="cards" id="videosContainer"><article class="card video"><a href="pages/video.html"><div class="thumb"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85" alt="Mandala Video" loading="lazy"><span class="badge">VIDEO</span></div><div class="meta">Mandala Video</div><h3>Jelajah Video Mandala</h3><p>Lihat semua video →</p></a></article></div></div></section>
+<section class="playlist reveal" id="playlistSection"><div class="w"><div class="head"><div><div class="k">Serial Mandala</div><h2 class="title">Playlist pilihan</h2></div><a class="view" href="pages/playlist.html">Lihat semua →</a></div><div class="playlist-stage" id="playlistStage" aria-label="Playlist pilihan"><button class="play-arrow prev" id="playlistPrev" type="button" aria-label="Playlist sebelumnya">‹</button><div class="playlist-track" id="playlistTrack"></div><button class="play-arrow next" id="playlistNext" type="button" aria-label="Playlist berikutnya">›</button><div class="play-dots" id="playlistDots" aria-label="Navigasi playlist"></div><div class="play-hint">Geser · klik · gunakan panah</div></div></div></section>
+<section class="reveal"><div class="w"><div class="head"><div><div class="k">Eksplorasi</div><h2 class="title">Topik Mandala</h2></div></div><div class="topicGrid" id="topicsContainer"><a class="topic" href="topics/jelajah-nusantara.html"><h3>Jelajah Nusantara</h3><p>Menjelajahi tempat, sejarah dan warisan Nusantara.</p></a><a class="topic" href="topics/tokoh-hindu.html"><h3>Tokoh Hindu</h3><p>Mengenal tokoh dan pemikiran Hindu Nusantara.</p></a><a class="topic" href="topics/tradisi-budaya.html"><h3>Tradisi &amp; Budaya</h3><p>Merawat tradisi dan kebudayaan yang terus hidup.</p></a></div></div></section>
+<section class="dark reveal"><div class="w"><div class="head"><div><div class="k">Podcast</div><h2 class="title">Percakapan yang lebih panjang</h2></div><a class="view" href="pages/podcast.html">Semua podcast →</a></div><div class="podcasts"><article class="podcast"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=900&q=85" alt="Mandala Podcast" loading="lazy"><div class="copy"><div class="k">Mandala Podcast</div><h3>Tradisi dan Budaya Jawa</h3><p>Ruang percakapan untuk membedah tradisi, sejarah dan makna.</p></div></article><article class="podcast"><img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&w=900&q=85" alt="Mandala Podcast" loading="lazy"><div class="copy"><div class="k">Mandala Podcast</div><h3>Dharma dalam Kehidupan</h3><p>Percakapan dan refleksi yang dekat dengan keseharian.</p></div></article></div></div></section>
+<section class="reveal"><div class="w"><div class="news"><div><div class="k">Mandala Letter</div><h2>Ikuti cerita terbaru.</h2><p>Berita, artikel dan pilihan video langsung ke email.</p></div><form class="email" id="newsletterForm"><input type="email" required placeholder="Email Anda" aria-label="Email Anda"><button type="submit">DAFTAR</button></form></div></div></section>
 </main>
-
-<div class="modal" id="modal" aria-hidden="true">
-  <div class="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modalBar"><span id="modalTitle">Mandala Channel</span><button class="close" id="closeModal" type="button" aria-label="Tutup">×</button></div>
-    <div class="frame"><iframe id="videoFrame" title="Mandala Channel Video" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
-  </div>
-</div>
-
-<footer>
-  <div class="w">
-    <div class="foot">
-      <div><img class="footLogo" src="assets/brand/Asset 5@4x.png" alt="Mandala Channel"><p>Media digital tentang Hindu, dharma, tokoh, budaya dan kearifan Nusantara.</p></div>
-      <div><h3>JELAJAH</h3><a href="pages/artikel.html">Artikel</a><br><a href="pages/video.html">Video</a><br><a href="pages/playlist.html">Playlist</a></div>
-      <div><h3>TOPIK</h3><a href="topics/jelajah-nusantara.html">Jelajah</a><br><a href="topics/tokoh-hindu.html">Tokoh</a><br><a href="topics/tradisi-budaya.html">Tradisi</a></div>
-      <div><h3>MANDALA</h3><a href="pages/tentang-kami.html">Tentang</a><br><a href="pages/kontak.html">Kontak</a></div>
-    </div>
-    <div class="copy">© 2026 Mandala Channel</div>
-  </div>
-</footer>
-
-<script src="js/config.js"></script>
-<script src="js/public-content.js?v=20260916.3"></script>
-<script src="js/homepage-settings.js?v=20260916.3"></script>
+<div class="modal" id="modal" aria-hidden="true"><div class="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalBar"><span id="modalTitle">Mandala Channel</span><button class="close" id="closeModal" type="button" aria-label="Tutup">×</button></div><div class="frame"><iframe id="videoFrame" title="Mandala Channel Video" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div></div>
+<footer><div class="w"><div class="foot"><div><img class="footLogo" src="assets/brand/Asset 5@4x.png" alt="Mandala Channel"><p>Media digital tentang Hindu, dharma, tokoh, budaya dan kearifan Nusantara.</p></div><div><h3>JELAJAH</h3><a href="pages/artikel.html">Artikel</a><br><a href="pages/video.html">Video</a><br><a href="pages/playlist.html">Playlist</a></div><div><h3>TOPIK</h3><a href="topics/jelajah-nusantara.html">Jelajah</a><br><a href="topics/tokoh-hindu.html">Tokoh</a><br><a href="topics/tradisi-budaya.html">Tradisi</a></div><div><h3>MANDALA</h3><a href="pages/tentang-kami.html">Tentang</a><br><a href="pages/kontak.html">Kontak</a></div></div><div class="copy">© 2026 Mandala Channel</div></div></footer>
+<script src="js/config.js"></script><script src="js/public-content.js?v=20260908.1"></script><script src="js/homepage-settings.js?v=20260907-02"></script>
 <script>
 "use strict";
-(function(){
-  const header=document.getElementById("siteHeader");
-  const syncHeader=()=>header?.classList.toggle("scrolled",window.scrollY>18);
-  syncHeader();window.addEventListener("scroll",syncHeader,{passive:true});
-
-  const revealNodes=document.querySelectorAll(".reveal");
-  if("IntersectionObserver" in window){
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}}),{threshold:.08,rootMargin:"0px 0px -50px"});
-    revealNodes.forEach(node=>observer.observe(node));
-  }else revealNodes.forEach(node=>node.classList.add("is-visible"));
-
-  window.openVideo=function(id,title){
-    if(!id){alert("Video belum memiliki ID YouTube.");return}
-    const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame"),label=document.getElementById("modalTitle");
-    if(!modal||!frame)return;
-    if(label)label.textContent=title||"Mandala Channel";
-    frame.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1&rel=0";
-    modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
-  };
-  window.closeVideo=function(){
-    const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame");
-    if(frame)frame.src="";if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")};document.body.style.overflow="";
-  };
-  document.getElementById("closeModal")?.addEventListener("click",window.closeVideo);
-  document.getElementById("modal")?.addEventListener("click",e=>{if(e.target.id==="modal")window.closeVideo()});
-  document.addEventListener("keydown",e=>{if(e.key==="Escape")window.closeVideo()});
-  document.getElementById("newsletterForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Form newsletter siap dihubungkan ke layanan email.")});
-})();
+(function(){const header=document.getElementById("siteHeader");if(!header)return;const sync=()=>header.classList.toggle("scrolled",window.scrollY>20);sync();window.addEventListener("scroll",sync,{passive:true})})();
+function openVideo(id,title){if(!id){alert("Video belum memiliki ID YouTube.");return}const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame"),modalTitle=document.getElementById("modalTitle");if(!modal||!frame)return;if(modalTitle)modalTitle.textContent=title||"Mandala Channel";frame.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1&rel=0";modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
+function closeVideo(){const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame");if(frame)frame.src="";if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}document.body.style.overflow=""}window.openVideo=openVideo;window.closeVideo=closeVideo;document.getElementById("closeModal")?.addEventListener("click",closeVideo);document.getElementById("modal")?.addEventListener("click",e=>{if(e.target.id==="modal")closeVideo()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeVideo()});document.getElementById("newsletterForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Form newsletter siap dihubungkan ke layanan email.")});
+(function(){const elements=document.querySelectorAll(".reveal");if(!(window.IntersectionObserver)){elements.forEach(el=>el.classList.add("is-visible"));return}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}})},{threshold:.08,rootMargin:"0px 0px -6% 0px"});elements.forEach(el=>observer.observe(el))})();
 </script>
 </body>
 </html>
