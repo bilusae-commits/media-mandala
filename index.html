@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/index-fluid-fix.css">
 <link rel="stylesheet" href="css/index-polish.css?v=20260910.1">
 <link rel="stylesheet" href="css/home-mobile-final.css?v=20260916.1">
+<link rel="stylesheet" href="css/home-image-integrity.css?v=20260916.2">
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span>MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA</span><span>Instagram · YouTube · Kontak</span></div></div>
@@ -37,7 +38,7 @@
 (function(){const header=document.getElementById("siteHeader");if(!header)return;const sync=()=>header.classList.toggle("scrolled",window.scrollY>20);sync();window.addEventListener("scroll",sync,{passive:true})})();
 function openVideo(id,title){if(!id){alert("Video belum memiliki ID YouTube.");return}const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame"),modalTitle=document.getElementById("modalTitle");if(!modal||!frame)return;if(modalTitle)modalTitle.textContent=title||"Mandala Channel";frame.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1&rel=0";modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
 function closeVideo(){const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame");if(frame)frame.src="";if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}document.body.style.overflow=""}window.openVideo=openVideo;window.closeVideo=closeVideo;document.getElementById("closeModal")?.addEventListener("click",closeVideo);document.getElementById("modal")?.addEventListener("click",e=>{if(e.target.id==="modal")closeVideo()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeVideo()});document.getElementById("newsletterForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Form newsletter siap dihubungkan ke layanan email.")});
-(function(){const elements=document.querySelectorAll(".reveal");if(!("IntersectionObserver" in window)){elements.forEach(el=>el.classList.add("is-visible"));return}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}})},{threshold:.08,rootMargin:"0px 0px -5% 0px"});elements.forEach(el=>observer.observe(el))})();
+(function(){const elements=document.querySelectorAll(".reveal");if(!("IntersectionObserver" in window)){elements.forEach(el=>el.classList.add("is-visible"));return}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}})},{threshold:.08,rootMargin:"0px 0px -6% 0px"});elements.forEach(el=>observer.observe(el))})();
 </script>
 </body>
 </html>
