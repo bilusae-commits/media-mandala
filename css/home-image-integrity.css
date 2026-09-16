@@ -1,102 +1,293 @@
-/* MANDALA CHANNEL — IMAGE INTEGRITY + RESPONSIVE EDITORIAL SYSTEM
-   Priority: never crop editorial covers.
-   The image keeps its intrinsic ratio; the layout adapts around it.
+/* MANDALA CHANNEL — FINAL RESPONSIVE / IMAGE INTEGRITY LAYER
+   Loaded LAST on index.html.
+   Rule: the asset keeps its intrinsic aspect ratio. The layout adapts to the asset.
+   No editorial cover is cropped, stretched, or forced into 16:9.
 */
+
 body[data-base="./"] main,
 body[data-base="./"] main *{min-width:0}
-body[data-base="./"] main img{max-width:100%}
+body[data-base="./"] main img{display:block;max-width:100%;height:auto}
 
-/* Article/video covers: natural height, never forced into 16:9. */
-body[data-base="./"] main .thumb{aspect-ratio:auto!important;height:auto!important;overflow:hidden!important;background:#f1f3f5}
-body[data-base="./"] main .thumb img{position:static!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;transform:none!important}
+/* ---------- PAGE WIDTH ---------- */
+body[data-base="./"] .w,
+body[data-base="./"] .heroGrid{
+  width:min(calc(100% - clamp(28px,6vw,96px)),1480px)!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
 
-/* Latest Stories covers. */
-body[data-base="./"] main .editorial-item{min-width:0!important}
-body[data-base="./"] main .editorial-item img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;align-self:start!important;background:#eef1f4!important}
-body[data-base="./"] main .editorial-main{height:auto!important;aspect-ratio:auto!important;overflow:hidden!important}
-body[data-base="./"] main .editorial-main img{position:static!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;background:#eef1f4!important}
-body[data-base="./"] main .editorial-main::after{z-index:1!important}
-body[data-base="./"] main .editorial-main-copy{z-index:2!important}
-body[data-base="./"] main .editorial-card{height:auto!important;overflow:hidden!important}
-body[data-base="./"] main .editorial-card img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;background:#eef1f4!important}
+/* ---------- HEADER ---------- */
+body[data-base="./"] .nav{width:100%;min-width:0}
+body[data-base="./"] .links{min-width:0;overflow-x:auto;overflow-y:hidden}
+body[data-base="./"] .links a{flex:0 0 auto}
 
-/* Hero collage: preserve each supplied image inside its visual frame. */
-body[data-base="./"] main .visual img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;background:rgba(255,255,255,.06)!important}
+/* ---------- HERO ---------- */
+body[data-base="./"] .heroGrid{
+  grid-template-columns:minmax(0,1.04fr) minmax(300px,.96fr)!important;
+  align-items:center!important;
+}
+body[data-base="./"] .heroCopy{min-width:0}
+body[data-base="./"] .visual{min-width:0}
+body[data-base="./"] .visual>div{overflow:hidden}
+body[data-base="./"] .visual img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:rgba(255,255,255,.05)!important;
+}
 
-/* Playlist artwork: never crop the source cover. */
-body[data-base="./"] main .play-card{aspect-ratio:auto!important;height:auto!important;overflow:hidden!important}
-body[data-base="./"] main .play-card img{position:static!important;display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;background:#172536!important}
+/* ---------- ALL STANDARD CARDS ---------- */
+body[data-base="./"] .cards{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:start!important;
+}
+body[data-base="./"] .card{min-width:0!important;height:auto!important}
+body[data-base="./"] .thumb{
+  aspect-ratio:auto!important;
+  height:auto!important;
+  overflow:hidden!important;
+  background:#eef1f4!important;
+}
+body[data-base="./"] .thumb img{
+  position:static!important;
+  inset:auto!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+}
+body[data-base="./"] .card h3,
+body[data-base="./"] .card p{min-height:0!important}
 
-/* Flexible grids: columns collapse when their content needs the space. */
-body[data-base="./"] .cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));align-items:start}
-body[data-base="./"] .card{height:auto!important;align-self:start}
-body[data-base="./"] .featureGrid{grid-template-columns:minmax(260px,.72fr) minmax(0,1.55fr);align-items:start}
-body[data-base="./"] .editorial-item{grid-template-columns:clamp(82px,8vw,116px) minmax(0,1fr);align-items:start}
-body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
-body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr)}
-body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:min(100% - clamp(24px,6vw,96px),1480px);max-width:none}
+/* ---------- LATEST STORIES ---------- */
+body[data-base="./"] .featureGrid{
+  grid-template-columns:minmax(260px,.72fr) minmax(0,1.55fr)!important;
+  align-items:start!important;
+}
+body[data-base="./"] .editorial-item{
+  grid-template-columns:clamp(78px,8vw,112px) minmax(0,1fr)!important;
+  align-items:start!important;
+}
+body[data-base="./"] .editorial-item img{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#eef1f4!important;
+}
+body[data-base="./"] .editorial-main{
+  position:relative!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:auto!important;
+  overflow:hidden!important;
+}
+body[data-base="./"] .editorial-main img{
+  position:static!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#eef1f4!important;
+}
+body[data-base="./"] .editorial-main::after{
+  z-index:1!important;
+  pointer-events:none!important;
+}
+body[data-base="./"] .editorial-main-copy{z-index:2!important}
+body[data-base="./"] .editorial-bottom{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;
+}
+body[data-base="./"] .editorial-card{
+  height:auto!important;
+  overflow:hidden!important;
+}
+body[data-base="./"] .editorial-card img{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#eef1f4!important;
+}
 
-/* Spotify-inspired audio shelf. This is Mandala's own UI, not a Spotify embed. */
-body[data-base="./"] .podcasts{display:grid;grid-template-columns:1fr;gap:10px}
-body[data-base="./"] .podcast{display:grid;grid-template-columns:72px minmax(0,1fr) 42px;gap:16px;align-items:center;min-height:72px;padding:10px 12px;border-radius:8px;background:#0b3764;border:1px solid rgba(255,255,255,.08);overflow:hidden;transition:background .18s ease,transform .18s ease}
-body[data-base="./"] .podcast:hover{background:#104574;transform:translateY(-1px)}
-body[data-base="./"] .podcast img{width:72px!important;height:72px!important;min-height:72px!important;aspect-ratio:1!important;object-fit:contain!important;display:block!important;border-radius:6px}
-body[data-base="./"] .podcast .copy{padding:0!important;min-width:0;display:block!important}
-body[data-base="./"] .podcast .copy::after{content:"▶";position:absolute;right:12px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:#fff;color:#082d56;display:grid;place-items:center;font-size:14px;line-height:1}
-body[data-base="./"] .podcast{position:relative}
+/* ---------- PLAYLIST ---------- */
+body[data-base="./"] .playlist-stage{min-width:0;overflow:hidden}
+body[data-base="./"] .playlist-track{min-width:0;overflow:visible}
+body[data-base="./"] .play-card{
+  overflow:hidden!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  background:#172536!important;
+}
+body[data-base="./"] .play-card img{
+  position:static!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  background:#172536!important;
+}
+
+/* ---------- HOMEPAGE PODCAST SHELF ---------- */
+body[data-base="./"] .podcasts{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:10px!important;
+}
+body[data-base="./"] .podcast{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:72px minmax(0,1fr) 42px!important;
+  align-items:center!important;
+  gap:16px!important;
+  min-width:0!important;
+  min-height:72px!important;
+  padding:10px 12px!important;
+  overflow:hidden!important;
+  border-radius:8px!important;
+  background:#0b3764!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+}
+body[data-base="./"] .podcast:hover{background:#104574!important;transform:translateY(-1px)}
+body[data-base="./"] .podcast img{
+  width:72px!important;
+  height:72px!important;
+  min-height:0!important;
+  aspect-ratio:1!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  border-radius:6px!important;
+  background:#173f68!important;
+}
+body[data-base="./"] .podcast .copy{
+  position:relative!important;
+  min-width:0!important;
+  padding:0!important;
+  display:block!important;
+}
+body[data-base="./"] .podcast .copy::after{
+  content:"▶";
+  position:absolute;
+  right:-56px;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#fff;
+  color:#082d56;
+  display:grid;
+  place-items:center;
+  font-size:13px;
+}
 body[data-base="./"] .podcast .k{font-size:7px!important;margin:0 0 4px!important}
-body[data-base="./"] .podcast h3{margin:0 52px 5px 0!important;color:#fff;font:700 15px/1.25 Arial,Helvetica,sans-serif!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-body[data-base="./"] .podcast p{margin:0 52px 8px 0!important;color:#b9c9d8!important;font-size:10px!important;line-height:1.35!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-body[data-base="./"] .podcast .copy::before{content:"";display:block;position:absolute;left:100px;right:70px;bottom:12px;height:3px;border-radius:99px;background:rgba(255,255,255,.18)}
-body[data-base="./"] .podcast .copy .k::after{content:"  ·  MANDALA AUDIO";color:#a9bac9;font-size:7px;letter-spacing:.08em}
+body[data-base="./"] .podcast h3{
+  margin:0 0 5px!important;
+  padding-right:8px!important;
+  color:#fff!important;
+  font:700 15px/1.25 Arial,Helvetica,sans-serif!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+body[data-base="./"] .podcast p{
+  margin:0!important;
+  padding-right:8px!important;
+  color:#b9c9d8!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
 
-@media(max-width:1000px){
-  body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1fr) minmax(260px,.85fr);gap:28px}
-  body[data-base="./"] .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* ---------- SIMPLE / PRECISE DATA TABLES ----------
+   Tables stay inside the page. Text wraps instead of creating a giant canvas.
+*/
+body[data-base="./"] main table{
+  width:100%!important;
+  max-width:100%!important;
+  border-collapse:collapse!important;
+  table-layout:fixed!important;
+}
+body[data-base="./"] main th,
+body[data-base="./"] main td{
+  max-width:1px;
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+  white-space:normal!important;
+}
+body[data-base="./"] main td img,
+body[data-base="./"] main th img{max-width:100%!important;height:auto!important}
+
+/* ---------- BREAKPOINTS ---------- */
+@media(max-width:1100px){
+  body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1fr) minmax(260px,.9fr)!important;gap:30px!important}
+  body[data-base="./"] .cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  body[data-base="./"] .featureGrid{grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr)!important}
+}
+
+@media(max-width:900px){
+  body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body[data-base="./"] .featureGrid{grid-template-columns:1fr!important}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 
 @media(max-width:760px){
-  body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 32px)}
-  body[data-base="./"] .hero{min-height:auto!important;padding:46px 0 38px!important}
-  body[data-base="./"] .heroGrid{grid-template-columns:1fr!important;gap:28px!important}
-  body[data-base="./"] .heroCopy{order:1;max-width:none}
-  body[data-base="./"] .visual{order:2;height:clamp(220px,68vw,340px)!important;max-height:none!important}
-  body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}
-  body[data-base="./"] .featureGrid{grid-template-columns:1fr;gap:30px}
-  body[data-base="./"] .editorial-right{gap:24px}
-  body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-  body[data-base="./"] .editorial-item{grid-template-columns:76px minmax(0,1fr);gap:12px}
-  body[data-base="./"] .editorial-item img{width:76px!important}
-  body[data-base="./"] .editorial-main-copy{padding:16px}
-  body[data-base="./"] .editorial-main-copy h2{font-size:23px;line-height:1.16}
-  body[data-base="./"] .podcast{grid-template-columns:64px minmax(0,1fr) 38px;gap:12px;padding:9px 10px;min-height:64px}
-  body[data-base="./"] .podcast img{width:64px!important;height:64px!important;min-height:64px!important}
-  body[data-base="./"] .podcast .copy::after{width:38px;height:38px;right:10px;font-size:12px}
-  body[data-base="./"] .podcast .copy::before{left:86px;right:60px;bottom:10px}
-  body[data-base="./"] .podcast h3{font-size:13px!important;margin-right:46px!important}
-  body[data-base="./"] .podcast p{font-size:9px!important;margin-right:46px!important}
+  body[data-base="./"] .w,
+  body[data-base="./"] .heroGrid{width:calc(100% - 32px)!important}
+  body[data-base="./"] .heroGrid{grid-template-columns:1fr!important;gap:24px!important}
+  body[data-base="./"] .heroCopy{order:1!important}
+  body[data-base="./"] .visual{order:2!important;height:clamp(210px,58vw,310px)!important}
+  body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px 14px!important}
+  body[data-base="./"] .editorial-item{grid-template-columns:78px minmax(0,1fr)!important;gap:12px!important}
+  body[data-base="./"] .editorial-item img{width:78px!important}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  body[data-base="./"] .editorial-main-copy{padding:16px!important}
+  body[data-base="./"] .podcast{grid-template-columns:64px minmax(0,1fr) 38px!important;gap:12px!important;padding:9px 10px!important;min-height:64px!important}
+  body[data-base="./"] .podcast img{width:64px!important;height:64px!important}
+  body[data-base="./"] .podcast .copy::after{width:38px;height:38px;right:-50px;font-size:12px}
+  body[data-base="./"] .podcast h3{font-size:13px!important}
+  body[data-base="./"] .podcast p{font-size:9px!important}
 }
 
 @media(max-width:520px){
-  body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 24px)}
-  body[data-base="./"] .cards{grid-template-columns:1fr}
-  body[data-base="./"] .editorial-bottom{grid-template-columns:1fr}
-  body[data-base="./"] .editorial-item{grid-template-columns:68px minmax(0,1fr)}
+  body[data-base="./"] .w,
+  body[data-base="./"] .heroGrid{width:calc(100% - 24px)!important}
+  body[data-base="./"] .cards{grid-template-columns:1fr!important;gap:22px!important}
+  body[data-base="./"] .editorial-item{grid-template-columns:68px minmax(0,1fr)!important}
   body[data-base="./"] .editorial-item img{width:68px!important}
-  body[data-base="./"] .podcast{grid-template-columns:58px minmax(0,1fr) 36px;gap:10px}
-  body[data-base="./"] .podcast img{width:58px!important;height:58px!important;min-height:58px!important}
-  body[data-base="./"] .podcast .copy::after{width:36px;height:36px;right:8px}
-  body[data-base="./"] .podcast .copy::before{left:78px;right:54px;bottom:9px}
+  body[data-base="./"] .editorial-bottom{grid-template-columns:1fr!important}
+  body[data-base="./"] .podcast{grid-template-columns:58px minmax(0,1fr) 36px!important;gap:10px!important}
+  body[data-base="./"] .podcast img{width:58px!important;height:58px!important}
+  body[data-base="./"] .podcast .copy::after{width:36px;height:36px;right:-46px}
   body[data-base="./"] .podcast h3{font-size:12.5px!important}
   body[data-base="./"] .podcast p{font-size:8px!important}
+  body[data-base="./"] main th,
+  body[data-base="./"] main td{font-size:9px!important;padding:8px 6px!important}
 }
 
 @media(max-width:360px){
-  body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 20px)}
-  body[data-base="./"] .editorial-item{grid-template-columns:62px minmax(0,1fr)}
+  body[data-base="./"] .w,
+  body[data-base="./"] .heroGrid{width:calc(100% - 20px)!important}
+  body[data-base="./"] .editorial-item{grid-template-columns:62px minmax(0,1fr)!important}
   body[data-base="./"] .editorial-item img{width:62px!important}
-  body[data-base="./"] .podcast{grid-template-columns:54px minmax(0,1fr) 34px}
-  body[data-base="./"] .podcast img{width:54px!important;height:54px!important;min-height:54px!important}
+  body[data-base="./"] .podcast{grid-template-columns:54px minmax(0,1fr) 34px!important}
+  body[data-base="./"] .podcast img{width:54px!important;height:54px!important}
 }
 
-@media(prefers-reduced-motion:reduce){body[data-base="./"] .podcast{transition:none!important}}
+@media(prefers-reduced-motion:reduce){
+  body[data-base="./"] .podcast{transition:none!important}
+}
