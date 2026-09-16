@@ -1,138 +1,81 @@
 /* =========================================================
    MANDALA CHANNEL — PUBLIC CONTENT
-   Single public-data bridge: Supabase -> public pages
+   Supabase -> public pages, with editorial layouts + audio player
    ========================================================= */
 (function(){
-    "use strict";
-    const SUPABASE_URL = (window.MANDALA_CONFIG || {}).SUPABASE_URL || "";
-    const SUPABASE_KEY = (window.MANDALA_CONFIG || {}).SUPABASE_PUBLISHABLE_KEY || (window.MANDALA_CONFIG || {}).SUPABASE_ANON_KEY || "";
-    const scriptSrc = document.currentScript?.src || "";
-    const resolveAsset = (path) => scriptSrc ? new window.URL(path, scriptSrc).href : path;
+  "use strict";
+  const SUPABASE_URL=(window.MANDALA_CONFIG||{}).SUPABASE_URL||"";
+  const SUPABASE_KEY=(window.MANDALA_CONFIG||{}).SUPABASE_PUBLISHABLE_KEY||(window.MANDALA_CONFIG||{}).SUPABASE_ANON_KEY||"";
+  const scriptSrc=document.currentScript?.src||"";
+  const resolveAsset=path=>scriptSrc?new window.URL(path,scriptSrc).href:path;
+  const isHomepage=document.body?.matches?.('body[data-base="./"]');
 
-    const isHomepage=document.body?.matches?.('body[data-base="./"]');
-    if (!isHomepage && !document.querySelector('link[data-mandala-public-ui]')) {
-        const ui = document.createElement('link');
-        ui.rel = 'stylesheet';
-        ui.href = resolveAsset('../css/public-unified.css');
-        ui.dataset.mandalaPublicUi = 'true';
-        document.head.appendChild(ui);
-    }
-    if (!document.querySelector('link[data-mandala-favicon]')) {
-        const favicon = document.createElement('link');
-        favicon.rel = 'icon';
-        favicon.type = 'image/svg+xml';
-        favicon.href = resolveAsset('../assets/brand/favicon.svg');
-        favicon.dataset.mandalaFavicon = 'true';
-        document.head.appendChild(favicon);
-    }
+  if(!isHomepage&&!document.querySelector('link[data-mandala-public-ui]')){const ui=document.createElement('link');ui.rel='stylesheet';ui.href=resolveAsset('../css/public-unified.css');ui.dataset.mandalaPublicUi='true';document.head.appendChild(ui)}
+  if(isHomepage&&!document.querySelector('link[data-mandala-home-upgrade]')){const ui=document.createElement('link');ui.rel='stylesheet';ui.href=resolveAsset('../css/home-upgrade.css?v=20260916.1');ui.dataset.mandalaHomeUpgrade='true';document.head.appendChild(ui)}
+  if(!document.querySelector('link[data-mandala-favicon]')){const favicon=document.createElement('link');favicon.rel='icon';favicon.type='image/svg+xml';favicon.href=resolveAsset('../assets/brand/favicon.svg');favicon.dataset.mandalaFavicon='true';document.head.appendChild(favicon)}
 
-    function normalizeBranding(){
-        const logo = document.querySelector('header .logo, #siteHeader .logo');
-        if (logo && !logo.querySelector('img')) {
-            logo.replaceChildren();
-            const img = document.createElement('img');
-            img.src = resolveAsset('../assets/brand/Asset 5@4x.png');
-            img.alt = 'Mandala Channel';
-            logo.appendChild(img);
-        }
-        const footerLogo = document.querySelector('footer .footLogo, footer .footer-brand img');
-        if (footerLogo) {
-            footerLogo.src = resolveAsset('../assets/brand/Asset 5@4x.png');
-            footerLogo.alt = 'Mandala Channel';
-        }
-        const footerBrand = document.querySelector('footer .foot > div:first-child');
-        if (footerBrand && !footerBrand.querySelector('img')) {
-            const img = document.createElement('img');
-            img.className = 'footLogo';
-            img.src = resolveAsset('../assets/brand/Asset 5@4x.png');
-            img.alt = 'Mandala Channel';
-            footerBrand.prepend(img);
-        }
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalizeBranding, {once:true});
-    else normalizeBranding();
+  function normalizeBranding(){
+    const logo=document.querySelector('header .logo,#siteHeader .logo');
+    if(logo&&!logo.querySelector('img')){logo.replaceChildren();const img=document.createElement('img');img.src=resolveAsset('../assets/brand/Asset 5@4x.png');img.alt='Mandala Channel';logo.appendChild(img)}
+    const footerLogo=document.querySelector('footer .footLogo,footer .footer-brand img');if(footerLogo){footerLogo.src=resolveAsset('../assets/brand/Asset 5@4x.png');footerLogo.alt='Mandala Channel'}
+    const footerBrand=document.querySelector('footer .foot > div:first-child');if(footerBrand&&!footerBrand.querySelector('img')){const img=document.createElement('img');img.className='footLogo';img.src=resolveAsset('../assets/brand/Asset 5@4x.png');img.alt='Mandala Channel';footerBrand.prepend(img)}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',normalizeBranding,{once:true});else normalizeBranding();
 
-    const FALLBACK = "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85";
-    let db = null;
-    let dbPromise = null;
-    let publicData = { articles: [], videos: [], playlists: [], topics: [], categories: [] };
-    function esc(value){return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
-    function youtubeId(value){if(!value)return "";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const url=new window.URL(text),host=url.hostname.replace(/^www\./,"").toLowerCase();if(host==="youtu.be")return url.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com")return url.searchParams.get("v")||(url.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||"";}catch(error){}return "";}
-    function videoImage(video){const id=video.youtube_video_id||youtubeId(video.youtube_url);return video.thumbnail_url||(id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:FALLBACK);}
-    function dateText(value){if(!value)return "";const date=new Date(value);if(Number.isNaN(date.getTime()))return "";return new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"long",year:"numeric"}).format(date);}
-    async function client(){
-        if(db)return db;
-        if(dbPromise)return dbPromise;
-        if(!SUPABASE_URL||!SUPABASE_KEY)throw new Error("Konfigurasi Supabase publik belum tersedia.");
-        dbPromise=(async()=>{
-            if(!window.supabase||typeof window.supabase.createClient!=="function"){
-                await new Promise((resolve,reject)=>{
-                    const existing=document.querySelector("script[data-mandala-supabase-public]");
-                    if(existing){existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return;}
-                    const script=document.createElement("script");
-                    script.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-                    script.dataset.mandalaSupabasePublic="true";
-                    script.onload=resolve;
-                    script.onerror=()=>reject(new Error("Supabase library gagal dimuat."));
-                    document.head.appendChild(script);
-                });
-            }
-            db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
-            return db;
-        })();
-        try{return await dbPromise}catch(error){dbPromise=null;throw error;}
-    }
-    async function loadTable(name,select,order){let query=(await client()).from(name).select(select);if(order)query=query.order(order,{ascending:true,nullsFirst:false});const result=await query;if(result.error)throw result.error;return result.data||[];}
-    function normalizePlaylist(row,categoryMap,index){const category=categoryMap[row.category_id];return{id:row.id||String(index+1),title:row.title||"Playlist Mandala",slug:row.slug||"",youtube_playlist_id:row.youtube_playlist_id||"",description:row.description||"",image:row.cover_image_url||category?.image_url||FALLBACK,category:category?.name||"Mandala",category_id:row.category_id||null,videoCount:0,status:row.status||"",featured:row.featured===true,sort_order:Number.isFinite(Number(row.sort_order))?Number(row.sort_order):9999,published_at:row.published_at||null,created_at:row.created_at||null};}
+  const FALLBACK="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85";
+  let db=null,dbPromise=null;
+  let publicData={articles:[],videos:[],playlists:[],podcasts:[],topics:[],categories:[]};
+  function esc(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
+  function youtubeId(value){if(!value)return"";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const url=new window.URL(text),host=url.hostname.replace(/^www\./,"").toLowerCase();if(host==='youtu.be')return url.pathname.split('/').filter(Boolean)[0]||'';if(host==='youtube.com'||host==='m.youtube.com')return url.searchParams.get('v')||(url.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||''}catch(error){}return""}
+  function videoImage(video){const id=video.youtube_video_id||youtubeId(video.youtube_url);return video.thumbnail_url||(id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:FALLBACK)}
+  function dateText(value){if(!value)return"";const date=new Date(value);if(Number.isNaN(date.getTime()))return"";return new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'long',year:'numeric'}).format(date)}
+  function timeText(seconds){const total=Math.max(0,Math.floor(Number(seconds)||0));const h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}:${String(0).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`}
 
-    function articleDate(article){return article.published_at||article.created_at||null;}
-    function articleUrl(article){return `pages/artikel-detail.html${article.slug?`?slug=${encodeURIComponent(article.slug)}`:""}`;}
-    function renderFeaturedArticles(items,categoryMap){
-        const grid=document.querySelector('body[data-base="./"] .featureGrid');
-        if(!grid||!items.length)return;
-        const featured=[...items].sort((a,b)=>new Date(articleDate(b)||0)-new Date(articleDate(a)||0)).slice(0,3);
-        if(!featured.length)return;
-        const main=featured[0],side=featured.slice(1,3);
-        const categoryName=article=>categoryMap[article.category_id]?.name||"ARTIKEL";
-        const image=article=>article.cover_image_url||FALLBACK;
-        grid.innerHTML=`
-          <article class="feature">
-            <a href="${articleUrl(main)}" aria-label="${esc(main.title||"Artikel")}">
-              <img src="${esc(image(main))}" alt="${esc(main.title||"Artikel")}" loading="eager">
-              <div class="copy">
-                <div class="k">${esc(categoryName(main))}</div>
-                <h2>${esc(main.title||"Artikel")}</h2>
-                <small>Mandala Channel · ${esc(dateText(articleDate(main)))}</small>
-              </div>
-            </a>
-          </article>
-          <div class="stories">
-            ${side.map(article=>`<a class="story" href="${articleUrl(article)}" aria-label="${esc(article.title||"Artikel")}">
-              <img src="${esc(image(article))}" alt="${esc(article.title||"Artikel")}" loading="lazy">
-              <div class="copy">
-                <div class="k">${esc(categoryName(article))}</div>
-                <h3>${esc(article.title||"Artikel")}</h3>
-                <p>${esc(article.excerpt||dateText(articleDate(article))||"Baca selengkapnya →")}</p>
-              </div>
-            </a>`).join("")}
-          </div>`;
-    }
+  async function client(){
+    if(db)return db;if(dbPromise)return dbPromise;if(!SUPABASE_URL||!SUPABASE_KEY)throw new Error('Konfigurasi Supabase publik belum tersedia.');
+    dbPromise=(async()=>{if(!window.supabase||typeof window.supabase.createClient!=='function'){await new Promise((resolve,reject)=>{const existing=document.querySelector('script[data-mandala-supabase-public]');if(existing){existing.addEventListener('load',resolve,{once:true});existing.addEventListener('error',reject,{once:true});return}const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';script.dataset.mandalaSupabasePublic='true';script.onload=resolve;script.onerror=()=>reject(new Error('Supabase library gagal dimuat.'));document.head.appendChild(script)})}db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});return db})();
+    try{return await dbPromise}catch(error){dbPromise=null;throw error}
+  }
+  async function loadTable(name,select,order){let query=(await client()).from(name).select(select);if(order)query=query.order(order,{ascending:true,nullsFirst:false});const result=await query;if(result.error)throw result.error;return result.data||[]}
+  function normalizePlaylist(row,categoryMap,index){const category=categoryMap[row.category_id];return{id:row.id||String(index+1),title:row.title||'Playlist Mandala',slug:row.slug||'',youtube_playlist_id:row.youtube_playlist_id||'',description:row.description||'',image:row.cover_image_url||category?.image_url||FALLBACK,category:category?.name||'Mandala',category_id:row.category_id||null,videoCount:0,status:row.status||'',featured:row.featured===true,sort_order:Number.isFinite(Number(row.sort_order))?Number(row.sort_order):9999,published_at:row.published_at||null,created_at:row.created_at||null}}
+  function articleDate(article){return article.published_at||article.created_at||null}
+  function articleUrl(article){return `pages/artikel-detail.html${article.slug?`?slug=${encodeURIComponent(article.slug)}`:''}`}
 
-    async function loadHomeData(){
-        const[articles,videos,playlists,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
-        const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};
-        activeCategories.forEach(category=>{categoryMap[category.id]=category;});
-        const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published").map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
-        publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,topics:activeCategories,categories:activeCategories};
-        window.DATA=publicData;window.MandalaPublicData=publicData;
-        renderFeaturedArticles(publicData.articles,categoryMap);
-        renderArticles(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);
-        return publicData;
-    }
-    function getPublicData(){return publicData;}
-    function renderArticles(items,categoryMap){const element=document.getElementById("articlesContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(article=>{const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=articleUrl(article);return`<article class="card"><a href="${detailUrl}"><div class="thumb"><img src="${esc(image)}" alt="${esc(article.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">${esc(dateText(article.published_at||article.created_at))}</div><h3>${esc(article.title||"Artikel")}</h3><p>${esc(article.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");}
-    function renderVideos(items,categoryMap){const element=document.getElementById("videosContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(video=>{const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||"VIDEO";return`<article class="card video"><a href="#" data-public-video="${esc(id)}" data-public-title="${esc(video.title)}"><div class="thumb"><img src="${esc(videoImage({...video,youtube_video_id:id}))}" alt="${esc(video.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">VIDEO · ${esc(dateText(video.published_at||video.created_at))}</div><h3>${esc(video.title||"Video Mandala")}</h3><p>Putar video →</p></a></article>`;}).join("");element.querySelectorAll("[data-public-video]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle);}));}
-    function renderTopics(items){const element=document.getElementById("topicsContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,6).map(topic=>`<a class="topic" href="topics/${encodeURIComponent(topic.slug||"")}.html"><h3>${esc(topic.name||"Topik")}</h3><p>${esc(topic.description||`Jelajahi cerita Mandala tentang ${String(topic.name||"").toLowerCase()}.`)}</p></a>`).join("");}
-    function renderPlaylistState(items){const track=document.getElementById("playlistTrack"),dots=document.getElementById("playlistDots");if(!track)return;if(items.length)return;track.innerHTML=`<div class="playlist-empty-state">Playlist belum tersedia.</div>`;if(dots)dots.innerHTML="";}
-    window.getPublicData=getPublicData;window.loadHomeData=loadHomeData;window.MandalaPublic={loadHomeData,getPublicData};
+  function renderFeaturedArticles(items,categoryMap){const grid=document.querySelector('body[data-base="./"] .featureGrid');if(!grid||!items.length)return;const featured=[...items].sort((a,b)=>new Date(articleDate(b)||0)-new Date(articleDate(a)||0)).slice(0,3);if(!featured.length)return;const main=featured[0],side=featured.slice(1,3);const categoryName=a=>categoryMap[a.category_id]?.name||'ARTIKEL';const image=a=>a.cover_image_url||FALLBACK;grid.innerHTML=`<article class="feature"><a href="${articleUrl(main)}" aria-label="${esc(main.title||'Artikel')}"><img src="${esc(image(main))}" alt="${esc(main.title||'Artikel')}" loading="eager"><div class="copy"><div class="k">${esc(categoryName(main))}</div><h2>${esc(main.title||'Artikel')}</h2><small>Mandala Channel · ${esc(dateText(articleDate(main)))}</small></div></a></article><div class="stories">${side.map(article=>`<a class="story" href="${articleUrl(article)}" aria-label="${esc(article.title||'Artikel')}"><img src="${esc(image(article))}" alt="${esc(article.title||'Artikel')}" loading="lazy"><div class="copy"><div class="k">${esc(categoryName(article))}</div><h3>${esc(article.title||'Artikel')}</h3><p>${esc(article.excerpt||dateText(articleDate(article))||'Baca selengkapnya →')}</p></div></a>`).join('')}</div>`}
+
+  async function loadHomeData(){
+    const[articles,videos,playlists,categories]=await Promise.all([loadTable('articles','id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured','published_at'),loadTable('videos','id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at','published_at'),loadTable('playlists','id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at','sort_order'),loadTable('categories','id,name,slug,description,image_url,sort_order,is_active','sort_order')]);
+    let podcasts=[];try{podcasts=await loadTable('podcasts','id,title,slug,description,cover_image_url,youtube_url,youtube_video_id,category_id,status,published_at,created_at,featured,content_type,audio_url,audio_duration','published_at')}catch(error){console.warn('Podcast data belum tersedia untuk publik:',error?.message||error)}
+    const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};activeCategories.forEach(category=>{categoryMap[category.id]=category});
+    const publicArticles=articles.filter(item=>item.status==='published'),publicVideos=videos.filter(item=>item.status==='published'),publicPlaylists=playlists.filter(item=>item.status==='published').map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0)),publicPodcasts=podcasts.filter(item=>item.status==='published'&&item.audio_url).sort((a,b)=>Number(b.featured)-Number(a.featured)||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
+    publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,podcasts:publicPodcasts,topics:activeCategories,categories:activeCategories};window.DATA=publicData;window.MandalaPublicData=publicData;
+    renderFeaturedArticles(publicData.articles,categoryMap);renderArticles(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);renderPodcasts(publicData.podcasts,categoryMap);setupAudioPlayer();return publicData;
+  }
+  function getPublicData(){return publicData}
+  function renderArticles(items,categoryMap){const element=document.getElementById('articlesContainer');if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(article=>{const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||'ARTIKEL',detailUrl=articleUrl(article);return`<article class="card"><a href="${detailUrl}"><div class="thumb"><img src="${esc(image)}" alt="${esc(article.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">${esc(dateText(article.published_at||article.created_at))}</div><h3>${esc(article.title||'Artikel')}</h3><p>${esc(article.excerpt||'Baca selengkapnya →')}</p></a></article>`}).join('')}
+  function renderVideos(items,categoryMap){const element=document.getElementById('videosContainer');if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(video=>{const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||'VIDEO';return`<article class="card video"><a href="#" data-public-video="${esc(id)}" data-public-title="${esc(video.title)}"><div class="thumb"><img src="${esc(videoImage({...video,youtube_video_id:id}))}" alt="${esc(video.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">VIDEO · ${esc(dateText(video.published_at||video.created_at))}</div><h3>${esc(video.title||'Video Mandala')}</h3><p>Putar video →</p></a></article>`}).join('');element.querySelectorAll('[data-public-video]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();if(typeof window.openVideo==='function')window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle)}))}
+  function renderTopics(items){const element=document.getElementById('topicsContainer');if(!element||!items.length)return;element.innerHTML=items.slice(0,6).map(topic=>`<a class="topic" href="topics/${encodeURIComponent(topic.slug||'')}.html"><h3>${esc(topic.name||'Topik')}</h3><p>${esc(topic.description||`Jelajahi cerita Mandala tentang ${String(topic.name||'').toLowerCase()}.`)}</p></a>`).join('')}
+  function renderPlaylistState(items){const track=document.getElementById('playlistTrack'),dots=document.getElementById('playlistDots');if(!track)return;if(items.length)return;track.innerHTML='<div class="playlist-empty-state">Playlist belum tersedia.</div>';if(dots)dots.innerHTML=''}
+
+  function renderPodcasts(items,categoryMap){
+    const element=document.querySelector('.podcasts');if(!element||!items.length)return;
+    element.innerHTML=items.slice(0,4).map((podcast,index)=>{const category=categoryMap[podcast.category_id]?.name||'MANDALA PODCAST';const duration=podcast.audio_duration?timeText(podcast.audio_duration):'Audio';return`<article class="podcast" data-audio-card data-audio-url="${esc(podcast.audio_url)}" data-audio-title="${esc(podcast.title||'Mandala Podcast')}" data-audio-cover="${esc(podcast.cover_image_url||FALLBACK)}"><img src="${esc(podcast.cover_image_url||FALLBACK)}" alt="${esc(podcast.title||'Mandala Podcast')}" loading="lazy"><div class="copy"><div class="audio-kicker">${esc(category)}</div><h3>${esc(podcast.title||'Mandala Podcast')}</h3><p>${esc(podcast.description||'Dengarkan cerita, percakapan dan gagasan Mandala Channel.')}</p><div class="mandala-audio"><button type="button" data-audio-play aria-label="Putar ${esc(podcast.title||'Mandala Podcast')}">▶</button><div class="audio-main"><div class="audio-track" data-audio-track><div class="audio-progress" data-audio-progress></div></div><div class="audio-times"><span data-audio-current>0:00</span><span>${esc(duration)}</span></div><div class="audio-volume"><span aria-hidden="true">🔊</span><input type="range" min="0" max="1" step="0.01" value="0.85" data-audio-volume aria-label="Volume"></div></div></div></div></article>`}).join('')
+  }
+
+  let audio=null,audioState={card:null,url:'',title:'',cover:'',closed:false};
+  function setupAudioPlayer(){
+    const cards=[...document.querySelectorAll('[data-audio-card]')];if(!cards.length)return;
+    if(!audio){audio=document.createElement('audio');audio.preload='metadata';audio.id='mandalaGlobalAudio';document.body.appendChild(audio)}
+    let bar=document.querySelector('.mandala-now-playing');
+    if(!bar){bar=document.createElement('div');bar.className='mandala-now-playing';bar.innerHTML='<img data-now-cover alt=""><div class="now-meta"><strong data-now-title>Mandala Podcast</strong><span>Mandala Channel</span></div><div class="now-controls"><button type="button" data-now-play aria-label="Putar atau jeda">▶</button><div class="now-track" data-now-track><div class="now-progress" data-now-progress></div></div><span class="now-time" data-now-time>0:00</span></div><button class="now-close" type="button" data-now-close aria-label="Tutup pemutar">×</button>';document.body.appendChild(bar)}
+    const nowCover=bar.querySelector('[data-now-cover]'),nowTitle=bar.querySelector('[data-now-title]'),nowPlay=bar.querySelector('[data-now-play]'),nowTrack=bar.querySelector('[data-now-track]'),nowProgress=bar.querySelector('[data-now-progress]'),nowTime=bar.querySelector('[data-now-time]'),nowClose=bar.querySelector('[data-now-close]');
+    function syncCard(card,playing){const button=card?.querySelector('[data-audio-play]');if(button)button.textContent=playing?'❚❚':'▶'}
+    function activate(card){audioState.card=card;audioState.url=card.dataset.audioUrl;audioState.title=card.dataset.audioTitle;audioState.cover=card.dataset.audioCover;audioState.closed=false;audio.src=audioState.url;audio.currentTime=0;audio.volume=Number(card.querySelector('[data-audio-volume]')?.value||.85);nowCover.src=audioState.cover;nowCover.alt=audioState.title;nowTitle.textContent=audioState.title;bar.classList.add('is-active');document.body.classList.add('has-now-playing');syncCard(card,false);audio.play().catch(()=>{});nowPlay.textContent='❚❚'}
+    cards.forEach(card=>{const play=card.querySelector('[data-audio-play]'),track=card.querySelector('[data-audio-track]'),progress=card.querySelector('[data-audio-progress]'),current=card.querySelector('[data-audio-current]'),volume=card.querySelector('[data-audio-volume]');play.addEventListener('click',()=>{if(audioState.card!==card||audio.src!==new window.URL(card.dataset.audioUrl,window.location.href).href){if(audioState.card)syncCard(audioState.card,false);activate(card);return}if(audio.paused){audio.play().catch(()=>{});play.textContent='❚❚';nowPlay.textContent='❚❚'}else{audio.pause();play.textContent='▶';nowPlay.textContent='▶'}});track.addEventListener('click',event=>{if(audioState.card!==card||!audio.duration)return;const rect=track.getBoundingClientRect();audio.currentTime=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width))*audio.duration});volume.addEventListener('input',()=>{audio.volume=Number(volume.value)}) ;card.addEventListener('dblclick',()=>activate(card));card.dataset.audioReady='true';void progress;void current});
+    audio.addEventListener('timeupdate',()=>{if(!audioState.card)return;const pct=audio.duration?audio.currentTime/audio.duration:0;const card=audioState.card;card.querySelector('[data-audio-progress]')?.style.setProperty('width',`${pct*100}%`);card.querySelector('[data-audio-current]').textContent=timeText(audio.currentTime);nowProgress.style.width=`${pct*100}%`;nowTime.textContent=`${timeText(audio.currentTime)} / ${timeText(audio.duration)}`});
+    audio.addEventListener('play',()=>{if(audioState.card){syncCard(audioState.card,true);nowPlay.textContent='❚❚'}});audio.addEventListener('pause',()=>{if(audioState.card){syncCard(audioState.card,false);nowPlay.textContent='▶'}});audio.addEventListener('ended',()=>{if(audioState.card){syncCard(audioState.card,false);nowPlay.textContent='▶';audio.currentTime=0}});
+    nowPlay.onclick=()=>{if(!audioState.card)return;if(audio.paused)audio.play().catch(()=>{});else audio.pause()};nowTrack.onclick=event=>{if(!audio.duration)return;const rect=nowTrack.getBoundingClientRect();audio.currentTime=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width))*audio.duration};nowClose.onclick=()=>{audio.pause();bar.classList.remove('is-active');document.body.classList.remove('has-now-playing');audioState.closed=true;if(audioState.card)syncCard(audioState.card,false)};
+  }
+
+  window.getPublicData=getPublicData;window.loadHomeData=loadHomeData;window.MandalaPublic={loadHomeData,getPublicData};
 })();
