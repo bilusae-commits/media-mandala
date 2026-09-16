@@ -1,0 +1,71 @@
+/* MANDALA CHANNEL — RESPONSIVE EDITORIAL V2 */
+body[data-base="./"] main,body[data-base="./"] main *{min-width:0}
+body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:min(100% - clamp(24px,6vw,96px),1480px);max-width:none}
+body[data-base="./"] .cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));align-items:start}
+body[data-base="./"] .card{height:auto!important;align-self:start}
+body[data-base="./"] .card .thumb{height:auto!important;aspect-ratio:auto!important;overflow:hidden!important}
+body[data-base="./"] .card .thumb img{width:100%!important;height:auto!important;display:block!important;object-fit:contain!important;transform:none!important}
+body[data-base="./"] .featureGrid{grid-template-columns:minmax(260px,.72fr) minmax(0,1.55fr);align-items:start}
+body[data-base="./"] .editorial-list{grid-template-columns:1fr}
+body[data-base="./"] .editorial-item{grid-template-columns:clamp(82px,8vw,116px) minmax(0,1fr);align-items:start}
+body[data-base="./"] .editorial-item img{width:100%!important;height:auto!important;object-fit:contain!important}
+body[data-base="./"] .editorial-main{height:auto!important;aspect-ratio:auto!important}
+body[data-base="./"] .editorial-main img{width:100%!important;height:auto!important;display:block!important;object-fit:contain!important}
+body[data-base="./"] .editorial-main-copy{position:absolute;bottom:0}
+body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+body[data-base="./"] .editorial-card img{width:100%!important;height:auto!important;object-fit:contain!important}
+body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr)}
+body[data-base="./"] .visual{height:clamp(260px,31vw,430px)}
+body[data-base="./"] .visual img{object-fit:contain!important;width:100%!important;height:100%!important}
+
+/* Spotify-inspired audio shelf for Mandala-owned podcast/audio content. */
+body[data-base="./"] .audioShelf{display:grid;gap:10px}
+body[data-base="./"] .audioItem{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 14px;border-radius:8px;background:#0b3764;border:1px solid rgba(255,255,255,.08);transition:background .18s ease,transform .18s ease}
+body[data-base="./"] .audioItem:hover{background:#104574;transform:translateY(-1px)}
+body[data-base="./"] .audioCover{width:72px;height:72px;overflow:hidden;border-radius:6px;background:#163f67}
+body[data-base="./"] .audioCover img{width:100%!important;height:100%!important;object-fit:contain!important;display:block}
+body[data-base="./"] .audioMeta{min-width:0}
+body[data-base="./"] .audioMeta .k{margin-bottom:5px}
+body[data-base="./"] .audioTitle{margin:0;color:#fff;font:700 16px/1.25 Arial,Helvetica,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-base="./"] .audioSub{margin:5px 0 10px;color:#b9c9d8;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-base="./"] .audioProgress{height:3px;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden}
+body[data-base="./"] .audioProgress span{display:block;width:34%;height:100%;background:#fff;border-radius:99px}
+body[data-base="./"] .audioPlay{width:42px;height:42px;border:0;border-radius:50%;display:grid;place-items:center;background:#fff;color:#082d56;font-size:16px;cursor:pointer;flex:0 0 auto}
+body[data-base="./"] .audioItem.is-active{box-shadow:inset 3px 0 0 #c0a16a}
+body[data-base="./"] .podcastAudioGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+
+@media(max-width:1000px){
+ body[data-base="./"] .heroGrid{grid-template-columns:minmax(0,1fr) minmax(260px,.85fr);gap:28px}
+ body[data-base="./"] .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 32px)}
+ body[data-base="./"] .hero{min-height:auto;padding:46px 0 38px}
+ body[data-base="./"] .heroGrid{grid-template-columns:1fr;gap:28px}
+ body[data-base="./"] .visual{height:clamp(220px,68vw,340px);order:2}
+ body[data-base="./"] .heroCopy{order:1;max-width:none}
+ body[data-base="./"] .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}
+ body[data-base="./"] .featureGrid{grid-template-columns:1fr;gap:30px}
+ body[data-base="./"] .editorial-right{gap:24px}
+ body[data-base="./"] .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ body[data-base="./"] .podcastAudioGrid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+ body[data-base="./"] .cards{grid-template-columns:1fr}
+ body[data-base="./"] .editorial-bottom{grid-template-columns:1fr}
+ body[data-base="./"] .editorial-item{grid-template-columns:76px minmax(0,1fr);gap:12px}
+ body[data-base="./"] .editorial-item img{width:76px!important}
+ body[data-base="./"] .editorial-main-copy{padding:16px}
+ body[data-base="./"] .editorial-main-copy h2{font-size:23px;line-height:1.16}
+ body[data-base="./"] .audioItem{grid-template-columns:58px minmax(0,1fr) 38px;gap:11px;padding:10px}
+ body[data-base="./"] .audioCover{width:58px;height:58px}
+ body[data-base="./"] .audioTitle{font-size:14px}
+ body[data-base="./"] .audioSub{font-size:10px;margin-bottom:7px}
+ body[data-base="./"] .audioPlay{width:36px;height:36px;font-size:14px}
+}
+@media(max-width:360px){
+ body[data-base="./"] .w,body[data-base="./"] .heroGrid{width:calc(100% - 24px)}
+ body[data-base="./"] .visual{height:220px}
+ body[data-base="./"] .editorial-item{grid-template-columns:68px minmax(0,1fr)}
+ body[data-base="./"] .editorial-item img{width:68px!important}
+}
