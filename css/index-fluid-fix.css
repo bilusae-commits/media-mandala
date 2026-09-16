@@ -84,3 +84,103 @@ body[data-base="./"] #heroImageTertiary.is-live{visibility:visible}
   body[data-base="./"] .btn{max-width:100%}
   body[data-base="./"] .play-arrow{width:34px;height:34px}
 }
+
+/* MOBILE EDITORIAL FIX
+   The mobile version remains visually related to desktop but reduces image dominance.
+   More-specific selectors intentionally sit here so the homepage polish layer cannot
+   turn every mobile block into a large single image. */
+@media (max-width:760px){
+  body[data-base="./"] main .hero{min-height:auto!important;padding:34px 0 30px!important}
+  body[data-base="./"] main .heroGrid{grid-template-columns:1fr!important;gap:22px!important}
+  body[data-base="./"] main .hero h1{margin:10px 0 15px!important;font-size:clamp(32px,8.6vw,43px)!important;line-height:1.03!important}
+  body[data-base="./"] main .hero p{margin-bottom:19px!important;font-size:12px!important;line-height:1.6!important}
+  body[data-base="./"] main .visual{height:clamp(210px,55vw,285px)!important;max-height:285px!important}
+  body[data-base="./"] main .v1{width:67%!important;height:82%!important;right:2%!important;top:0!important}
+  body[data-base="./"] main .v2{width:41%!important;height:47%!important;left:0!important;bottom:4%!important}
+  body[data-base="./"] main .v3{width:29%!important;height:35%!important;right:0!important;bottom:0!important}
+
+  body[data-base="./"] main > section{padding-block:42px!important}
+  body[data-base="./"] main .head{margin-bottom:20px!important}
+  body[data-base="./"] main .title{font-size:clamp(25px,6.5vw,34px)!important}
+
+  body[data-base="./"] main > section:nth-of-type(2){padding-block:34px!important}
+  body[data-base="./"] main .editorial-heading{margin:0 0 22px!important;gap:12px!important}
+  body[data-base="./"] main .editorial-heading>span{height:54px!important;width:4px!important;flex-basis:4px!important}
+  body[data-base="./"] main .editorial-heading h2{font-size:29px!important;line-height:1!important}
+  body[data-base="./"] main .editorial-list{gap:17px!important}
+  body[data-base="./"] main .editorial-item{grid-template-columns:72px minmax(0,1fr)!important;gap:11px!important}
+  body[data-base="./"] main .editorial-item img{width:72px!important;height:72px!important}
+  body[data-base="./"] main .editorial-item h3{font-size:14px!important;line-height:1.28!important}
+  body[data-base="./"] main .editorial-item small{font-size:8px!important;letter-spacing:.16em!important;margin:2px 0 6px!important}
+  body[data-base="./"] main .editorial-right{gap:18px!important}
+  body[data-base="./"] main .editorial-main{aspect-ratio:16/8.7!important}
+  body[data-base="./"] main .editorial-main-copy{padding:15px!important}
+  body[data-base="./"] main .editorial-main-copy h2{font-size:21px!important;line-height:1.12!important}
+  body[data-base="./"] main .editorial-main-copy small{font-size:8px!important;margin-bottom:6px!important}
+  body[data-base="./"] main .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  body[data-base="./"] main .editorial-card img{aspect-ratio:16/9!important}
+  body[data-base="./"] main .editorial-card>div{min-height:0!important;padding:13px 13px 16px!important}
+  body[data-base="./"] main .editorial-card small{font-size:8px!important;margin-bottom:7px!important}
+  body[data-base="./"] main .editorial-card h3{font-size:14px!important;line-height:1.22!important}
+
+  body[data-base="./"] main .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px 12px!important}
+  body[data-base="./"] main .thumb{aspect-ratio:16/9!important}
+  body[data-base="./"] main .card h3{font-size:14px!important;line-height:1.25!important}
+  body[data-base="./"] main .card p{font-size:10px!important;line-height:1.45!important}
+  body[data-base="./"] main .meta{font-size:7px!important;margin-top:8px!important}
+
+  body[data-base="./"] main .topicGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1px!important}
+  body[data-base="./"] main .topic{min-height:118px!important;padding:17px!important}
+  body[data-base="./"] main .topic h3{font-size:16px!important;line-height:1.2!important;margin-bottom:7px!important}
+  body[data-base="./"] main .topic p{font-size:9px!important;line-height:1.45!important}
+
+  body[data-base="./"] main .podcasts{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  body[data-base="./"] main .podcast{grid-template-columns:1fr!important}
+  body[data-base="./"] main .podcast img{width:100%!important;height:clamp(105px,28vw,135px)!important;min-height:0!important}
+  body[data-base="./"] main .podcast .copy{padding:13px!important}
+  body[data-base="./"] main .podcast h3{font-size:16px!important;line-height:1.18!important;margin:6px 0!important}
+  body[data-base="./"] main .podcast p{font-size:9px!important;line-height:1.45!important}
+
+  body[data-base="./"] main .playlist-stage{min-height:245px!important;padding-inline:28px!important}
+  body[data-base="./"] main .playlist-track{height:205px!important}
+  body[data-base="./"] main .play-card{width:clamp(150px,43vw,190px)!important}
+  body[data-base="./"] main .play-card.pos-1{transform:translate(-50%,-50%) translateX(24vw) scale(.78)!important}
+  body[data-base="./"] main .play-card.pos--1{transform:translate(-50%,-50%) translateX(-24vw) scale(.78)!important}
+  body[data-base="./"] main .play-card.pos-2,body[data-base="./"] main .play-card.pos--2{opacity:0!important}
+  body[data-base="./"] main .pc-info{padding:11px!important}
+  body[data-base="./"] main .pc-info strong{font-size:13px!important}
+  body[data-base="./"] main .news{padding:22px!important;gap:18px!important}
+}
+
+@media (max-width:520px){
+  body[data-base="./"] main .w,body[data-base="./"] main .heroGrid{padding-inline:16px!important}
+  body[data-base="./"] main .top .w{gap:10px}
+  body[data-base="./"] main .top{font-size:8px}
+  body[data-base="./"] main .hero{padding-top:28px!important;padding-bottom:25px!important}
+  body[data-base="./"] main .hero h1{font-size:clamp(30px,8.5vw,37px)!important}
+  body[data-base="./"] main .visual{height:clamp(185px,52vw,225px)!important}
+  body[data-base="./"] main .heroButtons .btn{min-height:38px!important;padding-inline:13px!important;font-size:8px!important}
+  body[data-base="./"] main .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body[data-base="./"] main .editorial-item{grid-template-columns:66px minmax(0,1fr)!important}
+  body[data-base="./"] main .editorial-item img{width:66px!important;height:66px!important}
+  body[data-base="./"] main .editorial-item h3{font-size:13px!important}
+  body[data-base="./"] main .editorial-main-copy h2{font-size:19px!important}
+  body[data-base="./"] main .editorial-bottom{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body[data-base="./"] main .editorial-card h3{font-size:13px!important}
+  body[data-base="./"] main .podcast h3{font-size:14px!important}
+  body[data-base="./"] main .podcast p{font-size:8px!important}
+  body[data-base="./"] main .topic{min-height:110px!important;padding:14px!important}
+  body[data-base="./"] main .topic h3{font-size:14px!important}
+  body[data-base="./"] main .playlist-stage{min-height:225px!important}
+  body[data-base="./"] main .playlist-track{height:190px!important}
+}
+
+@media (max-width:370px){
+  body[data-base="./"] main .cards{gap:18px 9px!important}
+  body[data-base="./"] main .editorial-bottom{gap:9px!important}
+  body[data-base="./"] main .podcasts{gap:9px!important}
+  body[data-base="./"] main .topicGrid{grid-template-columns:1fr 1fr!important}
+  body[data-base="./"] main .podcast .copy{padding:11px!important}
+  body[data-base="./"] main .podcast h3{font-size:13px!important}
+  body[data-base="./"] main .podcast p{font-size:7.5px!important}
+}
