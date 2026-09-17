@@ -1,0 +1,1 @@
+.ng-hero.has-hero-overlay::before{content:"";position:absolute;inset:0;z-index:1;background-image:var(--hero-overlay-image);background-position:center;background-size:cover;background-repeat:no-repeat;opacity:var(--hero-overlay-opacity,.15);mix-blend-mode:screen;pointer-events:none}.ng-hero.has-hero-overlay .hero-content{z-index:3}.ng-hero.has-hero-overlay .hero-scroll{z-index:4}
