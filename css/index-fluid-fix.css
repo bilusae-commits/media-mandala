@@ -1,3 +1,5 @@
+@import url("home-compact.css");
+
 /* MANDALA CHANNEL — INDEX FLUID FIX
    Scoped to the homepage only. Loaded after the existing homepage CSS.
    Goal: keep the page width fluid at browser zoom-out and allow clean reflow at zoom-in. */
