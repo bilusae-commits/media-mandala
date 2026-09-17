@@ -1,0 +1,43 @@
+/* MANDALA CHANNEL — COMPACT HOMEPAGE MEDIA */
+body[data-base="./"] main > section:nth-of-type(3) .thumb{aspect-ratio:16/8.8;max-height:170px}
+body[data-base="./"] main > section:nth-of-type(3) .card h3{font-size:clamp(14px,.9vw,17px);line-height:1.28;min-height:0}
+body[data-base="./"] main > section:nth-of-type(3) .card p{font-size:10px;min-height:0}
+
+/* Podcast: compact horizontal editorial rows, not large image cards. */
+body[data-base="./"] .podcasts{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+body[data-base="./"] .podcast{grid-template-columns:118px minmax(0,1fr);min-height:118px;background:#0a345f;border-radius:5px;overflow:hidden}
+body[data-base="./"] .podcast img{width:118px;height:118px;min-height:118px;object-fit:cover}
+body[data-base="./"] .podcast .copy{padding:15px 18px;display:flex;flex-direction:column;justify-content:center}
+body[data-base="./"] .podcast h3{font-size:18px;line-height:1.15;margin:5px 0}
+body[data-base="./"] .podcast p{font-size:10px;line-height:1.45}
+
+/* Audio: keep the player functional but visually quiet and responsive. */
+body[data-base="./"] audio{display:block;width:100%;max-width:560px;height:38px;margin:10px 0 0}
+body[data-base="./"] .audio-player,
+body[data-base="./"] .audio-card{min-width:0;padding:12px 0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+body[data-base="./"] .audio-player img,.audio-card img{max-height:90px;width:auto;object-fit:cover}
+body[data-base="./"] .audio-player h3,.audio-card h3{font-size:16px;margin:0 0 6px}
+body[data-base="./"] .audio-player p,.audio-card p{font-size:10px;margin:0;color:var(--muted)}
+
+@media(max-width:900px){
+  body[data-base="./"] main > section:nth-of-type(3) .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body[data-base="./"] main > section:nth-of-type(3) .thumb{max-height:145px}
+  body[data-base="./"] .podcasts{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  body[data-base="./"] main > section:nth-of-type(3) .thumb{max-height:135px}
+  body[data-base="./"] .podcast{grid-template-columns:96px minmax(0,1fr);min-height:96px}
+  body[data-base="./"] .podcast img{width:96px;height:96px;min-height:96px}
+  body[data-base="./"] .podcast .copy{padding:12px 14px}
+  body[data-base="./"] .podcast h3{font-size:16px}
+}
+@media(max-width:520px){
+  body[data-base="./"] main > section:nth-of-type(3) .cards{grid-template-columns:1fr}
+  body[data-base="./"] main > section:nth-of-type(3) .thumb{max-height:150px}
+  body[data-base="./"] .podcast{grid-template-columns:82px minmax(0,1fr);min-height:82px}
+  body[data-base="./"] .podcast img{width:82px;height:82px;min-height:82px}
+  body[data-base="./"] .podcast .copy{padding:10px 12px}
+  body[data-base="./"] .podcast h3{font-size:15px}
+  body[data-base="./"] .podcast p{font-size:9px}
+  body[data-base="./"] audio{height:36px}
+}
