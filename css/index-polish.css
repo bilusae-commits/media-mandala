@@ -31,3 +31,61 @@ body[data-base="./"] footer{background:#061521!important;color:#c4cdd2!important
  body[data-base="./"] footer{padding-bottom:80px!important}
  body[data-base="./"] .m-rail .card{flex-basis:78vw!important}
 }
+
+
+/* =========================================================
+   LONG-FORM EDITORIAL DEPTH — keeps the homepage rich,
+   spacious and magazine-like on desktop, compact on mobile.
+   ========================================================= */
+body[data-base="./"] .m-culture{background:#fff;padding:88px 0 94px}
+body[data-base="./"] .m-culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+body[data-base="./"] .m-culture-grid article{min-width:0}
+body[data-base="./"] .m-culture-grid article a{display:block;color:var(--ink);text-decoration:none}
+body[data-base="./"] .m-culture-img{aspect-ratio:1.22;overflow:hidden;background:#ddd;margin-bottom:15px}
+body[data-base="./"] .m-culture-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+body[data-base="./"] .m-culture-grid article:hover .m-culture-img img{transform:scale(1.035)}
+body[data-base="./"] .m-culture-grid small{display:block;color:var(--gold);font:700 7px/1 Arial,sans-serif;letter-spacing:.16em}
+body[data-base="./"] .m-culture-grid h3{font:500 23px/1.08 Georgia,serif;margin:8px 0 0;max-width:360px}
+
+body[data-base="./"] .m-explore{background:#e8e2d5;padding:88px 0 92px}
+body[data-base="./"] .m-explore-feature{display:grid;grid-template-columns:1.18fr .82fr;min-height:480px}
+body[data-base="./"] .m-explore-image{overflow:hidden}
+body[data-base="./"] .m-explore-image img{width:100%;height:100%;object-fit:cover;display:block}
+body[data-base="./"] .m-explore-copy{background:#102333;color:#fff;padding:58px 52px;display:flex;flex-direction:column;justify-content:center}
+body[data-base="./"] .m-explore-copy h2{font:500 clamp(34px,4vw,58px)/.96 Georgia,serif;letter-spacing:-.03em;margin:14px 0 18px}
+body[data-base="./"] .m-explore-copy p{font:12px/1.75 Arial,sans-serif;color:#aebbc2;max-width:390px;margin:0 0 26px}
+body[data-base="./"] .m-explore-copy .m-btn{align-self:flex-start}
+body[data-base="./"] .m-explore-links{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid rgba(23,35,45,.14);border-bottom:1px solid rgba(23,35,45,.14)}
+body[data-base="./"] .m-explore-links a{min-height:112px;padding:22px 24px;border-right:1px solid rgba(23,35,45,.14);display:grid;grid-template-columns:1fr auto;align-content:center;text-decoration:none;color:var(--ink)}
+body[data-base="./"] .m-explore-links span{grid-column:1/-1;color:var(--gold);font:700 7px/1 Arial,sans-serif;letter-spacing:.16em;margin-bottom:9px}
+body[data-base="./"] .m-explore-links strong{font:500 18px/1.1 Georgia,serif}
+body[data-base="./"] .m-explore-links i{font:normal 18px Georgia,serif;align-self:center}
+
+@media(max-width:760px){
+ body[data-base="./"] .m-tv{padding:58px 0 64px}
+ body[data-base="./"] .m-nusantara{padding:60px 0 64px}
+ body[data-base="./"] .m-stories{padding:60px 0 64px}
+ body[data-base="./"] .m-culture{padding:60px 0 64px}
+ body[data-base="./"] .m-culture-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:5px}
+ body[data-base="./"] .m-culture-grid article{flex:0 0 72%;scroll-snap-align:start}
+ body[data-base="./"] .m-culture-img{aspect-ratio:1.35;margin-bottom:10px}
+ body[data-base="./"] .m-culture-grid h3{font-size:17px}
+ body[data-base="./"] .m-explore{padding:60px 0 64px}
+ body[data-base="./"] .m-explore-feature{grid-template-columns:1fr;min-height:0}
+ body[data-base="./"] .m-explore-image{aspect-ratio:1.15}
+ body[data-base="./"] .m-explore-copy{padding:30px 24px 34px}
+ body[data-base="./"] .m-explore-copy h2{font-size:34px}
+ body[data-base="./"] .m-explore-copy p{font-size:10px;line-height:1.6}
+ body[data-base="./"] .m-explore-links{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
+ body[data-base="./"] .m-explore-links a{flex:0 0 76%;min-height:94px;scroll-snap-align:start;padding:18px}
+ body[data-base="./"] .m-explore-links strong{font-size:16px}
+ body[data-base="./"] .m-audio{padding:62px 0 40px}
+ body[data-base="./"] .m-figures{padding:62px 0 68px}
+ body[data-base="./"] .m-mission{padding:58px 0}
+}
+@media(max-width:420px){
+ body[data-base="./"] .m-culture-grid article{flex-basis:78%}
+ body[data-base="./"] .m-explore-copy{padding:26px 20px 30px}
+ body[data-base="./"] .m-explore-copy h2{font-size:30px}
+ body[data-base="./"] .m-explore-links a{flex-basis:82%}
+}
