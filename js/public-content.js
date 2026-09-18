@@ -55,7 +55,7 @@
     const FALLBACK = "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85";
     let db = null;
     let dbPromise = null;
-    let publicData = { articles: [], videos: [], playlists: [], topics: [], categories: [] };
+    let publicData = { articles: [], videos: [], playlists: [], podcasts: [], topics: [], categories: [] };
     function esc(value){return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
     function youtubeId(value){if(!value)return "";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const url=new window.URL(text),host=url.hostname.replace(/^www\./,"").toLowerCase();if(host==="youtu.be")return url.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com")return url.searchParams.get("v")||(url.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||"";}catch(error){}return "";}
     function videoImage(video){const id=video.youtube_video_id||youtubeId(video.youtube_url);return video.thumbnail_url||(id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:FALLBACK);}
@@ -84,6 +84,51 @@
     }
     async function loadTable(name,select,order){let query=(await client()).from(name).select(select);if(order)query=query.order(order,{ascending:true,nullsFirst:false});const result=await query;if(result.error)throw result.error;return result.data||[];}
     function normalizePlaylist(row,categoryMap,index){const category=categoryMap[row.category_id];return{id:row.id||String(index+1),title:row.title||"Playlist Mandala",slug:row.slug||"",youtube_playlist_id:row.youtube_playlist_id||"",description:row.description||"",image:row.cover_image_url||category?.image_url||FALLBACK,category:category?.name||"Mandala",category_id:row.category_id||null,videoCount:0,status:row.status||"",featured:row.featured===true,sort_order:Number.isFinite(Number(row.sort_order))?Number(row.sort_order):9999,published_at:row.published_at||null,created_at:row.created_at||null};}
+
+    function normalizeAudioUrl(value){
+        if(!value)return "";
+        const text=String(value).trim();
+        if(/^https?:\\/\\//i.test(text))return text;
+        const clean=text.replace(/^\\/+/,"");
+        if(clean.startsWith("podcasts/")) return "https://roeckoabffhyctfkvbhw.supabase.co/storage/v1/object/public/mandala-media/"+clean;
+        return clean;
+    }
+    function formatAudioTime(seconds){
+        const n=Math.max(0,Math.floor(Number(seconds)||0)),m=Math.floor(n/60),s=n%60;
+        return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+    }
+    function renderPodcasts(items){
+        const rail=document.getElementById("podcastRail");
+        if(!rail)return;
+        if(!items.length){rail.innerHTML='<div class="m-audio-empty">Belum ada audio yang dipublikasikan.</div>';return;}
+        rail.innerHTML=items.slice(0,8).map(item=>{
+            const image=item.cover_image_url||FALLBACK;
+            const url=normalizeAudioUrl(item.audio_url);
+            return '<button class="m-podcast-card" type="button" data-audio-url="'+esc(url)+'" data-audio-title="'+esc(item.title||"Mandala Audio")+'" data-audio-duration="'+esc(formatAudioTime(item.audio_duration))+'"><div class="m-podcast-thumb"><img src="'+esc(image)+'" alt="'+esc(item.title||"Mandala Audio")+'" loading="lazy"><span>▶</span></div><div><small>MANDALA AUDIO</small><strong>'+esc(item.title||"Tanpa judul")+'</strong><em>'+esc(formatAudioTime(item.audio_duration))+'</em></div></button>';
+        }).join("");
+        rail.querySelectorAll("[data-audio-url]").forEach(card=>card.addEventListener("click",()=>selectPodcast(card)));
+    }
+    function selectPodcast(card){
+        const audio=document.getElementById("mandalaAudio"),play=document.getElementById("audioPlay"),title=document.getElementById("audioTitle"),status=document.getElementById("audioStatus");
+        if(!audio)return;
+        const url=card.dataset.audioUrl||"";
+        if(!url){if(status)status.textContent="File audio belum tersedia.";return;}
+        audio.src=url; audio.load();
+        if(title)title.textContent=card.dataset.audioTitle||"Mandala Audio";
+        if(status)status.textContent="Memuat audio…";
+        audio.play().then(()=>{if(play)play.textContent="Ⅱ";if(status)status.textContent="Sedang diputar";}).catch(()=>{if(status)status.textContent="File audio belum dapat diputar.";});
+    }
+    function initAudioPlayer(){
+        const audio=document.getElementById("mandalaAudio"),play=document.getElementById("audioPlay"),progress=document.getElementById("audioProgress"),time=document.getElementById("audioTime"),status=document.getElementById("audioStatus");
+        if(!audio||!play)return;
+        play.addEventListener("click",()=>{if(!audio.src){if(status)status.textContent="Pilih cerita audio terlebih dahulu.";return;} if(audio.paused)audio.play();else audio.pause();});
+        audio.addEventListener("play",()=>{play.textContent="Ⅱ";if(status)status.textContent="Sedang diputar";});
+        audio.addEventListener("pause",()=>{play.textContent="▶";if(audio.currentTime>0&&status)status.textContent="Dijeda";});
+        audio.addEventListener("loadedmetadata",()=>{if(time)time.textContent=formatAudioTime(audio.currentTime);});
+        audio.addEventListener("timeupdate",()=>{if(time)time.textContent=formatAudioTime(audio.currentTime);if(progress&&audio.duration)progress.style.width=((audio.currentTime/audio.duration)*100)+"%";});
+        audio.addEventListener("ended",()=>{play.textContent="▶";if(status)status.textContent="Selesai";if(progress)progress.style.width="0%";});
+        audio.addEventListener("error",()=>{play.textContent="▶";if(status)status.textContent="File audio belum tersedia di Storage.";});
+    }
 
     function articleDate(article){return article.published_at||article.created_at||null;}
     function articleUrl(article){return `pages/artikel-detail.html${article.slug?`?slug=${encodeURIComponent(article.slug)}`:""}`;}
@@ -119,14 +164,14 @@
     }
 
     async function loadHomeData(){
-        const[articles,videos,playlists,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
+        const[articles,videos,playlists,podcasts,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("podcasts","id,title,slug,description,cover_image_url,youtube_url,youtube_video_id,category_id,status,published_at,created_at,featured,content_type,audio_url,audio_duration","published_at"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
         const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};
         activeCategories.forEach(category=>{categoryMap[category.id]=category;});
-        const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published").map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
-        publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,topics:activeCategories,categories:activeCategories};
+        const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published"),publicPodcasts=podcasts.filter(item=>item.status==="published"&&item.content_type==="audio").sort((a,b)=>new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0)).map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
+        publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,podcasts:publicPodcasts,topics:activeCategories,categories:activeCategories};
         window.DATA=publicData;window.MandalaPublicData=publicData;
         renderFeaturedArticles(publicData.articles,categoryMap);
-        renderArticles(publicData.articles,categoryMap);renderEditorialDepth(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);
+        renderArticles(publicData.articles,categoryMap);renderEditorialDepth(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);renderPodcasts(publicData.podcasts);initAudioPlayer();
         return publicData;
     }
     function getPublicData(){return publicData;}
