@@ -88,8 +88,8 @@
     function normalizeAudioUrl(value){
         if(!value)return "";
         const text=String(value).trim();
-        if(/^https?:\\/\\//i.test(text))return text;
-        const clean=text.replace(/^\\/+/,"");
+        if(text.startsWith("http://")||text.startsWith("https://"))return text;
+        const clean=text.replace(/^\/+/, "");
         if(clean.startsWith("podcasts/")) return "https://roeckoabffhyctfkvbhw.supabase.co/storage/v1/object/public/mandala-media/"+clean;
         return clean;
     }
