@@ -126,11 +126,29 @@
         publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,topics:activeCategories,categories:activeCategories};
         window.DATA=publicData;window.MandalaPublicData=publicData;
         renderFeaturedArticles(publicData.articles,categoryMap);
-        renderArticles(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);
+        renderArticles(publicData.articles,categoryMap);renderEditorialDepth(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);
         return publicData;
     }
     function getPublicData(){return publicData;}
     function renderArticles(items,categoryMap){const element=document.getElementById("articlesContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(article=>{const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=articleUrl(article);return`<article class="card"><a href="${detailUrl}"><div class="thumb"><img src="${esc(image)}" alt="${esc(article.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">${esc(dateText(article.published_at||article.created_at))}</div><h3>${esc(article.title||"Artikel")}</h3><p>${esc(article.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");}
+    function renderEditorialDepth(items,categoryMap){
+        const targets=[
+            document.getElementById("dharmaContainer"),
+            document.getElementById("exploreContainer")
+        ];
+        if(!items.length)return;
+        const sorted=[...items].sort((a,b)=>new Date(articleDate(b)||0)-new Date(articleDate(a)||0));
+        const cards=sorted.slice(0,6).map((article,index)=>{
+            const image=article.cover_image_url||FALLBACK;
+            const category=categoryMap[article.category_id]?.name||"MANDALA";
+            return {article,image,category,index};
+        });
+        const culture=document.getElementById("dharmaContainer");
+        if(culture && cards.length){
+            culture.innerHTML=cards.slice(0,3).map(({article,image,category})=>`<article><a href="${articleUrl(article)}"><div class="m-culture-img"><img src="${esc(image)}" alt="${esc(article.title||"Artikel")}" loading="lazy"></div><small>${esc(category)}</small><h3>${esc(article.title||"Cerita Mandala")}</h3></a></article>`).join("");
+        }
+    }
+
     function renderVideos(items,categoryMap){const element=document.getElementById("videosContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(video=>{const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||"VIDEO";return`<article class="card video"><a href="#" data-public-video="${esc(id)}" data-public-title="${esc(video.title)}"><div class="thumb"><img src="${esc(videoImage({...video,youtube_video_id:id}))}" alt="${esc(video.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">VIDEO · ${esc(dateText(video.published_at||video.created_at))}</div><h3>${esc(video.title||"Video Mandala")}</h3><p>Putar video →</p></a></article>`;}).join("");element.querySelectorAll("[data-public-video]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle);}));}
     function renderTopics(items){const element=document.getElementById("topicsContainer");if(!element||!items.length)return;const fallbacks=["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=90","https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=90","https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=90","https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=90"];element.innerHTML=items.slice(0,4).map((item,index)=>'<a class="m-figure '+(index===0?'hero-figure':'')+'" href="topics/'+encodeURIComponent(item.slug||'')+'.html"><img src="'+esc(item.image_url||fallbacks[index%fallbacks.length])+'" alt="'+esc(item.name||"Tokoh Nusantara")+'" loading="lazy"><div><small>'+esc(item.name||"TOKOH NUSANTARA")+'</small><h3>'+esc(item.description||"Menjaga pengetahuan, tradisi dan kehidupan Nusantara.")+'</h3></div></a>').join("")}
     function renderPlaylistState(items){const track=document.getElementById("playlistTrack"),dots=document.getElementById("playlistDots");if(!track)return;if(items.length)return;track.innerHTML=`<div class="playlist-empty-state">Playlist belum tersedia.</div>`;if(dots)dots.innerHTML="";}
