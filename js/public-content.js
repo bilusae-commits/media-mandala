@@ -90,7 +90,7 @@
         const text=String(value).trim();
         if(text.startsWith("http://")||text.startsWith("https://"))return text;
         const clean=text.replace(/^\/+/, "");
-        if(clean.startsWith("podcasts/")) return "https://roeckoabffhyctfkvbhw.supabase.co/storage/v1/object/public/mandala-media/"+clean;
+        if(clean.startsWith("podcasts/")) return "https://roeckoabffhyctfkvbhw.supabase.co/functions/v1/podcast-audio?key="+encodeURIComponent(clean);
         return clean;
     }
     function formatAudioTime(seconds){
