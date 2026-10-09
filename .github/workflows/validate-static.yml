@@ -29,3 +29,5 @@ jobs:
             admin/js/media.js; do
             node --check "$file"
           done
+      - name: Audit local page and asset references
+        run: node scripts/check-static-references.mjs
