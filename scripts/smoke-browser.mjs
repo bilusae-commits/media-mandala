@@ -154,6 +154,10 @@ try {
             catch { return { ok: false, width: image.naturalWidth }; }
           }, imageUrl);
           if (!imageProbe.ok || imageProbe.width < 1) failures.push("CMS hero main image failed to load: " + imageUrl);
+          const proxyOrigin = new URL(imageUrl).origin;
+          const invalidImageUrl = proxyOrigin + "/functions/v1/homepage-cover-image?url=" + encodeURIComponent("https://f005.backblazeb2.com/file/OtherBucket/homepage/probe.webp");
+          const rejectedStatus = await page.evaluate(async target => (await fetch(target)).status, invalidImageUrl).catch(() => 0);
+          if (rejectedStatus !== 403) failures.push("Homepage image proxy did not reject an unapproved storage bucket (status " + rejectedStatus + ")");
         }
       }
       if (Math.abs(Number(heroState.opacity) - 0.18) > 0.01) failures.push("CMS hero overlay opacity was not applied");
