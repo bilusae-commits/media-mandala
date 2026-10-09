@@ -161,6 +161,19 @@ try {
         }
       }
       if (Math.abs(Number(heroState.opacity) - 0.18) > 0.01) failures.push("CMS hero overlay opacity was not applied");
+      await page.evaluate(() => window.scrollTo(0, 1200));
+      await page.waitForTimeout(120);
+      const sticky = await page.locator("#siteHeader").evaluate(el => ({ position: getComputedStyle(el).position, top: el.getBoundingClientRect().top }));
+      if (!["sticky", "fixed"].includes(sticky.position) || sticky.top > 2) failures.push("Homepage navigation is not sticky at the top while scrolling");
+      await page.setViewportSize({ width: 390, height: 844 });
+      const homeMenu = page.locator("#worldMenu");
+      const homeDrawer = page.locator("#worldDrawer");
+      await homeMenu.click();
+      if (await homeMenu.getAttribute("aria-expanded") !== "true" || await homeDrawer.getAttribute("aria-hidden") !== "false" || !(await homeDrawer.evaluate(el => el.classList.contains("open")))) failures.push("Homepage mobile navigation did not open accessibly");
+      await page.keyboard.press("Escape");
+      if (await homeMenu.getAttribute("aria-expanded") !== "false" || await homeDrawer.getAttribute("aria-hidden") !== "true") failures.push("Homepage mobile navigation did not close on Escape");
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await page.evaluate(() => window.scrollTo(0, 0));
     }
     if (route === "pages/artikel.html") {
       await page.waitForTimeout(1200);
