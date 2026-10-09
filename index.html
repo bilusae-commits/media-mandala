@@ -1,153 +1,135 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Mandala Channel — ruang digital untuk cerita Hindu, dharma, tokoh, tradisi dan Nusantara.">
-<title>Mandala Channel — Living Archive</title>
-<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/home.css">
-<link rel="stylesheet" href="css/index-fluid-fix.css">
-<link rel="stylesheet" href="css/mandala-world.css?v=20260923.1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#14231e">
+  <meta name="description" content="Mandala Channel — cerita, gagasan, tokoh, tradisi dan kehidupan Hindu Nusantara dalam satu ruang editorial.">
+  <meta property="og:title" content="Mandala Channel — Cerita yang Menghubungkan Nusantara">
+  <meta property="og:description" content="Ruang editorial untuk membaca, menonton, mendengar dan menjelajahi cerita Nusantara.">
+  <title>Mandala Channel — Cerita yang Menghubungkan Nusantara</title>
+  <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+  <link rel="preconnect" href="https://roeckoabffhyctfkvbhw.supabase.co">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/mandala-world.css">
+  <link rel="stylesheet" href="css/pro-experience.css?v=2">
 </head>
 <body data-base="./">
-<div class="world-loader" id="worldLoader"><span class="loader-mark">✺</span><span>MANDALA</span></div>
+  <div class="world-loader" id="worldLoader" aria-label="Memuat Mandala"><span class="loader-mark">✺</span><span>MANDALA CHANNEL</span></div>
 
-<header id="siteHeader" class="world-header">
-  <a class="world-brand" href="index.html" aria-label="Mandala Channel">
-    <span class="brand-symbol">✺</span><span>MANDALA</span>
-  </a>
-  <div class="world-status"><i></i><span>HINDU · NUSANTARA · DHARMA</span></div>
-  <button class="world-menu" id="worldMenu" type="button" aria-label="Buka navigasi"><span></span><span></span></button>
-</header>
+  <header id="siteHeader" class="world-header">
+    <a class="world-brand" href="index.html" aria-label="Mandala Channel — Beranda"><span class="brand-symbol">✺</span><span class="brand-word">MANDALA</span></a>
+    <nav class="primary-nav" aria-label="Navigasi utama">
+      <a href="#stories">Artikel</a><a href="#tv">Video</a><a href="#audio">Podcast</a><a href="#figures">Rubrik</a><a href="pages/tentang-kami.html">Tentang</a>
+    </nav>
+    <div class="world-status"><i></i><span>MEDIA DHARMA &amp; NUSANTARA</span></div>
+    <button class="world-menu" id="worldMenu" type="button" aria-label="Buka navigasi" aria-expanded="false" aria-controls="worldDrawer"><span></span><span></span></button>
+  </header>
 
-<div class="world-drawer" id="worldDrawer" aria-hidden="true">
-  <div class="drawer-top"><span>NAVIGATE THE ARCHIVE</span><button id="worldClose" type="button">CLOSE ×</button></div>
-  <nav>
-    <a href="#origin"><b>00</b><span>Origin</span><em>Masuk</em></a>
-    <a href="#tv"><b>01</b><span>Mandala TV</span><em>Gerak</em></a>
-    <a href="#nusantara"><b>02</b><span>Nusantara</span><em>Jelajah</em></a>
-    <a href="#stories"><b>03</b><span>Stories</span><em>Cerita</em></a>
-    <a href="#audio"><b>04</b><span>Audio</span><em>Dengar</em></a>
-    <a href="#figures"><b>05</b><span>Tokoh</span><em>Manusia</em></a>
-    <a href="#mission"><b>06</b><span>Mandala</span><em>Makna</em></a>
-  </nav>
-  <div class="drawer-foot">MEDIA DHARMA & NUSANTARA · 2026</div>
-</div>
+  <div class="world-drawer" id="worldDrawer" aria-hidden="true">
+    <div class="drawer-top"><span>NAVIGASI MANDALA</span><button id="worldClose" type="button">TUTUP ×</button></div>
+    <nav aria-label="Navigasi mobile">
+      <a href="#stories"><b>01</b><span>Artikel</span><em>Baca</em></a>
+      <a href="#tv"><b>02</b><span>Video</span><em>Tonton</em></a>
+      <a href="#audio"><b>03</b><span>Podcast</span><em>Dengar</em></a>
+      <a href="#figures"><b>04</b><span>Rubrik</span><em>Jelajah</em></a>
+      <a href="pages/tentang-kami.html"><b>05</b><span>Tentang</span><em>Kenali</em></a>
+    </nav>
+    <div class="drawer-foot">CERITA · PENGETAHUAN · NUSANTARA</div>
+  </div>
 
-<main id="worldMain">
-  <section class="world-origin" id="origin">
-    <canvas id="mandalaCanvas" aria-hidden="true"></canvas>
-    <div class="origin-noise" aria-hidden="true"></div>
-    <div class="origin-copy">
-      <div class="origin-kicker"><span>MANDALA CHANNEL</span><i></i><span>EST. 2023 · NUSANTARA</span></div>
-      <h1><span>Yang</span><span>hidup</span><span>tak</span><span>pernah</span><span>diam.</span></h1>
-      <p>Ruang digital yang mengumpulkan suara, manusia, perjalanan dan pengetahuan Hindu Nusantara.</p>
-      <a class="enter-world" href="#tv"><span>MASUK KE CERITA</span><i>↓</i></a>
-    </div>
-    <div class="origin-edge left">0° — 360°</div>
-    <div class="origin-edge right">SCROLL / TOUCH TO EXPLORE</div>
-    <div class="origin-bottom"><span>THE LIVING ARCHIVE</span><span id="worldClock">--:--</span><span>01 / 07</span></div>
-  </section>
-
-  <section class="world-scene dark-scene" id="tv">
-    <div class="scene-index">01</div>
-    <div class="scene-intro">
-      <span class="scene-kicker">MOVING IMAGE</span>
-      <h2>Kita tidak<br><i>menonton.</i><br>Kita masuk.</h2>
-      <p>Mandala TV membawa cerita keluar dari bingkai. Geser. Pilih. Biarkan satu gambar membuka gambar berikutnya.</p>
-      <a href="pages/video.html">OPEN VIDEO ARCHIVE ↗</a>
-    </div>
-    <div class="film-wall" id="videosContainer">
-      <article class="film-placeholder"><div></div><span>MEMUAT ARSIP</span></article>
-    </div>
-    <div class="scene-marker">MANDALA / MOVING IMAGE</div>
-  </section>
-
-  <section class="world-scene earth-scene" id="nusantara">
-    <div class="scene-index">02</div>
-    <div class="earth-map" aria-hidden="true">
-      <div class="map-ring ring-a"></div><div class="map-ring ring-b"></div><div class="map-ring ring-c"></div>
-      <div class="island island-a"></div><div class="island island-b"></div><div class="island island-c"></div>
-      <span class="map-dot dot-1"></span><span class="map-dot dot-2"></span><span class="map-dot dot-3"></span>
-      <span class="map-label ml-1">JAVA</span><span class="map-label ml-2">BALI</span><span class="map-label ml-3">NUSANTARA</span>
-    </div>
-    <div class="earth-copy">
-      <span class="scene-kicker">A LIVING GEOGRAPHY</span>
-      <h2>Nusantara<br><em>bukan latar.</em><br>Ia adalah cerita.</h2>
-      <p>Tempat-tempat yang menyimpan jejak, upacara, ingatan dan kehidupan. Jelajah tanpa peta yang kaku.</p>
-      <a href="topics/jelajah-nusantara.html">JELAJAH NUSANTARA ↗</a>
-    </div>
-    <div class="geo-ticker"><span>JAWA</span><span>BALI</span><span>LOMBOK</span><span>KALIMANTAN</span><span>SUMATERA</span><span>NUSANTARA</span></div>
-  </section>
-
-  <section class="world-stories" id="stories">
-    <div class="stories-top">
-      <div><span class="scene-kicker">RECENT SIGNALS</span><h2>Cerita yang<br><em>baru menyala.</em></h2></div>
-      <a href="pages/artikel.html">BUKA SEMUA CERITA ↗</a>
-    </div>
-    <div class="story-field" id="articlesContainer">
-      <article class="story-placeholder"><span>MEMBACA ARSIP...</span></article>
-    </div>
-    <div class="story-caption"><span>MANDALA / EDITORIAL ARCHIVE</span><span>DRAG · SCROLL · READ</span></div>
-  </section>
-
-  <section class="world-audio dark-scene" id="audio">
-    <div class="scene-index">04</div>
-    <div class="audio-orbit" aria-hidden="true"><span></span><span></span><span></span><b>◉</b></div>
-    <div class="audio-copy">
-      <span class="scene-kicker">LISTENING ROOM</span>
-      <h2>Suara<br>punya<br><em>ruang.</em></h2>
-      <p>Podcast, percakapan dan kisah yang tidak harus dilihat untuk bisa dirasakan.</p>
-      <a href="pages/playlist.html">MASUK KE AUDIO ↗</a>
-    </div>
-    <div class="audio-archive">
-      <div class="audio-archive-head"><span>MANDALA AUDIO</span><span>SELECT A SIGNAL</span></div>
-      <div class="m-podcast-rail" id="podcastRail"></div>
-      <div class="world-player" id="mandalaPlayer">
-        <button id="audioPlay" type="button" aria-label="Putar">▶</button>
-        <div class="player-main"><strong id="audioTitle">Mandala Audio</strong><span id="audioStatus">Pilih suara untuk memulai</span></div>
-        <div class="player-track"><i id="audioProgress"></i></div>
-        <span id="audioTime">00:00</span>
-        <audio id="mandalaAudio" preload="metadata"></audio>
+  <main id="worldMain">
+    <section class="world-origin home-hero" id="origin">
+      <div class="hero-grid">
+        <div class="origin-copy">
+          <div class="origin-kicker"><span>MANDALA CHANNEL</span><i></i><span>EDITORIAL · NUSANTARA</span></div>
+          <h1><span>Yang</span><span>hidup</span><span>tak</span><span>pernah</span><span>diam.</span></h1>
+          <p>Ruang editorial untuk membaca gagasan, mengenal manusia, merawat tradisi, dan mengikuti cerita Hindu Nusantara dengan lebih dekat.</p>
+          <div class="origin-actions">
+            <a class="enter-world" id="heroPrimary" href="pages/artikel.html"><span>JELAJAHI CERITA</span><i>↗</i></a>
+            <a class="enter-world secondary-enter" id="heroSecondary" href="pages/playlist.html"><span>DENGARKAN MANDALA</span><i>↗</i></a>
+          </div>
+          <div class="hero-proof"><span class="proof-mark">✳</span><span>ARSIP YANG TERUS HIDUP</span><span class="proof-divider"></span><span>HINDU · NUSANTARA · DHARMA</span></div>
+        </div>
+        <div class="hero-feature" id="heroStory" aria-live="polite">
+          <div class="hero-story-placeholder"><span class="placeholder-kicker">CERITA PILIHAN</span><strong>Membuka lembar cerita terbaru…</strong></div>
+        </div>
       </div>
-    </div>
-  </section>
+      <div class="hero-bottom"><span>MENDEKAT PADA CERITA</span><span>SCROLL UNTUK MENJELAJAHI <b>↓</b></span></div>
+    </section>
 
-  <section class="world-figures" id="figures">
-    <div class="scene-index">05</div>
-    <div class="figure-head"><span class="scene-kicker">PEOPLE / KNOWLEDGE</span><h2>Di balik<br>sebuah tradisi,<br>selalu ada <em>manusia.</em></h2></div>
-    <div class="portrait-constellation" id="topicsContainer"></div>
-    <div class="figure-note">TOKOH NUSANTARA / KNOWLEDGE KEEPERS / LIVING MEMORY</div>
-    <a class="figure-more" href="topics/tokoh-hindu.html">TEMUI MEREKA ↗</a>
-  </section>
+    <section class="editorial-strip" aria-label="Fokus redaksi">
+      <span class="strip-label">RUANG REDAKSI</span><span>TRADISI YANG TERUS BERGERAK</span><i></i><span>SUARA DARI NUSANTARA</span><i></i><span>PENGETAHUAN UNTUK DITERUSKAN</span>
+    </section>
 
-  <section class="world-mission" id="mission">
-    <div class="mission-symbol">✺</div>
-    <div class="mission-copy">
-      <span class="scene-kicker">WHY MANDALA EXISTS</span>
-      <h2>Karena yang<br>tidak dicatat,<br>bisa <em>hilang.</em></h2>
-      <p>Mandala Channel mendokumentasikan pengetahuan, tokoh, tradisi, perjalanan dan percakapan tentang kehidupan Hindu di Nusantara — bukan sebagai museum yang diam, tetapi sebagai arsip yang terus bergerak.</p>
-      <a href="pages/tentang-kami.html">KENALI MANDALA ↗</a>
-    </div>
-    <div class="mission-end"><span>KEEP THE STORY ALIVE</span><strong>✺</strong></div>
-  </section>
-</main>
+    <section class="world-scene tv-section" id="tv">
+      <div class="section-heading">
+        <div><span class="scene-kicker">01 / MOVING IMAGE</span><h2>Cerita yang<br><em>terlihat dekat.</em></h2><p>Dokumenter, percakapan dan rekaman kehidupan yang membawa kita lebih dekat pada manusia dan tempatnya.</p></div>
+        <a class="section-link" href="pages/video.html">JELAJAHI MANDALA TV <span>↗</span></a>
+      </div>
+      <div class="film-wall" id="videosContainer">
+        <article class="film-placeholder"><div></div><span>MEMUAT VIDEO PILIHAN</span></article>
+      </div>
+    </section>
 
-<footer class="world-footer">
-  <div class="footer-symbol">✺</div>
-  <div><strong>MANDALA CHANNEL</strong><p>MEDIA DHARMA & NUSANTARA</p></div>
-  <nav><a href="pages/artikel.html">Stories</a><a href="pages/video.html">Video</a><a href="pages/playlist.html">Audio</a><a href="pages/kontak.html">Kontak</a></nav>
-  <span>© 2026</span>
-</footer>
+    <section class="world-stories" id="stories">
+      <div class="section-heading stories-heading">
+        <div><span class="scene-kicker">02 / EDITORIAL</span><h2>Cerita yang<br><em>layak disimak.</em></h2><p>Artikel dan sudut pandang pilihan untuk memahami konteks, bukan hanya permukaan.</p></div>
+        <a class="section-link" href="pages/artikel.html">SEMUA ARTIKEL <span>↗</span></a>
+      </div>
+      <div class="story-field" id="articlesContainer">
+        <article class="story-placeholder"><span>MEMBACA ARSIP REDAKSI…</span></article>
+      </div>
+      <div class="section-bottomline"><span>MANDALA / EDITORIAL ARCHIVE</span><span>MEMBACA DENGAN LEBIH DALAM</span></div>
+    </section>
 
-<div class="world-cursor" id="worldCursor"><span></span></div>
-<div class="world-progress" id="worldProgress"><i></i></div>
+    <section class="world-figures" id="figures">
+      <div class="section-heading">
+        <div><span class="scene-kicker">03 / RUBRIK &amp; TOPIK</span><h2>Temukan cerita<br>dari <em>berbagai sudut.</em></h2><p>Jelajahi tema, gagasan, tradisi dan kehidupan yang membentuk Hindu serta Nusantara.</p></div>
+        <a class="section-link" href="pages/artikel.html">BUKA ARSIP <span>↗</span></a>
+      </div>
+      <div class="portrait-constellation" id="topicsContainer"></div>
+      <div class="section-bottomline"><span>PILIH RUBRIK</span><span>IKUTI RASA INGIN TAHU</span></div>
+    </section>
 
-<script src="js/config.js"></script>
-<script src="js/public-content.js?v=20260918.6"></script>
-<script src="js/homepage-settings.js?v=20260918.3"></script>
-<script src="js/mandala-world.js?v=20260923.1"></script>
+    <section class="world-audio" id="audio">
+      <div class="audio-intro">
+        <span class="scene-kicker">04 / LISTENING ROOM</span>
+        <h2>Untuk cerita<br>yang ingin <em>didengar.</em></h2>
+        <p>Podcast, percakapan dan kisah yang memberi ruang bagi suara, jeda, dan pemikiran.</p>
+        <a class="section-link" href="pages/podcast.html">SEMUA EPISODE <span>↗</span></a>
+      </div>
+      <div class="audio-archive">
+        <div class="audio-archive-head"><span>MANDALA AUDIO</span><span>PILIH EPISODE UNTUK MEMUTAR</span></div>
+        <div class="m-podcast-rail" id="podcastRail"><div class="audio-empty">Memuat koleksi audio…</div></div>
+        <div class="world-player" id="mandalaPlayer">
+          <button id="audioPlay" type="button" aria-label="Putar audio">▶</button>
+          <div class="player-main"><strong id="audioTitle">Mandala Audio</strong><span id="audioStatus">Pilih episode untuk mulai mendengarkan</span></div>
+          <div class="player-track" aria-hidden="true"><i id="audioProgress"></i></div>
+          <span id="audioTime">00:00</span>
+          <audio id="mandalaAudio" preload="metadata"></audio>
+        </div>
+      </div>
+    </section>
+
+    <section class="world-mission" id="mission">
+      <div class="mission-symbol" aria-hidden="true">✺</div>
+      <div class="mission-copy"><span class="scene-kicker">WHY MANDALA EXISTS</span><h2>Yang tidak<br>dicatat, bisa <em>hilang.</em></h2><p>Mandala Channel mendokumentasikan pengetahuan, tokoh, tradisi, perjalanan dan percakapan tentang kehidupan Hindu di Nusantara — sebagai arsip yang terus tumbuh, dibaca, didengar, dan diteruskan.</p><a href="pages/tentang-kami.html" class="section-link">KENALI MANDALA <span>↗</span></a></div>
+      <div class="mission-end"><span>KEEP THE STORY ALIVE</span><strong>✳</strong></div>
+    </section>
+  </main>
+
+  <footer class="world-footer">
+    <a class="footer-brand" href="index.html"><span>✺</span><strong>MANDALA CHANNEL</strong><small>MEDIA DHARMA &amp; NUSANTARA</small></a>
+    <div class="footer-description">Ruang untuk mendekat pada cerita, memahami manusia, dan meneruskan pengetahuan Nusantara.</div>
+    <nav aria-label="Navigasi footer"><a href="pages/artikel.html">Artikel</a><a href="pages/video.html">Video</a><a href="pages/podcast.html">Podcast</a><a href="pages/playlist.html">Playlist</a><a href="pages/kontak.html">Kontak</a></nav>
+    <div class="footer-legal"><span>© 2026 MANDALA CHANNEL</span><span>DIRAWAT DENGAN RASA INGIN TAHU.</span></div>
+  </footer>
+  <div class="world-progress" id="worldProgress" aria-hidden="true"><i></i></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/public-content.js?v=2"></script>
+  <script src="js/homepage-settings.js?v=2"></script>
+  <script src="js/mandala-world.js?v=2"></script>
 </body>
 </html>
