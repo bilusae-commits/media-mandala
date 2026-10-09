@@ -103,7 +103,7 @@
     function renderPodcasts(items){
         const rail=document.getElementById("podcastRail");
         if(!rail)return;
-        if(!items.length){rail.innerHTML='<div class="m-audio-empty">Belum ada audio yang dipublikasikan.</div>';return;}
+        if(!items.length){rail.innerHTML='<div class="audio-empty">Belum ada audio yang dipublikasikan.</div>';return;}
         rail.innerHTML=items.slice(0,8).map(item=>{
             const image=item.cover_image_url||FALLBACK;
             const url=normalizeAudioUrl(item.audio_url);
@@ -166,6 +166,18 @@
           </div>`;
     }
 
+    function renderHeroStory(items,categoryMap){
+        const element=document.getElementById("heroStory");
+        if(!element)return;
+        if(!items.length){element.innerHTML='<div class="hero-story-placeholder"><span class="placeholder-kicker">CERITA PILIHAN</span><strong>Arsip baru segera hadir di Mandala.</strong></div>';return;}
+        const sorted=[...items].sort((a,b)=>new Date(articleDate(b)||0)-new Date(articleDate(a)||0));
+        const article=sorted.find(item=>item.featured===true)||sorted[0];
+        const category=categoryMap[article.category_id]?.name||"ARTIKEL PILIHAN";
+        const image=article.cover_image_url||FALLBACK;
+        const date=dateText(articleDate(article));
+        element.innerHTML='<a class="hero-story-card" href="'+articleUrl(article)+'"><img src="'+esc(image)+'" alt="'+esc(article.title||"Cerita pilihan Mandala")+'" loading="eager" decoding="async"><div class="hero-story-copy"><div class="hero-story-label">'+esc(category)+' · PILIHAN REDAKSI</div><h2>'+esc(article.title||"Cerita pilihan Mandala")+'</h2><p>'+esc(article.excerpt||"Baca cerita lengkap dan temukan konteks di baliknya.")+'</p><div class="hero-story-meta"><span>'+esc(date||"MANDALA CHANNEL")+'</span><span>BACA CERITA ↗</span></div></div></a>';
+    }
+
     async function loadHomeData(){
         const[articles,videos,playlists,podcasts,categories]=await Promise.all([safeLoadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),safeLoadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),safeLoadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),safeLoadTable("podcasts","id,title,slug,description,cover_image_url,youtube_url,youtube_video_id,category_id,status,published_at,created_at,featured,content_type,audio_url,audio_duration","published_at"),safeLoadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
         const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};
@@ -173,6 +185,7 @@
         const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published"),publicPodcasts=podcasts.filter(item=>item.status==="published"&&item.content_type==="audio").map(item=>({...item,audio_url:item.audio_url||"",audio_duration:Number(item.audio_duration)||0,cover_image_url:item.cover_image_url||FALLBACK})).sort((a,b)=>Number(b.featured)-Number(a.featured)||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
         publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,podcasts:publicPodcasts,topics:activeCategories,categories:activeCategories};
         window.DATA=publicData;window.MandalaPublicData=publicData;
+        renderHeroStory(publicData.articles,categoryMap);
         renderFeaturedArticles(publicData.articles,categoryMap);
         renderArticles(publicData.articles,categoryMap);renderEditorialDepth(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);renderPodcasts(publicData.podcasts);initAudioPlayer();
         return publicData;
