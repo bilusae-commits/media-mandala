@@ -152,6 +152,10 @@ create table if not exists public.homepage_settings (
   updated_at timestamptz not null default now()
 );
 
+-- Ensure the CMS always has one default presentation row on a fresh install.
+insert into public.homepage_settings (id) select 1 where not exists (select 1 from public.homepage_settings);
+select setval(pg_get_serial_sequence('public.homepage_settings','id'), (select max(id) from public.homepage_settings), true);
+
 -- MEDIA
 create table if not exists public.media (
   id uuid primary key default gen_random_uuid(), file_name text not null, file_url text not null,
