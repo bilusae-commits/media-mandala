@@ -1,6 +1,6 @@
 import { chromium } from "playwright";
 
-const base = "http://127.0.0.1:4173/media-mandala/";
+const base = process.env.MANDALA_BASE_URL || "http://127.0.0.1:4173/media-mandala/";
 const routes = [
   "", "pages/artikel.html", "pages/artikel-detail.html", "pages/artikel-detail.html?slug=menjaga-tradisi-hindu-jawa-di-tengah-perubahan-zaman", "pages/video.html",
   "pages/podcast.html", "pages/playlist.html", "pages/playlist-detail.html", "pages/playlist-detail.html?slug=jelajah-nusantara",
