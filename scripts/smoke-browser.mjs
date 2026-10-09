@@ -128,6 +128,20 @@ try {
       if (!heroState.secondary.endsWith("/pages/podcast.html")) failures.push("CMS secondary hero CTA target is incorrect");
       if (!heroState.background || !heroState.mainImage.includes("url(")) failures.push("CMS hero background/main image settings did not load");
       if (heroState.overlayImage && !heroState.overlayImage.includes("url(")) failures.push("CMS hero overlay image URL is invalid");
+      if (heroState.mainImage.includes("url(")) {
+        const imageUrl = heroState.mainImage.match(/^url\\(["']?(.*?)["']?\\)$/)?.[1];
+        if (!imageUrl) {
+          failures.push("CMS hero main image CSS URL could not be parsed");
+        } else {
+          const imageProbe = await page.evaluate(async source => {
+            const image = new Image();
+            image.src = source;
+            try { await image.decode(); return { ok: true, width: image.naturalWidth }; }
+            catch { return { ok: false, width: image.naturalWidth }; }
+          }, imageUrl);
+          if (!imageProbe.ok || imageProbe.width < 1) failures.push("CMS hero main image failed to load: " + imageUrl);
+        }
+      }
       if (Math.abs(Number(heroState.opacity) - 0.18) > 0.01) failures.push("CMS hero overlay opacity was not applied");
     }
     if (route === "pages/artikel.html") {
