@@ -13,7 +13,7 @@
     if(auth.role!=='admin'&&auth.role!=='editor'){ window.location.replace(options.deniedPage||'dashboard.html'); return null; }
     /* Admin dan Editor memakai konteks aksi CMS yang sama.
        Role asli tetap disimpan pada actual_role untuk kebutuhan audit. */
-    return {...(auth.profile||{}),role:'admin',actual_role:auth.role,user:auth.user,authenticated:true};
+    return {...(auth.profile||{}),role:auth.role,actual_role:auth.role,user:auth.user,authenticated:true};
   }
   async function logout(){ await API.auth.signOut(); window.location.href='index.html'; }
   async function getVideos(){const db=await getDb();const {data,error}=await db.from('videos').select('id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at,updated_at,author_id').order('created_at',{ascending:false});if(error)throw error;return data||[];}
