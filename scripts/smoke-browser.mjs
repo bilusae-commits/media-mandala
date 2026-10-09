@@ -127,7 +127,7 @@ try {
       if (!(await page.locator("#videoCollection").count())) failures.push("Homepage video collection container is missing");
       if (!(await page.locator("#topicCollection").count())) failures.push("Homepage topic collection container is missing");
       if (!(await page.locator("#audioCollection").count())) failures.push("Homepage audio collection container is missing");
-      const headline = (await page.locator("#heroTitle").innerText().catch(() => "")).replace(/\\s+/g, " ").trim();
+      const headline = (await page.locator("#heroTitle").innerText().catch(() => "")).replace(/\s+/g, " ").trim();
       if (!headline) failures.push("Homepage headline has no visible text");
       await page.evaluate(() => window.scrollTo(0, 1200));
       await page.waitForTimeout(120);
