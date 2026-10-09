@@ -8,7 +8,12 @@ const routes = [
   "topics/candika-nusantara.html", "topics/candika.html", "topics/dharma-ajaran.html",
   "topics/dharmika.html", "topics/ekonomi-hindu.html", "topics/jelajah-nusantara.html",
   "topics/kabar-umat.html", "topics/spiritual.html", "topics/tokoh-hindu.html",
-  "topics/tokoh.html", "topics/tradisi-budaya.html", "admin/login.html"
+  "topics/tokoh.html", "topics/tradisi-budaya.html",
+  "admin/index.html", "admin/dashboard.html", "admin/articles.html", "admin/article-edit.html",
+  "admin/videos.html", "admin/video.html", "admin/video-edit.html", "admin/podcasts.html",
+  "admin/podcast-edit.html", "admin/playlists.html", "admin/playlist-edit.html",
+  "admin/categories.html", "admin/settings.html", "admin/settings-new.html", "admin/media.html",
+  "admin/change-password.html", "admin/login.html"
 ];
 const failures = [];
 const warnings = [];
@@ -43,7 +48,7 @@ try {
       width: document.documentElement.clientWidth,
       scrollWidth: document.documentElement.scrollWidth
     }));
-    results.push({ route: route || "/", status: response?.status() ?? 0, title: info.title, bodyLength: info.bodyLength });
+    results.push({ route: route || "/", finalPath: new URL(page.url()).pathname, status: response?.status() ?? 0, title: info.title, bodyLength: info.bodyLength });
     if (!response || response.status() >= 400) failures.push("Page failed: " + route + " status=" + (response?.status() ?? "no response"));
     if (!info.title || !info.bodyLength) failures.push("Empty page/title: " + route);
     if (route === "" || route === "pages/artikel.html" || route === "pages/video.html" || route === "topics/jelajah-nusantara.html") {
@@ -74,7 +79,7 @@ try {
     }
   }
   console.log("Browser smoke results:");
-  for (const result of results) console.log(`- ${result.route}: HTTP ${result.status}; title="${result.title}"; body chars=${result.bodyLength}`);
+  for (const result of results) console.log(`- ${result.route}: HTTP ${result.status}; final=${result.finalPath}; title="${result.title}"; body chars=${result.bodyLength}`);
   if (warnings.length) console.log("Browser console warnings (" + warnings.length + "):\n" + warnings.slice(0, 25).map(x => "- " + x).join("\n"));
   if (failures.length) {
     console.error("Browser smoke failures (" + failures.length + "):\n" + failures.map(x => "- " + x).join("\n"));
