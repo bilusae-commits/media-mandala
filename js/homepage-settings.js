@@ -16,12 +16,12 @@
       const description=document.querySelector(".origin-copy p");if(description&&String(s.hero_description||"").trim())description.textContent=s.hero_description;
       const primary=document.getElementById("heroPrimary"),secondary=document.getElementById("heroSecondary");
       if(primary){if(s.hero_primary_label)primary.querySelector("span").textContent=s.hero_primary_label;primary.href=safeHref(s.hero_primary_url,"#tv");}
-      if(secondary){if(s.hero_secondary_label)secondary.querySelector("span").textContent=s.hero_secondary_label;secondary.href=safeHref(s.hero_secondary_url,"pages/playlist.html");}
+      if(secondary){if(s.hero_secondary_label)secondary.querySelector("span").textContent=s.hero_secondary_label;secondary.href=safeHref(s.hero_secondary_url,"pages/podcast.html");}
       const hero=document.querySelector(".world-origin");
       if(hero){
-        if(s.hero_background_color&&/^#[0-9a-f]{3,8}$/i.test(s.hero_background_color.trim()))hero.style.setProperty("--hero-background-color",s.hero_background_color.trim());
-        if(s.hero_image_main)hero.style.setProperty("--hero-main-image",'url("'+String(s.hero_image_main).replace(/["\\]/g,"")+'")');
-        if(s.hero_overlay_image)hero.style.setProperty("--hero-overlay-image",'url("'+String(s.hero_overlay_image).replace(/["\\]/g,"")+'")');
+        if(s.hero_background_color&&/^#(?:[0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(s.hero_background_color.trim()))hero.style.setProperty("--hero-background-color",s.hero_background_color.trim());
+        const mainImage=safeHref(s.hero_image_main,"");if(mainImage)hero.style.setProperty("--hero-main-image",'url("'+mainImage.replace(/["\\]/g,"")+'")')
+        const overlayImage=safeHref(s.hero_overlay_image,"");if(overlayImage)hero.style.setProperty("--hero-overlay-image",'url("'+overlayImage.replace(/["\\]/g,"")+'")')
         const opacity=Math.min(1,Math.max(0,Number(s.hero_overlay_opacity??.18)));
         hero.style.setProperty("--hero-overlay-opacity",String(Number.isFinite(opacity)?opacity:.18));
       }
