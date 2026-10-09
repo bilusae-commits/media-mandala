@@ -72,11 +72,11 @@ try {
     }
     if (route === "pages/artikel-detail.html?slug=menjaga-tradisi-hindu-jawa-di-tengah-perubahan-zaman") {
       await page.waitForTimeout(1200);
-      if (!(await page.locator("body").innerText()).includes("Menjaga Tradisi Hindu Jawa")) failures.push("Published article detail did not render for a real slug");
+      if (!(await page.locator("body").innerText()).replace(/\\s+/g, " ").includes("Menjaga Tradisi Hindu Jawa")) failures.push("Published article detail did not render for a real slug");
     }
     if (route === "pages/playlist-detail.html?slug=jelajah-nusantara") {
       await page.waitForTimeout(800);
-      if (!(await page.locator("body").innerText()).toLocaleLowerCase("id-ID").includes("jelajah nusantara")) failures.push("Published playlist detail did not render for a real slug");
+      if (!(await page.locator("body").innerText()).replace(/\\s+/g, " ").toLocaleLowerCase("id-ID").includes("jelajah nusantara")) failures.push("Published playlist detail did not render for a real slug");
     }
     if (route === "pages/podcast.html") {
       await page.waitForTimeout(1200);
@@ -98,7 +98,7 @@ try {
       const heroState = await page.evaluate(() => {
         const section = document.querySelector(".world-origin");
         return {
-          title: document.querySelector(".origin-copy h1")?.innerText || "",
+          title: (document.querySelector(".origin-copy h1")?.innerText || "").replace(/\\s+/g, " ").trim(),
           primary: document.getElementById("heroPrimary")?.href || "",
           secondary: document.getElementById("heroSecondary")?.href || "",
           background: getComputedStyle(section).getPropertyValue("--hero-background-color").trim(),
@@ -115,7 +115,7 @@ try {
     }
     if (route === "pages/artikel.html") {
       await page.waitForTimeout(1200);
-      if (!(await page.locator("body").innerText()).includes("Menjaga Tradisi Hindu Jawa di Tengah Perubahan Zaman")) failures.push("Published article list did not render a known published story");
+      if (!(await page.locator("body").innerText()).replace(/\\s+/g, " ").includes("Menjaga Tradisi Hindu Jawa di Tengah Perubahan Zaman")) failures.push("Published article list did not render a known published story");
     }
     if (route === "topics/jelajah-nusantara.html") {
       await page.setViewportSize({ width: 390, height: 844 });
