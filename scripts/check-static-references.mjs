@@ -22,7 +22,7 @@ let checked = 0;
 function checkReference(file, reference, kind) {
   let ref = String(reference || "").trim();
   if (!ref || ref === "#" || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(ref) ||
-      ref.startsWith("#") || ref.startsWith("?") ||
+      ref.startsWith("#") || ref.startsWith("?") || ref.startsWith("var(") || ref === "none" ||
       ref.includes("${") || ref.includes("{{") || ref.includes("}}")) return;
   ref = ref.split("#", 1)[0].split("?", 1)[0].trim();
   if (!ref || ref.startsWith("data:") || ref.startsWith("blob:")) return;
@@ -49,8 +49,13 @@ for (const file of sourceFiles) {
       checkReference(file, match[1], match[0].split("=")[0].trim());
     }
   }
-  for (const match of content.matchAll(/url\(\s*["']?([^"'\)]+)["']?\s*\)/gi)) {
-    checkReference(file, match[1], "css-url");
+  const styleSources = file.endsWith(".css")
+    ? [content]
+    : [...content.matchAll(/<style\\b[^>]*>([\\s\\S]*?)<\\/style>/gi)].map(match => match[1]);
+  for (const styleSource of styleSources) {
+    for (const match of styleSource.matchAll(/url\\(\\s*["']?([^"'\\)]+)["']?\\s*\\)/gi)) {
+      checkReference(file, match[1], "css-url");
+    }
   }
 }
 console.log(`Static reference audit: ${checked} local references checked across ${sourceFiles.length} HTML/CSS files.`);
