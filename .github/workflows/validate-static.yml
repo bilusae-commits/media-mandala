@@ -21,6 +21,7 @@ jobs:
           set -eu
           for file in \
             js/public-content.js \
+            js/home-redesign.js \
             js/homepage-settings.js \
             js/mandala-world.js \
             js/supabase-client.js \
