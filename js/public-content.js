@@ -83,6 +83,7 @@
         try{return await dbPromise}catch(error){dbPromise=null;throw error;}
     }
     async function loadTable(name,select,order){let query=(await client()).from(name).select(select);if(order)query=query.order(order,{ascending:true,nullsFirst:false});const result=await query;if(result.error)throw result.error;return result.data||[];}
+    async function safeLoadTable(name,select,order){try{return await loadTable(name,select,order)}catch(error){console.error("Mandala: tabel "+name+" gagal dimuat.",error);return []}}
     function normalizePlaylist(row,categoryMap,index){const category=categoryMap[row.category_id];return{id:row.id||String(index+1),title:row.title||"Playlist Mandala",slug:row.slug||"",youtube_playlist_id:row.youtube_playlist_id||"",description:row.description||"",image:row.cover_image_url||category?.image_url||FALLBACK,category:category?.name||"Mandala",category_id:row.category_id||null,videoCount:0,status:row.status||"",featured:row.featured===true,sort_order:Number.isFinite(Number(row.sort_order))?Number(row.sort_order):9999,published_at:row.published_at||null,created_at:row.created_at||null};}
 
     function normalizeAudioUrl(value){
@@ -164,7 +165,7 @@
     }
 
     async function loadHomeData(){
-        const[articles,videos,playlists,podcasts,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("podcasts","id,title,slug,description,cover_image_url,youtube_url,youtube_video_id,category_id,status,published_at,created_at,featured,content_type,audio_url,audio_duration","published_at"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
+        const[articles,videos,playlists,podcasts,categories]=await Promise.all([safeLoadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),safeLoadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),safeLoadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),safeLoadTable("podcasts","id,title,slug,description,cover_image_url,youtube_url,youtube_video_id,category_id,status,published_at,created_at,featured,content_type,audio_url,audio_duration","published_at"),safeLoadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
         const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};
         activeCategories.forEach(category=>{categoryMap[category.id]=category;});
         const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published"),publicPodcasts=podcasts.filter(item=>item.status==="published"&&item.content_type==="audio").map(item=>({...item,audio_url:item.audio_url||"",audio_duration:Number(item.audio_duration)||0,cover_image_url:item.cover_image_url||FALLBACK})).sort((a,b)=>Number(b.featured)-Number(a.featured)||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
@@ -175,7 +176,15 @@
         return publicData;
     }
     function getPublicData(){return publicData;}
-    function renderArticles(items,categoryMap){const element=document.getElementById("articlesContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(article=>{const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=articleUrl(article);return`<article class="card"><a href="${detailUrl}"><div class="thumb"><img src="${esc(image)}" alt="${esc(article.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">${esc(dateText(article.published_at||article.created_at))}</div><h3>${esc(article.title||"Artikel")}</h3><p>${esc(article.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");}
+    function renderArticles(items,categoryMap){
+        const element=document.getElementById("articlesContainer");
+        if(!element)return;
+        if(!items.length){element.innerHTML='<div class="content-empty"><strong>Arsip sedang disiapkan</strong><span>Belum ada cerita yang diterbitkan. Kunjungi kembali untuk membaca karya terbaru Mandala.</span><a href="pages/artikel.html">Lihat arsip artikel ↗</a></div>';return;}
+        element.innerHTML=items.slice(0,4).map(article=>{
+            const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=articleUrl(article);
+            return '<article class="card"><a href="'+detailUrl+'"><div class="thumb"><img src="'+esc(image)+'" alt="'+esc(article.title||"Artikel")+'" loading="lazy"><span class="badge">'+esc(category)+'</span></div><div class="meta">'+esc(dateText(article.published_at||article.created_at))+'</div><h3>'+esc(article.title||"Artikel")+'</h3><p>'+esc(article.excerpt||"Baca selengkapnya →")+'</p></a></article>';
+        }).join("");
+    }
     function renderEditorialDepth(items,categoryMap){
         const targets=[
             document.getElementById("dharmaContainer"),
@@ -194,8 +203,28 @@
         }
     }
 
-    function renderVideos(items,categoryMap){const element=document.getElementById("videosContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(video=>{const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||"VIDEO";return`<article class="card video"><a href="#" data-public-video="${esc(id)}" data-public-title="${esc(video.title)}"><div class="thumb"><img src="${esc(videoImage({...video,youtube_video_id:id}))}" alt="${esc(video.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">VIDEO · ${esc(dateText(video.published_at||video.created_at))}</div><h3>${esc(video.title||"Video Mandala")}</h3><p>Putar video →</p></a></article>`;}).join("");element.querySelectorAll("[data-public-video]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle);}));}
-    function renderTopics(items){const element=document.getElementById("topicsContainer");if(!element||!items.length)return;const fallbacks=["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=90","https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=90","https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=90","https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=90"];element.innerHTML=items.slice(0,4).map((item,index)=>'<a class="m-figure '+(index===0?'hero-figure':'')+'" href="topics/'+encodeURIComponent(item.slug||'')+'.html"><img src="'+esc(item.image_url||fallbacks[index%fallbacks.length])+'" alt="'+esc(item.name||"Tokoh Nusantara")+'" loading="lazy"><div><small>'+esc(item.name||"TOKOH NUSANTARA")+'</small><h3>'+esc(item.description||"Menjaga pengetahuan, tradisi dan kehidupan Nusantara.")+'</h3></div></a>').join("")}
+    function renderVideos(items,categoryMap){
+        const element=document.getElementById("videosContainer");
+        if(!element)return;
+        if(!items.length){element.innerHTML='<div class="content-empty content-empty-dark"><strong>Episode berikutnya sedang disiapkan</strong><span>Arsip video akan muncul di sini setelah redaksi menerbitkannya.</span><a href="pages/video.html">Buka arsip video ↗</a></div>';return;}
+        element.innerHTML=items.slice(0,4).map(video=>{
+            const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||"VIDEO";
+            const href=id?"https://www.youtube.com/watch?v="+encodeURIComponent(id):"pages/video.html";
+            return '<article class="card video"><a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer" data-public-video="'+esc(id)+'" data-public-title="'+esc(video.title||"Video Mandala")+'"><div class="thumb"><img src="'+esc(videoImage({...video,youtube_video_id:id}))+'" alt="'+esc(video.title||"Video Mandala")+'" loading="lazy"><span class="badge">'+esc(category)+'</span></div><div class="meta">VIDEO · '+esc(dateText(video.published_at||video.created_at))+'</div><h3>'+esc(video.title||"Video Mandala")+'</h3><p>Putar video ↗</p></a></article>';
+        }).join("");
+        element.querySelectorAll("[data-public-video]").forEach(link=>link.addEventListener("click",event=>{
+            if(typeof window.openVideo==="function"){event.preventDefault();window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle);}
+        }));
+    }
+    function renderTopics(items){
+        const element=document.getElementById("topicsContainer");
+        if(!element)return;
+        if(!items.length){element.innerHTML='<div class="topic-empty">Rubrik editorial akan muncul di sini setelah kategori diaktifkan oleh redaksi.</div>';return;}
+        element.innerHTML=items.slice(0,8).map((item,index)=>{
+            const number=String(index+1).padStart(2,"0");
+            return '<a class="m-topic-card" href="pages/artikel.html?category='+encodeURIComponent(item.id||"")+'"><span class="topic-number">'+number+'</span><div><small>RUBRIK / '+esc(item.name||"MANDALA")+'</small><h3>'+esc(item.name||"Cerita Mandala")+'</h3><p>'+esc(item.description||"Jelajahi cerita, gagasan, dan pengetahuan dari rubrik ini.")+'</p></div><span class="topic-arrow" aria-hidden="true">↗</span></a>';
+        }).join("");
+    }
     function renderPlaylistState(items){const track=document.getElementById("playlistTrack"),dots=document.getElementById("playlistDots");if(!track)return;if(items.length)return;track.innerHTML=`<div class="playlist-empty-state">Playlist belum tersedia.</div>`;if(dots)dots.innerHTML="";}
     window.getPublicData=getPublicData;window.loadHomeData=loadHomeData;window.MandalaPublic={loadHomeData,getPublicData};
     if(isHomepage){const boot=()=>loadHomeData().catch(error=>{console.error("Mandala: konten beranda gagal dimuat.",error);});if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();}
