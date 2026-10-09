@@ -2968,6 +2968,18 @@ button{
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="stylesheet" href="../css/mobile-navigation.css">
   <script src="../js/mobile-navigation.js" defer></script>
+  <style>
+    .video-section #videosContainer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+    .video-section #videosContainer .card.video{min-width:0;overflow:hidden;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:#10221c;color:#f5f0e5}
+    .video-section #videosContainer .card.video>a{display:block;height:100%;color:inherit;text-decoration:none}
+    .video-section #videosContainer .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#20382e}
+    .video-section #videosContainer .thumb img{display:block;width:100%;height:100%;object-fit:cover}
+    .video-section #videosContainer .badge{position:absolute;left:12px;top:12px;padding:5px 9px;border-radius:999px;background:rgba(10,24,19,.82);color:#f5f0e5;font-size:.68rem;letter-spacing:.08em}
+    .video-section #videosContainer .meta{padding:16px 18px 0;color:#c9b98d;font-size:.7rem;letter-spacing:.1em}
+    .video-section #videosContainer h3{padding:8px 18px 0;margin:0;color:#fff;font-size:1.15rem;line-height:1.3}
+    .video-section #videosContainer p{padding:8px 18px 18px;margin:0;color:#c4d0c8;line-height:1.6}
+    @media(max-width:760px){.video-section #videosContainer{grid-template-columns:1fr}}
+  </style>
 </head>
 
 
@@ -3285,236 +3297,8 @@ button{
 
 
 
-        <!-- =================================================
-             VIDEO UTAMA
-
-             GANTI FILE INI NANTI:
-             assets/videos/jelajah-nusantara.mp4
-
-             Untuk sekarang jika file belum ada,
-             placeholder tetap terlihat.
-             ================================================= -->
-
-        <div
-            class="main-video reveal"
-            data-video-block
-        >
-
-
-            <div class="video-player">
-
-                <div class="video-placeholder"></div>
-
-                <video
-                    controls
-                    preload="metadata"
-                    playsinline
-                    data-local-video
-                >
-
-                    <source
-                        src="../../assets/videos/jelajah-nusantara.mp4"
-                        type="video/mp4"
-                    >
-
-                    Browser Anda tidak mendukung
-                    pemutar video.
-
-                </video>
-
-
-                <div class="video-overlay">
-                    Mandala Jelajah
-                </div>
-
-            </div>
-
-
-
-            <div class="video-info">
-
-                <div class="label">
-                    Video Utama
-                </div>
-
-                <h3>
-                    Menemukan cerita
-                    di balik sebuah tempat
-                </h3>
-
-                <p>
-                    Sebuah perjalanan bukan hanya
-                    tentang mencapai tujuan. Ada
-                    masyarakat, sejarah, tradisi,
-                    dan kehidupan yang membuat
-                    perjalanan menjadi berarti.
-                </p>
-
-
-                <div class="video-meta">
-
-                    <span>
-                        Dokumenter
-                    </span>
-
-                    <span>
-                        Perjalanan
-                    </span>
-
-                    <span>
-                        Nusantara
-                    </span>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- =================================================
-             VIDEO PILIHAN
-             ================================================= -->
-
-        <div class="video-grid">
-
-
-            <article
-                class="video-card reveal"
-            >
-
-                <div class="video-thumb">
-
-                    <video
-                        muted
-                        preload="metadata"
-                        playsinline
-                    >
-
-                        <source
-                            src="../../assets/videos/jelajah-jawa.mp4"
-                            type="video/mp4"
-                        >
-
-                    </video>
-
-                </div>
-
-
-                <div class="video-card-body">
-
-                    <div class="video-card-category">
-                        Jawa
-                    </div>
-
-                    <h3>
-                        Menyusuri Jejak Hindu
-                        di Tanah Jawa
-                    </h3>
-
-                    <p>
-                        Perjalanan melihat pura,
-                        masyarakat, tradisi, dan
-                        sejarah yang masih hidup.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <article
-                class="video-card reveal"
-            >
-
-                <div class="video-thumb">
-
-                    <video
-                        muted
-                        preload="metadata"
-                        playsinline
-                    >
-
-                        <source
-                            src="../../assets/videos/jelajah-bali.mp4"
-                            type="video/mp4"
-                        >
-
-                    </video>
-
-                </div>
-
-
-                <div class="video-card-body">
-
-                    <div class="video-card-category">
-                        Bali
-                    </div>
-
-                    <h3>
-                        Ruang Kehidupan
-                        di Pulau Dewata
-                    </h3>
-
-                    <p>
-                        Melihat hubungan antara
-                        budaya, masyarakat, dan
-                        ruang kehidupan Hindu Bali.
-                    </p>
-
-                </div>
-
-            </article>
-
-
-
-            <article
-                class="video-card reveal"
-            >
-
-                <div class="video-thumb">
-
-                    <video
-                        muted
-                        preload="metadata"
-                        playsinline
-                    >
-
-                        <source
-                            src="../../assets/videos/jelajah-nusantara-timur.mp4"
-                            type="video/mp4"
-                        >
-
-                    </video>
-
-                </div>
-
-
-                <div class="video-card-body">
-
-                    <div class="video-card-category">
-                        Nusantara
-                    </div>
-
-                    <h3>
-                        Perjalanan ke
-                        Wilayah Timur
-                    </h3>
-
-                    <p>
-                        Cerita komunitas, perjalanan,
-                        dan jejak Hindu di wilayah
-                        Nusantara yang beragam.
-                    </p>
-
-                </div>
-
-            </article>
-
-
+        <div id="videosContainer" class="video-grid" aria-live="polite">
+            <div class="content-empty">Memuat video pilihan Mandala…</div>
         </div>
 
     </div>
@@ -4616,5 +4400,8 @@ button{
 
 
 <script src="../js/topic-sync.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/public-content.js"></script>
+  <script>if(typeof window.loadHomeData==="function"){window.loadHomeData().catch(function(error){console.error("Video Jelajah gagal dimuat:",error);});}</script>
 </body>
 </html>
