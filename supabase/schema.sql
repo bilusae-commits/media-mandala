@@ -25,9 +25,17 @@ returns boolean language sql stable security definer set search_path = public as
 $$;
 
 create or replace function public.is_staff()
-returns boolean language sql stable security definer set search_path = public as $$
+returns boolean language sql stable security definer set search_path = public as $
   select public.is_admin() or public.is_editor();
-$$;
+$;
+
+-- These authorization helpers are called by authenticated RLS / Storage policies only.
+revoke execute on function public.is_admin() from public, anon;
+revoke execute on function public.is_editor() from public, anon;
+revoke execute on function public.is_staff() from public, anon;
+grant execute on function public.is_admin() to authenticated;
+grant execute on function public.is_editor() to authenticated;
+grant execute on function public.is_staff() to authenticated;
 
 -- PROFILES
 create table if not exists public.profiles (
@@ -38,6 +46,17 @@ create table if not exists public.profiles (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+create or replace function public.get_my_profile()
+returns table(id uuid, full_name text, role text, avatar_url text, created_at timestamptz, updated_at timestamptz)
+language sql stable security invoker set search_path = public as $
+  select p.id, p.full_name, p.role, p.avatar_url, p.created_at, p.updated_at
+  from public.profiles p
+  where p.id = (select auth.uid())
+  limit 1;
+$;
+revoke execute on function public.get_my_profile() from public, anon;
+grant execute on function public.get_my_profile() to authenticated;
 
 alter table public.profiles add column if not exists role text;
 alter table public.profiles alter column role set default 'pending';
