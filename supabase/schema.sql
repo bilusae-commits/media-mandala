@@ -3,7 +3,7 @@
 -- Public users only read published content.
 --
 -- IMPORTANT:
--- User baru TIDAK otomatis menjadi editor. Role awal = pending.
+-- User baru TIDAK otomatis menjadi editor. Role awal = user.
 -- Admin harus menetapkan role editor/admin secara eksplisit.
 
 create extension if not exists pgcrypto;
@@ -41,7 +41,7 @@ grant execute on function public.is_staff() to authenticated;
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text,
-  role text not null default 'pending',
+  role text not null default 'user',
   avatar_url text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -59,12 +59,12 @@ revoke execute on function public.get_my_profile() from public, anon;
 grant execute on function public.get_my_profile() to authenticated;
 
 alter table public.profiles add column if not exists role text;
-alter table public.profiles alter column role set default 'pending';
+alter table public.profiles alter column role set default 'user';
 alter table public.profiles drop constraint if exists profiles_role_check;
-alter table public.profiles add constraint profiles_role_check check (role in ('pending','admin','editor'));
+alter table public.profiles add constraint profiles_role_check check (role in ('user','admin','editor'));
 
 -- Keep existing valid admin/editor roles. Only normalize legacy invalid/empty roles.
-update public.profiles set role = 'pending' where role is null or role not in ('pending','admin','editor');
+update public.profiles set role = 'user' where role is null or role not in ('user','admin','editor');
 
 -- CATEGORIES
 create table if not exists public.categories (
@@ -200,7 +200,7 @@ create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
   insert into public.profiles (id, full_name, role)
-  values (new.id, coalesce(new.raw_user_meta_data->>'full_name', new.email), 'pending')
+  values (new.id, coalesce(new.raw_user_meta_data->>'full_name', new.email), 'user')
   on conflict (id) do nothing;
   return new;
 end;
