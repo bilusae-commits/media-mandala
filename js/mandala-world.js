@@ -14,7 +14,7 @@ const cursor=$("#worldCursor");
 function ready(){setTimeout(()=>loader?.classList.add("loaded"),520)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ready,{once:true});else ready();
 
-function drawerSet(open){drawer?.classList.toggle("open",open);drawer?.setAttribute("aria-hidden",String(!open));body.classList.toggle("drawer-open",open);if(open)close?.focus();else menu?.focus()}
+function drawerSet(open){drawer?.classList.toggle("open",open);drawer?.setAttribute("aria-hidden",String(!open));body.classList.toggle("drawer-open",open);menu?.setAttribute("aria-expanded",String(open));menu?.setAttribute("aria-label",open?"Tutup navigasi":"Buka navigasi");if(open)close?.focus();else menu?.focus()}
 menu?.addEventListener("click",()=>drawerSet(!drawer?.classList.contains("open")));
 close?.addEventListener("click",()=>drawerSet(false));
 $$(".world-drawer a").forEach(a=>a.addEventListener("click",()=>drawerSet(false)));
