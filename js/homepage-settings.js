@@ -8,8 +8,11 @@
     if(!href)return "";
     try{
       const url=new URL(href,location.href);
-      if(url.hostname.endsWith(".backblazeb2.com")&&/^\\/file\\/[^/]+\\/(?:homepage\\/|playlist-covers\\/)/.test(url.pathname)){
-        const api=String(window.MANDALA_CONFIG?.SUPABASE_URL||"").replace(/\\/$/,"");
+      const parts=url.pathname.split("/");
+      const approved=parts[1]==="file"&&!!parts[2]&&(parts[3]==="homepage"||parts[3]==="playlist-covers")&&parts.length>4;
+      if(url.hostname.endsWith(".backblazeb2.com")&&approved){
+        let api=String(window.MANDALA_CONFIG?.SUPABASE_URL||"");
+        while(api.endsWith("/"))api=api.slice(0,-1);
         if(api)return api+"/functions/v1/homepage-cover-image?url="+encodeURIComponent(url.href);
       }
       return url.href;
