@@ -13,7 +13,7 @@ const routes = [
   "admin/videos.html", "admin/video.html", "admin/video-edit.html", "admin/podcasts.html",
   "admin/podcast-edit.html", "admin/playlists.html", "admin/playlist-edit.html",
   "admin/categories.html", "admin/settings.html", "admin/settings-new.html", "admin/media.html",
-  "admin/change-password.html", "admin/login.html"
+  "admin/change-password.html", "admin/change-password.html#type=recovery", "admin/login.html"
 ];
 const failures = [];
 const warnings = [];
@@ -49,7 +49,7 @@ try {
       scrollWidth: document.documentElement.scrollWidth
     }));
     const finalPath = new URL(page.url()).pathname;
-    if (route.startsWith("admin/") && route !== "admin/login.html" && route !== "admin/article-edit.html" && !finalPath.endsWith("/admin/login.html")) {
+    if (route.startsWith("admin/") && route !== "admin/login.html" && route !== "admin/article-edit.html" && route !== "admin/change-password.html#type=recovery" && !finalPath.endsWith("/admin/login.html")) {
       failures.push("Unauthenticated admin route did not return to login: " + route + " final=" + finalPath);
     }
     if (route === "admin/article-edit.html") {
@@ -60,6 +60,9 @@ try {
     }
     if (route === "admin/login.html") {
       if (!(await page.locator("#email").count()) || !(await page.locator("#password").count())) failures.push("Admin login form is missing email/password fields");
+    }
+    if (route === "admin/change-password.html#type=recovery") {
+      if (!(await page.locator("#new_password").count()) || !(await page.locator("#confirm_password").count())) failures.push("Password recovery link did not open the new-password form");
     }
     results.push({ route: route || "/", finalPath: new URL(page.url()).pathname, status: response?.status() ?? 0, title: info.title, bodyLength: info.bodyLength });
     if (!response || response.status() >= 400) failures.push("Page failed: " + route + " status=" + (response?.status() ?? "no response"));
@@ -104,6 +107,17 @@ try {
       const grid = page.locator("#videoGrid");
       if (!(await grid.count())) failures.push("Video archive grid is missing");
       else if (!(await grid.innerText()).replace(/\s+/g, " ").toLocaleUpperCase("id-ID").includes("MURWA CANDIKA")) failures.push("Video archive did not render a known published video");
+      const firstVideo = grid.locator("[data-video-index]").first();
+      if (await firstVideo.count()) {
+        await firstVideo.click();
+        const modal = page.locator("#modal");
+        if (!(await modal.evaluate(el => el.classList.contains("open")))) failures.push("Video click did not open the player modal");
+        if (!(await page.locator("#videoFrame").getAttribute("src"))) failures.push("Video player iframe source was not set");
+        await page.locator("#closeModal").click();
+        if (await modal.getAttribute("aria-hidden") !== "true") failures.push("Video player modal did not close accessibly");
+      } else {
+        failures.push("Video archive has no playable video cards");
+      }
     }
     if (route === "") {
       await page.waitForFunction(() => document.body.classList.contains("homepage-ready"), null, { timeout: 5000 }).catch(() => failures.push("Homepage CMS settings did not finish initialization"));
