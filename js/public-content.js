@@ -10,6 +10,8 @@
     const resolveAsset = (path) => scriptSrc ? new window.URL(path, scriptSrc).href : path;
 
     const isHomepage=document.body?.matches?.('body[data-base="./"]');
+    if (!isHomepage && !document.querySelector('link[data-mandala-mobile-nav]')) { const l=document.createElement('link'); l.rel='stylesheet'; l.href=resolveAsset('../css/mobile-navigation.css'); l.dataset.mandalaMobileNav='true'; document.head.appendChild(l); }
+    if (!isHomepage && !document.querySelector('script[data-mandala-mobile-nav]')) { const sc=document.createElement('script'); sc.src=resolveAsset('../js/mobile-navigation.js'); sc.dataset.mandalaMobileNav='true'; sc.async=true; document.head.appendChild(sc); }
     if (!isHomepage && !document.querySelector('link[data-mandala-public-ui]')) {
         const ui = document.createElement('link');
         ui.rel = 'stylesheet';
