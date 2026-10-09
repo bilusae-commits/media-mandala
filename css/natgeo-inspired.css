@@ -111,3 +111,52 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button,inp
  .footer-main{grid-template-columns:1fr}.footer-brand{grid-column:auto}.footer-bottom{flex-direction:column;gap:8px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* Heritage layer — subtle Nusantara/Balinese details for the homepage */
+:root{
+  --terracotta:#a64f32;
+  --heritage-gold:#d7b66b;
+  --heritage-ivory:#f4ecdc;
+}
+/* Keep the documentary layout, adding a restrained traditional signature. */
+.brand-mark{position:relative;border-color:var(--heritage-gold);overflow:hidden}
+.brand-mark:before,.brand-mark:after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;border:1px solid var(--heritage-gold);transform:translate(-50%,-50%) rotate(45deg)}
+.brand-mark:after{width:5px;height:5px;background:var(--terracotta);border-color:var(--terracotta)}
+.hero:after{
+  background-image:
+    var(--hero-overlay-image,none),
+    repeating-radial-gradient(ellipse at 50% 50%,transparent 0 9px,rgba(215,182,107,.22) 9.5px 10.5px,transparent 11px 20px);
+  background-size:cover,72px 72px;
+  background-position:center, right 7% bottom 12%;
+  background-repeat:no-repeat,repeat;
+  opacity:var(--hero-overlay-opacity,.16);
+  mix-blend-mode:screen;
+}
+.hero-note{position:relative}
+.hero-note:after{content:"";position:absolute;right:0;top:0;width:42px;height:42px;border-top:1px solid rgba(215,182,107,.8);border-right:1px solid rgba(215,182,107,.8);pointer-events:none}
+.intro-band{position:relative;isolation:isolate;overflow:hidden;background:var(--heritage-ivory);border-block:1px solid #d5c4a5}
+.intro-band:after{content:"";position:absolute;z-index:-1;inset:0 0 0 auto;width:min(36%,420px);opacity:.18;pointer-events:none;background:
+  radial-gradient(ellipse at center,transparent 0 28%,var(--terracotta) 29% 31%,transparent 32% 48%,var(--terracotta) 49% 51%,transparent 52%) 0 0/54px 54px,
+  radial-gradient(ellipse at center,transparent 0 28%,var(--terracotta) 29% 31%,transparent 32% 48%,var(--terracotta) 49% 51%,transparent 52%) 27px 27px/54px 54px}
+.intro-band p{position:relative;z-index:1;color:#392a20}
+.intro-band span{position:relative;z-index:1;color:#76513a}
+.section-label{color:var(--terracotta)}
+.section-title em{color:var(--terracotta)}
+.text-link:hover span{background:var(--heritage-gold);border-color:var(--heritage-gold)}
+.feature-card .tag,.feature-card .feature-meta i{color:var(--heritage-gold)}
+.tag:before{background:var(--heritage-gold)}
+.topics-section .section-label,.topics-section .topic-number{color:var(--heritage-gold)}
+.topics-section .section-title em{color:var(--heritage-gold)}
+.topic-arrow{color:var(--heritage-gold)}
+.site-footer .footer-column strong{color:var(--heritage-gold)}
+.newsletter{background:var(--terracotta)}
+.newsletter .section-label{color:#f4e4c7}
+.newsletter h2,.newsletter p{color:#fff8ee}
+.newsletter p{opacity:.9}
+.newsletter .section-label{letter-spacing:.17em}
+@media(max-width:760px){
+  .intro-band:after{width:46%;opacity:.12}
+  .hero:after{background-position:center, right -8px bottom 8%;background-size:cover,58px 58px}
+}
+@media(prefers-reduced-motion:reduce){.hero:before{animation:none}}
