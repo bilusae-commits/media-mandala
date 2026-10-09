@@ -307,7 +307,7 @@ create policy "editor update media" on public.media for update to authenticated 
 -- EDITOR CATEGORY READ-ONLY; category creation remains ADMIN-only.
 
 -- PROFILE SELF READ
-create policy "users read own profile" on public.profiles for select to authenticated using (id = auth.uid());
+create policy "users read own profile" on public.profiles for select to authenticated using (id = (select auth.uid()));
 
 -- GRANTS
 revoke all on all tables in schema public from anon;
