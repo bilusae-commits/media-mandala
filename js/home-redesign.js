@@ -164,8 +164,13 @@
         var titleNode = $("#heroTitle");
         if (title && titleNode) titleNode.textContent = title;
         if (description && $("#heroDescription")) $("#heroDescription").textContent = description;
-        var image = safeUrl(settings.hero_image_main || settings.hero_overlay_image);
-        if (image) $(".hero").style.setProperty("--hero-image", 'url("' + image.replace(/["\\]/g, "") + '")');
+        var hero = $(".hero");
+        var mainImage = safeUrl(settings.hero_image_main);
+        var overlayImage = safeUrl(settings.hero_overlay_image);
+        if (mainImage) hero.style.setProperty("--hero-image", 'url("' + mainImage.replace(/["\\]/g, "") + '")');
+        if (overlayImage) hero.style.setProperty("--hero-overlay-image", 'url("' + overlayImage.replace(/["\\]/g, "") + '")');
+        var opacity = Number(settings.hero_overlay_opacity);
+        if (Number.isFinite(opacity)) hero.style.setProperty("--hero-overlay-opacity", String(Math.min(1, Math.max(0, opacity))));
         var background = String(settings.hero_background_color || "");
         if (/^#[0-9a-f]{3,8}$/i.test(background)) $(".hero").style.backgroundColor = background;
       }).catch(function () { /* Optional CMS settings: the editorial fallback remains available. */ });
