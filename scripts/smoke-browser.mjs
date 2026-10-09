@@ -2,8 +2,8 @@ import { chromium } from "playwright";
 
 const base = "http://127.0.0.1:4173/media-mandala/";
 const routes = [
-  "", "pages/artikel.html", "pages/artikel-detail.html", "pages/video.html",
-  "pages/podcast.html", "pages/playlist.html", "pages/playlist-detail.html",
+  "", "pages/artikel.html", "pages/artikel-detail.html", "pages/artikel-detail.html?slug=menjaga-tradisi-hindu-jawa-di-tengah-perubahan-zaman", "pages/video.html",
+  "pages/podcast.html", "pages/playlist.html", "pages/playlist-detail.html", "pages/playlist-detail.html?slug=jelajah-nusantara",
   "pages/tentang-kami.html", "pages/kontak.html", "topics.html",
   "topics/candika-nusantara.html", "topics/candika.html", "topics/dharma-ajaran.html",
   "topics/dharmika.html", "topics/ekonomi-hindu.html", "topics/jelajah-nusantara.html",
@@ -56,6 +56,25 @@ try {
       const dimensions = await page.evaluate(() => ({ width: document.documentElement.clientWidth, scrollWidth: document.documentElement.scrollWidth }));
       if (dimensions.scrollWidth > dimensions.width + 2) failures.push("Mobile horizontal overflow: " + (route || "/") + " " + JSON.stringify(dimensions));
       await page.setViewportSize({ width: 1440, height: 1000 });
+    }
+    if (route === "pages/artikel-detail.html?slug=menjaga-tradisi-hindu-jawa-di-tengah-perubahan-zaman") {
+      await page.waitForTimeout(1200);
+      if (!(await page.locator("body").innerText()).includes("Menjaga Tradisi Hindu Jawa")) failures.push("Published article detail did not render for a real slug");
+    }
+    if (route === "pages/playlist-detail.html?slug=jelajah-nusantara") {
+      await page.waitForTimeout(800);
+      if (!(await page.locator("body").innerText()).toLocaleLowerCase("id-ID").includes("jelajah nusantara")) failures.push("Published playlist detail did not render for a real slug");
+    }
+    if (route === "pages/podcast.html") {
+      await page.waitForTimeout(1200);
+      const audioCount = await page.locator("#audioCount").innerText().catch(() => "");
+      if (!audioCount.includes("episode")) failures.push("Podcast audio list did not reach a loaded state");
+    }
+    if (route === "pages/video.html") {
+      await page.waitForTimeout(1200);
+      const grid = page.locator("#videoGrid");
+      if (!(await grid.count())) failures.push("Video archive grid is missing");
+      else if (!(await grid.innerText()).trim()) failures.push("Video archive grid stayed empty after load");
     }
     if (route === "") {
       const hero = await page.locator("#heroStory").count();
