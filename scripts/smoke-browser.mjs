@@ -48,6 +48,19 @@ try {
       width: document.documentElement.clientWidth,
       scrollWidth: document.documentElement.scrollWidth
     }));
+    const finalPath = new URL(page.url()).pathname;
+    if (route.startsWith("admin/") && route !== "admin/login.html" && route !== "admin/article-edit.html" && !finalPath.endsWith("/admin/login.html")) {
+      failures.push("Unauthenticated admin route did not return to login: " + route + " final=" + finalPath);
+    }
+    if (route === "admin/article-edit.html") {
+      await page.waitForTimeout(900);
+      if (!(await page.locator("body").innerText()).includes("Sesi Admin/Editor tidak ditemukan")) {
+        failures.push("Article editor did not block unauthenticated access with a session warning");
+      }
+    }
+    if (route === "admin/login.html") {
+      if (!(await page.locator("#email").count()) || !(await page.locator("#password").count())) failures.push("Admin login form is missing email/password fields");
+    }
     results.push({ route: route || "/", finalPath: new URL(page.url()).pathname, status: response?.status() ?? 0, title: info.title, bodyLength: info.bodyLength });
     if (!response || response.status() >= 400) failures.push("Page failed: " + route + " status=" + (response?.status() ?? "no response"));
     if (!info.title || !info.bodyLength) failures.push("Empty page/title: " + route);
