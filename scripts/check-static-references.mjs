@@ -53,8 +53,8 @@ for (const file of sourceFiles) {
     ? [content]
     : [...content.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)].map(match => match[1]);
   for (const styleSource of styleSources) {
-    for (const match of styleSource.matchAll(/url\(\s*["']?([^"'\)]+)["']?\s*\)/gi)) {
-      checkReference(file, match[1], "css-url");
+    for (const match of styleSource.matchAll(/url\(\s*(?:"([^"]*)"|\'([^\']*)\'|([^)]*))\s*\)/gi)) {
+      checkReference(file, match[1] ?? match[2] ?? match[3], "css-url");
     }
   }
 }
