@@ -108,7 +108,7 @@
     ];
     var list = items.length ? items : defaults;
     container.innerHTML = list.map(function (item, index) {
-      var knownTopics = ["candika-nusantara", "dharma-ajaran", "dharmika", "ekonomi-hindu", "jelajah-nusantara", "kabar-umat", "spiritual", "tokoh-hindu", "candika", "tokoh"];
+      var knownTopics = ["candika-nusantara", "dharma-ajaran", "dharmika", "ekonomi-hindu", "jelajah-nusantara", "kabar-umat", "spiritual", "tokoh-hindu", "tradisi-budaya", "candika", "tokoh"];
       var href = item.slug && knownTopics.indexOf(String(item.slug).toLowerCase()) >= 0 ? "topics/" + encodeURIComponent(item.slug) + ".html" : "pages/artikel.html";
       return '<a class="topic-card fade-up" href="' + esc(href) + '"><span class="topic-number">0' + (index + 1) + ' / RUBRIK</span><div><h3>' + esc(item.name) + '</h3><p>' + esc(excerpt(item.description || "Jelajahi cerita pilihan dari Mandala Channel.", 88)) + '</p></div><span class="topic-arrow" aria-hidden="true">↗</span></a>';
     }).join("");
