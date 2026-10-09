@@ -82,6 +82,22 @@ try {
       await page.waitForTimeout(1200);
       const audioCount = await page.locator("#audioCount").innerText().catch(() => "");
       if (!audioCount.includes("episode")) failures.push("Podcast audio list did not reach a loaded state");
+      const audioSource = await page.locator("#audioGrid audio").first().getAttribute("src").catch(() => null);
+      if (!audioSource) {
+        failures.push("Published podcast audio has no playable source URL");
+      } else {
+        try {
+          const audioProbe = await page.evaluate(async source => {
+            const response = await fetch(source, { method: "HEAD" });
+            return { status: response.status, type: response.headers.get("content-type") || "" };
+          }, new URL(audioSource, page.url()).href);
+          if (audioProbe.status !== 200 || !audioProbe.type.toLowerCase().startsWith("audio/")) {
+            failures.push("Podcast audio endpoint probe failed: " + JSON.stringify(audioProbe));
+          }
+        } catch (error) {
+          failures.push("Podcast audio endpoint could not be reached: " + error.message);
+        }
+      }
     }
     if (route === "pages/video.html") {
       await page.waitForTimeout(1200);
