@@ -178,6 +178,10 @@ create index if not exists idx_playlists_status_sort on public.playlists(status,
 create index if not exists idx_playlists_category on public.playlists(category_id);
 create index if not exists idx_podcasts_status_published on public.podcasts(status, published_at desc);
 create index if not exists idx_podcasts_category on public.podcasts(category_id);
+create index if not exists idx_media_uploaded_by on public.media(uploaded_by);
+create index if not exists idx_playlists_author_id on public.playlists(author_id);
+create index if not exists idx_podcasts_author_id on public.podcasts(author_id);
+create index if not exists idx_videos_author_id on public.videos(author_id);
 create unique index if not exists idx_videos_slug_unique on public.videos(slug) where slug is not null;
 create unique index if not exists idx_playlists_slug_unique on public.playlists(slug) where slug is not null;
 
