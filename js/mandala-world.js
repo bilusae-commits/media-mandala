@@ -75,7 +75,7 @@ startMandala();
 
 $$(".origin-copy h1 span").forEach((el,i)=>el.style.transform="translateX("+(i%2?-12:0)+"vw)");
 let lastY=0;
-if(!reduceMotion)window.addEventListener("scroll",()=>{const y=window.scrollY||0;if(y<innerHeight*1.1){const d=Math.min(y,500);$(".origin-copy h1 span").forEach((el,i)=>el.style.transform="translateX("+(i%2?-12+i*d*.012:i*d*.004)+"px)")}lastY=y},{passive:true});
+if(!reduceMotion)window.addEventListener("scroll",()=>{const y=window.scrollY||0;if(y<innerHeight*1.1){const d=Math.min(y,500);$$(".origin-copy h1 span").forEach((el,i)=>el.style.transform="translateX("+(i%2?-12+i*d*.012:i*d*.004)+"px)")}lastY=y},{passive:true});
 
 if("IntersectionObserver" in window){
  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("world-visible");io.unobserve(e.target)}}),{threshold:.12});
