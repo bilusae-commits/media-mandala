@@ -67,7 +67,7 @@ try {
     results.push({ route: route || "/", finalPath: new URL(page.url()).pathname, status: response?.status() ?? 0, title: info.title, bodyLength: info.bodyLength });
     if (!response || response.status() >= 400) failures.push("Page failed: " + route + " status=" + (response?.status() ?? "no response"));
     if (!info.title || !info.bodyLength) failures.push("Empty page/title: " + route);
-    if (route === "" || route === "pages/artikel.html" || route === "pages/video.html" || route === "topics/jelajah-nusantara.html") {
+    if (!route.startsWith("admin/")) {
       await page.setViewportSize({ width: 390, height: 844 });
       const dimensions = await page.evaluate(() => ({ width: document.documentElement.clientWidth, scrollWidth: document.documentElement.scrollWidth }));
       if (dimensions.scrollWidth > dimensions.width + 2) failures.push("Mobile horizontal overflow: " + (route || "/") + " " + JSON.stringify(dimensions));
