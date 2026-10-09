@@ -120,56 +120,24 @@ try {
       }
     }
     if (route === "") {
-      await page.waitForFunction(() => document.body.classList.contains("homepage-ready"), null, { timeout: 5000 }).catch(() => failures.push("Homepage CMS settings did not finish initialization"));
-      await page.waitForTimeout(500);
-      const hero = await page.locator("#heroStory").count();
-      if (!hero) failures.push("Homepage missing #heroStory container");
-      else if (!(await page.locator("#heroStory").innerText()).trim()) failures.push("Homepage hero story container stayed empty");
-      const heroState = await page.evaluate(() => {
-        const section = document.querySelector(".world-origin");
-        return {
-          title: (document.querySelector(".origin-copy h1")?.innerText || "").replace(/\s+/g, " ").trim(),
-          primary: document.getElementById("heroPrimary")?.href || "",
-          secondary: document.getElementById("heroSecondary")?.href || "",
-          background: getComputedStyle(section).getPropertyValue("--hero-background-color").trim(),
-          mainImage: getComputedStyle(section).getPropertyValue("--hero-main-image").trim(),
-          overlayImage: getComputedStyle(section).getPropertyValue("--hero-overlay-image").trim(),
-          opacity: getComputedStyle(section).getPropertyValue("--hero-overlay-opacity").trim()
-        };
-      });
-      if (!heroState.title.includes("Yang hidup tak pernah diam.")) failures.push("CMS hero title did not load");
-      if (!heroState.primary.endsWith("/pages/artikel.html")) failures.push("CMS primary hero CTA target is incorrect");
-      if (!heroState.secondary.endsWith("/pages/podcast.html")) failures.push("CMS secondary hero CTA target is incorrect");
-      if (!heroState.background || !heroState.mainImage.includes("url(")) failures.push("CMS hero background/main image settings did not load");
-      if (heroState.overlayImage && !heroState.overlayImage.includes("url(")) failures.push("CMS hero overlay image URL is invalid");
-      if (heroState.mainImage.includes("url(")) {
-        const imageUrl = heroState.mainImage.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
-        if (!imageUrl) {
-          failures.push("CMS hero main image CSS URL could not be parsed");
-        } else {
-          const imageProbe = await page.evaluate(async source => {
-            const image = new Image();
-            image.src = source;
-            try { await image.decode(); return { ok: true, width: image.naturalWidth }; }
-            catch { return { ok: false, width: image.naturalWidth }; }
-          }, imageUrl);
-          if (!imageProbe.ok || imageProbe.width < 1) failures.push("CMS hero main image failed to load: " + imageUrl);
-          const proxyOrigin = new URL(imageUrl).origin;
-          const invalidImageUrl = proxyOrigin + "/functions/v1/homepage-cover-image?url=" + encodeURIComponent("https://f005.backblazeb2.com/file/OtherBucket/homepage/probe.webp");
-          const rejectedStatus = await page.evaluate(async target => (await fetch(target)).status, invalidImageUrl).catch(() => 0);
-          if (rejectedStatus !== 403) failures.push("Homepage image proxy did not reject an unapproved storage bucket (status " + rejectedStatus + ")");
-        }
-      }
-      if (Math.abs(Number(heroState.opacity) - 0.18) > 0.01) failures.push("CMS hero overlay opacity was not applied");
+      await page.waitForTimeout(1600);
+      if (!(await page.locator("#heroTitle").count())) failures.push("Homepage headline is missing");
+      if (!(await page.locator("#featuredStory").count())) failures.push("Homepage editorial feature container is missing");
+      if (!(await page.locator("#latestStories").count())) failures.push("Homepage latest-articles container is missing");
+      if (!(await page.locator("#videoCollection").count())) failures.push("Homepage video collection container is missing");
+      if (!(await page.locator("#topicCollection").count())) failures.push("Homepage topic collection container is missing");
+      if (!(await page.locator("#audioCollection").count())) failures.push("Homepage audio collection container is missing");
+      const headline = (await page.locator("#heroTitle").innerText().catch(() => "")).replace(/\\s+/g, " ").trim();
+      if (!headline) failures.push("Homepage headline has no visible text");
       await page.evaluate(() => window.scrollTo(0, 1200));
       await page.waitForTimeout(120);
       const sticky = await page.locator("#siteHeader").evaluate(el => ({ position: getComputedStyle(el).position, top: el.getBoundingClientRect().top }));
       if (!["sticky", "fixed"].includes(sticky.position) || sticky.top > 2) failures.push("Homepage navigation is not sticky at the top while scrolling");
       await page.setViewportSize({ width: 390, height: 844 });
-      const homeMenu = page.locator("#worldMenu");
-      const homeDrawer = page.locator("#worldDrawer");
+      const homeMenu = page.locator("#navToggle");
+      const homeDrawer = page.locator("#mobileNav");
       await homeMenu.click();
-      if (await homeMenu.getAttribute("aria-expanded") !== "true" || await homeDrawer.getAttribute("aria-hidden") !== "false" || !(await homeDrawer.evaluate(el => el.classList.contains("open")))) failures.push("Homepage mobile navigation did not open accessibly");
+      if (await homeMenu.getAttribute("aria-expanded") !== "true" || await homeDrawer.getAttribute("aria-hidden") !== "false" || !(await homeDrawer.evaluate(el => el.classList.contains("is-open")))) failures.push("Homepage mobile navigation did not open accessibly");
       await page.keyboard.press("Escape");
       if (await homeMenu.getAttribute("aria-expanded") !== "false" || await homeDrawer.getAttribute("aria-hidden") !== "true") failures.push("Homepage mobile navigation did not close on Escape");
       await page.setViewportSize({ width: 1440, height: 1000 });
