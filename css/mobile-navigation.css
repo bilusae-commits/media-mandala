@@ -11,5 +11,5 @@
 .mc-mobile-drawer-links a{display:block!important;height:auto!important;padding:17px 0!important;border-bottom:1px solid rgba(255,255,255,.12);color:#fff!important;font:500 clamp(1.5rem,7vw,2.5rem)/1.1 Georgia,serif!important;white-space:normal!important}
 .mc-mobile-drawer-links a:after{display:none!important}
 .mc-mobile-drawer-foot{margin-top:auto;color:rgba(255,255,255,.5);font-size:.6rem;letter-spacing:.12em}
-@media(max-width:760px){.mc-mobile-menu{display:inline-flex}body.mc-mobile-nav-open{overflow:hidden}}
+@media(max-width:800px){.mc-mobile-menu{display:inline-flex}body.mc-mobile-nav-open{overflow:hidden}}
 @media(prefers-reduced-motion:reduce){.mc-mobile-menu span,.mc-mobile-drawer{transition:none}}
