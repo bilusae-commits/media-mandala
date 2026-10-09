@@ -81,7 +81,7 @@ try {
     if (route === "pages/podcast.html") {
       await page.waitForTimeout(1200);
       const audioCount = await page.locator("#audioCount").innerText().catch(() => "");
-      if (!audioCount.includes("episode")) failures.push("Podcast audio list did not reach a loaded state");
+      if (!/^[1-9]\\d* episode$/.test(audioCount.trim())) failures.push("Podcast audio list did not render published audio items: " + audioCount);
       const audioSource = await page.locator("#audioGrid audio").first().getAttribute("src").catch(() => null);
       if (!audioSource) {
         failures.push("Published podcast audio has no playable source URL");
@@ -103,7 +103,7 @@ try {
       await page.waitForTimeout(1200);
       const grid = page.locator("#videoGrid");
       if (!(await grid.count())) failures.push("Video archive grid is missing");
-      else if (!(await grid.innerText()).trim()) failures.push("Video archive grid stayed empty after load");
+      else if (!(await grid.innerText()).replace(/\\s+/g, " ").toLocaleUpperCase("id-ID").includes("MURWA CANDIKA")) failures.push("Video archive did not render a known published video");
     }
     if (route === "") {
       await page.waitForFunction(() => document.body.classList.contains("homepage-ready"), null, { timeout: 5000 }).catch(() => failures.push("Homepage CMS settings did not finish initialization"));
