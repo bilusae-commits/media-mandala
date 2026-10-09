@@ -129,7 +129,7 @@ try {
       if (!heroState.background || !heroState.mainImage.includes("url(")) failures.push("CMS hero background/main image settings did not load");
       if (heroState.overlayImage && !heroState.overlayImage.includes("url(")) failures.push("CMS hero overlay image URL is invalid");
       if (heroState.mainImage.includes("url(")) {
-        const imageUrl = heroState.mainImage.match(/^url\\(["']?(.*?)["']?\\)$/)?.[1];
+        const imageUrl = heroState.mainImage.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
         if (!imageUrl) {
           failures.push("CMS hero main image CSS URL could not be parsed");
         } else {
