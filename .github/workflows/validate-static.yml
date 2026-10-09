@@ -1,0 +1,31 @@
+name: Validate static assets
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  syntax:
+    name: JavaScript syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check changed JavaScript entry points
+        run: |
+          set -eu
+          for file in \
+            js/public-content.js \
+            js/homepage-settings.js \
+            js/mandala-world.js \
+            js/supabase-client.js \
+            js/mobile-navigation.js \
+            admin/js/cms-service.js \
+            admin/js/media.js; do
+            node --check "$file"
+          done
