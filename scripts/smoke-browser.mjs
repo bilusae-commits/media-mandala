@@ -90,9 +90,32 @@ try {
       else if (!(await grid.innerText()).trim()) failures.push("Video archive grid stayed empty after load");
     }
     if (route === "") {
+      await page.waitForFunction(() => document.body.classList.contains("homepage-ready"), null, { timeout: 5000 }).catch(() => failures.push("Homepage CMS settings did not finish initialization"));
+      await page.waitForTimeout(500);
       const hero = await page.locator("#heroStory").count();
       if (!hero) failures.push("Homepage missing #heroStory container");
       else if (!(await page.locator("#heroStory").innerText()).trim()) failures.push("Homepage hero story container stayed empty");
+      const heroState = await page.evaluate(() => {
+        const section = document.querySelector(".world-origin");
+        return {
+          title: document.querySelector(".origin-copy h1")?.innerText || "",
+          primary: document.getElementById("heroPrimary")?.href || "",
+          secondary: document.getElementById("heroSecondary")?.href || "",
+          background: getComputedStyle(section).getPropertyValue("--hero-background-color").trim(),
+          mainImage: getComputedStyle(section).getPropertyValue("--hero-main-image").trim(),
+          overlayImage: getComputedStyle(section).getPropertyValue("--hero-overlay-image").trim(),
+          opacity: getComputedStyle(section).getPropertyValue("--hero-overlay-opacity").trim()
+        };
+      });
+      if (!heroState.title.includes("Yang hidup tak pernah diam.")) failures.push("CMS hero title did not load");
+      if (!heroState.primary.endsWith("/pages/artikel.html")) failures.push("CMS primary hero CTA target is incorrect");
+      if (!heroState.secondary.endsWith("/pages/podcast.html")) failures.push("CMS secondary hero CTA target is incorrect");
+      if (!heroState.background || !heroState.mainImage.includes("url(") || !heroState.overlayImage.includes("url(")) failures.push("CMS hero background/main/overlay image settings did not load");
+      if (Math.abs(Number(heroState.opacity) - 0.18) > 0.01) failures.push("CMS hero overlay opacity was not applied");
+    }
+    if (route === "pages/artikel.html") {
+      await page.waitForTimeout(1200);
+      if (!(await page.locator("body").innerText()).includes("Menjaga Tradisi Hindu Jawa di Tengah Perubahan Zaman")) failures.push("Published article list did not render a known published story");
     }
     if (route === "topics/jelajah-nusantara.html") {
       await page.setViewportSize({ width: 390, height: 844 });
