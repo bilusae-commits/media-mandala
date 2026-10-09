@@ -38,6 +38,7 @@
       return result.data || [];
     });
   }
+  function safeQueryRows(db, table, columns, limit) { return queryRows(db, table, columns, limit).catch(function (error) { console.warn("Mandala: data " + table + " belum tersedia.", error); return []; }); }
   function renderStatus(container, title, detail) {
     if (!container) return;
     container.innerHTML = '<div class="status-message"><strong>' + esc(title) + '</strong>' + esc(detail) + '</div>';
@@ -107,7 +108,8 @@
     ];
     var list = items.length ? items : defaults;
     container.innerHTML = list.map(function (item, index) {
-      var href = item.slug ? "topics/" + encodeURIComponent(item.slug) + ".html" : "pages/artikel.html";
+      var knownTopics = ["candika-nusantara", "dharma-ajaran", "dharmika", "ekonomi-hindu", "jelajah-nusantara", "kabar-umat", "spiritual", "tokoh-hindu", "candika", "tokoh"];
+      var href = item.slug && knownTopics.indexOf(String(item.slug).toLowerCase()) >= 0 ? "topics/" + encodeURIComponent(item.slug) + ".html" : "pages/artikel.html";
       return '<a class="topic-card fade-up" href="' + esc(href) + '"><span class="topic-number">0' + (index + 1) + ' / RUBRIK</span><div><h3>' + esc(item.name) + '</h3><p>' + esc(excerpt(item.description || "Jelajahi cerita pilihan dari Mandala Channel.", 88)) + '</p></div><span class="topic-arrow" aria-hidden="true">↗</span></a>';
     }).join("");
   }
@@ -124,13 +126,15 @@
       button.addEventListener("click", function () {
         var item = items[Number(button.getAttribute("data-audio-index"))];
         if (!item || !audio) return;
-        if (audio.src !== safeUrlForAudio(item.audio_url)) audio.src = safeUrlForAudio(item.audio_url);
+        var selectedUrl = safeUrlForAudio(item.audio_url);
+        var isSameTrack = audio.src === selectedUrl;
+        if (!isSameTrack) audio.src = selectedUrl;
         var title = $("#audioNowTitle"), status = $("#audioNowStatus");
         if (title) title.textContent = item.title;
         if (status) status.textContent = "Mandala Audio · " + categoryName(item.category_id);
         container.querySelectorAll("[data-audio-index]").forEach(function (other) { other.setAttribute("aria-pressed", String(other === button)); other.textContent = other === button ? "Ⅱ" : "▶"; });
-        if (audio.paused) audio.play().catch(function () { if (status) status.textContent = "Audio tidak dapat diputar. Periksa tautan berkas atau coba episode lain."; });
-        else { audio.pause(); button.textContent = "▶"; button.setAttribute("aria-pressed", "false"); }
+        if (isSameTrack && !audio.paused) { audio.pause(); button.textContent = "▶"; button.setAttribute("aria-pressed", "false"); }
+        else audio.play().catch(function () { if (status) status.textContent = "Audio tidak dapat diputar. Periksa tautan berkas atau coba episode lain."; });
       });
     });
   }
@@ -178,10 +182,10 @@
     }
     Promise.allSettled([
       createClient().then(function (db) { return Promise.all([
-        queryRows(db, "articles", "id,title,slug,excerpt,content,cover_image_url,category_id,featured,published_at,created_at", 12),
-        queryRows(db, "videos", "id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,featured,published_at,created_at", 6),
-        queryRows(db, "podcasts", "id,title,slug,description,cover_image_url,content_type,audio_url,audio_duration,youtube_url,youtube_video_id,category_id,featured,published_at,created_at", 8),
-        db.from("categories").select("id,name,slug,description,is_active,sort_order").eq("is_active", true).order("sort_order", { ascending: true }).limit(12).then(function (result) { if (result.error) throw result.error; return result.data || []; })
+        safeQueryRows(db, "articles", "id,title,slug,excerpt,content,cover_image_url,category_id,featured,published_at,created_at", 12),
+        safeQueryRows(db, "videos", "id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,featured,published_at,created_at", 6),
+        safeQueryRows(db, "podcasts", "id,title,slug,description,cover_image_url,content_type,audio_url,audio_duration,youtube_url,youtube_video_id,category_id,featured,published_at,created_at", 8),
+        db.from("categories").select("id,name,slug,description,is_active,sort_order").eq("is_active", true).order("sort_order", { ascending: true }).limit(12).then(function (result) { if (result.error) { console.warn("Mandala: kategori belum tersedia.", result.error); return []; } return result.data || []; })
       ]); })
     ]).then(function (results) {
       var payload = results[0];
