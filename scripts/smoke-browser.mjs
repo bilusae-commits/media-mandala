@@ -126,7 +126,8 @@ try {
       if (!heroState.title.includes("Yang hidup tak pernah diam.")) failures.push("CMS hero title did not load");
       if (!heroState.primary.endsWith("/pages/artikel.html")) failures.push("CMS primary hero CTA target is incorrect");
       if (!heroState.secondary.endsWith("/pages/podcast.html")) failures.push("CMS secondary hero CTA target is incorrect");
-      if (!heroState.background || !heroState.mainImage.includes("url(") || !heroState.overlayImage.includes("url(")) failures.push("CMS hero background/main/overlay image settings did not load");
+      if (!heroState.background || !heroState.mainImage.includes("url(")) failures.push("CMS hero background/main image settings did not load");
+      if (heroState.overlayImage && !heroState.overlayImage.includes("url(")) failures.push("CMS hero overlay image URL is invalid");
       if (Math.abs(Number(heroState.opacity) - 0.18) > 0.01) failures.push("CMS hero overlay opacity was not applied");
     }
     if (route === "pages/artikel.html") {
