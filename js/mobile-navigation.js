@@ -2,8 +2,8 @@
 (function(){
   "use strict";
   function init(){
-    const header=document.querySelector("#siteHeader");
-    const source=header&&header.querySelector("nav.links");
+    const header=document.querySelector("#siteHeader, #header");
+    const source=header&&(header.querySelector("nav.links")||header.querySelector("nav.nav-menu"));
     if(!header||!source||header.querySelector(".mc-mobile-menu"))return;
     const button=document.createElement("button");
     button.type="button";button.className="mc-mobile-menu";button.setAttribute("aria-label","Buka navigasi");button.setAttribute("aria-expanded","false");button.innerHTML="<span></span><span></span>";
