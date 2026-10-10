@@ -99,7 +99,7 @@ p { overflow-wrap: break-word; }
 }
 .section {
   margin: 0;
-  padding-block: var(--space-xl);
+  padding-block: 40px;
 }
 .section-head {
   display: flex;
@@ -741,7 +741,7 @@ p { overflow-wrap: break-word; }
 #misi { background: var(--bg-light); color: var(--text-on-light); }
 .mission {
   margin: 0;
-  padding-block: var(--space-xl);
+  padding-block: 40px;
   background: var(--bg-light);
   color: var(--text-on-light);
 }
@@ -1011,10 +1011,13 @@ p { overflow-wrap: break-word; }
   .hero-visual { max-width: 420px; }
   .section-head { margin-bottom: 24px; }
   #mandala-tv > .horizontal,
-  #cerita .latest-list,
+  #cerita .latest-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
   #audio > .horizontal#playlist,
   #tokoh > .horizontal {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
   }
   #cerita > .section-head,
