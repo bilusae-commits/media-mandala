@@ -309,11 +309,11 @@ p { overflow-wrap: break-word; }
   transition: transform .2s ease, background .2s ease, border-color .2s ease;
 }
 .btn:active { transform: scale(.98); }
-.btn-gold {
+.btn-primary {
   background: var(--color-red);
   color: #FFFFFF;
 }
-.btn-gold:hover { background: var(--color-red-hover); }
+.btn-primary:hover { background: var(--color-red-hover); }
 .btn-outline {
   border-color: rgba(255,255,255,0.65);
   background: transparent;
@@ -752,8 +752,7 @@ p { overflow-wrap: break-word; }
 .mission .value-item h4 { color: var(--text-on-light); }
 .mission .section-sub,
 .mission .about-copy,
-.mission .value-item p,
-.mission .mission-bottom { color: var(--text-on-light-muted); }
+.mission .value-item p { color: var(--text-on-light-muted); }
 .mission .eyebrow { color: var(--color-red); }
 .mission-hero {
   overflow: hidden;
@@ -824,7 +823,8 @@ p { overflow-wrap: break-word; }
   transform: translate(-50%,-50%);
 }
 .mission-video .play-round:active { transform: translate(-50%,-50%) scale(.96); }
-.mission-bottom { margin: 18px 0 0; color: var(--text-on-light-muted); font-size: 10px; line-height: 1.7; }
+.site-footer { padding: 24px 0 30px; background: var(--bg-dark); color: var(--text-on-dark); }
+.site-footer .mission-bottom { margin: 0; color: var(--text-on-dark-muted); font-size: 10px; line-height: 1.7; }
 
 /* Drawer and search */
 .drawer-overlay {
@@ -1083,14 +1083,12 @@ p { overflow-wrap: break-word; }
   #misi .about-title,
   #misi .about-copy,
   #misi > .wrap > .btn,
-  #misi .mission-video,
-  #misi .mission-bottom { grid-column: 1 / -1; }
+  #misi .mission-video { grid-column: 1 / -1; }
   #misi .mission-values { gap: 32px; }
   #misi .about-title { margin-top: 12px; text-align: center; }
   #misi .about-copy { max-width: 800px; margin-inline: auto; text-align: center; }
   #misi > .wrap > .btn { justify-self: center; }
   #misi .mission-video { width: 100%; max-width: 900px; margin: 0 auto; }
-  #misi .mission-bottom { text-align: center; }
   .bottom-nav { display: none; }
   .page-bottom { height: 0; }
   .drawer { width: 400px; }
@@ -1152,7 +1150,7 @@ p { overflow-wrap: break-word; }
       <p class="hero-kicker">Media Hindu Nusantara</p>
       <h1 id="hero-title">Merawat Cerita Hindu Nusantara</h1>
       <p>Dari desa, pura, dan pegunungan hingga pelosok, kami hadir untuk mendokumentasikan kehidupan, tradisi, budaya, dan kearifan Hindu di seluruh Nusantara.</p>
-      <div class="hero-actions"><a class="btn btn-gold" href="#cerita">Jelajahi Cerita <i class="fa-solid fa-arrow-right"></i></a><a class="btn btn-outline" href="#mandala-tv"><i class="fa-solid fa-circle-play"></i> Tonton Video</a></div>
+      <div class="hero-actions"><a class="btn btn-primary" href="#cerita">Jelajahi Cerita <i class="fa-solid fa-arrow-right"></i></a><a class="btn btn-outline" href="#mandala-tv"><i class="fa-solid fa-circle-play"></i> Tonton Video</a></div>
       <div class="heritage-rule">Dari Nusantara, untuk Dharma</div>
     </div>
     <div class="hero-visual"><img src="assets/images/playlists/playlist-01.jpg" alt="Lanskap budaya Hindu Nusantara" fetchpriority="high"></div>
@@ -1189,11 +1187,11 @@ p { overflow-wrap: break-word; }
     </div>
     <div class="subhead"><h3>Semua Playlist</h3></div>
     <div class="playlist-list">
-      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-15.jpg" alt="Foto dokumentasi Hindu Nusantara" loading="lazy"><div><h4>Dharma Wacana</h4><p>Ceramah dan wejangan para tokoh</p><small>12 audio • 1:48:32</small></div><i class="fa-solid fa-chevron-right"></i></a>
-      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-01.jpg" alt="Foto dokumentasi Hindu Nusantara" loading="lazy"><div><h4>Kidung Nusantara</h4><p>Kidung, tembang, dan suara tradisi</p><small>10 audio • 1:23:45</small></div><i class="fa-solid fa-chevron-right"></i></a>
-      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-02.jpg" alt="Foto dokumentasi Hindu Nusantara" loading="lazy"><div><h4>Suara Para Pemangku</h4><p>Percakapan dan wejangan</p><small>8 audio • 1:12:20</small></div><i class="fa-solid fa-chevron-right"></i></a>
-      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-03.jpg" alt="Foto dokumentasi Hindu Nusantara" loading="lazy"><div><h4>Kawruh Leluhur</h4><p>Pengetahuan dan kearifan lokal</p><small>10 audio • 1:36:50</small></div><i class="fa-solid fa-chevron-right"></i></a>
-      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-04.jpg" alt="Foto dokumentasi Hindu Nusantara" loading="lazy"><div><h4>Cerita dari Desa</h4><p>Kisah masyarakat dan tradisi</p><small>8 audio • 1:10:05</small></div><i class="fa-solid fa-chevron-right"></i></a>
+      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-15.jpg" alt="Sampul audio Dharma Wacana" loading="lazy"><div><h4>Dharma Wacana</h4><p>Ceramah dan wejangan para tokoh</p><small>12 audio • 1:48:32</small></div><i class="fa-solid fa-chevron-right"></i></a>
+      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-01.jpg" alt="Sampul audio Kidung Nusantara" loading="lazy"><div><h4>Kidung Nusantara</h4><p>Kidung, tembang, dan suara tradisi</p><small>10 audio • 1:23:45</small></div><i class="fa-solid fa-chevron-right"></i></a>
+      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-02.jpg" alt="Sampul audio Suara Para Pemangku" loading="lazy"><div><h4>Suara Para Pemangku</h4><p>Percakapan dan wejangan</p><small>8 audio • 1:12:20</small></div><i class="fa-solid fa-chevron-right"></i></a>
+      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-03.jpg" alt="Sampul audio Kawruh Leluhur" loading="lazy"><div><h4>Kawruh Leluhur</h4><p>Pengetahuan dan kearifan lokal</p><small>10 audio • 1:36:50</small></div><i class="fa-solid fa-chevron-right"></i></a>
+      <a class="playlist-row media-action" href="#audio"><img src="assets/images/playlists/playlist-04.jpg" alt="Sampul audio Cerita dari Desa" loading="lazy"><div><h4>Cerita dari Desa</h4><p>Kisah masyarakat dan tradisi</p><small>8 audio • 1:10:05</small></div><i class="fa-solid fa-chevron-right"></i></a>
     </div>
   </section>
   <section class="section wrap" id="tokoh">
@@ -1220,11 +1218,11 @@ p { overflow-wrap: break-word; }
       </div>
       <h3 class="about-title">Tentang Mandala</h3>
       <p class="about-copy">Mandala adalah media yang mendokumentasikan kehidupan, tradisi, budaya, dan kearifan Hindu Nusantara dari sudut pandang masyarakat yang menjalaninya.</p>
-      <a class="btn btn-gold" href="#beranda">Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+      <a class="btn btn-primary" href="#beranda">Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
       <div class="mission-video"><img src="assets/images/playlists/playlist-11.jpg" alt="Candi Prambanan" loading="lazy"><button class="play-round media-action" aria-label="Putar video tentang Mandala"><i class="fa-solid fa-play"></i></button></div>
-      <p class="mission-bottom">MANDALA · MEDIA HINDU NUSANTARA<br>Merawat cerita, menjaga tradisi, meneruskan kebijaksanaan.</p>
-    </div>
+      </div>
   </section>
+  <footer class="site-footer"><div class="wrap"><p class="mission-bottom">MANDALA · MEDIA HINDU NUSANTARA<br>Merawat cerita, menjaga tradisi, meneruskan kebijaksanaan.</p></div></footer>
   <div class="page-bottom" aria-hidden="true"></div>
 </main>
 <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
