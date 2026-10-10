@@ -10,7 +10,8 @@ if(location.pathname.endsWith("/index.html")||location.pathname.endsWith("/")){
   const bootstrap=document.createElement("style");
   bootstrap.id="mandala-home-bootstrap";
   bootstrap.textContent=`
-    body[data-base="./"] main{opacity:1!important;visibility:visible!important}
+    body[data-base="./"] main{opacity:0!important;visibility:hidden!important}
+    body[data-base="./"].homepage-ready main{opacity:1!important;visibility:visible!important}
     body[data-base="./"] main .reveal,
     body[data-base="./"] main .revealItem,
     body[data-base="./"] main .reveal.is-visible,

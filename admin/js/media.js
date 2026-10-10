@@ -25,21 +25,7 @@
       input.value='';$('alt').value='';toast('Media berhasil diupload.');await load();
     }catch(e){toast(e.message||'Upload gagal. Pastikan bucket mandala-media dan policy Storage sudah aktif.',true);}finally{btn.disabled=false;btn.textContent='+ UPLOAD MEDIA';}
   }
-  async function remove(id){
-    if(auth?.role!=='admin')return toast('Hanya admin yang dapat menghapus file media.',true);
-    if(!confirm('Hapus media ini?'))return;
-    const item=files.find(x=>x.id===id);
-    try{
-      const db=await MandalaSupabase.getClient();
-      if(item?.storage_path){
-        const {error:storageError}=await db.storage.from('mandala-media').remove([item.storage_path]);
-        if(storageError)throw storageError;
-      }
-      const {error}=await db.from('media').delete().eq('id',id);
-      if(error)throw error;
-      toast('Media dihapus.');await load();
-    }catch(e){toast(e.message||'Gagal menghapus.',true);}
-  }
+  async function remove(id){if(!confirm('Hapus media ini?'))return;const item=files.find(x=>x.id===id);try{const db=await MandalaSupabase.getClient();if(item?.storage_path)await db.storage.from('mandala-media').remove([item.storage_path]);const {error}=await db.from('media').delete().eq('id',id);if(error)throw error;toast('Media dihapus.');await load();}catch(e){toast(e.message||'Gagal menghapus.',true);}}
   async function init(){auth=await MandalaSupabase.auth.requireStaff({loginPage:'index.html',deniedPage:'dashboard.html'});if(!auth)return;$('role').textContent=auth.role==='admin'?'ADMIN':'EDITOR';$('upload').onclick=upload;$('logout').onclick=async()=>{await MandalaSupabase.auth.signOut();location.href='index.html';};await load();}
   init().catch(e=>toast(e.message||'Gagal memuat media.',true));
 })();

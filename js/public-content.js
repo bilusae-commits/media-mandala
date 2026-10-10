@@ -10,8 +10,6 @@
     const resolveAsset = (path) => scriptSrc ? new window.URL(path, scriptSrc).href : path;
 
     const isHomepage=document.body?.matches?.('body[data-base="./"]');
-    if (!isHomepage && !document.querySelector('link[data-mandala-mobile-nav]')) { const l=document.createElement('link'); l.rel='stylesheet'; l.href=resolveAsset('../css/mobile-navigation.css'); l.dataset.mandalaMobileNav='true'; document.head.appendChild(l); }
-    if (!isHomepage && !document.querySelector('script[data-mandala-mobile-nav]')) { const sc=document.createElement('script'); sc.src=resolveAsset('../js/mobile-navigation.js'); sc.dataset.mandalaMobileNav='true'; sc.async=true; document.head.appendChild(sc); }
     if (!isHomepage && !document.querySelector('link[data-mandala-public-ui]')) {
         const ui = document.createElement('link');
         ui.rel = 'stylesheet';
@@ -57,7 +55,7 @@
     const FALLBACK = "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85";
     let db = null;
     let dbPromise = null;
-    let publicData = { articles: [], videos: [], playlists: [], podcasts: [], topics: [], categories: [] };
+    let publicData = { articles: [], videos: [], playlists: [], topics: [], categories: [] };
     function esc(value){return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");}
     function youtubeId(value){if(!value)return "";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const url=new window.URL(text),host=url.hostname.replace(/^www\./,"").toLowerCase();if(host==="youtu.be")return url.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com")return url.searchParams.get("v")||(url.pathname.match(/\/(?:embed|shorts)\/([^/]+)/)||[])[1]||"";}catch(error){}return "";}
     function videoImage(video){const id=video.youtube_video_id||youtubeId(video.youtube_url);return video.thumbnail_url||(id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:FALLBACK);}
@@ -85,53 +83,7 @@
         try{return await dbPromise}catch(error){dbPromise=null;throw error;}
     }
     async function loadTable(name,select,order){let query=(await client()).from(name).select(select);if(order)query=query.order(order,{ascending:true,nullsFirst:false});const result=await query;if(result.error)throw result.error;return result.data||[];}
-    async function safeLoadTable(name,select,order){try{return await loadTable(name,select,order)}catch(error){console.error("Mandala: tabel "+name+" gagal dimuat.",error);return []}}
     function normalizePlaylist(row,categoryMap,index){const category=categoryMap[row.category_id];return{id:row.id||String(index+1),title:row.title||"Playlist Mandala",slug:row.slug||"",youtube_playlist_id:row.youtube_playlist_id||"",description:row.description||"",image:row.cover_image_url||category?.image_url||FALLBACK,category:category?.name||"Mandala",category_id:row.category_id||null,videoCount:0,status:row.status||"",featured:row.featured===true,sort_order:Number.isFinite(Number(row.sort_order))?Number(row.sort_order):9999,published_at:row.published_at||null,created_at:row.created_at||null};}
-
-    function normalizeAudioUrl(value){
-        if(!value)return "";
-        const text=String(value).trim();
-        if(text.startsWith("http://")||text.startsWith("https://"))return text;
-        const clean=text.replace(/^\/+/, "");
-        if(clean.startsWith("podcasts/")) return "https://roeckoabffhyctfkvbhw.supabase.co/functions/v1/podcast-audio?key="+encodeURIComponent(clean);
-        return clean;
-    }
-    function formatAudioTime(seconds){
-        const n=Math.max(0,Math.floor(Number(seconds)||0)),m=Math.floor(n/60),s=n%60;
-        return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-    }
-    function renderPodcasts(items){
-        const rail=document.getElementById("podcastRail");
-        if(!rail)return;
-        if(!items.length){rail.innerHTML='<div class="audio-empty">Belum ada audio yang dipublikasikan.</div>';return;}
-        rail.innerHTML=items.slice(0,8).map(item=>{
-            const image=item.cover_image_url||FALLBACK;
-            const url=normalizeAudioUrl(item.audio_url);
-            return '<button class="m-podcast-card" type="button" data-audio-url="'+esc(url)+'" data-audio-title="'+esc(item.title||"Mandala Audio")+'" data-audio-duration="'+esc(formatAudioTime(item.audio_duration))+'"><div class="m-podcast-thumb"><img src="'+esc(image)+'" alt="'+esc(item.title||"Mandala Audio")+'" loading="lazy"><span>▶</span></div><div><small>MANDALA AUDIO</small><strong>'+esc(item.title||"Tanpa judul")+'</strong><em>'+esc(formatAudioTime(item.audio_duration))+'</em></div></button>';
-        }).join("");
-        rail.querySelectorAll("[data-audio-url]").forEach(card=>card.addEventListener("click",()=>selectPodcast(card)));
-    }
-    function selectPodcast(card){
-        const audio=document.getElementById("mandalaAudio"),play=document.getElementById("audioPlay"),title=document.getElementById("audioTitle"),status=document.getElementById("audioStatus");
-        if(!audio)return;
-        const url=card.dataset.audioUrl||"";
-        if(!url){if(status)status.textContent="File audio belum tersedia.";return;}
-        audio.src=url; audio.load();
-        if(title)title.textContent=card.dataset.audioTitle||"Mandala Audio";
-        if(status)status.textContent="Memuat audio…";
-        audio.play().then(()=>{if(play)play.textContent="Ⅱ";if(status)status.textContent="Sedang diputar";}).catch(()=>{if(status)status.textContent="File audio belum dapat diputar.";});
-    }
-    function initAudioPlayer(){
-        const audio=document.getElementById("mandalaAudio"),play=document.getElementById("audioPlay"),progress=document.getElementById("audioProgress"),time=document.getElementById("audioTime"),status=document.getElementById("audioStatus");
-        if(!audio||!play)return;
-        play.addEventListener("click",()=>{if(!audio.src){if(status)status.textContent="Pilih cerita audio terlebih dahulu.";return;} if(audio.paused)audio.play();else audio.pause();});
-        audio.addEventListener("play",()=>{play.textContent="Ⅱ";if(status)status.textContent="Sedang diputar";});
-        audio.addEventListener("pause",()=>{play.textContent="▶";if(audio.currentTime>0&&status)status.textContent="Dijeda";});
-        audio.addEventListener("loadedmetadata",()=>{if(time)time.textContent=formatAudioTime(audio.currentTime);});
-        audio.addEventListener("timeupdate",()=>{if(time)time.textContent=formatAudioTime(audio.currentTime);if(progress&&audio.duration)progress.style.width=((audio.currentTime/audio.duration)*100)+"%";});
-        audio.addEventListener("ended",()=>{play.textContent="▶";if(status)status.textContent="Selesai";if(progress)progress.style.width="0%";});
-        audio.addEventListener("error",()=>{play.textContent="▶";if(status)status.textContent="File audio belum tersedia di Storage.";});
-    }
 
     function articleDate(article){return article.published_at||article.created_at||null;}
     function articleUrl(article){return `pages/artikel-detail.html${article.slug?`?slug=${encodeURIComponent(article.slug)}`:""}`;}
@@ -166,81 +118,21 @@
           </div>`;
     }
 
-    function renderHeroStory(items,categoryMap){
-        const element=document.getElementById("heroStory");
-        if(!element)return;
-        if(!items.length){element.innerHTML='<div class="hero-story-placeholder"><span class="placeholder-kicker">CERITA PILIHAN</span><strong>Arsip baru segera hadir di Mandala.</strong></div>';return;}
-        const sorted=[...items].sort((a,b)=>new Date(articleDate(b)||0)-new Date(articleDate(a)||0));
-        const article=sorted.find(item=>item.featured===true)||sorted[0];
-        const category=categoryMap[article.category_id]?.name||"ARTIKEL PILIHAN";
-        const image=article.cover_image_url||FALLBACK;
-        const date=dateText(articleDate(article));
-        element.innerHTML='<a class="hero-story-card" href="'+articleUrl(article)+'"><img src="'+esc(image)+'" alt="'+esc(article.title||"Cerita pilihan Mandala")+'" loading="eager" decoding="async"><div class="hero-story-copy"><div class="hero-story-label">'+esc(category)+' · PILIHAN REDAKSI</div><h2>'+esc(article.title||"Cerita pilihan Mandala")+'</h2><p>'+esc(article.excerpt||"Baca cerita lengkap dan temukan konteks di baliknya.")+'</p><div class="hero-story-meta"><span>'+esc(date||"MANDALA CHANNEL")+'</span><span>BACA CERITA ↗</span></div></div></a>';
-    }
-
     async function loadHomeData(){
-        const[articles,videos,playlists,podcasts,categories]=await Promise.all([safeLoadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),safeLoadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),safeLoadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),safeLoadTable("podcasts","id,title,slug,description,cover_image_url,youtube_url,youtube_video_id,category_id,status,published_at,created_at,featured,content_type,audio_url,audio_duration","published_at"),safeLoadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
+        const[articles,videos,playlists,categories]=await Promise.all([loadTable("articles","id,title,slug,excerpt,content,cover_image_url,category_id,published_at,created_at,status,featured","published_at"),loadTable("videos","id,title,slug,youtube_url,youtube_video_id,thumbnail_url,description,category_id,status,featured,published_at,created_at","published_at"),loadTable("playlists","id,title,slug,youtube_playlist_id,description,cover_image_url,category_id,status,featured,sort_order,published_at,created_at","sort_order"),loadTable("categories","id,name,slug,description,image_url,sort_order,is_active","sort_order")]);
         const activeCategories=categories.filter(category=>category.is_active!==false),categoryMap={};
         activeCategories.forEach(category=>{categoryMap[category.id]=category;});
-        const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published"),publicPodcasts=podcasts.filter(item=>item.status==="published"&&item.content_type==="audio").map(item=>({...item,audio_url:item.audio_url||"",audio_duration:Number(item.audio_duration)||0,cover_image_url:item.cover_image_url||FALLBACK})).sort((a,b)=>Number(b.featured)-Number(a.featured)||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
-        publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,podcasts:publicPodcasts,topics:activeCategories,categories:activeCategories};
+        const publicArticles=articles.filter(item=>item.status==="published"),publicVideos=videos.filter(item=>item.status==="published"),publicPlaylists=playlists.filter(item=>item.status==="published").map((item,index)=>normalizePlaylist(item,categoryMap,index)).sort((a,b)=>Number(b.featured)-Number(a.featured)||a.sort_order-b.sort_order||new Date(b.published_at||b.created_at||0)-new Date(a.published_at||a.created_at||0));
+        publicData={articles:publicArticles,videos:publicVideos,playlists:publicPlaylists,topics:activeCategories,categories:activeCategories};
         window.DATA=publicData;window.MandalaPublicData=publicData;
-        renderHeroStory(publicData.articles,categoryMap);
         renderFeaturedArticles(publicData.articles,categoryMap);
-        renderArticles(publicData.articles,categoryMap);renderEditorialDepth(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);renderPodcasts(publicData.podcasts);initAudioPlayer();
+        renderArticles(publicData.articles,categoryMap);renderVideos(publicData.videos,categoryMap);renderTopics(publicData.topics);renderPlaylistState(publicData.playlists);
         return publicData;
     }
     function getPublicData(){return publicData;}
-    function renderArticles(items,categoryMap){
-        const element=document.getElementById("articlesContainer");
-        if(!element)return;
-        if(!items.length){element.innerHTML='<div class="content-empty"><strong>Arsip sedang disiapkan</strong><span>Belum ada cerita yang diterbitkan. Kunjungi kembali untuk membaca karya terbaru Mandala.</span><a href="pages/artikel.html">Lihat arsip artikel ↗</a></div>';return;}
-        element.innerHTML=items.slice(0,4).map(article=>{
-            const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=articleUrl(article);
-            return '<article class="card"><a href="'+detailUrl+'"><div class="thumb"><img src="'+esc(image)+'" alt="'+esc(article.title||"Artikel")+'" loading="lazy"><span class="badge">'+esc(category)+'</span></div><div class="meta">'+esc(dateText(article.published_at||article.created_at))+'</div><h3>'+esc(article.title||"Artikel")+'</h3><p>'+esc(article.excerpt||"Baca selengkapnya →")+'</p></a></article>';
-        }).join("");
-    }
-    function renderEditorialDepth(items,categoryMap){
-        const targets=[
-            document.getElementById("dharmaContainer"),
-            document.getElementById("exploreContainer")
-        ];
-        if(!items.length)return;
-        const sorted=[...items].sort((a,b)=>new Date(articleDate(b)||0)-new Date(articleDate(a)||0));
-        const cards=sorted.slice(0,6).map((article,index)=>{
-            const image=article.cover_image_url||FALLBACK;
-            const category=categoryMap[article.category_id]?.name||"MANDALA";
-            return {article,image,category,index};
-        });
-        const culture=document.getElementById("dharmaContainer");
-        if(culture && cards.length){
-            culture.innerHTML=cards.slice(0,3).map(({article,image,category})=>`<article><a href="${articleUrl(article)}"><div class="m-culture-img"><img src="${esc(image)}" alt="${esc(article.title||"Artikel")}" loading="lazy"></div><small>${esc(category)}</small><h3>${esc(article.title||"Cerita Mandala")}</h3></a></article>`).join("");
-        }
-    }
-
-    function renderVideos(items,categoryMap){
-        const element=document.getElementById("videosContainer");
-        if(!element)return;
-        if(!items.length){element.innerHTML='<div class="content-empty content-empty-dark"><strong>Episode berikutnya sedang disiapkan</strong><span>Arsip video akan muncul di sini setelah redaksi menerbitkannya.</span><a href="pages/video.html">Buka arsip video ↗</a></div>';return;}
-        element.innerHTML=items.slice(0,4).map(video=>{
-            const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||"VIDEO";
-            const href=id?"https://www.youtube.com/watch?v="+encodeURIComponent(id):"pages/video.html";
-            return '<article class="card video"><a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer" data-public-video="'+esc(id)+'" data-public-title="'+esc(video.title||"Video Mandala")+'"><div class="thumb"><img src="'+esc(videoImage({...video,youtube_video_id:id}))+'" alt="'+esc(video.title||"Video Mandala")+'" loading="lazy"><span class="badge">'+esc(category)+'</span></div><div class="meta">VIDEO · '+esc(dateText(video.published_at||video.created_at))+'</div><h3>'+esc(video.title||"Video Mandala")+'</h3><p>Putar video ↗</p></a></article>';
-        }).join("");
-        element.querySelectorAll("[data-public-video]").forEach(link=>link.addEventListener("click",event=>{
-            if(typeof window.openVideo==="function"){event.preventDefault();window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle);}
-        }));
-    }
-    function renderTopics(items){
-        const element=document.getElementById("topicsContainer");
-        if(!element)return;
-        if(!items.length){element.innerHTML='<div class="topic-empty">Rubrik editorial akan muncul di sini setelah kategori diaktifkan oleh redaksi.</div>';return;}
-        element.innerHTML=items.slice(0,8).map((item,index)=>{
-            const number=String(index+1).padStart(2,"0");
-            return '<a class="m-topic-card" href="pages/artikel.html?category='+encodeURIComponent(item.id||"")+'"><span class="topic-number">'+number+'</span><div><small>RUBRIK / '+esc(item.name||"MANDALA")+'</small><h3>'+esc(item.name||"Cerita Mandala")+'</h3><p>'+esc(item.description||"Jelajahi cerita, gagasan, dan pengetahuan dari rubrik ini.")+'</p></div><span class="topic-arrow" aria-hidden="true">↗</span></a>';
-        }).join("");
-    }
+    function renderArticles(items,categoryMap){const element=document.getElementById("articlesContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(article=>{const image=article.cover_image_url||FALLBACK,category=categoryMap[article.category_id]?.name||"ARTIKEL",detailUrl=articleUrl(article);return`<article class="card"><a href="${detailUrl}"><div class="thumb"><img src="${esc(image)}" alt="${esc(article.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">${esc(dateText(article.published_at||article.created_at))}</div><h3>${esc(article.title||"Artikel")}</h3><p>${esc(article.excerpt||"Baca selengkapnya →")}</p></a></article>`;}).join("");}
+    function renderVideos(items,categoryMap){const element=document.getElementById("videosContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,4).map(video=>{const id=video.youtube_video_id||youtubeId(video.youtube_url),category=categoryMap[video.category_id]?.name||"VIDEO";return`<article class="card video"><a href="#" data-public-video="${esc(id)}" data-public-title="${esc(video.title)}"><div class="thumb"><img src="${esc(videoImage({...video,youtube_video_id:id}))}" alt="${esc(video.title)}" loading="lazy"><span class="badge">${esc(category)}</span></div><div class="meta">VIDEO · ${esc(dateText(video.published_at||video.created_at))}</div><h3>${esc(video.title||"Video Mandala")}</h3><p>Putar video →</p></a></article>`;}).join("");element.querySelectorAll("[data-public-video]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.publicVideo,link.dataset.publicTitle);}));}
+    function renderTopics(items){const element=document.getElementById("topicsContainer");if(!element||!items.length)return;element.innerHTML=items.slice(0,6).map(topic=>`<a class="topic" href="topics/${encodeURIComponent(topic.slug||"")}.html"><h3>${esc(topic.name||"Topik")}</h3><p>${esc(topic.description||`Jelajahi cerita Mandala tentang ${String(topic.name||"").toLowerCase()}.`)}</p></a>`).join("");}
     function renderPlaylistState(items){const track=document.getElementById("playlistTrack"),dots=document.getElementById("playlistDots");if(!track)return;if(items.length)return;track.innerHTML=`<div class="playlist-empty-state">Playlist belum tersedia.</div>`;if(dots)dots.innerHTML="";}
     window.getPublicData=getPublicData;window.loadHomeData=loadHomeData;window.MandalaPublic={loadHomeData,getPublicData};
-    if(isHomepage){const boot=()=>loadHomeData().catch(error=>{console.error("Mandala: konten beranda gagal dimuat.",error);});if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();}
 })();
