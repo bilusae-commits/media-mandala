@@ -57,6 +57,11 @@
   .section {
     margin-top: 48px;
   }
+  #mandala-tv > .horizontal {
+    width: 100%;
+    max-width: 720px;
+    margin-inline: auto;
+  }
   #mandala-tv > .horizontal,
   #tokoh > .horizontal,
   #audio > .horizontal#playlist {
@@ -244,6 +249,9 @@
     font-size: clamp(18px, 2.5vw, 28px);
   }
   #mandala-tv > .horizontal {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
@@ -667,7 +675,12 @@
     document.querySelectorAll('.bottom-nav a').forEach(item => item.classList.remove('active'));
     link.classList.add('active');
   }));
-  // Update the active bottom item while navigating the single long page.
+  const desktopNavLinks = [...document.querySelectorAll('.desktop-nav a')];
+  desktopNavLinks.forEach(link => link.addEventListener('click', () => {
+    desktopNavLinks.forEach(item => item.classList.remove('active'));
+    link.classList.add('active');
+  }));
+  // Keep both navigation styles in sync with the section visible on screen.
   const sections = ['beranda','cerita','mandala-tv','audio','nusantara'];
   const navLinks = [...document.querySelectorAll('.bottom-nav a')];
   if ('IntersectionObserver' in window) {
@@ -676,6 +689,7 @@
       if (!visible) return;
       const map = {'beranda':0,'cerita':1,'mandala-tv':2,'audio':3,'nusantara':4};
       navLinks.forEach((link,index) => link.classList.toggle('active', index === map[visible.target.id]));
+      desktopNavLinks.forEach((link,index) => link.classList.toggle('active', index === map[visible.target.id]));
     }, {rootMargin:'-18% 0px -65% 0px',threshold:[0,.1,.25,.5]});
     sections.forEach(id => { const section = document.getElementById(id); if(section) observer.observe(section); });
   }
