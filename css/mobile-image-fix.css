@@ -301,3 +301,60 @@ body[data-base="./"] .mobile-nav-toggle { display:none; }
     animation-duration:.01ms !important;
   }
 }
+
+/* Keep text-bearing thumbnails unobstructed: labels sit below the image. */
+body[data-base="./"] .thumb {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  height:auto;
+  aspect-ratio:auto;
+  overflow:visible;
+}
+body[data-base="./"] .thumb img {
+  flex:0 0 auto;
+  width:100% !important;
+  height:auto !important;
+  aspect-ratio:16 / 9;
+  object-fit:contain !important;
+}
+body[data-base="./"] .thumb .badge {
+  position:static !important;
+  inset:auto !important;
+  display:inline-flex;
+  align-self:flex-start;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:8px 0 0 !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere;
+}
+
+/* Playlist artwork remains fully visible; the title lives in its own caption area. */
+body[data-base="./"] .play-card a {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+}
+body[data-base="./"] .play-card img {
+  flex:1 1 auto;
+  min-height:0;
+  width:100% !important;
+  height:auto !important;
+  object-fit:contain !important;
+}
+body[data-base="./"] .play-card::after { display:none; }
+body[data-base="./"] .pc-info {
+  position:static;
+  flex:0 0 auto;
+  min-height:74px;
+  background:#082d56;
+  text-align:center;
+}
+body[data-base="./"] .pc-info strong {
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+}
