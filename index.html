@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/home.css">
 <link rel="stylesheet" href="css/index-fluid-fix.css">
 <link rel="stylesheet" href="css/index-polish.css?v=20260910.1">
+<link rel="stylesheet" href="css/mobile-image-fix.css?v=20261013.1">
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span>MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA</span><span>Instagram · YouTube · Kontak</span></div></div>
@@ -33,6 +34,22 @@
 <script src="js/config.js"></script><script src="js/public-content.js?v=20260908.1"></script><script src="js/homepage-settings.js?v=20260907-02"></script>
 <script>
 "use strict";
+/* Fallback berjenjang untuk gambar playlist yang gagal dimuat. */
+document.addEventListener("error",function(event){
+  const img=event.target;
+  if(!(img instanceof HTMLImageElement)||!img.closest("#playlistTrack .play-card"))return;
+  const src=img.currentSrc||img.src;
+  const youtube=/\/(?:vi|vi_webp)\/[^/]+\/(?:maxresdefault|hqdefault|mqdefault)\.jpg(?:\?.*)?$/i.test(src);
+  if(/\/maxresdefault\.jpg(?:\?.*)?$/i.test(src)){
+    img.src=src.replace(/maxresdefault\.jpg(?:\?.*)?$/i,"hqdefault.jpg");return;
+  }
+  if(/\/hqdefault\.jpg(?:\?.*)?$/i.test(src)){
+    img.src=src.replace(/hqdefault\.jpg(?:\?.*)?$/i,"mqdefault.jpg");return;
+  }
+  if(img.dataset.mandalaFallbackDone==="1")return;
+  img.dataset.mandalaFallbackDone="1";
+  img.src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85";
+},true);
 (function(){const header=document.getElementById("siteHeader");if(!header)return;const sync=()=>header.classList.toggle("scrolled",window.scrollY>20);sync();window.addEventListener("scroll",sync,{passive:true})})();
 function openVideo(id,title){if(!id){alert("Video belum memiliki ID YouTube.");return}const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame"),modalTitle=document.getElementById("modalTitle");if(!modal||!frame)return;if(modalTitle)modalTitle.textContent=title||"Mandala Channel";frame.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1&rel=0";modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
 function closeVideo(){const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame");if(frame)frame.src="";if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}document.body.style.overflow=""}window.openVideo=openVideo;window.closeVideo=closeVideo;document.getElementById("closeModal")?.addEventListener("click",closeVideo);document.getElementById("modal")?.addEventListener("click",e=>{if(e.target.id==="modal")closeVideo()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeVideo()});document.getElementById("newsletterForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Form newsletter siap dihubungkan ke layanan email.")});
