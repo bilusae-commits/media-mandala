@@ -762,3 +762,150 @@ body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing td{
 body[data-base="./"] #homeAudioSection #homeAudioTitle.is-playing{
   color:#78c4ff!important;
 }
+
+
+/* Correction: restore the original centered, layered swipe carousel; make each card landscape. */
+body[data-base="./"] #playlistSection .playlist-stage{
+  min-height:330px!important;
+  padding:20px 48px 38px!important;
+}
+body[data-base="./"] #playlistSection .playlist-track{
+  position:relative!important;
+  display:block!important;
+  height:270px!important;
+  max-width:1080px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  overflow:visible!important;
+  scroll-snap-type:none!important;
+}
+body[data-base="./"] #playlistSection .play-card,
+body[data-base="./"] #playlistSection .play-card.pos-0,
+body[data-base="./"] #playlistSection .play-card.pos-1,
+body[data-base="./"] #playlistSection .play-card.pos--1,
+body[data-base="./"] #playlistSection .play-card.pos-2,
+body[data-base="./"] #playlistSection .play-card.pos--2,
+body[data-base="./"] #playlistSection .play-card.pos-hidden{
+  position:absolute!important;
+  top:50%!important;
+  left:50%!important;
+  flex:none!important;
+  width:clamp(260px,29vw,350px)!important;
+  height:238px!important;
+  aspect-ratio:auto!important;
+  transform:translate(-50%,-50%) scale(.68)!important;
+  transform-origin:center center!important;
+  opacity:0!important;
+  filter:none!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  scroll-snap-align:none!important;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .35s ease,filter .35s ease,box-shadow .35s ease!important;
+}
+body[data-base="./"] #playlistSection .play-card.pos-0{
+  z-index:10!important;
+  transform:translate(-50%,-50%) scale(1)!important;
+  opacity:1!important;
+  filter:none!important;
+  pointer-events:auto!important;
+}
+body[data-base="./"] #playlistSection .play-card.pos-1{
+  z-index:6!important;
+  transform:translate(-50%,-50%) translateX(clamp(145px,17vw,205px)) scale(.82)!important;
+  opacity:.8!important;
+  filter:brightness(.8)!important;
+  pointer-events:auto!important;
+}
+body[data-base="./"] #playlistSection .play-card.pos--1{
+  z-index:6!important;
+  transform:translate(-50%,-50%) translateX(clamp(-205px,-17vw,-145px)) scale(.82)!important;
+  opacity:.8!important;
+  filter:brightness(.8)!important;
+  pointer-events:auto!important;
+}
+body[data-base="./"] #playlistSection .play-card.pos-2{
+  z-index:3!important;
+  transform:translate(-50%,-50%) translateX(clamp(245px,26vw,305px)) scale(.68)!important;
+  opacity:.34!important;
+  pointer-events:auto!important;
+}
+body[data-base="./"] #playlistSection .play-card.pos--2{
+  z-index:3!important;
+  transform:translate(-50%,-50%) translateX(clamp(-305px,-26vw,-245px)) scale(.68)!important;
+  opacity:.34!important;
+  pointer-events:auto!important;
+}
+body[data-base="./"] #playlistSection .play-card.pos-hidden{opacity:0!important}
+body[data-base="./"] #playlistSection .play-card a{
+  display:flex!important;flex-direction:row!important;align-items:stretch!important;
+  height:100%!important;width:100%!important;
+}
+body[data-base="./"] #playlistSection .play-card img{
+  display:block!important;flex:1 1 62%!important;width:62%!important;height:100%!important;
+  min-width:0!important;min-height:0!important;object-fit:cover!important;padding:0!important;
+  background:#e9eef3!important;
+}
+body[data-base="./"] #playlistSection .pc-info{
+  flex:0 0 38%!important;min-width:0!important;min-height:0!important;
+  padding:12px!important;border-top:0!important;border-left:3px solid #c8a24b!important;
+  justify-content:center!important;background:#fff!important;
+}
+body[data-base="./"] #playlistSection .pc-info strong{font-size:clamp(12px,1vw,15px)!important}
+body[data-base="./"] #playlistSection .pc-info span{font-size:7px!important;overflow-wrap:anywhere!important}
+body[data-base="./"] #playlistSection .play-arrow{
+  top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;
+}
+body[data-base="./"] #playlistSection .play-arrow.prev{left:12px!important;right:auto!important}
+body[data-base="./"] #playlistSection .play-arrow.next{right:12px!important}
+body[data-base="./"] #playlistSection .play-dots{bottom:13px!important;left:50%!important;transform:translateX(-50%)!important;max-width:70%!important}
+body[data-base="./"] #playlistSection .playlist-stage::before{display:block!important}
+body[data-base="./"] #playlistSection .play-hint{display:block!important}
+@media(max-width:760px){
+ body[data-base="./"] #playlistSection .playlist-stage{min-height:290px!important;padding:15px 26px 38px!important}
+ body[data-base="./"] #playlistSection .playlist-track{height:235px!important}
+ body[data-base="./"] #playlistSection .play-card,
+ body[data-base="./"] #playlistSection .play-card.pos-0,
+ body[data-base="./"] #playlistSection .play-card.pos-1,
+ body[data-base="./"] #playlistSection .play-card.pos--1,
+ body[data-base="./"] #playlistSection .play-card.pos-2,
+ body[data-base="./"] #playlistSection .play-card.pos--2,
+ body[data-base="./"] #playlistSection .play-card.pos-hidden{
+   width:clamp(220px,64vw,270px)!important;height:174px!important;
+ }
+ body[data-base="./"] #playlistSection .play-card.pos-1{transform:translate(-50%,-50%) translateX(115px) scale(.78)!important}
+ body[data-base="./"] #playlistSection .play-card.pos--1{transform:translate(-50%,-50%) translateX(-115px) scale(.78)!important}
+ body[data-base="./"] #playlistSection .play-card.pos-2{transform:translate(-50%,-50%) translateX(205px) scale(.64)!important;opacity:0!important}
+ body[data-base="./"] #playlistSection .play-card.pos--2{transform:translate(-50%,-50%) translateX(-205px) scale(.64)!important;opacity:0!important}
+ body[data-base="./"] #playlistSection .pc-info{padding:9px!important;border-left-width:2px!important}
+ body[data-base="./"] #playlistSection .pc-info strong{font-size:12px!important}
+ body[data-base="./"] #playlistSection .pc-info span{font-size:6px!important}
+ body[data-base="./"] #playlistSection .play-arrow{width:28px!important;height:28px!important}
+ body[data-base="./"] #playlistSection .play-arrow.prev{left:5px!important}
+ body[data-base="./"] #playlistSection .play-arrow.next{right:5px!important}
+}
+@media(max-width:380px){
+ body[data-base="./"] #playlistSection .play-card,
+ body[data-base="./"] #playlistSection .play-card.pos-0,
+ body[data-base="./"] #playlistSection .play-card.pos-1,
+ body[data-base="./"] #playlistSection .play-card.pos--1,
+ body[data-base="./"] #playlistSection .play-card.pos-2,
+ body[data-base="./"] #playlistSection .play-card.pos--2,
+ body[data-base="./"] #playlistSection .play-card.pos-hidden{
+   width:214px!important;height:164px!important;
+ }
+ body[data-base="./"] #playlistSection .play-card.pos-1{transform:translate(-50%,-50%) translateX(100px) scale(.74)!important}
+ body[data-base="./"] #playlistSection .play-card.pos--1{transform:translate(-50%,-50%) translateX(-100px) scale(.74)!important}
+}
+
+/* Darker blue palette for the audio table and player. */
+body[data-base="./"] .home-audio-panel,
+body[data-base="./"] .home-audio-table-wrap,
+body[data-base="./"] .home-audio-player{background:#061a30!important}
+body[data-base="./"] .home-audio-table thead th,
+body[data-base="./"] .home-audio-search{background:#082640!important}
+body[data-base="./"] .home-audio-table tbody tr:hover,
+body[data-base="./"] .home-audio-table tbody tr.is-playing{background:#0b2c49!important}
+body[data-base="./"] .home-audio-table tbody tr.is-playing .home-audio-episode,
+body[data-base="./"] .home-audio-table tbody tr.is-playing .home-audio-description,
+body[data-base="./"] .home-audio-table tbody tr.is-playing td,
+body[data-base="./"] #homeAudioSection #homeAudioTitle.is-playing{color:#79b9ee!important}
