@@ -10,7 +10,7 @@ function show(text,type="info"){
 function publicUrl(path){return API?.getClient?null:null}
 async function client(){return await API.getClient()}
 async function optimize(file){
- if(!file?.type?.startsWith("image/"))throw new Error("File cover harus berupa gambar.");
+ if(!file?.type?.startsWith("image/"))throw new Error("Berkas sampul harus berupa gambar.");
  if(file.size>8*1024*1024)throw new Error("Ukuran cover maksimal 8 MB.");
  const bitmap=await createImageBitmap(file);
  const max=1800,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
