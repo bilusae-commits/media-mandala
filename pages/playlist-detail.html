@@ -33,8 +33,8 @@ async function loadPlaylist(){
   const {data,error}=await query.maybeSingle();
   if(error){console.error('PLAYLIST LOAD ERROR',error);showEmpty('Gagal memuat daftar putar','Terjadi masalah saat mengambil data dari Supabase.');return}
   if(!data){showEmpty('Daftar putar tidak ditemukan','Daftar putar belum diterbitkan atau tidak tersedia.');return}
-  document.title=data.title+' — Mandala Channel';
-  $('title').textContent=data.title;$('description').textContent=data.description||'Koleksi video Mandala Channel.';$('playerTitle').textContent=data.title;$('playerDesc').textContent=data.description||'Koleksi video Mandala Channel.';
+  document.title=data.title+' — Mandala';
+  $('title').textContent=data.title;$('description').textContent=data.description||'Koleksi video Mandala.';$('playerTitle').textContent=data.title;$('playerDesc').textContent=data.description||'Koleksi video Mandala.';
   const pid=String(data.youtube_playlist_id||'').trim();
   if(!pid){showEmpty('Daftar putar YouTube belum tersedia','Tambahkan ID daftar putar YouTube melalui panel pengelola daftar putar.');return}
   $('frame').innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/videoseries?list='+encodeURIComponent(pid)+'&rel=0" title="'+esc(data.title)+'" loading="eager" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
