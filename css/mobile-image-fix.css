@@ -607,3 +607,56 @@ body[data-base="./"] .pc-info span { overflow-wrap:anywhere; line-height:1.4; }
   body[data-base="./"] .cards,
   body[data-base="./"] .podcasts { scroll-behavior:auto; }
 }
+
+
+/* Tablet header: use the same compact menu when six links no longer fit. */
+@media (min-width:761px) and (max-width:900px) {
+  body[data-base="./"] header#siteHeader .nav { position:relative; }
+  body[data-base="./"] .mobile-nav-toggle {
+    display:inline-flex;
+    flex:0 0 40px;
+    width:40px;
+    height:40px;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #dbe2e8;
+    border-radius:4px;
+    background:#fff;
+    color:#082d56;
+    font-size:22px;
+    line-height:1;
+    cursor:pointer;
+  }
+  body[data-base="./"] header#siteHeader .yt { display:none; }
+  body[data-base="./"] header#siteHeader .links {
+    display:none;
+    position:absolute;
+    top:calc(100% + 1px);
+    left:0;
+    right:0;
+    z-index:1100;
+    height:auto;
+    max-height:calc(100svh - 90px);
+    overflow-x:hidden;
+    overflow-y:auto;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:8px 14px;
+    border:1px solid #e2e7ec;
+    background:#fff;
+    box-shadow:0 14px 28px rgba(6,31,60,.16);
+  }
+  body[data-base="./"] header#siteHeader .links.is-open { display:flex; }
+  body[data-base="./"] header#siteHeader .links a {
+    display:flex;
+    width:100%;
+    min-height:44px;
+    height:auto;
+    padding:12px 4px;
+    border-bottom:1px solid #edf0f3;
+    font-size:12px;
+  }
+  body[data-base="./"] header#siteHeader .links a:last-child { border-bottom:0; }
+  body[data-base="./"] header#siteHeader .links a::after { display:none; }
+}
