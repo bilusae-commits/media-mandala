@@ -480,3 +480,130 @@ body[data-base="./"] .sr-only {
   body[data-base="./"] .home-audio-table td { padding:11px 8px; }
   body[data-base="./"] .home-audio-player { padding:14px 12px; }
 }
+
+
+/* Responsive correction pass: preserve the intended layout instead of forcing
+   every image or content block into the same treatment. */
+body[data-base="./"] .thumb {
+  display:block;
+  height:auto;
+  aspect-ratio:16 / 9;
+  overflow:hidden;
+  border-radius:4px;
+  background:#e8ebee;
+}
+body[data-base="./"] .thumb img {
+  width:100% !important;
+  height:100% !important;
+  aspect-ratio:auto;
+  object-fit:cover !important;
+  object-position:center;
+}
+body[data-base="./"] .thumb .badge {
+  position:absolute !important;
+  left:10px !important;
+  bottom:10px !important;
+  inset:auto auto 10px 10px !important;
+  margin:0 !important;
+  width:auto !important;
+  max-width:calc(100% - 20px) !important;
+  white-space:normal;
+  background:rgba(255,255,255,.96);
+  color:#082d56;
+}
+body[data-base="./"] .home-audio-table-wrap {
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+}
+body[data-base="./"] .home-audio-table { min-width:590px; table-layout:auto; }
+body[data-base="./"] .home-audio-table th:first-child { min-width:250px; width:auto; }
+body[data-base="./"] .home-audio-table th:nth-child(2) { min-width:115px; width:125px; }
+body[data-base="./"] .home-audio-table th:nth-child(3) { min-width:78px; width:82px; }
+body[data-base="./"] .home-audio-table th:last-child { min-width:64px; width:64px; }
+body[data-base="./"] .home-audio-table td:nth-child(2),
+body[data-base="./"] .home-audio-table th:nth-child(2) { display:table-cell; }
+body[data-base="./"] .home-audio-table td:first-child { overflow-wrap:anywhere; }
+body[data-base="./"] .play-card {
+  background:#fff;
+}
+body[data-base="./"] .play-card img {
+  flex:1 1 auto;
+  min-height:0;
+  width:100% !important;
+  height:auto !important;
+  object-fit:contain !important;
+  object-position:center;
+  background:#f3f5f7;
+}
+body[data-base="./"] .pc-info { min-height:74px; }
+body[data-base="./"] .pc-info span { overflow-wrap:anywhere; line-height:1.4; }
+
+@media (max-width:760px) {
+  body[data-base="./"] .home-audio-table-wrap { margin-inline:0; }
+  body[data-base="./"] .home-audio-table { min-width:570px; }
+  body[data-base="./"] .home-audio-table th,
+  body[data-base="./"] .home-audio-table td { padding:12px 14px; }
+  body[data-base="./"] .home-audio-table th:first-child { width:auto; min-width:245px; }
+  body[data-base="./"] .home-audio-table th:nth-child(2),
+  body[data-base="./"] .home-audio-table td:nth-child(2) { display:table-cell; }
+  body[data-base="./"] .home-audio-table th:nth-child(3) { width:82px; }
+  body[data-base="./"] .home-audio-table th:last-child { width:64px; }
+}
+@media (max-width:560px) {
+  /* Article and video cards become a swipeable rail rather than a tall stack. */
+  body[data-base="./"] .cards {
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    margin-inline:-16px;
+    padding:2px 16px 16px;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:16px;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+  }
+  body[data-base="./"] .cards > .card {
+    flex:0 0 min(78vw,300px);
+    width:min(78vw,300px);
+    scroll-snap-align:start;
+  }
+  body[data-base="./"] .cards > .card .thumb { aspect-ratio:16 / 9; }
+  body[data-base="./"] .topicGrid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  body[data-base="./"] .topic { padding:16px; }
+  body[data-base="./"] .topic h3 { font-size:16px; }
+  body[data-base="./"] .topic p { font-size:11px; }
+  body[data-base="./"] .home-audio-table-wrap::after { content:"Geser tabel ke samping untuk melihat kolom lainnya"; display:block; padding:0 12px 10px; color:#758393; font-size:10px; }
+  body[data-base="./"] .home-audio-table { min-width:570px; }
+  body[data-base="./"] .podcasts {
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    margin-inline:-16px;
+    padding:2px 16px 16px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+  }
+  body[data-base="./"] .podcasts > .podcast {
+    flex:0 0 min(86vw,390px);
+    width:min(86vw,390px);
+    grid-template-columns:minmax(105px,36%) minmax(0,1fr);
+    align-self:stretch;
+    scroll-snap-align:start;
+  }
+  body[data-base="./"] .podcasts > .podcast > img { width:100%; height:100%; min-height:170px; aspect-ratio:auto; object-fit:cover; }
+  body[data-base="./"] .podcasts > .podcast .copy { padding:14px; }
+  body[data-base="./"] .podcasts > .podcast h3 { font-size:18px; }
+  body[data-base="./"] .podcasts > .podcast p { font-size:11px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  body[data-base="./"] .cards,
+  body[data-base="./"] .podcasts { scroll-behavior:auto; }
+}
