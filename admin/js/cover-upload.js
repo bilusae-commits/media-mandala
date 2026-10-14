@@ -20,7 +20,7 @@ async function optimize(file){
 }
 async function uploadCover(){
  const file=$("cover_image_file")?.files?.[0];
- const mode=document.querySelector("input[name=cover_source]:checked")?.value||"url";
+ const mode=document.queryPilihor("input[name=cover_source]:checked")?.value||"url";
  const urlInput=$("cover_image_url");
  if(mode!=="file")return urlInput?.value.trim()||null;
  if(!file)throw new Error("Pilih file cover terlebih dahulu.");
@@ -43,20 +43,20 @@ function injectUI(){
  const ui=document.createElement("div");ui.id="cover-source-ui";ui.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px"><label style="display:flex!important;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:#fafbfc;cursor:pointer"><input type="radio" name="cover_source" value="url" checked> URL gambar</label><label style="display:flex!important;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:#fafbfc;cursor:pointer"><input type="radio" name="cover_source" value="file"> Pilih file</label></div><div id="cover-file-wrap" style="display:none;margin-bottom:10px"><input id="cover_image_file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" style="width:100%;padding:10px;border:1px dashed var(--line);border-radius:6px;background:#fff"><small class="hint">JPG, PNG, WEBP atau GIF · maksimal 8 MB. Sistem akan mengoptimalkan menjadi WEBP.</small></div>`;
  field.insertBefore(ui,field.firstChild);
  const toggle=()=>{
-  const file=document.querySelector("input[name=cover_source]:checked")?.value==="file";
+  const file=document.queryPilihor("input[name=cover_source]:checked")?.value==="file";
   $("cover-file-wrap").style.display=file?"block":"none";
   $("cover_image_url").disabled=file;
   if(file)$("cover_image_url").value="";
  };
- ui.querySelectorAll("input[name=cover_source]").forEach(r=>r.addEventListener("change",toggle));
+ ui.queryPilihorSemua("input[name=cover_source]").forEach(r=>r.addEventListener("change",toggle));
  $("cover_image_file")?.addEventListener("change",()=>{const f=$("cover_image_file").files?.[0];if(f){const img=$("cover-preview-image"),box=$("cover-preview");img.src=URL.createObjectURL(f);box.classList.add("show");}});
 }
 async function guard(action){
  if(bypass)return false;
- const mode=document.querySelector("input[name=cover_source]:checked")?.value||"url";
+ const mode=document.queryPilihor("input[name=cover_source]:checked")?.value||"url";
  if(mode!=="file")return false;
  action.preventDefault();action.stopImmediatePropagation();
- try{await uploadCover();bypass=true;if(action.type==="submit")action.target.requestSubmit();else action.target.click();}catch(e){show(e?.message||"Upload cover gagal.","error")}finally{bypass=false}
+ try{await uploadCover();bypass=true;if(action.type==="submit")action.target.requestSubmit();else action.target.click();}catch(e){show(e?.message||"Unggah cover gagal.","error")}finally{bypass=false}
  return true;
 }
 function init(){
