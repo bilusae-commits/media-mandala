@@ -56,7 +56,7 @@
     dots?.querySelectorAll("[data-dot]").forEach(dot=>dot.addEventListener("click",()=>{go(Number(dot.dataset.dot));startAuto()}));
     if(stage&&!stage.dataset.swipeReady){
       stage.dataset.swipeReady="true";
-      stage.addEventListener("pointerdown",event=>{if(event.target.closest("button"))return;startX=event.clientX;startY=event.clientY;dragging=true;try{stage.setPointerCapture(event.pointerId)}catch(e){}});
+      stage.addEventListener("pointerdown",event=>{if(event.target.closest("button"))return;startX=event.clientX;startY=event.clientY;dragging=true;});
       stage.addEventListener("pointerup",event=>{if(!dragging)return;dragging=false;const dx=event.clientX-startX,dy=event.clientY-startY;if(Math.abs(dx)>35&&Math.abs(dx)>Math.abs(dy)*1.2){suppressClick=true;go(index+(dx<0?1:-1));startAuto();stage.classList.remove("is-dragging")}});
       stage.addEventListener("pointercancel",()=>{dragging=false;stage.classList.remove("is-dragging")});
       stage.addEventListener("click",event=>{if(suppressClick){event.preventDefault();event.stopPropagation();suppressClick=false}},true);
