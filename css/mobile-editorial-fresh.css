@@ -231,3 +231,7 @@ body[data-base="./"] #playlistSection .playlist-stage img {
     transition: none !important;
   }
 }
+
+
+/* Keep the homepage audio list bounded and vertically scrollable on phones. */
+@media(max-width:560px){body[data-base="./"] .home-audio-table-wrap{max-height:360px!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important}}
