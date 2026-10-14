@@ -235,3 +235,152 @@ body[data-base="./"] #playlistSection .playlist-stage img {
 
 /* Keep the homepage audio list bounded and vertically scrollable on phones. */
 @media(max-width:560px){body[data-base="./"] .home-audio-table-wrap{max-height:360px!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important}}
+
+
+/* MANDALA homepage polish — editorial cards, video shelf and bounded audio list. */
+/* Latest stories: keep mobile cover art fully visible instead of cropping important subjects. */
+@media (max-width:760px){
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-item img,
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-main img,
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card img{
+    object-fit:contain!important;
+    object-position:center!important;
+    background:#eef1f4!important;
+    transform:none!important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-main{
+    background:#eef1f4!important;
+  }
+}
+/* Ruang Redaksi: a horizontal editorial shelf on both desktop and mobile. */
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch;
+  gap:18px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  padding:2px 2px 16px!important;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:#c6ced7 transparent;
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card{
+  flex:0 0 clamp(230px,25vw,320px)!important;
+  min-width:0!important;
+  scroll-snap-align:start;
+  border:1px solid #e6eaf0;
+  border-radius:8px;
+  background:#fff;
+  overflow:hidden;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(8,45,86,.09);
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card>a{display:block;height:100%}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer .thumb{
+  aspect-ratio:16/10!important;
+  border-radius:0!important;
+  background:#edf1f5;
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer .thumb img{
+  object-fit:cover!important;
+  object-position:center!important;
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer .meta,
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer h3,
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer p{
+  margin-left:14px!important;
+  margin-right:14px!important;
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer h3{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  min-height:2.5em;
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer p{padding-bottom:12px}
+/* Video shelf: distinct premium dark cards, landscape thumbnails, controlled image framing. */
+body[data-base="./"] main > section.dark #videosContainer{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  gap:20px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  padding:3px 2px 18px!important;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.35) transparent;
+}
+body[data-base="./"] main > section.dark #videosContainer>.card{
+  flex:0 0 clamp(270px,34vw,420px)!important;
+  min-width:0!important;
+  overflow:hidden;
+  scroll-snap-align:start;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:9px;
+  background:linear-gradient(155deg,#123b61,#092845);
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+}
+body[data-base="./"] main > section.dark #videosContainer .thumb{
+  aspect-ratio:16/9!important;
+  border-radius:0!important;
+  background:#142a3d!important;
+}
+body[data-base="./"] main > section.dark #videosContainer .thumb img{
+  object-fit:cover!important;
+  object-position:center!important;
+  transform:scale(1.09);
+}
+body[data-base="./"] main > section.dark #videosContainer>.card:hover .thumb img{transform:scale(1.13)}
+body[data-base="./"] main > section.dark #videosContainer .meta,
+body[data-base="./"] main > section.dark #videosContainer h3,
+body[data-base="./"] main > section.dark #videosContainer p{margin-left:16px!important;margin-right:16px!important}
+body[data-base="./"] main > section.dark #videosContainer h3{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  min-height:2.5em;
+}
+body[data-base="./"] main > section.dark #videosContainer p{padding-bottom:14px}
+@media(max-width:760px){
+  body[data-base="./"] main > section:nth-of-type(3) #articlesContainer{gap:12px!important}
+  body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card{flex-basis:72vw!important;max-width:280px}
+  body[data-base="./"] main > section:nth-of-type(3) #articlesContainer .card h3{font-size:14px!important;line-height:1.3}
+  body[data-base="./"] main > section.dark #videosContainer{gap:13px!important}
+  body[data-base="./"] main > section.dark #videosContainer>.card{flex-basis:78vw!important;max-width:330px}
+  body[data-base="./"] main > section.dark #videosContainer .meta{font-size:8px!important}
+  body[data-base="./"] main > section.dark #videosContainer h3{font-size:16px!important;line-height:1.3}
+  body[data-base="./"] main > section.dark #videosContainer p{font-size:10px!important;line-height:1.45}
+}
+/* Audio podcast table must remain bounded and vertically scrollable on desktop too. */
+body[data-base="./"] #homeAudioSection .home-audio-table-wrap{
+  height:min(430px,58vh)!important;
+  max-height:min(430px,58vh)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+}
+body[data-base="./"] footer .foot .foot-motto{
+  margin-top:12px;
+  color:#f0e6d2;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(15px,1.25vw,19px);
+  font-style:italic;
+  letter-spacing:.035em;
+  line-height:1.4;
+}
+@media(max-width:760px){
+  body[data-base="./"] #homeAudioSection .home-audio-table-wrap{
+    height:360px!important;
+    max-height:360px!important;
+  }
+}
