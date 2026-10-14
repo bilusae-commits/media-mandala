@@ -1,0 +1,86 @@
+/* MANDALA — phone layout audit
+   Only non-playlist homepage rails are converted back to normal document flow.
+   Playlist remains swipeable via its existing carousel. */
+@media (max-width: 560px) {
+  body[data-base="./"] .cards,
+  body[data-base="./"] .podcasts {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  body[data-base="./"] .cards > .card,
+  body[data-base="./"] .podcasts > .podcast {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    flex: initial !important;
+    scroll-snap-align: none !important;
+  }
+
+  /* The audio table fits the phone width; no sideways scrolling. */
+  body[data-base="./"] .home-audio-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  body[data-base="./"] .home-audio-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  body[data-base="./"] .home-audio-table th,
+  body[data-base="./"] .home-audio-table td {
+    box-sizing: border-box;
+    padding: 10px 7px !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Hide date only on narrow phones so episode, duration and play fit. */
+  body[data-base="./"] .home-audio-table th:nth-child(2),
+  body[data-base="./"] .home-audio-table td:nth-child(2) {
+    display: none !important;
+  }
+
+  body[data-base="./"] .home-audio-table th:first-child { width: auto !important; }
+  body[data-base="./"] .home-audio-table th:nth-child(3) { width: 64px !important; }
+  body[data-base="./"] .home-audio-table th:last-child { width: 46px !important; }
+  body[data-base="./"] .home-audio-table td:first-child { width: auto; }
+  body[data-base="./"] .home-audio-table td:nth-child(3) { width: 64px; }
+  body[data-base="./"] .home-audio-table td:last-child { width: 46px; }
+
+  body[data-base="./"] .home-audio-panel::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  body[data-base="./"] .home-audio-play {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+
+/* Guard against content-box width plus phone gutters creating a right-side strip. */
+@media (max-width: 760px) {
+  body[data-base="./"] .w,
+  body[data-base="./"] .heroGrid {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  body[data-base="./"] main > section,
+  body[data-base="./"] main > section > .w {
+    min-width: 0;
+  }
+}
