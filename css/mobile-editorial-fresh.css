@@ -384,3 +384,75 @@ body[data-base="./"] footer .foot .foot-motto{
     max-height:360px!important;
   }
 }
+
+
+/* Follow-up refinement: show complete article images and reduce visual weight on phones. */
+/* Ruang Redaksi: use the complete image frame so source photos are never cropped. */
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card .thumb{
+  aspect-ratio:16/10!important;
+  height:auto!important;
+  overflow:hidden!important;
+  background:#edf1f5!important;
+}
+body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card .thumb img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+}
+/* Footer motto is a subtle signature, not a headline. */
+body[data-base="./"] footer .foot .foot-motto{
+  font-size:12px!important;
+  line-height:1.35!important;
+  letter-spacing:.02em!important;
+  margin-top:7px!important;
+  max-width:190px;
+}
+@media(max-width:760px){
+  body[data-base="./"] footer .foot .foot-motto{
+    font-size:11px!important;
+    max-width:165px;
+  }
+  /* Smaller article cards and thumbnails: keep the shelf compact and balanced. */
+  body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card{
+    flex-basis:56vw!important;
+    max-width:220px!important;
+  }
+  body[data-base="./"] main > section:nth-of-type(3) #articlesContainer .thumb{
+    aspect-ratio:16/10!important;
+  }
+  body[data-base="./"] main > section:nth-of-type(3) #articlesContainer .card h3{
+    font-size:13px!important;
+    line-height:1.28!important;
+  }
+  /* Video shelf thumbnails are smaller while cards remain horizontally swipeable. */
+  body[data-base="./"] main > section.dark #videosContainer>.card{
+    flex-basis:62vw!important;
+    max-width:250px!important;
+  }
+  body[data-base="./"] main > section.dark #videosContainer .thumb{
+    aspect-ratio:16/9!important;
+  }
+  body[data-base="./"] main > section.dark #videosContainer .meta{
+    margin-top:10px!important;
+  }
+  body[data-base="./"] main > section.dark #videosContainer h3{
+    font-size:14px!important;
+    line-height:1.28!important;
+  }
+  body[data-base="./"] main > section.dark #videosContainer p{
+    font-size:9px!important;
+  }
+}
+@media(max-width:380px){
+  body[data-base="./"] main > section:nth-of-type(3) #articlesContainer>.card{
+    flex-basis:61vw!important;
+    max-width:205px!important;
+  }
+  body[data-base="./"] main > section.dark #videosContainer>.card{
+    flex-basis:68vw!important;
+    max-width:225px!important;
+  }
+}
