@@ -578,7 +578,8 @@ body[data-base="./"] .pc-info span { overflow-wrap:anywhere; line-height:1.4; }
   body[data-base="./"] .topic { padding:16px; }
   body[data-base="./"] .topic h3 { font-size:16px; }
   body[data-base="./"] .topic p { font-size:11px; }
-  body[data-base="./"] .home-audio-table-wrap::after { content:"Geser tabel ke samping untuk melihat kolom lainnya"; display:block; padding:0 12px 10px; color:#758393; font-size:10px; }
+  body[data-base="./"] .home-audio-table-wrap::after { content:none; }
+  body[data-base="./"] .home-audio-panel::before { content:"Geser tabel ke samping untuk melihat kolom lainnya"; display:block; padding:12px 12px 0; color:#758393; font-size:10px; }
   body[data-base="./"] .home-audio-table { min-width:570px; }
   body[data-base="./"] .podcasts {
     display:flex;
