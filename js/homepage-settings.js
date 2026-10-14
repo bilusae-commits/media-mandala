@@ -28,21 +28,21 @@
     const urlFor=a=>`pages/artikel-detail.html${a.slug?`?slug=${encodeURIComponent(a.slug)}`:""}`;
     const esc=v=>String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;");
     const main=list[0], bottom=list.slice(1,3), left=list.slice(3,9);
-    grid.innerHTML=`<div class="editorial-left"><div class="editorial-heading"><span></span><h2>LATEST<br>STORIES</h2></div><div class="editorial-list">${left.map(a=>`<a class="editorial-item" href="${urlFor(a)}"><img src="${esc(image(a))}" alt="${esc(a.title||"Artikel")}" loading="lazy"><div><small>MANDALA</small><h3>${esc(a.title||"Artikel")}</h3></div></a>`).join("")}</div></div><div class="editorial-right"><a class="editorial-main" href="${urlFor(main)}"><img src="${esc(image(main))}" alt="${esc(main.title||"Artikel")}" loading="eager"><div class="editorial-main-copy"><small>MANDALA CHANNEL</small><h2>${esc(main.title||"Artikel")}</h2></div></a><div class="editorial-bottom">${bottom.map(a=>`<a class="editorial-card" href="${urlFor(a)}"><img src="${esc(image(a))}" alt="${esc(a.title||"Artikel")}" loading="lazy"><div><small>MANDALA CHANNEL</small><h3>${esc(a.title||"Artikel")}</h3></div></a>`).join("")}</div></div>`;
+    grid.innerHTML=`<div class="editorial-left"><div class="editorial-heading"><span></span><h2>CERITA<br>TERBARU</h2></div><div class="editorial-list">${left.map(a=>`<a class="editorial-item" href="${urlFor(a)}"><img src="${esc(image(a))}" alt="${esc(a.title||"Artikel")}" loading="lazy"><div><small>MANDALA</small><h3>${esc(a.title||"Artikel")}</h3></div></a>`).join("")}</div></div><div class="editorial-right"><a class="editorial-main" href="${urlFor(main)}"><img src="${esc(image(main))}" alt="${esc(main.title||"Artikel")}" loading="eager"><div class="editorial-main-copy"><small>MANDALA</small><h2>${esc(main.title||"Artikel")}</h2></div></a><div class="editorial-bottom">${bottom.map(a=>`<a class="editorial-card" href="${urlFor(a)}"><img src="${esc(image(a))}" alt="${esc(a.title||"Artikel")}" loading="lazy"><div><small>MANDALA</small><h3>${esc(a.title||"Artikel")}</h3></div></a>`).join("")}</div></div>`;
   }
   function renderPlaylistsSafe(){
     const track=document.getElementById("playlistTrack"),dots=document.getElementById("playlistDots"),stage=document.getElementById("playlistStage");
     if(!track)return;
     const data=window.MandalaPublicData||window.DATA||{},items=Array.isArray(data.playlists)?data.playlists:[];
     if(window.__mandalaPlaylistTimer){clearInterval(window.__mandalaPlaylistTimer);window.__mandalaPlaylistTimer=null}
-    if(!items.length){track.innerHTML='<div class="playlist-empty-state">Playlist belum tersedia.</div>';if(dots)dots.innerHTML="";return}
+    if(!items.length){track.innerHTML='<div class="playlist-empty-state">Daftar putar belum tersedia.</div>';if(dots)dots.innerHTML="";return}
     const esc=v=>String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
     track.innerHTML=items.map((p,i)=>{
-      const id=String(p.id||i+1),title=esc(p.title||"Playlist Mandala"),image=esc(p.image||"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85"),category=esc(p.category||"Mandala"),count=Number(p.videoCount);
+      const id=String(p.id||i+1),title=esc(p.title||"Daftar Putar Mandala"),image=esc(p.image||"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85"),category=esc(p.category||"Mandala"),count=Number(p.videoCount);
       const detail=count>0?category+" · "+count+" video":category;
       return '<article class="play-card pos-hidden" data-index="'+i+'"><a href="pages/playlist-detail.html?id='+encodeURIComponent(id)+'" aria-label="'+title+'"><img src="'+image+'" alt="'+title+'" loading="lazy" draggable="false"><div class="pc-info"><strong>'+title+'</strong><span>'+detail+'</span></div></a></article>';
     }).join("");
-    if(dots)dots.innerHTML=items.map((_,i)=>'<button class="play-dot'+(i===0?' active':'')+'" type="button" data-dot="'+i+'" aria-label="Ke playlist '+(i+1)+'"></button>').join("");
+    if(dots)dots.innerHTML=items.map((_,i)=>'<button class="play-dot'+(i===0?' active':'')+'" type="button" data-dot="'+i+'" aria-label="Ke daftar putar '+(i+1)+'"></button>').join("");
     fixPlaylistImages(track);watchPlaylistImages();window.__mandalaHomepagePlaylistsRendered=true;
     const cards=[...track.querySelectorAll(".play-card")],total=cards.length;
     if(!total)return;
