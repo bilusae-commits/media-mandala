@@ -5,12 +5,12 @@
   const finishHydration=()=>document.body?.classList.add("homepage-ready");
   const PROXY=url?url+"/functions/v1/homepage-cover-image":"";
   const B2_BASE="https://f005.backblazeb2.com/file/Mandala-Podcast/";
-  const FAVICON="assets/brand/WhatsApp%20Image%202026-02-19%20at%2011.46.52%20AM.jpeg";
+  const FAVICON="assets/brand/Mandala.png?v=20261014.2";
   async function get(table,select,params=""){const r=await fetch(url+"/rest/v1/"+table+"?select="+encodeURIComponent(select)+params,{headers:{apikey:key,Authorization:"Bearer "+key}});if(!r.ok)throw new Error(table+" HTTP "+r.status);return r.json()}
   function publicImage(value){const source=String(value||"").trim();if(!source)return "";try{if(new URL(source).hostname.toLowerCase().endsWith(".backblazeb2.com")&&PROXY)return PROXY+"?url="+encodeURIComponent(source)}catch(e){}return source}
   function imageFromKey(value){const k=String(value||"").trim();return k?publicImage(B2_BASE+k):""}
   function cleanText(value){return String(value??"").trim().replace(/^DESKRIPSI\s+/i,"").replace(/\s+(?:LABEL|JUDUL|TOMBOL)$/i,"").trim()}
-  function setHomepageFavicon(){const icon=document.querySelector('link[rel~="icon"]');if(icon)icon.href=FAVICON;else{const x=document.createElement("link");x.rel="icon";x.type="image/jpeg";x.href=FAVICON;document.head.appendChild(x)}}
+  function setHomepageFavicon(){let icons=[...document.querySelectorAll('link[rel~="icon"]')];if(!icons.length){const x=document.createElement("link");x.rel="icon";document.head.appendChild(x);icons=[x]}icons.forEach(icon=>{icon.href=FAVICON;icon.type="image/png"})}
   function fixPlaylistImages(root=document){root.querySelectorAll?.("#playlistTrack .play-card img").forEach(img=>{const source=img.getAttribute("src")||"";if(PROXY&&source.includes(PROXY+"?url="))return;if(/\.backblazeb2\.com\//i.test(source))img.src=publicImage(source)})}
   function watchPlaylistImages(){const track=document.getElementById("playlistTrack");if(!track)return;fixPlaylistImages(track);if(window.MandalaHomepagePlaylistObserver)window.MandalaHomepagePlaylistObserver.disconnect();const observer=new MutationObserver(()=>fixPlaylistImages(track));observer.observe(track,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]});window.MandalaHomepagePlaylistObserver=observer}
   function setText(id,value){const x=document.getElementById(id),text=cleanText(value);if(x&&text)x.textContent=text}
@@ -80,20 +80,33 @@
     const tracks=(items||[]).filter(item=>item.content_type==="audio"&&item.audio_url);
     if(!tracks.length){renderHomeAudioEmpty("Belum ada audio yang dipublikasikan. Audio yang tersedia akan muncul di sini.");return}
     const dateText=value=>{if(!value)return "—";const date=new Date(value);return Number.isNaN(date.getTime())?"—":new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"short",year:"numeric"}).format(date)};
-    rows.innerHTML=tracks.slice(0,6).map((track,index)=>'<tr data-home-audio-row="'+audioEsc(track.id)+'"><td><strong class="home-audio-episode">'+audioEsc(track.title||"Audio Mandala")+'</strong></td><td>'+audioEsc(dateText(track.published_at||track.created_at))+'</td><td>'+audioTime(track.audio_duration)+'</td><td><button class="home-audio-play" type="button" data-home-audio-play="'+audioEsc(track.id)+'" aria-label="Putar '+audioEsc(track.title||"Audio Mandala")+'" aria-pressed="false">▶</button></td></tr>').join("");
-    const title=document.getElementById("homeAudioTitle"),status=document.getElementById("homeAudioStatus");
+    const title=document.getElementById("homeAudioTitle"),status=document.getElementById("homeAudioStatus"),search=document.getElementById("homeAudioSearch");
     let selectedId="";
     const markSelected=id=>{rows.querySelectorAll("tr[data-home-audio-row]").forEach(row=>{const active=row.dataset.homeAudioRow===String(id);row.classList.toggle("is-playing",active);const button=row.querySelector("[data-home-audio-play]");if(button){button.setAttribute("aria-pressed",String(active));button.textContent=active&&!player.paused?"Ⅱ":"▶"}})};
-    rows.querySelectorAll("[data-home-audio-play]").forEach(button=>button.addEventListener("click",async()=>{
-      const track=tracks.find(item=>String(item.id)===button.dataset.homeAudioPlay);if(!track)return;
-      if(selectedId===String(track.id)&&!player.paused){player.pause();markSelected(track.id);if(status)status.textContent="Audio dijeda.";return}
-      if(selectedId!==String(track.id)){selectedId=String(track.id);player.pause();player.src=AUDIO_ENDPOINT+"?id="+encodeURIComponent(track.id);player.load();if(title)title.textContent=track.title||"Audio Mandala";markSelected(track.id)}
-      if(status)status.textContent="Memuat audio…";
-      try{await player.play();markSelected(track.id);if(status)status.textContent="Sedang diputar."}
-      catch(error){if(status)status.textContent="Audio gagal diputar. Coba tekan tombol putar pada pemutar.";console.warn("Homepage audio playback failed:",error)}
-    }));
+    const renderRows=query=>{
+      const q=String(query||"").toLocaleLowerCase("id-ID").trim();
+      const visible=tracks.filter(track=>(String(track.title||"")+" "+String(track.description||"")).toLocaleLowerCase("id-ID").includes(q));
+      if(!visible.length){rows.innerHTML='<tr><td colspan="4" class="home-audio-empty">Tidak ada audio yang cocok dengan pencarian.</td></tr>';return}
+      rows.innerHTML=visible.map(track=>{
+        const rawDescription=String(track.description||"").replace(/\s+/g," ").trim();
+        const description=rawDescription.length>82?rawDescription.slice(0,82).trimEnd()+"....":rawDescription;
+        return '<tr data-home-audio-row="'+audioEsc(track.id)+'"><td><strong class="home-audio-episode">'+audioEsc(track.title||"Audio Mandala")+'</strong><span class="home-audio-description">'+audioEsc(description||"Dengarkan episode pilihan Mandala.")+'</span></td><td>'+audioEsc(dateText(track.published_at||track.created_at))+'</td><td>'+audioTime(track.audio_duration)+'</td><td><button class="home-audio-play" type="button" data-home-audio-play="'+audioEsc(track.id)+'" aria-label="Putar '+audioEsc(track.title||"Audio Mandala")+'" aria-pressed="false">▶</button></td></tr>'
+      }).join("");
+      rows.querySelectorAll("[data-home-audio-play]").forEach(button=>button.addEventListener("click",async()=>{
+        const track=visible.find(item=>String(item.id)===button.dataset.homeAudioPlay);if(!track)return;
+        if(selectedId===String(track.id)&&!player.paused){player.pause();markSelected(track.id);if(status)status.textContent="Audio dijeda.";return}
+        if(selectedId!==String(track.id)){selectedId=String(track.id);player.pause();player.src=AUDIO_ENDPOINT+"?id="+encodeURIComponent(track.id);player.load();if(title)title.textContent=track.title||"Audio Mandala";markSelected(track.id)}
+        if(status)status.textContent="Menghubungkan ke sumber audio…";
+        try{await player.play();markSelected(track.id);if(status)status.textContent="Sedang diputar."}
+        catch(error){if(status)status.textContent="Audio gagal diputar. Coba tekan tombol putar pada pemutar.";console.warn("Homepage audio playback failed:",error)}
+      }));
+      if(selectedId)markSelected(selectedId);
+    };
+    renderRows(search?.value||"");
+    if(search&&!search.dataset.bound){search.addEventListener("input",()=>renderRows(search.value));search.dataset.bound="true"}
     player.addEventListener("play",()=>{if(status)status.textContent="Sedang diputar.";if(selectedId)markSelected(selectedId)});
     player.addEventListener("pause",()=>{if(status&&selectedId)status.textContent="Audio dijeda.";if(selectedId)markSelected(selectedId)});
+    player.addEventListener("waiting",()=>{if(status)status.textContent="Memuat audio…"});
     player.addEventListener("ended",()=>{if(status)status.textContent="Audio selesai.";if(selectedId)markSelected(selectedId)});
     player.addEventListener("error",()=>{if(status)status.textContent="Audio tidak dapat dimuat. Periksa sumber audio atau coba lagi."});
   }
