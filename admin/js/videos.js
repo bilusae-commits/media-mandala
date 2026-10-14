@@ -8,7 +8,7 @@ const FALLBACK_THUMBNAIL="data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(
 const esc=v=>String(v??"").replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const date=v=>{if(!v)return"-";const d=new Date(v);return Number.isNaN(d.getTime())?"-":d.toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"})};
 const publicationDate=v=>v?.published_at||((v?.status||"")==="published"?v?.created_at:null);
-const label=v=>({draft:"Draf",review:"Ditinjau",published:"Terbit",archived:"Arsip"}[v]||v||"-");
+const label=v=>({draft:"Draf",review:"Peninjauan",published:"Terbit",archived:"Arsip"}[v]||v||"-");
 const vidId=v=>{if(v?.youtube_video_id)return v.youtube_video_id;const m=String(v?.youtube_url||"").match(/(?:v=|youtu\.be\/|youtube\.com\/(?:embed|shorts|live)\/)([A-Za-z0-9_-]{11})/);return m?.[1]||""};
 const thumb=v=>v?.thumbnail_url||((id=vidId(v))?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:FALLBACK_THUMBNAIL);
 function msg(t="",type=""){if(message){message.textContent=t;message.className=`message ${type}`.trim()}}
