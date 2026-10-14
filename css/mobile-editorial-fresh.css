@@ -553,3 +553,158 @@ body[data-base="./"] footer .foot .foot-motto{
   body[data-base="./"] #heroSection .visual{height:142px!important}
   body[data-base="./"] #heroSection .heroButtons .btn{font-size:7px!important;min-height:27px!important}
 }
+
+
+/* Playlist Pilihan: horizontal editorial shelf on desktop and mobile. */
+body[data-base="./"] #playlistSection .playlist-stage{
+  display:block!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:0 0 30px!important;
+  overflow:visible!important;
+}
+body[data-base="./"] #playlistSection .playlist-track{
+  display:flex!important;
+  align-items:stretch!important;
+  gap:clamp(12px,1.8vw,24px)!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:14px 4px 22px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:4px;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:#bdc6ce transparent;
+}
+body[data-base="./"] #playlistSection .play-card,
+body[data-base="./"] #playlistSection .play-card.pos-0,
+body[data-base="./"] #playlistSection .play-card.pos-1,
+body[data-base="./"] #playlistSection .play-card.pos--1,
+body[data-base="./"] #playlistSection .play-card.pos-2,
+body[data-base="./"] #playlistSection .play-card.pos--2,
+body[data-base="./"] #playlistSection .play-card.pos-hidden{
+  position:relative!important;
+  top:auto!important;
+  left:auto!important;
+  flex:0 0 clamp(170px,18vw,245px)!important;
+  width:clamp(170px,18vw,245px)!important;
+  height:auto!important;
+  aspect-ratio:3/4!important;
+  margin:0!important;
+  transform:none!important;
+  opacity:1!important;
+  filter:none!important;
+  pointer-events:auto!important;
+  scroll-snap-align:start;
+}
+body[data-base="./"] #playlistSection .play-card.pos-0{
+  box-shadow:0 10px 28px rgba(8,45,86,.17)!important;
+}
+body[data-base="./"] #playlistSection .play-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+}
+body[data-base="./"] #playlistSection .play-card a{height:100%!important}
+body[data-base="./"] #playlistSection .play-arrow{
+  top:auto!important;
+  bottom:0!important;
+  transform:none!important;
+  width:30px!important;
+  height:30px!important;
+  border-radius:3px!important;
+}
+body[data-base="./"] #playlistSection .play-arrow.prev{left:auto!important;right:40px!important}
+body[data-base="./"] #playlistSection .play-arrow.next{right:0!important}
+body[data-base="./"] #playlistSection .play-dots{
+  left:0!important;
+  bottom:9px!important;
+  transform:none!important;
+  max-width:calc(100% - 80px);
+  overflow:hidden;
+}
+body[data-base="./"] #playlistSection .play-hint{display:none!important}
+body[data-base="./"] #playlistSection .playlist-stage::before{display:none!important}
+
+/* Audio episodes sit directly above the video section as one continuous navy block. */
+body[data-base="./"] .home-audio-section{
+  background:#061f3c!important;
+  color:#fff!important;
+  padding-bottom:clamp(26px,3vw,42px)!important;
+  margin-bottom:0!important;
+}
+body[data-base="./"] .home-audio-section .title{color:#fff!important}
+body[data-base="./"] .home-audio-section .k{color:#d9b86d!important}
+body[data-base="./"] .home-audio-intro{color:#c0cedb!important}
+body[data-base="./"] .home-audio-section .view{color:#e0c47f!important}
+body[data-base="./"] .home-audio-panel{
+  border-color:rgba(255,255,255,.15)!important;
+  background:#0a345f!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.12)!important;
+}
+body[data-base="./"] .home-audio-table-wrap{
+  border-color:rgba(255,255,255,.13)!important;
+  background:#0a345f!important;
+}
+body[data-base="./"] .home-audio-table thead th{
+  background:#0d3b68!important;
+  color:#d1deea!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.12)!important;
+}
+body[data-base="./"] .home-audio-table td{
+  color:#d0dce7!important;
+  border-top-color:rgba(255,255,255,.10)!important;
+}
+body[data-base="./"] .home-audio-episode{color:#fff!important}
+body[data-base="./"] .home-audio-description{color:#b7c7d7!important}
+body[data-base="./"] .home-audio-table tbody tr:hover,
+body[data-base="./"] .home-audio-table tbody tr.is-playing{background:#124574!important}
+body[data-base="./"] .home-audio-player{
+  border-top-color:rgba(255,255,255,.14)!important;
+  background:#0a345f!important;
+}
+body[data-base="./"] .home-audio-label{color:#e0c47f!important}
+body[data-base="./"] #homeAudioTitle{color:#fff!important}
+body[data-base="./"] #homeAudioStatus{color:#c0cedb!important}
+body[data-base="./"] .home-audio-search{
+  border-color:rgba(255,255,255,.22)!important;
+  background:#0d3b68!important;
+}
+body[data-base="./"] .home-audio-search input{color:#fff!important}
+body[data-base="./"] .home-audio-search input::placeholder{color:#c0cedb!important}
+body[data-base="./"] .home-audio-search-icon{border-color:#c0cedb!important}
+body[data-base="./"] .home-audio-search-icon::after{background:#c0cedb!important}
+body[data-base="./"] .home-audio-section .home-audio-panel::before{color:#c0cedb!important}
+body[data-base="./"] main > section.dark.reveal{
+  padding-top:clamp(26px,3vw,42px)!important;
+  background:#061f3c!important;
+}
+@media(max-width:760px){
+ body[data-base="./"] #playlistSection .playlist-track{gap:12px!important;padding:10px 2px 18px!important}
+ body[data-base="./"] #playlistSection .play-card,
+ body[data-base="./"] #playlistSection .play-card.pos-0,
+ body[data-base="./"] #playlistSection .play-card.pos-1,
+ body[data-base="./"] #playlistSection .play-card.pos--1,
+ body[data-base="./"] #playlistSection .play-card.pos-2,
+ body[data-base="./"] #playlistSection .play-card.pos--2,
+ body[data-base="./"] #playlistSection .play-card.pos-hidden{
+   flex-basis:clamp(145px,43vw,185px)!important;
+   width:clamp(145px,43vw,185px)!important;
+ }
+ body[data-base="./"] #playlistSection .play-arrow{width:28px!important;height:28px!important}
+}
+@media(max-width:380px){
+ body[data-base="./"] #playlistSection .play-card,
+ body[data-base="./"] #playlistSection .play-card.pos-0,
+ body[data-base="./"] #playlistSection .play-card.pos-1,
+ body[data-base="./"] #playlistSection .play-card.pos--1,
+ body[data-base="./"] #playlistSection .play-card.pos-2,
+ body[data-base="./"] #playlistSection .play-card.pos--2,
+ body[data-base="./"] #playlistSection .play-card.pos-hidden{
+   flex-basis:142px!important;width:142px!important;
+ }
+}
