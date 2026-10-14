@@ -27,16 +27,16 @@ function showEmpty(title,text){$('frame').innerHTML='<div class="empty"><div><st
 async function loadPlaylist(){
   const id=params.get('id');
   const slug=params.get('slug');
-  if(!id&&!slug){showEmpty('Playlist tidak ditemukan','Tautan playlist tidak memiliki ID atau slug.');return}
+  if(!id&&!slug){showEmpty('Daftar putar tidak ditemukan','Tautan daftar putar tidak memiliki ID atau alamat singkat.');return}
   let query=db.from('playlists').select('id,title,youtube_playlist_id,description,status,slug').eq('status','published').limit(1);
   query=id?query.eq('id',id):query.eq('slug',slug);
   const {data,error}=await query.maybeSingle();
-  if(error){console.error('PLAYLIST LOAD ERROR',error);showEmpty('Gagal memuat playlist','Terjadi masalah saat mengambil data dari Supabase.');return}
-  if(!data){showEmpty('Playlist tidak ditemukan','Playlist belum dipublikasikan atau tidak tersedia.');return}
+  if(error){console.error('PLAYLIST LOAD ERROR',error);showEmpty('Gagal memuat daftar putar','Terjadi masalah saat mengambil data dari Supabase.');return}
+  if(!data){showEmpty('Daftar putar tidak ditemukan','Daftar putar belum diterbitkan atau tidak tersedia.');return}
   document.title=data.title+' — Mandala Channel';
   $('title').textContent=data.title;$('description').textContent=data.description||'Koleksi video Mandala Channel.';$('playerTitle').textContent=data.title;$('playerDesc').textContent=data.description||'Koleksi video Mandala Channel.';
   const pid=String(data.youtube_playlist_id||'').trim();
-  if(!pid){showEmpty('Playlist YouTube belum tersedia','Tambahkan YouTube Playlist ID melalui Admin Playlist.');return}
+  if(!pid){showEmpty('Daftar putar YouTube belum tersedia','Tambahkan ID daftar putar YouTube melalui panel pengelola daftar putar.');return}
   $('frame').innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/videoseries?list='+encodeURIComponent(pid)+'&rel=0" title="'+esc(data.title)+'" loading="eager" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   $('youtube').href='https://www.youtube.com/playlist?list='+encodeURIComponent(pid);
 }
