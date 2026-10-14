@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Playlist — Mandala Channel</title>
+<title>Daftar Putar — Mandala</title>
 <link rel="stylesheet" href="../css/main.css">
 <style>
 :root{--navy:#082d56;--deep:#061f3c;--muted:#718091;--paper:#f7f6f1;--line:#e4e8ec;--bronze:#9b7837;--max:94vw}
@@ -11,11 +11,11 @@
 </style>
 </head>
 <body>
-<div class="top"><div class="w"><span>MANDALA CHANNEL · MEDIA DHARMA &amp; NUSANTARA</span><span>Instagram · YouTube · Kontak</span></div></div>
-<header id="siteHeader"><div class="w nav"><a class="logo" href="../index.html"><div class="mark">✺</div><div><b>MANDALA</b><small>CHANNEL</small></div></a><nav class="links"><a href="../index.html">Beranda</a><a href="artikel.html">Artikel</a><a href="video.html">Video</a><a href="playlist.html" aria-current="page">Playlist</a><a href="podcast.html">Podcast</a><a href="tentang-kami.html">Tentang</a></nav><a class="yt" href="https://www.youtube.com/" target="_blank" rel="noopener">YOUTUBE ↗</a></div></header>
-<section class="hero"><div class="w"><a class="back" href="playlist.html">← Kembali ke Playlist</a><div class="k">Mandala Channel · Playlist</div><h1 id="title">Memuat playlist...</h1><p id="description">Mengambil informasi playlist.</p></div></section>
-<main class="main"><div class="w"><div class="layout"><section><div class="player"><div class="frame" id="frame"><div class="empty"><div><strong>Memuat playlist...</strong>Menyiapkan pemutar YouTube.</div></div></div><div class="playerInfo"><div class="k">Mandala Collection</div><h2 id="playerTitle">Playlist Mandala</h2><p id="playerDesc">Koleksi video Mandala Channel.</p></div></div></section><aside class="side"><h2>Tentang playlist</h2><a id="youtube" class="youtubeLink" href="https://www.youtube.com/" target="_blank" rel="noopener">BUKA DI YOUTUBE ↗</a><div class="status"><strong>Menonton di Mandala</strong>Playlist diputar langsung di halaman ini. YouTube hanya digunakan sebagai sumber video.</div></aside></div></div></main>
-<footer><div class="w"><div class="foot"><div><b style="color:#fff;font:500 18px Georgia,serif">MANDALA</b><p>Media digital tentang Hindu, dharma, tokoh, budaya dan kearifan Nusantara.</p></div><div><h3>JELAJAH</h3><a href="artikel.html">Artikel</a><br><a href="video.html">Video</a><br><a href="playlist.html">Playlist</a></div><div><h3>TOPIK</h3><a href="../topics/jelajah-nusantara.html">Jelajah</a><br><a href="../topics/tokoh-hindu.html">Tokoh</a><br><a href="../topics/tradisi-budaya.html">Tradisi</a></div><div><h3>MANDALA</h3><a href="tentang-kami.html">Tentang</a><br><a href="kontak.html">Kontak</a></div></div><div class="copy">© 2026 Mandala Channel</div></div></footer>
+<div class="top"><div class="w"><span>MANDALA · MEDIA DHARMA NUSANTARA</span><span>Instagram · YouTube · Kontak</span></div></div>
+<header id="siteHeader"><div class="w nav"><a class="logo" href="../index.html"><div class="mark">✺</div><div><b>MANDALA</b><small>CHANNEL</small></div></a><nav class="links"><a href="../index.html">Beranda</a><a href="artikel.html">Artikel</a><a href="video.html">Video</a><a href="playlist.html" aria-current="page">Daftar Putar</a><a href="podcast.html">Siniar</a><a href="tentang-kami.html">Tentang</a></nav><a class="yt" href="https://www.youtube.com/" target="_blank" rel="noopener">YOUTUBE ↗</a></div></header>
+<section class="hero"><div class="w"><a class="back" href="playlist.html">← Kembali ke Daftar Putar</a><div class="k">Mandala · Daftar Putar</div><h1 id="title">Memuat Daftar Putar...</h1><p id="description">Mengambil informasi Daftar Putar.</p></div></section>
+<main class="main"><div class="w"><div class="layout"><section><div class="player"><div class="frame" id="frame"><div class="empty"><div><strong>Memuat Daftar Putar...</strong>Menyiapkan pemutar YouTube.</div></div></div><div class="playerInfo"><div class="k">Mandala Collection</div><h2 id="playerTitle">Daftar Putar Mandala</h2><p id="playerDesc">Koleksi video Mandala.</p></div></div></section><aside class="side"><h2>Tentang Daftar Putar</h2><a id="youtube" class="youtubeLink" href="https://www.youtube.com/" target="_blank" rel="noopener">BUKA DI YOUTUBE ↗</a><div class="status"><strong>Menonton di Mandala</strong>Daftar Putar diputar langsung di halaman ini. YouTube hanya digunakan sebagai sumber video.</div></aside></div></div></main>
+<footer><div class="w"><div class="foot"><div><b style="color:#fff;font:500 18px Georgia,serif">MANDALA</b><p>Media digital tentang Hindu, dharma, tokoh, budaya dan kearifan Nusantara.</p></div><div><h3>JELAJAH</h3><a href="artikel.html">Artikel</a><br><a href="video.html">Video</a><br><a href="playlist.html">Daftar Putar</a></div><div><h3>TOPIK</h3><a href="../topics/jelajah-nusantara.html">Jelajah</a><br><a href="../topics/tokoh-hindu.html">Tokoh</a><br><a href="../topics/tradisi-budaya.html">Tradisi</a></div><div><h3>MANDALA</h3><a href="tentang-kami.html">Tentang</a><br><a href="kontak.html">Kontak</a></div></div><div class="copy">© 2026 Mandala</div></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 "use strict";
@@ -27,16 +27,16 @@ function showEmpty(title,text){$('frame').innerHTML='<div class="empty"><div><st
 async function loadPlaylist(){
   const id=params.get('id');
   const slug=params.get('slug');
-  if(!id&&!slug){showEmpty('Playlist tidak ditemukan','Tautan playlist tidak memiliki ID atau slug.');return}
+  if(!id&&!slug){showEmpty('Daftar putar tidak ditemukan','Tautan daftar putar tidak memiliki ID atau alamat singkat.');return}
   let query=db.from('playlists').select('id,title,youtube_playlist_id,description,status,slug').eq('status','published').limit(1);
   query=id?query.eq('id',id):query.eq('slug',slug);
   const {data,error}=await query.maybeSingle();
-  if(error){console.error('PLAYLIST LOAD ERROR',error);showEmpty('Gagal memuat playlist','Terjadi masalah saat mengambil data dari Supabase.');return}
-  if(!data){showEmpty('Playlist tidak ditemukan','Playlist belum dipublikasikan atau tidak tersedia.');return}
-  document.title=data.title+' — Mandala Channel';
-  $('title').textContent=data.title;$('description').textContent=data.description||'Koleksi video Mandala Channel.';$('playerTitle').textContent=data.title;$('playerDesc').textContent=data.description||'Koleksi video Mandala Channel.';
+  if(error){console.error('PLAYLIST LOAD ERROR',error);showEmpty('Gagal memuat daftar putar','Terjadi masalah saat mengambil data dari Supabase.');return}
+  if(!data){showEmpty('Daftar putar tidak ditemukan','Daftar putar belum diterbitkan atau tidak tersedia.');return}
+  document.title=data.title+' — Mandala';
+  $('title').textContent=data.title;$('description').textContent=data.description||'Koleksi video Mandala.';$('playerTitle').textContent=data.title;$('playerDesc').textContent=data.description||'Koleksi video Mandala.';
   const pid=String(data.youtube_playlist_id||'').trim();
-  if(!pid){showEmpty('Playlist YouTube belum tersedia','Tambahkan YouTube Playlist ID melalui Admin Playlist.');return}
+  if(!pid){showEmpty('Daftar putar YouTube belum tersedia','Tambahkan ID daftar putar YouTube melalui panel pengelola daftar putar.');return}
   $('frame').innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/videoseries?list='+encodeURIComponent(pid)+'&rel=0" title="'+esc(data.title)+'" loading="eager" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   $('youtube').href='https://www.youtube.com/playlist?list='+encodeURIComponent(pid);
 }
