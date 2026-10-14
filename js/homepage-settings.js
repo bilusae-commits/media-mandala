@@ -82,7 +82,7 @@
     const dateText=value=>{if(!value)return "—";const date=new Date(value);return Number.isNaN(date.getTime())?"—":new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"short",year:"numeric"}).format(date)};
     const title=document.getElementById("homeAudioTitle"),status=document.getElementById("homeAudioStatus"),search=document.getElementById("homeAudioSearch");
     let selectedId="";
-    const markSelected=id=>{rows.querySelectorAll("tr[data-home-audio-row]").forEach(row=>{const active=row.dataset.homeAudioRow===String(id);row.classList.toggle("is-playing",active);const button=row.querySelector("[data-home-audio-play]");if(button){button.setAttribute("aria-pressed",String(active));button.textContent=active&&!player.paused?"Ⅱ":"▶"}})};
+    const markSelected=id=>{rows.querySelectorAll("tr[data-home-audio-row]").forEach(row=>{const active=row.dataset.homeAudioRow===String(id)&&!player.paused;row.classList.toggle("is-playing",active);const button=row.querySelector("[data-home-audio-play]");if(button){button.setAttribute("aria-pressed",String(active));button.textContent=active&&!player.paused?"Ⅱ":"▶"}})};
     const renderRows=query=>{
       const q=String(query||"").toLocaleLowerCase("id-ID").trim();
       const visible=tracks.filter(track=>(String(track.title||"")+" "+String(track.description||"")).toLocaleLowerCase("id-ID").includes(q));
@@ -104,8 +104,8 @@
     };
     renderRows(search?.value||"");
     if(search&&!search.dataset.bound){search.addEventListener("input",()=>renderRows(search.value));search.dataset.bound="true"}
-    player.addEventListener("play",()=>{if(status)status.textContent="Sedang diputar.";if(selectedId)markSelected(selectedId)});
-    player.addEventListener("pause",()=>{if(status&&selectedId)status.textContent="Audio dijeda.";if(selectedId)markSelected(selectedId)});
+    player.addEventListener("play",()=>{if(status)status.textContent="Sedang diputar.";if(title)title.classList.add("is-playing");if(selectedId)markSelected(selectedId)});
+    player.addEventListener("pause",()=>{if(status&&selectedId)status.textContent="Audio dijeda.";if(title)title.classList.remove("is-playing");if(selectedId)markSelected(selectedId)});
     player.addEventListener("waiting",()=>{if(status)status.textContent="Memuat audio…"});
     player.addEventListener("ended",()=>{if(status)status.textContent="Audio selesai.";if(selectedId)markSelected(selectedId)});
     player.addEventListener("error",()=>{if(status)status.textContent="Audio tidak dapat dimuat. Periksa sumber audio atau coba lagi."});
