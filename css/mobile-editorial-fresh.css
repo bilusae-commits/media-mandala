@@ -708,3 +708,57 @@ body[data-base="./"] main > section.dark.reveal{
    flex-basis:142px!important;width:142px!important;
  }
 }
+
+
+/* Final refinement: playlist cards are landscape while remaining swipeable. */
+body[data-base="./"] #playlistSection .play-card,
+body[data-base="./"] #playlistSection .play-card.pos-0,
+body[data-base="./"] #playlistSection .play-card.pos-1,
+body[data-base="./"] #playlistSection .play-card.pos--1,
+body[data-base="./"] #playlistSection .play-card.pos-2,
+body[data-base="./"] #playlistSection .play-card.pos--2,
+body[data-base="./"] #playlistSection .play-card.pos-hidden{
+  flex-basis:clamp(250px,24vw,320px)!important;
+  width:clamp(250px,24vw,320px)!important;
+  aspect-ratio:4/3!important;
+}
+body[data-base="./"] #playlistSection .play-card img{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  object-fit:contain!important;
+}
+@media(max-width:760px){
+  body[data-base="./"] #playlistSection .play-card,
+  body[data-base="./"] #playlistSection .play-card.pos-0,
+  body[data-base="./"] #playlistSection .play-card.pos-1,
+  body[data-base="./"] #playlistSection .play-card.pos--1,
+  body[data-base="./"] #playlistSection .play-card.pos-2,
+  body[data-base="./"] #playlistSection .play-card.pos--2,
+  body[data-base="./"] #playlistSection .play-card.pos-hidden{
+    flex-basis:clamp(220px,68vw,270px)!important;
+    width:clamp(220px,68vw,270px)!important;
+    aspect-ratio:4/3!important;
+  }
+}
+@media(max-width:380px){
+  body[data-base="./"] #playlistSection .play-card,
+  body[data-base="./"] #playlistSection .play-card.pos-0,
+  body[data-base="./"] #playlistSection .play-card.pos-1,
+  body[data-base="./"] #playlistSection .play-card.pos--1,
+  body[data-base="./"] #playlistSection .play-card.pos-2,
+  body[data-base="./"] #playlistSection .play-card.pos--2,
+  body[data-base="./"] #playlistSection .play-card.pos-hidden{
+    flex-basis:218px!important;
+    width:218px!important;
+  }
+}
+
+/* Highlight the active audio title and description in blue during playback. */
+body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing .home-audio-episode,
+body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing .home-audio-description,
+body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing td{
+  color:#78c4ff!important;
+}
+body[data-base="./"] #homeAudioSection #homeAudioTitle.is-playing{
+  color:#78c4ff!important;
+}
