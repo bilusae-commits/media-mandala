@@ -14,7 +14,7 @@ async function initShell(title, active){
  <a class="nav-link" data-page="categories" href="categories.html"><span class="nav-icon">◇</span><span>Kategori</span></a>
  <div class="nav-title">Sistem</div>
  <a class="nav-link" data-page="settings" href="settings.html"><span class="nav-icon">⚙</span><span>Pengaturan</span></a>
- <a class="nav-link" data-page="change-password" href="change-password.html"><span class="nav-icon">🔒</span><span>Ubah Password</span></a>
+ <a class="nav-link" data-page="change-password" href="change-password.html"><span class="nav-icon">🔒</span><span>Ubah Kata Sandi</span></a>
  </nav>
  <div class="sidebar-bottom"><div class="sidebar-user"><div class="sidebar-user-name">${user.email || "Pengguna"}</div><div class="sidebar-user-role">${isAdmin ? "Pengelola" : "Penyunting"}</div></div><button class="logout-button" id="logoutBtn" type="button"><span>Keluar</span> ↪</button></div>
  </aside>
