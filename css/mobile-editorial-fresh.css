@@ -1,0 +1,233 @@
+/* MANDALA — touch carousel and lighter mobile editorial layout
+   Scoped to the homepage. Keeps desktop layout and non-playlist horizontal flow unchanged. */
+
+/* Horizontal gestures are handled by the existing pointer-based playlist carousel;
+   vertical gestures remain available to the browser for page scrolling. */
+body[data-base="./"] #playlistSection .playlist-stage {
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: grab;
+}
+body[data-base="./"] #playlistSection .playlist-stage.is-dragging {
+  cursor: grabbing;
+}
+body[data-base="./"] #playlistSection .playlist-stage img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Phone: magazine-style density instead of one oversized image per row. */
+@media (max-width: 560px) {
+  body[data-base="./"] main > section:not(#playlistSection) {
+    padding-block: 38px;
+  }
+
+  /* Article and video cards: two compact columns, with consistent image crops. */
+  body[data-base="./"] .cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 22px 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  body[data-base="./"] .cards > .card {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    flex: initial !important;
+  }
+  body[data-base="./"] .cards .thumb {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3 !important;
+    overflow: hidden !important;
+    border-radius: 4px;
+    background: #e8edf1;
+  }
+  body[data-base="./"] .cards .thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+    padding: 0 !important;
+  }
+  body[data-base="./"] .cards .meta {
+    margin-top: 9px;
+    font-size: 7px;
+    line-height: 1.4;
+  }
+  body[data-base="./"] .cards .card h3 {
+    margin: 5px 0 0;
+    font-size: 15px;
+    line-height: 1.22;
+    overflow-wrap: anywhere;
+  }
+  body[data-base="./"] .cards .card p {
+    margin-top: 7px;
+    font-size: 10px;
+  }
+  body[data-base="./"] .dark .cards .thumb {
+    border: 1px solid rgba(255,255,255,.12);
+  }
+
+  /* Keep the lead editorial photograph, but make the supporting stories lighter. */
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-list {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0 !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-item {
+    grid-template-columns: 88px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    padding: 12px 0 !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-item img {
+    width: 88px !important;
+    height: 66px !important;
+    aspect-ratio: 4 / 3 !important;
+    object-fit: cover !important;
+    padding: 0 !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-item h3 {
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-main {
+    aspect-ratio: 16 / 10 !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-main img,
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card img {
+    object-fit: cover !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-bottom {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card img {
+    width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card > div {
+    padding: 12px !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card h3 {
+    font-size: 14px !important;
+    line-height: 1.23 !important;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card small {
+    font-size: 7px;
+    letter-spacing: .1em;
+  }
+
+  /* Podcast cards become compact editorial rows rather than large full-width covers. */
+  body[data-base="./"] .podcasts {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  body[data-base="./"] .podcasts > .podcast {
+    display: grid !important;
+    grid-template-columns: 104px minmax(0, 1fr) !important;
+    gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 112px;
+    border-radius: 4px;
+  }
+  body[data-base="./"] .podcasts > .podcast > img {
+    width: 104px !important;
+    height: 100% !important;
+    min-height: 112px !important;
+    aspect-ratio: auto !important;
+    object-fit: cover !important;
+  }
+  body[data-base="./"] .podcasts > .podcast .copy {
+    min-width: 0;
+    padding: 12px !important;
+  }
+  body[data-base="./"] .podcasts > .podcast h3 {
+    margin: 4px 0 6px;
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+  body[data-base="./"] .podcasts > .podcast p {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* More breathing room around headings, without oversized typography. */
+  body[data-base="./"] .head {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  body[data-base="./"] .title {
+    font-size: clamp(25px, 7vw, 32px);
+    line-height: 1.1;
+  }
+
+  /* Playlist becomes a shorter, more touch-friendly carousel on phones. */
+  body[data-base="./"] #playlistSection .playlist-stage {
+    min-height: 304px;
+    padding: 12px 18px 38px;
+    touch-action: pan-y pinch-zoom;
+  }
+  body[data-base="./"] #playlistSection .playlist-track {
+    height: 244px;
+  }
+  body[data-base="./"] #playlistSection .play-card {
+    width: clamp(150px, 46vw, 174px);
+    height: 226px;
+  }
+  body[data-base="./"] #playlistSection .play-card.pos-1 {
+    transform: translate(-50%, -50%) translateX(88px) scale(.76);
+  }
+  body[data-base="./"] #playlistSection .play-card.pos--1 {
+    transform: translate(-50%, -50%) translateX(-88px) scale(.76);
+  }
+  body[data-base="./"] #playlistSection .play-card.pos-2,
+  body[data-base="./"] #playlistSection .play-card.pos--2 {
+    opacity: 0;
+    pointer-events: none;
+  }
+  body[data-base="./"] #playlistSection .play-arrow {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 370px) {
+  body[data-base="./"] .cards .card h3 { font-size: 14px; }
+  body[data-base="./"] .podcasts > .podcast {
+    grid-template-columns: 88px minmax(0, 1fr) !important;
+  }
+  body[data-base="./"] .podcasts > .podcast > img {
+    width: 88px !important;
+  }
+  body[data-base="./"] #playlistSection .play-card {
+    width: 144px;
+    height: 216px;
+  }
+  body[data-base="./"] #playlistSection .play-card.pos-1 {
+    transform: translate(-50%, -50%) translateX(78px) scale(.73);
+  }
+  body[data-base="./"] #playlistSection .play-card.pos--1 {
+    transform: translate(-50%, -50%) translateX(-78px) scale(.73);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-base="./"] #playlistSection .playlist-stage,
+  body[data-base="./"] #playlistSection .play-card {
+    transition: none !important;
+  }
+}
