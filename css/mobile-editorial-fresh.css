@@ -478,14 +478,14 @@ body[data-base="./"] footer .foot .foot-motto{
   body[data-base="./"] #heroSection .heroCopy>.k{
     display:none!important;
   }
-  body[data-base="./"] #heroSection .hero h1{
+  body[data-base="./"] #heroSection h1{
     margin:0 0 9px!important;
     font-size:clamp(21px,6.1vw,27px)!important;
     line-height:1.06!important;
     letter-spacing:-.035em!important;
     text-wrap:balance;
   }
-  body[data-base="./"] #heroSection .hero p{
+  body[data-base="./"] #heroSection p{
     display:-webkit-box!important;
     -webkit-box-orient:vertical!important;
     -webkit-line-clamp:2!important;
@@ -548,8 +548,8 @@ body[data-base="./"] footer .foot .foot-motto{
     gap:8px!important;
     padding-inline:12px!important;
   }
-  body[data-base="./"] #heroSection .hero h1{font-size:21px!important}
-  body[data-base="./"] #heroSection .hero p{font-size:9px!important}
+  body[data-base="./"] #heroSection h1{font-size:21px!important}
+  body[data-base="./"] #heroSection p{font-size:9px!important}
   body[data-base="./"] #heroSection .visual{height:142px!important}
   body[data-base="./"] #heroSection .heroButtons .btn{font-size:7px!important;min-height:27px!important}
 }
