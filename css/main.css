@@ -221,3 +221,20 @@ img { height: auto; }
     transition-duration: .01ms !important;
   }
 }
+
+/* On narrow screens, cover artwork should remain fully visible rather than be cropped. */
+@media (max-width: 760px) {
+  .cover img,
+  .cover-image img,
+  .playlist-cover img,
+  .article-cover img,
+  .topic-cover img,
+  .podcast-cover img,
+  .podcast-feature-media img,
+  [class*="cover-image"] img,
+  [class*="playlist-cover"] img {
+    object-fit: contain !important;
+    object-position: center !important;
+    background-color: #f1f4f7;
+  }
+}
