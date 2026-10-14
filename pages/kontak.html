@@ -1721,15 +1721,15 @@ a.contactValue:hover{
 
       <div class="field">
 
-        <label for="email">
+        <label for="surel">
           Surel
         </label>
 
         <input
-          id="email"
-          name="email"
-          type="email"
-          autocomplete="email"
+          id="surel"
+          name="surel"
+          type="surel"
+          autocomplete="surel"
           placeholder="nama@Surel.com"
           maxlength="150"
           required
@@ -2220,9 +2220,9 @@ contactForm.addEventListener(
         .trim();
 
 
-    const email =
+    const surel =
       document
-        .getElementById("email")
+        .getElementById("surel")
         .value
         .trim();
 
@@ -2247,7 +2247,7 @@ contactForm.addEventListener(
 
     if(
       !name ||
-      !email ||
+      !surel ||
       !subject ||
       !message
     ){
@@ -2321,8 +2321,8 @@ contactForm.addEventListener(
                 name:
                   name,
 
-                email:
-                  email,
+                surel:
+                  surel,
 
                 subject:
                   subject,
@@ -2408,7 +2408,7 @@ contactForm.addEventListener(
     catch(error){
 
       console.error(
-        "Contact form error:",
+        "Kesalahan formulir kontak:",
         error
       );
 
