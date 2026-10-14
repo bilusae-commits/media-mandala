@@ -24,7 +24,7 @@ async function uploadCover(){
  const urlInput=$("cover_image_url");
  if(mode!=="file")return urlInput?.value.trim()||null;
  if(!file)throw new Error("Pilih file cover terlebih dahulu.");
- show("Mengupload cover...");
+ show("Mengunggah sampul...");
  const db=await client();
  const slug=($("slug")?.value||$("title")?.value||"artikel").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"artikel";
  const path=`covers/${slug}/${crypto.randomUUID()}.webp`;
@@ -56,7 +56,7 @@ async function guard(action){
  const mode=document.querySelector("input[name=cover_source]:checked")?.value||"url";
  if(mode!=="file")return false;
  action.preventDefault();action.stopImmediatePropagation();
- try{await uploadCover();bypass=true;if(action.type==="submit")action.target.requestSubmit();else action.target.click();}catch(e){show(e?.message||"Upload cover gagal.","error")}finally{bypass=false}
+ try{await uploadCover();bypass=true;if(action.type==="submit")action.target.requestSubmit();else action.target.click();}catch(e){show(e?.message||"Pengunggahan sampul gagal.","error")}finally{bypass=false}
  return true;
 }
 function init(){
