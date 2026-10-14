@@ -238,3 +238,27 @@ img { height: auto; }
     background-color: #f1f4f7;
   }
 }
+
+
+/* Final enforcement: shared tokens also override legacy per-page declarations. */
+:root {
+  --mandala-navy: #082d56 !important;
+  --mandala-deep: #061f3c !important;
+  --mandala-gold: #b89a61 !important;
+  --mandala-ink: #172536 !important;
+  --mandala-muted: #718091 !important;
+  --mandala-line: #e5e9ed !important;
+  --mandala-soft: #f5f7f9 !important;
+  --gold: #b89a61 !important;
+  --gold-light: #d2c09b !important;
+  --bronze: #9b7b4f !important;
+  --bronze-soft: #b89a61 !important;
+  --paper: #f5f7f9 !important;
+}
+body {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6,
+.title, .page h1, .hero h1 {
+  font-family: Georgia, "Times New Roman", serif !important;
+}
