@@ -108,7 +108,7 @@ async function init() {
     } catch (error) {
 
         console.error(
-            "Panel Pengelola initialization error:",
+            "Dashboard initialization error:",
             error
         );
 
