@@ -1,0 +1,168 @@
+/* MANDALA — editorial visual audit v2
+   Correct the upstream image crop and give the editorial area clearer visual hierarchy.
+   Scoped to the homepage's Latest Stories section to avoid side effects on other pages. */
+body[data-base="./"] main > section:nth-of-type(2) {
+  background: #f1f4f7 !important;
+  position: relative;
+  isolation: isolate;
+}
+body[data-base="./"] main > section:nth-of-type(2)::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, #f2c400 0 16%, #082d56 16% 100%);
+  z-index: -1;
+}
+body[data-base="./"] main > section:nth-of-type(2) .featureGrid {
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.5fr);
+  gap: clamp(24px, 3.5vw, 52px);
+  align-items: start;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-heading {
+  gap: 16px;
+  margin: 0 0 28px;
+  align-items: stretch;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-heading > span {
+  width: 5px;
+  height: auto;
+  min-height: 62px;
+  background: #c8a24b;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-heading h2 {
+  font-size: clamp(26px, 2.7vw, 42px);
+  letter-spacing: -.025em;
+  line-height: .98;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-list {
+  gap: 0;
+  border-top: 1px solid #d8e0e7;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-item {
+  grid-template-columns: clamp(92px, 9vw, 124px) minmax(0, 1fr);
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid #d8e0e7;
+  overflow: visible;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-item img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4 / 3;
+  object-fit: contain !important;
+  object-position: center;
+  background: #e3e9ef;
+  border-radius: 3px;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-item small,
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main-copy small,
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card small {
+  color: #7b602d;
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-item h3 {
+  font-size: clamp(14px, 1vw, 17px);
+  line-height: 1.28;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-right {
+  gap: 24px;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main {
+  aspect-ratio: 16 / 10;
+  border-radius: 5px;
+  box-shadow: 0 18px 42px rgba(8, 45, 86, .16);
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main img {
+  object-fit: contain !important;
+  background: #dce4eb;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main::after {
+  background: linear-gradient(180deg, rgba(4, 22, 43, 0) 28%, rgba(4, 22, 43, .2) 52%, rgba(4, 22, 43, .94) 100%);
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main-copy {
+  padding: clamp(18px, 2.6vw, 38px);
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main-copy h2 {
+  max-width: 680px;
+  font-size: clamp(25px, 2.7vw, 42px);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-bottom {
+  gap: 20px;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card {
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(8, 45, 86, .07);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(8, 45, 86, .14);
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card img {
+  height: auto !important;
+  aspect-ratio: 16 / 10;
+  object-fit: contain !important;
+  background: #dce4eb;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card > div {
+  min-height: 0;
+  padding: 18px 20px 22px;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card h3 {
+  font-size: clamp(17px, 1.4vw, 23px);
+  line-height: 1.18;
+}
+body[data-base="./"] main > section:nth-of-type(2) .editorial-item,
+body[data-base="./"] main > section:nth-of-type(2) .editorial-main,
+body[data-base="./"] main > section:nth-of-type(2) .editorial-card {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+@media (max-width: 900px) {
+  body[data-base="./"] main > section:nth-of-type(2) .featureGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-item {
+    grid-template-columns: 96px minmax(0, 1fr);
+    align-items: start;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-right {
+    gap: 20px;
+  }
+}
+@media (max-width: 560px) {
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-item {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 13px;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-main {
+    aspect-ratio: 4 / 3;
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-main-copy h2 {
+    font-size: clamp(22px, 6vw, 29px);
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card img {
+    aspect-ratio: 16 / 9;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-card,
+  body[data-base="./"] main > section:nth-of-type(2) .editorial-item {
+    transition: none !important;
+  }
+}
