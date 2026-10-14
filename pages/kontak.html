@@ -1489,7 +1489,7 @@ a.contactValue:hover{
     <p class="heroText">
       Punya cerita, informasi, pertanyaan, atau ingin bekerja sama?
       Sampaikan kepada kami. Mandala terbuka untuk berbagai
-      gagasan yang berkaitan dengan Media, budaya, masyarakat, dan
+      gagasan yang berkaitan dengan media, budaya, masyarakat, dan
       Nusantara.
     </p>
 
@@ -1721,15 +1721,15 @@ a.contactValue:hover{
 
       <div class="field">
 
-        <label for="surel">
+        <label for="email">
           Surel
         </label>
 
         <input
-          id="surel"
-          name="surel"
-          type="surel"
-          autocomplete="surel"
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
           placeholder="nama@Surel.com"
           maxlength="150"
           required
@@ -1918,7 +1918,7 @@ a.contactValue:hover{
       </h3>
 
       <p>
-        Hubungi kami untuk pembahasan kerja sama Media,
+        Hubungi kami untuk pembahasan kerja sama media,
         produksi konten, maupun bentuk kolaborasi lainnya.
       </p>
 
@@ -2220,9 +2220,9 @@ contactForm.addEventListener(
         .trim();
 
 
-    const surel =
+    const email =
       document
-        .getElementById("surel")
+        .getElementById("email")
         .value
         .trim();
 
@@ -2247,7 +2247,7 @@ contactForm.addEventListener(
 
     if(
       !name ||
-      !surel ||
+      !email ||
       !subject ||
       !message
     ){
@@ -2321,8 +2321,8 @@ contactForm.addEventListener(
                 name:
                   name,
 
-                surel:
-                  surel,
+                email:
+                  email,
 
                 subject:
                   subject,
@@ -2408,7 +2408,7 @@ contactForm.addEventListener(
     catch(error){
 
       console.error(
-        "Kesalahan formulir kontak:",
+        "Contact form error:",
         error
       );
 
