@@ -20,45 +20,45 @@
       eyebrow: "DARI RUANG REDAKSI",
       title: "Cerita, gagasan, dan perspektif",
       cards: [
-        ["Artikel terbaru", "Baca kisah dan pemikiran pilihan", "assets/images/playlists/playlist-01.jpg", "pages/artikel.html"],
-        ["Tokoh Hindu", "Mengenal tokoh dan perjalanan dharma", "assets/images/playlists/playlist-04.jpg", "topics/tokoh-hindu.html"],
-        ["Tradisi & Budaya", "Menelusuri warisan yang tetap hidup", "assets/images/playlists/playlist-05.jpg", "topics/tradisi-budaya.html"]
+        ["Artikel terbaru", "Baca kisah dan pemikiran pilihan", "assets/images/playlists/playlist-04.jpg", "pages/artikel.html"],
+        ["Tokoh Hindu", "Mengenal tokoh dan perjalanan dharma", "assets/images/playlists/playlist-05.jpg", "topics/tokoh-hindu.html"],
+        ["Tradisi & Budaya", "Menelusuri warisan yang tetap hidup", "assets/images/playlists/playlist-06.jpg", "topics/tradisi-budaya.html"]
       ]
     },
     "Video": {
       eyebrow: "TONTON DI MANDALA",
       title: "Kisah Nusantara dalam gambar bergerak",
       cards: [
-        ["Video terbaru", "Temukan video dari kanal Mandala", "assets/images/playlists/playlist-02.jpg", "pages/video.html"],
-        ["Candika Nusantara", "Candi, sejarah, dan warisan", "assets/images/playlists/playlist-03.jpg", "topics/candika-nusantara.html"],
-        ["Jelajah Nusantara", "Tempat, budaya, dan perjalanan", "assets/images/playlists/playlist-06.jpg", "topics/jelajah-nusantara.html"]
+        ["Video terbaru", "Temukan video dari kanal Mandala", "assets/images/playlists/playlist-07.jpg", "pages/video.html"],
+        ["Candika Nusantara", "Candi, sejarah, dan warisan", "assets/images/playlists/playlist-08.jpg", "topics/candika-nusantara.html"],
+        ["Jelajah Nusantara", "Tempat, budaya, dan perjalanan", "assets/images/playlists/playlist-09.jpg", "topics/jelajah-nusantara.html"]
       ]
     },
     "Daftar Putar": {
       eyebrow: "RANGKAIAN CERITA",
       title: "Ikuti satu cerita ke cerita berikutnya",
       cards: [
-        ["Jelajah Nusantara", "Perjalanan dan warisan Nusantara", "assets/images/playlists/playlist-01.jpg", "pages/playlist.html"],
-        ["Kabar Umat", "Kabar dan kegiatan komunitas", "assets/images/playlists/playlist-02.jpg", "pages/playlist.html"],
-        ["Bersama Sang Tokoh", "Percakapan dan kisah para tokoh", "assets/images/playlists/playlist-03.jpg", "pages/playlist.html"]
+        ["Jelajah Nusantara", "Perjalanan dan warisan Nusantara", "assets/images/playlists/playlist-10.jpg", "pages/playlist.html"],
+        ["Kabar Umat", "Kabar dan kegiatan komunitas", "assets/images/playlists/playlist-11.jpg", "pages/playlist.html"],
+        ["Bersama Sang Tokoh", "Percakapan dan kisah para tokoh", "assets/images/playlists/playlist-12.jpg", "pages/playlist.html"]
       ]
     },
     "Audio Podcast": {
       eyebrow: "DENGARKAN MANDALA",
       title: "Percakapan yang lebih panjang",
       cards: [
-        ["Episode terbaru", "Dengarkan cerita pilihan", "assets/images/playlists/playlist-04.jpg", "pages/podcast.html"],
-        ["Perjalanan dharmika", "Pengalaman dan perjalanan hidup", "assets/images/playlists/playlist-05.jpg", "pages/podcast.html"],
-        ["Tradisi Nusantara", "Gagasan, budaya, dan kehidupan", "assets/images/playlists/playlist-06.jpg", "pages/podcast.html"]
+        ["Episode terbaru", "Dengarkan cerita pilihan", "assets/images/playlists/playlist-13.jpg", "pages/podcast.html"],
+        ["Perjalanan dharmika", "Pengalaman dan perjalanan hidup", "assets/images/playlists/playlist-14.jpg", "pages/podcast.html"],
+        ["Tradisi Nusantara", "Gagasan, budaya, dan kehidupan", "assets/images/playlists/playlist-15.jpg", "pages/podcast.html"]
       ]
     },
     "Tentang": {
       eyebrow: "MENGENAL MANDALA",
       title: "Media Hindu Nusantara",
       cards: [
-        ["Tentang kami", "Kenali visi dan perjalanan Mandala", "assets/images/playlists/playlist-07.jpg", "pages/tentang-kami.html"],
-        ["Tradisi & Budaya", "Merawat warisan Nusantara", "assets/images/playlists/playlist-08.jpg", "topics/tradisi-budaya.html"],
-        ["Hubungi redaksi", "Sampaikan cerita dan pertanyaan", "assets/images/playlists/playlist-09.jpg", "pages/kontak.html"]
+        ["Tentang kami", "Kenali visi dan perjalanan Mandala", "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=700&q=85", "pages/tentang-kami.html"],
+        ["Tradisi & Budaya", "Merawat warisan Nusantara", "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=700&q=85", "topics/tradisi-budaya.html"],
+        ["Hubungi redaksi", "Sampaikan cerita dan pertanyaan", "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=85", "pages/kontak.html"]
       ]
     }
   };
@@ -85,9 +85,9 @@
     activeLink = link;
     eyebrow.textContent = entry.eyebrow;
     title.textContent = entry.title;
-    const existingCovers = [...document.querySelectorAll("#playlistTrack .play-card img")].map(img => img.currentSrc || img.src).filter(Boolean);
-    cards.innerHTML = entry.cards.map((item, index) => {
-      const cover = existingCovers[index] || item[2];
+    panel.dataset.menu = key.toLowerCase().replace(/\\s+/g, "-");
+    cards.innerHTML = entry.cards.map((item) => {
+      const cover = item[2];
       return '<a class="nav-preview-card" href="' + item[3] + '">' +
         '<span class="nav-preview-image"><img src="' + cover + '" alt="" loading="eager" onerror="this.onerror=null;this.src=\'assets/images/playlists/playlist-10.jpg\';"></span>' +
         '<span class="nav-preview-copy"><strong>' + item[0] + '</strong><span>' + item[1] + '</span><em>Jelajahi <span aria-hidden="true">↗</span></em></span>' +
