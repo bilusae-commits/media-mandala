@@ -3188,3 +3188,15 @@ body[data-base="./"] #topicsContainer .topic p {
 @media (max-width: 420px) {
   body[data-base="./"] #topicsContainer.topicGrid { grid-template-columns: 1fr !important; }
 }
+
+
+/* Final cascade guard: keep playlist text in normal flow below the artwork. */
+body[data-base="./"] #playlistSection .play-card::after { display: none !important; }
+body[data-base="./"] #playlistSection .pc-info {
+  position: static !important;
+  inset: auto !important;
+  z-index: 2 !important;
+  align-self: stretch !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
