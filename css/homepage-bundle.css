@@ -2993,3 +2993,124 @@ body[data-base="./"] #playlistSection .play-card.pos--2 {
   body[data-base="./"] #playlistSection .play-card.pos-1 { transform: translate(-50%,-50%) translateX(128px) scale(.72) !important; }
   body[data-base="./"] #playlistSection .play-card.pos--1 { transform: translate(-50%,-50%) translateX(-128px) scale(.72) !important; }
 }
+
+
+/* Homepage refinements requested 2026-10-15:
+   active audio row: near-black navy text on its white playing background. */
+body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing,
+body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing td,
+body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing td * {
+  color: #07182b !important;
+}
+body[data-base="./"] #homeAudioSection .home-audio-table tbody tr.is-playing .home-audio-description {
+  color: #26384b !important;
+}
+
+/* Playlist cover first, text below: clean editorial poster cards. */
+body[data-base="./"] #playlistSection .play-card,
+body[data-base="./"] #playlistSection .play-card.pos-0,
+body[data-base="./"] #playlistSection .play-card.pos-1,
+body[data-base="./"] #playlistSection .play-card.pos--1,
+body[data-base="./"] #playlistSection .play-card.pos-2,
+body[data-base="./"] #playlistSection .play-card.pos--2,
+body[data-base="./"] #playlistSection .play-card.pos-hidden {
+  width: clamp(240px, 25vw, 300px) !important;
+  height: 310px !important;
+  border-radius: 8px !important;
+}
+body[data-base="./"] #playlistSection .play-card a {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  height: 100% !important;
+  width: 100% !important;
+  background: #fff !important;
+}
+body[data-base="./"] #playlistSection .play-card img {
+  display: block !important;
+  flex: 0 0 72% !important;
+  width: 100% !important;
+  height: 72% !important;
+  min-height: 0 !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 10px !important;
+  background: #0b2744 !important;
+}
+body[data-base="./"] #playlistSection .pc-info {
+  display: flex !important;
+  flex: 1 1 28% !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  padding: 12px 15px !important;
+  border-top: 2px solid #c8a24b !important;
+  border-left: 0 !important;
+  background: #fff !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+body[data-base="./"] #playlistSection .pc-info strong {
+  color: #082d56 !important;
+  font-size: clamp(13px, 1.1vw, 16px) !important;
+  line-height: 1.25 !important;
+}
+body[data-base="./"] #playlistSection .pc-info span {
+  color: #667586 !important;
+  font-size: 9px !important;
+  line-height: 1.4 !important;
+}
+body[data-base="./"] #playlistSection .play-card.pos-1 {
+  transform: translate(-50%,-50%) translateX(clamp(150px,18vw,205px)) scale(.78) !important;
+}
+body[data-base="./"] #playlistSection .play-card.pos--1 {
+  transform: translate(-50%,-50%) translateX(clamp(-205px,-18vw,-150px)) scale(.78) !important;
+}
+body[data-base="./"] #playlistSection .play-card.pos-2 {
+  transform: translate(-50%,-50%) translateX(330px) scale(.62) !important;
+}
+body[data-base="./"] #playlistSection .play-card.pos--2 {
+  transform: translate(-50%,-50%) translateX(-330px) scale(.62) !important;
+}
+@media (max-width: 760px) {
+  body[data-base="./"] #playlistSection .play-card,
+  body[data-base="./"] #playlistSection .play-card.pos-0,
+  body[data-base="./"] #playlistSection .play-card.pos-1,
+  body[data-base="./"] #playlistSection .play-card.pos--1,
+  body[data-base="./"] #playlistSection .play-card.pos-2,
+  body[data-base="./"] #playlistSection .play-card.pos--2,
+  body[data-base="./"] #playlistSection .play-card.pos-hidden {
+    width: min(78vw, 300px) !important;
+    height: 270px !important;
+  }
+  body[data-base="./"] #playlistSection .play-card img {
+    flex-basis: 70% !important;
+    height: 70% !important;
+    padding: 8px !important;
+  }
+  body[data-base="./"] #playlistSection .pc-info {
+    flex-basis: 30% !important;
+    padding: 10px 12px !important;
+  }
+  body[data-base="./"] #playlistSection .play-card.pos-1 {
+    transform: translate(-50%,-50%) translateX(118px) scale(.76) !important;
+  }
+  body[data-base="./"] #playlistSection .play-card.pos--1 {
+    transform: translate(-50%,-50%) translateX(-118px) scale(.76) !important;
+  }
+  body[data-base="./"] #playlistSection .play-card.pos-2,
+  body[data-base="./"] #playlistSection .play-card.pos--2 {
+    opacity: 0 !important;
+  }
+}
+@media (max-width: 380px) {
+  body[data-base="./"] #playlistSection .play-card,
+  body[data-base="./"] #playlistSection .play-card.pos-0,
+  body[data-base="./"] #playlistSection .play-card.pos-1,
+  body[data-base="./"] #playlistSection .play-card.pos--1,
+  body[data-base="./"] #playlistSection .play-card.pos-2,
+  body[data-base="./"] #playlistSection .play-card.pos--2,
+  body[data-base="./"] #playlistSection .play-card.pos-hidden {
+    width: 260px !important;
+    height: 248px !important;
+  }
+}
