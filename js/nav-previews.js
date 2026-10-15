@@ -96,12 +96,13 @@
     const headerRect = header.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
     const panelWidth = Math.min(820, window.innerWidth - 32);
-    const anchorCenter = linkRect.left + linkRect.width / 2 - headerRect.left;
+    const anchorCenter = linkRect.left + linkRect.width / 2;
     const minCenter = panelWidth / 2 + 16;
-    const maxCenter = headerRect.width - panelWidth / 2 - 16;
+    const maxCenter = window.innerWidth - panelWidth / 2 - 16;
+    panel.style.position = "fixed";
     panel.style.width = "min(820px, calc(100vw - 32px))";
     panel.style.left = Math.max(minCenter, Math.min(maxCenter, anchorCenter)) + "px";
-    panel.style.top = (headerRect.height + 4) + "px";
+    panel.style.top = (headerRect.bottom + 2) + "px";
     panel.style.transform = "translateX(-50%)";
     panel.hidden = false;
     header.classList.add("has-nav-preview");
