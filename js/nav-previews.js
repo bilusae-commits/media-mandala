@@ -78,8 +78,9 @@
   let closeTimer = null;
 
   function show(link) {
-    const key = link.textContent.trim();
-    const entry = entries[key];
+    const label = link.textContent.trim().replace(/\\s+/g, " ");
+    const key = Object.keys(entries).find(name => name.toLowerCase() === label.toLowerCase());
+    const entry = key ? entries[key] : null;
     if (!entry || window.matchMedia("(max-width: 900px)").matches) return;
     window.clearTimeout(closeTimer);
     activeLink = link;
@@ -100,6 +101,9 @@
     const minCenter = panelWidth / 2 + 16;
     const maxCenter = window.innerWidth - panelWidth / 2 - 16;
     panel.style.position = "fixed";
+    panel.style.display = "block";
+    panel.style.visibility = "visible";
+    panel.style.opacity = "1";
     panel.style.width = "min(820px, calc(100vw - 32px))";
     panel.style.left = Math.max(minCenter, Math.min(maxCenter, anchorCenter)) + "px";
     panel.style.top = (headerRect.bottom + 2) + "px";
@@ -126,6 +130,7 @@
   links.forEach(link => {
     if (entries[link.textContent.trim()]) link.setAttribute("aria-haspopup", "true");
     link.addEventListener("mouseenter", () => show(link));
+    link.addEventListener("pointerenter", () => show(link));
     link.addEventListener("focus", () => show(link));
     link.addEventListener("mouseleave", scheduleHide);
   });
