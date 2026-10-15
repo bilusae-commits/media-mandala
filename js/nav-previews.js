@@ -101,7 +101,7 @@
     const maxCenter = headerRect.width - panelWidth / 2 - 16;
     panel.style.width = "min(820px, calc(100vw - 32px))";
     panel.style.left = Math.max(minCenter, Math.min(maxCenter, anchorCenter)) + "px";
-    panel.style.top = (linkRect.bottom - headerRect.top + 8) + "px";
+    panel.style.top = (headerRect.height + 4) + "px";
     panel.style.transform = "translateX(-50%)";
     panel.hidden = false;
     header.classList.add("has-nav-preview");
