@@ -132,9 +132,10 @@ window.setTimeout(function(){
   async function loadCatalog(){
     if(catalogReady||loading)return;loading=true;
     const fetched=await Promise.all(pages.map(async item=>{
-      try{const response=await fetch(item[1],{credentials:"same-origin"});if(!response.ok)return item;const doc=new DOMParser().parseFromString(await response.text(),"text/html");const title=doc.querySelector("h1")?.textContent.trim()||doc.title||item[0];const description=doc.querySelector('meta[name="description"]')?.content||doc.querySelector("main p,article p")?.textContent.trim()||item[2];return [title,item[1],description.slice(0,180)];}catch(e){return item;}
+      try{const response=await fetch(item[1],{credentials:"same-origin"});if(!response.ok)return item;const doc=new DOMParser().parseFromString(await response.text(),"text/html");const title=doc.querySelector("h1")?.textContent.trim()||doc.title||item[0];const description=doc.querySelector('meta[name="description"]')?.content||doc.querySelector("main p,article p")?.textContent.trim()||item[2];const searchable=[...doc.querySelectorAll("h1,h2,h3,h4,p,a")].map(node=>node.textContent.trim()).filter(Boolean).join(" ").replace(/\\s+/g," ");return [title,item[1],(description+" "+searchable).slice(0,1600)];}catch(e){return item;}
     }));
-    catalog=fetched;catalogReady=true;loading=false;
+    const home=[...document.querySelectorAll(".featureGrid a,#playlistTrack .play-card a,#topicsContainer a,#homeAudioSection a")].map(link=>{const title=link.querySelector("h2,h3,strong")?.textContent.trim()||link.textContent.trim().replace(/\\s+/g," ").slice(0,90);return [title,link.getAttribute("href")||"index.html",link.textContent.trim().replace(/\\s+/g," ").slice(0,600)];});
+    catalog=[...home,...fetched];catalogReady=true;loading=false;
   }
   function render(query){
     const q=normalize(query).trim();if(!q){results.innerHTML="<p>Ketik kata kunci untuk menemukan cerita Mandala.</p>";return;}
