@@ -11,25 +11,22 @@
       eyebrow: "JELAJAHI MANDALA",
       title: "Ruang cerita Hindu Nusantara",
       cards: [
-        ["Cerita terbaru", "Pilihan redaksi dan kabar terbaru", "assets/images/playlists/playlist-01.jpg", "index.html"],
-        ["Video pilihan", "Tonton kisah dari berbagai penjuru", "assets/images/playlists/playlist-02.jpg", "pages/video.html"],
-        ["Audio Podcast", "Dengarkan percakapan lebih mendalam", "assets/images/playlists/playlist-03.jpg", "pages/podcast.html"]
+        ["Cerita terbaru", "Pilihan redaksi dan kabar terbaru", "assets/images/playlists/playlist-04.jpg", "pages/artikel.html"],
+        ["Video pilihan", "Tonton kisah dari berbagai penjuru", "assets/images/playlists/playlist-05.jpg", "pages/video.html"]
       ]
     },
     "Artikel": {
       eyebrow: "DARI RUANG REDAKSI",
       title: "Cerita, gagasan, dan perspektif",
       cards: [
-        ["Artikel terbaru", "Baca kisah dan pemikiran pilihan", "assets/images/playlists/playlist-04.jpg", "pages/artikel.html"],
-        ["Tokoh Hindu", "Mengenal tokoh dan perjalanan dharma", "assets/images/playlists/playlist-05.jpg", "topics/tokoh-hindu.html"],
-        ["Tradisi & Budaya", "Menelusuri warisan yang tetap hidup", "assets/images/playlists/playlist-06.jpg", "topics/tradisi-budaya.html"]
+        ["Tokoh Hindu", "Mengenal tokoh dan perjalanan dharma", "assets/images/playlists/playlist-06.jpg", "topics/tokoh-hindu.html"],
+        ["Tradisi & Budaya", "Menelusuri warisan yang tetap hidup", "assets/images/playlists/playlist-07.jpg", "topics/tradisi-budaya.html"]
       ]
     },
     "Video": {
       eyebrow: "TONTON DI MANDALA",
       title: "Kisah Nusantara dalam gambar bergerak",
       cards: [
-        ["Video terbaru", "Temukan video dari kanal Mandala", "assets/images/playlists/playlist-07.jpg", "pages/video.html"],
         ["Candika Nusantara", "Candi, sejarah, dan warisan", "assets/images/playlists/playlist-08.jpg", "topics/candika-nusantara.html"],
         ["Jelajah Nusantara", "Tempat, budaya, dan perjalanan", "assets/images/playlists/playlist-09.jpg", "topics/jelajah-nusantara.html"]
       ]
@@ -38,27 +35,24 @@
       eyebrow: "RANGKAIAN CERITA",
       title: "Ikuti satu cerita ke cerita berikutnya",
       cards: [
-        ["Jelajah Nusantara", "Perjalanan dan warisan Nusantara", "assets/images/playlists/playlist-10.jpg", "pages/playlist.html"],
-        ["Kabar Umat", "Kabar dan kegiatan komunitas", "assets/images/playlists/playlist-11.jpg", "pages/playlist.html"],
-        ["Bersama Sang Tokoh", "Percakapan dan kisah para tokoh", "assets/images/playlists/playlist-12.jpg", "pages/playlist.html"]
+        ["Kabar Umat", "Kabar dan kegiatan komunitas", "assets/images/playlists/playlist-10.jpg", "topics/kabar-umat.html"],
+        ["Bersama Sang Tokoh", "Percakapan dan kisah para tokoh", "assets/images/playlists/playlist-11.jpg", "pages/playlist.html"]
       ]
     },
     "Audio Podcast": {
       eyebrow: "DENGARKAN MANDALA",
       title: "Percakapan yang lebih panjang",
       cards: [
-        ["Episode terbaru", "Dengarkan cerita pilihan", "assets/images/playlists/playlist-13.jpg", "pages/podcast.html"],
-        ["Perjalanan dharmika", "Pengalaman dan perjalanan hidup", "assets/images/playlists/playlist-14.jpg", "pages/podcast.html"],
-        ["Tradisi Nusantara", "Gagasan, budaya, dan kehidupan", "assets/images/playlists/playlist-15.jpg", "pages/podcast.html"]
+        ["Perjalanan dharmika", "Pengalaman dan perjalanan hidup", "assets/images/playlists/playlist-12.jpg", "topics/dharmika.html"],
+        ["Tradisi Nusantara", "Gagasan, budaya, dan kehidupan", "assets/images/playlists/playlist-13.jpg", "pages/podcast.html"]
       ]
     },
     "Tentang": {
       eyebrow: "MENGENAL MANDALA",
       title: "Media Hindu Nusantara",
       cards: [
-        ["Tentang kami", "Kenali visi dan perjalanan Mandala", "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=700&q=85", "pages/tentang-kami.html"],
-        ["Tradisi & Budaya", "Merawat warisan Nusantara", "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=700&q=85", "topics/tradisi-budaya.html"],
-        ["Hubungi redaksi", "Sampaikan cerita dan pertanyaan", "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=85", "pages/kontak.html"]
+        ["Tentang kami", "Kenali visi dan perjalanan Mandala", "assets/images/playlists/playlist-14.jpg", "pages/tentang-kami.html"],
+        ["Hubungi redaksi", "Sampaikan cerita dan pertanyaan", "assets/images/playlists/playlist-15.jpg", "pages/kontak.html"]
       ]
     }
   };
