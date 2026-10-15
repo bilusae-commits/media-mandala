@@ -3114,3 +3114,27 @@ body[data-base="./"] #playlistSection .play-card.pos--2 {
     height: 248px !important;
   }
 }
+
+
+/* Ensure the header preview is visibly anchored beneath the navigation bar. */
+#siteHeader .nav-preview {
+  z-index: 1200 !important;
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+}
+#siteHeader .nav-preview-image {
+  flex: 0 0 92px !important;
+  width: 92px !important;
+  height: 92px !important;
+  min-height: 92px !important;
+  background: #e9eef3 !important;
+}
+#siteHeader .nav-preview-image img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
