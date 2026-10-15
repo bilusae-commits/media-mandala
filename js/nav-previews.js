@@ -85,12 +85,24 @@
     activeLink = link;
     eyebrow.textContent = entry.eyebrow;
     title.textContent = entry.title;
-    cards.innerHTML = entry.cards.map((item) =>
-      '<a class="nav-preview-card" href="' + item[3] + '">' +
-        '<span class="nav-preview-image"><img src="' + item[2] + '" alt="" loading="lazy"></span>' +
+    const existingCovers = [...document.querySelectorAll("#playlistTrack .play-card img")].map(img => img.currentSrc || img.src).filter(Boolean);
+    cards.innerHTML = entry.cards.map((item, index) => {
+      const cover = existingCovers[index] || item[2];
+      return '<a class="nav-preview-card" href="' + item[3] + '">' +
+        '<span class="nav-preview-image"><img src="' + cover + '" alt="" loading="eager" onerror="this.onerror=null;this.src=\'assets/images/playlists/playlist-10.jpg\';"></span>' +
         '<span class="nav-preview-copy"><strong>' + item[0] + '</strong><span>' + item[1] + '</span><em>Jelajahi <span aria-hidden="true">↗</span></em></span>' +
-      '</a>'
-    ).join("");
+      '</a>';
+    }).join("");
+    const headerRect = header.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const panelWidth = Math.min(820, window.innerWidth - 32);
+    const anchorCenter = linkRect.left + linkRect.width / 2 - headerRect.left;
+    const minCenter = panelWidth / 2 + 16;
+    const maxCenter = headerRect.width - panelWidth / 2 - 16;
+    panel.style.width = "min(820px, calc(100vw - 32px))";
+    panel.style.left = Math.max(minCenter, Math.min(maxCenter, anchorCenter)) + "px";
+    panel.style.top = (linkRect.bottom - headerRect.top + 8) + "px";
+    panel.style.transform = "translateX(-50%)";
     panel.hidden = false;
     header.classList.add("has-nav-preview");
     links.forEach(item => item.setAttribute("aria-expanded", String(item === link)));
@@ -111,7 +123,7 @@
   }
 
   links.forEach(link => {
-    link.setAttribute("aria-haspopup", "true");
+    if (entries[link.textContent.trim()]) link.setAttribute("aria-haspopup", "true");
     link.addEventListener("mouseenter", () => show(link));
     link.addEventListener("focus", () => show(link));
     link.addEventListener("mouseleave", scheduleHide);
