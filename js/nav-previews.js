@@ -35,24 +35,24 @@
       eyebrow: "RANGKAIAN CERITA",
       title: "Ikuti satu cerita ke cerita berikutnya",
       cards: [
-        ["Kabar Umat", "Kabar dan kegiatan komunitas", "assets/images/playlists/playlist-10.jpg", "topics/kabar-umat.html"],
-        ["Bersama Sang Tokoh", "Percakapan dan kisah para tokoh", "assets/images/playlists/playlist-11.jpg", "pages/playlist.html"]
+        ["Kabar Umat", "Kabar dan kegiatan komunitas", "assets/images/playlists/playlist-12.jpg", "topics/kabar-umat.html"],
+        ["Bersama Sang Tokoh", "Percakapan dan kisah para tokoh", "assets/images/playlists/playlist-13.jpg", "pages/playlist.html"]
       ]
     },
     "Audio Podcast": {
       eyebrow: "DENGARKAN MANDALA",
       title: "Percakapan yang lebih panjang",
       cards: [
-        ["Perjalanan dharmika", "Pengalaman dan perjalanan hidup", "assets/images/playlists/playlist-12.jpg", "topics/dharmika.html"],
-        ["Tradisi Nusantara", "Gagasan, budaya, dan kehidupan", "assets/images/playlists/playlist-13.jpg", "pages/podcast.html"]
+        ["Perjalanan dharmika", "Pengalaman dan perjalanan hidup", "assets/images/playlists/playlist-14.jpg", "topics/dharmika.html"],
+        ["Tradisi Nusantara", "Gagasan, budaya, dan kehidupan", "assets/images/playlists/playlist-15.jpg", "pages/podcast.html"]
       ]
     },
     "Tentang": {
       eyebrow: "MENGENAL MANDALA",
       title: "Media Hindu Nusantara",
       cards: [
-        ["Tentang kami", "Kenali visi dan perjalanan Mandala", "assets/images/playlists/playlist-14.jpg", "pages/tentang-kami.html"],
-        ["Hubungi redaksi", "Sampaikan cerita dan pertanyaan", "assets/images/playlists/playlist-15.jpg", "pages/kontak.html"]
+        ["Tentang kami", "Kenali visi dan perjalanan Mandala", "assets/brand/Mandala.png", "pages/tentang-kami.html"],
+        ["Hubungi redaksi", "Sampaikan cerita dan pertanyaan", "assets/brand/WhatsApp%20Image%202026-02-19%20at%2011.46.52%20AM.jpeg", "pages/kontak.html"]
       ]
     }
   };
