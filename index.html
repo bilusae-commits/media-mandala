@@ -139,7 +139,14 @@ window.setTimeout(function(){
   }
   function render(query){
     const q=normalize(query).trim();if(!q){results.innerHTML="<p>Ketik kata kunci untuk menemukan cerita Mandala.</p>";return;}
-    const found=catalog.map(item=>({item,score:normalize(item.join(" ")).includes(q)?(normalize(item[0]).includes(q)?3:1):0})).filter(x=>x.score).sort((a,b)=>b.score-a.score).slice(0,8);
+    const data=window.MandalaPublicData||window.DATA||{};
+    const dynamic=[
+      ...(Array.isArray(data.articles)?data.articles.map(item=>[item.title||"Artikel Mandala","pages/artikel-detail.html?slug="+encodeURIComponent(item.slug||item.id||""),[item.title,item.excerpt,item.summary,item.description,item.content].filter(Boolean).join(" ").slice(0,700)]):[]),
+      ...(Array.isArray(data.videos)?data.videos.map(item=>[item.title||"Video Mandala","pages/video.html",[item.title,item.description,item.category].filter(Boolean).join(" ").slice(0,700)]):[]),
+      ...(Array.isArray(data.playlists)?data.playlists.map(item=>[item.title||"Daftar Putar Mandala","pages/playlist-detail.html?id="+encodeURIComponent(item.id||item.slug||""),[item.title,item.description,item.category].filter(Boolean).join(" ").slice(0,700)]):[]),
+      ...(Array.isArray(data.topics)?data.topics.map(item=>[item.name||item.title||"Topik Mandala",item.slug?"topics/"+encodeURIComponent(item.slug)+".html":"index.html",[item.name,item.title,item.description].filter(Boolean).join(" ").slice(0,700)]):[])
+    ];
+    const found=[...catalog,...dynamic].map(item=>({item,score:normalize(item.join(" ")).includes(q)?(normalize(item[0]).includes(q)?3:1):0})).filter(x=>x.score).sort((a,b)=>b.score-a.score).slice(0,8);
     if(!found.length){results.innerHTML='<p>Belum ada hasil yang cocok. Coba kata kunci lain.</p>';return;}
     results.innerHTML=found.map(({item})=>'<a class="mandala-search-result" href="'+safe(item[1])+'"><span>'+safe(item[0])+'</span><small>'+safe(item[2])+'</small><b aria-hidden="true">↗</b></a>').join("");
   }
