@@ -123,7 +123,7 @@
   function scheduleHide() {
     window.clearTimeout(closeTimer);
     closeTimer = window.setTimeout(() => {
-      if (!panel.matches(":hover") && !(activeLink && activeLink.matches(":focus"))) hideNow();
+      if (!panel.matches(":hover") && !(activeLink && (activeLink.matches(":focus") || activeLink.matches(":hover")))) hideNow();
     }, 140);
   }
 
