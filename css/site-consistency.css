@@ -52,13 +52,6 @@ main, article, section, header, footer, nav, aside,
   margin-inline: auto;
 }
 
-section {
-  padding-block: var(--md-section-space) !important;
-}
-
-section > :first-child { margin-top: 0; }
-section > :last-child { margin-bottom: 0; }
-
 h1 {
   max-width: 100%;
   font-size: clamp(2rem, 4.1vw, 3.65rem);
@@ -143,7 +136,6 @@ hr {
   html { scroll-padding-top: 68px; }
   h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); line-height: 1.12; }
   h2 { line-height: 1.2; }
-  section { padding-block: var(--md-section-space) !important; }
   .grid, .cards, .topic-grid, .topics-grid, .article-grid,
   .video-grid, .playlist-grid, .podcast-grid {
     gap: 14px;
@@ -310,8 +302,14 @@ footer .copy, footer.footer .copy {
   header#siteHeader > .w.nav, header.site-header > .w.nav, header.header > .w.nav,
   footer .w, footer.footer .w { width:calc(100% - 36px)!important; }
   header#siteHeader nav.links, header.site-header nav.links, header.header nav.links {
-    display:none!important;
+    display:flex!important; flex:1 1 0!important; min-width:0!important;
+    overflow-x:auto!important; scrollbar-width:none!important; gap:12px!important;
   }
+  header#siteHeader nav.links::-webkit-scrollbar, header.site-header nav.links::-webkit-scrollbar,
+  header.header nav.links::-webkit-scrollbar { display:none!important; }
+  header#siteHeader:has(.mobileToggle) nav.links,
+  header.site-header:has(.mobileToggle) nav.links,
+  header.header:has(.mobileToggle) nav.links { display:none!important; }
   header#siteHeader nav.nav-menu, header.site-header nav.nav-menu, header.header nav.nav-menu {
     gap:12px!important; overflow-x:auto; scrollbar-width:none;
   }
@@ -332,6 +330,9 @@ footer .copy, footer.footer .copy {
     width:34px!important; height:34px!important; flex-basis:34px!important;
   }
   header#siteHeader .yt, header.site-header .yt, header.header .yt { display:none!important; }
+  header#siteHeader nav.links, header.site-header nav.links, header.header nav.links {
+    max-width:calc(100vw - 180px)!important;
+  }
   header#siteHeader nav.nav-menu, header.site-header nav.nav-menu, header.header nav.nav-menu {
     max-width:calc(100vw - 190px); gap:12px!important;
   }
