@@ -100,7 +100,7 @@
     const minCenter = panelWidth / 2 + 16;
     const maxCenter = window.innerWidth - panelWidth / 2 - 16;
     panel.style.position = "fixed";
-    panel.style.display = "block";
+    panel.style.setProperty("display", "block", "important");
     panel.style.visibility = "visible";
     panel.style.opacity = "1";
     panel.style.width = "min(680px, calc(100vw - 32px))";
@@ -114,6 +114,7 @@
 
   function hideNow() {
     panel.hidden = true;
+    panel.style.setProperty("display", "none", "important");
     header.classList.remove("has-nav-preview");
     links.forEach(item => {
       item.removeAttribute("aria-expanded");
@@ -129,6 +130,8 @@
     }, 180);
   }
 
+  nav.addEventListener("pointerover", event => { const link = event.target.closest("a"); if (link && entries[link.textContent.trim()]) show(link); });
+  nav.addEventListener("focusin", event => { const link = event.target.closest("a"); if (link && entries[link.textContent.trim()]) show(link); });
   links.forEach(link => {
     const label = link.textContent.trim();
     if (!entries[label]) return;
