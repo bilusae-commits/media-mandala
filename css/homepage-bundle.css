@@ -3253,3 +3253,79 @@ body[data-base="./"] #homeAudioSection .mandala-promo-art img{display:block!impo
 @media(prefers-reduced-motion:reduce){
  body[data-base="./"] #homeAudioSection .mandala-promo-slide{transition:none!important}
 }
+
+
+/* 2026-10 homepage refinement: text-only navigation and a larger, uncropped promo visual. */
+body[data-base="./"] #siteHeader .nav-preview-text-only{
+  width:min(680px,calc(100vw - 32px))!important;max-height:calc(100vh - 108px)!important;
+  overflow:auto!important;border:1px solid #e2e7ed!important;border-top:3px solid #c8a24b!important;
+  border-radius:0 0 12px 12px!important;background:#fff!important;
+  box-shadow:0 22px 52px rgba(8,35,63,.18)!important;color:#102a43!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-inner{padding:22px 24px 24px!important}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-heading{
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:end!important;
+  gap:8px 18px!important;margin:0 0 16px!important;padding:0 0 14px!important;border-bottom:1px solid #e8edf2!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-eyebrow{
+  grid-column:1/-1!important;color:#96732e!important;font-size:9px!important;font-weight:800!important;letter-spacing:.17em!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-title{
+  color:#082d56!important;font-family:inherit!important;font-size:clamp(18px,2vw,23px)!important;font-weight:750!important;line-height:1.2!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-hint{
+  color:#8995a2!important;font-size:8px!important;font-weight:800!important;letter-spacing:.13em!important;white-space:nowrap!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-links{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-text-link{
+  min-width:0!important;display:grid!important;grid-template-columns:30px minmax(0,1fr) 18px!important;align-items:center!important;
+  gap:10px!important;padding:13px 12px!important;border:1px solid #e6ebf0!important;border-radius:7px!important;
+  background:#fff!important;text-decoration:none!important;transition:background .16s ease,border-color .16s ease,transform .16s ease!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-text-link:hover,
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-text-link:focus-visible{
+  background:#f4f7fa!important;border-color:#c8a24b!important;transform:translateY(-1px)!important;outline:2px solid transparent!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-link-number{
+  color:#b18b3b!important;font-family:Georgia,serif!important;font-size:13px!important;font-weight:700!important;
+}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-link-copy{display:flex!important;flex-direction:column!important;gap:4px!important;min-width:0!important}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-link-copy strong{color:#082d56!important;font-size:12px!important;font-weight:750!important;line-height:1.25!important}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-link-copy small{color:#657486!important;font-size:10px!important;line-height:1.4!important}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-link-arrow{color:#9a782f!important;font-size:15px!important;text-align:center!important}
+body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-text-link:only-child{grid-column:1/-1!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-strip{
+  height:clamp(320px,29vw,410px)!important;margin-bottom:30px!important;
+  overflow:hidden!important;background:#fff!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-slide{
+  grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr)!important;
+  gap:clamp(24px,4vw,68px)!important;padding:clamp(26px,4vw,58px)!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy{gap:12px!important;max-width:680px!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy>span{font-size:10px!important;letter-spacing:.19em!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy h3{font-size:clamp(27px,3.25vw,46px)!important;line-height:1.06!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy p{font-size:clamp(13px,1.15vw,16px)!important;line-height:1.55!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-art{width:100%!important;height:100%!important;min-height:0!important;padding:0!important;overflow:hidden!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-art img{
+  display:block!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;
+  max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;
+}
+@media(max-width:760px){
+ body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-inner{padding:16px!important}
+ body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-links{grid-template-columns:minmax(0,1fr)!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-strip{height:clamp(350px,100vw,440px)!important;margin-bottom:24px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{
+   grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr)!important;
+   gap:12px!important;padding:20px 18px!important;
+ }
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy{gap:8px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy h3{font-size:clamp(23px,6.2vw,30px)!important;line-height:1.08!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy p{font-size:12px!important;line-height:1.42!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-art img{max-height:180px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-base="./"] #siteHeader .nav-preview-text-only .nav-preview-text-link{transition:none!important}
+}
