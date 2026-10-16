@@ -3548,3 +3548,84 @@ body[data-base="./"] .mandala-promo-slide img{
  body[data-base="./"] .mandala-promo-track,body[data-base="./"] .mandala-promo-slide{border-radius:5px!important}
 }
 @media(prefers-reduced-motion:reduce){body[data-base="./"] .mandala-promo-slide{transition:none!important}}
+
+
+/* Final promo card fix: keep the banner inside its content column and match the image-only slide markup. */
+body[data-base="./"] #homeAudioSection .mandala-promo-strip{
+ position:relative!important;left:auto!important;transform:none!important;
+ display:block!important;width:100%!important;height:clamp(250px,27vw,330px)!important;
+ margin:0 0 38px!important;padding:8px!important;overflow:hidden!important;
+ background:#fff!important;border:1px solid #e0e7ef!important;border-radius:18px!important;
+ box-shadow:0 12px 32px rgba(8,35,63,.09)!important;isolation:isolate!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-track{
+ position:relative!important;display:block!important;width:100%!important;height:100%!important;
+ overflow:hidden!important;background:#f7f9fc!important;transform:none!important;border-radius:12px!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-slide{
+ position:absolute!important;inset:0!important;display:grid!important;
+ grid-template-columns:minmax(0,1.12fr) minmax(180px,.88fr)!important;
+ align-items:center!important;gap:clamp(20px,4vw,54px)!important;
+ width:100%!important;height:100%!important;margin:0!important;
+ padding:clamp(22px,4vw,48px)!important;overflow:hidden!important;
+ color:#102a43!important;text-decoration:none!important;
+ background:linear-gradient(115deg,#f7f9fc 0%,#fff 70%)!important;
+ opacity:0!important;visibility:hidden!important;
+ transition:opacity .55s ease,visibility .55s ease!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-slide.is-active{opacity:1!important;visibility:visible!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy{
+ position:relative!important;z-index:1!important;min-width:0!important;max-width:650px!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:11px!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy>span{
+ color:#98752f!important;font-size:10px!important;font-weight:800!important;letter-spacing:.17em!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy h3{
+ margin:0!important;color:#082d56!important;font-family:inherit!important;
+ font-size:clamp(25px,3.1vw,43px)!important;font-weight:760!important;line-height:1.08!important;
+ letter-spacing:-.035em!important;overflow-wrap:anywhere!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy p{
+ margin:0!important;max-width:500px!important;color:#526274!important;
+ font-size:clamp(12px,1.15vw,15px)!important;line-height:1.6!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-cta{
+ display:inline-flex!important;align-items:center!important;gap:12px!important;
+ margin-top:5px!important;padding:10px 0 8px!important;color:#082d56!important;
+ border-bottom:2px solid #c8a24b!important;font-size:10px!important;font-weight:800!important;
+ letter-spacing:.08em!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-cta::after{content:"→";font-size:16px!important;line-height:1!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-slide:hover .mandala-promo-cta{color:#98752f!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-art{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ min-width:0!important;width:100%!important;height:100%!important;overflow:hidden!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-art img{
+ display:block!important;width:auto!important;height:auto!important;max-width:100%!important;
+ max-height:100%!important;object-fit:contain!important;object-position:center!important;
+ border-radius:8px!important;filter:drop-shadow(0 8px 16px rgba(8,35,63,.10))!important;
+}
+@media(max-width:760px){
+ body[data-base="./"] #homeAudioSection .mandala-promo-strip{
+  height:340px!important;margin-bottom:28px!important;padding:6px!important;border-radius:14px!important;
+ }
+ body[data-base="./"] #homeAudioSection .mandala-promo-track{border-radius:9px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{
+  grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr)!important;
+  gap:10px!important;padding:20px 18px 14px!important;align-content:stretch!important;
+ }
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy{gap:7px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy h3{font-size:clamp(23px,6.3vw,30px)!important;line-height:1.08!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy p{font-size:12px!important;line-height:1.45!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-cta{margin-top:1px!important;padding:6px 0!important;font-size:9px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-art img{max-height:145px!important;max-width:90%!important}
+}
+@media(max-width:380px){
+ body[data-base="./"] #homeAudioSection .mandala-promo-strip{height:320px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{padding:16px 14px 12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{transition:none!important}
+}
