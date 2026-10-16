@@ -72,7 +72,7 @@
   let closeTimer = null;
 
   function show(link) {
-    const label = link.textContent.trim().replace(/\\s+/g, " ");
+    const label = link.textContent.trim().replace(/\s+/g, " ");
     const key = Object.keys(entries).find(name => name.toLowerCase() === label.toLowerCase());
     const entry = key ? entries[key] : null;
     if (!entry || window.matchMedia("(max-width: 900px)").matches) return;
@@ -80,7 +80,7 @@
     activeLink = link;
     eyebrow.textContent = entry.eyebrow;
     title.textContent = entry.title;
-    panel.dataset.menu = key.toLowerCase().replace(/\\s+/g, "-");
+    panel.dataset.menu = key.toLowerCase().replace(/\s+/g, "-");
     cards.innerHTML = entry.cards.map((item) => {
       const cover = item[2];
       return '<a class="nav-preview-card" href="' + item[3] + '">' +
