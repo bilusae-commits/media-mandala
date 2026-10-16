@@ -148,9 +148,9 @@ window.setTimeout(function(){
     const width=Math.min(520,window.innerWidth-28);
     const center=lr.left+lr.width/2-hr.left;
     const safeCenter=Math.max(width/2+8,Math.min(hr.width-width/2-8,center));
-    panel.style.left=safeCenter+"px";
-    panel.style.top=(nr.bottom-hr.top+4)+"px";
-    panel.style.transform="translateX(-50%)";
+    panel.style.setProperty("left",safeCenter+"px","important");
+    panel.style.setProperty("top",(nr.bottom-hr.top+4)+"px","important");
+    panel.style.setProperty("transform","translateX(-50%)","important");
   };
   nav.querySelectorAll('a[aria-controls^="navPreview"]').forEach(link=>{
     link.addEventListener("pointerenter",()=>positionPreview(link));
