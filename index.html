@@ -6,7 +6,7 @@
 <meta name="description" content="Mandala — media digital tentang Hindu, dharma, tokoh, budaya dan Nusantara.">
 <title>Mandala</title>
 <link rel="icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2"><link rel="shortcut icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2">
-<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.11">
+<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.12">
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span class="top-kicker"><i aria-hidden="true"></i> MANDALA · MEDIA HINDU NUSANTARA</span><span class="top-note">Tradisi yang hidup. Cerita yang terus tumbuh.</span></div></div>
@@ -138,6 +138,30 @@ window.setTimeout(function(){
  },3800);
 })();
 (function(){
+  const header=document.getElementById("siteHeader"),nav=document.getElementById("primaryNav");
+  if(!header||!nav)return;
+  const positionPreview=link=>{
+    if(window.matchMedia("(max-width:760px)").matches)return;
+    const panel=document.getElementById(link.getAttribute("aria-controls"));
+    if(!panel)return;
+    const hr=header.getBoundingClientRect(),nr=nav.getBoundingClientRect(),lr=link.getBoundingClientRect();
+    const width=Math.min(520,window.innerWidth-28);
+    const center=lr.left+lr.width/2-hr.left;
+    const safeCenter=Math.max(width/2+8,Math.min(hr.width-width/2-8,center));
+    panel.style.left=safeCenter+"px";
+    panel.style.top=(nr.bottom-hr.top+4)+"px";
+    panel.style.transform="translateX(-50%)";
+  };
+  nav.querySelectorAll('a[aria-controls^="navPreview"]').forEach(link=>{
+    link.addEventListener("pointerenter",()=>positionPreview(link));
+    link.addEventListener("focus",()=>positionPreview(link));
+  });
+  window.addEventListener("resize",()=>{
+    const link=nav.querySelector('a:hover,a:focus');
+    if(link)positionPreview(link);
+  });
+})();
+(function(){
   const toggle=document.getElementById("headerSearchToggle"),panel=document.getElementById("mandalaSearchPanel"),input=document.getElementById("mandalaSiteSearch"),close=document.getElementById("mandalaSearchClose"),results=document.getElementById("mandalaSearchResults"),tabs=document.getElementById("mandalaSearchTabs");
   if(!toggle||!panel||!input||!close||!results||!tabs)return;
   const pages=[
@@ -197,7 +221,7 @@ window.setTimeout(function(){
   let hideTimer=0;function open(){window.clearTimeout(hideTimer);panel.hidden=false;toggle.setAttribute("aria-expanded","true");document.body.classList.add("search-open");loadCatalog().then(()=>{if(input.value)render(input.value);});input.focus();}
   function shut(){panel.hidden=true;toggle.setAttribute("aria-expanded","false");document.body.classList.remove("search-open");}
   window.addEventListener("mandala:audio-catalog-updated",()=>{if(!panel.hidden&&input.value)render(input.value)});window.addEventListener("mandala:public-content-updated",()=>{if(!panel.hidden&&input.value)render(input.value)});toggle.addEventListener("click",()=>{if(panel.hidden)open();else shut();});close.addEventListener("click",shut);
-  input.addEventListener("input",()=>{const id=++request;activeType="all";render(input.value);if(!catalogReady)loadCatalog().then(()=>{if(id===request)render(input.value);});});
+  input.addEventListener("input",()=>{const id=++request;activeType="all";render(input.value);const audioSearch=document.getElementById("homeAudioSearch");if(audioSearch&&audioSearch.value!==input.value){audioSearch.value=input.value;audioSearch.dispatchEvent(new Event("input",{bubbles:true}));}if(!catalogReady)loadCatalog().then(()=>{if(id===request)render(input.value);});});
   tabs.addEventListener("click",event=>{const button=event.target.closest("[data-search-type]");if(!button)return;activeType=button.dataset.searchType;render(input.value);});
   results.addEventListener("click",event=>{const link=event.target.closest(".mandala-search-result");if(!link)return;if(link.dataset.resultType==="video"&&link.dataset.resultVideoId){event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.resultVideoId,link.dataset.resultTitle);shut();return;}if(link.dataset.resultType==="audio"&&link.getAttribute("href")==="#homeAudioSection"){event.preventDefault();const audioSearch=document.getElementById("homeAudioSearch");if(audioSearch){audioSearch.value=link.dataset.resultTitle;audioSearch.dispatchEvent(new Event("input",{bubbles:true}));}shut();document.getElementById("homeAudioSection")?.scrollIntoView({behavior:"smooth",block:"start"});}});
   function scheduleAutoHide(){window.clearTimeout(hideTimer);hideTimer=window.setTimeout(()=>{if(!panel.matches(":hover")&&!toggle.matches(":hover"))shut();},120);}
