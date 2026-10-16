@@ -3970,3 +3970,137 @@ body[data-base="./"] .editorial-card > div {
     font-size: 17px !important;
   }
 }
+
+
+/* Targeted compact balance for the homepage "Cerita Terbaru" block. */
+body[data-base="./"] main > section:nth-of-type(2) {
+  padding-block: 28px !important;
+}
+body[data-base="./"] .featureGrid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+body[data-base="./"] .editorial-heading {
+  gap: 14px !important;
+  margin: 2px 0 18px !important;
+}
+body[data-base="./"] .editorial-heading > span {
+  height: 58px !important;
+}
+body[data-base="./"] .editorial-heading h2 {
+  font-size: clamp(25px, 2.4vw, 36px) !important;
+}
+body[data-base="./"] .editorial-list {
+  gap: 12px !important;
+}
+body[data-base="./"] .editorial-item {
+  grid-template-columns: 148px minmax(0, 1fr) !important;
+  gap: 13px !important;
+  align-items: center !important;
+}
+body[data-base="./"] .editorial-item img {
+  width: 148px !important;
+  height: 88px !important;
+  aspect-ratio: 37 / 22 !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+}
+body[data-base="./"] .editorial-item small {
+  margin: 0 0 6px !important;
+  font-size: 9px !important;
+  letter-spacing: .15em !important;
+}
+body[data-base="./"] .editorial-item h3 {
+  font-size: clamp(14px, 1.02vw, 16px) !important;
+  line-height: 1.24 !important;
+}
+body[data-base="./"] .editorial-right {
+  gap: 18px !important;
+}
+body[data-base="./"] .editorial-main {
+  aspect-ratio: 16 / 9 !important;
+  max-height: 340px !important;
+  border-radius: 6px !important;
+}
+body[data-base="./"] .editorial-main-copy {
+  padding: 22px !important;
+}
+body[data-base="./"] .editorial-main-copy small {
+  margin: 0 0 8px !important;
+  font-size: 9px !important;
+  letter-spacing: .16em !important;
+}
+body[data-base="./"] .editorial-main-copy h2 {
+  font-size: clamp(23px, 2.15vw, 34px) !important;
+  line-height: 1.12 !important;
+}
+body[data-base="./"] .editorial-bottom {
+  gap: 18px !important;
+}
+body[data-base="./"] .editorial-card > div {
+  padding: 14px 15px 17px !important;
+}
+body[data-base="./"] .editorial-card small {
+  margin: 0 0 8px !important;
+  font-size: 9px !important;
+  letter-spacing: .15em !important;
+}
+body[data-base="./"] .editorial-card h3 {
+  font-size: clamp(17px, 1.35vw, 22px) !important;
+  line-height: 1.16 !important;
+}
+@media (max-width: 900px) {
+  body[data-base="./"] .featureGrid {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr) !important;
+    gap: 18px !important;
+  }
+  body[data-base="./"] .editorial-item {
+    grid-template-columns: 112px minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+  body[data-base="./"] .editorial-item img {
+    width: 112px !important;
+    height: 76px !important;
+  }
+  body[data-base="./"] .editorial-right,
+  body[data-base="./"] .editorial-bottom {
+    gap: 14px !important;
+  }
+}
+@media (max-width: 680px) {
+  body[data-base="./"] main > section:nth-of-type(2) {
+    padding-block: 24px !important;
+  }
+  body[data-base="./"] .featureGrid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 22px !important;
+  }
+  body[data-base="./"] .editorial-item {
+    grid-template-columns: 120px minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+  body[data-base="./"] .editorial-item img {
+    width: 120px !important;
+    height: 78px !important;
+  }
+  body[data-base="./"] .editorial-main {
+    max-height: none !important;
+    aspect-ratio: 16 / 10 !important;
+  }
+  body[data-base="./"] .editorial-main-copy {
+    padding: 16px !important;
+  }
+  body[data-base="./"] .editorial-main-copy h2 {
+    font-size: clamp(22px, 6vw, 29px) !important;
+  }
+  body[data-base="./"] .editorial-bottom {
+    gap: 12px !important;
+  }
+  body[data-base="./"] .editorial-card > div {
+    padding: 12px 10px 14px !important;
+  }
+  body[data-base="./"] .editorial-card h3 {
+    font-size: 16px !important;
+  }
+}
