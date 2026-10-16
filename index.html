@@ -6,7 +6,7 @@
 <meta name="description" content="Mandala — media digital tentang Hindu, dharma, tokoh, budaya dan Nusantara.">
 <title>Mandala</title>
 <link rel="icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2"><link rel="shortcut icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2">
-<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.14">
+<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.15">
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span class="top-kicker"><i aria-hidden="true"></i> MANDALA · MEDIA HINDU NUSANTARA</span><span class="top-note">Tradisi yang hidup. Cerita yang terus tumbuh.</span></div></div>
@@ -98,51 +98,53 @@ window.setTimeout(function(){
 },4500);
 </script>
 <script>
-/* Image-only carousel for the nine Mandala topics. Admin uploads can replace image URLs in this configuration later. */
+/* Pure-image topic carousel. Each banner links directly to its matching topic. */
 (function(){
  const strip=document.getElementById("mandalaPromoStrip"),track=document.getElementById("mandalaPromoTrack");
  if(!strip||!track)return;
  const base="assets/images/playlists/";
  window.MANDALA_TOPIC_BANNERS=window.MANDALA_TOPIC_BANNERS||[
-  {title:"Candika Nusantara",description:"Menyusuri jejak candi, situs suci, dan warisan spiritual Nusantara.",href:"topics/candika-nusantara.html",image:base+"playlist-02.jpg"},
-  {title:"Tokoh Hindu",description:"Mengenal sosok dan pemikiran yang ikut membentuk perjalanan Hindu Nusantara.",href:"topics/tokoh-hindu.html",image:base+"playlist-03.jpg"},
-  {title:"Dharma Ajaran",description:"Mendalami nilai dharma dan kebijaksanaan untuk kehidupan sehari-hari.",href:"topics/dharma-ajaran.html",image:base+"playlist-04.jpg"},
-  {title:"Dharmika",description:"Kisah perjalanan pribadi dan pengalaman menemukan jalan dharma.",href:"topics/dharmika.html",image:base+"playlist-05.jpg"},
-  {title:"Ekonomi Hindu",description:"Cerita usaha, kemandirian, dan gerak ekonomi umat Hindu.",href:"topics/ekonomi-hindu.html",image:base+"playlist-06.jpg"},
-  {title:"Jelajah Nusantara",description:"Menjelajahi tempat, sejarah, dan tradisi yang menyimpan cerita.",href:"topics/jelajah-nusantara.html",image:base+"playlist-07.jpg"},
-  {title:"Kabar Umat",description:"Mengikuti kabar, kegiatan, dan perkembangan komunitas Hindu.",href:"topics/kabar-umat.html",image:base+"playlist-08.jpg"},
-  {title:"Spiritual",description:"Ruang untuk refleksi, praktik spiritual, dan perjalanan batin.",href:"topics/spiritual.html",image:base+"playlist-09.jpg"},
-  {title:"Tradisi & Budaya",description:"Merawat tradisi leluhur dan kebudayaan yang terus hidup.",href:"topics/tradisi-budaya.html",image:base+"playlist-10.jpg"}
+  {title:"Candika Nusantara",href:"topics/candika-nusantara.html",image:base+"playlist-02.jpg"},
+  {title:"Tokoh Hindu",href:"topics/tokoh-hindu.html",image:base+"playlist-03.jpg"},
+  {title:"Dharma Ajaran",href:"topics/dharma-ajaran.html",image:base+"playlist-04.jpg"},
+  {title:"Dharmika",href:"topics/dharmika.html",image:base+"playlist-05.jpg"},
+  {title:"Ekonomi Hindu",href:"topics/ekonomi-hindu.html",image:base+"playlist-06.jpg"},
+  {title:"Jelajah Nusantara",href:"topics/jelajah-nusantara.html",image:base+"playlist-07.jpg"},
+  {title:"Kabar Umat",href:"topics/kabar-umat.html",image:base+"playlist-08.jpg"},
+  {title:"Spiritual",href:"topics/spiritual.html",image:base+"playlist-09.jpg"},
+  {title:"Tradisi & Budaya",href:"topics/tradisi-budaya.html",image:base+"playlist-10.jpg"}
  ];
- let slides=[],index=0;
+ const prev=document.createElement("button"),next=document.createElement("button");
+ prev.type=next.type="button";prev.className="mandala-promo-arrow is-prev";next.className="mandala-promo-arrow is-next";
+ prev.setAttribute("aria-label","Banner sebelumnya");next.setAttribute("aria-label","Banner berikutnya");
+ prev.innerHTML="<span aria-hidden='true'>‹</span>";next.innerHTML="<span aria-hidden='true'>›</span>";
+ strip.append(prev,next);
+ let slides=[],index=0,timer=null;
+ function show(nextIndex){
+  if(!slides.length)return;
+  index=(nextIndex+slides.length)%slides.length;
+  slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===index));
+ }
  function render(){
   const items=window.MANDALA_TOPIC_BANNERS.filter(item=>item&&item.href&&item.image);
   track.replaceChildren(...items.map(item=>{
-   const link=document.createElement("a");
-   link.className="mandala-promo-slide";
-   link.href=item.href;
+   const link=document.createElement("a");link.className="mandala-promo-slide";link.href=item.href;
    link.setAttribute("aria-label",(item.title||"Jelajahi topik Mandala")+" — buka topik");
-   const copy=document.createElement("div");copy.className="mandala-promo-copy";
-   const eyebrow=document.createElement("span");eyebrow.textContent="JELAJAHI MANDALA";
-   const title=document.createElement("h3");title.textContent=item.title||"Cerita Hindu Nusantara";
-   const description=document.createElement("p");description.textContent=item.description||"Temukan cerita dan wawasan dari Hindu Nusantara.";
-   const cta=document.createElement("span");cta.className="mandala-promo-cta";cta.textContent="JELAJAHI TOPIK";
-   copy.append(eyebrow,title,description,cta);
-   const art=document.createElement("div");art.className="mandala-promo-art";
-   const img=document.createElement("img");
-   img.src=item.image;img.alt="";img.loading="eager";img.decoding="async";
-   art.appendChild(img);link.append(copy,art);return link;
+   const img=document.createElement("img");img.src=item.image;img.alt=item.title||"Banner topik Mandala";img.loading="eager";img.decoding="async";
+   link.appendChild(img);return link;
   }));
-  slides=Array.from(track.querySelectorAll(".mandala-promo-slide"));
-  slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===0));
-  index=0;
+  slides=Array.from(track.querySelectorAll(".mandala-promo-slide"));show(0);
+  prev.hidden=next.hidden=slides.length<2;
  }
- render();
+ function restart(){if(timer)window.clearInterval(timer);timer=window.setInterval(()=>{if(!document.hidden&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)show(index+1)},5000)}
+ prev.addEventListener("click",()=>{show(index-1);restart()});
+ next.addEventListener("click",()=>{show(index+1);restart()});
+ strip.addEventListener("mouseenter",()=>{if(timer)window.clearInterval(timer)});
+ strip.addEventListener("mouseleave",restart);
+ strip.addEventListener("focusin",()=>{if(timer)window.clearInterval(timer)});
+ strip.addEventListener("focusout",restart);
+ render();restart();
  window.addEventListener("mandala:topic-banners-updated",render);
- window.setInterval(()=>{
-  if(document.hidden||slides.length<2||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  slides[index].classList.remove("is-active");index=(index+1)%slides.length;slides[index].classList.add("is-active");
- },3800);
 })();
 (function(){
   const header=document.getElementById("siteHeader"),nav=document.getElementById("primaryNav");
