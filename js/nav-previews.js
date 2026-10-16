@@ -84,7 +84,7 @@
     cards.innerHTML = entry.cards.map((item) => {
       const cover = item[2];
       return '<a class="nav-preview-card" href="' + item[3] + '">' +
-        '<span class="nav-preview-image"><img src="' + cover + '" alt="" loading="eager" onerror="this.onerror=null;this.src=\'assets/images/playlists/playlist-10.jpg\';"></span>' +
+        '<span class="nav-preview-image"><img src="' + cover + '" alt="" loading="eager" onerror="this.onerror=null;this.closest(\'.nav-preview-image\').style.display=\'none\';"></span>' +
         '<span class="nav-preview-copy"><strong>' + item[0] + '</strong><span>' + item[1] + '</span><em>Jelajahi <span aria-hidden="true">↗</span></em></span>' +
       '</a>';
     }).join("");
