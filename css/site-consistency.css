@@ -385,3 +385,21 @@ header.header nav.nav-menu a[href*="video.html"] { order:3; }
 header.header nav.nav-menu a[href*="playlist.html"] { order:4; }
 header.header nav.nav-menu a[href*="podcast.html"] { order:5; }
 header.header nav.nav-menu a[href*="tentang-kami.html"] { order:6; }
+
+/* Legacy topic pages use text-only brand markup; render the same approved logo asset. */
+header#siteHeader .logo:not(:has(img)),
+header.site-header .logo:not(:has(img)),
+header.header .brand:not(:has(img)) {
+  display:block!important; width:170px!important; height:38px!important; flex:0 0 170px!important;
+  background-image:url("../assets/brand/Asset 5@4x.png")!important;
+  background-repeat:no-repeat!important; background-position:left center!important;
+  background-size:contain!important; overflow:hidden!important;
+}
+header#siteHeader .logo:not(:has(img)) > *,
+header.site-header .logo:not(:has(img)) > *,
+header.header .brand:not(:has(img)) > * { display:none!important; }
+@media(max-width:760px) {
+  header#siteHeader .logo:not(:has(img)),
+  header.site-header .logo:not(:has(img)),
+  header.header .brand:not(:has(img)) { width:145px!important;height:34px!important;flex-basis:145px!important; }
+}
