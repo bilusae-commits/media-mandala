@@ -3827,3 +3827,20 @@ body[data-base="./"] main > section:has(#articlesContainer) {
     padding-bottom: 6px !important;
   }
 }
+
+
+/* High-specificity dismissal overrides for the hover/focus rules above. */
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#primaryNav a[href="index.html"]:hover) #navPreviewBeranda,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#navPreviewBeranda:hover) #navPreviewBeranda,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#primaryNav a[href="pages/artikel.html"]:hover) #navPreviewArtikel,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#navPreviewArtikel:hover) #navPreviewArtikel,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#primaryNav a[href="pages/video.html"]:hover) #navPreviewVideo,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#navPreviewVideo:hover) #navPreviewVideo,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#primaryNav a[href="pages/playlist.html"]:hover) #navPreviewPlaylist,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#navPreviewPlaylist:hover) #navPreviewPlaylist,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#primaryNav a[href="pages/podcast.html"]:hover) #navPreviewAudio,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#navPreviewAudio:hover) #navPreviewAudio,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#primaryNav a[href="pages/tentang-kami.html"]:hover) #navPreviewTentang,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(#navPreviewTentang:hover) #navPreviewTentang {
+  display: none !important;
+}
