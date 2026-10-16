@@ -104,7 +104,7 @@
       if(selectedId)markSelected(selectedId);
     };
     renderRows(search?.value||"");
-    if(search&&!search.dataset.bound){const updateAudioSearch=()=>renderRows(search.value.trim()?search.value:"");search.addEventListener("input",updateAudioSearch);search.addEventListener("search",updateAudioSearch);search.dataset.bound="true"}
+    if(search&&!search.dataset.bound){const updateAudioSearch=()=>{const query=search.value.trim();renderRows(query?query:"")};search.addEventListener("input",updateAudioSearch);search.addEventListener("search",updateAudioSearch);search.addEventListener("keyup",event=>{if(event.key==="Backspace"||event.key==="Delete")updateAudioSearch()});search.dataset.bound="true"}
     player.addEventListener("play",()=>{if(status)status.textContent="Sedang diputar.";if(title)title.classList.add("is-playing");if(selectedId)markSelected(selectedId)});
     player.addEventListener("pause",()=>{if(status&&selectedId)status.textContent="Audio dijeda.";if(title)title.classList.remove("is-playing");if(selectedId)markSelected(selectedId)});
     player.addEventListener("waiting",()=>{if(status)status.textContent="Memuat audio…"});
