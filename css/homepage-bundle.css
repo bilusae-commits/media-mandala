@@ -3728,3 +3728,74 @@ body[data-base="./"] #homeAudioSection .mandala-promo-arrow:hover{background:rgb
  body[data-base="./"] #homeAudioSection .mandala-promo-slide,
  body[data-base="./"] #homeAudioSection .mandala-promo-arrow{transition:none!important}
 }
+
+
+/* 2026-10-16: banner topik berdiri sendiri, di luar panel Mandala Audio. */
+body[data-base="./"] #topicBannerSection{
+ position:relative!important;display:block!important;width:100%!important;
+ margin:clamp(24px,3.5vw,44px) 0!important;padding:0!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+body[data-base="./"] #topicBannerSection>.w{
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-strip{
+ position:relative!important;display:block!important;width:100%!important;
+ height:clamp(260px,34vw,410px)!important;margin:0!important;padding:0!important;
+ overflow:hidden!important;border:0!important;border-radius:18px!important;
+ background:transparent!important;box-shadow:none!important;isolation:isolate!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-track{
+ position:relative!important;display:block!important;width:100%!important;height:100%!important;
+ overflow:hidden!important;border-radius:18px!important;background:transparent!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-slide{
+ position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;
+ margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:18px!important;
+ background:transparent!important;text-decoration:none!important;opacity:0!important;visibility:hidden!important;
+ pointer-events:none!important;transition:opacity .45s ease,visibility .45s ease!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-slide.is-active{
+ opacity:1!important;visibility:visible!important;pointer-events:auto!important;z-index:1!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-slide img{
+ display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+ margin:0!important;padding:0!important;border:0!important;border-radius:18px!important;
+ object-fit:cover!important;object-position:center!important;background:transparent!important;filter:none!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-arrow{
+ position:absolute!important;z-index:5!important;top:50%!important;transform:translateY(-50%)!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:44px!important;height:44px!important;padding:0!important;border:1px solid rgba(255,255,255,.7)!important;
+ border-radius:50%!important;background:rgba(8,35,63,.68)!important;color:#fff!important;
+ font-size:30px!important;line-height:1!important;opacity:0!important;visibility:hidden!important;
+ pointer-events:none!important;cursor:pointer!important;transition:opacity .2s ease,visibility .2s ease,background .2s ease!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-arrow.is-prev{left:16px!important}
+body[data-base="./"] #topicBannerSection .mandala-promo-arrow.is-next{right:16px!important}
+body[data-base="./"] #topicBannerSection .mandala-promo-arrow span{display:block!important;line-height:1!important;margin-top:-3px!important}
+body[data-base="./"] #topicBannerSection .mandala-promo-strip:hover .mandala-promo-arrow,
+body[data-base="./"] #topicBannerSection .mandala-promo-strip:focus-within .mandala-promo-arrow{
+ opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-arrow:hover{background:rgba(8,35,63,.92)!important}
+@media(hover:none){
+ body[data-base="./"] #topicBannerSection .mandala-promo-arrow{
+  width:36px!important;height:36px!important;opacity:.85!important;visibility:visible!important;pointer-events:auto!important;
+ }
+ body[data-base="./"] #topicBannerSection .mandala-promo-arrow.is-prev{left:8px!important}
+ body[data-base="./"] #topicBannerSection .mandala-promo-arrow.is-next{right:8px!important}
+}
+@media(max-width:760px){
+ body[data-base="./"] #topicBannerSection{margin:20px 0 28px!important}
+ body[data-base="./"] #topicBannerSection .mandala-promo-strip{
+  height:clamp(180px,58vw,280px)!important;border-radius:13px!important;
+ }
+ body[data-base="./"] #topicBannerSection .mandala-promo-track,
+ body[data-base="./"] #topicBannerSection .mandala-promo-slide,
+ body[data-base="./"] #topicBannerSection .mandala-promo-slide img{border-radius:13px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-base="./"] #topicBannerSection .mandala-promo-slide,
+ body[data-base="./"] #topicBannerSection .mandala-promo-arrow{transition:none!important}
+}
