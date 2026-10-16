@@ -343,12 +343,12 @@ document.getElementById('searchInput').addEventListener('input',e=>{query=e.targ
   ['Tradisi Budaya','../topics/tradisi-budaya.html','Warisan tradisi dan budaya','topik']
  ];
  let type='semua';
- const normalize=s=>String(s??'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase('id').replace(/[^\\p{L}\\p{N}]+/gu,' ').trim();
+ const normalize=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('id').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
  function drawTabs(){const types=['semua','artikel','topik','video','audio','lainnya'];tabs.innerHTML=types.map(t=>'<button class="mandala-search-tab '+(type===t?'active':'')+'" type="button" data-type="'+t+'">'+(t==='semua'?'Semua':t[0].toUpperCase()+t.slice(1))+'</button>').join('');tabs.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{type=b.dataset.type;drawTabs();drawResults()}))}
  function drawResults(){
   const q=normalize(input.value);
   if(!q){results.innerHTML='<p>Ketik kata kunci untuk menemukan artikel, topik, video, dan audio Mandala.</p>';return}
-  const terms=q.split(/\\s+/).filter(Boolean);
+  const terms=q.split(/\s+/).filter(Boolean);
   const pageResults=basePages.map(p=>({title:p[0],url:p[1],description:p[2],kind:p[3],haystack:normalize(p.join(' '))}));
   const articleResults=(Array.isArray(articles)?articles:[]).map(a=>({title:a.title||'Artikel Mandala',url:'artikel-detail.html?slug='+encodeURIComponent(a.slug||''),description:[cat(a),a.excerpt||'',date(a.published_at)].filter(Boolean).join(' · '),kind:'artikel',haystack:normalize([a.title,a.excerpt,a.slug,cat(a)].join(' '))}));
   const all=pageResults.concat(articleResults);
