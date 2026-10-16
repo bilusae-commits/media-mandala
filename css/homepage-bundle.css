@@ -3214,3 +3214,42 @@ body[data-base="./"] .mandala-promo-slide img{display:block!important;width:100%
  body[data-base="./"] #playlistSection .pc-info strong{font-size:12px!important}
  body[data-base="./"] .mandala-promo-strip{height:200px!important}
 }
+
+
+/* Promo banner final layout: a true full-bleed white canvas with uncropped cover art. */
+body[data-base="./"] #homeAudioSection .mandala-promo-strip{
+ position:relative!important;left:50%!important;transform:translateX(-50%)!important;
+ width:100vw!important;height:clamp(300px,25vw,360px)!important;
+ margin:0 0 30px!important;padding:0!important;overflow:hidden!important;
+ background:#fff!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-track{position:relative!important;display:block!important;width:100%!important;height:100%!important;overflow:hidden!important;background:#fff!important;transform:none!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-slide{
+ position:absolute!important;inset:0!important;display:grid!important;
+ grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;align-items:center!important;
+ gap:clamp(20px,4vw,64px)!important;width:100%!important;height:100%!important;
+ margin:0!important;padding:clamp(22px,4vw,56px)!important;
+ opacity:0!important;visibility:hidden!important;overflow:hidden!important;
+ background:#fff!important;transition:opacity .65s ease,visibility .65s ease!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-slide.is-active{opacity:1!important;visibility:visible!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy{min-width:0!important;max-width:700px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy>span{color:#9b762e!important;font-size:10px!important;font-weight:800!important;letter-spacing:.16em!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy h3{margin:0!important;color:#082d56!important;font-family:inherit!important;font-size:clamp(23px,3vw,42px)!important;font-weight:760!important;line-height:1.08!important;letter-spacing:-.035em!important;overflow-wrap:anywhere!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy p{margin:0!important;max-width:560px!important;color:#526274!important;font-size:clamp(12px,1.1vw,15px)!important;line-height:1.55!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy a{display:inline-flex!important;align-items:center!important;gap:10px!important;margin-top:4px!important;padding:10px 0!important;color:#082d56!important;font-size:11px!important;font-weight:800!important;letter-spacing:.04em!important;text-decoration:none!important;border-bottom:1px solid #c8a24b!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-copy a:hover{color:#a17b32!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-art{display:flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;width:100%!important;height:100%!important;overflow:hidden!important;background:#fff!important}
+body[data-base="./"] #homeAudioSection .mandala-promo-art img{display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;background:#fff!important}
+@media(max-width:760px){
+ body[data-base="./"] #homeAudioSection .mandala-promo-strip{height:390px!important;margin-bottom:22px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto minmax(0,150px)!important;gap:12px!important;padding:20px 18px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy{gap:7px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy h3{font-size:clamp(21px,6vw,28px)!important;line-height:1.12!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy p{font-size:12px!important;line-height:1.4!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy a{padding:7px 0!important;font-size:10px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-art img{max-height:150px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{transition:none!important}
+}
