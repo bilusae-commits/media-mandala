@@ -6,7 +6,7 @@
 <meta name="description" content="Mandala — media digital tentang Hindu, dharma, tokoh, budaya dan Nusantara.">
 <title>Mandala</title>
 <link rel="icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2"><link rel="shortcut icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2">
-<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.18">
+<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.19">
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span class="top-kicker"><i aria-hidden="true"></i> MANDALA · MEDIA HINDU NUSANTARA</span><span class="top-note">Tradisi yang hidup. Cerita yang terus tumbuh.</span></div></div>
@@ -244,32 +244,61 @@ window.setTimeout(function(){
 </script>
 
 <script>
-/* Keep homepage navigation previews from remaining stuck after a selection. */
+/* Header preview: one explicit state source, reset on navigation and browser back. */
 (function () {
   const header = document.getElementById("siteHeader");
   const nav = document.getElementById("primaryNav");
   if (!header || !nav) return;
+  const links = nav.querySelectorAll('a[aria-controls^="navPreview"]');
+  let closeTimer = 0;
 
-  const closePreviews = () => header.classList.add("nav-preview-dismissed");
-  const allowPreviews = () => header.classList.remove("nav-preview-dismissed");
+  function closePreviews() {
+    window.clearTimeout(closeTimer);
+    header.classList.remove("nav-preview-open");
+    header.classList.add("nav-preview-dismissed");
+    header.removeAttribute("data-active-preview");
+    links.forEach(link => link.setAttribute("aria-expanded", "false"));
+  }
+  function openPreview(link) {
+    window.clearTimeout(closeTimer);
+    const id = link.getAttribute("aria-controls");
+    if (!id) return;
+    header.classList.remove("nav-preview-dismissed");
+    header.classList.add("nav-preview-open");
+    header.setAttribute("data-active-preview", id);
+    links.forEach(item => item.setAttribute("aria-expanded", String(item === link)));
+  }
+  function scheduleClose() {
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(closePreviews, 100);
+  }
 
-  nav.querySelectorAll('a[aria-controls^="navPreview"]').forEach((link) => {
-    link.addEventListener("pointerenter", allowPreviews);
-    link.addEventListener("focus", allowPreviews);
+  links.forEach(link => {
+    link.setAttribute("aria-expanded", "false");
+    link.addEventListener("pointerenter", () => openPreview(link));
+    link.addEventListener("focus", () => openPreview(link));
+    link.addEventListener("click", closePreviews);
   });
-
-  header.addEventListener("click", (event) => {
-    if (event.target.closest("a")) closePreviews();
+  header.querySelectorAll(".nav-preview-static").forEach(panel => {
+    panel.addEventListener("pointerenter", () => window.clearTimeout(closeTimer));
+    panel.addEventListener("pointerleave", scheduleClose);
+    panel.querySelectorAll("a").forEach(link => link.addEventListener("click", closePreviews));
   });
-
-  header.addEventListener("pointerleave", closePreviews);
-  document.addEventListener("click", (event) => {
+  header.addEventListener("pointerleave", scheduleClose);
+  header.addEventListener("pointerenter", () => window.clearTimeout(closeTimer));
+  document.addEventListener("pointerdown", event => {
     if (!header.contains(event.target)) closePreviews();
   });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closePreviews();
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closePreviews();
+      if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    }
   });
   window.addEventListener("pageshow", closePreviews);
+  window.addEventListener("pagehide", closePreviews);
+  window.addEventListener("popstate", closePreviews);
+  closePreviews();
 })();
 </script>
 
