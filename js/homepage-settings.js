@@ -86,7 +86,7 @@
     const markSelected=id=>{rows.querySelectorAll("tr[data-home-audio-row]").forEach(row=>{const active=row.dataset.homeAudioRow===String(id)&&!player.paused;row.classList.toggle("is-playing",active);const button=row.querySelector("[data-home-audio-play]");if(button){button.setAttribute("aria-pressed",String(active));button.textContent=active&&!player.paused?"Ⅱ":"▶"}})};
     const renderRows=query=>{
       const q=String(query||"").toLocaleLowerCase("id-ID").trim();
-      const visible=tracks.filter(track=>(String(track.title||"")+" "+String(track.description||"")).toLocaleLowerCase("id-ID").includes(q));
+      const visible=q?tracks.filter(track=>(String(track.title||"")+" "+String(track.description||"")).toLocaleLowerCase("id-ID").includes(q)):tracks.slice();
       if(!visible.length){rows.innerHTML='<tr><td colspan="4" class="home-audio-empty">Tidak ada audio yang cocok dengan pencarian.</td></tr>';return}
       rows.innerHTML=visible.map(track=>{
         const rawDescription=String(track.description||"").replace(/\s+/g," ").trim();
@@ -104,7 +104,7 @@
       if(selectedId)markSelected(selectedId);
     };
     renderRows(search?.value||"");
-    if(search&&!search.dataset.bound){search.addEventListener("input",()=>renderRows(search.value));search.dataset.bound="true"}
+    if(search&&!search.dataset.bound){const updateAudioSearch=()=>renderRows(search.value.trim()?search.value:"");search.addEventListener("input",updateAudioSearch);search.addEventListener("search",updateAudioSearch);search.dataset.bound="true"}
     player.addEventListener("play",()=>{if(status)status.textContent="Sedang diputar.";if(title)title.classList.add("is-playing");if(selectedId)markSelected(selectedId)});
     player.addEventListener("pause",()=>{if(status&&selectedId)status.textContent="Audio dijeda.";if(title)title.classList.remove("is-playing");if(selectedId)markSelected(selectedId)});
     player.addEventListener("waiting",()=>{if(status)status.textContent="Memuat audio…"});
