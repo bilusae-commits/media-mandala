@@ -6,7 +6,7 @@
 <meta name="description" content="Mandala — media digital tentang Hindu, dharma, tokoh, budaya dan Nusantara.">
 <title>Mandala</title>
 <link rel="icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2"><link rel="shortcut icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2">
-<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.3">
+<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.4">
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span class="top-kicker"><i aria-hidden="true"></i> MANDALA · MEDIA HINDU NUSANTARA</span><span class="top-note">Tradisi yang hidup. Cerita yang terus tumbuh.</span></div></div>
@@ -45,7 +45,7 @@
 </main>
 <div class="modal" id="modal" aria-hidden="true"><div class="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalBar"><span id="modalTitle">Mandala</span><button class="close" id="closeModal" type="button" aria-label="Tutup">×</button></div><div class="frame"><iframe id="videoFrame" title="Mandala Video" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div></div>
 <footer><div class="w"><div class="foot"><div><img class="footLogo" src="assets/brand/Asset 5@4x.png" alt="Mandala"><p class="foot-motto">Jer Basuki Mawa Beya</p></div><div><h3>JELAJAH</h3><a href="pages/artikel.html">Artikel</a><br><a href="pages/video.html">Video</a><br><a href="pages/playlist.html">Daftar Putar</a></div><div><h3>TOPIK</h3><a href="topics/jelajah-nusantara.html">Jelajah</a><br><a href="topics/tokoh-hindu.html">Tokoh</a><br><a href="topics/tradisi-budaya.html">Tradisi</a></div><div><h3>MANDALA</h3><a href="pages/tentang-kami.html">Tentang</a><br><a href="pages/kontak.html">Kontak</a></div></div><div class="copy">© 2024 Mandala Channel</div></div></footer>
-<script src="js/config.js"></script><script src="js/public-content.js?v=20261014.1"></script><script src="js/homepage-settings.js?v=20261014-06"></script>
+<script src="js/config.js"></script><script src="js/public-content.js?v=20261014.1"></script><script src="js/homepage-settings.js?v=20261016.4"></script>
 <script>
 "use strict";
 /* Fallback berjenjang untuk gambar playlist yang gagal dimuat. */
@@ -62,7 +62,7 @@ document.addEventListener("error",function(event){
   }
   if(img.dataset.mandalaFallbackDone==="1")return;
   img.dataset.mandalaFallbackDone="1";
-  img.src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85";
+  img.src="assets/images/playlists/playlist-01.jpg";
 },true);
 (function(){
   const toggle=document.getElementById("mobileNavToggle");
@@ -86,7 +86,7 @@ function openVideo(id,title){if(!id){alert("Video belum memiliki ID YouTube.");r
 function closeVideo(){const modal=document.getElementById("modal"),frame=document.getElementById("videoFrame");if(frame)frame.src="";if(modal){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}document.body.style.overflow=""}window.openVideo=openVideo;window.closeVideo=closeVideo;document.getElementById("closeModal")?.addEventListener("click",closeVideo);document.getElementById("modal")?.addEventListener("click",e=>{if(e.target.id==="modal")closeVideo()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeVideo()});document.getElementById("newsletterForm")?.addEventListener("submit",e=>{e.preventDefault();alert("Formulir Warta Mandala siap dihubungkan ke layanan surel.")});
 (function(){const elements=document.querySelectorAll(".reveal");if(!("IntersectionObserver" in window)){elements.forEach(el=>el.classList.add("is-visible"));return}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}})},{threshold:.08,rootMargin:"0px 0px -40px 0px"});elements.forEach(el=>observer.observe(el))})();
 let playlistIndex=0,playlistTimer=null,playlistCards=[];function getPlaylists(){const data=window.MandalaPublicData||window.DATA||{};return Array.isArray(data.playlists)?data.playlists:[]}function escapeHtml(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}function renderPlaylists(){const track=document.getElementById("playlistTrack"),dots=document.getElementById("playlistDots");if(!track)return;const items=getPlaylists();if(!items.length){track.innerHTML='<div class="playlist-empty-state">Daftar putar belum tersedia.</div>';if(dots)dots.innerHTML="";return}track.innerHTML=items.map((playlist,index)=>{const id=String(playlist.id||index+1),title=escapeHtml(playlist.title||"Daftar Putar Mandala"),image=escapeHtml(playlist.image||"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=85"),category=escapeHtml(playlist.category||"Mandala"),count=escapeHtml(playlist.videoCount??0);return `<article class="play-card" data-index="${index}"><a href="pages/playlist-detail.html?id=${encodeURIComponent(id)}" aria-label="${title}"><img src="${image}" alt="${title}" loading="lazy" draggable="false"><div class="pc-info"><strong>${title}</strong><span>${category} · ${count} video</span></div></a></article>`}).join("");if(dots){dots.innerHTML=items.map((_,index)=>`<button class="play-dot" type="button" data-dot="${index}" aria-label="Ke daftar putar ${index+1}"></button>`).join("");dots.querySelectorAll("[data-dot]").forEach(dot=>dot.addEventListener("click",e=>{e.stopPropagation();goPlaylist(Number(dot.dataset.dot));restartPlaylist()}))}playlistCards=[...track.querySelectorAll(".play-card")];playlistIndex=0;updatePlaylist();startPlaylist()}
-function relativePosition(index,total){let distance=index-playlistIndex;if(distance>total/2)distance-=total;if(distance<-total/2)distance+=total;return distance}function updatePlaylist(){const total=playlistCards.length;if(!total)return;playlistCards.forEach((card,index)=>{const distance=relativePosition(index,total);card.className="play-card"+(distance===0?" pos-0":distance===1?" pos-1":distance===-1?" pos--1":distance===2?" pos-2":distance===-2?" pos--2":" pos-hidden");});document.querySelectorAll("#playlistDots .play-dot").forEach((dot,index)=>dot.classList.toggle("active",index===playlistIndex));}function goPlaylist(index){const total=playlistCards.length;if(!total)return;playlistIndex=(index+total)%total;updatePlaylist()}function startPlaylist(){if(playlistTimer)clearInterval(playlistTimer);playlistTimer=null}function restartPlaylist(){startPlaylist()}document.getElementById("playlistPrev")?.addEventListener("click",()=>{goPlaylist(playlistIndex-1);restartPlaylist()});document.getElementById("playlistNext")?.addEventListener("click",()=>{goPlaylist(playlistIndex+1);restartPlaylist()});window.renderPlaylists=renderPlaylists;window.goPlaylist=goPlaylist;window.updatePlaylist=updatePlaylist;
+function relativePosition(index,total){let distance=index-playlistIndex;if(distance>total/2)distance-=total;if(distance<-total/2)distance+=total;return distance}function updatePlaylist(){const total=playlistCards.length;if(!total)return;playlistCards.forEach((card,index)=>{const distance=relativePosition(index,total);card.className="play-card"+(distance===0?" pos-0":distance===1?" pos-1":distance===-1?" pos--1":distance===2?" pos-2":distance===-2?" pos--2":" pos-hidden");});document.querySelectorAll("#playlistDots .play-dot").forEach((dot,index)=>dot.classList.toggle("active",index===playlistIndex));}function goPlaylist(index){const total=playlistCards.length;if(!total)return;playlistIndex=(index+total)%total;updatePlaylist()}function startPlaylist(){if(playlistTimer)clearInterval(playlistTimer);playlistTimer=null;if(playlistCards.length<2||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;playlistTimer=window.setInterval(()=>{if(!document.hidden)goPlaylist(playlistIndex+1)},6000)}function restartPlaylist(){startPlaylist()}document.getElementById("playlistPrev")?.addEventListener("click",()=>{goPlaylist(playlistIndex-1);restartPlaylist()});document.getElementById("playlistNext")?.addEventListener("click",()=>{goPlaylist(playlistIndex+1);restartPlaylist()});window.renderPlaylists=renderPlaylists;window.goPlaylist=goPlaylist;window.updatePlaylist=updatePlaylist;
 </script>
 <script>
 /* homepage-ready failsafe: keep static content visible if a remote request stalls. */
@@ -146,7 +146,7 @@ window.setTimeout(function(){
       const fetched=await Promise.all(pages.map(async item=>{
         try{const response=await fetch(item[1],{credentials:"same-origin"});if(!response.ok)return item;const doc=new DOMParser().parseFromString(await response.text(),"text/html");const title=doc.querySelector("h1")?.textContent.trim()||doc.title||item[0];const description=doc.querySelector('meta[name="description"]')?.content||doc.querySelector("main p,article p")?.textContent.trim()||item[2];const searchable=[...doc.querySelectorAll("h1,h2,h3,h4,p,a")].map(node=>node.textContent.trim()).filter(Boolean).join(" ").replace(/\s+/g," ");return [title,item[1],(description+" "+searchable).slice(0,1600),item[3]];}catch(e){return item;}
       }));
-      const home=[...document.querySelectorAll(".featureGrid a,#playlistTrack .play-card a,#topicsContainer a,#homeAudioSection a")].map(link=>{const href=link.getAttribute("href")||"index.html";const title=link.querySelector("h2,h3,strong")?.textContent.trim()||link.textContent.trim().replace(/\s+/g," ").slice(0,90);const type=/podcast|audio/i.test(href+" "+title)?"audio":/video|playlist|youtube/i.test(href+" "+title)?"video":"article";return [title,href,link.textContent.trim().replace(/\s+/g," ").slice(0,600),type];});
+      const home=[...document.querySelectorAll(".featureGrid a,#videosContainer a,#topicsContainer a,#homeAudioSection a")].map(link=>{const href=link.getAttribute("href")||"index.html";const title=link.querySelector("h2,h3,strong")?.textContent.trim()||link.textContent.trim().replace(/\s+/g," ").slice(0,90);const type=/podcast|audio/i.test(href+" "+title)?"audio":/video|playlist|youtube/i.test(href+" "+title)?"video":"article";return [title,href,link.textContent.trim().replace(/\s+/g," ").slice(0,600),type];});
       catalog=[...home,...fetched];catalogReady=true;
     })();
     return catalogPromise;
@@ -156,9 +156,9 @@ window.setTimeout(function(){
     const dynamic=[
       ...(Array.isArray(data.articles)?data.articles.map(item=>[item.title||"Artikel Mandala","pages/artikel-detail.html"+(item.slug?"?slug="+encodeURIComponent(item.slug):""),[item.title,item.excerpt,item.content].filter(Boolean).join(" ").slice(0,700),"article"]):[]),
       ...(Array.isArray(data.videos)?data.videos.map(item=>[item.title||"Video Mandala","pages/video.html",[item.title,item.description].filter(Boolean).join(" ").slice(0,700),"video"]):[]),
-      ...(Array.isArray(data.playlists)?data.playlists.map(item=>[item.title||"Daftar Putar Mandala","pages/playlist.html",[item.title,item.description].filter(Boolean).join(" ").slice(0,700),"video"]):[])
+      
     ];
-    const audio=[...document.querySelectorAll("#homeAudioRows tr[data-home-audio-row]")].map(row=>{const title=row.querySelector(".home-audio-episode")?.textContent.trim()||"Audio Mandala";const desc=row.querySelector(".home-audio-description")?.textContent.trim()||"Episode audio Mandala";return [title,"#homeAudioSection",desc+" audio podcast","audio"];});
+    const audio=Array.isArray(window.MandalaHomepageAudioCatalog)?window.MandalaHomepageAudioCatalog.map(item=>[item.title||"Audio Mandala","#homeAudioSection",[item.description,"audio podcast"].filter(Boolean).join(" "),"audio"]):[...document.querySelectorAll("#homeAudioRows tr[data-home-audio-row]")].map(row=>{const title=row.querySelector(".home-audio-episode")?.textContent.trim()||"Audio Mandala";const desc=row.querySelector(".home-audio-description")?.textContent.trim()||"Episode audio Mandala";return [title,"#homeAudioSection",desc+" audio podcast","audio"];});
     return [...catalog,...dynamic,...audio];
   }
   function render(query){
@@ -180,6 +180,6 @@ window.setTimeout(function(){
   panel.addEventListener("click",event=>{if(event.target===panel)shut();});
   document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!panel.hidden)shut();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==="k"){event.preventDefault();if(panel.hidden)open();else input.focus();}});
 })();</script>
-<script src="js/nav-previews.js?v=20261016.3" defer></script>
+<script src="js/nav-previews.js?v=20261016.4" defer></script>
 </body>
 </html>
