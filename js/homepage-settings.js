@@ -78,6 +78,7 @@
     const rows=document.getElementById("homeAudioRows"),player=document.getElementById("homeAudioPlayer");
     if(!rows||!player)return;
     const tracks=(items||[]).filter(item=>item.content_type==="audio"&&item.audio_url);
+    window.MandalaHomepageAudioCatalog=tracks.map(item=>({id:String(item.id||""),title:String(item.title||"Audio Mandala"),description:String(item.description||""),published_at:item.published_at||item.created_at||"",audio_duration:item.audio_duration||""}));
     if(!tracks.length){renderHomeAudioEmpty("Belum ada audio yang dipublikasikan. Audio yang tersedia akan muncul di sini.");return}
     const dateText=value=>{if(!value)return "—";const date=new Date(value);return Number.isNaN(date.getTime())?"—":new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"short",year:"numeric"}).format(date)};
     const title=document.getElementById("homeAudioTitle"),status=document.getElementById("homeAudioStatus"),search=document.getElementById("homeAudioSearch");
