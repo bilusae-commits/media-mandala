@@ -3155,3 +3155,16 @@ body[data-base="./"] .mandala-promo-slide img{display:block!important;width:100%
 @media(prefers-reduced-motion:reduce){
  body[data-base="./"] .mandala-promo-slide{transition:none!important}
 }
+
+body[data-base="./"] .mandala-search-tab{font-family:inherit!important}
+body[data-base="./"] .mandala-search-quicklinks{display:grid;gap:0;margin-top:2px}
+body[data-base="./"] .mandala-search-quicklinks>a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;padding:11px 8px;border-bottom:1px solid #edf0f3;text-decoration:none}
+body[data-base="./"] .mandala-search-quicklinks>a:hover{background:#f5f8fb}
+body[data-base="./"] .mandala-search-quicklinks span{color:#082d56;font-size:12px;font-weight:750}
+body[data-base="./"] .mandala-search-quicklinks small{grid-column:1;color:#718091;font-size:10px;line-height:1.35}
+body[data-base="./"] .mandala-search-quicklinks b{grid-column:2;grid-row:1/3;align-self:center;color:#a17b32;font-size:14px}
+body[data-base="./"] .nav-preview-image{aspect-ratio:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;background:#fff!important}
+body[data-base="./"] .nav-preview-image img{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;background:#fff!important}
+@media(max-width:760px){
+ body[data-base="./"] .nav-preview-image img{width:100%!important;height:auto!important}
+}
