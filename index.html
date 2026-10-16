@@ -6,7 +6,7 @@
 <meta name="description" content="Mandala — media digital tentang Hindu, dharma, tokoh, budaya dan Nusantara.">
 <title>Mandala</title>
 <link rel="icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2"><link rel="shortcut icon" type="image/png" href="assets/brand/Mandala.png?v=20261014.2">
-<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.6">
+<link rel="stylesheet" href="css/homepage-bundle.css?v=20261016.7">
 </head>
 <body data-base="./">
 <div class="top"><div class="w"><span class="top-kicker"><i aria-hidden="true"></i> MANDALA · MEDIA HINDU NUSANTARA</span><span class="top-note">Tradisi yang hidup. Cerita yang terus tumbuh.</span></div></div>
@@ -57,7 +57,7 @@
 </main>
 <div class="modal" id="modal" aria-hidden="true"><div class="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalBar"><span id="modalTitle">Mandala</span><button class="close" id="closeModal" type="button" aria-label="Tutup">×</button></div><div class="frame"><iframe id="videoFrame" title="Mandala Video" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div></div></div>
 <footer><div class="w"><div class="foot"><div><img class="footLogo" src="assets/brand/Asset 5@4x.png" alt="Mandala"><p class="foot-motto">Jer Basuki Mawa Beya</p></div><div><h3>JELAJAH</h3><a href="pages/artikel.html">Artikel</a><br><a href="pages/video.html">Video</a><br><a href="pages/playlist.html">Daftar Putar</a></div><div><h3>TOPIK</h3><a href="topics/jelajah-nusantara.html">Jelajah</a><br><a href="topics/tokoh-hindu.html">Tokoh</a><br><a href="topics/tradisi-budaya.html">Tradisi</a></div><div><h3>MANDALA</h3><a href="pages/tentang-kami.html">Tentang</a><br><a href="pages/kontak.html">Kontak</a></div></div><div class="copy">© 2024 Mandala Channel</div></div></footer>
-<script src="js/config.js"></script><script src="js/public-content.js?v=20261014.1"></script><script src="js/homepage-settings.js?v=20261016.6"></script>
+<script src="js/config.js"></script><script src="js/public-content.js?v=20261014.1"></script><script src="js/homepage-settings.js?v=20261016.7"></script>
 <script>
 "use strict";
 /* Fallback berjenjang untuk gambar playlist yang gagal dimuat. */
@@ -108,24 +108,21 @@ window.setTimeout(function(){
 },4500);
 </script>
 <script>
-/* Promo image crossfade: one banner at a time, continuously while the homepage is open. */
+/* Homepage promo: featured content first, then a randomized mix of published content. */
 (function(){
-  const strip=document.getElementById("mandalaPromoStrip");
-  if(!strip)return;
-  const slides=[...strip.querySelectorAll(".mandala-promo-slide")];
-  if(!slides.length)return;
-  slides.forEach((slide,index)=>{
-    slide.classList.toggle("is-active",index===0);
-    const img=slide.querySelector("img");
-    if(img)img.loading="eager";
-  });
-  if(slides.length<2)return;
-  let index=0;
-  window.setInterval(()=>{
-    slides[index].classList.remove("is-active");
-    index=(index+1)%slides.length;
-    slides[index].classList.add("is-active");
-  },3200);
+ const strip=document.getElementById("mandalaPromoStrip"),track=document.getElementById("mandalaPromoTrack");if(!strip||!track)return;
+ let slides=[],index=0;const localCovers=["assets/images/playlists/playlist-04.jpg","assets/images/playlists/playlist-05.jpg","assets/images/playlists/playlist-06.jpg"];
+ function videoIdOf(value){if(!value)return "";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const u=new URL(text),host=u.hostname.replace("www.","");if(host==="youtu.be")return u.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com"){const v=u.searchParams.get("v");if(v)return v;const p=u.pathname.split("/").filter(Boolean);if(p[0]==="embed"||p[0]==="shorts")return p[1]||"";}}catch(e){}return "";}
+ function makeSlide(item,pos){const slide=document.createElement("article");slide.className="mandala-promo-slide";const copy=document.createElement("div");copy.className="mandala-promo-copy";const eyebrow=document.createElement("span");eyebrow.textContent=item.eyebrow||"SOROTAN MANDALA";const heading=document.createElement("h3");heading.textContent=item.title||"Cerita Pilihan Mandala";const desc=document.createElement("p");desc.textContent=item.description||"Cerita dan gagasan dari Hindu Nusantara.";const link=document.createElement("a");link.textContent=item.action||"Jelajahi konten";link.href=item.href||"pages/artikel.html";if(item.videoId){link.href="#mandalaPromoStrip";link.dataset.promoVideoId=item.videoId;link.dataset.promoVideoTitle=item.title||"Mandala Video";}const arrow=document.createElement("span");arrow.setAttribute("aria-hidden","true");arrow.textContent=" ↗";link.appendChild(arrow);copy.append(eyebrow,heading,desc,link);const art=document.createElement("div");art.className="mandala-promo-art";const img=document.createElement("img");img.src=item.image||localCovers[pos%localCovers.length];img.alt=item.title||"Sorotan konten Mandala";img.loading="eager";img.decoding="async";img.addEventListener("error",()=>{if(img.dataset.fallback!=="1"){img.dataset.fallback="1";img.src=localCovers[pos%localCovers.length];}},{once:true});art.appendChild(img);slide.append(copy,art);return slide;}
+ function bindSlides(){slides=Array.from(track.querySelectorAll(".mandala-promo-slide"));slides.forEach((slide,i)=>slide.classList.toggle("is-active",i===0));index=0;}
+ function shuffle(items){for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]];}return items;}
+ window.renderMandalaPromo=function(){const data=window.MandalaPublicData||window.DATA||{},items=[];
+ (Array.isArray(data.articles)?data.articles:[]).forEach(item=>items.push({kind:"article",featured:!!item.featured,title:item.title,description:item.excerpt||item.description||"Artikel pilihan dari ruang redaksi Mandala.",image:item.cover_image_url,eyebrow:"ARTIKEL PILIHAN",action:"Baca artikel",href:"pages/artikel-detail.html"+(item.slug?"?slug="+encodeURIComponent(item.slug):item.id?"?id="+encodeURIComponent(item.id):"")}));
+ (Array.isArray(data.videos)?data.videos:[]).forEach(item=>{const id=item.youtube_video_id||videoIdOf(item.youtube_url);items.push({kind:"video",featured:!!item.featured,title:item.title,description:item.description||"Video pilihan dari Mandala.",image:item.thumbnail_url||(id?"https://i.ytimg.com/vi/"+encodeURIComponent(id)+"/hqdefault.jpg":""),eyebrow:"VIDEO PILIHAN",action:"Putar video",href:item.youtube_url||"pages/video.html",videoId:id});});
+ (Array.isArray(data.playlists)?data.playlists:[]).forEach(item=>items.push({kind:"playlist",featured:!!item.featured,title:item.title,description:item.description||"Rangkaian video pilihan Mandala.",image:item.cover_image_url||item.image_url,eyebrow:"DAFTAR PUTAR",action:"Jelajahi daftar putar",href:"pages/playlist-detail.html"+(item.id?"?id="+encodeURIComponent(item.id):item.slug?"?slug="+encodeURIComponent(item.slug):"")}));
+ const unique=items.filter(item=>item.title&&item.title.trim()).reduce((out,item)=>{const key=item.kind+":"+item.title.trim();if(!out.some(x=>x.key===key))out.push(Object.assign({key},item));return out;},[]);const chosen=unique.filter(x=>x.featured).concat(shuffle(unique.filter(x=>!x.featured))).slice(0,4);if(!chosen.length){bindSlides();return;}track.replaceChildren(...chosen.map((item,i)=>makeSlide(item,i)));bindSlides();};
+ strip.addEventListener("click",event=>{const link=event.target.closest("[data-promo-video-id]");if(!link)return;event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.promoVideoId,link.dataset.promoVideoTitle);else window.open("https://www.youtube.com/watch?v="+encodeURIComponent(link.dataset.promoVideoId),"_blank","noopener");});
+ bindSlides();window.setInterval(()=>{if(document.hidden||slides.length<2||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;slides[index].classList.remove("is-active");index=(index+1)%slides.length;slides[index].classList.add("is-active");},2800);
 })();
 (function(){
   const toggle=document.getElementById("headerSearchToggle"),panel=document.getElementById("mandalaSearchPanel"),input=document.getElementById("mandalaSiteSearch"),close=document.getElementById("mandalaSearchClose"),results=document.getElementById("mandalaSearchResults"),tabs=document.getElementById("mandalaSearchTabs");
@@ -150,6 +147,7 @@ window.setTimeout(function(){
   let catalog=[...pages],catalogReady=false,catalogPromise=null,request=0,activeType="all";
   const types=[["article","Artikel"],["video","Video"],["audio","Audio"]];
   const normalize=value=>String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+  function getVideoId(value){if(!value)return "";const text=String(value).trim();if(/^[A-Za-z0-9_-]{11}$/.test(text))return text;try{const u=new URL(text),host=u.hostname.replace("www.","");if(host==="youtu.be")return u.pathname.split("/").filter(Boolean)[0]||"";if(host==="youtube.com"||host==="m.youtube.com"){const v=u.searchParams.get("v");if(v)return v;const p=u.pathname.split("/").filter(Boolean);if(p[0]==="embed"||p[0]==="shorts")return p[1]||"";}}catch(e){}return "";}
   const safe=value=>String(value||"").replace(/[&<>"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[char]));
   function loadCatalog(){
     if(catalogReady)return Promise.resolve();
@@ -158,7 +156,7 @@ window.setTimeout(function(){
       const fetched=await Promise.all(pages.map(async item=>{
         try{const response=await fetch(item[1],{credentials:"same-origin"});if(!response.ok)return item;const doc=new DOMParser().parseFromString(await response.text(),"text/html");const title=doc.querySelector("h1")?.textContent.trim()||doc.title||item[0];const description=doc.querySelector('meta[name="description"]')?.content||doc.querySelector("main p,article p")?.textContent.trim()||item[2];const searchable=[...doc.querySelectorAll("h1,h2,h3,h4,p,a")].map(node=>node.textContent.trim()).filter(Boolean).join(" ").replace(/\s+/g," ");return [title,item[1],(description+" "+searchable).slice(0,1600),item[3]];}catch(e){return item;}
       }));
-      const home=[...document.querySelectorAll(".featureGrid a,#videosContainer a,#topicsContainer a,#homeAudioSection a")].map(link=>{const href=link.getAttribute("href")||"index.html";const title=link.querySelector("h2,h3,strong")?.textContent.trim()||link.textContent.trim().replace(/\s+/g," ").slice(0,90);const type=/podcast|audio/i.test(href+" "+title)?"audio":/video|playlist|youtube/i.test(href+" "+title)?"video":"article";return [title,href,link.textContent.trim().replace(/\s+/g," ").slice(0,600),type];});
+      const home=[...document.querySelectorAll(".featureGrid a,#topicsContainer a,#homeAudioSection a")].map(link=>{const href=link.getAttribute("href")||"index.html";const title=link.querySelector("h2,h3,strong")?.textContent.trim()||link.textContent.trim().replace(/\s+/g," ").slice(0,90);const type=/podcast|audio/i.test(href+" "+title)?"audio":/video|playlist|youtube/i.test(href+" "+title)?"video":"article";return [title,href,link.textContent.trim().replace(/\s+/g," ").slice(0,600),type];});
       catalog=[...home,...fetched];catalogReady=true;
     })();
     return catalogPromise;
@@ -167,7 +165,7 @@ window.setTimeout(function(){
     const data=window.MandalaPublicData||window.DATA||{};
     const dynamic=[
       ...(Array.isArray(data.articles)?data.articles.map(item=>[item.title||"Artikel Mandala","pages/artikel-detail.html"+(item.slug?"?slug="+encodeURIComponent(item.slug):""),[item.title,item.excerpt,item.content].filter(Boolean).join(" ").slice(0,700),"article"]):[]),
-      ...(Array.isArray(data.videos)?data.videos.map(item=>[item.title||"Video Mandala","pages/video.html",[item.title,item.description].filter(Boolean).join(" ").slice(0,700),"video"]):[]),
+      ...(Array.isArray(data.videos)?data.videos.map(item=>{const id=item.youtube_video_id||getVideoId(item.youtube_url);const href=id?"#mandala-video-"+id:(item.youtube_url||"");return [item.title||"Video Mandala",href,[item.title,item.description].filter(Boolean).join(" ").slice(0,700),"video",id];}).filter(item=>item[1]):[]),
       
     ];
     const audio=Array.isArray(window.MandalaHomepageAudioCatalog)?window.MandalaHomepageAudioCatalog.map(item=>[item.title||"Audio Mandala","#homeAudioSection",[item.description,"audio podcast"].filter(Boolean).join(" "),"audio"]):[...document.querySelectorAll("#homeAudioRows tr[data-home-audio-row]")].map(row=>{const title=row.querySelector(".home-audio-episode")?.textContent.trim()||"Audio Mandala";const desc=row.querySelector(".home-audio-description")?.textContent.trim()||"Episode audio Mandala";return [title,"#homeAudioSection",desc+" audio podcast","audio"];});
@@ -181,17 +179,17 @@ window.setTimeout(function(){
     if(!groups.length){tabs.innerHTML="";results.innerHTML='<p>Tidak ada artikel, video, atau audio yang cocok. Coba kata kunci lain.</p>';return;}
     tabs.innerHTML=groups.map(group=>'<button type="button" role="tab" aria-selected="'+(activeType===group.type||activeType==="all"&&group===groups[0])+'" class="mandala-search-tab'+(activeType===group.type||activeType==="all"&&group===groups[0]?' is-active':'')+'" data-search-type="'+group.type+'">'+group.label+' <span>'+group.items.length+'</span></button>').join("");
     const selected=activeType==="all"?groups[0]:groups.find(group=>group.type===activeType)||groups[0];
-    results.innerHTML='<div class="mandala-search-group-label">'+selected.label+'</div>'+selected.items.map(({item})=>'<a class="mandala-search-result" href="'+safe(item[1])+'" data-result-type="'+item[3]+'" data-result-title="'+safe(item[0])+'"><span>'+safe(item[0])+'</span><small>'+safe(item[2])+'</small><b aria-hidden="true">↗</b></a>').join("");
+    results.innerHTML='<div class="mandala-search-group-label">'+selected.label+'</div>'+selected.items.map(({item})=>'<a class="mandala-search-result" href="'+safe(item[1])+'" data-result-type="'+item[3]+'" data-result-title="'+safe(item[0])+'" data-result-video-id="'+safe(item[4]||"")+'"><span>'+safe(item[0])+'</span><small>'+safe(item[2])+'</small><b aria-hidden="true">↗</b></a>').join("");
   }
   function open(){panel.hidden=false;toggle.setAttribute("aria-expanded","true");document.body.classList.add("search-open");loadCatalog().then(()=>{if(input.value)render(input.value);});input.focus();}
   function shut(){panel.hidden=true;toggle.setAttribute("aria-expanded","false");document.body.classList.remove("search-open");}
-  window.addEventListener("mandala:audio-catalog-updated",()=>{if(!panel.hidden&&input.value)render(input.value)});toggle.addEventListener("click",()=>{if(panel.hidden)open();else shut();});close.addEventListener("click",shut);
+  window.addEventListener("mandala:audio-catalog-updated",()=>{if(!panel.hidden&&input.value)render(input.value)});window.addEventListener("mandala:public-content-updated",()=>{if(!panel.hidden&&input.value)render(input.value)});toggle.addEventListener("click",()=>{if(panel.hidden)open();else shut();});close.addEventListener("click",shut);
   input.addEventListener("input",()=>{const id=++request;activeType="all";render(input.value);if(!catalogReady)loadCatalog().then(()=>{if(id===request)render(input.value);});});
   tabs.addEventListener("click",event=>{const button=event.target.closest("[data-search-type]");if(!button)return;activeType=button.dataset.searchType;render(input.value);});
-  results.addEventListener("click",event=>{const link=event.target.closest(".mandala-search-result");if(!link)return;if(link.dataset.resultType==="audio"&&link.getAttribute("href")==="#homeAudioSection"){event.preventDefault();const audioSearch=document.getElementById("homeAudioSearch");if(audioSearch){audioSearch.value=link.dataset.resultTitle;audioSearch.dispatchEvent(new Event("input",{bubbles:true}));}shut();document.getElementById("homeAudioSection")?.scrollIntoView({behavior:"smooth",block:"start"});}});
+  results.addEventListener("click",event=>{const link=event.target.closest(".mandala-search-result");if(!link)return;if(link.dataset.resultType==="video"&&link.dataset.resultVideoId){event.preventDefault();if(typeof window.openVideo==="function")window.openVideo(link.dataset.resultVideoId,link.dataset.resultTitle);shut();return;}if(link.dataset.resultType==="audio"&&link.getAttribute("href")==="#homeAudioSection"){event.preventDefault();const audioSearch=document.getElementById("homeAudioSearch");if(audioSearch){audioSearch.value=link.dataset.resultTitle;audioSearch.dispatchEvent(new Event("input",{bubbles:true}));}shut();document.getElementById("homeAudioSection")?.scrollIntoView({behavior:"smooth",block:"start"});}});
   panel.addEventListener("click",event=>{if(event.target===panel)shut();});
   document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!panel.hidden)shut();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==="k"){event.preventDefault();if(panel.hidden)open();else input.focus();}});
 })();</script>
-<script src="js/nav-previews.js?v=20261016.5" defer></script>
+<script src="js/nav-previews.js?v=20261016.6" defer></script>
 </body>
 </html>
