@@ -52,13 +52,6 @@ main, article, section, header, footer, nav, aside,
   margin-inline: auto;
 }
 
-section {
-  padding-block: var(--md-section-space) !important;
-}
-
-section > :first-child { margin-top: 0; }
-section > :last-child { margin-bottom: 0; }
-
 h1 {
   max-width: 100%;
   font-size: clamp(2rem, 4.1vw, 3.65rem);
@@ -143,9 +136,9 @@ hr {
   html { scroll-padding-top: 68px; }
   h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); line-height: 1.12; }
   h2 { line-height: 1.2; }
-  section { padding-block: var(--md-section-space) !important; }
   .grid, .cards, .topic-grid, .topics-grid, .article-grid,
-  .video-grid, .playlist-grid, .podcast-grid {
+  .video-grid, .playlist-grid, .podcast-grid,
+  .videoGrid, .playlistGrid, .articleGrid, .podcastGrid {
     gap: 14px;
   }
   img { max-width: 100%; }
@@ -159,4 +152,256 @@ hr {
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+
+/* MANDALA DESIGN LOCK — shared public-page chrome, based on index.html.
+   Keep page-specific content layouts intact while standardizing the frame. */
+:root {
+  --md-navy: #082d56;
+  --md-navy-deep: #061f3c;
+  --md-gold: #b89a61;
+  --md-ink: #172536;
+  --md-muted: #718091;
+  --md-line: #e5e9ed;
+  --md-paper: #f5f7f9;
+  --md-content: 1360px;
+  --md-radius: 7px;
+  --md-gutter: clamp(16px, 3.2vw, 44px);
+}
+html { scroll-behavior:smooth; }
+body { font-family:"Segoe UI",Arial,Helvetica,sans-serif; color:var(--md-ink); }
+h1,h2,h3,h4,h5,h6,.title,.page h1,.hero h1 {
+  font-family:Georgia,"Times New Roman",serif;
+}
+header#siteHeader, header.site-header, header.header {
+  position:sticky!important; top:0!important; z-index:1000!important;
+  min-height:78px!important; background:rgba(255,255,255,.97)!important;
+  color:var(--md-ink)!important; border-bottom:1px solid var(--md-line)!important;
+  box-shadow:none; transition:box-shadow .3s ease,background .3s ease;
+}
+header#siteHeader.scrolled, header.site-header.scrolled, header.header.scrolled {
+  box-shadow:0 8px 30px rgba(8,45,86,.07)!important;
+}
+header#siteHeader > .w.nav, header.site-header > .w.nav, header.header > .w.nav {
+  width:min(1360px,calc(100% - 56px))!important; max-width:1360px!important;
+  min-height:78px!important; margin-inline:auto!important;
+  display:flex!important; align-items:center!important; gap:clamp(14px,1.8vw,25px)!important;
+}
+header#siteHeader .logo, header.site-header .logo, header.header .logo,
+header#siteHeader .brand, header.site-header .brand, header.header .brand {
+  display:flex!important; align-items:center!important; gap:10px!important;
+  margin-right:auto!important; flex:0 0 auto!important; text-decoration:none!important;
+}
+header#siteHeader .logo img, header.site-header .logo img, header.header .logo img,
+header#siteHeader .brand img, header.site-header .brand img, header.header .brand img {
+  display:block!important; width:auto!important; height:38px!important;
+  max-width:170px!important; object-fit:contain!important; object-position:left center!important;
+}
+header#siteHeader .mark, header.site-header .mark, header.header .mark,
+header#siteHeader .logo-mark, header.site-header .logo-mark,
+header.header .logo-mark, header#siteHeader .brand-mark,
+header.site-header .brand-mark, header.header .brand-mark {
+  width:38px!important; height:38px!important; flex:0 0 38px!important;
+  display:grid!important; place-items:center!important;
+  border:1px solid var(--md-gold)!important; border-radius:50%!important;
+  color:var(--md-gold)!important; background:transparent!important;
+}
+header#siteHeader .logo b, header.site-header .logo b, header.header .logo b,
+header#siteHeader .brand-name strong, header.site-header .brand-name strong,
+header.header .brand-name strong, header#siteHeader .logo-text strong,
+header.site-header .logo-text strong, header.header .logo-text strong {
+  color:var(--md-navy)!important; font:500 16px Georgia,"Times New Roman",serif!important;
+  letter-spacing:.16em!important;
+}
+header#siteHeader .logo small, header.site-header .logo small, header.header .logo small,
+header#siteHeader .brand-name small, header.site-header .brand-name small,
+header.header .brand-name small, header#siteHeader .logo-text small,
+header.site-header .logo-text small, header.header .logo-text small {
+  display:block!important; margin-top:2px!important; color:#8794a0!important;
+  font:400 7px/1.3 "Segoe UI",Arial,sans-serif!important; letter-spacing:.28em!important;
+}
+header#siteHeader nav.links, header.site-header nav.links, header.header nav.links,
+header#siteHeader nav.nav-menu, header.site-header nav.nav-menu, header.header nav.nav-menu {
+  display:flex; align-items:center; gap:clamp(12px,1.55vw,21px);
+  min-width:0; color:#657381; font:700 9px/1.3 "Segoe UI",Arial,sans-serif;
+  text-transform:uppercase;
+}
+header#siteHeader nav.links a, header.site-header nav.links a, header.header nav.links a,
+header#siteHeader nav.nav-menu a, header.site-header nav.nav-menu a, header.header nav.nav-menu a {
+  position:relative; display:inline-flex; align-items:center; white-space:nowrap;
+  padding:32px 0!important; color:#657381!important; font:700 9px/1.3 "Segoe UI",Arial,sans-serif!important;
+  text-decoration:none!important; transition:color .22s ease!important;
+}
+header#siteHeader nav.links a::after, header.site-header nav.links a::after,
+header.header nav.links a::after, header#siteHeader nav.nav-menu a::after,
+header.site-header nav.nav-menu a::after, header.header nav.nav-menu a::after {
+  content:""; position:absolute; left:0; right:100%; bottom:23px; height:1px;
+  background:var(--md-gold); transition:right .22s ease;
+}
+header#siteHeader nav.links a:hover::after, header.site-header nav.links a:hover::after,
+header.header nav.links a:hover::after, header#siteHeader nav.nav-menu a:hover::after,
+header.site-header nav.nav-menu a:hover::after, header.header nav.nav-menu a:hover::after,
+header#siteHeader nav.links a[aria-current="page"]::after,
+header.site-header nav.links a[aria-current="page"]::after,
+header.header nav.links a[aria-current="page"]::after,
+header#siteHeader nav.nav-menu a.active::after, header.site-header nav.nav-menu a.active::after,
+header.header nav.nav-menu a.active::after { right:0; }
+header#siteHeader nav.links a:hover, header.site-header nav.links a:hover,
+header.header nav.links a:hover, header#siteHeader nav.nav-menu a:hover,
+header.site-header nav.nav-menu a:hover, header.header nav.nav-menu a:hover,
+header#siteHeader nav.links a[aria-current="page"], header.site-header nav.links a[aria-current="page"],
+header.header nav.links a[aria-current="page"], header#siteHeader nav.nav-menu a.active,
+header.site-header nav.nav-menu a.active, header.header nav.nav-menu a.active {
+  color:var(--md-navy)!important;
+}
+/* Topic-specific local "TOPIK" links are removed from the global nav;
+   the page's topic identity remains in its hero heading. */
+header#siteHeader nav.nav-menu a[href^="#"], header.site-header nav.nav-menu a[href^="#"],
+header.header nav.nav-menu a[href^="#"] { display:none!important; }
+header#siteHeader .yt, header.site-header .yt, header.header .yt {
+  flex:0 0 auto!important; display:inline-flex!important; align-items:center!important;
+  justify-content:center!important; min-height:36px!important; padding:10px 13px!important;
+  border-radius:4px!important; background:var(--md-navy)!important; color:#fff!important;
+  font:700 9px/1.2 "Segoe UI",Arial,sans-serif!important; text-decoration:none!important;
+  transition:transform .22s ease,background .22s ease!important;
+}
+header#siteHeader .yt:hover, header.site-header .yt:hover, header.header .yt:hover {
+  transform:translateY(-1px); background:var(--md-navy-deep)!important;
+}
+/* Common footer palette, proportions and hover behavior. */
+footer, footer.footer {
+  background:var(--md-navy-deep)!important; color:#9fb0bf!important;
+  border-top:0!important;
+}
+footer .w, footer.footer .w {
+  width:min(1360px,calc(100% - 56px))!important; max-width:1360px!important;
+  margin-inline:auto!important;
+}
+footer .foot, footer.footer .foot, footer .footer-grid, footer.footer .footer-grid {
+  display:grid!important; grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr))!important;
+  gap:clamp(18px,2.6vw,35px)!important;
+}
+footer h3, footer.footer h3 {
+  color:#fff!important; font:700 11px/1.5 "Segoe UI",Arial,sans-serif!important;
+  letter-spacing:.08em!important;
+}
+footer p, footer a, footer.footer p, footer.footer a {
+  color:#9fb0bf!important; font:400 12px/1.8 "Segoe UI",Arial,sans-serif!important;
+  text-decoration:none!important; transition:color .2s ease!important;
+}
+footer a:hover, footer.footer a:hover { color:#fff!important; }
+footer img, footer.footer img {
+  max-width:180px!important; max-height:40px!important; object-fit:contain!important;
+}
+footer .copy, footer.footer .copy {
+  margin-top:30px!important; padding-top:13px!important;
+  border-top:1px solid rgba(255,255,255,.09)!important;
+  color:#8295a6!important; text-align:center!important; font-size:10px!important;
+}
+@media(max-width:1050px) {
+  header#siteHeader > .w.nav, header.site-header > .w.nav, header.header > .w.nav,
+  footer .w, footer.footer .w { width:calc(100% - 36px)!important; }
+  header#siteHeader nav.links, header.site-header nav.links, header.header nav.links {
+    display:flex!important; flex:1 1 0!important; min-width:0!important;
+    overflow-x:auto!important; scrollbar-width:none!important; gap:12px!important;
+  }
+  header#siteHeader nav.links::-webkit-scrollbar, header.site-header nav.links::-webkit-scrollbar,
+  header.header nav.links::-webkit-scrollbar { display:none!important; }
+  header#siteHeader:has(.mobileToggle) nav.links,
+  header.site-header:has(.mobileToggle) nav.links,
+  header.header:has(.mobileToggle) nav.links { display:none!important; }
+  header#siteHeader nav.nav-menu, header.site-header nav.nav-menu, header.header nav.nav-menu {
+    gap:12px!important; overflow-x:auto; scrollbar-width:none;
+  }
+  header#siteHeader nav.nav-menu::-webkit-scrollbar, header.site-header nav.nav-menu::-webkit-scrollbar,
+  header.header nav.nav-menu::-webkit-scrollbar { display:none; }
+}
+@media(max-width:760px) {
+  header#siteHeader, header.site-header, header.header { min-height:68px!important; }
+  header#siteHeader > .w.nav, header.site-header > .w.nav, header.header > .w.nav {
+    min-height:68px!important; gap:10px!important;
+  }
+  header#siteHeader .logo img, header.site-header .logo img, header.header .logo img {
+    height:34px!important; max-width:145px!important;
+  }
+  header#siteHeader .mark, header.site-header .mark, header.header .mark,
+  header#siteHeader .logo-mark, header.site-header .logo-mark, header.header .logo-mark,
+  header#siteHeader .brand-mark, header.site-header .brand-mark, header.header .brand-mark {
+    width:34px!important; height:34px!important; flex-basis:34px!important;
+  }
+  header#siteHeader .yt, header.site-header .yt, header.header .yt { display:none!important; }
+  header#siteHeader nav.links, header.site-header nav.links, header.header nav.links {
+    max-width:calc(100vw - 180px)!important;
+  }
+  header#siteHeader nav.nav-menu, header.site-header nav.nav-menu, header.header nav.nav-menu {
+    max-width:calc(100vw - 190px); gap:12px!important;
+  }
+  header#siteHeader nav.nav-menu a, header.site-header nav.nav-menu a, header.header nav.nav-menu a {
+    padding:26px 0!important; font-size:8px!important;
+  }
+  header#siteHeader nav.nav-menu a::after, header.site-header nav.nav-menu a::after,
+  header.header nav.nav-menu a::after { bottom:18px; }
+  footer .foot, footer.footer .foot, footer .footer-grid, footer.footer .footer-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  footer .w, footer.footer .w { width:calc(100% - 28px)!important; }
+}
+@media(max-width:480px) {
+  footer .foot, footer.footer .foot, footer .footer-grid, footer.footer .footer-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  header#siteHeader, header.site-header, header.header,
+  header#siteHeader *, header.site-header *, header.header *,
+  footer a, footer.footer a { transition:none!important; }
+}
+
+/* Match the homepage's image wordmark and navigation order on legacy page headers. */
+header#siteHeader .logo:has(img) .mark,
+header#siteHeader .logo:has(img) .logo-mark,
+header#siteHeader .logo:has(img) .logo-text,
+header#siteHeader .logo:has(img) .brand-name,
+header.site-header .logo:has(img) .mark,
+header.site-header .logo:has(img) .logo-mark,
+header.site-header .logo:has(img) .logo-text,
+header.site-header .logo:has(img) .brand-name,
+header.header .brand:has(img) .brand-mark,
+header.header .brand:has(img) .brand-name { display:none!important; }
+header#siteHeader nav.nav-menu a[href*="index.html"] { order:1; }
+header#siteHeader nav.nav-menu a[href*="artikel.html"] { order:2; }
+header#siteHeader nav.nav-menu a[href*="video.html"] { order:3; }
+header#siteHeader nav.nav-menu a[href*="playlist.html"] { order:4; }
+header#siteHeader nav.nav-menu a[href*="podcast.html"] { order:5; }
+header#siteHeader nav.nav-menu a[href*="tentang-kami.html"] { order:6; }
+header.site-header nav.nav-menu a[href*="index.html"] { order:1; }
+header.site-header nav.nav-menu a[href*="artikel.html"] { order:2; }
+header.site-header nav.nav-menu a[href*="video.html"] { order:3; }
+header.site-header nav.nav-menu a[href*="playlist.html"] { order:4; }
+header.site-header nav.nav-menu a[href*="podcast.html"] { order:5; }
+header.site-header nav.nav-menu a[href*="tentang-kami.html"] { order:6; }
+header.header nav.nav-menu a[href*="index.html"] { order:1; }
+header.header nav.nav-menu a[href*="artikel.html"] { order:2; }
+header.header nav.nav-menu a[href*="video.html"] { order:3; }
+header.header nav.nav-menu a[href*="playlist.html"] { order:4; }
+header.header nav.nav-menu a[href*="podcast.html"] { order:5; }
+header.header nav.nav-menu a[href*="tentang-kami.html"] { order:6; }
+
+/* Legacy topic pages use text-only brand markup; render the same approved logo asset. */
+header#siteHeader .logo:not(:has(img)),
+header.site-header .logo:not(:has(img)),
+header.header .brand:not(:has(img)) {
+  display:block!important; width:170px!important; height:38px!important; flex:0 0 170px!important;
+  background-image:url("../assets/brand/Asset 5@4x.png")!important;
+  background-repeat:no-repeat!important; background-position:left center!important;
+  background-size:contain!important; overflow:hidden!important;
+}
+header#siteHeader .logo:not(:has(img)) > *,
+header.site-header .logo:not(:has(img)) > *,
+header.header .brand:not(:has(img)) > * { display:none!important; }
+@media(max-width:760px) {
+  header#siteHeader .logo:not(:has(img)),
+  header.site-header .logo:not(:has(img)),
+  header.header .brand:not(:has(img)) { width:145px!important;height:34px!important;flex-basis:145px!important; }
 }
