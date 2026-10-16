@@ -250,6 +250,7 @@ window.setTimeout(function(){
   const nav = document.getElementById("primaryNav");
   if (!header || !nav) return;
   const links = nav.querySelectorAll('a[aria-controls^="navPreview"]');
+  const panels = header.querySelectorAll(".nav-preview-static");
   let closeTimer = 0;
 
   function closePreviews() {
@@ -257,6 +258,7 @@ window.setTimeout(function(){
     header.classList.remove("nav-preview-open");
     header.classList.add("nav-preview-dismissed");
     header.removeAttribute("data-active-preview");
+    panels.forEach(panel => panel.style.setProperty("display", "none", "important"));
     links.forEach(link => link.setAttribute("aria-expanded", "false"));
   }
   function openPreview(link) {
@@ -266,6 +268,7 @@ window.setTimeout(function(){
     header.classList.remove("nav-preview-dismissed");
     header.classList.add("nav-preview-open");
     header.setAttribute("data-active-preview", id);
+    panels.forEach(panel => panel.style.setProperty("display", panel.id === id ? "block" : "none", "important"));
     links.forEach(item => item.setAttribute("aria-expanded", String(item === link)));
   }
   function scheduleClose() {
