@@ -221,37 +221,59 @@ header#siteHeader.nav-preview-open .nav-preview-static.is-active{display:block}
 .mandala-search-result span{color:#082d56;font-size:13px;font-weight:750}
 .mandala-search-result small{grid-column:1;color:#6c7a88;font-size:11px;line-height:1.4}
 .mandala-search-result b{grid-column:2;grid-row:1/3;align-self:center;color:#a17b32;font-size:15px}
-.featureGrid{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);align-items:stretch}
-.featureMain{display:grid;grid-template-columns:minmax(0,43%) minmax(0,1fr);align-items:stretch;min-height:260px;height:clamp(240px,23vw,310px);background:#f5f7f9;border:1px solid #e3e7eb;cursor:pointer}
-.featureMain>img{position:relative;inset:auto;width:100%;height:100%;min-height:0;max-width:100%;object-fit:contain;object-position:center;background:#eef1f4;transition:transform .35s var(--ease)}
-.featureMain:hover>img{transform:scale(1.015)}
+/* Featured article: compact editorial layout, images never forced to crop */
+.featureGrid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);align-items:stretch;gap:clamp(16px,2vw,26px)}
+.featureMain{display:grid;grid-template-columns:minmax(0,35%) minmax(0,1fr);align-items:stretch;min-width:0;min-height:0;height:clamp(218px,21vw,282px);overflow:hidden;border:1px solid #e3e7eb;border-radius:6px;background:#f7f8fa;cursor:pointer}
+.featureMain>img{position:relative;inset:auto;width:100%;height:100%;min-width:0;min-height:0;max-width:100%;object-fit:contain;object-position:center;background:#eef1f4;transition:transform .3s var(--ease)}
+.featureMain:hover>img{transform:scale(1.012)}
 .featureMain::after{display:none}
-.featureCopy{position:relative;left:auto;right:auto;bottom:auto;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;padding:clamp(16px,2vw,26px);background:transparent;color:var(--ink)}
-.featureCopy .eyebrow{color:var(--gold);font-size:9px;letter-spacing:.11em}
-.featureCopy h2{margin:9px 0 11px;color:var(--navy);font-size:clamp(19px,1.6vw,26px);line-height:1.2;overflow-wrap:anywhere}
-.featureCopy p{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:4;max-width:100%;margin:0;color:var(--muted);font-size:clamp(11px,.72vw,12px);line-height:1.6}
-.badge{left:6px;top:6px;bottom:auto;max-width:calc(100% - 12px);padding:3px 5px;border-radius:2px;background:rgba(6,31,60,.82);color:#fff;font-size:7px;font-weight:700;letter-spacing:.025em}
+.featureCopy{position:relative;inset:auto;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;padding:clamp(15px,1.8vw,24px);background:transparent;color:var(--ink)}
+.featureCopy .eyebrow{color:var(--gold);font-size:9px;letter-spacing:.1em}
+.featureCopy h2{margin:8px 0 10px;color:var(--navy);font-size:clamp(18px,1.45vw,24px);line-height:1.2;overflow-wrap:anywhere}
+.featureCopy p{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3;max-width:100%;margin:0;color:var(--muted);font-size:clamp(11px,.7vw,12px);line-height:1.55}
+.featureSide{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:14px;min-width:0}
+.side{display:grid;grid-template-columns:minmax(100px,34%) minmax(0,1fr);align-items:stretch;gap:13px;min-width:0;min-height:0;overflow:hidden;padding:8px;border:1px solid #e8ecf0;border-radius:5px;background:#fff}
+.side>img{width:100%;height:100%;min-height:0;aspect-ratio:4/3;object-fit:contain;object-position:center;border-radius:3px;background:#f0f2f4}
+.sideCopy{min-width:0;padding:5px 2px}
+.sideCopy h3{font-size:clamp(14px,1vw,17px);line-height:1.22}
+.sideCopy p{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3;font-size:11px;line-height:1.45}
+.thumb{background:#f0f2f4}
+.thumb img{object-fit:contain;object-position:center;background:#f0f2f4}
 @media(max-width:1100px){
- .featureGrid{grid-template-columns:minmax(0,1fr)}
- .featureMain{grid-template-columns:minmax(0,40%) minmax(0,1fr);height:clamp(235px,32vw,290px)}
+ .featureGrid{grid-template-columns:minmax(0,1fr);gap:16px}
+ .featureMain{grid-template-columns:minmax(0,34%) minmax(0,1fr);height:clamp(220px,27vw,270px)}
  .featureSide{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none}
+ .side{grid-template-columns:minmax(90px,34%) minmax(0,1fr);min-height:118px}
 }
 @media(max-width:820px){
  header#siteHeader .nav-preview-static{display:none!important}
- .featureMain{grid-template-columns:minmax(0,40%) minmax(0,1fr);height:clamp(225px,37vw,280px);min-height:0}
- .featureCopy{padding:16px}
- .featureCopy h2{font-size:clamp(18px,2.5vw,23px)}
- .featureSide{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .featureMain{grid-template-columns:minmax(0,35%) minmax(0,1fr);height:clamp(210px,32vw,255px)}
+ .featureCopy{padding:15px}
+ .featureCopy h2{font-size:clamp(18px,2.5vw,22px)}
+ .featureSide{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none}
+ .side{grid-template-columns:minmax(0,1fr);grid-template-rows:110px auto;align-content:start;gap:9px;padding:9px}
+ .side>img{height:110px;aspect-ratio:auto}
+ .sideCopy{padding:0 1px 3px}
 }
 @media(max-width:560px){
  .nav-preview-links{grid-template-columns:minmax(0,1fr)}
  .mandala-search-panel{top:calc(var(--header-h,66px) + 8px);right:10px;width:calc(100vw - 20px)}
  .featureMain{grid-template-columns:minmax(0,1fr);height:auto;min-height:0}
- .featureMain>img{height:clamp(155px,48vw,210px);object-fit:contain}
- .featureCopy{padding:15px 16px 17px}
+ .featureMain>img{height:clamp(140px,42vw,180px);max-height:180px;object-fit:contain}
+ .featureCopy{padding:14px 15px 16px}
  .featureCopy h2{font-size:20px}
  .featureCopy p{-webkit-line-clamp:3}
- .featureSide{grid-template-columns:minmax(0,1fr)}
+ .featureSide{grid-template-columns:minmax(0,1fr);gap:12px}
+ .side{grid-template-columns:104px minmax(0,1fr);grid-template-rows:minmax(0,1fr);align-items:center;min-height:106px;padding:8px;gap:11px}
+ .side>img{height:90px;min-height:90px;aspect-ratio:1/1;object-fit:contain}
+ .sideCopy h3{font-size:15px}
+ .sideCopy p{font-size:11px;line-height:1.45}
+ .thumb img{object-fit:contain}
+}
+@media(max-width:380px){
+ .featureMain>img{height:140px}
+ .side{grid-template-columns:90px minmax(0,1fr)}
+ .side>img{height:82px;min-height:82px}
 }
 </style>
 </head>
@@ -280,7 +302,7 @@ const SUPABASE_URL='https://roeckoabffhyctfkvbhw.supabase.co';const SUPABASE_KEY
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');const date=v=>{if(!v)return '';const d=new Date(v);return Number.isNaN(d.getTime())?'':new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'long',year:'numeric'}).format(d)};const img=a=>a.cover_image_url||FALLBACK;const cat=a=>a.category?.name||a.category_name||'Mandala';
 function card(a){return `<article class="card" data-slug="${esc(a.slug)}"><div class="thumb"><img src="${esc(img(a))}" alt="${esc(a.title)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'"><span class="badge">${esc(cat(a))}</span></div><div class="meta">${esc(cat(a))}</div><h3>${esc(a.title)}</h3><p>${esc(a.excerpt||'Baca artikel Mandala.')}</p>${date(a.published_at)?`<small class="date">${esc(date(a.published_at))}</small>`:''}</article>`}
 function empty(title,text){return `<div class="state"><strong>${esc(title)}</strong>${esc(text)}</div>`}
-async function load(){const grid=document.getElementById('articleGrid');try{const [{data,error},{data:cats,error:catErr}]=await Promise.all([db.from('articles').select('id,title,slug,excerpt,cover_image_url,category_id,author_id,status,featured,published_at,created_at,category:categories(name,slug)').eq('status','published').not('published_at','is',null).order('published_at',{ascending:false}),db.from('categories').select('id,name,slug').eq('is_active',true).order('sort_order',{ascending:true})]);if(error)throw error;if(catErr)console.warn(catErr);articles=data||[];categories=cats||[];renderFilters();render()}catch(e){console.error(e);grid.innerHTML=empty('Artikel gagal dimuat',e.message||'Tidak dapat mengambil data dari Supabase.');document.getElementById('resultCount').textContent='';document.getElementById('featuredArea').innerHTML=''}}
+async function load(){const grid=document.getElementById('articleGrid');try{const [{data,error},{data:cats,error:catErr}]=await Promise.all([db.from('articles').select('id,title,slug,excerpt,cover_image_url,category_id,author_id,status,featured,published_at,created_at,category:categories(name,slug)').eq('status','published').not('published_at','is',null).order('published_at',{ascending:false}),db.from('categories').select('id,name,slug').eq('is_active',true).order('sort_order',{ascending:true})]);if(error)throw error;if(catErr)console.warn(catErr);articles=data||[];categories=cats||[];renderFilters();render();window.dispatchEvent(new Event('mandala-articles-loaded'))}catch(e){console.error(e);grid.innerHTML=empty('Artikel gagal dimuat',e.message||'Tidak dapat mengambil data dari Supabase.');document.getElementById('resultCount').textContent='';document.getElementById('featuredArea').innerHTML=''}}
 function renderFilters(){const el=document.getElementById('filters');el.innerHTML='<button class="filter active" data-category="all">Semua</button>'+categories.map(c=>`<button class="filter" data-category="${esc(c.id)}">${esc(c.name)}</button>`).join('');el.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{activeCategory=b.dataset.category;el.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render()})}
 function render(){const q=query.trim().toLowerCase();const list=articles.filter(a=>(activeCategory==='all'||String(a.category_id)===activeCategory)&&(!q||`${a.title} ${a.excerpt||''} ${a.slug} ${cat(a)}`.toLowerCase().includes(q)));document.getElementById('resultCount').textContent=`${list.length} artikel`;const f=list.find(a=>a.featured)||list[0];const side=list.filter(a=>a.id!==f?.id).slice(0,2);document.getElementById('featuredArea').innerHTML=f?`<article class="featureMain" data-slug="${esc(f.slug)}"><img src="${esc(img(f))}" alt="${esc(f.title)}" onerror="this.onerror=null;this.src='${FALLBACK}'"><div class="featureCopy"><div class="eyebrow">${esc(cat(f))}</div><h2>${esc(f.title)}</h2><p>${esc(f.excerpt||'Baca artikel pilihan Mandala Channel.')}</p></div></article><div class="featureSide">${side.map(a=>`<article class="side" data-slug="${esc(a.slug)}"><img src="${esc(img(a))}" alt="${esc(a.title)}" loading="lazy"><div class="sideCopy"><div class="eyebrow">${esc(cat(a))}</div><h3>${esc(a.title)}</h3><p>${esc(a.excerpt||'Baca artikel Mandala.')}</p></div></article>`).join('')}</div>`:empty('Belum ada artikel','Belum ada artikel terbit yang tersedia.');document.getElementById('articleGrid').innerHTML=list.length?list.map(card).join(''):empty('Tidak ditemukan','Coba kata kunci atau kategori lain.');document.querySelectorAll('[data-slug]').forEach(el=>el.onclick=()=>{const s=el.dataset.slug;if(s)location.href=`artikel-detail.html?slug=${encodeURIComponent(s)}`})}
 document.getElementById('searchInput').addEventListener('input',e=>{query=e.target.value;render()});const mobileNavToggle=document.getElementById('articleMobileNavToggle');const primaryNav=document.getElementById('primaryNav');mobileNavToggle.addEventListener('click',()=>{const open=mobileNavToggle.getAttribute('aria-expanded')!=='true';mobileNavToggle.setAttribute('aria-expanded',String(open));mobileNavToggle.setAttribute('aria-label',open?'Tutup menu':'Buka menu');primaryNav.classList.toggle('is-open',open);mobileNavToggle.textContent=open?'×':'☰'});primaryNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{primaryNav.classList.remove('is-open');mobileNavToggle.setAttribute('aria-expanded','false');mobileNavToggle.setAttribute('aria-label','Buka menu');mobileNavToggle.textContent='☰'}));document.addEventListener('keydown',e=>{if(e.key==='Escape'){primaryNav.classList.remove('is-open');mobileNavToggle.setAttribute('aria-expanded','false');mobileNavToggle.setAttribute('aria-label','Buka menu');mobileNavToggle.textContent='☰'}});const header=document.getElementById('siteHeader');const update=()=>header.classList.toggle('scrolled',scrollY>20);update();addEventListener('scroll',update,{passive:true});load();
@@ -303,6 +325,7 @@ document.getElementById('searchInput').addEventListener('input',e=>{query=e.targ
  const toggle=document.getElementById('articleHeaderSearchToggle'),panel=document.getElementById('mandalaSearchPanel'),input=document.getElementById('mandalaSiteSearch'),closeBtn=document.getElementById('mandalaSearchClose'),results=document.getElementById('mandalaSearchResults'),tabs=document.getElementById('mandalaSearchTabs');
  if(!toggle||!panel||!input||!closeBtn||!results||!tabs)return;
  const basePages=[
+  ['Beranda','../index.html','Beranda Mandala dan artikel pilihan','lainnya'],
   ['Artikel','artikel.html','Artikel dan cerita terbaru','artikel'],
   ['Video','video.html','Video dan dokumenter Mandala','video'],
   ['Audio Podcast','podcast.html','Episode audio dan podcast','audio'],
@@ -320,13 +343,25 @@ document.getElementById('searchInput').addEventListener('input',e=>{query=e.targ
   ['Tradisi Budaya','../topics/tradisi-budaya.html','Warisan tradisi dan budaya','topik']
  ];
  let type='semua';
+ const normalize=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('id').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
  function drawTabs(){const types=['semua','artikel','topik','video','audio','lainnya'];tabs.innerHTML=types.map(t=>'<button class="mandala-search-tab '+(type===t?'active':'')+'" type="button" data-type="'+t+'">'+(t==='semua'?'Semua':t[0].toUpperCase()+t.slice(1))+'</button>').join('');tabs.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{type=b.dataset.type;drawTabs();drawResults()}))}
- function drawResults(){const q=input.value.trim().toLocaleLowerCase('id');if(!q){results.innerHTML='<p>Ketik kata kunci untuk menemukan cerita Mandala.</p>';return}const found=basePages.filter(p=>(type==='semua'||p[3]===type)&&(p[0]+' '+p[2]+' '+p[3]).toLocaleLowerCase('id').includes(q)).slice(0,12);results.innerHTML=found.length?found.map(p=>'<a class="mandala-search-result" href="'+p[1]+'"><span>'+p[0]+'</span><small>'+p[2]+'</small><b>↗</b></a>').join(''):'<p>Tidak ada hasil yang cocok. Coba kata kunci lain.</p>'}
- function openSearch(){panel.hidden=false;toggle.setAttribute('aria-expanded','true');drawTabs();drawResults();setTimeout(()=>input.focus({preventScroll:true}),40)}
- function closeSearch(){panel.hidden=true;toggle.setAttribute('aria-expanded','false');input.value='';type='semua';results.innerHTML='<p>Ketik kata kunci untuk menemukan cerita Mandala.</p>'}
+ function drawResults(){
+  const q=normalize(input.value);
+  if(!q){results.innerHTML='<p>Ketik kata kunci untuk menemukan artikel, topik, video, dan audio Mandala.</p>';return}
+  const terms=q.split(/\s+/).filter(Boolean);
+  const pageResults=basePages.map(p=>({title:p[0],url:p[1],description:p[2],kind:p[3],haystack:normalize(p.join(' '))}));
+  const articleResults=(Array.isArray(articles)?articles:[]).map(a=>({title:a.title||'Artikel Mandala',url:'artikel-detail.html?slug='+encodeURIComponent(a.slug||''),description:[cat(a),a.excerpt||'',date(a.published_at)].filter(Boolean).join(' · '),kind:'artikel',haystack:normalize([a.title,a.excerpt,a.slug,cat(a)].join(' '))}));
+  const all=pageResults.concat(articleResults);
+  const found=all.filter(item=>(type==='semua'||item.kind===type)&&terms.every(term=>item.haystack.includes(term))).slice(0,15);
+  results.innerHTML=found.length?found.map(p=>'<a class="mandala-search-result" href="'+p.url+'"><span>'+esc(p.title)+'</span><small>'+esc(p.description)+'</small><b>↗</b></a>').join(''):'<p>Tidak ada hasil yang cocok. Coba kata kunci lebih singkat, misalnya “tokoh”, “tradisi”, atau nama artikel.</p>';
+ }
+ function openSearch(){panel.hidden=false;toggle.setAttribute('aria-expanded','true');drawTabs();drawResults();input.focus({preventScroll:true})}
+ function closeSearch(){panel.hidden=true;toggle.setAttribute('aria-expanded','false');input.value='';type='semua';drawTabs();results.innerHTML='<p>Ketik kata kunci untuk menemukan artikel, topik, video, dan audio Mandala.</p>'}
  toggle.addEventListener('click',()=>panel.hidden?openSearch():closeSearch());closeBtn.addEventListener('click',closeSearch);input.addEventListener('input',drawResults);
  document.addEventListener('pointerdown',e=>{if(!panel.hidden&&!panel.contains(e.target)&&!toggle.contains(e.target))closeSearch()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearch()});
+ window.addEventListener('mandala-articles-loaded',drawResults);
+
 })();
 
 </script>
