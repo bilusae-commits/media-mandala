@@ -3629,3 +3629,39 @@ body[data-base="./"] #homeAudioSection .mandala-promo-art img{
 @media(prefers-reduced-motion:reduce){
  body[data-base="./"] #homeAudioSection .mandala-promo-slide{transition:none!important}
 }
+
+
+/* 2026-10-16: enlarge the promotional artwork while preserving uncropped images. */
+body[data-base="./"] #homeAudioSection .mandala-promo-strip{
+ height:clamp(300px,34vw,410px)!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-slide{
+ grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)!important;
+ gap:clamp(16px,2.5vw,34px)!important;
+ padding:clamp(20px,3vw,38px)!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-art{
+ min-height:0!important;
+}
+body[data-base="./"] #homeAudioSection .mandala-promo-art img{
+ width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;
+ object-fit:contain!important;object-position:center!important;
+}
+@media(max-width:760px){
+ body[data-base="./"] #homeAudioSection .mandala-promo-strip{height:410px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:auto minmax(0,1fr)!important;
+  gap:8px!important;padding:17px 15px 10px!important;
+ }
+ body[data-base="./"] #homeAudioSection .mandala-promo-copy{gap:6px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-art{min-height:0!important;height:100%!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-art img{
+  width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;
+ }
+}
+@media(max-width:380px){
+ body[data-base="./"] #homeAudioSection .mandala-promo-strip{height:390px!important}
+ body[data-base="./"] #homeAudioSection .mandala-promo-slide{padding:14px 12px 8px!important}
+}
