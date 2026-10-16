@@ -355,3 +355,33 @@ footer .copy, footer.footer .copy {
   header#siteHeader *, header.site-header *, header.header *,
   footer a, footer.footer a { transition:none!important; }
 }
+
+/* Match the homepage's image wordmark and navigation order on legacy page headers. */
+header#siteHeader .logo:has(img) .mark,
+header#siteHeader .logo:has(img) .logo-mark,
+header#siteHeader .logo:has(img) .logo-text,
+header#siteHeader .logo:has(img) .brand-name,
+header.site-header .logo:has(img) .mark,
+header.site-header .logo:has(img) .logo-mark,
+header.site-header .logo:has(img) .logo-text,
+header.site-header .logo:has(img) .brand-name,
+header.header .brand:has(img) .brand-mark,
+header.header .brand:has(img) .brand-name { display:none!important; }
+header#siteHeader nav.nav-menu a[href*="index.html"] { order:1; }
+header#siteHeader nav.nav-menu a[href*="artikel.html"] { order:2; }
+header#siteHeader nav.nav-menu a[href*="video.html"] { order:3; }
+header#siteHeader nav.nav-menu a[href*="playlist.html"] { order:4; }
+header#siteHeader nav.nav-menu a[href*="podcast.html"] { order:5; }
+header#siteHeader nav.nav-menu a[href*="tentang-kami.html"] { order:6; }
+header.site-header nav.nav-menu a[href*="index.html"] { order:1; }
+header.site-header nav.nav-menu a[href*="artikel.html"] { order:2; }
+header.site-header nav.nav-menu a[href*="video.html"] { order:3; }
+header.site-header nav.nav-menu a[href*="playlist.html"] { order:4; }
+header.site-header nav.nav-menu a[href*="podcast.html"] { order:5; }
+header.site-header nav.nav-menu a[href*="tentang-kami.html"] { order:6; }
+header.header nav.nav-menu a[href*="index.html"] { order:1; }
+header.header nav.nav-menu a[href*="artikel.html"] { order:2; }
+header.header nav.nav-menu a[href*="video.html"] { order:3; }
+header.header nav.nav-menu a[href*="playlist.html"] { order:4; }
+header.header nav.nav-menu a[href*="podcast.html"] { order:5; }
+header.header nav.nav-menu a[href*="tentang-kami.html"] { order:6; }
