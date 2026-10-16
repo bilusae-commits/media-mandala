@@ -137,7 +137,8 @@ hr {
   h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); line-height: 1.12; }
   h2 { line-height: 1.2; }
   .grid, .cards, .topic-grid, .topics-grid, .article-grid,
-  .video-grid, .playlist-grid, .podcast-grid {
+  .video-grid, .playlist-grid, .podcast-grid,
+  .videoGrid, .playlistGrid, .articleGrid, .podcastGrid {
     gap: 14px;
   }
   img { max-width: 100%; }
@@ -282,11 +283,11 @@ footer .foot, footer.footer .foot, footer .footer-grid, footer.footer .footer-gr
   gap:clamp(18px,2.6vw,35px)!important;
 }
 footer h3, footer.footer h3 {
-  color:#fff!important; font:700 9px/1.4 "Segoe UI",Arial,sans-serif!important;
+  color:#fff!important; font:700 11px/1.5 "Segoe UI",Arial,sans-serif!important;
   letter-spacing:.08em!important;
 }
 footer p, footer a, footer.footer p, footer.footer a {
-  color:#9fb0bf!important; font:400 9px/1.8 "Segoe UI",Arial,sans-serif!important;
+  color:#9fb0bf!important; font:400 12px/1.8 "Segoe UI",Arial,sans-serif!important;
   text-decoration:none!important; transition:color .2s ease!important;
 }
 footer a:hover, footer.footer a:hover { color:#fff!important; }
@@ -296,7 +297,7 @@ footer img, footer.footer img {
 footer .copy, footer.footer .copy {
   margin-top:30px!important; padding-top:13px!important;
   border-top:1px solid rgba(255,255,255,.09)!important;
-  color:#8295a6!important; text-align:center!important; font-size:8px!important;
+  color:#8295a6!important; text-align:center!important; font-size:10px!important;
 }
 @media(max-width:1050px) {
   header#siteHeader > .w.nav, header.site-header > .w.nav, header.header > .w.nav,
