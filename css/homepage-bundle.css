@@ -3799,3 +3799,31 @@ body[data-base="./"] #topicBannerSection .mandala-promo-arrow:hover{background:r
  body[data-base="./"] #topicBannerSection .mandala-promo-slide,
  body[data-base="./"] #topicBannerSection .mandala-promo-arrow{transition:none!important}
 }
+
+
+/* Focused homepage fix 2026-10-16:
+   1) Explicitly dismiss stuck navigation previews after selection.
+   2) Reduce excess vertical whitespace above the standalone topic banner. */
+body[data-base="./"] #siteHeader.nav-preview-dismissed .nav-preview-static,
+body[data-base="./"] #siteHeader.nav-preview-dismissed:has(.nav-preview-static:hover) .nav-preview-static {
+  display: none !important;
+}
+body[data-base="./"] #topicBannerSection {
+  margin: 0 !important;
+  padding: 8px 0 24px !important;
+}
+body[data-base="./"] #topicBannerSection .mandala-promo-strip {
+  margin: 0 !important;
+}
+body[data-base="./"] main > section:has(#articlesContainer) {
+  padding-bottom: 10px !important;
+}
+@media (max-width: 760px) {
+  body[data-base="./"] #topicBannerSection {
+    margin: 0 !important;
+    padding: 4px 0 18px !important;
+  }
+  body[data-base="./"] main > section:has(#articlesContainer) {
+    padding-bottom: 6px !important;
+  }
+}
